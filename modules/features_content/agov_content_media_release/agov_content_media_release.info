@@ -1,0 +1,12 @@
+name = Media Release
+description = Provides default content for media release content type.
+core = 7.x
+package = aGov content
+php = 5.2.4
+version = 7.x-1.0
+project = agov_content_media_release
+dependencies[] = defaultcontent
+dependencies[] = agov_media_releases
+features[content][] = agov_media_release_1
+features[content][] = agov_media_release_2
+features[features_api][] = api:1

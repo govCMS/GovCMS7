@@ -1,0 +1,23 @@
+INSTALLATION
+
+aGov is available as a full drupal site in tgz and zip format at:
+
+  http://aGov-SITE
+
+Those familiar with drush make can find a build-openpublic.make file available
+in this folder that can be used to build aGov with a command such as:
+
+drush make --prepare-install build-openpublic.make INSTALL_PATH
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Sets up include for feature.
+ */
+
+include_once 'agov_editing.features.inc';

@@ -1,0 +1,137 @@
+name = aGov
+description = A distribution for government and the public sector in Australia
+version = 7.x-1.0-beta1
+core = 7.x
+
+; System Requirements.
+php_memory_limit = 256M
+
+files[] = agov.profile
+
+
+; Core
+
+dependencies[] = block
+dependencies[] = contact
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = syslog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = toolbar
+dependencies[] = field
+dependencies[] = field_ui
+dependencies[] = text
+dependencies[] = file
+dependencies[] = image
+dependencies[] = list
+dependencies[] = rdf
+dependencies[] = update
+
+
+; Contrib
+
+dependencies[] = agls
+dependencies[] = bean
+dependencies[] = bean_admin_ui
+dependencies[] = captcha
+dependencies[] = chosen
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = date
+dependencies[] = defaultcontent
+dependencies[] = ds
+dependencies[] = entity
+dependencies[] = features
+dependencies[] = file_entity
+dependencies[] = agov_disable_defaultcontent
+dependencies[] = libraries
+dependencies[] = media
+dependencies[] = media_internet
+dependencies[] = media_vimeo
+dependencies[] = media_youtube
+dependencies[] = menu_attributes
+dependencies[] = menu_block
+dependencies[] = menu_block_export
+dependencies[] = menu_trail_by_path
+dependencies[] = metatag
+dependencies[] = node_reference
+dependencies[] = panels
+dependencies[] = panels_ipe
+dependencies[] = pathauto
+dependencies[] = pathauto_persist
+dependencies[] = references
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = views_content
+dependencies[] = search404
+dependencies[] = scheduler
+dependencies[] = scheduler_workbench
+dependencies[] = r4032login
+dependencies[] = site_map
+dependencies[] = superfish
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = webform
+dependencies[] = workbench
+dependencies[] = workbench_moderation
+dependencies[] = wysiwyg
+dependencies[] = xmlsitemap
+dependencies[] = xmlsitemap_menu
+dependencies[] = xmlsitemap_node
+dependencies[] = ccl
+dependencies[] = ccl_actions
+dependencies[] = ccl_blocks
+dependencies[] = ccl_local_actions
+dependencies[] = ccl_views
+
+; Custom
+
+dependencies[] = node_freshness
+dependencies[] = text_summary_options
+dependencies[] = wcag_validate
+dependencies[] = wcag_scheduler
+
+; aGov
+
+dependencies[] = agov_core
+dependencies[] = agov_beans
+dependencies[] = agov_layouts
+dependencies[] = agov_text_resize
+dependencies[] = agov_twitter
+dependencies[] = agov_image_styles
+dependencies[] = agov_editing
+dependencies[] = agov_chosen
+dependencies[] = agov_contact
+;dependencies[] = agov_content_requirements
+dependencies[] = agov_front
+dependencies[] = agov_menu_block
+dependencies[] = agov_social_menu
+dependencies[] = agov_superfish_configuration
+dependencies[] = agov_sitemap
+
+; Content types
+
+dependencies[] = agov_basic_page
+dependencies[] = agov_blog
+dependencies[] = agov_events
+dependencies[] = agov_media_releases
+dependencies[] = agov_news
+dependencies[] = agov_publications
+dependencies[] = agov_promotion
+
+dependencies[] = agov_permissions
+
+; Content
+
+dependencies[] = agov_menu
+dependencies[] = agov_tags

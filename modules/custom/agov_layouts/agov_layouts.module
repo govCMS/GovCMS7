@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Implements core hooks for agov_layouts.
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function agov_layouts_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'panels' && $plugin == 'layouts') {
+    return 'plugins/layouts';
+  }
+}

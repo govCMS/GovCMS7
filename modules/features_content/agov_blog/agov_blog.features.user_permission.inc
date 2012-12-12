@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * agov_blog.features.user_permission.inc
+ */
+
+/**
+ * Implements hook_user_default_permissions().
+ */
+function agov_blog_user_default_permissions() {
+  $permissions = array();
+
+  // Exported permission: create blog_article content.
+  $permissions['create blog_article content'] = array(
+    'name' => 'create blog_article content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'Site administrator' => 'Site administrator',
+      'Site builder' => 'Site builder',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: delete any blog_article content.
+  $permissions['delete any blog_article content'] = array(
+    'name' => 'delete any blog_article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: delete own blog_article content.
+  $permissions['delete own blog_article content'] = array(
+    'name' => 'delete own blog_article content',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: edit any blog_article content.
+  $permissions['edit any blog_article content'] = array(
+    'name' => 'edit any blog_article content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'Site administrator' => 'Site administrator',
+      'Site builder' => 'Site builder',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  // Exported permission: edit own blog_article content.
+  $permissions['edit own blog_article content'] = array(
+    'name' => 'edit own blog_article content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'Site administrator' => 'Site administrator',
+      'Site builder' => 'Site builder',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'node',
+  );
+
+  return $permissions;
+}

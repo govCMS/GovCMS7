@@ -1,0 +1,1001 @@
+<?php
+
+/**
+ * @file
+ * The install file for the aGov distribution.
+ *
+ * @copyright Copyright(c) 2012 PreviousNext
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Chris Skene chris at previousnext.com.au
+ */
+
+/**
+ * Define a default theme constant
+ */
+define('AGOV_INSTALL_DEFAULT_THEME', 'agov_barton');
+define('AGOV_BASE_THEME', 'agov_base');
+define('AGOV_DEFAULT_THEME', 'agov_barton');
+define('AGOV_DEFAULT_ADMIN_THEME', 'ember');
+define('AGOV_ADMIN_ROLE_ID', '3');
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ */
+function agov_install() {
+
+  ini_set('max_execution_time', 300);
+
+  // Ensure the beans feature is reverted.
+  $revert = array('agov_beans');
+  _agov_features_revert($revert);
+
+  // Configure default text formats and basic permissions.
+  _agov_default_formats_and_permissions();
+
+  // Configure basic roles.
+  _agov_create_basic_roles_perms();
+
+  // Set default front-end and admin themes.
+  _agov_set_default_themes();
+
+  // Set up default terms.
+  _agov_enable_vocabs();
+
+  // Create additional date formats.
+  _agov_date_formats();
+
+  // Setup some default blocks.
+  _agov_default_blocks();
+
+  // Set some PathAuto settings.
+  _agov_default_variables();
+
+  // Set default menu items.
+  _agov_set_menu();
+
+  // Set default tags.
+  _agov_default_tags();
+
+  // Required by view_unpublished module.
+  node_access_rebuild();
+
+  // Rebuild the sitemap now we have a menu.
+  agov_rebuild_sitemap();
+
+  // @todo Image styles not being applied to beans on install. Needs manual
+  // revert.
+  cache_clear_all();
+  features_revert(array('agov_beans' => array('field')));
+}
+
+/**
+ * Create basic roles.
+ */
+function _agov_create_basic_roles_perms() {
+
+  $weight = 1;
+  $base_permissions = array();
+
+  // Content editor.
+  $roles['Content editor'] = array(
+    'name' => 'Content editor',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Content approver.
+  $roles['Content approver'] = array(
+    'name' => 'Content approver',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Site administrator.
+  $roles['Site administrator'] = array(
+    'name' => 'Site administrator',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Site builder.
+  $roles['Site builder'] = array(
+    'name' => 'Site builder',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Create the roles.
+  foreach ($roles as $role) {
+    $role_object = new stdClass();
+    $role_object->name = $role['name'];
+    $role_object->weight = $role['weight'];
+
+    // Save the role.
+    user_role_save($role_object);
+
+    // Grant permissions.
+    user_role_grant_permissions($role_object->rid, $role['permissions']);
+  }
+
+  // Update the weight of the administrator role so its last.
+  $admin_role = user_role_load(AGOV_ADMIN_ROLE_ID);
+  $admin_role->weight = $weight++;
+  user_role_save($admin_role);
+}
+
+/**
+ * Set default themes.
+ */
+function _agov_set_default_themes() {
+  // Any themes without keys here will get numeric keys and so will be enabled,
+  // but not placed into variables.
+  //
+  // The install_state data is discarded after the last core install task, so
+  // we set install_profile specifically to ensure that drupal_get_profile()
+  // returns the correct profile name and finds the profile themes.
+  $enable = array(
+    '0' => AGOV_BASE_THEME,
+    '1' => AGOV_DEFAULT_THEME,
+    'theme_default' => AGOV_INSTALL_DEFAULT_THEME,
+    'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
+    'install_profile' => 'agov',
+  );
+  theme_enable($enable);
+
+  foreach ($enable as $var => $theme) {
+    if (!is_numeric($var)) {
+      variable_set($var, $theme);
+    }
+  }
+
+  // Disable the default Bartik theme.
+  theme_disable(array('bartik'));
+}
+
+/**
+ * Sets up default vocabularies.
+ */
+function _agov_enable_vocabs() {
+
+  // Create a default vocabulary named "Tags"
+  $description = st('Use tags to group articles on similar topics into categories.');
+  $help = st('Enter a comma-separated list of words to describe your content.');
+  $vocabulary = (object) array(
+    'name' => st('Tags'),
+    'description' => $description,
+    'machine_name' => 'tags',
+    'help' => $help,
+  );
+  taxonomy_vocabulary_save($vocabulary);
+}
+
+/**
+ * Add default text formats and create a default role for administrators.
+ */
+function _agov_default_formats_and_permissions() {
+
+  // Add text formats.
+  $filtered_html_format = array(
+    'format' => 'filtered_html',
+    'name' => 'Filtered HTML',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $filtered_html_format = (object) $filtered_html_format;
+  filter_format_save($filtered_html_format);
+
+  $rich_text_format = array(
+    'format' => 'rich_text',
+    'name' => 'Rich Text',
+    'weight' => 0,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // HTML filter.
+      'filter_html' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $rich_text_format = (object) $rich_text_format;
+  filter_format_save($rich_text_format);
+
+  $full_html_format = array(
+    'format' => 'full_html',
+    'name' => 'Full HTML',
+    'weight' => 1,
+    'filters' => array(
+      // URL filter.
+      'filter_url' => array(
+        'weight' => 0,
+        'status' => 1,
+      ),
+      // Line break filter.
+      'filter_autop' => array(
+        'weight' => 1,
+        'status' => 1,
+      ),
+      // HTML corrector filter.
+      'filter_htmlcorrector' => array(
+        'weight' => 10,
+        'status' => 1,
+      ),
+    ),
+  );
+  $full_html_format = (object) $full_html_format;
+  filter_format_save($full_html_format);
+
+  // Enable default permissions for system roles.
+  $filtered_html_permission = filter_permission_name($filtered_html_format);
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
+  user_role_grant_permissions(
+    DRUPAL_AUTHENTICATED_RID,
+    array(
+      'access content',
+      'access comments',
+      'post comments',
+      'skip comment approval',
+      $filtered_html_permission,
+    )
+  );
+
+  // Create a default role for site administrators, with all available
+  // permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+}
+
+/**
+ * Sets a custom date format.
+ *
+ * This install function works in 3 steps:
+ * 1) Install the date type - Month Year format ("F Y").
+ * 2) Setup a date type of Publications.
+ * 3) Using variable set we then associate the format and type.
+ */
+function _agov_date_formats() {
+  $t = get_t();
+
+  // Variables.
+  $date_formats = array(
+    'agov_month_year' => array(
+      'format' => array(
+        'type' => 'agov_month_year',
+        'format' => 'F Y',
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'agov_month_year',
+        'title' => $t('Month Year Format'),
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+    ),
+    'agov_month_day_year' => array(
+      'format' => array(
+        'type' => 'agov_month_day_year',
+        'format' => 'F j, Y',
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'agov_month_day_year',
+        'title' => $t('Month Day Year Format'),
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+    ),
+  );
+
+  // Save the data.
+  foreach ($date_formats as $type_string => $data) {
+    system_date_format_save($data['format']);
+    system_date_format_type_save($data['type']);
+    variable_set('date_format_' . $type_string, $data['format']['format']);
+  }
+
+}
+
+/**
+ * Setup some default blocks.
+ */
+function _agov_default_blocks() {
+  // Get all the aGov supported themes.
+  $themes = agov_core_theme_info();
+
+  // Set default system block in primary theme.
+  agov_core_insert_block('system', 'main', $themes, 'content', -12);
+  agov_core_insert_block('wcag_validate', 'wcag_validate', $themes, 'content', 24);
+  agov_core_insert_block('system', 'help', $themes, 'content', -14);
+  agov_core_insert_block('superfish', '1', $themes, 'header_main_menu');
+  agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer_sub_menu');
+
+  // Set aGov blocks.
+  agov_core_insert_block('menu', 'menu-header-menu', $themes, 'header_top_menu');
+  agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header_search');
+  agov_core_insert_block('search', 'form', $themes, 'header_search');
+  agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
+  agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, 'footer_menu');
+  agov_core_insert_block('views', 'feature_article-block', $themes, 'feature_articles', 0, 1, '<front>');
+  agov_core_insert_block('views', 'footer_teaser-block', $themes, 'footer_feature');
+
+  // Set aGov sidebar blocks.
+  agov_core_insert_block('menu_block', 'agov_menu_block-sidebar', $themes, 'sidebar', -50);
+  agov_core_insert_block('agov_twitter', 'feed', $themes, 'sidebar', -49);
+  agov_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar', -48);
+  agov_core_insert_block('menu', 'menu-social-media', $themes, 'sidebar', -47);
+
+  // Set some blocks in the admin theme.
+  agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
+  agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, 'help');
+}
+
+/**
+ * Set default variables.
+ */
+function _agov_default_variables() {
+
+  $variables = array(
+
+    // Pathauto default.
+    'pathauto_node_pattern' => '[node:title]',
+    'pathauto_punctuation_hyphen' => 1,
+    'pathauto_taxonomy_term_pattern' => '[term:vocabulary]/[term:name]',
+    'pathauto_user_pattern' => 'users/[user:name]',
+    'path_alias_whitelist' => array(
+      'node' => TRUE,
+      'taxonomy' => TRUE,
+      'user' => TRUE,
+    ),
+
+    // User registration.
+    'user_register' => USER_REGISTER_ADMINISTRATORS_ONLY,
+    'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
+    'node_admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
+  );
+
+  foreach ($variables as $key => $value) {
+    variable_set($key, $value);
+  }
+}
+
+/**
+ * Set default menu items.
+ */
+function _agov_set_menu() {
+
+  // Create a Home link in the main menu.
+  $item = array(
+    'link_title' => st('Home'),
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+    'weight' => -50,
+  );
+  menu_link_save($item);
+
+  menu_rebuild();
+}
+
+/**
+ * Setup beans.
+ */
+function _agov_default_beans() {
+  // If functionality available. Create some blocks.
+  if (function_exists('agov_core_save_bean')) {
+    // Create the front page block.
+    $fields = array(
+      'field_bean_body' => array(
+        '0' => array(
+          'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non faucibus massa. Maecenas ac dui turpis. Vivamus eu arcu tellus. Nunc sit amet tellus nunc. Quisque ac lacus nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer consectetur, urna vitae posuere varius, sem enim blandit augue, non condimentum dolor tortor id quam. Quisque venenatis dolor neque. Nunc suscipit sem id neque lobortis ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.<br/><a href="about-us">Learn more about us &raquo;</a>',
+          'format' => 'rich_text',
+        ),
+      ),
+    );
+    agov_core_save_bean('basic_content', 'About Us', 'Provides "About Us" block for the from page.', 'About Us', $fields);
+
+    // Create the footer block.
+    $fields = array(
+      'field_bean_body' => array(
+        '0' => array(
+          'value' => '&#169; 2012 Government | Powered by <a href="http://agov.com.au">aGov</a>',
+          'format' => 'rich_text',
+        ),
+      ),
+    );
+    // Get all the aGov supported themes.
+    $themes = agov_core_theme_info();
+    agov_core_save_bean('basic_content', 'Footer copyright', 'The copyright message', '', $fields);
+    agov_core_insert_block('bean', 'footer-copyright', $themes, 'footer_copyright', 0);
+  }
+  else {
+    drupal_set_message('aGov Core was not available. Some of your blocks could not be created.', 'error');
+  }
+}
+
+/**
+ * Sets up news related beans.
+ */
+function _agov_default_news_beans() {
+  $t = get_t();
+
+  // Ensure the bean save function is available.
+  if (!function_exists('agov_core_save_bean')) {
+    error_log('Function not available');
+    return;
+  }
+
+  // Add menu links to main menu.
+  $menus = array(
+    'current-news' => 'news-media/current-news',
+    'archived-news' => 'news-media/news-archive',
+    'media-releases' => 'news-media/media-releases',
+    'events' => 'news-media/events',
+    'blog' => 'blog',
+  );
+
+  // @todo - Save these menu items below the news-media item.
+  // Save the images required for these block.
+  $files = array();
+  $images = array(
+    'news-media-intro' => 'news-media.jpg',
+    'current-news' => 'news-archives.jpg',
+    'archived-news' => 'news-archives.jpg',
+    'media-releases' => 'media-releases.jpg',
+    'events' => 'events.jpg',
+    'blog' => 'news-media.jpg',
+  );
+  foreach ($images as $delta => $image) {
+    // Load the files contents.
+    $image_path = file_get_contents(dirname(__FILE__) . '/images/' . $image);
+
+    // Returns the new file object.
+    $files[$delta] = file_save_data($image_path, 'public://' . $image, FILE_EXISTS_RENAME);
+  }
+
+  // Install the required blocks.
+  // Beans to be installed.
+  $beans = array(
+    // News and Media Intro block for the News & Media page.
+    'news-media-intro' => array(
+      'label' => $t('News and Media Intro'),
+      'title' => '',
+      'description' => $t('Provides a "News and Media Intro" bean that gives overview for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'hightlight',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['news-media-intro']->fid,
+            'alt' => t('News and Media Intro'),
+            'title' => t('News and Media Intro'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Optional intro block with image Est porttitor hac ultricies nec integer enim scelerisque proin sagittis porttitor, sit! Magnis sit egestas turpis parturient aliquam. Mauris duis nascetur vel porttitor scelerisque cursus nec, in dis sit sagittis, lacus lacus?',
+            'format' => 'rich_text',
+          ),
+        ),
+      ),
+    ),
+
+  // Current News block.
+    'current-news' => array(
+      'label' => $t('Current News'),
+      'title' => $t('Current News'),
+      'description' => $t('Provides a "Current News" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+      // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['current-news']->fid,
+            'alt' => t('Current News'),
+            'title' => t('Current News'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+      // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['current-news'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+  // Archived News block.
+    'archived-news' => array(
+      'label' => $t('Archived News'),
+      'title' => $t('Archived News'),
+      'description' => $t('Provides a "Archived News" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+      // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['archived-news']->fid,
+            'alt' => t('Archived News'),
+            'title' => t('Archived News'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+      // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['archived-news'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+  // Media releases.
+    'media-releases' => array(
+      'label' => $t('Media Releases'),
+      'title' => $t('Media Releases'),
+      'description' => $t('Provides a "Media Releases" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['media-releases']->fid,
+            'alt' => t('Media Releases'),
+            'title' => t('Media Releases'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+      // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['media-releases'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+  // Events.
+    'events' => array(
+      'label' => $t('Events'),
+      'title' => $t('Events'),
+      'description' => $t('Provides a "Events" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['events']->fid,
+            'alt' => t('Events'),
+            'title' => t('Events'),
+          ),
+        ),
+        // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+        // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['events'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+   // Blog.
+    'blog' => array(
+      'label' => $t('Blog'),
+      'title' => $t('Blog'),
+      'description' => $t('Provides a "Blog" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['blog']->fid,
+            'alt' => t('Blog'),
+            'title' => t('Blog'),
+          ),
+        ),
+        // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+        // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['blog'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Programattically create the beans using core aGov functionality.
+  foreach ($beans as $bean) {
+    agov_core_save_bean($bean['type'], $bean['label'], $bean['description'], $bean['title'], $bean['fields'], $bean['view_mode']);
+  }
+}
+
+/**
+ * Reverts a list of features.
+ */
+function _agov_features_revert($modules) {
+  module_load_include('inc', 'features', 'features.export');
+  features_include();
+  foreach ($modules as $module) {
+    if (($feature = feature_load($module, TRUE)) && module_exists($module)) {
+      $components = array();
+      // Forcefully revert all components of a feature.
+      foreach (array_keys($feature->info['features']) as $component) {
+        if (features_hook($component, 'features_revert')) {
+          $components[] = $component;
+        }
+      }
+    }
+    foreach ($components as $component) {
+      features_revert(array($module => array($component)));
+    }
+  }
+}
+
+/**
+ * Created default tags.
+ */
+function _agov_default_tags() {
+  // List of terms for insert.
+  $terms = array(
+    t('consequat'),
+    t('fuisset'),
+    t('maluisset'),
+    t('ponderum'),
+    t('prodesset'),
+    t('rationibus'),
+    t('voluptatibus'),
+  );
+
+  $vocabs = taxonomy_vocabulary_get_names();
+  if (empty($vocabs['tags'])) {
+    return;
+  }
+
+  // Save taxonomy terms.
+  $vid = $vocabs['tags']->vid;
+  $tids = array();
+
+  foreach ($terms as $delta => $name) {
+    $term = new stdClass();
+    $term->name = $name;
+    $term->vid = $vid;
+    $term->vocabulary_machine_name = 'tags';
+    taxonomy_term_save($term);
+    $tids[] = $term->tid;
+  }
+
+  // Save the tids.
+  variable_set('agov_tags_saved', $tids);
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function agov_install_tasks($install_state) {
+  $task = array();
+  $agov_example_content_batch = variable_get('agov_example_content_batch', FALSE);
+  $task['agov_example_content_requirements'] = array(
+    'display_name' => st('Example content'),
+    'display' => TRUE,
+    'type' => 'form',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+  );
+  $task['agov_example_content_install'] = array(
+    'display_name' => st('Example content'),
+    'display' => FALSE,
+    'type' => 'batch',
+    'run' => $agov_example_content_batch ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
+  );
+  return $task;
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function agov_install_tasks_alter(&$tasks, $install_state) {
+
+  _agov_set_theme(AGOV_INSTALL_DEFAULT_THEME);
+  drupal_add_css('profiles/agov/css/install.css');
+}
+
+/**
+ * Check the server's max_execution_time can handle the installation content.
+ */
+function agov_example_content_requirements() {
+  $form = array();
+  drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
+  drupal_set_title('Install example content');
+  $max_execution_time = ini_get('max_execution_time');
+  if ($max_execution_time >= 300) {
+    $form['message'] = array(
+      '#type' => 'item',
+      '#markup' => st('Would you like to install example content?'),
+    );
+    $form['continue'] = array(
+      '#id' => 'install',
+      '#type' => 'submit',
+      '#value' => st('Install'),
+    );
+    $form['cancel'] = array(
+      '#id' => 'cancel',
+      '#type' => 'submit',
+      '#value' => st('Do not install'),
+    );
+  }
+  else {
+    drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
+    $form['continue'] = array(
+      '#id' => 'continue',
+      '#type' => 'submit',
+      '#value' => st('Continue'),
+    );
+  }
+  return $form;
+}
+
+/**
+ * Set variable for batch process if install button is clicked.
+ */
+function agov_example_content_requirements_submit(&$form, &$form_state) {
+  if ($form_state['triggering_element']['#id'] == 'install') {
+    variable_set('agov_example_content_batch', TRUE);
+  }
+}
+
+/**
+ * Returns modules and functions to install default/example content.
+ */
+function agov_default_content() {
+
+  return array(
+    0 => array(
+      'title' => st('Events'),
+      'type' => 'module',
+      'key' => 'agov_content_event',
+    ),
+    1 => array(
+      'title' => st('Publications'),
+      'type' => 'module',
+      'key' => 'agov_content_publications',
+    ),
+    2 => array(
+      'title' => st('Blog'),
+      'type' => 'module',
+      'key' => 'agov_content_blog',
+    ),
+    3 => array(
+      'title' => st('Media Releases'),
+      'type' => 'module',
+      'key' => 'agov_content_media_release',
+    ),
+    4 => array(
+      'title' => st('News Articles'),
+      'type' => 'module',
+      'key' => 'agov_content_new_article',
+    ),
+    5 => array(
+      'title' => st('Promotions'),
+      'type' => 'module',
+      'key' => 'agov_content_promotion',
+    ),
+    6 => array(
+      'title' => st('Standard pages'),
+      'type' => 'module',
+      'key' => 'agov_content_standard_page',
+    ),
+    7 => array(
+      'title' => st('Default Beans'),
+      'type' => 'function',
+      'key' => '_agov_default_beans',
+      'message' => st('Enabled Deafult Beans'),
+    ),
+    8 => array(
+      'title' => st('Default News Beans'),
+      'type' => 'function',
+      'key' => '_agov_default_news_beans',
+      'message' => st('Enabled Deafult News Beans'),
+    ),
+  );
+
+}
+
+/**
+ * Sets the Batch API array for batch processing.
+ */
+function agov_example_content_install() {
+
+  $operations = array();
+
+  foreach (agov_default_content() as $content) {
+    $operations[] = array(
+      'agov_example_content_install_batch',
+      array(
+        $content['type'],
+        $content['key'],
+        $content['title'],
+        isset($content['message']) ? $content['message'] : '',
+      ),
+    );
+  }
+
+  $batch = array(
+    'operations' => $operations,
+    'title' => st('Processing example content'),
+    'init_message' => st('Initializing'),
+    'error_message' => st('Error'),
+    'finished' => 'agov_example_content_install_finished',
+  );
+  return $batch;
+}
+
+/**
+ * Either enable module or run function for Example content batch install.
+ *
+ * @param string $type
+ *   Type of content either 'module' or 'function'.
+ * @param string $key
+ *   Name of module or function to enable/run.
+ * @param string $name
+ *   Title/name of the module or function.
+ * @param string $message
+ *   Optional message to be output with function.
+ * @param array $context
+ *   Batch context data.
+ */
+function agov_example_content_install_batch($type, $key, $name, $message, &$context) {
+  if ($type == 'module') {
+    module_enable(array($key), FALSE);
+    $context['results'][] = $key;
+    $context['message'] = st('Enabled %module content.', array('%module' => $name));
+  }
+  elseif ($type == 'function') {
+    call_user_func($key);
+    $context['results'][] = $key;
+    if ($message) {
+      $context['message'] = $message;
+    }
+  }
+}
+
+
+/**
+ * Performs any cleanup and output on completion of example content batch.
+ */
+function agov_example_content_install_finished(&$context) {
+
+  agov_rebuild_sitemap();
+
+  drupal_set_message('Example content installed.');
+  drupal_set_message('Sitemap has been rebuilt.');
+}
+
+/**
+ * Force-set a theme at any point during the execution of the request.
+ *
+ * Drupal doesn't give us the option to set the theme during the installation
+ * process and forces enable the maintenance theme too early in the request
+ * for us to modify it in a clean way.
+ *
+ * This function was helpfully taken from Commerce Kickstart.
+ */
+function _agov_set_theme($target_theme) {
+  if ($GLOBALS['theme'] != $target_theme) {
+    unset($GLOBALS['theme']);
+
+    drupal_static_reset();
+    $GLOBALS['conf']['maintenance_theme'] = $target_theme;
+    _drupal_maintenance_theme();
+  }
+}
+
+/**
+ * Rebuilds the sitemap.xml.
+ */
+function agov_rebuild_sitemap() {
+  if (module_exists('xmlsitemap')) {
+    module_load_include('generate.inc', 'xmlsitemap');
+
+    // Build a list of rebuildable link types.
+    $rebuild_types = xmlsitemap_get_rebuildable_link_types();
+
+    // Run the batch process.
+    xmlsitemap_run_unprogressive_batch('xmlsitemap_rebuild_batch', $rebuild_types, TRUE);
+  }
+}

@@ -1,0 +1,278 @@
+<?php
+/**
+ * @file
+ * Common functionality used across aGov.
+ *
+ * @copyright Copyright(c) 2012 PreviousNext
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Chris Skene chris at previousnext dot com dot au
+ */
+
+/**
+ * Helper to manufacture a new Bean of a given type.
+ *
+ * @param string $bean_type
+ *   The type of bean to create
+ * @param string $label
+ *   Admin label for the bean
+ * @param string $description
+ *   (optional) Admin description for the bean
+ * @param string $title
+ *   (optional) Block title for the bean
+ * @param array $fields
+ *   (optional) An array of fields to assign. This should resemble the ACTUAL
+ *   field array, as it is literally transposed onto the bean, with the
+ *   exception that the language key should be omitted.
+ * @param string $view_mode
+ *   (optional) The view mode. Defaults to 'default'.
+ */
+function agov_core_save_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
+
+  $bean = agov_core_create_bean($bean_type, $label, $description, $title, $fields, $view_mode);
+  $bean->save();
+
+  drupal_set_message('Created a new bean "' . $label . '" of type <em>' . $bean_type . '</em>');
+}
+
+/**
+ * Create a bean from configuration.
+ *
+ * Normally, you can use agov_core_save_bean(), however this is useful if
+ * you need to manipulate the bean before saving.
+ *
+ * @param string $bean_type
+ *   The type of bean to create
+ * @param string $label
+ *   Admin label for the bean
+ * @param string $description
+ *   (optional) Admin description for the bean
+ * @param string $title
+ *   (optional) Block title for the bean
+ * @param array $fields
+ *   (optional) An array of fields to assign. This should resemble the ACTUAL
+ *   field array, as it is literally transposed onto the bean, with the
+ *   exception that the language key should be omitted.
+ * @param string $view_mode
+ *   (optional) The view mode. Defaults to 'default'.
+ *
+ * @return Bean
+ *   a Bean entity
+ */
+function agov_core_create_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
+  $config = array(
+    'label' => $label,
+    'description' => $description,
+    'title' => $title,
+    'type' => $bean_type,
+    'view_mode' => $view_mode,
+    'is_new' => TRUE,
+  );
+  foreach ($fields as $field_key => $field_value) {
+    $config[$field_key] = array();
+    $config[$field_key]['und'] = $field_value;
+  }
+  $bean = bean_create($config);
+  return $bean;
+}
+
+/**
+ * Create initial block placement for a block which hasn't been used before.
+ *
+ * @todo There is better logic in block_add_block_form_submit()
+ *
+ * @param string $module
+ *   The module providing the block
+ * @param string $delta
+ *   The block delta
+ * @param string $theme
+ *   (optional) The theme to insert into. Defaults to the current theme
+ * @param int|string $region
+ *   (optional) The region to insert the block into. Defaults to
+ *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
+ *   this blank.
+ * @param int $weight
+ *   (optional) The weight of the block. Defaults to 0.
+ * @param int $visibility
+ *   (optional) The visibility of the block. Defaults to 0.
+ * @param string $pages
+ *   (optional) The pages to show the block on. Defaults to all.
+ *
+ * @return bool
+ *   TRUE if the block is inserted, or FALSE on an error.
+ */
+function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '') {
+  if (!isset($theme)) {
+    $theme = variable_get('theme_default', NULL);
+    if (!isset($theme) || is_null($theme)) {
+      return FALSE;
+    }
+  }
+  $block = array(
+    'module' => $module,
+    'delta' => $delta,
+    'theme' => $theme,
+    'status' => (int) ($region != BLOCK_REGION_NONE),
+    'weight' => (int) $weight,
+    'region' => $region,
+    'visibility' => $visibility,
+    'pages' => $pages,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $query = db_insert('block')->fields(
+    array(
+      'module',
+      'delta',
+      'theme',
+      'status',
+      'weight',
+      'region',
+      'visibility',
+      'pages',
+      'cache',
+    )
+  );
+
+  // If a theme was specified execute the single value.
+  if (is_array($theme)) {
+    // Get a list of themes that this block is already assigned to.
+    $assigned_themes = db_query('SELECT theme FROM {block} b WHERE b.module = :module AND b.delta = :delta', array(':module' => $module, ':delta' => $delta))->fetchCol();
+
+    // Get a list of the themes aGov supports.
+    foreach ($theme as $theme_id) {
+      $record = $block;
+
+      // We need to check if the block already exists for this theme.
+      if (in_array($theme_id, $assigned_themes)) {
+        continue;
+      }
+
+      $record['theme'] = $theme_id;
+      $query->values($record);
+    }
+  }
+  else {
+    $query->values($block);
+  }
+
+  $query->execute();
+
+  return TRUE;
+}
+
+/**
+ * Update block placement for an existing block.
+ *
+ * @param string $module
+ *   The module providing the block
+ * @param string $delta
+ *   The block delta
+ * @param string $theme
+ *   (optional) The theme to insert into. Defaults to the current theme
+ * @param int|string $region
+ *   (optional) The region to insert the block into. Defaults to
+ *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
+ *   this blank.
+ * @param int $weight
+ *   (optional) The weight of the block. Defaults to 0
+ *
+ * This is based on block_admin_display_form_submit()
+ *
+ * @throws Exception
+ */
+function agov_core_update_block($module, $delta, $theme = '', $region = BLOCK_REGION_NONE, $weight = 0) {
+  $transaction = db_transaction();
+  try {
+    $status = (int) ($region != BLOCK_REGION_NONE);
+    $region = $status ? $region : '';
+    db_update('block')
+      ->fields(array(
+      'status' => $status,
+      'weight' => $weight,
+      'region' => $region,
+    ))
+      ->condition('module', $module)
+      ->condition('delta', $delta)
+      ->condition('theme', $theme)
+      ->execute();
+  }
+  catch (Exception $e) {
+    $transaction->rollback();
+    watchdog_exception('block', $e);
+    throw $e;
+  }
+  cache_clear_all();
+}
+
+/**
+ * Returns a list of the themes that aGov supports.
+ */
+function agov_core_theme_info() {
+  return array(
+    'agov_barton',
+    'agov_bruce',
+    'agov_cook',
+    'agov_deakin',
+    'agov_fisher',
+    'agov_hughes',
+    'agov_reid',
+    'agov_watson',
+  );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function agov_core_form_alter(&$form, &$form_alter, $form_id) {
+  // Check if this is the node_freshness config form.
+  if ($form_id == 'node_freshness_config') {
+    $form['agov_help'] = array(
+      '#markup' => '<p>' . t('Node freshness is a general value available across the site for governing when content is considered "stale" or archiveable.') . '</p>',
+      '#weight' => '-50',
+    );
+    if (module_exists('agov_news')) {
+      $form['agov_help']['#markup'] .= '<p>' . t('Currently, this value determines when News items are moved to the Archived section.') . '</p>';
+    }
+  }
+}
+
+/**
+ * Implements hook_block_info_alter().
+ */
+function agov_core_block_info_alter(&$blocks, $theme, $code_blocks) {
+  // Ensure the block exists.
+  if (!empty($blocks['wcag_validate']['wcag_validate'])) {
+    $blocks['wcag_validate']['wcag_validate']['visibility'] = BLOCK_VISIBILITY_LISTED;
+    $blocks['wcag_validate']['wcag_validate']['pages'] = "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*";
+  }
+}
+
+/**
+ * Implements hook_update_status_alter().
+ */
+function agov_core_update_status_alter(&$projects) {
+  // Notify users that updates are managed by aGov.
+  drupal_set_message(t('This site is running on the aGov distribution. Please do not update modules individually. aGov ships with a number of patched and development status modules that have been tested to work together.'), 'warning', FALSE);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function agov_core_cron() {
+  $today = date('Y-m-d');
+  $last_run = variable_get('agov_cron_last_run', $today);
+
+  // Run only once per day.
+  if ($last_run != $today) {
+    variable_set('agov_cron_last_run', $today);
+    // Send a check for updates with site domain.
+    $update_site = variable_get('agov_update_site', 'http://updates.agov.com.au');
+    $query = drupal_http_build_query(array(
+      'site' => check_plain($_SERVER['HTTP_HOST']),
+      'ip' => ip_address(),
+      'name' => variable_get('site_name'),
+    ));
+    drupal_http_request($update_site . '/update_check?' . $query);
+  }
+}
+

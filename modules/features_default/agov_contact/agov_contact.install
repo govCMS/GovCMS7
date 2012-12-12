@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * Install implemenations for the government contact feature.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * We have to save the captcha type to the database as this is not saved
+ * in variables for strongarm.
+ */
+function agov_contact_install() {
+  $t = get_t();
+
+  // Set the contact site form to use the math captcha.
+  module_load_include('inc', 'captcha', 'captcha');
+  captcha_set_form_id_setting('contact_site_form', 'captcha/Math');
+
+  // We also want to add the menu link to the main menu and footer.
+  $menus = array(
+    'main' => array(
+      'link_path' => 'contact',
+      'link_title' => $t('Contact'),
+      'menu_name' => 'main-menu',
+    ),
+    'footer' => array(
+      'link_path' => 'contact',
+      'link_title' => $t('Feedback'),
+      'menu_name' => 'menu-footer-sub-menu',
+      'weight' => -40,
+    ),
+  );
+  foreach ($menus as $menu) {
+    menu_link_save($menu);
+  }
+
+  // Rebuild the menu.
+  menu_rebuild();
+}

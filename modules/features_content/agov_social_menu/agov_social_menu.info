@@ -1,0 +1,13 @@
+name = Social Menu
+description = Provides default social menu.
+core = 7.x
+package = aGov
+dependencies[] = features
+dependencies[] = menu
+dependencies[] = menu_attributes
+features[features_api][] = api:1
+features[menu_custom][] = menu-social-media
+features[menu_links][] = menu-social-media:contact
+features[menu_links][] = menu-social-media:http://www.facebook.com/pages/PreviousNext/170975076260877
+features[menu_links][] = menu-social-media:http://www.twitter.com/PreviousNext
+features[menu_links][] = menu-social-media:rss.xml

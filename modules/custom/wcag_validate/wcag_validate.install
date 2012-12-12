@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Provides install functionality for wcag_validate module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function wcag_validate_install() {
+  // Place the block at the very bottom of the content region.
+  $block = array(
+    'module' => 'wcag_validate',
+    'delta' => 'wcag_validate',
+    'theme' => variable_get('theme_default', 'bartik'),
+    'status' => 1,
+    'weight' => 24,
+    'region' => 'content',
+    'pages' => '',
+    'cache' => -1,
+  );
+
+  // Save the block to the database.
+  $query = db_insert('block')->fields(array(
+    'module',
+    'delta',
+    'theme',
+    'status',
+    'weight',
+    'region',
+    'pages',
+    'cache',
+  ));
+  $query->values($block);
+  $query->execute();
+}
