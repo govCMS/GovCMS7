@@ -133,7 +133,7 @@ projects[features][version] = "2.0-beta1"
 projects[features][subdir] = "contrib"
 projects[features][patch][] = "http://drupal.org/files/features_static_caches-1063204-32.patch"
 
-projects[media][version] = "2.0-unstable7"
+projects[media][version] = "2.0-unstable6"
 projects[media][subdir] = "contrib"
 projects[media][patch][] = "http://drupal.org/files/1307054-d7-2-alt-text-89.patch"
 
