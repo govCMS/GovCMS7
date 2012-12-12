@@ -113,25 +113,25 @@ projects[ctools][patch][] = "http://drupal.org/files/ctools-fix-warning-message-
 
 projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-defaultcontent-files.patch"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy_0.patch"
+projects[defaultcontent][patch][] = "http://drupal.org/files/1611928.patch"
+projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 
-projects[features][version] = "2.0"
+projects[features][version] = "2.0-beta1"
 projects[features][subdir] = "contrib"
 projects[features][patch][] = "http://drupal.org/files/features_static_caches-1063204-32.patch"
 
 projects[media][version] = "2.0-unstable7"
 projects[media][subdir] = "contrib"
-projects[media][patch][] = "http://drupal.org/files/1307054-d7-2.patch"
+projects[media][patch][] = "http://drupal.org/files/1307054-d7-2-alt-text-89.patch"
 
 
 projects[scheduler][version] = "1.0"
 projects[scheduler][subdir] = "contrib"
-projects[scheduler][patch][] = "http://drupal.org/files/1660192-1-expand-options-for-integrating-modules.patch"
+projects[scheduler][patch][] = "http://drupal.org/files/more_integration_options.patch"
 
 projects[uuid][version] = "1.0-alpha3"
 projects[uuid][subdir] = "contrib"
-projects[uuid][patch][] = "http://drupal.org/files/1423542-rewrite-token-integration.patch"
+projects[uuid][patch][] = "http://drupal.org/files/uuid-uuid_token-1423542-7.patch"
 
 projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
@@ -153,29 +153,25 @@ projects[login_security][download][type] = "git"
 projects[login_security][download][revision] = b78cbc902a5b517d36c0bb1d71ad0d36e53d58e5
 projects[login_security][download][branch] = 7.x-1.x
 projects[login_security][type] = "module"
-projects[login_security][type][subdir] = "contrib"
+projects[login_security][subdir] = "contrib"
 
 ; Themes
 projects[omega][version] = "3.1"
+projects[omega][patch][] = "http://drupal.org/files/omega_color_module_support.patch"
 
 projects[ember][version] = "1.0-alpha4"
 
 
 ; PreviousNext modules
-
-projects[agls][download][type] = "git"
-projects[agls][download][revision] = 08f5130bfcdd710bea22652c733985d5d1c97395
-projects[agls][download][branch] = 7.x-1.x
-projects[agls][type] = "module"
-projects[agls][type][subdir] = "contrib"
+projects[agls][version] = "1.0-beta1"
+projects[agls][subdir] = "contrib"
 
 projects[guzzle][download][type] = "git"
 projects[guzzle][download][branch] = master
-projects[guzzle][download][revision] = db0782aa6ec766655ba48b056c011bb59
+projects[guzzle][download][revision] = 758860bdb0782aa6ec766655ba48b056c011bb59
 projects[guzzle][type] = "module"
-projects[guzzle][type][subdir] = "contrib"
+projects[guzzle][subdir] = "contrib"
 
-; Themes
 
 ; Libraries
 
