@@ -17,7 +17,10 @@ projects[captcha][subdir] = "contrib"
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
-projects[chosen][version] = "1.0+17-dev"
+projects[chosen][download][type] = "git"
+projects[chosen][download][revision] = 4c4b8fd5e5b2c1912c3de1589d658049b49cdc90
+projects[chosen][download][branch] = 7.x-1.x
+projects[chosen][type] = "module"
 projects[chosen][subdir] = "contrib"
 
 projects[context][version] = "3.0-beta4"
