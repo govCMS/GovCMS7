@@ -135,8 +135,7 @@ projects[features][patch][] = "http://drupal.org/files/features_static_caches-10
 
 projects[media][version] = "2.0-unstable6"
 projects[media][subdir] = "contrib"
-projects[media][patch][] = "http://drupal.org/files/1307054-d7-2-alt-text-89.patch"
-
+projects[media][patch][] = "http://drupal.org/files/media_alt_and_title-1307054-7.patch"
 
 projects[scheduler][version] = "1.0"
 projects[scheduler][subdir] = "contrib"
