@@ -72,6 +72,9 @@ projects[panels][subdir] = "contrib"
 projects[pathauto][version] = "1.2"
 projects[pathauto][subdir] = "contrib"
 
+projects[pathauto_persist][version] = "1.3"
+projects[pathauto_persist][subdir] = "contrib"
+
 projects[r4032login][version] = "1.5"
 projects[r4032login][subdir] = "contrib"
 
@@ -87,11 +90,22 @@ projects[site_map][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
 
+projects[superfish][version] = "1.9-beta5"
+projects[superfish][subdir] = "contrib"
+
+projects[text_summary_options][download][type] = "git"
+projects[text_summary_options][download][url] = "http://git.drupal.org/sandbox/timeisenhuth/1743358.git"
+projects[text_summary_options][download][revision] = be992c95898f09f010a759eb0706c2fd862aae55
+projects[text_summary_options][download][branch] = "master"
+projects[text_summary_options][type] = "module"
+projects[text_summary_options][subdir] = "contrib"
+
 projects[token][version] = "1.4"
 projects[token][subdir] = "contrib"
 
-projects[view_unpublished][version] = "1.1+1-dev"
+projects[view_unpublished][version] = "1.1"
 projects[view_unpublished][subdir] = "contrib"
+projects[view_unpublished][patch][] = "http://drupal.org/files/view_unpublished_content_admin-1192074-47.patch"
 
 projects[views][version] = "3.5"
 projects[views][subdir] = "contrib"
