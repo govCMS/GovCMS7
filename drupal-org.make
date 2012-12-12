@@ -90,7 +90,7 @@ projects[site_map][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
 
-projects[superfish][version] = "1.9-beta5"
+projects[superfish][version] = "1.9-beta4"
 projects[superfish][subdir] = "contrib"
 
 projects[token][version] = "1.4"
