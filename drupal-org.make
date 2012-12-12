@@ -158,9 +158,10 @@ projects[login_security][subdir] = "contrib"
 ; Themes
 projects[omega][version] = "3.1"
 projects[omega][patch][] = "http://drupal.org/files/omega_color_module_support.patch"
+projects[omega][subdir]= "contrib"
 
 projects[ember][version] = "1.0-alpha4"
-
+projects[ember][subdir]= "contrib"
 
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta1"
