@@ -93,19 +93,15 @@ projects[strongarm][subdir] = "contrib"
 projects[superfish][version] = "1.9-beta5"
 projects[superfish][subdir] = "contrib"
 
-projects[text_summary_options][download][type] = "git"
-projects[text_summary_options][download][url] = "http://git.drupal.org/sandbox/timeisenhuth/1743358.git"
-projects[text_summary_options][download][revision] = be992c95898f09f010a759eb0706c2fd862aae55
-projects[text_summary_options][download][branch] = "master"
-projects[text_summary_options][type] = "module"
-projects[text_summary_options][subdir] = "contrib"
-
 projects[token][version] = "1.4"
 projects[token][subdir] = "contrib"
 
-projects[view_unpublished][version] = "1.1"
+projects[view_unpublished][download][type] = "git"
+projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
+projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4ede493123f
+projects[view_unpublished][download][branch] = "7.x-1.x"
+projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
-projects[view_unpublished][patch][] = "http://drupal.org/files/view_unpublished_content_admin-1192074-47.patch"
 
 projects[views][version] = "3.5"
 projects[views][subdir] = "contrib"
