@@ -142,10 +142,12 @@ projects[scheduler][version] = "1.0"
 projects[scheduler][subdir] = "contrib"
 projects[scheduler][patch][] = "http://drupal.org/files/more_integration_options.patch"
 
-projects[uuid][version] = "1.0-alpha3"
+projects[uuid][download][type] = "git"
+projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
+projects[uuid][download][branch] = 7.x-1.x
+projects[uuid][type] = "module"
 projects[uuid][subdir] = "contrib"
-projects[uuid][patch][] = "http://drupal.org/files/uuid-uuid_token-1423542-7.patch"
-
+ 
 projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"
