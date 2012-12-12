@@ -181,13 +181,6 @@ projects[ember][subdir]= "contrib"
 projects[agls][version] = "1.0-beta1"
 projects[agls][subdir] = "contrib"
 
-projects[guzzle][download][type] = "git"
-projects[guzzle][download][branch] = master
-projects[guzzle][download][revision] = 758860bdb0782aa6ec766655ba48b056c011bb59
-projects[guzzle][type] = "module"
-projects[guzzle][subdir] = "contrib"
-
-
 ; Libraries
 
 libraries[chosen][download][type] = "git"
