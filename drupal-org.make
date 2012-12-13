@@ -142,7 +142,7 @@ projects[scheduler][subdir] = "contrib"
 projects[scheduler][patch][] = "http://drupal.org/files/more_integration_options.patch"
 
 projects[uuid][download][type] = "git"
-projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
+projects[uuid][download][revision] = 8b6d70f1764a83896e799712111d6b46cf482737
 projects[uuid][download][branch] = 7.x-1.x
 projects[uuid][type] = "module"
 projects[uuid][subdir] = "contrib"
