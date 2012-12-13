@@ -174,48 +174,6 @@ function agov_menu_menu_default_menu_links() {
     'weight' => '-48',
     'parent_path' => 'news-media',
   );
-  // Exported menu link: main-menu:node/38
-  $menu_links['main-menu:node/38'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/38',
-    'router_path' => 'node/%',
-    'link_title' => 'About Us',
-    'options' => array(),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '1',
-    'expanded' => '0',
-    'weight' => '-49',
-  );
-  // Exported menu link: main-menu:node/39
-  $menu_links['main-menu:node/39'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/39',
-    'router_path' => 'node/%',
-    'link_title' => 'Services',
-    'options' => array(),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
-  // Exported menu link: main-menu:node/40
-  $menu_links['main-menu:node/40'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/40',
-    'router_path' => 'node/%',
-    'link_title' => 'Resources',
-    'options' => array(),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-45',
-  );
   // Exported menu link: main-menu:publications
   $menu_links['main-menu:publications'] = array(
     'menu_name' => 'main-menu',
