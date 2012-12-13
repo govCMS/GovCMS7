@@ -868,7 +868,7 @@ function agov_default_content() {
     4 => array(
       'title' => st('News Articles'),
       'type' => 'module',
-      'key' => 'agov_content_new_article',
+      'key' => 'agov_content_news_article',
     ),
     5 => array(
       'title' => st('Promotions'),
