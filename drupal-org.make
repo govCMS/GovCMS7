@@ -23,7 +23,7 @@ projects[chosen][download][branch] = 7.x-1.x
 projects[chosen][type] = "module"
 projects[chosen][subdir] = "contrib"
 
-projects[context][version] = "3.0-beta4"
+projects[context][version] = "3.0-beta6"
 projects[context][subdir] = "contrib"
 
 projects[date][version] = "2.6"
