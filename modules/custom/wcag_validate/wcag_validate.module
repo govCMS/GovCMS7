@@ -31,6 +31,12 @@ function wcag_validate_menu() {
     'file' => 'wcag_validate.admin.inc',
   );
 
+  $items['admin/config/services/wcag-validate-connection-test'] = array(
+    'title' => 'WCAG Validate Connection Test',
+    'page callback' => 'wcag_validate_test_connection_page',
+    'access arguments' => array('Administer WCAG Validate'),
+  );
+
   $items['wcag-validate-url'] = array(
     'title' => 'Validate URL',
     'page callback' => 'wcag_validate_url',
@@ -129,6 +135,7 @@ function wcag_validate_get_config($conf) {
   if (empty($conf_val)) {
     switch ($conf) {
       case 'wcag_validate_server_base':
+      case 'wcag_validate_server':
         // TODO: Fix this to allow for redirect &/or load.
         $conf_val = 'http://wcag.dev02.previousnext.com.au';
         break;
@@ -192,7 +199,7 @@ function wcag_validate_send_html($html, $url) {
 /**
  * Helper function to combine auth and url to redirect to service.
  */
-function wcag_validate_get_service_url() {
+function wcag_validate_get_service_url($full = TRUE) {
 
   $url = wcag_validate_get_config('wcag_validate_server');
   $user = wcag_validate_get_config('wcag_validate_auth_user');
@@ -211,7 +218,69 @@ function wcag_validate_get_service_url() {
 
   $new_url = '';
   $new_url .= $url['scheme'] . '://';
-  $new_url .= $auth . $url['host'] . $url['path'] . '?' . $url['query'];
+  $new_url .= $auth . $url['host'] . (!empty($url['path']) ? $url['path'] : '');
+
+  if ($full) {
+    $new_url .= '?' . $url['query'];
+  }
 
   return $new_url;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function wcag_validate_cron() {
+  $last_run = variable_get('wcag_validate_last_connection_test', 0);
+  // Has it been more than an hour since we last checked?
+  if ((time() - $last_run) > 3600) {
+    wcag_validate_test_connection();
+  }
+}
+
+/**
+ * Performs our connection test to the server.
+ *
+ * If we cannot access the service or the service cannot access us, we'll error.
+ */
+function wcag_validate_test_connection() {
+  global $base_url;
+
+  $url = wcag_validate_get_service_url(FALSE) . '/check-connection?url=' . urlencode($base_url);
+
+  $result = @drupal_http_request($url);
+
+  if ($result->status_message == 'OK') {
+    $result = json_decode($result->data);
+    if ($result->result == 'success') {
+      variable_set('wcag_validate_connection_status', 'success');
+      variable_set('wcag_validate_connection_status_msg', '');
+      return TRUE;
+    }
+    else {
+      variable_set('wcag_validate_connection_status_msg', 'This site is not able to be accessed from the WCAG Validation service.');
+      watchdog('wcag_validate', 'This site is not able to be accessed from the WCAG Validation service.', WATCHDOG_ERROR);
+    }
+  }
+  else {
+    variable_set('wcag_validate_connection_status_msg', 'Unable to access WCAG Validation service.');
+    watchdog('wcag_validate', 'Unable to access WCAG Validation service.', WATCHDOG_ERROR);
+  }
+
+  variable_set('wcag_validate_connection_status', 'failed');
+  return FALSE;
+}
+
+/**
+ * Perform a connection test and send the user back to where they came from.
+ */
+function wcag_validate_test_connection_page() {
+  wcag_validate_test_connection();
+  drupal_set_message('Connection test performed.', 'status');
+  if (!empty($_REQUEST['destination'])) {
+    drupal_goto($_REQUEST['destination']);
+  }
+  else {
+    drupal_goto('admin/config/services/wcag-validate-admin');
+  }
 }

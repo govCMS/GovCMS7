@@ -35,3 +35,30 @@ function wcag_validate_install() {
   $query->values($block);
   $query->execute();
 }
+
+/**
+ * Implements hook_requirements().
+ */
+function wcag_validate_requirements($phase) {
+  if ($phase == 'runtime') {
+    $t = get_t();
+    $test_now = l($t('Test Now'), 'admin/config/services/wcag-validate-connection-test', array('query' => drupal_get_destination()));
+
+    $requirements = array(
+      'wcag_validate' => array(
+        'title' => 'WCAG Validate Service',
+        'description' => 'Tests the connection to and from the WCAG service.',
+        'severity' => REQUIREMENT_OK,
+        'value' => 'Connection established',
+      ),
+    );
+
+    if (variable_get('wcag_validate_connection_status') != 'success') {
+      $requirements['wcag_validate']['severity'] = REQUIREMENT_ERROR;
+      $requirements['wcag_validate']['value'] = variable_get('wcag_validate_connection_status_msg') . ' ' . $test_now;
+    }
+
+  }
+
+  return $requirements;
+}
