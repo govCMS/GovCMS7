@@ -38,8 +38,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -62,8 +60,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'toolbar',
@@ -75,8 +71,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench',
@@ -88,8 +82,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'media_internet',
@@ -119,8 +111,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'file_entity',
@@ -139,8 +129,6 @@ function agov_permissions_user_default_permissions() {
   $permissions['administer scheduler'] = array(
     'name' => 'administer scheduler',
     'roles' => array(
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'scheduler',
@@ -150,7 +138,6 @@ function agov_permissions_user_default_permissions() {
   $permissions['administer workbench moderation'] = array(
     'name' => 'administer workbench moderation',
     'roles' => array(
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -169,7 +156,6 @@ function agov_permissions_user_default_permissions() {
   $permissions['bypass workbench moderation'] = array(
     'name' => 'bypass workbench moderation',
     'roles' => array(
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -181,8 +167,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -194,8 +178,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -207,8 +189,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -220,8 +200,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -233,8 +211,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -246,8 +222,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'bean',
@@ -270,8 +244,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -282,8 +254,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'moderate content from needs_review to draft',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -294,8 +265,6 @@ function agov_permissions_user_default_permissions() {
     'name' => 'moderate content from needs_review to published',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -307,8 +276,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'scheduler_workbench',
@@ -331,8 +298,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -344,8 +309,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'scheduler',
@@ -377,8 +340,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'filter',
@@ -390,8 +351,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -403,8 +362,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -415,8 +372,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view all unpublished content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -449,7 +405,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished blog_article content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -459,6 +415,8 @@ function agov_permissions_user_default_permissions() {
   $permissions['view any unpublished content'] = array(
     'name' => 'view any unpublished content',
     'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -469,7 +427,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished event content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -480,7 +438,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished footer_teaser content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -491,7 +449,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished media_release content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -502,7 +460,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished news_article content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -513,7 +471,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished page content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -524,7 +482,7 @@ function agov_permissions_user_default_permissions() {
     'name' => 'view any unpublished publication content',
     'roles' => array(
       'Content approver' => 'Content approver',
-      'Site administrator' => 'Site administrator',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'view_unpublished',
@@ -545,8 +503,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -558,8 +514,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'workbench_moderation',
@@ -571,8 +525,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -584,8 +536,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -597,8 +547,6 @@ function agov_permissions_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'system',

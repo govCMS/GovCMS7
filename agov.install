@@ -92,20 +92,6 @@ function _agov_create_basic_roles_perms() {
     'permissions' => $base_permissions,
   );
 
-  // Site administrator.
-  $roles['Site administrator'] = array(
-    'name' => 'Site administrator',
-    'weight' => $weight++,
-    'permissions' => $base_permissions,
-  );
-
-  // Site builder.
-  $roles['Site builder'] = array(
-    'name' => 'Site builder',
-    'weight' => $weight++,
-    'permissions' => $base_permissions,
-  );
-
   // Create the roles.
   foreach ($roles as $role) {
     $role_object = new stdClass();
