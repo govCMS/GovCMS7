@@ -110,9 +110,13 @@ function wcag_validate_block_view($delta = '') {
  * Request the report from the validation server.
  */
 function wcag_validate_url() {
+  $url = urldecode($_GET['url']);
 
-  // We use HTTP_REFERRER because carrying URL's through drupal paths is tricky.
-  $url = $_SERVER['HTTP_REFERER'];
+  // HTTP_REFERER does not work with IE,
+  // but we'll fall back incase no url was passed.
+  if (empty($url)) {
+    $url = $_SERVER['HTTP_REFERER'];
+  }
 
   if (!empty($url)) {
     // Get the report, or redirect?
