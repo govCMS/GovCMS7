@@ -40,17 +40,17 @@ function wcag_validate_install() {
  * Implements hook_requirements().
  */
 function wcag_validate_requirements($phase) {
+  $requirements = array();
+  
   if ($phase == 'runtime') {
     $t = get_t();
     $test_now = l($t('Test Now'), 'admin/config/services/wcag-validate-connection-test', array('query' => drupal_get_destination()));
 
-    $requirements = array(
-      'wcag_validate' => array(
-        'title' => 'WCAG Validate Service',
-        'description' => 'Tests the connection to and from the WCAG service.',
-        'severity' => REQUIREMENT_OK,
-        'value' => 'Connection established',
-      ),
+    $requirements['wcag_validate'] = array(
+      'title' => 'WCAG Validate Service',
+      'description' => 'Tests the connection to and from the WCAG service.',
+      'severity' => REQUIREMENT_OK,
+      'value' => 'Connection established',
     );
 
     if (variable_get('wcag_validate_connection_status') != 'success') {

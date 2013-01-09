@@ -53,7 +53,6 @@ dependencies[] = ds
 dependencies[] = entity
 dependencies[] = features
 dependencies[] = file_entity
-dependencies[] = google_analytics
 dependencies[] = libraries
 dependencies[] = media
 dependencies[] = media_internet
