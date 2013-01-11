@@ -7,6 +7,7 @@ core = 7.x
 php_memory_limit = 256M
 
 files[] = agov.profile
+files[] = tests/agov.test
 
 
 ; Core
@@ -54,6 +55,7 @@ dependencies[] = entity
 dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = libraries
+dependencies[] = link
 dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = media_vimeo
@@ -80,6 +82,7 @@ dependencies[] = site_map
 dependencies[] = superfish
 dependencies[] = views
 dependencies[] = views_ui
+dependencies[] = view_unpublished
 dependencies[] = webform
 dependencies[] = workbench
 dependencies[] = workbench_moderation
