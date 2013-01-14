@@ -173,11 +173,17 @@ function _wcag_scheduler_query($query = '') {
   $server_base = variable_get('wcag_validate_server_base', wcag_validate_get_config('wcag_validate_server_base'));
 
   // Setup a Guzzle submission.
-  $client = new Guzzle\Service\Client();
-  $request = $client->get($server_base . $query);
-  $response = $request->send();
-  $response->getBody(TRUE);
-  $json = json_decode($response->getBody(TRUE));
+  if (class_exists('Guzzle\Service\Client')) {
+    $client = new Guzzle\Service\Client();
+    $request = $client->get($server_base . $query);
+    $response = $request->send();
+    $response->getBody(TRUE);
+    $json = json_decode($response->getBody(TRUE));
+  }
+  else {
+    watchdog('wcag_scheduler', 'Could not load the Guzzle Client class.', array(), WATCHDOG_ERROR);
+    return;
+  }
 
   return $json;
 }

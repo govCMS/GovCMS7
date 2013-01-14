@@ -839,7 +839,7 @@ function agov_default_content() {
     1 => array(
       'title' => st('Publications'),
       'type' => 'module',
-      'key' => 'agov_content_publications',
+      'key' => 'agov_content_publication',
     ),
     2 => array(
       'title' => st('Blog'),
