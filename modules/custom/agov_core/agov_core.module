@@ -234,6 +234,16 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
       $form['agov_help']['#markup'] .= '<p>' . t('Currently, this value determines when News items are moved to the Archived section.') . '</p>';
     }
   }
+
+  // Install Canberra timezone
+  if ($form_id == 'system_regional_settings') {
+    $timezone_form = $form['timezone']['date_default_timezone'];
+    $sydney_tz = $timezone_form['#options']['Australia/Sydney'];
+    $canberra_tz = preg_replace('/Sydney/', 'Canberra', $sydney_tz);
+    $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
+    asort($timezone_form['#options']);
+    $form['timezone']['date_default_timezone'] = $timezone_form;
+  }
 }
 
 /**

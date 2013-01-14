@@ -19,6 +19,12 @@ function agov_form_install_configure_form_alter(&$form, &$form_state) {
   $form['admin_account']['account']['name']['#default_value'] = 'admin';
   $form['admin_account']['account']['mail']['#default_value'] = 'admin@' . $_SERVER['HTTP_HOST'];
   $form['server_settings']['site_default_country']['#default_value'] = 'AU';
+  $timezone_form = $form['server_settings']['date_default_timezone'];
+  $sydney_tz = $timezone_form['#options']['Australia/Sydney'];
+  $canberra_tz = preg_replace('/Sydney/', 'Canberra', $sydney_tz);
+  $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
+  asort($timezone_form['#options']);
+  $form['server_settings']['date_default_timezone'] = $timezone_form;
   /**
    * As a workaround to core issue #1017020 (http://drupal.org/node/1017020),
    * we override the timezone javascript behaviour by setting it to null in the
