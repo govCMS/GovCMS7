@@ -172,7 +172,14 @@ function _wcag_scheduler_query($query = '') {
 
   $server_base = variable_get('wcag_validate_server_base', wcag_validate_get_config('wcag_validate_server_base'));
 
-  // Setup a Guzzle submission.
+  // Ensure that Guzzle is loaded in case a page hasnt been initialised yet
+  // when this is called, ie cron or post installation.
+  if (!class_exists('Guzzle\Service\Client')) {
+    guzzle_init();
+  }
+
+  // Setup a Guzzle submission. Note this may fail in drush if --uri option
+  // is not set.
   if (class_exists('Guzzle\Service\Client')) {
     $client = new Guzzle\Service\Client();
     $request = $client->get($server_base . $query);
