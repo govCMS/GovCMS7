@@ -428,10 +428,11 @@ function _agov_default_beans() {
     agov_core_save_bean('basic_content', 'About Us', 'Provides "About Us" block for the from page.', 'About Us', $fields);
 
     // Create the footer block.
+    $this_year = date('Y');
     $fields = array(
       'field_bean_body' => array(
         '0' => array(
-          'value' => '&#169; 2012 Government | Powered by <a href="http://agov.com.au">aGov</a>',
+          'value' => '&#169; ' . $this_year . ' Government | Powered by <a href="http://agov.com.au">aGov</a>',
           'format' => 'rich_text',
         ),
       ),
