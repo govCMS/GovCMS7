@@ -30,7 +30,7 @@
   			
   			pager += '<li><a href="#pause" class="pause playing" data-paused="false" title="Pause slideshow">Pause</a></li></ul>';
   			
-  			$('#block-views-feature-article-block').prepend(pager);
+  			$('#block-views-slideshow-block').prepend(pager);
 			}
 			/**
 			* Updates the active state on the pager

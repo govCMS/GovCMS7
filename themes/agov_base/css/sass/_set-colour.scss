@@ -249,7 +249,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
  * Home Page Featured Articles
  */
  
-#block-views-feature-article-block {
+#block-views-slideshow-block {
   background-color: $home_feature_bg;
 }
 #zone-featured-articles {
@@ -266,18 +266,18 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 /**
  * Featured Article Pager
  */
-#block-views-feature-article-block ul li a {
+#block-views-slideshow-block ul li a {
   background-color: $link_light_alpha;
   color: $text_darkest;
 }
-#block-views-feature-article-block ul li.current a {
+#block-views-slideshow-block ul li.current a {
   background-color: $text_active;
 	color: $text_bg !important;
 }
-#block-views-feature-article-block ul li a.playing {
+#block-views-slideshow-block ul li a.playing {
 	background-color: $link_light_alpha;
 }
-#block-views-feature-article-block ul li a.paused {
+#block-views-slideshow-block ul li a.paused {
 	background-color: $text_active;
 }
 

@@ -320,3 +320,7 @@ body.toolbar {
 .wcag_validate {
   display: block;
 }
+
+#region-feature-articles span {
+  display: block;
+}
