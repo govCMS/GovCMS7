@@ -179,7 +179,7 @@ function _wcag_scheduler_query($query = '') {
     return FALSE;
   }
   else {
-   $json = json_decode($result->data);
+    $json = json_decode($result->data);
     return $json;
   }
 }

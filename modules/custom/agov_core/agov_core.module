@@ -275,4 +275,3 @@ function agov_core_cron() {
     drupal_http_request($update_site . '/update_check?' . $query);
   }
 }
-

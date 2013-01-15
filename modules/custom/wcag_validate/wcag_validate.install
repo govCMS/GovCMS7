@@ -41,7 +41,7 @@ function wcag_validate_install() {
  */
 function wcag_validate_requirements($phase) {
   $requirements = array();
-  
+
   if ($phase == 'runtime') {
     $t = get_t();
     $test_now = l($t('Test Now'), 'admin/config/services/wcag-validate-connection-test', array('query' => drupal_get_destination()));
