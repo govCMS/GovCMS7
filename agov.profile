@@ -30,3 +30,11 @@ function agov_form_install_configure_form_alter(&$form, &$form_state) {
     ),
   );
 }
+
+
+/**
+ * Implements hook_block_info_alter().
+ */
+function agov_block_info_alter(&$blocks, $theme, $code_blocks) {
+  $blocks['system']['help']['region'] = 'content';
+}
