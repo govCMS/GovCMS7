@@ -335,6 +335,22 @@ input.form-submit {
 
 /* Search Form */
 
+#skip-to-content a {
+	background: url('../images/skip-to-content-arrow.png') 0% 60% no-repeat;
+}
+
+#region-header-search .block-agov-text-resize-text-resize #resize-buttons li.font-small a {
+	background: url('../images/font-resize-bg.png') 0px 0px no-repeat;
+}
+
+#region-header-search .block-agov-text-resize-text-resize #resize-buttons li.font-large a {
+	background: url('../images/font-resize-bg.png') 0px -27px no-repeat;
+}
+
+#region-header-search .block-agov-text-resize-text-resize #resize-buttons li.reset a {
+	background: url('../images/font-resize-bg.png') 0px -54px no-repeat;
+}
+
 #region-header-search {
 	margin-left: 0;
 	margin-right: 7px;
