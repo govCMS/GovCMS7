@@ -1,23 +1,15 @@
 <?php
 /**
  * @file
- * agov_news.features.inc
+ * agov_slideshow.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function agov_news_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
-  if ($module == "context" && $api == "context") {
-    return array("version" => "3");
-  }
+function agov_slideshow_ctools_plugin_api() {
   list($module, $api) = func_get_args();
   if ($module == "ds" && $api == "ds") {
-    return array("version" => "1");
-  }
-  list($module, $api) = func_get_args();
-  if ($module == "page_manager" && $api == "pages_default") {
     return array("version" => "1");
   }
   list($module, $api) = func_get_args();
@@ -29,21 +21,21 @@ function agov_news_ctools_plugin_api() {
 /**
  * Implements hook_views_api().
  */
-function agov_news_views_api() {
+function agov_slideshow_views_api() {
   return array("api" => "3.0");
 }
 
 /**
  * Implements hook_image_default_styles().
  */
-function agov_news_image_default_styles() {
+function agov_slideshow_image_default_styles() {
   $styles = array();
 
-  // Exported image style: feature_article.
-  $styles['feature_article'] = array(
-    'name' => 'feature_article',
+  // Exported image style: slideshow_reorder.
+  $styles['slideshow_reorder'] = array(
+    'name' => 'slideshow_reorder',
     'effects' => array(
-      7 => array(
+      2 => array(
         'label' => 'Scale and crop',
         'help' => 'Scale and crop will maintain the aspect-ratio of the original image, then crop the larger dimension. This is most useful for creating perfectly square thumbnails without stretching the image.',
         'effect callback' => 'image_scale_and_crop_effect',
@@ -53,10 +45,10 @@ function agov_news_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '640',
-          'height' => '280',
+          'width' => '320',
+          'height' => '140',
         ),
-        'weight' => '2',
+        'weight' => '1',
       ),
     ),
   );
@@ -67,12 +59,12 @@ function agov_news_image_default_styles() {
 /**
  * Implements hook_node_info().
  */
-function agov_news_node_info() {
+function agov_slideshow_node_info() {
   $items = array(
-    'news_article' => array(
-      'name' => t('News Article'),
+    'slide' => array(
+      'name' => t('Slide'),
       'base' => 'node_content',
-      'description' => t('Use <em>News articles</em> to keep your audience up-to-date with the latest news. Articles flagged as "Featured" will be shown on the front page slideshow. Articles flagged "Promoted to front page" will appear in the "Latest News" section of the front page.'),
+      'description' => t('Content to be displayed in the slideshow.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',

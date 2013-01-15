@@ -29,6 +29,9 @@ projects[context][subdir] = "contrib"
 projects[date][version] = "2.6"
 projects[date][subdir] = "contrib"
 
+projects[draggableviews][version] = "2.0"
+projects[draggableviews][subdir] = "contrib"
+
 projects[ds][version] = "2.0"
 projects[ds][subdir] = "contrib"
 
@@ -149,7 +152,7 @@ projects[uuid][download][revision] = 8b6d70f1764a83896e799712111d6b46cf482737
 projects[uuid][download][branch] = 7.x-1.x
 projects[uuid][type] = "module"
 projects[uuid][subdir] = "contrib"
- 
+
 projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"
