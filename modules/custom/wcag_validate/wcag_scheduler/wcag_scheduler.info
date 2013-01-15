@@ -1,7 +1,6 @@
 name = WCAG Scheduler
 description = Provides scheduled WCAG checking functionality.
 core = 7.x
-dependencies[] = guzzle
 dependencies[] = views
 dependencies[] = wcag_validate
 files[] = wcag_scheduler.views.inc
