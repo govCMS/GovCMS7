@@ -49,6 +49,7 @@ dependencies[] = context
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = defaultcontent
+dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
 dependencies[] = features
@@ -116,6 +117,7 @@ dependencies[] = agov_contact
 ;dependencies[] = agov_content_requirements
 dependencies[] = agov_front
 dependencies[] = agov_menu_block
+dependencies[] = agov_slideshow
 dependencies[] = agov_social_menu
 dependencies[] = agov_superfish_configuration
 dependencies[] = agov_sitemap
@@ -129,7 +131,6 @@ dependencies[] = agov_media_releases
 dependencies[] = agov_news
 dependencies[] = agov_publications
 dependencies[] = agov_promotion
-
 dependencies[] = agov_permissions
 
 ; Content
