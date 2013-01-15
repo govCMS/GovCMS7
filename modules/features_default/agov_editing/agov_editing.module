@@ -5,3 +5,17 @@
  */
 
 include_once 'agov_editing.features.inc';
+
+function agov_editing_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if ($context['profile']->editor == 'tinymce') {
+    // Add custom styles for the styleselect plugin.
+    $settings['style_formats'] = array(
+      array('title' => 'Float left',
+            'selector' => 'p',
+            'attributes' => array('class' => 'img-float-left')),
+      array('title' => 'Float right',
+            'selector' => 'p',
+            'attributes' => array('class' => 'img-float-right')),
+    );
+  }
+}
