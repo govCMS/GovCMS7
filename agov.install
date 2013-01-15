@@ -12,9 +12,8 @@
 /**
  * Define a default theme constant
  */
-define('AGOV_INSTALL_DEFAULT_THEME', 'agov_barton');
-define('AGOV_BASE_THEME', 'agov_base');
-define('AGOV_DEFAULT_THEME', 'agov_barton');
+define('AGOV_INSTALL_DEFAULT_THEME', 'agov_base');
+define('AGOV_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_ADMIN_THEME', 'ember');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
@@ -122,9 +121,7 @@ function _agov_set_default_themes() {
   // we set install_profile specifically to ensure that drupal_get_profile()
   // returns the correct profile name and finds the profile themes.
   $enable = array(
-    '0' => AGOV_BASE_THEME,
-    '1' => AGOV_DEFAULT_THEME,
-    'theme_default' => AGOV_INSTALL_DEFAULT_THEME,
+    'theme_default' => AGOV_DEFAULT_THEME,
     'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
     'install_profile' => 'agov',
   );
@@ -136,8 +133,8 @@ function _agov_set_default_themes() {
     }
   }
 
-  // Disable the default Bartik theme.
-  theme_disable(array('bartik'));
+  // Disable the default Bartik & default admin theme.
+  theme_disable(array('bartik', AGOV_DEFAULT_ADMIN_THEME));
 }
 
 /**

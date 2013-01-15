@@ -209,14 +209,7 @@ function agov_core_update_block($module, $delta, $theme = '', $region = BLOCK_RE
  */
 function agov_core_theme_info() {
   return array(
-    'agov_barton',
-    'agov_bruce',
-    'agov_cook',
-    'agov_deakin',
-    'agov_fisher',
-    'agov_hughes',
-    'agov_reid',
-    'agov_watson',
+    'agov_base',
   );
 }
 
