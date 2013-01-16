@@ -98,7 +98,7 @@ function agov_disable_defaultcontent_init() {
     $default_content = agov_disable_defaultcontent_modules();
     if (!empty($default_content) && variable_get('agov_disable_defaultcontent_notice_enabled', 1)) {
       drupal_set_message(
-        t('Default content has been enabled for this site, would you like to !disable_link (!hide_link).',
+        t('Default content has been enabled for this site, would you like to !disable_link? (!hide_link).',
         array(
           '!disable_link' => l(t('switch it off'), 'admin/config/content/default-content/disable'),
           '!hide_link' => l(t('hide this notice'), 'admin/config/content/default-content'),
