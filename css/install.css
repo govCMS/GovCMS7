@@ -1,3 +1,5 @@
+body {background-color: #efeee9;}
+
 #page {
   max-width: 960px;
   margin: 50px auto 0;
@@ -6,7 +8,7 @@
   line-height: 1.4;
   background: white;
   padding: 20px;
-  border: 1px solid #88A5BF;
+  border: 1px solid #d4dee7;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -99,6 +101,25 @@ label {
 input.form-checkbox {
   margin-right: 5px;
 }
+
+input.form-submit {
+  background: #a52b36;
+  color: white;
+  box-shadow: 1px 1px 1px #c9c9c9;
+  -webkit-box-shadow: 1px 1px 1px #c9c9c9;
+  -moz-box-shadow: 1px 1px 1px #c9c9c9; }
+
+input.form-submit:hover {
+  background-color: #c42a36; }
+
+a {
+  color: #c53100; }
+
+a:hover {
+  color: #003655; }
+
+legend a {color:#eee;}
+legend a:hover {color:#fff;}
 
 .messages {
   border-radius: 10px;

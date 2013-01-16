@@ -250,9 +250,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 /**
  * Home Page Featured Articles
  */
-#block-views-slideshow-block {
 #block-views-feature-article-block {
->>>>>>> 2eeeca48527598680b272aa10a3cfc98b85956e0
   background-color: #f2f2f3;
 }
 
@@ -272,23 +270,24 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 /**
  * Featured Article Pager
  */
-#block-views-slideshow-block ul li a {
+#block-views-feature-article-block ul li a {
   background-color: rgba(255, 255, 255, 0.6);
   color: black;
 }
 
-#block-views-slideshow-block ul li.current a {
+#block-views-feature-article-block ul li.current a {
   background-color: #333333;
   color: white !important;
 }
 
-#block-views-slideshow-block ul li a.playing {
+#block-views-feature-article-block ul li a.playing {
   background-color: rgba(255, 255, 255, 0.6);
 }
 
-#block-views-slideshow-block ul li a.paused {
+#block-views-feature-article-block ul li a.paused {
   background-color: #333333;
 }
+
 /**
  * Home Page Latest News & From The Blog
  */

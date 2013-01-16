@@ -1,0 +1,93 @@
+// Body
+$body_bg: #f2f2f3;
+$body_color: #5F5F5F;
+$body_toolbar_bg: #f2f2f3;
+$body_toolbardrawer_bg: #f2f2f3;
+
+$base_light: #fff;
+$base_midrange: #BFBFBF;
+
+// Links
+$link_color: #c53100;
+$hover_color: #330000;
+$submit_hover: #c42a36;
+$input_button: #767676;
+$button_bg: #a52b36;
+$button_color_light: #fff;
+$box_shadow: #999;
+$menu_active: #006eae;
+$search_button: #006eae;
+$link_light_alpha: rgba(255,255,255,.6);
+$footer_link: #1b1b27;
+$mainmenu_link: #eee;
+
+$pager_active: #c53100;
+$pager_current: #3F3E41;
+
+$topmenu_link_color: #fff;
+
+// Headers
+$h1: #1b1b27;
+$h2: #082949;
+$h3: #555;
+$twitter_h2: #1b1b27;
+$footer_h2: #1b1b27;
+
+// Borders
+$border_general: #ddd;
+$border_theme: #73737B;
+$border_tab: #ccc;
+$border_util: #73737B;
+$top_menu_border_left: #27272d;
+$top_menu_border_right: #5b5b61;
+$twitter_border: #A2B6C8;
+
+$box_shadow: #c9c9c9;
+
+// Theme highlight color
+$theme_color: #19191d; // colour of header region
+$menu_bg: #797979;
+$menu_border: #dedede;
+
+// Main Menu
+$dropdown_menu_bg: #EFEEE9;
+$main_menu_border: #999;
+
+// Text
+$text_light: #767676;
+$text_darkest: #000;
+$text_bg: #fff;
+$text_summary: #444;
+$text_blog: #000;
+$text_active: #333;
+
+// Content
+$content_bg: #fff;
+
+// Comments
+$comment_border_top: #73737B;
+$comment_bg: #F7F7F4;
+$comment_border_bottom: #EBEBEB;
+
+// Tabs
+$tab_bg: #EFEEE9;
+
+// Home page featured articles
+$home_feature_bg: #f1efed;
+$region_feature_bg: #DEE7EF;
+
+// Blocks
+$block_border: #dbdbdb;
+$block_header_bg: #d6d6d6;
+$block_list_separator: #CDCCCE;
+
+// Footer feature
+$footer_feature_bg: #F3F3F3;
+$footer_region_bg: #d6d6d6;
+
+// Messages
+$message_border: #88A5BF;
+$message_color: #1A3E64;
+
+
+@import "../../set-colour.scss";
