@@ -813,13 +813,22 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
 	padding: 20px 10px 0 10px;
 }
 
-#region-feature-articles .views-field-title .field-content {
+#region-feature-articles .views-field-title span {
 	font-family: 'OpenSansBold';
 	font-size: 22px;
 	font-weight: normal;
 	line-height: 26px;
 	margin-bottom: 13px;
 	padding-top: 0;
+}
+
+#region-feature-articles .views-field-title a {
+  font-weight:normal;
+  text-decoration:none;
+}
+
+#region-feature-articles .views-field-title a:hover {
+  text-decoration:underline;
 }
 
 #region-feature-articles .views-field-body,

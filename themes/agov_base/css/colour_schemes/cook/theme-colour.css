@@ -198,7 +198,8 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 #region-feature-articles {
   background-color: #dee7ef; }
 
-#region-feature-articles .field-name-title h2 {
+#region-feature-articles .views-field-title a,
+#region-feature-articles .views-field-title {
   color: #1a3e64;
   text-shadow: 1px 1px 0 white; }
 
