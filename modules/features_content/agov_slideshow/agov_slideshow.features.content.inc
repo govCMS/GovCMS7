@@ -36,7 +36,7 @@ function agov_slideshow_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => NULL,
+          'alt' => 'Os Praemitto Refero Tatio',
           'title' => NULL,
           'width' => '900',
           'height' => '637',
@@ -85,7 +85,7 @@ function agov_slideshow_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => NULL,
+          'alt' => 'Diam Eum In Probo',
           'title' => NULL,
           'width' => '900',
           'height' => '522',
@@ -133,7 +133,7 @@ function agov_slideshow_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => NULL,
+          'alt' => 'Macto Oppeto',
           'title' => NULL,
           'width' => '900',
           'height' => '600',
