@@ -774,6 +774,11 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
 
 /* Home Page Featured Articles */
 
+#block-views-slideshow-block {
+  /* Hide for mobile */
+  display:none;
+}
+
 #block-views-slideshow-block .view-slideshow {
 	position: relative;
 	height: 370px;

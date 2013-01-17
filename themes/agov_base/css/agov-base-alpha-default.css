@@ -324,3 +324,7 @@ body.toolbar {
 #region-feature-articles span {
   display: block;
 }
+
+#block-views-slideshow-block {
+  display:block;
+}
