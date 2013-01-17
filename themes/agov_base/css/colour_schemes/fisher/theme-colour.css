@@ -189,7 +189,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 /**
  * Home Page Featured Articles
  */
-#block-views-feature-article-block {
+#block-views-slideshow-block {
   background-color: #ececec; }
 
 #zone-featured-articles {
@@ -205,18 +205,18 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 /**
  * Featured Article Pager
  */
-#block-views-feature-article-block ul li a {
+#block-views-slideshow-block ul li a {
   background-color: rgba(255, 255, 255, 0.6);
   color: black; }
 
-#block-views-feature-article-block ul li.current a {
+#block-views-slideshow-block ul li.current a {
   background-color: #333333;
   color: white !important; }
 
-#block-views-feature-article-block ul li a.playing {
+#block-views-slideshow-block ul li a.playing {
   background-color: rgba(255, 255, 255, 0.6); }
 
-#block-views-feature-article-block ul li a.paused {
+#block-views-slideshow-block ul li a.paused {
   background-color: #333333; }
 
 /**
