@@ -231,8 +231,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 
 /**
  * Home Page Featured Articles
- */
- 
+ */ 
 #block-views-slideshow-block {
   background-color: $home_feature_bg;
 }
@@ -242,7 +241,8 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 #region-feature-articles {
 	background-color: $region_feature_bg;
 }
-#region-feature-articles .field-name-title h2 {
+#region-feature-articles .views-field-title a,
+#region-feature-articles .views-field-title {
 	color: $h2;
 	text-shadow: 1px 1px 0 $text_bg;
 }
