@@ -85,11 +85,23 @@ function agov_slideshow_views_default_views() {
   );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Read more */
+  $handler->display->display_options['fields']['field_read_more_1']['id'] = 'field_read_more_1';
+  $handler->display->display_options['fields']['field_read_more_1']['table'] = 'field_data_field_read_more';
+  $handler->display->display_options['fields']['field_read_more_1']['field'] = 'field_read_more';
+  $handler->display->display_options['fields']['field_read_more_1']['label'] = '';
+  $handler->display->display_options['fields']['field_read_more_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_read_more_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_read_more_1']['hide_empty'] = TRUE;
+  $handler->display->display_options['fields']['field_read_more_1']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_read_more_1']['type'] = 'link_url';
   /* Field: Content: Image */
   $handler->display->display_options['fields']['field_slide_image']['id'] = 'field_slide_image';
   $handler->display->display_options['fields']['field_slide_image']['table'] = 'field_data_field_slide_image';
   $handler->display->display_options['fields']['field_slide_image']['field'] = 'field_slide_image';
   $handler->display->display_options['fields']['field_slide_image']['label'] = '';
+  $handler->display->display_options['fields']['field_slide_image']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_slide_image']['alter']['path'] = '[field_read_more_1]';
   $handler->display->display_options['fields']['field_slide_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_slide_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_slide_image']['settings'] = array(
@@ -101,15 +113,18 @@ function agov_slideshow_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_read_more_1]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['body']['settings'] = array(
     'trim_length' => '200',
   );
