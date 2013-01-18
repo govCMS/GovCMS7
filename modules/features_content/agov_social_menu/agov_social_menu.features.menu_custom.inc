@@ -13,12 +13,12 @@ function agov_social_menu_menu_default_menu_custom() {
   // Exported menu: menu-social-media.
   $menus['menu-social-media'] = array(
     'menu_name' => 'menu-social-media',
-    'title' => 'Social Media',
+    'title' => 'Connect with us',
     'description' => '',
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Social Media');
+  t('Connect with us');
 
 
   return $menus;
