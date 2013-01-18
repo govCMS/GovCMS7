@@ -36,16 +36,10 @@ input.form-submit {
 input.form-submit:hover {
   background-color: #c42a36; }
 
-/**
- * Theme color
- */
 #zone-header-wrapper {
   background-color: white;
   background-image: none !important; }
 
-/*
- * Top Menu
- */
 #region-header-top-menu .block-menu ul.menu li {
   border-left: 1px solid #27272d;
   border-right: 1px solid #5b5b61; }
@@ -63,9 +57,6 @@ input.form-submit:hover {
 #region-header-search form input.form-text {
   border: 1px solid #dddddd !important; }
 
-/**
- * Main Menu
- */
 #zone-menu-wrapper {
   background-color: #d6d6d6;
   border-top: 1px solid #dedede; }
@@ -104,9 +95,6 @@ input.form-submit:hover {
   background: white;
   color: #006eae; }
 
-/**
- *Search Form
- */
 #region-header-search form input.form-text {
   color: #767676;
   background: white; }
@@ -115,9 +103,6 @@ input.form-submit:hover {
   background-image: none;
   background-color: #1863ac; }
 
-/**
- * Content
- */
 #zone-content {
   background-color: white; }
 
@@ -132,9 +117,6 @@ input.form-submit:hover {
 .not-front .node-blog-article .field-name-summary {
   color: #444444; }
 
-/**
- * Comments
- */
 #comments #comment-wrapper-header {
   border-top: 3px solid #8d98a2; }
 
@@ -153,9 +135,6 @@ input.form-submit:hover {
 #comments #add-new-comment input#edit-preview:hover {
   color: black; }
 
-/**
- * Tabs
- */
 .tabbed-nav {
   border: 1px solid #cccccc; }
 
@@ -172,9 +151,6 @@ input.form-submit:hover {
   border-left: 1px solid #cccccc;
   border-right: 1px solid #cccccc; }
 
-/**
- * User login
- */
 body.page-user #region-content #block-system-main {
   border: 1px solid #cccccc; }
 
@@ -186,9 +162,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
   border: 1px solid #cccccc;
   color: #767676; }
 
-/**
- * Home Page Featured Articles
- */
 #block-views-slideshow-block {
   background-color: #f2f2f3; }
 
@@ -203,9 +176,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
   color: #222222;
   text-shadow: 1px 1px 0 white; }
 
-/**
- * Featured Article Pager
- */
 #block-views-slideshow-block ul li a {
   background-color: rgba(255, 255, 255, 0.6);
   color: black; }
@@ -220,16 +190,10 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 #block-views-slideshow-block ul li a.paused {
   background-color: #333333; }
 
-/**
- * Home Page Latest News & From The Blog
- */
 #block-views-latest-news-block .content .views-row,
 .view-home-page-blog-articles .views-row {
   border-bottom: 1px solid #cccccc; }
 
-/**
- * Search results
- */
 body.page-search #section-content #search-form {
   background-color: #f7f7f4;
   border-top: 3px solid #8d98a2; }
@@ -252,9 +216,6 @@ body.page-search #section-content .content h2 {
 body.page-search #section-content ol.search-results li {
   border-bottom: 1px solid #cccccc; }
 
-/**
- * Sidebar blocks
- */
 #region-sidebar .block {
   border-top: 3px solid #dbdbdb; }
 
@@ -275,18 +236,12 @@ body.page-search #section-content ol.search-results li {
 #region-sidebar .block-menu-block .content ul li.last.active a {
   border-bottom: 1px solid #cdccce; }
 
-/**
- * Twitter feed
- */
 #block-agov-twitter-feed h2 a {
   color: #222222; }
 
 #block-agov-twitter-feed #tweets ul li {
   border-bottom: 1px solid #a2b6c8; }
 
-/**
- * Footer Feature/Teasers
- */
 #region-footer-feature {
   background: #f3f3f3; }
 
@@ -299,9 +254,6 @@ body.page-search #section-content ol.search-results li {
 #region-footer-feature .views-row {
   border-top: 1px solid #cccccc; }
 
-/**
- * Footer menu
- */
 #region-footer-menu {
   background-image: none !important;
   background-color: #d6d6d6; }
@@ -310,15 +262,9 @@ body.page-search #section-content ol.search-results li {
   color: #1b1b27;
   font-weight: bold; }
 
-/**
- * Footer bottom
- */
 #zone-footer-copyright {
   background-color: white; }
 
-/**
- * Footer sub menu
- */
 #region-footer-sub-menu ul li a {
   color: #0d5ba8; }
 

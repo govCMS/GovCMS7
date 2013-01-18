@@ -1,39 +1,132 @@
-/* This file will hold styles for the mobile version of your website (mobile first). */
-/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+/**
+ * @file
+ * Global styles
+ *
+ * Adds all global styles
+ *
+ */
 
-/* Fonts */
+// This file includes:
+// 1. Styles for the mobile version of aGov (mobile first).
+// 2. ANY global CSS that applies site-wide.
+//
+// This file does not include:
+// 1. Any layout-specific code for narrow or normal layouts (these should go into specific alpha-default files).
+// 2. Base variables, mixins, etc (this should go into _base.scss).
+//
+// A Note for STARTERKIT users:
+// The STARTERKIT allows user's to complete override this file, loosing almost all aGov default styling.
+// Hence the construction of this file 
 
-@font-face {
-	font-family: 'OpenSansRegular';
-	src: url('../fonts/opensans-regular-webfont.eot');
-	src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/opensans-regular-webfont.woff') format('woff'),
-		url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
-		url('../fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
-	font-weight: normal;
-	font-style: normal;
+
+// Imports
+///////////////////////////////////////////////////////////////////////////////
+// First, lets import all our global styles, compass plugins, base partials, etc.
+
+// Base partials
+@import "base";
+
+// Font declarations
+@import "fonts";
+
+
+// Slideshow 
+///////////////////////////////////////////////////////////////////////////////
+// Provides global layout and styling for the aGov slideshow when rendered in
+// any location.
+
+#block-views-slideshow-block {
+  // @todo create mobile version of slideshow code.
+  display:none; // Hide slideshow on mobile.
+  
+  .view-slideshow {
+    position:relative;
+  }
+  
+  .views-row {
+    position:absolute;
+    display:none; // Hide all slide's initially.
+  }
+  
+  .views-row-first {
+    display:block; // Show the first slide initially.
+  }
+  
+  // Font styling for title
+  .views-field-title {
+    font-family: 'OpenSansBold';
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 26px;
+    a {
+      font-weight:normal;
+      text-decoration:none;
+      &:hover {text-decoration:underline;}
+    }
+  }
+  
+  // Font styling for body
+  .views-field-body {
+    p {
+      line-height:18px;
+      margin:0;
+    }
+  }
+  
+  // Font styling for readmore
+  .views-field-field-read-more {
+    a {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+  
+  // Pager
+  #featured-article-pager {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    // Position for pager mobile
+    top: 100px;
+    left: 10px;
+  
+    li {
+      float: left;
+      margin-left: 2px;
+      a {
+        display: block;
+        width: 27px;
+        height: 27px;
+        font-weight: bold;
+        line-height: 27px;
+        text-align: center;
+        text-decoration: none;
+        &.pause {
+          height: 0;
+          overflow: hidden;
+          padding-top: 27px; 
+        }
+        &.playing {
+          background-image: url('../images/featured-articles-pause.png');
+          background-position: 0px -27px;
+          background-repeat: no-repeat;
+        }
+        &.paused {
+          background-image: url('../images/featured-articles-pause.png');
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+  
 }
 
-@font-face {
-	font-family: 'OpenSansBold';
-	src: url('../fonts/opensans-bold-webfont.eot');
-	src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/opensans-bold-webfont.woff') format('woff'),
-		url('../fonts/opensans-bold-webfont.ttf') format('truetype'),
-		url('../fonts/opensans-bold-webfont.svg#OpenSansBold') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'OpenSansSemibold';
-	src: url('../fonts/opensans-semibold-webfont.eot');
-	src: url('../fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/opensans-semibold-webfont.woff') format('woff'),
-		url('../fonts/opensans-semibold-webfont.ttf') format('truetype'),
-		url('../fonts/opensans-semibold-webfont.svg#OpenSansSemibold') format('svg');
-	font-weight: normal;
-	font-style: normal;
+#region-feature-articles {
+  background-image: url('../images/mobile-menu-shadow.png');
+  background-repeat: repeat-x;
+	background: #DEE7EF url('../images/mobile-menu-shadow.png') repeat-x;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 /* Global / Overwrites */
@@ -770,128 +863,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-action
 body.page-user #region-content #block-system-main .block-inner form .form-item .description {
 	font-size: 12px;
 	line-height: 17px;
-}
-
-/* Home Page Featured Articles */
-
-#block-views-slideshow-block {
-  /* Hide for mobile */
-  display:none;
-}
-
-#block-views-slideshow-block .view-slideshow {
-	position: relative;
-	height: 370px;
-}
-
-#region-feature-articles {
-  background-image: url('../images/mobile-menu-shadow.png');
-  background-repeat: repeat-x;
-	background: #DEE7EF url('../images/mobile-menu-shadow.png') repeat-x;
-	margin-left: 0;
-	margin-right: 0;
-}
-
-#region-feature-articles .views-row {
-	position: absolute;
-	height: 396px;
-	display: none;
-}
-
-#region-feature-articles .views-row-first {
-	display: block;
-}
-
-#region-feature-articles .views-field-field-slide-image {
-	padding-left: 10px;
-	padding-top: 20px;
-}
-
-#region-feature-articles .views-field-field-slide-image,
-#region-feature-articles .views-field-field-slide-image img {
-	width: 300px;
-	height: 131px;
-}
-
-#region-feature-articles .views-field-title {
-	width: 290px;
-	padding: 20px 10px 0 10px;
-}
-
-#region-feature-articles .views-field-title span {
-	font-family: 'OpenSansBold';
-	font-size: 22px;
-	font-weight: normal;
-	line-height: 26px;
-	margin-bottom: 13px;
-	padding-top: 0;
-}
-
-#region-feature-articles .views-field-title a {
-  font-weight:normal;
-  text-decoration:none;
-}
-
-#region-feature-articles .views-field-title a:hover {
-  text-decoration:underline;
-}
-
-#region-feature-articles .views-field-body,
-#region-feature-articles .views-field-field-read-more {
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-#region-feature-articles .views-field-body p {
-	line-height: 18px;
-}
-
-#region-feature-articles .views-field-field-read-more a {
-	font-size: 14px;
-	font-weight: bold;
-	position: relative;
-	z-index: 2;
-}
-
-/* Featured Article Pager */
-#block-views-slideshow-block #featured-article-pager {
-	position: absolute;
-	z-index: 1;
-	margin: 0;
-	top: 100px;
-	left: 10px;
-}
-
-#block-views-slideshow-block #featured-article-pager li {
-	float: left;
-	margin-left: 2px;
-}
-
-#block-views-slideshow-block #featured-article-pager li a {
-	display: block;
-	width: 27px;
-	height: 27px;
-	font-weight: bold;
-	line-height: 27px;
-	text-align: center;
-	text-decoration: none;
-}
-
-#block-views-slideshow-block #featured-article-pager li a.pause {
-	height: 0;
-	overflow: hidden;
-	padding-top: 27px;
-}
-
-#block-views-slideshow-block #featured-article-pager li a.playing {
-  background-image: url('../images/featured-articles-pause.png');
-  background-position: 0px -27px;
-  background-repeat: no-repeat;
-}
-
-#block-views-slideshow-block #featured-article-pager li a.paused {
-  background-image: url('../images/featured-articles-pause.png');
-  background-repeat: no-repeat;
 }
 
 /* Home Page Latest News & From The Blog */

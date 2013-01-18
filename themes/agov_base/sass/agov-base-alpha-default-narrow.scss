@@ -1,7 +1,62 @@
-/* This file will hold styles that are loaded using the same media query as the narrow grid. */
-/* If you are using the default media queries provided by Omega, these styles will also
- *  apply to the normal and widescreen layouts. You may override these styles in the normal 
- *  and widescreen CSS files as appropriate. */
+/**
+ * @file
+ * Narrow styles
+ *
+ * Adds all narrow grid styles
+ *
+ */
+
+// This file will hold styles that are loaded using the same media query as the narrow grid.
+// If you are using the default media queries provided by Omega, these styles will also
+// apply to the normal and widescreen layouts. You may override these styles in the normal 
+// and widescreen CSS files as appropriate.
+
+
+// Slideshow 
+///////////////////////////////////////////////////////////////////////////////
+// Provides layout specific code to render slideshow in normal layout.
+
+#block-views-slideshow-block {
+
+  .view-slideshow {
+    height: 475px;
+  }
+
+  .views-field-field-slide-image {
+    width: 720px;
+    height: 315px;
+    img {display:block;width:100%;height:100%;}
+  }
+
+  .views-field-title,
+  .views-field-body,
+  .views-field-field-read-more {
+    float:none;
+    width:100%;
+  }
+
+  .views-field-title .field-content {
+    padding:20px 20px 10px;
+  }
+
+  .views-field-body .field-content {
+    padding:0 20px;
+  }
+  
+  .views-field-field-read-more .field-content {
+    padding:10px 20px 0;
+  }
+  
+  // Pager position
+  #featured-article-pager {
+    bottom:inherit;
+    left:inherit;
+    top: 268px;
+    right: 20px;
+  }
+
+}
+
 
 #block-agov-twitter-feed #tweets ul li .tweet_text {
   width: 140px;
@@ -103,33 +158,6 @@
 
 #region-footer-copyright p {
 	margin-bottom: 0;
-}
-
-/* Slideshow */
-#block-views-slideshow-block {
-  height: 475px;  
-}
-
-#region-feature-articles .views-field-field-slide-image {
-  padding-top: 0;
-  width: 720px;
-	height: 280px;
-	padding-left: 0;
-	float: left;
-}
-
-#region-feature-articles .views-field-field-slide-image img {
-	width: 720px;
-	height: 280px;
-}
-
-#region-feature-articles .views-field-title {
-  width: auto;
-}
-
-#block-views-slideshow-block #featured-article-pager {
-  top: 242px;
-  right: 20px;                                  
 }
 
 .node-event .field-name-field-tags {
