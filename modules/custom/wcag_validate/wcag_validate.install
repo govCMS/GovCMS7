@@ -54,7 +54,7 @@ function wcag_validate_requirements($phase) {
     );
 
     if (variable_get('wcag_validate_connection_status') != 'success') {
-      $requirements['wcag_validate']['severity'] = REQUIREMENT_ERROR;
+      $requirements['wcag_validate']['severity'] = REQUIREMENT_WARNING;
       $requirements['wcag_validate']['value'] = variable_get('wcag_validate_connection_status_msg') . ' ' . $test_now;
     }
 
