@@ -1591,6 +1591,22 @@ img.img-float-left {
   margin-bottom: 30px;
 }
 
+.page-news-media
+#region-content .entity-bean.bean-image-and-text.highlight {
+    padding-top: 0;
+}
+.page-news-media
+.entity-bean.highlight .summary-text h2 {
+    border-top: 0 !important;
+    border-bottom: none;
+}
+
+.page-news-media
+.entity-bean.highlight .image img {
+    width: 230px;
+    padding-top: 19px;
+}
+
 #region-content .entity-bean.default {
   padding-bottom: 17px;
   border-bottom: 1px solid #CCC;
@@ -1698,18 +1714,18 @@ ul.contextual-links li {
   /*
  * Replaces background images with retina images for the iPhone 4.
  */
-  
+
   #block-agov-twitter h2 {
   	background: url('../images/twitter-feed-icon@2x.png') 94% 50% no-repeat !important;
   	-webkit-background-size: 31px 21px;
   }
-  
+
   #region-header-search form input.form-submit {
     background: #4C7296 url('../images/search-btn-mobile@2x.png') 50% 50% no-repeat !important;
   	-webkit-background-size: 19px 17px;
   }
-  
-  
+
+
   #block-system-main-menu select.menu {
   	background: #FFF url('../images/mobile-menu-arrow@2x.png') 95% 50% no-repeat !important;
   	-webkit-background-size: 10px 6px;
