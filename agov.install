@@ -325,6 +325,7 @@ function _agov_date_formats() {
     variable_set('date_format_' . $type_string, $data['format']['format']);
   }
 
+  variable_set('date_format_short', "d/m/Y - g:ia");
 }
 
 /**
