@@ -13,7 +13,7 @@ function agov_menu_install() {
 
   $item = array(
     'link_path' => 'sitemap',
-    'link_title' => $t('Sitemap'),
+    'link_title' => $t('Sitemap and Feeds'),
     'menu_name' => 'menu-footer-sub-menu',
     'weight' => -39,
   );

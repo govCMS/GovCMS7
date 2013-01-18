@@ -15,7 +15,7 @@ function agov_menu_menu_default_menu_links() {
     'menu_name' => 'menu-header-menu',
     'link_path' => 'sitemap',
     'router_path' => 'sitemap',
-    'link_title' => 'Site map',
+    'link_title' => 'Site map and Feeds',
     'options' => array(
       'attributes' => array(
         'title' => '',
@@ -193,7 +193,7 @@ function agov_menu_menu_default_menu_links() {
     'menu_name' => 'menu-footer-sub-menu',
     'link_path' => 'sitemap',
     'router_path' => 'sitemap',
-    'link_title' => 'Sitemap',
+    'link_title' => 'Sitemap and Feeds',
     'options' => array(),
     'module' => 'menu',
     'hidden' => '0',
@@ -268,7 +268,7 @@ function agov_menu_menu_default_menu_links() {
   t('Publications');
   t('Resources');
   t('Services');
-  t('Sitemap');
+  t('Sitemap and Feeds');
   t('Smartraveller');
 
 

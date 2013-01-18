@@ -64,29 +64,11 @@ function agov_social_menu_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-49',
   );
-  // Exported menu link: menu-social-media:rss.xml
-  $menu_links['menu-social-media:rss.xml'] = array(
-    'menu_name' => 'menu-social-media',
-    'link_path' => 'rss.xml',
-    'router_path' => 'rss.xml',
-    'link_title' => 'RSS',
-    'options' => array(
-      'attributes' => array(
-        'id' => 'sc-rss',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Email');
   t('Facebook');
-  t('RSS');
   t('Twitter');
 
 
