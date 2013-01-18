@@ -29,7 +29,7 @@ function agov_base_preprocess_html(&$vars) {
     drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
   }
   else {
-    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
   }
   
 }

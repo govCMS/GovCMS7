@@ -5,38 +5,41 @@
  * Adds styles for narrow & normal grids.
  *
  */
+
 body {
-  background-position: 0 0;
+	background-position: 0 0;
 }
 
 body.toolbar {
-  background-position: 0px 30px;
+	background-position: 0px 30px;
 }
 
 /* Regions */
+
 #zone-header {
-  height: 115px !important;
+	height: 115px !important;
 }
 
 #region-header-logo {
-  float: left;
-  margin-top: 20px;
+	float: left;
+	margin-top: 20px;
 }
 
 #region-header-top-menu {
-  float: right;
-  margin: 14px 10px 19px 10px;
+	float: right;
+	margin: 14px 10px 19px 10px;
 }
 
 #region-header-search {
-  float: right;
+	float: right;
 }
 
 #zone-content {
-  padding-top: 20px;
+	padding-top: 20px;
 }
 
 /* Drop Down Menu */
+
 #region-header-main-menu .block-title {
   display: none;
 }
@@ -47,8 +50,8 @@ body.toolbar {
 }
 
 #region-header-main-menu .menu li ul li a {
-  padding: 0 0 0 14px;
-  height: 30px;
+	padding: 0 0 0 14px;
+	height: 30px;
 }
 
 .sf-sub-indicator {
@@ -56,119 +59,121 @@ body.toolbar {
 }
 
 /* Search */
+
 #region-header-search {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 365px !important;
-  clear: right;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 365px !important;
+	clear: right;
 }
 
 #block-search-form {
-  float: right;
+	float: right;
 }
 
 #region-header-search .block-agov-text-resize-text-resize {
-  float: left;
-  width: 95px;
+	float: left;
+	width: 95px;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons ul {
-  margin: 0;
-  height: 27px;
+	margin: 0;
+	height: 27px;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons li {
-  float: left;
-  list-style: none;
-  margin-right: 2px;
+	float: left;
+	list-style: none;
+	margin-right: 2px;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons li a {
-  display: block;
-  width: 27px;
-  height: 0;
-  overflow: hidden;
-  padding-top: 27px;
+	display: block;
+	width: 27px;
+	height: 0;
+	overflow: hidden;
+	padding-top: 27px;
 }
 
 /* Top Menu */
+
 #region-header-top-menu {
-  background: none;
+	background: none;
 }
 
 #region-header-top-menu .region-header-top-menu-inner {
-  float: right;
-  min-width: 294px;
+	float: right;
+        min-width: 294px;
 }
 
 #block-menu-menu-top-menu {
-  float: left;
+	float: left;
 }
 
 .block-agov-text-resize-text-resize {
-  display: block;
+	display: block;
 }
 
 #region-header-top-menu .content ul.menu {
-  padding: 0;
+	padding: 0;
 }
 
 #region-header-top-menu .content ul.menu li a {
-  font-weight: normal;
+	font-weight: normal;
 }
 
 #region-header-top-menu .content ul.menu li a,
 #skip-to-content a {
-  font-size: 13px;
-  font-weight: normal;
+	font-size: 13px;
+	font-weight: normal;
 }
 
 #skip-to-content {
-  margin: 0 0 0 17px;
+	margin: 0 0 0 17px;
 }
 
 #skip-to-content {
-  padding-right: 10px;
+	padding-right: 10px;
 }
 
 #region-header-top-menu {
-  padding-right: 0;
+	padding-right: 0;
 }
 
 #region-header-top-menu .content ul.menu li.first {
-  padding-left: 10px;
+	padding-left: 10px;
 }
 
 /*
  * Main menu
  */
 #region-header-main-menu {
-  height: 40px;
-  float: left;
-  margin-left: 10px;
+	height: 40px;
+	float: left;
+	margin-left: 10px;
 }
 
 #region-header-main-menu ul.menu {
-  margin-bottom: 0;
-  display: block;
+	margin-bottom: 0;
+	display: block;
 }
 
 #region-header-main-menu select.menu {
-  display: none;
+	display: none;
 }
 
 #region-header-main-menu .menu li {
-  list-style: none;
-  float: left;
-  padding: 0;
+	list-style: none;
+	float: left;
+	padding: 0;
 }
 
 #region-header-main-menu .menu li {
-  position: relative;
-  margin: 8px 0;
-  height: 24px;
-  border-left-style: solid;
-  border-left-width: 1px;
+	position: relative;
+	margin: 8px 0;
+	height: 24px;
+	border-left-style: solid;
+	border-left-width: 1px;
 }
 
 #region-header-main-menu .menu li.first {
@@ -176,16 +181,16 @@ body.toolbar {
 }
 
 #region-header-main-menu .menu li ul {
-  display: none;
-  position: absolute;
-  z-index: 10;
-  width: 180px;
-  top: 32px;
-  padding: 3px;
+	display: none;
+	position: absolute;
+	z-index: 10;
+	width: 180px;
+	top: 32px;
+	padding: 3px;
 }
 
 #region-header-main-menu .menu li ul li {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
 }
 
 #region-header-main-menu .menu li ul li.last {
@@ -198,14 +203,14 @@ body.toolbar {
 }
 
 #region-header-main-menu .menu li a {
-  height: 40px;
-  padding: 0 17px;
-  line-height: 42px;
+	height: 40px;
+	padding: 0 17px;
+	line-height: 42px;
 }
 
 #region-header-main-menu .menu li a {
   position: relative;
-  top: -8px;
+  top: -8px;  
 }
 
 #region-header-main-menu li.expanded .menu {
@@ -220,8 +225,8 @@ body.toolbar {
 }
 
 #region-header-main-menu .menu :hover a,
-#region-header-main-menu .menu ul ul :hover a {
-  text-shadow: none;
+#region-header-main-menu .menu ul ul :hover a {	
+	text-shadow: none;
 }
 
 #region-header-main-menu .menu li ul li {
@@ -238,7 +243,7 @@ body.toolbar {
 #block-system-main-menu select.menu,
 #region-header-search form input.form-text,
 #region-header-search form input.form-submit {
-  /*   margin-top: 7px; */
+/*   margin-top: 7px; */
 }
 
 #region-header-search form input.form-submit {
@@ -264,10 +269,10 @@ body.toolbar {
 }
 
 #region-footer-feature .views-row .field-name-field-description {
-  float: left;
+	float: left;
 }
 
-#zone-content,
+#zone-content, 
 #zone-footer-copyright,
 #zone-featured-articles {
   background: none;
@@ -329,5 +334,5 @@ body.toolbar {
 }
 
 #block-views-slideshow-block {
-  display: block;
+  display:block;
 }

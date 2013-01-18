@@ -1,7 +1,43 @@
-/* This file will hold styles that are loaded using the same media query as the narrow grid. */
-/* If you are using the default media queries provided by Omega, these styles will also
- *  apply to the normal and widescreen layouts. You may override these styles in the normal 
- *  and widescreen CSS files as appropriate. */
+/**
+ * @file
+ * Narrow styles
+ *
+ * Adds all narrow grid styles
+ *
+ */
+#block-views-slideshow-block .view-slideshow {
+  height: 475px;
+}
+#block-views-slideshow-block .views-field-field-slide-image {
+  width: 720px;
+  height: 315px;
+}
+#block-views-slideshow-block .views-field-field-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#block-views-slideshow-block .views-field-title,
+#block-views-slideshow-block .views-field-body,
+#block-views-slideshow-block .views-field-field-read-more {
+  float: none;
+  width: 100%;
+}
+#block-views-slideshow-block .views-field-title .field-content {
+  padding: 20px 20px 10px;
+}
+#block-views-slideshow-block .views-field-body .field-content {
+  padding: 0 20px;
+}
+#block-views-slideshow-block .views-field-field-read-more .field-content {
+  padding: 10px 20px 0;
+}
+#block-views-slideshow-block #featured-article-pager {
+  bottom: inherit;
+  left: inherit;
+  top: 268px;
+  right: 20px;
+}
 
 #block-agov-twitter-feed #tweets ul li .tweet_text {
   width: 140px;
@@ -13,7 +49,6 @@
 }
 
 /* Regions */
-
 #region-feature-articles {
   width: 720px;
 }
@@ -26,110 +61,78 @@
 }
 
 /* Search Form */
-
 #region-header-search {
-	margin-left: 10px;
-	margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #region-header-search form {
-	float: right;
+  float: right;
 }
 
 #region-header-search form input.form-text {
-	width: 180px;
-	height: 25px;
-	border: 1px solid #FFF;
-	float: left;
-	font-size: 13px;
-	padding: 0 9px;
-	margin-top: 0;
+  width: 180px;
+  height: 25px;
+  border: 1px solid white;
+  float: left;
+  font-size: 13px;
+  padding: 0 9px;
+  margin-top: 0;
 }
 
 #region-header-search form input.form-submit {
-	width: 70px;
-	height: 28px;
-	float: left;
-	border: none;
-	cursor: pointer;
-	color: #FFF;
-	font-weight: bold;
-	font-size: 13px;
-	text-align: center;
-	margin-top: 0;
-	text-indent: 0;
-	text-shadow: none;
+  width: 70px;
+  height: 28px;
+  float: left;
+  border: none;
+  cursor: pointer;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 0;
+  text-indent: 0;
+  text-shadow: none;
 }
 
 /* Footer Menu */
-
 #region-footer-menu {
-	width: 720px;
-	padding: 20px 0;
-	margin: 0;
+  width: 720px;
+  padding: 20px 0;
+  margin: 0;
 }
 
 #region-footer-menu ul li {
-	width: 100px;
-	margin: 0 10px;
+  width: 100px;
+  margin: 0 10px;
 }
 
 #region-footer-menu ul ul {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 /* Footer Bottom */
-
 #zone-footer-copyright {
-	padding: 10px 0;
+  padding: 10px 0;
 }
 
 #zone-footer-copyright div.region {
-	width: 720px;
+  width: 720px;
 }
 
 /* Footer Sub Menu */
-
 #region-footer-sub-menu ul {
-	text-align: center;
-	margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 /* Copywright */
-
 #region-footer-copyright {
-	text-align: center;
+  text-align: center;
 }
 
 #region-footer-copyright p {
-	margin-bottom: 0;
-}
-
-/* Slideshow */
-#block-views-slideshow-block {
-  height: 475px;  
-}
-
-#region-feature-articles .views-field-field-slide-image {
-  padding-top: 0;
-  width: 720px;
-	height: 280px;
-	padding-left: 0;
-	float: left;
-}
-
-#region-feature-articles .views-field-field-slide-image img {
-	width: 720px;
-	height: 280px;
-}
-
-#region-feature-articles .views-field-title {
-  width: auto;
-}
-
-#block-views-slideshow-block #featured-article-pager {
-  top: 242px;
-  right: 20px;                                  
+  margin-bottom: 0;
 }
 
 .node-event .field-name-field-tags {
@@ -142,15 +145,15 @@
 
 #section-content,
 #section-footer {
-  background: url('../images/shadow-bg-720.png') top center repeat-y;
+  background: url("../images/shadow-bg-720.png") top center repeat-y;
 }
 
 #region-feature-articles {
-  border-top: 10px solid #FFF;
+  border-top: 10px solid white;
 }
 
-#region-content .entity-bean.highlight .image  {
-   margin: -19px 14px 19px -14px;
+#region-content .entity-bean.highlight .image {
+  margin: -19px 14px 19px -14px;
 }
 
 #region-content .entity-bean.highlight .image {
