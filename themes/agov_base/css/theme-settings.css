@@ -5,22 +5,32 @@
   margin: 15px 30px 15px 0;
   width: 293px;
   padding-top: 228px;
-  background-repeat: no-repeat; }
-  #edit-colour-scheme .form-type-radio label {
-    font-size: 1.2em; }
+  background-repeat: no-repeat;
+}
+#edit-colour-scheme .form-type-radio label {
+  font-size: 1.2em;
+}
 #edit-colour-scheme .edit-colour-scheme-barton {
-  background-image: url("../images/colour-schemes/barton.png"); }
+  background-image: url("../images/colour-schemes/barton.png");
+}
 #edit-colour-scheme .edit-colour-scheme-cook {
-  background-image: url("../images/colour-schemes/cook.png"); }
+  background-image: url("../images/colour-schemes/cook.png");
+}
 #edit-colour-scheme .edit-colour-scheme-deakin {
-  background-image: url("../images/colour-schemes/deakin.png"); }
+  background-image: url("../images/colour-schemes/deakin.png");
+}
 #edit-colour-scheme .edit-colour-scheme-fisher {
-  background-image: url("../images/colour-schemes/fisher.png"); }
+  background-image: url("../images/colour-schemes/fisher.png");
+}
 #edit-colour-scheme .edit-colour-scheme-hughes {
-  background-image: url("../images/colour-schemes/hughes.png"); }
+  background-image: url("../images/colour-schemes/hughes.png");
+}
 #edit-colour-scheme .edit-colour-scheme-reid {
-  background-image: url("../images/colour-schemes/reid.png"); }
+  background-image: url("../images/colour-schemes/reid.png");
+}
 #edit-colour-scheme .edit-colour-scheme-watson {
-  background-image: url("../images/colour-schemes/watson.png"); }
+  background-image: url("../images/colour-schemes/watson.png");
+}
 #edit-colour-scheme .edit-colour-scheme-base {
-  background-image: url("../images/colour-schemes/base.png"); }
+  background-image: url("../images/colour-schemes/base.png");
+}
