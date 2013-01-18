@@ -12,9 +12,8 @@
 /**
  * Define a default theme constant
  */
-define('AGOV_INSTALL_DEFAULT_THEME', 'agov_barton');
-define('AGOV_BASE_THEME', 'agov_base');
-define('AGOV_DEFAULT_THEME', 'agov_barton');
+define('AGOV_INSTALL_DEFAULT_THEME', 'agov_base');
+define('AGOV_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_ADMIN_THEME', 'ember');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
@@ -122,9 +121,7 @@ function _agov_set_default_themes() {
   // we set install_profile specifically to ensure that drupal_get_profile()
   // returns the correct profile name and finds the profile themes.
   $enable = array(
-    '0' => AGOV_BASE_THEME,
-    '1' => AGOV_DEFAULT_THEME,
-    'theme_default' => AGOV_INSTALL_DEFAULT_THEME,
+    'theme_default' => AGOV_DEFAULT_THEME,
     'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
     'install_profile' => 'agov',
   );
@@ -136,8 +133,8 @@ function _agov_set_default_themes() {
     }
   }
 
-  // Disable the default Bartik theme.
-  theme_disable(array('bartik'));
+  // Disable the default Bartik & default admin theme.
+  theme_disable(array('bartik', AGOV_DEFAULT_ADMIN_THEME));
 }
 
 /**
@@ -328,6 +325,7 @@ function _agov_date_formats() {
     variable_set('date_format_' . $type_string, $data['format']['format']);
   }
 
+  variable_set('date_format_short', "d/m/Y - g:ia");
 }
 
 /**
@@ -350,7 +348,7 @@ function _agov_default_blocks() {
   agov_core_insert_block('search', 'form', $themes, 'header_search');
   agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
   agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, 'footer_menu');
-  agov_core_insert_block('views', 'feature_article-block', $themes, 'feature_articles', 0, 1, '<front>');
+  agov_core_insert_block('views', 'slideshow-block', $themes, 'feature_articles', 0, 1, '<front>');
   agov_core_insert_block('views', 'footer_teaser-block', $themes, 'footer_feature');
 
   // Set aGov sidebar blocks.
@@ -428,10 +426,11 @@ function _agov_default_beans() {
     agov_core_save_bean('basic_content', 'About Us', 'Provides "About Us" block for the from page.', 'About Us', $fields);
 
     // Create the footer block.
+    $this_year = date('Y');
     $fields = array(
       'field_bean_body' => array(
         '0' => array(
-          'value' => '&#169; 2012 Government | Powered by <a href="http://agov.com.au">aGov</a>',
+          'value' => '&#169; ' . $this_year . ' Government | Powered by <a href="http://agov.com.au">aGov</a>',
           'format' => 'rich_text',
         ),
       ),
@@ -839,7 +838,7 @@ function agov_default_content() {
     1 => array(
       'title' => st('Publications'),
       'type' => 'module',
-      'key' => 'agov_content_publications',
+      'key' => 'agov_content_publication',
     ),
     2 => array(
       'title' => st('Blog'),

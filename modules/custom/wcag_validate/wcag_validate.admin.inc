@@ -60,7 +60,11 @@ function wcag_validate_admin_form() {
 
   $form['check_connection'] = array(
     '#markup' => '<div>' . t('!link',
-      array('!link' => l(t('Check connection to service'), 'admin/config/services/wcag-validate-connection-test', array('query' => drupal_get_destination())))) . '</div>',
+      array(
+        '!link' => l(t('Check connection to service'),
+        'admin/config/services/wcag-validate-connection-test',
+        array('query' => drupal_get_destination())))
+    ) . '</div>',
     '#access' => 'administer blocks',
   );
 

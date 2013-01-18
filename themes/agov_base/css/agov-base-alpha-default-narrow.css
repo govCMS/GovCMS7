@@ -106,26 +106,28 @@
 }
 
 /* Slideshow */
-#block-views-feature-article-block {
+#block-views-slideshow-block {
   height: 475px;  
 }
 
-#region-feature-articles .field-name-field-image {
+#region-feature-articles .views-field-field-slide-image {
   padding-top: 0;
   width: 720px;
 	height: 280px;
+	padding-left: 0;
+	float: left;
 }
 
-#region-feature-articles .field-name-field-image img {
+#region-feature-articles .views-field-field-slide-image img {
 	width: 720px;
 	height: 280px;
 }
 
-#region-feature-articles .field-name-title {
+#region-feature-articles .views-field-title {
   width: auto;
 }
 
-#block-views-feature-article-block #featured-article-pager {
+#block-views-slideshow-block #featured-article-pager {
   top: 242px;
   right: 20px;                                  
 }

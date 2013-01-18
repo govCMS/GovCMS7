@@ -209,14 +209,7 @@ function agov_core_update_block($module, $delta, $theme = '', $region = BLOCK_RE
  */
 function agov_core_theme_info() {
   return array(
-    'agov_barton',
-    'agov_bruce',
-    'agov_cook',
-    'agov_deakin',
-    'agov_fisher',
-    'agov_hughes',
-    'agov_reid',
-    'agov_watson',
+    'agov_base',
   );
 }
 
@@ -233,6 +226,17 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
     if (module_exists('agov_news')) {
       $form['agov_help']['#markup'] .= '<p>' . t('Currently, this value determines when News items are moved to the Archived section.') . '</p>';
     }
+  }
+
+  // Install Canberra timezone.
+  if ($form_id == 'system_regional_settings') {
+    $timezone_form = $form['timezone']['date_default_timezone'];
+    $sydney_tz = $timezone_form['#options']['Australia/Sydney'];
+    $sydney_re = '/Sydney/';
+    $canberra_tz = preg_replace($sydney_re, 'Canberra', $sydney_tz, 1);
+    $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
+    asort($timezone_form['#options']);
+    $form['timezone']['date_default_timezone'] = $timezone_form;
   }
 }
 
@@ -275,4 +279,3 @@ function agov_core_cron() {
     drupal_http_request($update_site . '/update_check?' . $query);
   }
 }
-

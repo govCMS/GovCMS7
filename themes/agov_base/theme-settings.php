@@ -1,16 +1,67 @@
 <?php
+
 /**
  * @file
- * Theme settings overrides.
+ * Theme settings
  */
 
 /**
- * Implements hook_form_BASE_FORM_ID_alter().
+ * Implements hook_form_system_theme_settings_alter().
  */
 function agov_base_form_system_theme_settings_alter(&$form, &$form_state) {
+  // Add CSS & JS.
+  drupal_add_css(drupal_get_path('theme', 'agov_base') . '/css/theme-settings.css', array('group' => CSS_THEME, 'weight' => 100));
+  drupal_add_js(drupal_get_path('theme', 'agov_base') . '/js/theme-settings.js');
+
+  // Create aGov settings tab group.
+  $form['design_settings'] = array(
+    '#type' => 'vertical_tabs',
+    '#weight' => -20,
+    '#prefix' => t('<h3>Design configuration</h3>'),
+  );
+
+  // Create colour config tab.
+  $form['design_settings']['colour'] = array(
+    '#type' => 'fieldset',
+    '#weight' => -10,
+    '#title' => t('Colour scheme'),
+  );
+
+  // Enable colour options.
+  $form['design_settings']['colour']['colour_toggle'] = array(
+    '#type' => 'checkbox',
+    '#weight' => -10,
+    '#title' => t('Enable colour scheme choices'),
+    '#default_value' => theme_get_setting('colour_toggle'),
+    '#description' => t("Enabling this will allow you to choose one of aGov's included colour schemes. If you want to design your own colour scheme, disable this option and edit the") . ' <em>' . t('theme-colour.scss') . '</em> ' . t('file within the sass directory of your sub theme.'),
+  );
+
+  // Colour scheme options.
+  $colour_options = array(
+    'barton' => t('Barton'),
+    'cook' => t('Cook'),
+    'deakin' => t('Deakin'),
+    'fisher' => t('Fisher'),
+    'hughes' => t('Hughes'),
+    'reid' => t('Reid'),
+    'watson' => t('Watson'),
+  );
+  $form['design_settings']['colour']['colour_scheme'] = array(
+    '#type' => 'radios',
+    '#weight' => -9,
+    '#title' => t('Choose a colour scheme'),
+    '#default_value' => theme_get_setting('colour_scheme'),
+    '#options' => $colour_options,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="colour_toggle"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+
   $path = '';
 
-  $form['header'] = array(
+  $form['design_settings']['header'] = array(
     '#type' => 'fieldset',
     '#title' => t('Header'),
     '#description' => t('Upload header background image and set display options.'),
@@ -21,31 +72,31 @@ function agov_base_form_system_theme_settings_alter(&$form, &$form_state) {
   if (isset($header_background['uri'])) {
     $path = str_replace(file_default_scheme() . '://', "", $header_background['uri']);
   }
-  $form['header']['header_background_image_uri'] = array(
+  $form['design_settings']['header']['header_background_image_uri'] = array(
     '#type' => 'textfield',
     '#title' => t('Path to header background'),
     '#default_value' => $path,
   );
 
-  $form['header']['header_background_image'] = array(
+  $form['design_settings']['header']['header_background_image'] = array(
     '#type' => 'file',
     '#title' => t('Upload a header background'),
     '#description' => t('Upload a heading background image.'),
   );
 
-  $form['header']['header_background_repeat_x'] = array(
+  $form['design_settings']['header']['header_background_repeat_x'] = array(
     '#type' => 'checkbox',
     '#title' => t('Repeat horizontally'),
     '#default_value' => isset($header_background['repeat-x']) && $header_background['repeat-x'] ? TRUE : FALSE,
   );
 
-  $form['header']['header_background_repeat_y'] = array(
+  $form['design_settings']['header']['header_background_repeat_y'] = array(
     '#type' => 'checkbox',
     '#title' => t('Repeat vertically'),
     '#default_value' => isset($header_background['repeat-y']) && $header_background['repeat-y'] ? TRUE : FALSE,
   );
 
-  $form['header']['header_background_custom_css'] = array(
+  $form['design_settings']['header']['header_background_custom_css'] = array(
     '#type' => 'textfield',
     '#title' => t('Custom CSS'),
     '#description' => t('Any additional shorthand CSS to be placed after the background: url() element. E.g. center or 25% 50%'),
@@ -53,6 +104,19 @@ function agov_base_form_system_theme_settings_alter(&$form, &$form_state) {
   );
 
   $form['#submit'][] = 'agov_base_form_system_theme_settings_alter_submit';
+
+  // Rearrange visual settings into design config tabs group
+  $form['design_settings']['logo'] = $form['logo'];
+  $form['design_settings']['logo']['#title'] = t('Logo');
+  unset($form['logo']);
+  unset($form['design_settings']['logo']['#attributes']);
+  
+  $form['design_settings']['favicon'] = $form['favicon'];
+  $form['design_settings']['favicon']['#title'] = t('Favicon');
+  unset($form['favicon']);
+  
+  $form['design_settings']['theme_settings'] = $form['theme_settings'];
+  unset($form['theme_settings']);
 
 }
 

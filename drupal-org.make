@@ -29,6 +29,9 @@ projects[context][subdir] = "contrib"
 projects[date][version] = "2.6"
 projects[date][subdir] = "contrib"
 
+projects[draggableviews][version] = "2.0"
+projects[draggableviews][subdir] = "contrib"
+
 projects[ds][version] = "2.0"
 projects[ds][subdir] = "contrib"
 
@@ -129,7 +132,7 @@ projects[ctools][patch][] = "http://drupal.org/files/ctools-fix-warning-message-
 
 projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1611928.patch"
+projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 
 projects[features][version] = "2.0-beta1"
@@ -149,7 +152,7 @@ projects[uuid][download][revision] = 8b6d70f1764a83896e799712111d6b46cf482737
 projects[uuid][download][branch] = 7.x-1.x
 projects[uuid][type] = "module"
 projects[uuid][subdir] = "contrib"
- 
+
 projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"

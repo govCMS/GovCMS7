@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Template preprocessor functions for the agov_barton theme.
+ * Template preprocessor functions for the agov theme.
  */
 
 /**
@@ -21,6 +21,17 @@ function agov_base_preprocess_html(&$vars) {
   }
   $prefix = implode(" ", $prefixes);
   $vars['rdf_namespaces'] = ' xmlns="http://www.w3.org/1999/xhtml" prefix="' . $prefix . '"';
+
+  // Add colour scheme css to page.
+  $colour_toggle = theme_get_setting('colour_toggle');
+  if ($colour_toggle == '1') {
+    $colour_scheme = theme_get_setting('colour_scheme');
+    drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+  }
+  else {
+    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+  }
+  
 }
 
 /**

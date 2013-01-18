@@ -172,14 +172,16 @@ function _wcag_scheduler_query($query = '') {
 
   $server_base = variable_get('wcag_validate_server_base', wcag_validate_get_config('wcag_validate_server_base'));
 
-  // Setup a Guzzle submission.
-  $client = new Guzzle\Service\Client();
-  $request = $client->get($server_base . $query);
-  $response = $request->send();
-  $response->getBody(TRUE);
-  $json = json_decode($response->getBody(TRUE));
+  $result = drupal_http_request($server_base . $query);
 
-  return $json;
+  if ($result->code != 200) {
+    watchdog('wcag_scheduler', 'HTTP error @code making a request to @url', array('@code' => $result->code, '@url' => $server_base . $query), WATCHDOG_NOTICE);
+    return FALSE;
+  }
+  else {
+    $json = json_decode($result->data);
+    return $json;
+  }
 }
 
 /**
