@@ -187,3 +187,7 @@ body.page-search #section-content #search-form #edit-basic {
 #region-header-main-menu .block-superfish {
   margin-top: 8px;
 }
+
+#region-header-top-menu {
+  width: 360px; 
+}
