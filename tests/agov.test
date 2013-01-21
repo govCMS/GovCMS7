@@ -1,0 +1,193 @@
+<?php
+/**
+ * @file
+ * Tests for Agov install profile.
+ * @author Tim Eisenhuth tim dot eisenhuth at previousnext dot com dot au
+ */
+
+class AgovTest extends DrupalWebTestCase {
+
+  protected $profile = 'agov';
+  protected $testUser;
+
+  /**
+   * Provides test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name'  => 'Agov tests',
+      'description'  => "Tests for Agov.",
+      'group' => 'Agov',
+    );
+  }
+
+  /**
+   * Setup function.
+   */
+  public function setUp() {
+    parent::setUp(array(
+      'agov_content_event',
+      'agov_content_publication',
+      'agov_content_blog',
+      'agov_content_media_release',
+      'agov_content_news_article',
+      'agov_content_promotion',
+      'agov_content_standard_page',
+    ));
+
+    // Continue setup of default content.
+    _agov_default_beans();
+    _agov_default_news_beans();
+
+    // Create a user.
+    $this->testUser = $this->drupalCreateUser(array(
+      'access content',
+      'view revisions',
+      'view all unpublished content',
+      'create blog_article content',
+      'create event content',
+      'create media_release content',
+      'create news_article content',
+      'create footer_teaser content',
+      'create publication content',
+      'create slide content',
+      'create page content',
+      'create webform content',
+      'edit any webform content',
+    ));
+
+  }
+
+  /**
+   * Test anonymous access to pages and some elements.
+   */
+  protected function testAnonymousPages() {
+	/**
+    $this->drupalGet('user');
+    $this->assertRaw('Member login', 'Anonymous user.');
+
+    // Get the home page.
+    $this->drupalGet('/');
+    $this->assertResponse(200, 'View home page as anonymous user.');
+    $this->assertRaw('Latest News', 'Found Latest News');
+    $this->assertRaw('From the Blog', 'Found From the Blog.');
+
+    $this->assertRaw('block-agov-menu-block-footer', 'Found Footer.');
+
+    // About us page.
+    $this->drupalGet('about-us');
+    $this->assertRaw('About Us', 'Found About us.');
+
+    // Services.
+    $this->drupalGet('services');
+    $this->assertRaw('Services', 'Found Services.');
+
+    // Publications.
+    $this->drupalGet('publications');
+    $this->assertRaw('Publications', 'Found Publications.');
+
+    // Contact.
+    $this->drupalGet('contact');
+    $this->assertRaw('Contact', 'Found Contact.');
+*/
+  }
+
+  /**
+   * Test posting content.
+   */
+  protected function testPostContent() {
+
+    // Cant use drupalLogin() as this only returns true if "Log out" is found.
+    $this->drupalPost('user', array('name' => $this->testUser->name, 'pass' => $this->testUser->pass_raw), t('Log in'));
+    $this->assertRaw($this->testUser->name, 'User logged in.');
+
+    // Get list of test images.
+    $images = $this->drupalGetTestFiles('image');
+    // Create a managed file for slide node.
+    $slide_image = file_save($images[4]);
+    // Get a node to post for reference field.
+    $post_node = reset(node_load_multiple(array(), array('title' => 'About Us')));
+
+    // Define content types.
+    $content_types = array(
+      'blog_article' => array(
+        'path' => 'blog-article',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test blog article',
+        ),
+      ),
+      'event' => array(
+        'path' => 'event',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test event',
+        ),
+      ),
+      'media_release' => array(
+        'path' => 'media-release',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test media release',
+        ),
+      ),
+      'news_article' => array(
+        'path' => 'news-article',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test news article',
+        ),
+      ),
+      'promotion' => array(
+        'path' => 'footer-teaser',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test promotion',
+          'files[field_image_und_0]' => drupal_realpath($images[4]->uri),
+          'field_reference[und]' => $post_node->nid,
+        ),
+      ),
+      'publication' => array(
+        'path' => 'publication',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test publication',
+        ),
+      ),
+      'slide' => array(
+        'path' => 'slide',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test slide',
+          'field_slide_image[und][0][fid]' => $slide_image->fid
+        ),
+      ),
+      'standard_page' => array(
+        'path' => 'page',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test standard page',
+        ),
+      ),
+      'webform' => array(
+        'path' => 'webform',
+        'button' => 'Save',
+        'fields' => array(
+          'title' => 'test webform',
+        ),
+      ),
+    );
+    
+    // Post each content type.
+    foreach ($content_types as $type) {
+      $this->drupalPost('node/add/' . $type['path'], $type['fields'], t($type['button']));
+      $this->assertRaw('<h1>' . $type['fields']['title'] . '</h1>', 'Found title `' . $type['fields']['title'] . '`');
+      // Check for node in the database.
+      $node = db_select('node', 'n')->fields('n')->condition('title' ,$type['fields']['title'])->execute()->fetchObject();
+      $this->assertNotEqual($node, FALSE, 'Found node in database.');
+      
+    }
+
+  }
+
+}

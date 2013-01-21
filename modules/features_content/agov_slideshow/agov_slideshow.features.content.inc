@@ -45,7 +45,7 @@ function agov_slideshow_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Os Praemitto Refero Tatio',
+          'alt' => 'Os Praemitto Refero Tation',
           'title' => NULL,
           'width' => '900',
           'height' => '637',
