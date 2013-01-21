@@ -55,7 +55,8 @@ input {
   margin-right: 20px;
 }
 
-input.form-submit {
+input.form-submit,
+.button {
   border: none;
   font-size: 1.4em;
   padding: 2px 12px;
@@ -75,12 +76,23 @@ input.form-text {
   font-size: 0.8em;
 }
 
-input.form-submit {
+input.form-submit,
+.button {
   border-radius: 4px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   cursor: pointer;
   padding: 5px 10px;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: #FFF;
+  text-decoration: none;
 }
 
 #progress .message {
@@ -102,14 +114,16 @@ input.form-checkbox {
   margin-right: 5px;
 }
 
-input.form-submit {
+input.form-submit,
+.button {
   background: #a52b36;
   color: white;
   box-shadow: 1px 1px 1px #c9c9c9;
   -webkit-box-shadow: 1px 1px 1px #c9c9c9;
   -moz-box-shadow: 1px 1px 1px #c9c9c9; }
 
-input.form-submit:hover {
+input.form-submit:hover,
+.button:hover {
   background-color: #c42a36; }
 
 a {
