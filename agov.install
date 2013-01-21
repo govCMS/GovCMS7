@@ -820,34 +820,27 @@ function agov_finished() {
  * Check the server's max_execution_time can handle the installation content.
  */
 function agov_example_content_requirements() {
+
   $form = array();
   drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
   drupal_set_title('Install example content');
   $max_execution_time = ini_get('max_execution_time');
+  
   if ($max_execution_time >= 300) {
-    $form['message'] = array(
-      '#type' => 'item',
-      '#markup' => st('Would you like to install example content?'),
-    );
-    $form['continue'] = array(
-      '#id' => 'install',
-      '#type' => 'submit',
-      '#value' => st('Install'),
-    );
-    $form['cancel'] = array(
-      '#id' => 'cancel',
-      '#type' => 'submit',
-      '#value' => st('Do not install'),
+    $form['default_content']['install'] = array(
+      '#type' => 'checkbox',
+      '#title' => st('Yes, install example content'),
     );
   }
   else {
     drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
-    $form['continue'] = array(
-      '#id' => 'continue',
-      '#type' => 'submit',
-      '#value' => st('Continue'),
-    );
   }
+  
+  $form['default_content']['continue'] = array(
+    '#type' => 'submit',
+    '#value' => st('Continue'),
+  );
+  
   return $form;
 }
 
@@ -855,7 +848,8 @@ function agov_example_content_requirements() {
  * Set variable for batch process if install button is clicked.
  */
 function agov_example_content_requirements_submit(&$form, &$form_state) {
-  if ($form_state['triggering_element']['#id'] == 'install') {
+
+  if ($form_state['values']['install'] == TRUE) {
     variable_set('agov_example_content_batch', TRUE);
   }
 }
