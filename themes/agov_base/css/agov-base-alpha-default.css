@@ -98,7 +98,10 @@ body.toolbar {
 
 #region-header-top-menu .region-header-top-menu-inner {
   float: right;
-  min-width: 294px;
+}
+
+#region-header-top-menu .block-menu-menu-header-menu {
+  float: left;
 }
 
 #block-menu-menu-top-menu {
