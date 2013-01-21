@@ -414,111 +414,6 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field: 'node-news_article-field_image'.
-  $fields['node-news_article-field_image'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_image',
-      'foreign keys' => array(
-        'fid' => array(
-          'columns' => array(
-            'fid' => 'fid',
-          ),
-          'table' => 'file_managed',
-        ),
-      ),
-      'indexes' => array(
-        'fid' => array(
-          0 => 'fid',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'image',
-      'settings' => array(
-        'default_image' => 0,
-        'uri_scheme' => 'public',
-      ),
-      'translatable' => '0',
-      'type' => 'image',
-    ),
-    'field_instance' => array(
-      'bundle' => 'news_article',
-      'deleted' => '0',
-      'description' => 'Provides a feature image to be associated with this <em>Article</em>.',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'article_page_620x349',
-          ),
-          'type' => 'image',
-          'weight' => '1',
-        ),
-        'feature' => array(
-          'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'feature_article',
-          ),
-          'type' => 'image',
-          'weight' => '0',
-        ),
-        'full' => array(
-          'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'article_page_620x349',
-          ),
-          'type' => 'image',
-          'weight' => '1',
-        ),
-        'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'square_thumbnail',
-          ),
-          'type' => 'image',
-          'weight' => '2',
-        ),
-      ),
-      'ds_extras_field_template' => '',
-      'entity_type' => 'node',
-      'field_name' => 'field_image',
-      'label' => 'Feature Image',
-      'required' => 0,
-      'settings' => array(
-        'alt_field' => 1,
-        'default_image' => 0,
-        'file_directory' => 'field/image',
-        'file_extensions' => 'png gif jpg jpeg',
-        'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '',
-        'title_field' => 1,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'image',
-        'settings' => array(
-          'preview_image_style' => 'feature_article',
-          'progress_indicator' => 'throbber',
-        ),
-        'type' => 'image_image',
-        'weight' => '1',
-      ),
-    ),
-  );
-
   // Exported field: 'node-news_article-field_news_date'.
   $fields['node-news_article-field_news_date'] = array(
     'field_config' => array(
@@ -722,10 +617,8 @@ The <em>body</em> field is used for the main article content.',
   t('Date');
   t('Date that this news content took place.');
   t('Enter a comma-separated list of words to describe your content.');
-  t('Feature Image');
   t('Featured');
   t('Image');
-  t('Provides a feature image to be associated with this <em>Article</em>.');
   t('Select this article as featured if you wish to have it displayed on the front page slideshow feature.');
   t('Tags');
   t('The <em>Summary</em> field above is included in any listings of this page as well as the initial paragraph of the page view.

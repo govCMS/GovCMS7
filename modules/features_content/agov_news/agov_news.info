@@ -44,7 +44,6 @@ features[field][] = node-article-field_image
 features[field][] = node-article-field_tags
 features[field][] = node-news_article-body
 features[field][] = node-news_article-field_featured
-features[field][] = node-news_article-field_image
 features[field][] = node-news_article-field_news_date
 features[field][] = node-news_article-field_tags
 features[image][] = feature_article
