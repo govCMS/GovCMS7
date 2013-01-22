@@ -57,9 +57,6 @@ function agov_install() {
   // Set default tags.
   _agov_default_tags();
 
-  // Required by view_unpublished module.
-  node_access_rebuild();
-
   // Rebuild the sitemap now we have a menu.
   agov_rebuild_sitemap();
 
@@ -768,6 +765,12 @@ function agov_install_tasks($install_state) {
     'type' => 'batch',
     'run' => $agov_example_content_batch ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
   );
+  $task['agov_finished'] = array(
+    'display_name' => st('Finish'),
+    'display' => FALSE,
+    'type' => 'normal',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED
+  );
   return $task;
 }
 
@@ -821,6 +824,8 @@ function agov_finished() {
  */
 function agov_example_content_requirements() {
 
+  set_time_limit(300);
+
   $form = array();
   drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
   drupal_set_title('Install example content');
@@ -830,6 +835,7 @@ function agov_example_content_requirements() {
     $form['default_content']['install'] = array(
       '#type' => 'checkbox',
       '#title' => st('Yes, install example content'),
+      '#default_value' => TRUE
     );
   }
   else {
@@ -975,10 +981,22 @@ function agov_example_content_install_batch($type, $key, $name, $message, &$cont
  */
 function agov_example_content_install_finished(&$context) {
 
-  agov_rebuild_sitemap();
+  
 
   drupal_set_message('Example content installed.');
   drupal_set_message('Sitemap has been rebuilt.');
+}
+
+/**
+* Run any cleanup or other functions required after install is finished.
+*/
+function agov_finished() {
+  
+  agov_rebuild_sitemap();
+  
+  // Required by view_unpublished module.
+  node_access_rebuild();
+  
 }
 
 /**
