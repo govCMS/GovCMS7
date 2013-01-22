@@ -765,7 +765,7 @@ function agov_install_tasks($install_state) {
     'type' => 'batch',
     'run' => $agov_example_content_batch ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
   );
-  $task['agov_finished'] = array(
+  $task['agov_cleanup'] = array(
     'display_name' => st('Finish'),
     'display' => FALSE,
     'type' => 'normal',
@@ -787,6 +787,9 @@ function agov_install_tasks_alter(&$tasks, $install_state) {
   drupal_add_css('profiles/agov/css/install.css');
 }
 
+/**
+* Overrides the core install_finished.
+*/
 function agov_finished() {
   drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
   $messages = drupal_set_message();
@@ -835,7 +838,6 @@ function agov_example_content_requirements() {
     $form['default_content']['install'] = array(
       '#type' => 'checkbox',
       '#title' => st('Yes, install example content'),
-      '#default_value' => TRUE
     );
   }
   else {
@@ -981,8 +983,6 @@ function agov_example_content_install_batch($type, $key, $name, $message, &$cont
  */
 function agov_example_content_install_finished(&$context) {
 
-  
-
   drupal_set_message('Example content installed.');
   drupal_set_message('Sitemap has been rebuilt.');
 }
@@ -990,7 +990,7 @@ function agov_example_content_install_finished(&$context) {
 /**
 * Run any cleanup or other functions required after install is finished.
 */
-function agov_finished() {
+function agov_cleanup() {
   
   agov_rebuild_sitemap();
   
