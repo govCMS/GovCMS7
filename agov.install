@@ -778,7 +778,6 @@ function agov_install_tasks($install_state) {
  * Implements hook_install_tasks_alter().
  */
 function agov_install_tasks_alter(&$tasks, $install_state) {
- error_log(print_r($tasks,TRUE));
  
   $tasks['agov_finished'] = $tasks['install_finished'];
   unset($tasks['install_finished']);
