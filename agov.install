@@ -57,9 +57,6 @@ function agov_install() {
   // Set default tags.
   _agov_default_tags();
 
-  // Required by view_unpublished module.
-  node_access_rebuild();
-
   // Rebuild the sitemap now we have a menu.
   agov_rebuild_sitemap();
 
@@ -768,6 +765,12 @@ function agov_install_tasks($install_state) {
     'type' => 'batch',
     'run' => $agov_example_content_batch ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
   );
+  $task['agov_cleanup'] = array(
+    'display_name' => st('Finish'),
+    'display' => FALSE,
+    'type' => 'normal',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED
+  );
   return $task;
 }
 
@@ -775,7 +778,6 @@ function agov_install_tasks($install_state) {
  * Implements hook_install_tasks_alter().
  */
 function agov_install_tasks_alter(&$tasks, $install_state) {
- error_log(print_r($tasks,TRUE));
  
   $tasks['agov_finished'] = $tasks['install_finished'];
   unset($tasks['install_finished']);
@@ -784,6 +786,9 @@ function agov_install_tasks_alter(&$tasks, $install_state) {
   drupal_add_css('profiles/agov/css/install.css');
 }
 
+/**
+* Overrides the core install_finished.
+*/
 function agov_finished() {
   drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
   $messages = drupal_set_message();
@@ -820,34 +825,29 @@ function agov_finished() {
  * Check the server's max_execution_time can handle the installation content.
  */
 function agov_example_content_requirements() {
+
+  set_time_limit(300);
+
   $form = array();
   drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
   drupal_set_title('Install example content');
   $max_execution_time = ini_get('max_execution_time');
+  
   if ($max_execution_time >= 300) {
-    $form['message'] = array(
-      '#type' => 'item',
-      '#markup' => st('Would you like to install example content?'),
-    );
-    $form['continue'] = array(
-      '#id' => 'install',
-      '#type' => 'submit',
-      '#value' => st('Install'),
-    );
-    $form['cancel'] = array(
-      '#id' => 'cancel',
-      '#type' => 'submit',
-      '#value' => st('Do not install'),
+    $form['default_content']['install'] = array(
+      '#type' => 'checkbox',
+      '#title' => st('Yes, install example content'),
     );
   }
   else {
     drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
-    $form['continue'] = array(
-      '#id' => 'continue',
-      '#type' => 'submit',
-      '#value' => st('Continue'),
-    );
   }
+  
+  $form['default_content']['continue'] = array(
+    '#type' => 'submit',
+    '#value' => st('Continue'),
+  );
+  
   return $form;
 }
 
@@ -855,7 +855,8 @@ function agov_example_content_requirements() {
  * Set variable for batch process if install button is clicked.
  */
 function agov_example_content_requirements_submit(&$form, &$form_state) {
-  if ($form_state['triggering_element']['#id'] == 'install') {
+
+  if ($form_state['values']['install'] == TRUE) {
     variable_set('agov_example_content_batch', TRUE);
   }
 }
@@ -981,10 +982,20 @@ function agov_example_content_install_batch($type, $key, $name, $message, &$cont
  */
 function agov_example_content_install_finished(&$context) {
 
-  agov_rebuild_sitemap();
-
   drupal_set_message('Example content installed.');
   drupal_set_message('Sitemap has been rebuilt.');
+}
+
+/**
+* Run any cleanup or other functions required after install is finished.
+*/
+function agov_cleanup() {
+  
+  agov_rebuild_sitemap();
+  
+  // Required by view_unpublished module.
+  node_access_rebuild();
+  
 }
 
 /**
