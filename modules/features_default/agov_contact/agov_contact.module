@@ -30,7 +30,6 @@ function agov_contact_menu() {
 function agov_contact_form_alter(&$form, &$form_state, $form_id) {
   // Ensure we have the site contact form.
   if ($form_id == 'contact_site_form' && $fid = _agov_contact_get_fid()) {
-
     $file = file_load($fid);
 
     // Determine our file extension.
@@ -175,4 +174,14 @@ function agov_contact_captcha($op, $captcha_type = '') {
       break;
   }
   return NULL;
+}
+
+/**
+ * Implement hook_help()
+ */
+function agov_contact_help($path, $arg) {
+  switch ($path) {
+    case 'contact':
+    return '<p class="form-help-text">Fields marked <span class="form-required">*</span> are required.</p>';
+  }
 }
