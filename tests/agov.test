@@ -62,7 +62,7 @@ class AgovTest extends DrupalWebTestCase {
    * Test anonymous access to pages and some elements.
    */
   protected function testAnonymousPages() {
-	/**
+       
     $this->drupalGet('user');
     $this->assertRaw('Member login', 'Anonymous user.');
 
@@ -89,7 +89,7 @@ class AgovTest extends DrupalWebTestCase {
     // Contact.
     $this->drupalGet('contact');
     $this->assertRaw('Contact', 'Found Contact.');
-*/
+
   }
 
   /**
