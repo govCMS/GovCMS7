@@ -73,7 +73,7 @@
 #region-header-search form input.form-text {
   width: 180px;
   height: 25px;
-  border: 1px solid white;
+  border: 1px solid #FFF;
   float: left;
   font-size: 13px;
   padding: 0 9px;
@@ -149,7 +149,7 @@
 }
 
 #region-feature-articles {
-  border-top: 10px solid white;
+  border-top: 10px solid #FFF;
 }
 
 #region-content .entity-bean.highlight .image {
@@ -186,8 +186,4 @@ body.page-search #section-content #search-form #edit-basic {
 
 #region-header-main-menu .block-superfish {
   margin-top: 8px;
-}
-
-#region-header-top-menu {
-  width: 360px; 
 }
