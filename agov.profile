@@ -45,4 +45,5 @@ function agov_form_install_configure_form_alter(&$form, &$form_state) {
 function agov_block_info_alter(&$blocks, $theme, $code_blocks) {
   $blocks['system']['help']['region'] = 'content';
   $blocks['superfish'][1]['title'] = '<none>';
+  $blocks['menu']['menu-header-menu']['title'] = '<none>';
 }
