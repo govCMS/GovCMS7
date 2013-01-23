@@ -1076,6 +1076,7 @@ body.page-search #section-content #region-content .content ul li {
   height: 32px;
   margin-right: 15px;
   padding-left: 0 !important;
+  background-image: none;
 }
 
 #region-sidebar #block-menu-menu-social-media .content ul .sc-item-last {
@@ -1086,23 +1087,6 @@ body.page-search #section-content #region-content .content ul li {
 	display: block;
 	width: 32px;
 	height: 32px;
-	text-indent: -9999px;
-}
-
-#region-sidebar #sc-facebook {
-	background: url('../images/stay-connected-icons.png') 0px 0px no-repeat;
-}
-
-#region-sidebar #sc-twitter {
-	background: url('../images/stay-connected-icons.png') 0px -32px no-repeat;
-}
-
-#region-sidebar #sc-rss {
-	background: url('../images/stay-connected-icons.png') 0px -64px no-repeat;
-}
-
-#region-sidebar #sc-email {
-	background: url('../images/stay-connected-icons.png') 0px -96px no-repeat;
 }
 
 /* Twitter Feed */
