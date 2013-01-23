@@ -62,7 +62,7 @@ class AgovTest extends DrupalWebTestCase {
    * Test anonymous access to pages and some elements.
    */
   protected function testAnonymousPages() {
-	/**
+
     $this->drupalGet('user');
     $this->assertRaw('Member login', 'Anonymous user.');
 
@@ -89,7 +89,7 @@ class AgovTest extends DrupalWebTestCase {
     // Contact.
     $this->drupalGet('contact');
     $this->assertRaw('Contact', 'Found Contact.');
-*/
+
   }
 
   /**
@@ -159,7 +159,7 @@ class AgovTest extends DrupalWebTestCase {
         'button' => 'Save',
         'fields' => array(
           'title' => 'test slide',
-          'field_slide_image[und][0][fid]' => $slide_image->fid
+          'field_slide_image[und][0][fid]' => $slide_image->fid,
         ),
       ),
       'standard_page' => array(
@@ -177,17 +177,15 @@ class AgovTest extends DrupalWebTestCase {
         ),
       ),
     );
-    
+
     // Post each content type.
     foreach ($content_types as $type) {
       $this->drupalPost('node/add/' . $type['path'], $type['fields'], t($type['button']));
       $this->assertRaw('<h1>' . $type['fields']['title'] . '</h1>', 'Found title `' . $type['fields']['title'] . '`');
       // Check for node in the database.
-      $node = db_select('node', 'n')->fields('n')->condition('title' ,$type['fields']['title'])->execute()->fetchObject();
+      $node = db_select('node', 'n')->fields('n')->condition('title', $type['fields']['title'])->execute()->fetchObject();
       $this->assertNotEqual($node, FALSE, 'Found node in database.');
-      
     }
-
   }
 
 }
