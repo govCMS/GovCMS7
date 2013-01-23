@@ -23,15 +23,6 @@
   float: none;
   width: 100%;
 }
-#block-views-slideshow-block .views-field-title .field-content {
-  padding: 20px 20px 10px;
-}
-#block-views-slideshow-block .views-field-body .field-content {
-  padding: 0 20px;
-}
-#block-views-slideshow-block .views-field-field-read-more .field-content {
-  padding: 10px 20px 0;
-}
 #block-views-slideshow-block #featured-article-pager {
   bottom: inherit;
   left: inherit;
@@ -73,7 +64,7 @@
 #region-header-search form input.form-text {
   width: 180px;
   height: 25px;
-  border: 1px solid #FFF;
+  border: 1px solid white;
   float: left;
   font-size: 13px;
   padding: 0 9px;
@@ -149,7 +140,7 @@
 }
 
 #region-feature-articles {
-  border-top: 10px solid #FFF;
+  border-top: 10px solid white;
 }
 
 #region-content .entity-bean.highlight .image {
