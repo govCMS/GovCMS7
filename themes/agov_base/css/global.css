@@ -1678,3 +1678,7 @@ th.tabledrag-hide {
   margin-bottom: 10px;
   display: inline-block;
 }
+
+.form-help-text {
+  margin-bottom: 0;
+}
