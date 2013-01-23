@@ -98,10 +98,7 @@ body.toolbar {
 
 #region-header-top-menu .region-header-top-menu-inner {
   float: right;
-}
-
-#region-header-top-menu .block-menu-menu-header-menu {
-  float: left;
+  min-width: 294px;
 }
 
 #block-menu-menu-top-menu {
@@ -188,7 +185,7 @@ body.toolbar {
 }
 
 #region-header-main-menu .menu li ul li {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
 }
 
 #region-header-main-menu .menu li ul li.last {
