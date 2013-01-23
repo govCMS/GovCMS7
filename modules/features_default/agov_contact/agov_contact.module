@@ -30,6 +30,7 @@ function agov_contact_menu() {
 function agov_contact_form_alter(&$form, &$form_state, $form_id) {
   // Ensure we have the site contact form.
   if ($form_id == 'contact_site_form' && $fid = _agov_contact_get_fid()) {
+
     $file = file_load($fid);
 
     // Determine our file extension.
@@ -59,4 +60,119 @@ function agov_contact_form_alter(&$form, &$form_state, $form_id) {
  */
 function _agov_contact_get_fid() {
   return variable_get('agov_contact_printable_upload', FALSE);
+}
+
+/**
+ * Custom CAPTCHA validate function.
+ *
+ * Provides a clearer form error message.
+ *
+ * @param (mixed) $solution
+ *   CAPTCHA solution
+ * @param (mixed) $captcha_response
+ *   CAPTCHA response
+ * @param (array) $element
+ *   CAPTCHA form element
+ * @param (array) $form_state
+ *   CAPTCHA form state
+ */
+function agov_contact_captcha_validate($solution, $captcha_response, $element = NULL, $form_state = NULL) {
+
+  $captcha_info = $form_state['captcha_info'];
+  $form_id = $captcha_info['this_form_id'];
+
+  // Get CAPTCHA session from CAPTCHA info.
+  $csid = $captcha_info['captcha_sid'];
+
+  if ($solution === FALSE) {
+    // Unknown challenge_id.
+    // TODO: this probably never happens anymore now that there is detection
+    // for CAPTCHA session reuse attacks in _captcha_get_posted_captcha_info().
+    form_set_error('captcha', t('CAPTCHA validation error: unknown CAPTCHA session ID. Contact the site administrator if this problem persists.'));
+    watchdog('CAPTCHA',
+      'CAPTCHA validation error: unknown CAPTCHA session ID (%csid).',
+      array('%csid' => var_export($csid, TRUE)),
+      WATCHDOG_ERROR);
+  }
+  else {
+    // Check the response with the CAPTCHA validation function.
+    // Apart from the traditional expected $solution and received $response,
+    // we also provide the CAPTCHA $element and $form_state arrays for more
+    // advanced use cases.
+    if (captcha_validate_strict_equality($solution, $captcha_response)) {
+      // Correct answer.
+      $_SESSION['captcha_success_form_ids'][$form_id] = $form_id;
+      // Record success.
+      db_update('captcha_sessions')
+        ->condition('csid', $csid)
+        ->fields(array('status' => CAPTCHA_STATUS_SOLVED))
+        ->expression('attempts', 'attempts + 1')
+        ->execute();
+    }
+    else {
+      // Wrong answer.
+      db_update('captcha_sessions')
+        ->condition('csid', $csid)
+        ->expression('attempts', 'attempts + 1')
+        ->execute();
+      // Set form error.
+      form_set_error('captcha_response',
+        t('The answer you entered for the math question was not correct.')
+      );
+      // Update wrong response counter.
+      variable_set('captcha_wrong_response_counter', variable_get('captcha_wrong_response_counter', 0) + 1);
+      // Log to watchdog if needed.
+      if (variable_get('captcha_log_wrong_responses', FALSE)) {
+        watchdog('CAPTCHA',
+          '%form_id post blocked by CAPTCHA module: challenge "%challenge" (by module "%module"), user answered "%response", but the solution was "%solution".',
+          array(
+            '%form_id' => $form_id,
+            '%response' => $captcha_response, '%solution' => $solution,
+            '%challenge' => $captcha_info['captcha_type'], '%module' => $captcha_info['module'],
+          ),
+          WATCHDOG_NOTICE);
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_captcha().
+ *
+ * Copy of default implementation but with custom validate function.
+ */
+function agov_contact_captcha($op, $captcha_type = '') {
+  switch ($op) {
+
+    case 'list':
+      return array('aGov Math');
+
+    case 'generate':
+      if ($captcha_type == 'aGov Math') {
+        $result = array();
+        $answer = mt_rand(1, 20);
+        $x = mt_rand(1, $answer);
+        $y = $answer - $x;
+        $result['solution'] = "$answer";
+        // Build challenge widget.
+        // Note that we also use t() for the math challenge itself. This makes
+        // it possible to 'rephrase' the challenge a bit through localization
+        // or string overrides.
+        $result['form']['captcha_response'] = array(
+          '#type' => 'textfield',
+          '#title' => t('Math question'),
+          '#description' => t('Solve this simple math problem and enter the result. E.g. for 1+3, enter 4.'),
+          '#field_prefix' => t('@x + @y = ', array('@x' => $x, '@y' => $y)),
+          '#size' => 4,
+          '#maxlength' => 2,
+          '#required' => TRUE,
+        );
+        // Same as default math CAPTCHA but use custom validate function.
+        $result['captcha_validate'] = 'agov_contact_captcha_validate';
+        return $result;
+      }
+      break;
+  }
+  return NULL;
 }
