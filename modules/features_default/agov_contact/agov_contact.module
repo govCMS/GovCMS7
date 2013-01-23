@@ -60,3 +60,13 @@ function agov_contact_form_alter(&$form, &$form_state, $form_id) {
 function _agov_contact_get_fid() {
   return variable_get('agov_contact_printable_upload', FALSE);
 }
+
+/**
+ * Implement hook_help()
+ */
+function agov_contact_help($path, $arg) {
+  switch ($path) {
+    case 'contact':
+    return '<p class="form-help-text">Fields marked <span class="form-required">*</span> are required.</p>';
+  }
+}

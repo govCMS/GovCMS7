@@ -114,3 +114,62 @@ function agov_base_preprocess_maintenance_page(&$variables) {
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
   ));
 }
+
+/**
+ * Insert <img> element in the link for social media icon links as a WCAG requirement. 
+ * Background image via CSS is not to be used.
+ */
+function agov_base_menu_link__menu_social_media(array $variables) {
+  if ($variables['element']['#title'] == 'Facebook') {
+    $output = theme_link(array(
+      'path' => $variables['element']['#href'],
+      'text' => theme_image(array(
+        'path' => 'profiles/agov/themes/agov_base/images/facebook.png', 
+        'title' => $variables['element']['#title'], 
+        'alt' => '', 
+        'width' =>'32', 
+        'height' => '32', 
+        'attributes' => array('typeof' => 'foaf:Image')
+      )),
+      'options' => array(
+        'html' => TRUE,
+        'attributes' => array('id' => $variables['element']['#localized_options']['attributes']['id']),
+      )
+    ));
+    return '<li' . drupal_attributes(array('class' => $variables['element']['#attributes']['class'])) . '>' . $output . '</li>';
+  } elseif ($variables['element']['#title'] == 'Twitter') {
+    $output = theme_link(array(
+      'path' => $variables['element']['#href'],
+      'text' => theme_image(array(
+        'path' => 'profiles/agov/themes/agov_base/images/twitter.png', 
+        'title' => $variables['element']['#title'], 
+        'alt' => '', 
+        'width' =>'32', 
+        'height' => '32', 
+        'attributes' => array('typeof' => 'foaf:Image')
+      )),
+      'options' => array(
+        'html' => TRUE,
+        'attributes' => array('id' => $variables['element']['#localized_options']['attributes']['id']),
+      )
+    ));
+    return '<li' . drupal_attributes(array('class' => $variables['element']['#attributes']['class'])) . '>' . $output . '</li>';
+  } elseif ($variables['element']['#title'] == 'Email') {
+    $output = theme_link(array(
+      'path' => $variables['element']['#href'],
+      'text' => theme_image(array(
+        'path' => 'profiles/agov/themes/agov_base/images/email.png', 
+        'title' => $variables['element']['#title'], 
+        'alt' => '', 
+        'width' =>'32', 
+        'height' => '32', 
+        'attributes' => array('typeof' => 'foaf:Image')
+      )),
+      'options' => array(
+        'html' => TRUE,
+        'attributes' => array('id' => $variables['element']['#localized_options']['attributes']['id']),
+      )
+    ));
+    return '<li' . drupal_attributes(array('class' => $variables['element']['#attributes']['class'])) . '>' . $output . '</li>';
+  }
+}
