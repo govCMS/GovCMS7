@@ -59,6 +59,15 @@
   line-height: 18px;
   margin: 0;
 }
+#block-views-slideshow-block .views-field-body .field-content {
+  padding: 0 20px;
+}
+#block-views-slideshow-block .views-field-title .field-content {
+  padding: 20px 20px 10px;
+}
+#block-views-slideshow-block .views-field-field-read-more .field-content {
+  padding: 10px 20px 0;
+}
 #block-views-slideshow-block .views-field-field-read-more a {
   font-size: 14px;
   font-weight: bold;
@@ -460,7 +469,7 @@ input.form-submit {
 
 .enter-search-text {
   font-style: normal !important;
-  color: #000 !important;
+  color: black !important;
 }
 
 #region-header-search form input.form-submit {
@@ -667,7 +676,7 @@ body.page-node #region-content .node .field-type-image img {
 #comments #add-new-comment input.form-text {
   width: 617px;
   height: 22px;
-  border: 1px solid #DDD;
+  border: 1px solid #dddddd;
 }
 
 #comments #add-new-comment textarea {
@@ -1346,7 +1355,7 @@ input.form-text {
 .node-type-media-release .file-icon {
   padding: 5px;
   background: #ccc;
-  box-shadow: 1px 1px 2px #000;
+  box-shadow: 1px 1px 2px black;
 }
 
 .node-type-media-release .file a {
@@ -1505,14 +1514,14 @@ img.img-float-left {
 #region-content .entity-bean.highlight {
   background: #F7F7F4;
   padding: 19px 14px;
-  border-top: 3px solid #8D98A2;
-  border-bottom: 3px solid #8D98A2;
+  border-top: 3px solid #8d98a2;
+  border-bottom: 3px solid #8d98a2;
   margin-bottom: 30px;
 }
 
 #region-content .entity-bean.default {
   padding-bottom: 17px;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #cccccc;
   margin-bottom: 19px;
 }
 
@@ -1643,7 +1652,7 @@ ul.contextual-links li {
 .views-table td {
   padding: 8px;
   vertical-align: top;
-  border: 1px solid #CCC;
+  border: 1px solid #cccccc;
 }
 
 .draggable a.tabledrag-handle {
