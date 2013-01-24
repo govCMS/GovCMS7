@@ -1679,3 +1679,12 @@ th.tabledrag-hide {
   font-size: 15px;
   font-family: Arial, sans-serif;
 }
+
+.block-agov-social-links-services .content {
+  padding: 15px 5px 7px 15px !important;
+}
+.block-agov-social-links-services .content a {
+  display: block;
+  float: left;
+  margin: 0 8px 8px 0;
+}

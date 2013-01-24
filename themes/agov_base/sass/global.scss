@@ -141,6 +141,7 @@
 	margin-right: 0;
 }
 
+
 /* Global / Overwrites */
 
 * {
@@ -1709,4 +1710,17 @@ th.tabledrag-hide { display: none !important; }
   padding: 0;
   font-size: 15px;
   font-family: Arial, sans-serif;
+}
+
+// Social links 
+///////////////////////////////////////////////////////////////////////////////
+
+.block-agov-social-links-services {
+  .content {padding:15px 5px 7px 15px !important;
+    a {
+      display:block;
+      float:left;
+      margin:0 8px 8px 0;
+    }
+  }
 }
