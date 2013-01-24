@@ -7,7 +7,7 @@
 (function ($) {
   Drupal.behaviors.featureArticles = {
     attach: function (context, settings) {
-			
+
 			/**
 			* Global variables
 			*/
@@ -21,7 +21,7 @@
   			/**
   			* Builds the pager
   			*/
-  			var pager = '<ul id="featured-article-pager">';
+  			var pager = '<span id="slideshow-controls">Slideshow controls</span><ul id="featured-article-pager">';
   			
   			
   			for (i = 1; i <= num_items; i++) {

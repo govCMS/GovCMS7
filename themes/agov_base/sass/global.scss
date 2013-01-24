@@ -35,6 +35,11 @@
 // Provides global layout and styling for the aGov slideshow when rendered in
 // any location.
 
+#slideshow-controls {
+  text-indent: -9999px;
+  height: 0;
+}
+
 #block-views-slideshow-block {
   // @todo create mobile version of slideshow code.
   display:none; // Hide slideshow on mobile.
