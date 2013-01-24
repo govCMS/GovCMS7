@@ -16,7 +16,7 @@ function agov_contact_install() {
 
   // Set the contact site form to use the math captcha.
   module_load_include('inc', 'captcha', 'captcha');
-  captcha_set_form_id_setting('contact_site_form', 'captcha/Math');
+  captcha_set_form_id_setting('contact_site_form', 'agov_contact/aGov Math');
 
   // We also want to add the menu link to the main menu and footer.
   $menus = array(
