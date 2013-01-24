@@ -85,7 +85,7 @@ function agov_slideshow_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '31',
+        'weight' => '3',
       ),
     ),
   );
@@ -175,7 +175,7 @@ function agov_slideshow_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '42',
+        'weight' => '1',
       ),
     ),
   );
@@ -282,7 +282,7 @@ function agov_slideshow_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
-        'weight' => '41',
+        'weight' => '2',
       ),
     ),
   );

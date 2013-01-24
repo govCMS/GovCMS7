@@ -93,16 +93,16 @@ function agov_slideshow_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '40',
+          'weight' => '6',
         ),
         'title' => array(
-          'weight' => '-5',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '30',
+          'weight' => '4',
         ),
         'xmlsitemap' => array(
-          'weight' => '30',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
@@ -114,9 +114,7 @@ function agov_slideshow_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_options_slide';
-  $strongarm->value = array(
-    0 => 'main-menu',
-  );
+  $strongarm->value = array();
   $export['menu_options_slide'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -131,8 +129,8 @@ function agov_slideshow_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_slide';
   $strongarm->value = array(
-    0 => 'status',
-    1 => 'promote',
+    0 => 'moderation',
+    1 => 'revision',
   );
   $export['node_options_slide'] = $strongarm;
 
