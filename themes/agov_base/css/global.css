@@ -1663,6 +1663,9 @@ th.tabledrag-hide {
   display: inline-block;
 }
 
+#region-content {
+  outline: none;
+}
 #region-content .view h2 {
   margin-bottom: 0;
   border-top: none;
