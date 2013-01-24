@@ -263,12 +263,12 @@ function wcag_validate_test_connection() {
     }
     else {
       variable_set('wcag_validate_connection_status_msg', 'This site is not able to be accessed from the WCAG Validation service.');
-      watchdog('wcag_validate', 'This site is not able to be accessed from the WCAG Validation service.', array(), WATCHDOG_ERROR);
+      watchdog('wcag_validate', 'This site is not able to be accessed from the WCAG Validation service.', array(), WATCHDOG_WARNING);
     }
   }
   else {
     variable_set('wcag_validate_connection_status_msg', 'Unable to access WCAG Validation service.');
-    watchdog('wcag_validate', 'Unable to access WCAG Validation service.', array(), WATCHDOG_ERROR);
+    watchdog('wcag_validate', 'Unable to access WCAG Validation service.', array(), WATCHDOG_WARNING);
   }
 
   variable_set('wcag_validate_connection_status', 'failed');

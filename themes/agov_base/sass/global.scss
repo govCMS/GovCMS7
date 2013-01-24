@@ -73,6 +73,18 @@
     }
   }
   
+  .views-field-body .field-content {
+    padding: 0 20px;
+  }
+
+  .views-field-title .field-content {
+    padding: 20px 20px 10px;
+  }
+
+  .views-field-field-read-more .field-content {
+    padding: 10px 20px 0;
+  }
+  
   // Font styling for readmore
   .views-field-field-read-more {
     a {
@@ -1690,3 +1702,11 @@ ul.contextual-links li {
 th.tabledrag-hide { display: none !important; }
 
 .tabledrag-toggle-weight { margin-bottom: 10px; display: inline-block; }
+
+#region-content .view h2 {
+  margin-bottom: 0;
+  border-top: none;
+  padding: 0;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}

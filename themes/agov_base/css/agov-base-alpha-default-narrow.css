@@ -23,15 +23,6 @@
   float: none;
   width: 100%;
 }
-#block-views-slideshow-block .views-field-title .field-content {
-  padding: 20px 20px 10px;
-}
-#block-views-slideshow-block .views-field-body .field-content {
-  padding: 0 20px;
-}
-#block-views-slideshow-block .views-field-field-read-more .field-content {
-  padding: 10px 20px 0;
-}
 #block-views-slideshow-block #featured-article-pager {
   bottom: inherit;
   left: inherit;
@@ -186,8 +177,4 @@ body.page-search #section-content #search-form #edit-basic {
 
 #region-header-main-menu .block-superfish {
   margin-top: 8px;
-}
-
-#region-header-top-menu {
-  width: 360px; 
 }
