@@ -61,36 +61,37 @@ class AgovTest extends DrupalWebTestCase {
   /**
    * Test anonymous access to pages and some elements.
    */
-  // public function testAnonymousPages() {
-  // 
-  //   $this->drupalGet('user');
-  //   $this->assertRaw('Member login', 'Anonymous user.');
-  // 
-  //   // Get the home page.
-  //   $this->drupalGet('/');
-  //   $this->assertResponse(200, 'View home page as anonymous user.');
-  //   $this->assertRaw('Latest News', 'Found Latest News');
-  //   $this->assertRaw('From the Blog', 'Found From the Blog.');
-  // 
-  //   $this->assertRaw('block-agov-menu-block-footer', 'Found Footer.');
-  // 
-  //   // About us page.
-  //   $this->drupalGet('about-us');
-  //   $this->assertRaw('About Us', 'Found About us.');
-  // 
-  //   // Services.
-  //   $this->drupalGet('services');
-  //   $this->assertRaw('Services', 'Found Services.');
-  // 
-  //   // Publications.
-  //   $this->drupalGet('publications');
-  //   $this->assertRaw('Publications', 'Found Publications.');
-  // 
-  //   // Contact.
-  //   $this->drupalGet('contact');
-  //   $this->assertRaw('Contact', 'Found Contact.');
-  // 
-  // }
+  protected function testAnonymousPages() {
+
+    $this->drupalGet('user');
+    $this->assertRaw('Member login', 'Anonymous user.');
+
+    // Get the home page.
+    $this->drupalGet('/');
+    $this->assertResponse(200, 'View home page as anonymous user.');
+    $this->assertRaw('Latest News', 'Found Latest News');
+    $this->assertRaw('From the Blog', 'Found From the Blog.');
+
+    $this->assertRaw('block-agov-menu-block-footer', 'Found Footer.');
+
+    // About us page.
+    $this->drupalGet('about-us');
+    $this->assertRaw('About Us', 'Found About us.');
+
+    // Services.
+    $this->drupalGet('services');
+    $this->assertRaw('Services', 'Found Services.');
+
+    // Publications.
+    $this->drupalGet('publications');
+    $this->assertRaw('Publications', 'Found Publications.');
+
+    // Contact.
+    $this->drupalGet('contact');
+    $this->assertRaw('Contact', 'Found Contact.');
+
+  }
+  
 
   /**
    * Test posting content.
@@ -197,9 +198,7 @@ class AgovTest extends DrupalWebTestCase {
       // Check for node in the database.
       $node = db_select('node', 'n')->fields('n')->condition('title', $type['fields']['title'])->execute()->fetchObject();
       $this->assertNotEqual($node, FALSE, 'Found node in database.');
-
     }
-
   }
 
 }
