@@ -232,9 +232,11 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 // Featured Article Pager
+
 #block-views-slideshow-block ul li a {
   background-color: $link_light_alpha;
   color: $text_darkest;
+  border: none;
 }
 #block-views-slideshow-block ul li.current a {
   background-color: $text_active;
@@ -245,6 +247,12 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 #block-views-slideshow-block ul li a.paused {
 	background-color: $text_active;
+}
+#block-views-slideshow-block ul li a:focus {
+  border: 2px solid $link_color;
+}
+#block-views-slideshow-block ul li.current a:focus {
+  border: 2px solid $link_color;
 }
 
 // Home Page Latest News & From The Blog
