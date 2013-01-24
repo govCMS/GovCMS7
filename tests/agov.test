@@ -61,52 +61,64 @@ class AgovTest extends DrupalWebTestCase {
   /**
    * Test anonymous access to pages and some elements.
    */
-  protected function testAnonymousPages() {
-       
-    $this->drupalGet('user');
-    $this->assertRaw('Member login', 'Anonymous user.');
-
-    // Get the home page.
-    $this->drupalGet('/');
-    $this->assertResponse(200, 'View home page as anonymous user.');
-    $this->assertRaw('Latest News', 'Found Latest News');
-    $this->assertRaw('From the Blog', 'Found From the Blog.');
-
-    $this->assertRaw('block-agov-menu-block-footer', 'Found Footer.');
-
-    // About us page.
-    $this->drupalGet('about-us');
-    $this->assertRaw('About Us', 'Found About us.');
-
-    // Services.
-    $this->drupalGet('services');
-    $this->assertRaw('Services', 'Found Services.');
-
-    // Publications.
-    $this->drupalGet('publications');
-    $this->assertRaw('Publications', 'Found Publications.');
-
-    // Contact.
-    $this->drupalGet('contact');
-    $this->assertRaw('Contact', 'Found Contact.');
-
-  }
+  // public function testAnonymousPages() {
+  // 
+  //   $this->drupalGet('user');
+  //   $this->assertRaw('Member login', 'Anonymous user.');
+  // 
+  //   // Get the home page.
+  //   $this->drupalGet('/');
+  //   $this->assertResponse(200, 'View home page as anonymous user.');
+  //   $this->assertRaw('Latest News', 'Found Latest News');
+  //   $this->assertRaw('From the Blog', 'Found From the Blog.');
+  // 
+  //   $this->assertRaw('block-agov-menu-block-footer', 'Found Footer.');
+  // 
+  //   // About us page.
+  //   $this->drupalGet('about-us');
+  //   $this->assertRaw('About Us', 'Found About us.');
+  // 
+  //   // Services.
+  //   $this->drupalGet('services');
+  //   $this->assertRaw('Services', 'Found Services.');
+  // 
+  //   // Publications.
+  //   $this->drupalGet('publications');
+  //   $this->assertRaw('Publications', 'Found Publications.');
+  // 
+  //   // Contact.
+  //   $this->drupalGet('contact');
+  //   $this->assertRaw('Contact', 'Found Contact.');
+  // 
+  // }
 
   /**
    * Test posting content.
    */
-  protected function testPostContent() {
+  public function testPostContent() {
 
     // Cant use drupalLogin() as this only returns true if "Log out" is found.
-    $this->drupalPost('user', array('name' => $this->testUser->name, 'pass' => $this->testUser->pass_raw), t('Log in'));
-    $this->assertRaw($this->testUser->name, 'User logged in.');
+    $name = $this->testUser->name;
+    $pass = $this->testUser->pass_raw;
+    $this->drupalPost('user', array('name' => $name, 'pass' => $pass), t('Log in'));
+    $this->assertRaw($name, 'User logged in.');
 
     // Get list of test images.
     $images = $this->drupalGetTestFiles('image');
     // Create a managed file for slide node.
     $slide_image = file_save($images[4]);
+
     // Get a node to post for reference field.
-    $post_node = reset(node_load_multiple(array(), array('title' => 'About Us')));
+    $query = new EntityFieldQuery();
+    $entities = $query->entityCondition('entity_type', 'node')
+      ->entityCondition('bundle', 'page')
+      ->propertyCondition('status', 1)
+      ->propertyCondition('title', 'About Us')
+      ->execute();
+
+    $nids = array_keys($entities['node']);
+
+    $post_node = node_load(array_shift($nids));
 
     // Define content types.
     $content_types = array(
@@ -159,7 +171,7 @@ class AgovTest extends DrupalWebTestCase {
         'button' => 'Save',
         'fields' => array(
           'title' => 'test slide',
-          'field_slide_image[und][0][fid]' => $slide_image->fid
+          'field_slide_image[und][0][fid]' => $slide_image->fid,
         ),
       ),
       'standard_page' => array(
@@ -177,15 +189,15 @@ class AgovTest extends DrupalWebTestCase {
         ),
       ),
     );
-    
+
     // Post each content type.
     foreach ($content_types as $type) {
       $this->drupalPost('node/add/' . $type['path'], $type['fields'], t($type['button']));
       $this->assertRaw('<h1>' . $type['fields']['title'] . '</h1>', 'Found title `' . $type['fields']['title'] . '`');
       // Check for node in the database.
-      $node = db_select('node', 'n')->fields('n')->condition('title' ,$type['fields']['title'])->execute()->fetchObject();
+      $node = db_select('node', 'n')->fields('n')->condition('title', $type['fields']['title'])->execute()->fetchObject();
       $this->assertNotEqual($node, FALSE, 'Found node in database.');
-      
+
     }
 
   }
