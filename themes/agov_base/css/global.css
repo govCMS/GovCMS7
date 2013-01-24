@@ -37,6 +37,12 @@
 #block-views-slideshow-block {
   display: none;
 }
+#block-views-slideshow-block .block-title {
+  text-indent: -9999px;
+  padding: 0;
+  margin: 0;
+  height: 0;
+}
 #block-views-slideshow-block .view-slideshow {
   position: relative;
 }
