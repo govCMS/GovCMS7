@@ -358,6 +358,7 @@ function _agov_default_blocks() {
   agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
   agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, 'help');
   agov_core_insert_block('agov_core', 'update_notification', AGOV_DEFAULT_ADMIN_THEME, 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
+
 }
 
 /**
