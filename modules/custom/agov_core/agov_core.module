@@ -259,7 +259,6 @@ function agov_core_block_info() {
 
   $blocks['update_notification'] = array(
     'info' => t('aGov Update Notification'),
-    'cache' => DRUPAL_CACHE_GLOBAL,
   );
 
   return $blocks;
