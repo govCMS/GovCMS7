@@ -134,6 +134,7 @@ projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
+projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
 
 projects[features][version] = "2.0-beta1"
 projects[features][subdir] = "contrib"
