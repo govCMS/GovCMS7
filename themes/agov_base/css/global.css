@@ -469,7 +469,7 @@ input.form-submit {
 
 .enter-search-text {
   font-style: normal !important;
-  color: black !important;
+  color: #000 !important;
 }
 
 #region-header-search form input.form-submit {
@@ -676,7 +676,7 @@ body.page-node #region-content .node .field-type-image img {
 #comments #add-new-comment input.form-text {
   width: 617px;
   height: 22px;
-  border: 1px solid #dddddd;
+  border: 1px solid #DDD;
 }
 
 #comments #add-new-comment textarea {
@@ -1355,7 +1355,7 @@ input.form-text {
 .node-type-media-release .file-icon {
   padding: 5px;
   background: #ccc;
-  box-shadow: 1px 1px 2px black;
+  box-shadow: 1px 1px 2px #000;
 }
 
 .node-type-media-release .file a {
@@ -1514,14 +1514,14 @@ img.img-float-left {
 #region-content .entity-bean.highlight {
   background: #F7F7F4;
   padding: 19px 14px;
-  border-top: 3px solid #8d98a2;
-  border-bottom: 3px solid #8d98a2;
+  border-top: 3px solid #8D98A2;
+  border-bottom: 3px solid #8D98A2;
   margin-bottom: 30px;
 }
 
 #region-content .entity-bean.default {
   padding-bottom: 17px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #CCC;
   margin-bottom: 19px;
 }
 
@@ -1652,7 +1652,7 @@ ul.contextual-links li {
 .views-table td {
   padding: 8px;
   vertical-align: top;
-  border: 1px solid #cccccc;
+  border: 1px solid #CCC;
 }
 
 .draggable a.tabledrag-handle {
@@ -1678,4 +1678,14 @@ th.tabledrag-hide {
   padding: 0;
   font-size: 15px;
   font-family: Arial, sans-serif;
+}
+
+/**
+ * Lists
+ */
+#region-content .no-bullets {
+  margin-left: 0;
+}
+#region-content .no-bullets li {
+  list-style: none;
 }

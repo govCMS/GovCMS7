@@ -1710,3 +1710,15 @@ th.tabledrag-hide { display: none !important; }
   font-size: 15px;
   font-family: Arial, sans-serif;
 }
+
+/**
+ * Lists
+ */
+#region-content {
+  .no-bullets {
+    margin-left: 0;
+    li {
+      list-style: none;
+    }
+  }
+}
