@@ -1376,7 +1376,7 @@ input.form-text {
   margin-bottom: 3px;
 }
 
-.node-publication .field-name-field-date,
+.node-publication .field-name-field-date, 
 .node-event .field-name-field-event-date {
   margin-bottom: 1em;
 }
@@ -1508,7 +1508,8 @@ img.img-float-left {
   font-size: 18px;
 }
 
-.node-event .field-label-inline {
+.node-event .field-label-inline, 
+.node-event dd {
   margin-bottom: 20px;
 }
 
@@ -1720,5 +1721,18 @@ th.tabledrag-hide { display: none !important; }
     li {
       list-style: none;
     }
+  }
+}
+
+/**
+ * Event page
+ * Styling for event details
+ */
+
+.node-event {
+  dt {
+    font-weight: bold;
+    float: left;
+    width: 100px;
   }
 }

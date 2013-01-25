@@ -1470,7 +1470,8 @@ img.img-float-left {
   font-size: 18px;
 }
 
-.node-event .field-label-inline {
+.node-event .field-label-inline,
+.node-event dd {
   margin-bottom: 20px;
 }
 
@@ -1688,4 +1689,14 @@ th.tabledrag-hide {
 }
 #region-content .no-bullets li {
   list-style: none;
+}
+
+/**
+ * Event page
+ * Styling for event details
+ */
+.node-event dt {
+  font-weight: bold;
+  float: left;
+  width: 100px;
 }
