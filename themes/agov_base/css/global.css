@@ -1700,3 +1700,7 @@ th.tabledrag-hide {
   float: left;
   width: 100px;
 }
+
+#block-menu-menu-header-menu {
+  float: left;
+}

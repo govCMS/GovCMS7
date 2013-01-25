@@ -5,10 +5,7 @@
  * @author Tim Eisenhuth tim dot eisenhuth at previousnext dot com dot au
  */
 
-class AgovTest extends DrupalWebTestCase {
-
-  protected $profile = 'agov';
-  protected $testUser;
+class AgovTest extends AgovTestBase {
 
   /**
    * Provides test info.
@@ -25,37 +22,7 @@ class AgovTest extends DrupalWebTestCase {
    * Setup function.
    */
   public function setUp() {
-    parent::setUp(array(
-      'agov_content_event',
-      'agov_content_publication',
-      'agov_content_blog',
-      'agov_content_media_release',
-      'agov_content_news_article',
-      'agov_content_promotion',
-      'agov_content_standard_page',
-    ));
-
-    // Continue setup of default content.
-    _agov_default_beans();
-    _agov_default_news_beans();
-
-    // Create a user.
-    $this->testUser = $this->drupalCreateUser(array(
-      'access content',
-      'view revisions',
-      'view all unpublished content',
-      'create blog_article content',
-      'create event content',
-      'create media_release content',
-      'create news_article content',
-      'create footer_teaser content',
-      'create publication content',
-      'create slide content',
-      'create page content',
-      'create webform content',
-      'edit any webform content',
-    ));
-
+    parent::setUp(array());
   }
 
   /**
@@ -198,6 +165,7 @@ class AgovTest extends DrupalWebTestCase {
       // Check for node in the database.
       $node = db_select('node', 'n')->fields('n')->condition('title', $type['fields']['title'])->execute()->fetchObject();
       $this->assertNotEqual($node, FALSE, 'Found node in database.');
+
     }
   }
 

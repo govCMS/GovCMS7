@@ -7,8 +7,9 @@ core = 7.x
 php_memory_limit = 256M
 
 files[] = agov.profile
+files[] = tests/agov_test_base.inc
 files[] = tests/agov.test
-
+files[] = tests/agov_metadata.test
 
 ; Core
 
