@@ -14,7 +14,7 @@
  */
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_THEME', 'agov_base');
-define('AGOV_DEFAULT_ADMIN_THEME', 'ember');
+define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
 /**
