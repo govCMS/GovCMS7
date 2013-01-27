@@ -228,6 +228,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 #block-views-slideshow-block ul li a {
   background-color: rgba(255, 255, 255, 0.6);
   color: black;
+  border: none;
 }
 
 #block-views-slideshow-block ul li.current a {
@@ -241,6 +242,14 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 
 #block-views-slideshow-block ul li a.paused {
   background-color: #333333;
+}
+
+#block-views-slideshow-block ul li a:focus {
+  border: 2px solid #c53100;
+}
+
+#block-views-slideshow-block ul li.current a:focus {
+  border: 2px solid #c53100;
 }
 
 #block-views-latest-news-block .content .views-row,
