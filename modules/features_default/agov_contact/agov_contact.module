@@ -160,9 +160,9 @@ function agov_contact_captcha($op, $captcha_type = '') {
         // or string overrides.
         $result['form']['captcha_response'] = array(
           '#type' => 'textfield',
-          '#title' => t('Math question'),
+          '#title' => t('Prove your not a robot'),
           '#description' => t('Solve this simple math problem and enter the result. E.g. for 1+3, enter 4.'),
-          '#field_prefix' => t('@x + @y = ', array('@x' => $x, '@y' => $y)),
+          '#field_prefix' => t('Math question: @x + @y = ', array('@x' => $x, '@y' => $y)),
           '#size' => 4,
           '#maxlength' => 2,
           '#required' => TRUE,
