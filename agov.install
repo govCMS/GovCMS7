@@ -334,7 +334,7 @@ function _agov_default_blocks() {
 
   // Set default system block in primary theme.
   agov_core_insert_block('system', 'main', $themes, 'content', -12);
-  agov_core_insert_block('wcag_validate', 'wcag_validate', $themes, 'content', 24);
+  agov_core_insert_block('wcag_validate', 'wcag_validate', $themes, 'content', 24, BLOCK_VISIBILITY_LISTED, "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*");
   agov_core_insert_block('system', 'help', $themes, 'content', -14);
   agov_core_insert_block('superfish', '1', $themes, 'header_main_menu');
   agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer_sub_menu');
