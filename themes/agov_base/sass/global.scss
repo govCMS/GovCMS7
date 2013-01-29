@@ -1636,6 +1636,16 @@ img.img-float-left {
   margin-right: 0;
 }
 
+/**
+ * Customised h2 - with no border on top
+ */
+ 
+.page-news-media {
+  #region-content h2 {
+    border-top: none;
+  }
+}
+
 /*
  ** Contextual links
  */
