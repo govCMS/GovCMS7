@@ -5,7 +5,6 @@
        * @requires jquery.jumpMenu.js
        * Creates a drop down menu for the mobile site
        */
-/*        console.log($('#block-menu-block-agov-menu-block-main-menu .content .menu-block-wrapper > ul.menu').html()); */
       $('#region-header-main-menu ul.menu').clone().appendTo('#block-superfish-1 .content').addClass('mobile-menu').jumpMenu();
 
       /*
@@ -76,6 +75,14 @@
             next();
           });
         }
+      });
+      
+      /**
+       * Skip to content focus
+       */
+      $('#region-content').attr('tabindex', '-1');
+      $('#skip-to-content').click(function () {
+        $('#region-content').focus();
       });
     }
   };

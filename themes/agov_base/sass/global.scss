@@ -1716,12 +1716,16 @@ th.tabledrag-hide { display: none !important; }
 
 .tabledrag-toggle-weight { margin-bottom: 10px; display: inline-block; }
 
-#region-content .view h2 {
-  margin-bottom: 0;
-  border-top: none;
-  padding: 0;
-  font-size: 15px;
-  font-family: Arial, sans-serif;
+#region-content {
+  outline: none;
+  
+  .view h2 {
+    margin-bottom: 0;
+    border-top: none;
+    padding: 0;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+  }
 }
 
 /**
