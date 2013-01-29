@@ -299,3 +299,13 @@ function agov_core_cron() {
     drupal_http_request($update_site . '/update_check?' . $query);
   }
 }
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function agov_core_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['blog_teaser'] = array(
+      'label' => t('Blog Teaser'),
+      'custom settings' => TRUE,
+  );
+}
