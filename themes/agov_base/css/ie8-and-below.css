@@ -51,6 +51,17 @@
   padding-top: 10px;
 }
 
+/**
+ * News and Media page
+ */
+#region-content .entity-bean.highlight .image {
+  margin: -19px 20px 0 -14px;
+}
+
+#region-content .entity-bean.highlight .field-name-field-bean-text {
+  line-height: 1.2em;
+}
+
 /*
  * Footer
  */
