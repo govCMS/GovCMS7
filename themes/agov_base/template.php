@@ -31,7 +31,7 @@ function agov_base_preprocess_html(&$vars) {
   else {
     drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
   }
-  
+
 }
 
 /**
@@ -117,7 +117,7 @@ function agov_base_preprocess_maintenance_page(&$variables) {
 }
 
 /**
- * Insert <img> element in the link for social media icon links as a WCAG requirement. 
+ * Insert <img> element in the link for social media icon links as a WCAG requirement.
  * Background image via CSS is not to be used.
  */
 function agov_base_menu_link__menu_social_media(array $variables) {
@@ -125,11 +125,11 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/facebook.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/facebook.png',
+        'title' => $variables['element']['#title'],
+        'alt' => '',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -142,11 +142,11 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/twitter.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/twitter.png',
+        'title' => $variables['element']['#title'],
+        'alt' => '',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -159,11 +159,11 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/email.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/email.png',
+        'title' => $variables['element']['#title'],
+        'alt' => '',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -173,4 +173,24 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     ));
     return '<li' . drupal_attributes(array('class' => $variables['element']['#attributes']['class'])) . '>' . $output . '</li>';
   }
+}
+
+
+/**
+ * Overrides theme_file_icon.
+ *
+ * @param (array) $vars
+ *   Theme hook variables.
+ *
+ * @return string
+ *   Themed output.
+ */
+function agov_base_file_icon(&$vars) {
+  $file = $vars['file'];
+  $icon_directory = $vars['icon_directory'];
+  $mime = check_plain($file->filemime);
+  $icon_url = file_icon_url($file, $icon_directory);
+  $mime_type_parse = explode('/', $mime, 2);
+  $mime_type = $mime_type_parse[1];
+  return '<img class="file-icon" alt="File type ' . $mime_type . ' icon" src="' . $icon_url . '" />';
 }
