@@ -64,8 +64,9 @@ function agov_base_preprocess_entity(&$vars) {
  */
 function agov_base_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
-    // If this is the search form, add a new label.
-    $form['actions']['submit']['#prefix'] = '<label class="element-invisible" for="edit-submit">Search</label>';
+    // If this is the search form, set a unique id and provide a label element.
+    $form['actions']['submit']['#id'] = 'edit-agov-search';
+    $form['actions']['submit']['#prefix'] = '<label class="element-invisible" for="edit-agov-search">Search</label>';
   }
   elseif ($form_id == 'system_theme_settings') {
     unset($form['alpha_settings']['layout']['grid_layouts']['alpha_default']['fluid']);
