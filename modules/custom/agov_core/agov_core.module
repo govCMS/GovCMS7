@@ -241,7 +241,6 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_block_info_alter().
  */
 function agov_core_block_info_alter(&$blocks, $theme, $code_blocks) {
