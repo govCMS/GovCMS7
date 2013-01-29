@@ -241,11 +241,43 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
 }
 
 /**
- * Implements hook_update_status_alter().
+<<<<<<< HEAD
+ * Implements hook_block_info_alter().
  */
-function agov_core_update_status_alter(&$projects) {
-  // Notify users that updates are managed by aGov.
-  drupal_set_message(t('This site is running on the aGov distribution. Please do not update modules individually. aGov ships with a number of patched and development status modules that have been tested to work together.'), 'warning', FALSE);
+function agov_core_block_info_alter(&$blocks, $theme, $code_blocks) {
+  // Ensure the block exists.
+  if (!empty($blocks['wcag_validate']['wcag_validate'])) {
+    $blocks['wcag_validate']['wcag_validate']['visibility'] = BLOCK_VISIBILITY_LISTED;
+    $blocks['wcag_validate']['wcag_validate']['pages'] = "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*";
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function agov_core_block_info() {
+  $blocks = array();
+
+  $blocks['update_notification'] = array(
+    'info' => t('aGov Update Notification'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function agov_core_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'update_notification':
+      $block['content'] = "<div class=\"messages warning\">This site is running on the aGov distribution. Please do not update modules individually. aGov ships with a number of patched and development status modules that have been tested to work together.</div>";
+      break;
+  }
+
+  return $block;
 }
 
 /**
