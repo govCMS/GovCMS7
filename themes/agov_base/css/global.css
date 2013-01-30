@@ -1725,3 +1725,7 @@ th.tabledrag-hide {
 #block-menu-menu-header-menu {
   float: left;
 }
+
+.jump-menu-label {
+  display: none;
+}
