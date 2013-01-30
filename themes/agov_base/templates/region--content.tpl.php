@@ -8,8 +8,8 @@
 <div<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
 		
-		<?php if (!$is_front): ?>
-		  <?php print '<h1>' . drupal_get_title() . '</h1>'; ?>
+		<?php if ($is_front): ?>
+		  <?php print '<h1 class="element-invisible">' . drupal_get_title() . '</h1>'; ?>
 		<?php endif; ?>
 		
 		<?php if (!empty($tabs) && !$is_front && !empty($tabs['#primary'])): ?>

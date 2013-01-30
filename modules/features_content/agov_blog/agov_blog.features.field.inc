@@ -47,18 +47,36 @@ function agov_blog_field_default_fields() {
 The <em>body</em> field is used for the main article content. 
 ',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(
+            'trim_length' => '130',
+          ),
+          'type' => 'text_summary_or_trimmed',
+          'weight' => '3',
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '0',
+          'weight' => '3',
         ),
         'full' => array(
           'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
+          'weight' => '3',
+        ),
+        'snippet' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(
+            'trim_length' => '130',
+          ),
+          'type' => 'text_summary_or_trimmed',
           'weight' => '3',
         ),
         'teaser' => array(
@@ -140,12 +158,17 @@ The <em>body</em> field is used for the main article content.
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '12',
+        ),
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '1',
+          'type' => 'hidden',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -153,6 +176,12 @@ The <em>body</em> field is used for the main article content.
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
           'weight' => '4',
+        ),
+        'snippet' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -216,15 +245,25 @@ The <em>body</em> field is used for the main article content.
       'deleted' => '0',
       'description' => 'Provides a image to be associated with this <em>Blog Article</em>.',
       'display' => array(
-        'default' => array(
-          'label' => 'inline',
+        'blog_teaser' => array(
+          'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => 'large',
+            'image_style' => 'blog_teaser_thumbnail',
           ),
           'type' => 'image',
-          'weight' => '2',
+          'weight' => '0',
+        ),
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => 'article_page_620x349',
+          ),
+          'type' => 'image',
+          'weight' => '1',
         ),
         'full' => array(
           'label' => 'hidden',
@@ -235,6 +274,16 @@ The <em>body</em> field is used for the main article content.
           ),
           'type' => 'image',
           'weight' => '1',
+        ),
+        'snippet' => array(
+          'label' => 'hidden',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => 'blog_teaser_thumbnail',
+          ),
+          'type' => 'image',
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
