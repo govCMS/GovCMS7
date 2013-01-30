@@ -92,6 +92,7 @@ function agov_contact_captcha_validate($solution, $captcha_response, $element = 
       'CAPTCHA validation error: unknown CAPTCHA session ID (%csid).',
       array('%csid' => var_export($csid, TRUE)),
       WATCHDOG_ERROR);
+    return FALSE;
   }
   else {
     // Check the response with the CAPTCHA validation function.
@@ -132,6 +133,7 @@ function agov_contact_captcha_validate($solution, $captcha_response, $element = 
           ),
           WATCHDOG_NOTICE);
       }
+      return FALSE;
     }
   }
 }
