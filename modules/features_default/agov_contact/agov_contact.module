@@ -107,6 +107,7 @@ function agov_contact_captcha_validate($solution, $captcha_response, $element = 
         ->fields(array('status' => CAPTCHA_STATUS_SOLVED))
         ->expression('attempts', 'attempts + 1')
         ->execute();
+      return TRUE;
     }
     else {
       // Wrong answer.
