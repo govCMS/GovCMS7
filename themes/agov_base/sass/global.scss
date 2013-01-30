@@ -561,6 +561,10 @@ body.node-type-article #region-content h1,
 body.node-type-blog-article #region-content h1 {
 	font-family: 'OpenSansBold';
 }
+.page-blog #region-content .view h2 {
+  font-size: 14px;
+  font-weight: bold;
+}
 .not-front .node-blog-article .field-name-post-date {
 	font-style: italic;
 	font-size: 12px;
@@ -911,7 +915,8 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
 	border-bottom: none;
 }
 
-.view-mode-teaser .field-name-field-thumbnail {
+.view-mode-teaser .field-name-field-thumbnail, 
+.view-mode-blog_teaser .field-name-field-thumbnail {
 	float: left;
 	margin-right: 10px;
 }

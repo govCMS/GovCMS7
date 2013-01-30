@@ -17,15 +17,20 @@ function agov_blog_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'blog_article';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'comments' => array(
-      'weight' => '3',
+    'title' => array(
+      'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '1',
+        'wrapper' => 'h2',
+        'class' => '',
+      ),
     ),
     'post_date' => array(
       'weight' => '0',
       'label' => 'hidden',
-      'format' => 'ds_post_date_article_date',
+      'format' => 'ds_post_date_long',
     ),
   );
   $export['node|blog_article|default'] = $ds_fieldsetting;
