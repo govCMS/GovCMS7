@@ -22,6 +22,15 @@ function agov_content_promotion_content_defaults() {
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_promotion_1',
+    'field_description' => array(
+      'und' => array(
+        0 => array(
+          'value' => '<p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p>',
+          'format' => 'rich_text',
+          'safe_value' => ' <p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p> ',
+        ),
+      ),
+    ),
     'field_image' => array(
       'und' => array(
         0 => array(
@@ -45,6 +54,13 @@ function agov_content_promotion_content_defaults() {
         ),
       ),
     ),
+    'field_reference' => array(
+      'und' => array(
+        0 => array(
+          'machine_name' => 'agov_publication_4',
+        ),
+      ),
+    ),
     'field_tags' => array(
       'und' => array(
         0 => array(
@@ -52,22 +68,6 @@ function agov_content_promotion_content_defaults() {
         ),
         1 => array(
           'tid' => '4',
-        ),
-      ),
-    ),
-    'field_description' => array(
-      'und' => array(
-        0 => array(
-          'value' => '<p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p>',
-          'format' => 'rich_text',
-          'safe_value' => ' <p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p> ',
-        ),
-      ),
-    ),
-    'field_reference' => array(
-      'und' => array(
-        0 => array(
-          'machine_name' => 'agov_publication_4',
         ),
       ),
     ),
@@ -85,6 +85,16 @@ function agov_content_promotion_content_defaults() {
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_promotion_2',
+    'field_description' => array(
+      'und' => array(
+        0 => array(
+          'value' => '<p>Nullam tristique adipiscing mauris sit amet pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam non mauris diam, et vehicula neque. Quisque sit amet libero sapien. Vestibulum bibendum metus at nisl tempus in viverra ante porttitor. Sed nulla odio, aliquam in aliquam a, dictum sit amet sapien. Maecenas ac malesuada magna.</p>
+',
+          'format' => 'rich_text',
+          'safe_value' => ' <p>Nullam tristique adipiscing mauris sit amet pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam non mauris diam, et vehicula neque. Quisque sit amet libero sapien. Vestibulum bibendum metus at nisl tempus in viverra ante porttitor. Sed nulla odio, aliquam in aliquam a, dictum sit amet sapien. Maecenas ac malesuada magna.</p> ',
+        ),
+      ),
+    ),
     'field_image' => array(
       'und' => array(
         0 => array(
@@ -108,27 +118,17 @@ function agov_content_promotion_content_defaults() {
         ),
       ),
     ),
-    'field_tags' => array(
-      'und' => array(
-        0 => array(
-          'tid' => '7',
-        ),
-      ),
-    ),
-    'field_description' => array(
-      'und' => array(
-        0 => array(
-          'value' => '<p>Nullam tristique adipiscing mauris sit amet pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam non mauris diam, et vehicula neque. Quisque sit amet libero sapien. Vestibulum bibendum metus at nisl tempus in viverra ante porttitor. Sed nulla odio, aliquam in aliquam a, dictum sit amet sapien. Maecenas ac malesuada magna.</p>
-',
-          'format' => 'rich_text',
-          'safe_value' => ' <p>Nullam tristique adipiscing mauris sit amet pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam non mauris diam, et vehicula neque. Quisque sit amet libero sapien. Vestibulum bibendum metus at nisl tempus in viverra ante porttitor. Sed nulla odio, aliquam in aliquam a, dictum sit amet sapien. Maecenas ac malesuada magna.</p> ',
-        ),
-      ),
-    ),
     'field_reference' => array(
       'und' => array(
         0 => array(
           'machine_name' => 'agov_publication_8',
+        ),
+      ),
+    ),
+    'field_tags' => array(
+      'und' => array(
+        0 => array(
+          'tid' => '7',
         ),
       ),
     ),
@@ -146,6 +146,15 @@ function agov_content_promotion_content_defaults() {
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_promotion_3',
+    'field_description' => array(
+      'und' => array(
+        0 => array(
+          'value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin congue vulputate convallis. Nullam auctor, turpis ut faucibus dapibus, dui enim fermentum neque, ut elementum felis augue sed turpis. Ut ac nunc ut libero imperdiet adipiscing. Mauris eu dolor ac diam commodo imperdiet id a lectus. Nam et ante ac neque scelerisque porttitor. In eu erat turpis, non consequat elit. Vivamus molestie enim vitae massa eleifend blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dictum velit et erat luctus tincidunt. Ut eget tellus nisi, feugiat malesuada nibh. Etiam at est purus, at gravida lacus.</p>',
+          'format' => 'rich_text',
+          'safe_value' => ' <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin congue vulputate convallis. Nullam auctor, turpis ut faucibus dapibus, dui enim fermentum neque, ut elementum felis augue sed turpis. Ut ac nunc ut libero imperdiet adipiscing. Mauris eu dolor ac diam commodo imperdiet id a lectus. Nam et ante ac neque scelerisque porttitor. In eu erat turpis, non consequat elit. Vivamus molestie enim vitae massa eleifend blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dictum velit et erat luctus tincidunt. Ut eget tellus nisi, feugiat malesuada nibh. Etiam at est purus, at gravida lacus.</p> ',
+        ),
+      ),
+    ),
     'field_image' => array(
       'und' => array(
         0 => array(
@@ -169,26 +178,17 @@ function agov_content_promotion_content_defaults() {
         ),
       ),
     ),
-    'field_tags' => array(
-      'und' => array(
-        0 => array(
-          'tid' => '3',
-        ),
-      ),
-    ),
-    'field_description' => array(
-      'und' => array(
-        0 => array(
-          'value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin congue vulputate convallis. Nullam auctor, turpis ut faucibus dapibus, dui enim fermentum neque, ut elementum felis augue sed turpis. Ut ac nunc ut libero imperdiet adipiscing. Mauris eu dolor ac diam commodo imperdiet id a lectus. Nam et ante ac neque scelerisque porttitor. In eu erat turpis, non consequat elit. Vivamus molestie enim vitae massa eleifend blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dictum velit et erat luctus tincidunt. Ut eget tellus nisi, feugiat malesuada nibh. Etiam at est purus, at gravida lacus.</p>',
-          'format' => 'rich_text',
-          'safe_value' => ' <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin congue vulputate convallis. Nullam auctor, turpis ut faucibus dapibus, dui enim fermentum neque, ut elementum felis augue sed turpis. Ut ac nunc ut libero imperdiet adipiscing. Mauris eu dolor ac diam commodo imperdiet id a lectus. Nam et ante ac neque scelerisque porttitor. In eu erat turpis, non consequat elit. Vivamus molestie enim vitae massa eleifend blandit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Morbi dictum velit et erat luctus tincidunt. Ut eget tellus nisi, feugiat malesuada nibh. Etiam at est purus, at gravida lacus.</p> ',
-        ),
-      ),
-    ),
     'field_reference' => array(
       'und' => array(
         0 => array(
           'machine_name' => 'agov_publication_3',
+        ),
+      ),
+    ),
+    'field_tags' => array(
+      'und' => array(
+        0 => array(
+          'tid' => '3',
         ),
       ),
     ),
