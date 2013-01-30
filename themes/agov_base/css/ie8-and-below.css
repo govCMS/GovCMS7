@@ -1,11 +1,3 @@
-#region-header-top-menu .region-header-top-menu-inner {
-  width: 300px;
-}
-
-.large-fonts #region-header-top-menu .region-header-top-menu-inner {
-  width: 350px;
-}
-
 .block-text-resize {
   width: 90px !important;
 }
@@ -49,6 +41,17 @@
 
 #region-feature-articles {
   padding-top: 10px;
+}
+
+/**
+ * News and Media page
+ */
+#region-content .entity-bean.highlight .image {
+  margin: -19px 20px 0 -14px;
+}
+
+#region-content .entity-bean.highlight .field-name-field-bean-text {
+  line-height: 1.2em;
 }
 
 /*
