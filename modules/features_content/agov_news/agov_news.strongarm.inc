@@ -233,7 +233,7 @@ function agov_news_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_news_article_pattern';
-  $strongarm->value = 'news-and-media/[node:title]';
+  $strongarm->value = 'news-media/news/[node:title]';
   $export['pathauto_node_news_article_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
