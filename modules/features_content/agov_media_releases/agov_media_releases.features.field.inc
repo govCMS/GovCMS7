@@ -46,6 +46,12 @@ function agov_media_releases_field_default_fields() {
       'description' => 'The <em>Summary</em> field above is included in any listings of this page as well as the initial paragraph of the page view.
 The <em>body</em> field is used for the main article content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -135,6 +141,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Downloadable <em>Full release</em> version of this <em>Media release</em>',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'file',
@@ -234,6 +246,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Provides a image to be associated with this <em>Media Release</em>.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -330,6 +348,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
