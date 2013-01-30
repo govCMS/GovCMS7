@@ -11,7 +11,7 @@ function agov_content_blog_content_defaults() {
   $content = array();
 
   $content['agov_blog_1'] = (object) array(
-    'exported_path' => 'news-and-media/new-standards-websites',
+    'exported_path' => 'news-media/blog/dapibus-porttitor-odio',
     'title' => 'Dapibus porttitor odio',
     'status' => '1',
     'promote' => '0',
@@ -32,7 +32,6 @@ function agov_content_blog_content_defaults() {
 <p>Turpis a! Dapibus porttitor odio. Pulvinar porta et porttitor vel duis sed integer, turpis, pellentesque mid mid elit integer. Diam scelerisque. Lacus sociis, pulvinar non. Pellentesque montes turpis nisi lacus placerat pulvinar magna natoque sit massa aliquam aenean, ridiculus scelerisque aenean. Egestas eu adipiscing. Habitasse rhoncus tincidunt. Aliquam diam, pulvinar placerat vel placerat in. Rhoncus dignissim? Integer magnis, non, urna amet tortor ut, ac duis non est mauris, nec et turpis, sociis dis magnis proin odio vel, porttitor tincidunt ut ultrices, ut magna amet tristique rhoncus arcu, turpis lorem. Cum scelerisque tortor, mus elit sagittis. Nisi sit sed purus adipiscing sociis, eu velit! Cras urna integer nec? Ac nascetur sed nunc lectus arcu? Magnis est auctor integer! Eros rhoncus.</p>
 <p>Pellentesque non mattis tempor scelerisque aenean urna elementum amet, urna penatibus eu turpis mus ut elementum lectus urna nisi odio mus nunc placerat, aenean ridiculus purus cras, pid lundium, augue enim dictumst. Amet, integer vut! Turpis! Tristique. Lorem aliquet, integer penatibus in nisi, sed, a ut eu sociis aliquam duis phasellus sit ac diam odio, porttitor eu nec magna. Ut ac magna elit nec in in nec? In, mus, turpis porttitor? Augue ac odio parturient cum ac porttitor pulvinar montes hac ac eros? Rhoncus nisi parturient risus, a! Augue dis sed ultrices platea, elementum sagittis? Eros porta porttitor placerat! Scelerisque montes, adipiscing amet, est ut a dapibus turpis sociis? Nunc diam, purus vel sit, integer magnis mattis in parturient.</p>
 <p>Pulvinar, dolor enim aenean magnis? Augue, vel pellentesque porta, scelerisque aliquam elementum rhoncus nunc augue integer, cras placerat pulvinar purus odio odio odio tincidunt habitasse et dolor! Tristique pid sociis ridiculus vel pulvinar, platea phasellus? Amet nascetur duis sagittis odio augue rhoncus porta quis porttitor turpis a nunc rhoncus, a augue enim habitasse aliquam, rhoncus a nunc sit elit. Augue lectus! Sed, auctor aenean tempor tincidunt tristique eros placerat magna in egestas tristique, parturient amet turpis odio dis et, lacus habitasse porta in non, enim purus dolor, habitasse lectus, elit eros amet et turpis enim! Porta facilisis nunc, nec! In! Montes cum pellentesque, tincidunt dictumst, dolor magnis, rhoncus sagittis scelerisque pid sit auctor natoque proin rhoncus dis dictumst sagittis.</p>
-<p>[[{"type":"media","view_mode":"media_large","fid":"148","attributes":{"alt":"","class":"media-image","typeof":"foaf:Image"}}]]</p>
 <p>Magna habitasse dapibus? Adipiscing, in! Ultrices risus amet vut aliquam enim phasellus augue turpis cursus purus a, sit ut, magna lectus penatibus cum. Enim cras mus ridiculus hac. Arcu, tempor mattis adipiscing, cursus turpis, a dapibus arcu odio magna. Ut ac, parturient risus proin? Placerat rhoncus augue tincidunt odio nascetur aliquet. Aliquam etiam, a nisi, ac velit pellentesque non, nunc habitasse ut cras turpis eu tortor et ultricies montes! Nunc? Et purus magnis nisi lundium in turpis diam purus proin mattis risus pellentesque? Parturient, parturient urna dignissim non eros nisi vut magna ac tincidunt, ac eros dapibus cursus, cum, cras, dis tristique porta? Proin ut adipiscing tortor? Lacus nec! Pid tempor, enim, egestas, tempor placerat enim odio sociis mauris.</p>
 <p>Mattis magna ac rhoncus massa mid lorem ut dictumst, sit rhoncus ut magna pulvinar turpis habitasse sed eu mauris, in, montes sociis turpis, urna pulvinar ultricies phasellus vut sit? Odio sit, cras amet mus sed? Amet sit sit tincidunt. Sed? Sed facilisis magna. Lorem! Porttitor enim pellentesque, cursus amet magna, et velit eu sociis proin ac placerat turpis natoque tristique turpis duis sit amet, a! Porttitor sit! Tempor, augue tortor lorem mauris scelerisque! In? Pulvinar, mid nec, a platea sed montes adipiscing auctor lorem turpis amet amet risus quis duis, sed, mus. Integer eros sed penatibus? In in augue scelerisque facilisis adipiscing integer amet, dis et etiam, pellentesque dis rhoncus placerat! Habitasse rhoncus urna placerat, dictumst sed, aenean proin.</p>
 <p>Et quis nunc, vel montes rhoncus parturient! Pellentesque turpis nisi elementum, pulvinar amet phasellus. Ac pellentesque nunc. Proin integer. Dis porttitor et tincidunt, a eros amet ut nascetur mid? Augue vel, penatibus urna porta cursus, tincidunt. Elementum penatibus non quis lectus, elit scelerisque? Vut dapibus vel, vel porttitor porta a! Cum placerat enim, tempor eros sit scelerisque in placerat tempor est parturient? Turpis? Elementum eu dis sed! Tortor hac quis. In! Augue porta dictumst nunc integer mid, nisi proin dolor sed! Turpis nascetur turpis a! Aliquam, tristique amet! Nisi? Egestas lorem penatibus eu facilisis auctor? Parturient ac cras lacus! Diam tortor. Nunc ut dolor. Porttitor et tincidunt placerat dapibus. Et sagittis placerat sit, purus pellentesque, mauris auctor! Ultrices aliquet.</p>',
@@ -45,7 +44,6 @@ function agov_content_blog_content_defaults() {
 <p>Turpis a! Dapibus porttitor odio. Pulvinar porta et porttitor vel duis sed integer, turpis, pellentesque mid mid elit integer. Diam scelerisque. Lacus sociis, pulvinar non. Pellentesque montes turpis nisi lacus placerat pulvinar magna natoque sit massa aliquam aenean, ridiculus scelerisque aenean. Egestas eu adipiscing. Habitasse rhoncus tincidunt. Aliquam diam, pulvinar placerat vel placerat in. Rhoncus dignissim? Integer magnis, non, urna amet tortor ut, ac duis non est mauris, nec et turpis, sociis dis magnis proin odio vel, porttitor tincidunt ut ultrices, ut magna amet tristique rhoncus arcu, turpis lorem. Cum scelerisque tortor, mus elit sagittis. Nisi sit sed purus adipiscing sociis, eu velit! Cras urna integer nec? Ac nascetur sed nunc lectus arcu? Magnis est auctor integer! Eros rhoncus.</p>
 <p>Pellentesque non mattis tempor scelerisque aenean urna elementum amet, urna penatibus eu turpis mus ut elementum lectus urna nisi odio mus nunc placerat, aenean ridiculus purus cras, pid lundium, augue enim dictumst. Amet, integer vut! Turpis! Tristique. Lorem aliquet, integer penatibus in nisi, sed, a ut eu sociis aliquam duis phasellus sit ac diam odio, porttitor eu nec magna. Ut ac magna elit nec in in nec? In, mus, turpis porttitor? Augue ac odio parturient cum ac porttitor pulvinar montes hac ac eros? Rhoncus nisi parturient risus, a! Augue dis sed ultrices platea, elementum sagittis? Eros porta porttitor placerat! Scelerisque montes, adipiscing amet, est ut a dapibus turpis sociis? Nunc diam, purus vel sit, integer magnis mattis in parturient.</p>
 <p>Pulvinar, dolor enim aenean magnis? Augue, vel pellentesque porta, scelerisque aliquam elementum rhoncus nunc augue integer, cras placerat pulvinar purus odio odio odio tincidunt habitasse et dolor! Tristique pid sociis ridiculus vel pulvinar, platea phasellus? Amet nascetur duis sagittis odio augue rhoncus porta quis porttitor turpis a nunc rhoncus, a augue enim habitasse aliquam, rhoncus a nunc sit elit. Augue lectus! Sed, auctor aenean tempor tincidunt tristique eros placerat magna in egestas tristique, parturient amet turpis odio dis et, lacus habitasse porta in non, enim purus dolor, habitasse lectus, elit eros amet et turpis enim! Porta facilisis nunc, nec! In! Montes cum pellentesque, tincidunt dictumst, dolor magnis, rhoncus sagittis scelerisque pid sit auctor natoque proin rhoncus dis dictumst sagittis.</p>
-<p></p>
 <p>Magna habitasse dapibus? Adipiscing, in! Ultrices risus amet vut aliquam enim phasellus augue turpis cursus purus a, sit ut, magna lectus penatibus cum. Enim cras mus ridiculus hac. Arcu, tempor mattis adipiscing, cursus turpis, a dapibus arcu odio magna. Ut ac, parturient risus proin? Placerat rhoncus augue tincidunt odio nascetur aliquet. Aliquam etiam, a nisi, ac velit pellentesque non, nunc habitasse ut cras turpis eu tortor et ultricies montes! Nunc? Et purus magnis nisi lundium in turpis diam purus proin mattis risus pellentesque? Parturient, parturient urna dignissim non eros nisi vut magna ac tincidunt, ac eros dapibus cursus, cum, cras, dis tristique porta? Proin ut adipiscing tortor? Lacus nec! Pid tempor, enim, egestas, tempor placerat enim odio sociis mauris.</p>
 <p>Mattis magna ac rhoncus massa mid lorem ut dictumst, sit rhoncus ut magna pulvinar turpis habitasse sed eu mauris, in, montes sociis turpis, urna pulvinar ultricies phasellus vut sit? Odio sit, cras amet mus sed? Amet sit sit tincidunt. Sed? Sed facilisis magna. Lorem! Porttitor enim pellentesque, cursus amet magna, et velit eu sociis proin ac placerat turpis natoque tristique turpis duis sit amet, a! Porttitor sit! Tempor, augue tortor lorem mauris scelerisque! In? Pulvinar, mid nec, a platea sed montes adipiscing auctor lorem turpis amet amet risus quis duis, sed, mus. Integer eros sed penatibus? In in augue scelerisque facilisis adipiscing integer amet, dis et etiam, pellentesque dis rhoncus placerat! Habitasse rhoncus urna placerat, dictumst sed, aenean proin.</p>
 <p>Et quis nunc, vel montes rhoncus parturient! Pellentesque turpis nisi elementum, pulvinar amet phasellus. Ac pellentesque nunc. Proin integer. Dis porttitor et tincidunt, a eros amet ut nascetur mid? Augue vel, penatibus urna porta cursus, tincidunt. Elementum penatibus non quis lectus, elit scelerisque? Vut dapibus vel, vel porttitor porta a! Cum placerat enim, tempor eros sit scelerisque in placerat tempor est parturient? Turpis? Elementum eu dis sed! Tortor hac quis. In! Augue porta dictumst nunc integer mid, nisi proin dolor sed! Turpis nascetur turpis a! Aliquam, tristique amet! Nisi? Egestas lorem penatibus eu facilisis auctor? Parturient ac cras lacus! Diam tortor. Nunc ut dolor. Porttitor et tincidunt placerat dapibus. Et sagittis placerat sit, purus pellentesque, mauris auctor! Ultrices aliquet.</p> ',
@@ -56,10 +54,10 @@ function agov_content_blog_content_defaults() {
     'field_tags' => array(
       'und' => array(
         0 => array(
-          'tid' => '6',
+          'tid' => '2',
         ),
         1 => array(
-          'tid' => '2',
+          'tid' => '6',
         ),
         2 => array(
           'tid' => '7',
@@ -92,7 +90,7 @@ function agov_content_blog_content_defaults() {
   );
 
   $content['agov_blog_2'] = (object) array(
-    'exported_path' => 'news-and-media/consectetur-adipiscing-elit',
+    'exported_path' => 'news-media/blog/consectetur-adipiscing-elit',
     'title' => 'Consectetur adipiscing elit',
     'status' => '1',
     'promote' => '0',
@@ -151,7 +149,7 @@ function agov_content_blog_content_defaults() {
   );
 
   $content['agov_blog_3'] = (object) array(
-    'exported_path' => 'news-and-media/cras-mauris-enim',
+    'exported_path' => 'news-media/blog/cras-mauris-enim',
     'title' => 'Cras mauris enim',
     'status' => '1',
     'promote' => '0',
@@ -215,7 +213,7 @@ function agov_content_blog_content_defaults() {
   );
 
   $content['agov_blog_4'] = (object) array(
-    'exported_path' => 'news-and-media/vivamus-gravida-iaculis-ligula',
+    'exported_path' => 'news-media/blog/vivamus-gravida-iaculis-ligula',
     'title' => 'Vivamus gravida iaculis ligula,',
     'status' => '1',
     'promote' => '0',
@@ -279,7 +277,7 @@ function agov_content_blog_content_defaults() {
   );
 
   $content['agov_blog_5'] = (object) array(
-    'exported_path' => 'news-and-media/adipiscing-quam-ut-dolor-vehicula-vitae-feugiat-erat-dapibus',
+    'exported_path' => 'news-media/blog/adipiscing-quam-ut-dolor-vehicula-vitae-feugiat-erat-dapibus',
     'title' => 'In adipiscing quam ut dolor vehicula vitae feugiat erat dapibus.',
     'status' => '1',
     'promote' => '0',
