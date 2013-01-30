@@ -10,6 +10,8 @@
 		
 		<?php if ($is_front): ?>
 		  <?php print '<h1 class="element-invisible">' . drupal_get_title() . '</h1>'; ?>
+		<?php else: ?>
+		  <?php print '<h1>' . drupal_get_title() . '</h1>'; ?>
 		<?php endif; ?>
 		
 		<?php if (!empty($tabs) && !$is_front && !empty($tabs['#primary'])): ?>
