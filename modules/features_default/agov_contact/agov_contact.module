@@ -74,6 +74,9 @@ function _agov_contact_get_fid() {
  *   CAPTCHA form element
  * @param (array) $form_state
  *   CAPTCHA form state
+ *
+ * @return bool
+ *   Is valid and correct answer or not.
  */
 function agov_contact_captcha_validate($solution, $captcha_response, $element = NULL, $form_state = NULL) {
 
