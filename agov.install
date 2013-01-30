@@ -466,11 +466,11 @@ function _agov_default_news_beans() {
 
   // Add menu links to main menu.
   $menus = array(
-    'current-news' => 'news-media/current-news',
+    'current-news' => 'news-media/news',
     'archived-news' => 'news-media/news-archive',
     'media-releases' => 'news-media/media-releases',
     'events' => 'news-media/events',
-    'blog' => 'blog',
+    'blog' => 'news-media/blog',
   );
 
   // @todo - Save these menu items below the news-media item.
