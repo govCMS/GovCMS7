@@ -46,6 +46,12 @@ function agov_events_field_default_fields() {
       'description' => 'The <em>Summary</em> field above is included in any listings of this page as well as the initial paragraph of the page view.
 The <em>body</em> field is used for the main article content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -132,6 +138,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Please enter the contact information for this event.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'inline',
           'module' => 'text',
@@ -207,6 +219,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => '',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'inline',
           'module' => 'text',
@@ -283,6 +301,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'The date the event is due to start and finish.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'agov_events',
@@ -375,6 +399,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Provides a image to be associated with this <em>Event</em>.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -464,6 +494,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => '',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'inline',
           'module' => 'text',
@@ -545,6 +581,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
