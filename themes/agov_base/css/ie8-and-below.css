@@ -60,3 +60,7 @@
 #region-footer-menu {
   padding-top: 15px !important;
 }
+
+#region-header-search form input.form-submit {
+  text-indent: 0 !important;
+}
