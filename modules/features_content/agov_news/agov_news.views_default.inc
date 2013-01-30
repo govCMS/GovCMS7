@@ -419,7 +419,7 @@ function agov_news_views_default_views() {
   $handler->display->display_options['filters']['field_news_date_value']['table'] = 'field_data_field_news_date';
   $handler->display->display_options['filters']['field_news_date_value']['field'] = 'field_news_date_value';
   $handler->display->display_options['filters']['field_news_date_value']['operator'] = 'node_freshness';
-  $handler->display->display_options['path'] = 'news-media/current-news';
+  $handler->display->display_options['path'] = 'news-media/news';
   $export['latest_news'] = $view;
 
   $view = new view();
