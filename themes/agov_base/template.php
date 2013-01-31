@@ -184,7 +184,7 @@ function agov_base_views_more($variables) {
     $link_text = $variables['link_text'];
     $link_url = $base_url . $variables['more_url'];
   }
-  return '<div class="more-link">' . l(t($link_text), $link_url, array('attributes' => array('title' => $variables['title']))) . '</div>';
+  return '<div class="more-link">' . l(t($link_text), $link_url, array('attributes' => array('title' => $link_text))) . '</div>';
 }
 
 /**
