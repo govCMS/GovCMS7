@@ -9,7 +9,45 @@
  */
 function agov_menu_menu_default_menu_links() {
   $menu_links = array();
+  
+  // Exported menu link: menu-header-menu:sitemap
+  $menu_links['menu-header-menu:sitemap'] = array(
+    'menu_name' => 'menu-header-menu',
+    'link_path' => 'sitemap',
+    'router_path' => 'sitemap',
+    'link_title' => 'Site map and Feeds',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+       ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-50',
+  );
 
+  // Exported menu link: menu-header-menu:user
+  $menu_links['menu-header-menu:user'] = array(
+    'menu_name' => 'menu-header-menu',
+    'link_path' => 'user',
+    'router_path' => 'user',
+    'link_title' => 'Member login',
+    'options' => array(
+        'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-48',
+  );
+  
   // Exported menu link: main-menu:<front>
   $menu_links['main-menu:<front>'] = array(
     'menu_name' => 'main-menu',
