@@ -234,6 +234,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 // Featured Article Pager
 
 #block-views-slideshow-block ul li a {
+  background-color: #cececd; // this bg colour will be picked up by IE (other browsers will override this by the CSS immediately below this line)
   background-color: $link_light_alpha;
   color: $text_darkest;
   border: none;
