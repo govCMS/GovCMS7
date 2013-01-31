@@ -179,7 +179,7 @@ function agov_base_views_more($variables) {
   global $base_url;
   if ($variables['view']->name == 'latest_news') {
     $link_text = 'View more news';
-    $link_url = $base_url . '/news-media/current-news';
+    $link_url = $base_url . '/news-media/news';
   } else {
     $link_text = $variables['link_text'];
     $link_url = $base_url . $variables['more_url'];
