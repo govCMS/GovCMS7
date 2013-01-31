@@ -47,7 +47,6 @@ dependencies[] = bean
 dependencies[] = bean_admin_ui
 dependencies[] = captcha
 dependencies[] = chosen
-dependencies[] = context
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = defaultcontent

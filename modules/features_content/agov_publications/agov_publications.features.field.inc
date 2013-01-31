@@ -45,6 +45,12 @@ function agov_publications_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -119,6 +125,12 @@ function agov_publications_field_default_fields() {
       'deleted' => '0',
       'description' => 'The date in which the publication was tabled in Parliament or other publication date as appropriate.  If no time is known then set to 00 hours and 00 minutes.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'inline',
           'module' => 'agov_events',
@@ -198,6 +210,12 @@ function agov_publications_field_default_fields() {
       'deleted' => '0',
       'description' => 'Allows one of more documents to be associated with this <em>Publication</em>.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'file',
@@ -291,6 +309,12 @@ function agov_publications_field_default_fields() {
       'deleted' => '0',
       'description' => 'The article subtitle, displayed in any any listings underneath the main article title.  Plain text only.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -366,6 +390,12 @@ function agov_publications_field_default_fields() {
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',

@@ -11,7 +11,7 @@ function agov_slideshow_content_defaults() {
   $content = array();
 
   $content['slide_1'] = (object) array(
-    'exported_path' => 'os-praemitto-refero-tation',
+    'exported_path' => 'slides/os-praemitto-refero-tation',
     'title' => 'Os Praemitto Refero Tation',
     'status' => '1',
     'promote' => '0',
@@ -68,7 +68,7 @@ function agov_slideshow_content_defaults() {
   );
 
   $content['slide_2'] = (object) array(
-    'exported_path' => 'diam-eum-probo',
+    'exported_path' => 'slides/diam-eum-probo',
     'title' => 'Diam Eum In Probo',
     'status' => '1',
     'promote' => '0',
@@ -126,7 +126,7 @@ function agov_slideshow_content_defaults() {
   );
 
   $content['slide_3'] = (object) array(
-    'exported_path' => 'macto-oppeto',
+    'exported_path' => 'slides/macto-oppeto',
     'title' => 'Macto Oppeto',
     'status' => '1',
     'promote' => '0',

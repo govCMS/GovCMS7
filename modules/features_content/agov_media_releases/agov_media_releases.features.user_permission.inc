@@ -16,8 +16,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -29,8 +27,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -42,8 +38,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -55,8 +49,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -68,8 +60,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

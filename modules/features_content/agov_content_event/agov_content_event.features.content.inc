@@ -11,7 +11,7 @@ function agov_content_event_content_defaults() {
   $content = array();
 
   $content['agov_event_1'] = (object) array(
-    'exported_path' => 'events/date-test',
+    'exported_path' => 'news-media/events/quis-autem-vel-eum',
     'title' => ' Quis autem vel eum',
     'status' => '1',
     'promote' => '0',
@@ -36,16 +36,6 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? ',
           'safe_summary' => ' Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. ',
-        ),
-      ),
-    ),
-    'field_tags' => array(
-      'und' => array(
-        0 => array(
-          'tid' => '5',
-        ),
-        1 => array(
-          'tid' => '7',
         ),
       ),
     ),
@@ -110,10 +100,20 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
         ),
       ),
     ),
+    'field_tags' => array(
+      'und' => array(
+        0 => array(
+          'tid' => '5',
+        ),
+        1 => array(
+          'tid' => '7',
+        ),
+      ),
+    ),
   );
 
   $content['agov_event_2'] = (object) array(
-    'exported_path' => 'events/eu-utinam-inciderint-sit',
+    'exported_path' => 'news-media/events/eu-utinam-inciderint-sit',
     'title' => 'Eu utinam inciderint sit',
     'status' => '1',
     'promote' => '0',
@@ -138,13 +138,6 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 <p>Has vidisse expetendis in, everti apeirian referrentur vel ea, elit principes consectetuer ne ius. Sit tantas facete an. Cu volumus adipiscing mediocritatem eam, usu quis aeterno an. Scaevola atomorum vel id, duo in novum praesent mnesarchum, maluisset reformidans efficiantur his eu. Aperiri consectetuer mel cu, minimum theophrastus sed te, ad sanctus dignissim efficiendi per.</p>
 <p>Id errem possim moderatius nec. No corpora voluptua sed, falli latine est ad. Tale graecis ei usu, pri ex liber voluptaria, brute rationibus ex eum. Sea falli feugait et, facer appetere sit ea, solum scripta inimicus sit et.</p> ',
           'safe_summary' => ' Eu utinam inciderint sit, illum ipsum persequeris ne quo, sit cu quas temporibus theophrastus. Eum an utinam vocent suavitate, in mel ferri aliquando. Et his ipsum putent, dico facilis accumsan pro et. Ius prima epicurei ei. ',
-        ),
-      ),
-    ),
-    'field_tags' => array(
-      'und' => array(
-        0 => array(
-          'tid' => '6',
         ),
       ),
     ),
@@ -211,10 +204,17 @@ Julius Caesar',
         ),
       ),
     ),
+    'field_tags' => array(
+      'und' => array(
+        0 => array(
+          'tid' => '6',
+        ),
+      ),
+    ),
   );
 
   $content['agov_event_3'] = (object) array(
-    'exported_path' => 'events/fusce-vel-cursus-lectus',
+    'exported_path' => 'news-media/events/fusce-vel-cursus-lectus',
     'title' => 'Fusce vel cursus lectus',
     'status' => '1',
     'promote' => '1',
