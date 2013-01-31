@@ -59,6 +59,13 @@ function agov_install() {
 
   // Rebuild the sitemap now we have a menu.
   agov_rebuild_sitemap();
+  
+  // Set default recipient for contact form.
+  db_update('contact')->fields(
+    array('recipients' => variable_get('site_mail', 'admin@example.com'))
+  )
+  ->condition('cid', 1)
+  ->execute();
 
   // @todo Image styles not being applied to beans on install. Needs manual
   // revert.
