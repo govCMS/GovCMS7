@@ -175,6 +175,17 @@ function agov_base_menu_link__menu_social_media(array $variables) {
   }
 }
 
+function agov_base_views_more($variables) {
+  global $base_url;
+  if ($variables['view']->name == 'latest_news') {
+    $link_text = 'View more news';
+    $link_url = $base_url . '/news-media/current-news';
+  } else {
+    $link_text = $variables['link_text'];
+    $link_url = $base_url . $variables['more_url'];
+  }
+  return '<div class="more-link">' . l(t($link_text), $link_url, array('attributes' => array('title' => $variables['title']))) . '</div>';
+}
 
 /**
  * Overrides theme_file_icon.
@@ -194,3 +205,4 @@ function agov_base_file_icon(&$vars) {
   $mime_type = $mime_type_parse[1];
   return '<img class="file-icon" alt="File type ' . $mime_type . ' icon" src="' . $icon_url . '" />';
 }
+
