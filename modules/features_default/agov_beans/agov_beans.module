@@ -34,5 +34,8 @@ function agov_beans_preprocess_entity(&$variables) {
       // We create a url wrapped in the title.
       $variables['title'] = l($variables['bean']->title, $variables['field_link_to'][0]['url']);
     }
+    else {
+      $variables['title'] = check_plain($variables['bean']->title);
+    }
   }
 }
