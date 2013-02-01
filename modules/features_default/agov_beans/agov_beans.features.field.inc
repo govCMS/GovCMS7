@@ -116,7 +116,7 @@ function agov_beans_field_default_fields() {
           'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
-            'image_link' => 'content',
+            'image_link' => '',
             'image_style' => 'image_and_text_bean_small',
           ),
           'type' => 'image',
