@@ -272,7 +272,7 @@ function agov_core_block_view($delta = '') {
 
   switch ($delta) {
     case 'update_notification':
-      $block['content'] = "<div class=\"messages warning\">This site is running on the aGov distribution. Please do not update modules individually. aGov ships with a number of patched and development status modules that have been tested to work together.</div>";
+      $block['content'] = "<div class=\"messages warning\">This site is running on the aGov distribution. aGov ships with a number of patched and development status modules that have been tested to work together. Avoid updating modules included with aGov independently. See the <a href=\"http://drupal.org/project/agov\">aGov project page</a> on drupal.org for further information about releases.</div>";
       break;
   }
 
