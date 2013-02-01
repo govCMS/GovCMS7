@@ -55,7 +55,9 @@ function agov_metatag_config_default_alter(&$configs) {
   $configs['global']->config['DCTERMS.creator'] = array('value' => '[site:name]');
   $configs['global']->config['DCTERMS.date'] = array('value' => '[current-date:custom:Y-m-d\TH:iP]');
   $configs['global']->config['DCTERMS.description'] = array('value' => '[site:slogan]');
+  $configs['global']->config['DCTERMS.language'] = array('value' => 'en');
   $configs['global']->config['DCTERMS.publisher'] = array('value' => '[site:name]');
   $configs['global']->config['DCTERMS.subject'] = array('value' => '[site:slogan]');
   $configs['global']->config['DCTERMS.type'] = array('value' => 'other');
+  $configs['node']->config['DCTERMS.language'] = array('value' => 'en');
 }
