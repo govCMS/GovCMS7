@@ -52,7 +52,7 @@ class AgovMetaDataTest extends AgovTestBase  {
     $this->assertRaw('name="DCTERMS.description" content="' . strip_tags($node->body[LANGUAGE_NONE][0]['value']), 'Found DCTERMS.description with value `' . strip_tags($node->body[LANGUAGE_NONE][0]['value']) . '`');
     $this->assertRaw('name="DCTERMS.format" content="text/html"', 'Found DCTERMS.format with value `text/html`');
     $this->assertRaw('name="DCTERMS.identifier" content="' . $node_path . '"', 'Found DCTERMS.identifier with value `' . $node_path . '`');
-    $this->assertRaw('name="DCTERMS.language" content="' . $node->language . '"', 'Found DCTERMS.language with value `' . $node->language . '`');
+    $this->assertRaw('name="DCTERMS.language" content="en"', 'Found DCTERMS.language with value `en`');
     $this->assertRaw('name="DCTERMS.publisher" content="Agov"', 'Found DCTERMS.publisher with value `Agov`');
     $this->assertRaw('name="DCTERMS.subject" content="Agov website"', 'Found DCTERMS.subject with value `Agov website`');
     $this->assertRaw('name="DCTERMS.title" content="About Us"', 'Found DCTERMS.title with value `About Us`');
