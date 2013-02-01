@@ -126,8 +126,7 @@ function agov_base_menu_link__menu_social_media(array $variables) {
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
         'path' => 'profiles/agov/themes/agov_base/images/facebook.png',
-        'title' => $variables['element']['#title'],
-        'alt' => '',
+        'alt' => 'Facebook icon',
         'width' =>'32',
         'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
@@ -143,8 +142,7 @@ function agov_base_menu_link__menu_social_media(array $variables) {
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
         'path' => 'profiles/agov/themes/agov_base/images/twitter.png',
-        'title' => $variables['element']['#title'],
-        'alt' => '',
+        'alt' => 'Twitter icon',
         'width' =>'32',
         'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
@@ -160,8 +158,7 @@ function agov_base_menu_link__menu_social_media(array $variables) {
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
         'path' => 'profiles/agov/themes/agov_base/images/email.png',
-        'title' => $variables['element']['#title'],
-        'alt' => '',
+        'alt' => 'Email icon',
         'width' =>'32',
         'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
