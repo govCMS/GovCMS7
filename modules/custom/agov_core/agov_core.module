@@ -280,27 +280,6 @@ function agov_core_block_view($delta = '') {
 }
 
 /**
- * Implements hook_cron().
- */
-function agov_core_cron() {
-  $today = date('Y-m-d');
-  $last_run = variable_get('agov_cron_last_run', $today);
-
-  // Run only once per day.
-  if ($last_run != $today) {
-    variable_set('agov_cron_last_run', $today);
-    // Send a check for updates with site domain.
-    $update_site = variable_get('agov_update_site', 'http://updates.agov.com.au');
-    $query = drupal_http_build_query(array(
-      'site' => check_plain($_SERVER['HTTP_HOST']),
-      'ip' => ip_address(),
-      'name' => variable_get('site_name'),
-    ));
-    drupal_http_request($update_site . '/update_check?' . $query);
-  }
-}
-
-/**
  * Implements hook_entity_info_alter().
  */
 function agov_core_entity_info_alter(&$entity_info) {
