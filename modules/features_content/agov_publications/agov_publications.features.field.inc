@@ -133,9 +133,15 @@ function agov_publications_field_default_fields() {
         ),
         'default' => array(
           'label' => 'inline',
-          'module' => 'agov_events',
-          'settings' => array(),
-          'type' => 'date_no_time',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'agov_month_day_year',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+          ),
+          'type' => 'date_default',
           'weight' => '1',
         ),
         'teaser' => array(
