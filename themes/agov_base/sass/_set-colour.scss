@@ -147,6 +147,11 @@ input.form-submit:hover {
 	border-top: 3px solid $border_theme;
 }
 
+.page-news-media #region-content .view h2, 
+.page-publications #region-content .view h2 {
+  color: $body-color;
+}
+
 .not-front .node-blog-article .field-name-post-date {
   color: $text_light;
 }
