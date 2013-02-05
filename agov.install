@@ -860,8 +860,8 @@ function agov_install_additional_options() {
   $max_execution_time = ini_get('max_execution_time');
   if ($max_execution_time >= 300) {
     $form['default_content']['install'] = array(
-        '#type' => 'checkbox',
-        '#title' => st('Install example content'),
+      '#type' => 'checkbox',
+      '#title' => st('Install example content'),
     );
   }
   else {
@@ -869,14 +869,14 @@ function agov_install_additional_options() {
   }
 
   $form['register'] = array(
-    '#type' => 'fieldset', 
-    '#title' => st('Register aGov')
+    '#type' => 'fieldset',
+    '#title' => st('Register aGov'),
   );
   $form['register']['agov_register_confirm'] = array(
-    '#type' => 'checkbox', 
+    '#type' => 'checkbox',
     '#title' => st('Register your aGov site'),
   );
-  
+
   // Default registration data.
   $default_data = array(
     'agov_register_agency' => variable_get('site_name'),
@@ -891,6 +891,11 @@ function agov_install_additional_options() {
   return $form;
 }
 
+/**
+ * Validate handler.
+ *
+ * @ingroup forms
+ */
 function agov_install_additional_options_validate(&$form, &$form_state) {
   if ($form_state['values']['agov_register_confirm']) {
     if (!valid_email_address($form_state['values']['agov_register_email'])) {
@@ -899,13 +904,18 @@ function agov_install_additional_options_validate(&$form, &$form_state) {
   }
 }
 
+/**
+ * Submit handler.
+ *
+ * @ingroup forms
+ */
 function agov_install_additional_options_submit(&$form, &$form_state) {
-  
+
   // If user selects to install default content. Set var.
   if ($form_state['values']['install']) {
     variable_set('agov_example_content_batch', TRUE);
   }
-  
+
   // If the user selects to register the site, post the data.
   if ($form_state['values']['agov_register_confirm']) {
     $data = array(
@@ -913,11 +923,11 @@ function agov_install_additional_options_submit(&$form, &$form_state) {
       'agov_register_contact' => check_plain($form_state['values']['agov_register_contact']),
       'agov_register_email' => check_plain($form_state['values']['agov_register_email']),
       'agov_register_notification' => check_plain($form_state['values']['agov_register_notification']),
-    ); 
+    );
     agov_register_post($data);
 
   }
- 
+
 }
 
 /**
@@ -1035,7 +1045,6 @@ function agov_example_content_install_batch($type, $key, $name, $message, &$cont
   }
 }
 
-
 /**
  * Performs any cleanup and output on completion of example content batch.
  */
@@ -1046,15 +1055,15 @@ function agov_example_content_install_finished(&$context) {
 }
 
 /**
-* Run any cleanup or other functions required after install is finished.
-*/
+ * Run any cleanup or other functions required after install is finished.
+ */
 function agov_cleanup() {
-  
+
   agov_rebuild_sitemap();
-  
+
   // Required by view_unpublished module.
   node_access_rebuild();
-  
+
 }
 
 /**

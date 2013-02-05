@@ -22,9 +22,8 @@ function agov_register_menu() {
  * Form builder.
  */
 function agov_register_form() {
-  $agov_register_information = variable_get('agov_register_information', FALSE);
-
   $form = array();
+  $agov_register_information = variable_get('agov_register_information', FALSE);
 
   if ($agov_register_information['registered']) {
     drupal_set_message('Your installation is registered. It was last updated on ' . format_date($agov_register_information['agov_register_last_attempt'], 'agov_month_day_year'));
@@ -50,10 +49,12 @@ function agov_register_form() {
 
 /**
  * Form builder.
+ *
+ * @ingroup forms
  */
 function agov_register_form_elements($data = FALSE) {
-  $t = get_t();
   $form = array();
+  $t = get_t();
   $form['agov_register_agency'] = array(
     '#type' => 'textfield',
     '#title' => $t('Department/Agency/Company'),
@@ -84,6 +85,8 @@ function agov_register_form_elements($data = FALSE) {
 
 /**
  * Validate handler.
+ *
+ * @ingroup forms
  */
 function agov_register_validate(&$form, &$form_state) {
   if (!valid_email_address($form_state['values']['agov_register_email'])) {
@@ -93,9 +96,10 @@ function agov_register_validate(&$form, &$form_state) {
 
 /**
  * Submit handler.
+ *
+ * @ingroup forms
  */
 function agov_register_submit(&$form, &$form_state) {
-
   $data = variable_get('agov_register_information', array());
 
   $data['agov_register_agency'] = check_plain($form_state['values']['agov_register_agency']);
@@ -126,7 +130,7 @@ function agov_register_submit(&$form, &$form_state) {
 }
 
 /**
- * Post function.
+ * Posts's registration data to web server.
  */
 function agov_register_post($data) {
   $update_site = variable_get('agov_update_site', 'http://updates.agov.com.au');
@@ -147,7 +151,6 @@ function agov_register_post($data) {
  * Implements hook_cron().
  */
 function agov_register_cron() {
-
   $data = variable_get('agov_register_information', FALSE);
 
   if ($data) {
