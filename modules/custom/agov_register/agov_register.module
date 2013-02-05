@@ -106,7 +106,7 @@ function agov_register_submit(&$form, &$form_state) {
   $data['agov_register_contact'] = check_plain($form_state['values']['agov_register_contact']);
   $data['agov_register_email'] = check_plain($form_state['values']['agov_register_email']);
   $data['agov_register_notification'] = check_plain($form_state['values']['agov_register_notification']);
-
+  
   if (empty($form_state['values']['agov_register_id'])) {
     // Generate a site id.
     $data['agov_register_id'] = agov_register_generate_id();
@@ -134,6 +134,9 @@ function agov_register_submit(&$form, &$form_state) {
  */
 function agov_register_post($data) {
   $update_site = variable_get('agov_update_site', 'http://updates.agov.com.au');
+  if (!isset($data['agov_register_id'])) {
+    $data['agov_register_id'] = agov_register_generate_id();
+  }
   $query = drupal_http_build_query($data);
   $response = drupal_http_request($update_site . '/update_check?' . $query);
   if ($response->code == 200) {
