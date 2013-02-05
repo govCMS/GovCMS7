@@ -554,16 +554,23 @@ h2 {
 	padding-top: 10px;
 }
 
+/**
+ * h2 headings for teasers
+ * Publications, News, Events, Media releases
+ */
+.page-publications #region-content .view h2, 
+.page-news-media #region-content .view h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 /*
  * Node type blog article
  */
 body.node-type-article #region-content h1,
 body.node-type-blog-article #region-content h1 {
 	font-family: 'OpenSansBold';
-}
-.page-news-media-blog #region-content .view h2 {
-  font-size: 14px;
-  font-weight: bold;
 }
 .not-front .node-blog-article .field-name-post-date {
 	font-style: italic;
