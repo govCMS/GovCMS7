@@ -120,6 +120,7 @@ dependencies[] = agov_contact
 ;dependencies[] = agov_content_requirements
 dependencies[] = agov_front
 dependencies[] = agov_menu_block
+dependencies[] = agov_register
 dependencies[] = agov_slideshow
 dependencies[] = agov_social_menu
 dependencies[] = agov_superfish_configuration

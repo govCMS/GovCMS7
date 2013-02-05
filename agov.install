@@ -59,7 +59,7 @@ function agov_install() {
 
   // Rebuild the sitemap now we have a menu.
   agov_rebuild_sitemap();
-  
+
   // Set default recipient for contact form.
   db_update('contact')->fields(
     array('recipients' => variable_get('site_mail', 'admin@example.com'))
@@ -364,7 +364,7 @@ function _agov_default_blocks() {
   agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
   agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, 'help');
   agov_core_insert_block('agov_core', 'update_notification', AGOV_DEFAULT_ADMIN_THEME, 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
-  
+
   // Ensure Wcag validate block only appears on correct pages.
   db_update('block')->fields(array(
     'visibility' => BLOCK_VISIBILITY_LISTED,
@@ -373,7 +373,7 @@ function _agov_default_blocks() {
   ->condition('module', 'wcag_validate')
   ->condition('delta', 'wcag_validate')
   ->execute();
-  
+
 }
 
 /**
@@ -769,9 +769,11 @@ function _agov_default_tags() {
  */
 function agov_install_tasks($install_state) {
   $task = array();
+
   $agov_example_content_batch = variable_get('agov_example_content_batch', FALSE);
-  $task['agov_example_content_requirements'] = array(
-    'display_name' => st('Example content'),
+
+  $task['agov_install_additional_options'] = array(
+    'display_name' => st('Additional options'),
     'display' => TRUE,
     'type' => 'form',
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
@@ -786,7 +788,7 @@ function agov_install_tasks($install_state) {
     'display_name' => st('Finish'),
     'display' => FALSE,
     'type' => 'normal',
-    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
   );
   return $task;
 }
@@ -795,17 +797,17 @@ function agov_install_tasks($install_state) {
  * Implements hook_install_tasks_alter().
  */
 function agov_install_tasks_alter(&$tasks, $install_state) {
- 
+
   $tasks['agov_finished'] = $tasks['install_finished'];
   unset($tasks['install_finished']);
- 
+
   _agov_set_theme(AGOV_INSTALL_DEFAULT_THEME);
   drupal_add_css('profiles/agov/css/install.css');
 }
 
 /**
-* Overrides the core install_finished.
-*/
+ * Overrides the core install_finished.
+ */
 function agov_finished() {
   drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
   $messages = drupal_set_message();
@@ -820,7 +822,7 @@ function agov_finished() {
   // Remember the profile which was used.
   variable_set('install_profile', drupal_get_profile());
 
-  // Installation profiles are always loaded last
+  // Installation profiles are always loaded last.
   db_update('system')
     ->fields(array('weight' => 1000))
     ->condition('type', 'module')
@@ -839,43 +841,70 @@ function agov_finished() {
 }
 
 /**
- * Check the server's max_execution_time can handle the installation content.
+ * Form callback for additional options install task.
  */
-function agov_example_content_requirements() {
+function agov_install_additional_options() {
 
   set_time_limit(300);
 
   $form = array();
+  drupal_set_title('Additional options');
+
   drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
-  drupal_set_title('Install example content');
+
+  $form['default_content'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Example content'),
+  );
+
   $max_execution_time = ini_get('max_execution_time');
-  
   if ($max_execution_time >= 300) {
     $form['default_content']['install'] = array(
-      '#type' => 'checkbox',
-      '#title' => st('Yes, install example content'),
+        '#type' => 'checkbox',
+        '#title' => st('Install example content'),
     );
   }
   else {
     drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
   }
-  
-  $form['default_content']['continue'] = array(
+
+  $form['register'] = array(
+    '#type' => 'fieldset', 
+    '#title' => st('Register aGov')
+  );
+  $form['register']['agov_register_confirm'] = array(
+    '#type' => 'checkbox', 
+    '#title' => st('Register your aGov site'),
+  );
+  $form['register'][] = agov_register_form_elements();
+
+  $form['submit'] = array(
     '#type' => 'submit',
     '#value' => st('Continue'),
   );
-  
   return $form;
 }
 
-/**
- * Set variable for batch process if install button is clicked.
- */
-function agov_example_content_requirements_submit(&$form, &$form_state) {
-
-  if ($form_state['values']['install'] == TRUE) {
+function agov_install_additional_options_submit(&$form, &$form_state) {
+  
+  // If user selects to install default content. Set var.
+  if ($form_state['values']['install']) {
     variable_set('agov_example_content_batch', TRUE);
   }
+  
+  // If the user selects to register the site, post the data.
+  if ($form_state['values']['agov_register_confirm']) {
+    $data = array(
+      'agov_register_agency' => check_plain($form_state['values']['agov_register_agency']),
+      'agov_register_contact' => check_plain($form_state['values']['agov_register_contact']),
+      'agov_register_email' => check_plain($form_state['values']['agov_register_email']),
+      'agov_register_do_not_send' => check_plain($form_state['values']['agov_register_do_not_send']),
+      'agov_register_site_information' => check_plain($form_state['values']['agov_register_site_information']),
+    ); 
+    agov_register_post($data);
+
+  }
+ 
 }
 
 /**
