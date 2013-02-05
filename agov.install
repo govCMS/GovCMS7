@@ -803,6 +803,7 @@ function agov_install_tasks_alter(&$tasks, $install_state) {
 
   _agov_set_theme(AGOV_INSTALL_DEFAULT_THEME);
   drupal_add_css('profiles/agov/css/install.css');
+  drupal_add_js('profiles/agov/js/install.js');
 }
 
 /**
@@ -850,8 +851,6 @@ function agov_install_additional_options() {
   $form = array();
   drupal_set_title('Additional options');
 
-  drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
-
   $form['default_content'] = array(
     '#type' => 'fieldset',
     '#title' => st('Example content'),
@@ -877,12 +876,17 @@ function agov_install_additional_options() {
     '#title' => st('Register your aGov site'),
   );
 
+  $form['register']['fields'] = array(
+    '#prefix' => '<div id="agov-install-register-fields">',
+    '#suffix' => '</div>',
+  );
+
   // Default registration data.
   $default_data = array(
     'agov_register_agency' => variable_get('site_name'),
     'agov_register_email' => variable_get('site_mail'),
   );
-  $form['register'][] = agov_register_form_elements($default_data);
+  $form['register']['fields'][] = agov_register_form_elements($default_data);
 
   $form['submit'] = array(
     '#type' => 'submit',
