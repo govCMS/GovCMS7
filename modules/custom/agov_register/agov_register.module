@@ -9,7 +9,7 @@
  */
 function agov_register_menu() {
   $items = array();
-  $items['register'] = array(
+  $items['admin/register'] = array(
     'title' => 'aGov Registration',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('agov_register_form'),
@@ -25,14 +25,22 @@ function agov_register_form() {
   $agov_register_information = variable_get('agov_register_information', FALSE);
 
   $form = array();
-  
+
   if ($agov_register_information['registered']) {
-    drupal_set_message('Your registration was last updated on ' . format_date($agov_register_information['agov_register_last_attempt'], 'agov_month_day_year'));
+    drupal_set_message('Your installation is registered. It was last updated on ' . format_date($agov_register_information['agov_register_last_attempt'], 'agov_month_day_year'));
   }
-  
+  elseif (isset($agov_register_information['last_attempt'])) {
+    drupal_set_message('the previous attempt to register your installation on ' . format_date($agov_register_information['last_attempt'], 'agov_month_date_year') . ' was not successful. We will attempt to register it at another time. If this problem persists, please visit agov.com.au/support');
+  }
+  else {
+    drupal_set_message('Your installation is not currently registered. Please fill out the following information to register.', 'warning');
+  }
+
   $form['registration'] = agov_register_form_elements($agov_register_information);
 
   $form['#submit'][] = 'agov_register_submit';
+  $form['#validate'][] = 'agov_register_validate';
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => empty($agov_register_information) ? 'Register' : 'Update',
@@ -48,28 +56,23 @@ function agov_register_form_elements($data = FALSE) {
   $form = array();
   $form['agov_register_agency'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Agency'),
+    '#title' => $t('Department/Agency/Company'),
     '#default_value' => isset($data['agov_register_agency']) ? $data['agov_register_agency'] : '',
   );
   $form['agov_register_contact'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Contact'),
+    '#title' => $t('Contact Name or Position'),
     '#default_value' => isset($data['agov_register_contact']) ? $data['agov_register_contact'] : '',
   );
   $form['agov_register_email'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Email'),
+    '#title' => $t('Contact Email'),
     '#default_value' => isset($data['agov_register_email']) ? $data['agov_register_email'] : '',
   );
-  $form['agov_register_do_not_send'] = array(
+  $form['agov_register_notification'] = array(
     '#type' => 'checkbox',
     '#title' => $t('Do not send aGov news or product update information to the registered address'),
-    '#default_value' => isset($data['agov_register_do_not_send']) ? $data['agov_register_do_not_send'] : '',
-  );
-  $form['agov_register_site_information'] = array(
-    '#type' => 'checkbox',
-    '#title' => $t('Allow this site to send anonymous usage information.'),
-    '#default_value' => isset($data['agov_register_site_information']) ? $data['agov_register_site_information'] : '',
+    '#default_value' => isset($data['agov_register_notification']) ? $data['agov_register_notification'] : '',
   );
   $form['agov_register_id'] = array(
     '#type' => 'hidden',
@@ -77,6 +80,15 @@ function agov_register_form_elements($data = FALSE) {
   );
 
   return $form;
+}
+
+/**
+ * Validate handler.
+ */
+function agov_register_validate(&$form, &$form_state) {
+  if (!valid_email_address($form_state['values']['agov_register_email'])) {
+    form_set_error('agov_register_email', 'Please enter a valid email address.');
+  }
 }
 
 /**
@@ -89,8 +101,7 @@ function agov_register_submit(&$form, &$form_state) {
   $data['agov_register_agency'] = check_plain($form_state['values']['agov_register_agency']);
   $data['agov_register_contact'] = check_plain($form_state['values']['agov_register_contact']);
   $data['agov_register_email'] = check_plain($form_state['values']['agov_register_email']);
-  $data['agov_register_do_not_send'] = check_plain($form_state['values']['agov_register_do_not_send']);
-  $data['agov_register_site_information'] = check_plain($form_state['values']['agov_register_site_information']);
+  $data['agov_register_notification'] = check_plain($form_state['values']['agov_register_notification']);
 
   if (empty($form_state['values']['agov_register_id'])) {
     // Generate a site id.
@@ -109,7 +120,7 @@ function agov_register_submit(&$form, &$form_state) {
   if ($response->code != 200) {
     $data['registered'] = FALSE;
   }
-  
+
   // Save the data.
   variable_set('agov_register_information', $data);
 }
@@ -119,13 +130,7 @@ function agov_register_submit(&$form, &$form_state) {
  */
 function agov_register_post($data) {
   $update_site = variable_get('agov_update_site', 'http://updates.agov.com.au');
-  $query = array(
-    'site' => check_plain($_SERVER['HTTP_HOST']),
-    'ip' => ip_address(),
-    'name' => variable_get('site_name'),
-  );
-  $query = array_merge($query, $data);
-  $query = drupal_http_build_query($query);
+  $query = drupal_http_build_query($data);
   $response = drupal_http_request($update_site . '/update_check?' . $query);
   if ($response->code == 200) {
     $data['registered'] = TRUE;
@@ -158,7 +163,7 @@ function agov_register_cron() {
  *   unique id
  */
 function agov_register_generate_id() {
-  
+
   if (function_exists('uuid_generate')) {
     return uuid_generate();
   }
@@ -168,5 +173,5 @@ function agov_register_generate_id() {
     $string = $site_name . '_' . time() . '_' . $random;
     return md5($string);
   }
-  
+
 }

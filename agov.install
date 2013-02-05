@@ -876,13 +876,27 @@ function agov_install_additional_options() {
     '#type' => 'checkbox', 
     '#title' => st('Register your aGov site'),
   );
-  $form['register'][] = agov_register_form_elements();
+  
+  // Default registration data.
+  $default_data = array(
+    'agov_register_agency' => variable_get('site_name'),
+    'agov_register_email' => variable_get('site_mail'),
+  );
+  $form['register'][] = agov_register_form_elements($default_data);
 
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => st('Continue'),
   );
   return $form;
+}
+
+function agov_install_additional_options_validate(&$form, &$form_state) {
+  if ($form_state['values']['agov_register_confirm']) {
+    if (!valid_email_address($form_state['values']['agov_register_email'])) {
+      form_set_error('agov_register_email', 'Please enter a valid email address.');
+    }
+  }
 }
 
 function agov_install_additional_options_submit(&$form, &$form_state) {
@@ -898,8 +912,7 @@ function agov_install_additional_options_submit(&$form, &$form_state) {
       'agov_register_agency' => check_plain($form_state['values']['agov_register_agency']),
       'agov_register_contact' => check_plain($form_state['values']['agov_register_contact']),
       'agov_register_email' => check_plain($form_state['values']['agov_register_email']),
-      'agov_register_do_not_send' => check_plain($form_state['values']['agov_register_do_not_send']),
-      'agov_register_site_information' => check_plain($form_state['values']['agov_register_site_information']),
+      'agov_register_notification' => check_plain($form_state['values']['agov_register_notification']),
     ); 
     agov_register_post($data);
 
