@@ -10,7 +10,6 @@ dependencies[] = media_internet
 dependencies[] = media_youtube
 dependencies[] = strongarm
 dependencies[] = wysiwyg
-scripts[] = agov_editing.js
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[filter][] = filtered_html
