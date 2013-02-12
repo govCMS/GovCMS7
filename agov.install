@@ -346,7 +346,7 @@ function _agov_default_blocks() {
   agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer_sub_menu');
 
   // Set aGov blocks.
-  agov_core_insert_block('menu', 'menu-header-menu', $themes, 'header_top_menu');
+  agov_core_insert_block('system', 'user-menu', $themes, 'header_top_menu');
   agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header_search');
   agov_core_insert_block('search', 'form', $themes, 'header_search');
   agov_core_insert_block('workbench', 'block', $themes, 'content', -14);

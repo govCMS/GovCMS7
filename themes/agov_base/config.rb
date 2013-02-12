@@ -8,7 +8,12 @@ images_dir = "images"
 javascripts_dir = "js"
 fonts_dir = "fonts"
 
+# Leave this as expanded for now.
 output_style = :expanded
+
+# Uncomment the line below to output debug info your css files.
+# Be sure to re-comment it before commiting.
+# sass_options = {:debug_info => true}
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true

@@ -8,11 +8,13 @@
 
 <div<?php print $attributes; ?>>
   <div<?php print $content_attributes; ?>>
-		<div id="skip-to-content">
-			<a href="#region-content">
-			  <?php print t('Skip to content'); ?>
-			</a>
-		</div>
-    <?php print $content; ?>
+		<ul id="skip-to-content" class="menu">
+			<li>
+				<a href="#region-content">
+				  <?php print t('Skip to content'); ?>
+				</a>
+			</li>
+		</ul>
+		<?php print $content; ?>
   </div>
 </div>

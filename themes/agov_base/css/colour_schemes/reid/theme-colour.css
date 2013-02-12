@@ -52,16 +52,20 @@ input.form-submit:hover {
   background-image: none !important;
 }
 
-#region-header-top-menu .block-menu ul.menu li {
+#region-header-top-menu div.block .content {
+  border-left: 1px solid #5b5b61;
+}
+
+#region-header-top-menu ul.menu li {
   border-left: 1px solid #cccccc;
   border-right: 1px solid #5b5b61;
 }
 
-#region-header-top-menu .block-menu ul.menu li.first {
+#region-header-top-menu ul.menu li.first {
   border-left: 1px solid #cccccc;
 }
 
-#region-header-top-menu .block-menu ul.menu li a,
+#region-header-top-menu ul.menu li a,
 #skip-to-content a {
   color: #c50000;
 }

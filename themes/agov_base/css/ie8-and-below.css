@@ -2,6 +2,19 @@
   width: 90px !important;
 }
 
+#region-header-top-menu .region-inner {
+  float:right;
+}
+
+#region-header-top-menu #skip-to-content,
+#region-header-top-menu #block-system-user-menu {
+  float:left;clear:none;
+}
+
+#region-header-top-menu #skip-to-content {
+  padding-right:6px;
+}
+
 #region-header-search form input.form-submit {
   width: 70px !important;
 }
