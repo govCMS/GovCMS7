@@ -23,11 +23,6 @@ body.toolbar {
   margin-top: 20px;
 }
 
-#region-header-top-menu {
-  float: right;
-  margin: 14px 10px 19px 10px;
-}
-
 #region-header-search {
   float: right;
 }
@@ -91,52 +86,22 @@ body.toolbar {
   padding-top: 27px;
 }
 
-/* Top Menu */
 #region-header-top-menu {
   background: none;
-}
-
-#region-header-top-menu .region-header-top-menu-inner {
+  padding: 0;
   float: right;
-  min-width: 294px;
+  margin: 14px 10px 19px;
+  text-align: right;
 }
-
-#block-menu-menu-top-menu {
-  float: left;
+#region-header-top-menu a {
+  font-size: 13px;
+}
+#region-header-top-menu #skip-to-content, #region-header-top-menu #block-system-user-menu {
+  display: inline-block;
 }
 
 .block-agov-text-resize-text-resize {
   display: block;
-}
-
-#region-header-top-menu .content ul.menu {
-  padding: 0;
-}
-
-#region-header-top-menu .content ul.menu li a {
-  font-weight: normal;
-}
-
-#region-header-top-menu .content ul.menu li a,
-#skip-to-content a {
-  font-size: 13px;
-  font-weight: normal;
-}
-
-#skip-to-content {
-  margin: 0 0 0 17px;
-}
-
-#skip-to-content {
-  padding-right: 10px;
-}
-
-#region-header-top-menu {
-  padding-right: 0;
-}
-
-#region-header-top-menu .content ul.menu li.first {
-  padding-left: 10px;
 }
 
 /*

@@ -59,22 +59,26 @@ input.form-submit:hover {
 }
 
 // Top Menu
-#region-header-top-menu .block-menu ul.menu li {
+#region-header-top-menu div.block .content {
+	border-left: 1px solid $top_menu_border_right;
+}
+
+#region-header-top-menu ul.menu li {
 	border-left: 1px solid $top_menu_border_left;
 	border-right: 1px solid $top_menu_border_right;
 }
 
-#region-header-top-menu .block-menu ul.menu li.first {
+#region-header-top-menu ul.menu li.first {
 	border-left: 1px solid $top_menu_border_left;
 }
 
-#region-header-top-menu .block-menu ul.menu li a,
+#region-header-top-menu ul.menu li a,
 #skip-to-content a {
 	color: $topmenu_link_color;
 }
 
 #skip-to-content {
- border-right: 1px solid $top_menu_border_right;
+	border-right: 1px solid $top_menu_border_right;
 }
 
 #region-header-search form input.form-text {
