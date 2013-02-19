@@ -92,6 +92,7 @@ projects[search404][subdir] = "contrib"
 
 projects[site_map][version] = "1.0"
 projects[site_map][subdir] = "contrib"
+projects[site_map][patch][] = "http://drupal.org/files/accessibility_enhancements-1920722-2.patch"
 
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
