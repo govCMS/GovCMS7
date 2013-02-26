@@ -190,15 +190,22 @@ function wcag_validate_send_html($html, $url) {
 
   $curl_response = curl_exec($curl);
 
-  $report = json_decode($curl_response);
+  if ($curl_response === FALSE || $curl_response == 'false') {
+    watchdog('wcag_validate', "Invalid or no response received from wcag_validate service:<br/><br/>@response", array('@response' => print_r(curl_getinfo($curl), TRUE)), WATCHDOG_ERROR);
+  }
+  else {
+    $report = json_decode($curl_response);
 
-  $report_id = $report->report_id;
+    $report_id = $report->report_id;
 
-  // Log our report id so we can view it later if needed.
-  watchdog('wcag_validate', 'Validation report can be viewed at http://wcag.dev02.previousnext.com.au/view?id=' . $report_id);
+    // Log our report id so we can view it later if needed.
+    watchdog('wcag_validate', 'Validation report can be viewed at ' . wcag_validate_get_config('wcag_validate_server_base') . wcag_validate_get_config('wcag_validate_server_view') . '?id=' . $report_id);
 
-  drupal_goto(wcag_validate_get_config('wcag_validate_server_base') . wcag_validate_get_config('wcag_validate_server_view') . '?id=' . $report_id);
+    drupal_goto(wcag_validate_get_config('wcag_validate_server_base') . wcag_validate_get_config('wcag_validate_server_view') . '?id=' . $report_id);
+  }
+
 }
+
 
 /**
  * Helper function to combine auth and url to redirect to service.
