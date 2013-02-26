@@ -886,7 +886,7 @@ function agov_install_additional_options() {
     'agov_register_agency' => variable_get('site_name'),
     'agov_register_email' => variable_get('site_mail'),
   );
-  $form['register']['fields'][] = agov_register_form_elements($default_data);
+  $form['register']['fields'][] = agov_register_form_elements($default_data, TRUE);
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -928,10 +928,16 @@ function agov_install_additional_options_submit(&$form, &$form_state) {
       'agov_register_email' => check_plain($form_state['values']['agov_register_email']),
       'agov_register_notification' => check_plain($form_state['values']['agov_register_notification']),
     );
-    agov_register_post($data);
+    $registration = agov_register_post($data);
+    if ($registration->code == 200) {
+      drupal_set_message('Thank you, your registration was successful');
+    }
+    else {
+      drupal_set_message('Sorry, your registration failed at this time. We will try again later to register your site. Visit `Configuration > aGov Registration` after installation to check the status.', 'warning');
+    }
 
   }
-
+  return FALSE;
 }
 
 /**
