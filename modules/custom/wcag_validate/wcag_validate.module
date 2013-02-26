@@ -88,18 +88,20 @@ function wcag_validate_block_view($delta = '') {
         return;
       }
 
-      $block['content'] = array(
-        '#theme' => 'wcag_validate_button',
-        '#title' => t('Validate This Page'),
-        '#attached' => array(
-          'js' => array(
-            drupal_get_path('module', 'wcag_validate') . '/js/wcag_validate.js' => array('scope' => 'footer'),
+      if (variable_get('wcag_validate_connection_status') == 'success') {
+        $block['content'] = array(
+          '#theme' => 'wcag_validate_button',
+          '#title' => t('Validate This Page'),
+          '#attached' => array(
+            'js' => array(
+              drupal_get_path('module', 'wcag_validate') . '/js/wcag_validate.js' => array('scope' => 'footer'),
+            ),
+            'css' => array(
+              drupal_get_path('module', 'wcag_validate') . '/css/wcag_validate.css',
+            ),
           ),
-          'css' => array(
-            drupal_get_path('module', 'wcag_validate') . '/css/wcag_validate.css',
-          ),
-        ),
-      );
+        );
+      }
       break;
   }
 
