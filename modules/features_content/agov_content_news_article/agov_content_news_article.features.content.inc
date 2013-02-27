@@ -18,7 +18,7 @@ function agov_content_news_article_content_defaults() {
     'sticky' => '0',
     'type' => 'news_article',
     'language' => 'und',
-    'created' => '1345171599',
+    'created' => time() - (1 * 24 * 60 * 60),
     'comment' => '0',
     'translate' => '0',
     'machine_name' => 'agov_news_article_1',
@@ -49,7 +49,7 @@ function agov_content_news_article_content_defaults() {
     'field_news_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2012-05-17 02:45:00',
+          'value' => date('Y-m-d H:i:s', time() - (1 * 24 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',
@@ -76,7 +76,7 @@ function agov_content_news_article_content_defaults() {
     'sticky' => '0',
     'type' => 'news_article',
     'language' => 'und',
-    'created' => '1345171775',
+    'created' => time() - (4 * 24 * 60 * 60),
     'comment' => '0',
     'translate' => '0',
     'machine_name' => 'agov_news_article_2',
@@ -107,7 +107,7 @@ function agov_content_news_article_content_defaults() {
     'field_news_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2012-08-17 02:45:00',
+          'value' => date('Y-m-d H:i:s', time() - (4 * 24 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',
@@ -124,7 +124,7 @@ function agov_content_news_article_content_defaults() {
     'sticky' => '0',
     'type' => 'news_article',
     'language' => 'und',
-    'created' => '1345171477',
+    'created' => time() - (90 * 24 * 60 * 60),
     'comment' => '0',
     'translate' => '0',
     'machine_name' => 'agov_news_article_3',
@@ -153,7 +153,7 @@ function agov_content_news_article_content_defaults() {
     'field_news_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2011-08-17 02:45:00',
+          'value' => date('Y-m-d H:i:s', time() - (7 * 30 * 24 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',

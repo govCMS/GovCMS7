@@ -18,7 +18,7 @@ function agov_content_event_content_defaults() {
     'sticky' => '0',
     'type' => 'event',
     'language' => 'und',
-    'created' => '1345852488',
+    'created' => time() + (1 * 24 * 60 * 60),
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_event_1',
@@ -60,8 +60,8 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     'field_event_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2013-02-21 14:00:00',
-          'value2' => '2013-02-21 16:15:00',
+          'value' => date('Y-m-d H:i:s', time() + (1 * 10 * 60 * 60)),
+          'value2' => date('Y-m-d H:i:s', time() + (1 * 8 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',
@@ -120,7 +120,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     'sticky' => '0',
     'type' => 'event',
     'language' => 'und',
-    'created' => '1345371296',
+    'created' => time() - (7 * 24 * 60 * 60),
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_event_2',
@@ -164,8 +164,8 @@ Julius Caesar',
     'field_event_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2012-12-22 09:45:00',
-          'value2' => '2012-12-23 09:45:00',
+          'value' => date('Y-m-d H:i:s', time() + (7 * 24 * 60 * 60)),
+          'value2' => date('Y-m-d H:i:s', time() + (7 * 22 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',
@@ -221,7 +221,7 @@ Julius Caesar',
     'sticky' => '0',
     'type' => 'event',
     'language' => 'und',
-    'created' => '1345177795',
+    'created' => time() - (14 * 24 * 60 * 60),
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_event_3',
@@ -263,8 +263,8 @@ Julius Caesar',
     'field_event_date' => array(
       'und' => array(
         0 => array(
-          'value' => '2012-12-25 04:30:00',
-          'value2' => '2012-12-25 04:30:00',
+          'value' => date('Y-m-d H:i:s', time() + (14 * 17 * 60 * 60)),
+          'value2' => date('Y-m-d H:i:s', time() + (14 * 15 * 60 * 60)),
           'timezone' => 'Australia/Sydney',
           'timezone_db' => 'UTC',
           'date_type' => 'datetime',
