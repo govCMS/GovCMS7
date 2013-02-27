@@ -288,3 +288,4 @@ function agov_core_entity_info_alter(&$entity_info) {
     'custom settings' => TRUE,
   );
 }
+
