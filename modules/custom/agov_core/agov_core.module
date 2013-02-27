@@ -241,17 +241,6 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
 }
 
 /**
- * Implements hook_block_info_alter().
- */
-function agov_core_block_info_alter(&$blocks, $theme, $code_blocks) {
-  // Ensure the block exists.
-  if (!empty($blocks['wcag_validate']['wcag_validate'])) {
-    $blocks['wcag_validate']['wcag_validate']['visibility'] = BLOCK_VISIBILITY_LISTED;
-    $blocks['wcag_validate']['wcag_validate']['pages'] = "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*";
-  }
-}
-
-/**
  * Implements hook_block_info().
  */
 function agov_core_block_info() {
