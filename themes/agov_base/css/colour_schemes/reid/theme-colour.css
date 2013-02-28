@@ -65,8 +65,7 @@ input.form-submit:hover {
   border-left: 1px solid #cccccc;
 }
 
-#region-header-top-menu ul.menu li a,
-#skip-to-content a {
+#zone-header a {
   color: #c50000;
 }
 
