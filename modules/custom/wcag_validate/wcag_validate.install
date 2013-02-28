@@ -17,7 +17,7 @@ function wcag_validate_install() {
     'status' => 1,
     'weight' => 24,
     'region' => 'content',
-    'pages' => '',
+    'pages' => 'node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*',
     'cache' => -1,
   );
 
