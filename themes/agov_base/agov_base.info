@@ -44,6 +44,7 @@ stylesheets[only screen and (-webkit-min-device-pixel-ratio: 2)][] = css/retina.
 scripts[] = js/jquery.smartresize.js
 scripts[] = js/modernizr.min.js
 scripts[] = js/responsive.js
+scripts[] = js/respond.min.js
 scripts[] = js/common.js
 scripts[] = js/jquery.jumpMenu.js
 

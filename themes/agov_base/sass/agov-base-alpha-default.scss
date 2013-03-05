@@ -45,21 +45,23 @@ body.toolbar {
 }
 
 /* Search */
-
 #region-header-search {
-	margin-left: 10px;
-	margin-right: 10px;
-	text-align: right;
-	clear: right;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: right;
+  clear: right;
+  width: 366px;
 }
 
 #block-search-form {
-	display: inline-block;
+	display: block;
+	float: right;
 }
 
 #region-header-search .block-agov-text-resize-text-resize {
-	display: inline-block;
+	display: block;
 	width: 95px;
+	float: left;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons ul {
@@ -92,8 +94,12 @@ body.toolbar {
 	float:right;
 	margin:14px 10px 19px;
 	text-align:right;
+	width: auto;
 
-	#skip-to-content,#block-system-user-menu {display:inline-block;}
+	#skip-to-content,#block-system-user-menu {
+	  float: left; 
+    display: block;  
+	}
 }
 
 .block-agov-text-resize-text-resize {

@@ -170,6 +170,9 @@ body.large-fonts {
  h3 { @include h3; }
  $base-font-size: $original-base-font-size;
  #region-header-search form input.form-submit { width: 80px; }
+ #region-header-search {
+   width: 376px;
+ }
 }
 
 ul.links li {

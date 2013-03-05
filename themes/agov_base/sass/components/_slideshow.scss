@@ -21,11 +21,16 @@
   
   .view-slideshow {
     position:relative;
+    overflow: hidden;
+    height: 200px;
+    width: 960px;
   }
   
   .views-row {
     display:none; // Hide all slide's initially.
     position: absolute;
+    width: 720px;
+    padding-right: $indent-amount*2;
   }
   
   .views-row-first {
@@ -55,7 +60,6 @@
   }
   
   
-  @include breakpoint(730px) {
     
     .view-slideshow { height: 475px; }
     
@@ -76,13 +80,15 @@
       @include box-sizing(border-box);
     }
 
-    
-  }
   
   @include breakpoint(980px) {
   
     .view-slideshow {
        height: 280px;
+     }
+     
+     .views-row {
+       width: auto;
      }
 
      .views-field-field-slide-image {

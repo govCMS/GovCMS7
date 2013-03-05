@@ -2,6 +2,9 @@
   width: 90px !important;
 }
 
+
+body.large-fonts #region-header-search form input.form-submit { width: 100px; }
+
 #region-header-top-menu .region-inner {
   float:right;
 }

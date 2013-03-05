@@ -743,10 +743,15 @@ table {
 }
 #block-views-slideshow-block .view-slideshow {
   position: relative;
+  overflow: hidden;
+  height: 200px;
+  width: 960px;
 }
 #block-views-slideshow-block .views-row {
   display: none;
   position: absolute;
+  width: 720px;
+  padding-right: 20px;
 }
 #block-views-slideshow-block .views-row-first {
   display: block;
@@ -770,36 +775,37 @@ table {
 #block-views-slideshow-block .views-field-body p {
   margin: 0.69231em 0;
 }
-@media (min-width: 730px) {
-  #block-views-slideshow-block .view-slideshow {
-    height: 475px;
-  }
-  #block-views-slideshow-block #block-slideshow-block {
-    height: 200px;
-  }
-  #block-views-slideshow-block .views-field-field-slide-image {
-    width: 720px;
-    height: 315px;
-  }
-  #block-views-slideshow-block .views-field-field-slide-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  #block-views-slideshow-block .views-field-title,
-  #block-views-slideshow-block .views-field-body,
-  #block-views-slideshow-block .views-field-field-read-more {
-    float: none;
-    width: 100%;
-    padding: 0 20px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+#block-views-slideshow-block .view-slideshow {
+  height: 475px;
+}
+#block-views-slideshow-block #block-slideshow-block {
+  height: 200px;
+}
+#block-views-slideshow-block .views-field-field-slide-image {
+  width: 720px;
+  height: 315px;
+}
+#block-views-slideshow-block .views-field-field-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#block-views-slideshow-block .views-field-title,
+#block-views-slideshow-block .views-field-body,
+#block-views-slideshow-block .views-field-field-read-more {
+  float: none;
+  width: 100%;
+  padding: 0 20px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 @media (min-width: 980px) {
   #block-views-slideshow-block .view-slideshow {
     height: 280px;
+  }
+  #block-views-slideshow-block .views-row {
+    width: auto;
   }
   #block-views-slideshow-block .views-field-field-slide-image {
     float: left;
@@ -1038,6 +1044,9 @@ body.large-fonts h3 {
 }
 body.large-fonts #region-header-search form input.form-submit {
   width: 80px;
+}
+body.large-fonts #region-header-search {
+  width: 376px;
 }
 
 ul.links li {
