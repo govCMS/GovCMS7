@@ -28,3 +28,7 @@ color_output = false
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
 preferred_syntax = :scss
+
+
+# Require any additional compass plugins installed on your system.
+require 'breakpoint'
