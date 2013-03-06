@@ -81,7 +81,7 @@
     }
 
   
-  @include breakpoint(980px) {
+  @include breakpoint(980px, $no-query: '.lt-ie9') {
   
     .view-slideshow {
        height: 280px;
@@ -145,13 +145,13 @@
         }
       }
     }
-    @include breakpoint(740px) {  
+    @include breakpoint(740px, $no-query: '.lt-ie9') {  
        bottom:inherit;
        left:inherit;
        top: 268px;
        right: 20px;
     }
-    @include breakpoint(980px) { 
+    @include breakpoint(980px, $no-query: '.lt-ie9') { 
       top:inherit;
       left:inherit;
       bottom: 20px;

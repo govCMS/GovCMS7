@@ -79,7 +79,7 @@
  }
  ul.menu {
  	display: none;
- 	@include breakpoint(740px) {
+ 	@include breakpoint(740px, $no-query: '.lt-ie9') {
  	  display: block;
 	}
 	
@@ -155,8 +155,8 @@
 	@include reset-baseline();
 	font-weight: bold;
 	margin: 6px 0 0 10px;
-	@include breakpoint(740px) {
-	  display: none;
+	@include breakpoint(740px, $no-query: '.lt-ie9') {
+	  display: none; // This is a test
  }
 }
 
