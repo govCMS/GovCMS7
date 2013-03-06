@@ -54,6 +54,7 @@ input.form-submit:hover {
 
 #region-header-top-menu div.block .content {
   border-left: 1px solid #5b5b61;
+  overflow: hidden;
 }
 
 #region-header-top-menu ul.menu li {
@@ -65,8 +66,7 @@ input.form-submit:hover {
   border-left: 1px solid #27272d;
 }
 
-#region-header-top-menu ul.menu li a,
-#skip-to-content a {
+#zone-header a {
   color: white;
 }
 

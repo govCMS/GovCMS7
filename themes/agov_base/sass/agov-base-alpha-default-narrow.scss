@@ -11,41 +11,6 @@
 // apply to the normal and widescreen layouts. You may override these styles in the normal 
 // and widescreen CSS files as appropriate.
 
-
-// Slideshow 
-///////////////////////////////////////////////////////////////////////////////
-// Provides layout specific code to render slideshow in normal layout.
-
-#block-views-slideshow-block {
-
-  .view-slideshow {
-    height: 475px;
-  }
-
-  .views-field-field-slide-image {
-    width: 720px;
-    height: 315px;
-    img {display:block;width:100%;height:100%;}
-  }
-
-  .views-field-title,
-  .views-field-body,
-  .views-field-field-read-more {
-    float:none;
-    width:100%;
-  }
-
-  // Pager position
-  #featured-article-pager {
-    bottom:inherit;
-    left:inherit;
-    top: 268px;
-    right: 20px;
-  }
-
-}
-
-
 #block-agov-twitter-feed #tweets ul li .tweet_text {
   width: 140px;
 }
@@ -55,24 +20,10 @@
   width: 119px;
 }
 
-/* Regions */
-
-#region-feature-articles {
-  width: 720px;
-}
-
-#region-footer-feature,
-#region-footer-menu {
-  margin-left: 0;
-  margin-right: 0;
-  width: 720px;
-}
 
 /* Search Form */
 
 #region-header-search {
-	margin-left: 10px;
-	margin-right: 10px;
 }
 
 #region-header-search form {
@@ -84,7 +35,6 @@
 	height: 25px;
 	border: 1px solid #FFF;
 	float: left;
-	font-size: 13px;
 	padding: 0 9px;
 	margin-top: 0;
 }
@@ -97,7 +47,6 @@
 	cursor: pointer;
 	color: #FFF;
 	font-weight: bold;
-	font-size: 13px;
 	text-align: center;
 	margin-top: 0;
 	text-indent: 0;
@@ -123,10 +72,6 @@
 
 /* Footer Bottom */
 
-#zone-footer-copyright {
-	padding: 10px 0;
-}
-
 #zone-footer-copyright div.region {
 	width: 720px;
 }
@@ -135,17 +80,6 @@
 
 #region-footer-sub-menu ul {
 	text-align: center;
-	margin-bottom: 5px;
-}
-
-/* Copywright */
-
-#region-footer-copyright {
-	text-align: center;
-}
-
-#region-footer-copyright p {
-	margin-bottom: 0;
 }
 
 .node-event .field-name-field-tags {
@@ -156,10 +90,6 @@
   margin-left: 50px;
 }
 
-#section-content,
-#section-footer {
-  background: url('../images/shadow-bg-720.png') top center repeat-y;
-}
 
 #region-feature-articles {
   border-top: 10px solid #FFF;
@@ -188,15 +118,3 @@ body.page-search #section-content #search-form #edit-basic {
   height: 102px;
 }
 
-#region-header-main-menu {
-  width: 720px;
-  margin: 0;
-}
-
-#region-header-main-menu .menu li {
-  margin: 0;
-}
-
-#region-header-main-menu .block-superfish {
-  margin-top: 8px;
-}
