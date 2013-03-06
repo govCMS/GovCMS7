@@ -998,10 +998,6 @@ table {
 }
 
 /* Global / Overwrites */
-* {
-  -webkit-text-size-adjust: none;
-}
-
 body.toolbar {
   background-image: url("../images/background.png");
   background-repeat: repeat-x;
@@ -1548,7 +1544,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-item {
 
 body.page-user #region-content #block-system-main .block-inner form .form-item label {
   font-weight: bold;
-  line-height: 30px;
   float: none !important;
 }
 
