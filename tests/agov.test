@@ -58,7 +58,6 @@ class AgovTest extends AgovTestBase {
     $this->assertRaw('Contact', 'Found Contact.');
 
   }
-  
 
   /**
    * Test posting content.
@@ -167,6 +166,40 @@ class AgovTest extends AgovTestBase {
       $this->assertNotEqual($node, FALSE, 'Found node in database.');
 
     }
+  }
+
+  /**
+   * Tests to ensure relevant date widgets are available.
+   */
+  public function testDateWidget() {
+
+    // Cant use drupalLogin() as this only returns true if "Log out" is found.
+    $name = $this->testUser->name;
+    $pass = $this->testUser->pass_raw;
+    $this->drupalPost('user', array('name' => $name, 'pass' => $pass), t('Log in'));
+
+    // Events.
+    $this->drupalGet('node/add/event');
+    $this->assertFieldById('edit-field-event-date-und-0-value-day', date('d'));
+    $this->assertFieldById('edit-field-event-date-und-0-value-month', date('m'));
+    $this->assertFieldById('edit-field-event-date-und-0-value-year', date('Y'));
+
+    $this->assertFieldById('edit-field-event-date-und-0-value2-day', date('d'));
+    $this->assertFieldById('edit-field-event-date-und-0-value2-month', date('m'));
+    $this->assertFieldById('edit-field-event-date-und-0-value2-year', date('Y'));
+
+    // News Article.
+    $this->drupalGet('node/add/news-article');
+    $this->assertFieldById('edit-field-news-date-und-0-value-day', date('d'));
+    $this->assertFieldById('edit-field-news-date-und-0-value-month', date('m'));
+    $this->assertFieldById('edit-field-news-date-und-0-value-year', date('Y'));
+
+    // Publications.
+    $this->drupalGet('node/add/publication');
+    $this->assertFieldById('edit-field-date-und-0-value-day', date('d'));
+    $this->assertFieldById('edit-field-date-und-0-value-month', date('m'));
+    $this->assertFieldById('edit-field-date-und-0-value-year', date('Y'));
+
   }
 
 }
