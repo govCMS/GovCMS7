@@ -2,22 +2,19 @@
   width: 90px !important;
 }
 
-body.large-fonts #region-header-search form input.form-submit {
-  padding-left: 8px;
-}
+body.large-fonts #region-header-search form input.form-submit { padding-left: 8px; }
 
 #region-header-top-menu .region-inner {
-  float: right;
+  float:right;
 }
 
 #region-header-top-menu #skip-to-content,
 #region-header-top-menu #block-system-user-menu {
-  float: left;
-  clear: none;
+  float:left;clear:none;
 }
 
 #region-header-top-menu #skip-to-content {
-  padding-right: 6px;
+  padding-right:6px;
 }
 
 #region-header-search form input.form-submit {

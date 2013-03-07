@@ -23,6 +23,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 // First, lets import all our global styles, compass plugins, base partials, etc.
 
+
+$breakpoint-no-queries: false;
+$breakpoint-no-query-wrappers: true;
+
 // Base partials
 @import "base";
 
@@ -55,11 +59,11 @@
 #section-content,
 #section-footer {
   background-color: white;
-  @include breakpoint(740px) { 
+  @include breakpoint(740px, $no-query: '.lt-ie9') { 
     background: url('../images/shadow-bg-720.png') top center repeat-y;
     background-color: transparent;
   }
-  @include breakpoint(980px) { 
+  @include breakpoint(980px, $no-query: '.lt-ie9') { 
     background: url('../images/shadow-bg.png') top center repeat-y;
   }
 }
@@ -270,12 +274,14 @@ input.form-submit {
 	position: absolute;
   right: 10px;
   margin-top: 22px;
-	@include breakpoint(740px) {
+  @include breakpoint(740px, $no-query: '.lt-ie9') {
   	position: relative;
   	margin-left: 0;
   	margin-right: $indent-amount;
-  	margin-top: 26px;
   	float: right;
+  }
+  @include breakpoint(740px) {
+  	margin-top: 26px;
   }
 }
 
@@ -931,15 +937,19 @@ body.page-search #section-content #region-content .content ul li {
 
 #region-footer-feature .views-row {
 	padding: $base-line-height 0px;
-	@include breakpoint(740px) { 
+	@include breakpoint(740px, $no-query: '.lt-ie9') { 
   	float: none;
   	@include box-sizing(border-box);
-  	width: 32% !important;
+  	width: 32%;
   	margin: 0px;
   	margin-right: 2%;
+  	float: left;
   	&.views-row-last { margin-right: 0px; }
   }
+  overflow: hidden;
+  display: block;
 }
+
 
 #region-footer-feature .block h2 {
 	display: none;
@@ -1065,7 +1075,7 @@ body.page-search #section-content #region-content .content ul li {
 	text-align: center;
 	margin: 0 0 rhythm(.75) 0;
 	text-align: center;
-	@include breakpoint(980px) { 
+	@include breakpoint(980px, $no-query: '.lt-ie9') { 
 	  text-align: right;
 	  margin: rhythm(.75) 0;
   }

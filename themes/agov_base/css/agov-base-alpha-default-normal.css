@@ -109,17 +109,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 /* Footer Feature/Teasers */
-#region-footer-feature .views-row {
-  width: 300px;
-}
-
-#region-footer-feature .views-row-first {
-  margin-left: 0;
-}
-
-#region-footer-feature .views-row:nth-child(3n+3) {
-  margin-right: 0;
-}
 
 #region-footer-feature .block .content h2,
 #region-footer-feature .views-row .field-name-field-description {

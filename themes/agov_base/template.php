@@ -32,7 +32,27 @@ function agov_base_preprocess_html(&$vars) {
     drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
   }
 
+  // Attributes for html element.
+  $vars['html_attributes_array'] = array(
+    'lang' => $vars['language']->language,
+    'dir' => $vars['language']->dir,
+  );
+
 }
+
+/**
+ * Override or insert variables into the html templates.
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("html" in this case.)
+ */
+function agov_base_process_html(&$vars, $hook) {
+  // Flatten out html_attributes.
+  $vars['html_attributes'] = drupal_attributes($vars['html_attributes_array']);
+}
+
 
 /**
  * Implements hook_preprocess_node().
