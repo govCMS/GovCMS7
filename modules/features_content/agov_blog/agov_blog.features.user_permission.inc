@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_blog_user_default_permissions() {
+function agov_blog_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: create blog_article content.
@@ -25,15 +25,8 @@ function agov_blog_user_default_permissions() {
   $permissions['delete any blog_article content'] = array(
     'name' => 'delete any blog_article content',
     'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: delete own blog_article content.
-  $permissions['delete own blog_article content'] = array(
-    'name' => 'delete own blog_article content',
-    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -42,17 +35,6 @@ function agov_blog_user_default_permissions() {
   // Exported permission: edit any blog_article content.
   $permissions['edit any blog_article content'] = array(
     'name' => 'edit any blog_article content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: edit own blog_article content.
-  $permissions['edit own blog_article content'] = array(
-    'name' => 'edit own blog_article content',
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',

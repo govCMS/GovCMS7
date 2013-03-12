@@ -11,6 +11,7 @@ dependencies[] = ds
 dependencies[] = features
 dependencies[] = link
 dependencies[] = media
+dependencies[] = node
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = views

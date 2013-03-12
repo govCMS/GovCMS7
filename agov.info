@@ -49,6 +49,7 @@ dependencies[] = captcha
 dependencies[] = chosen
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = defaultconfig
 dependencies[] = defaultcontent
 dependencies[] = draggableviews
 dependencies[] = ds

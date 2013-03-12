@@ -55,6 +55,7 @@ function agov_slideshow_content_defaults() {
           'filesize' => '999455',
           'status' => '1',
           'type' => 'image',
+          'uuid' => 'b4c4a8db-d5ac-47cb-9908-ec0f09fce864',
           'metatags' => array(),
           'rdf_mapping' => array(),
           'image_dimensions' => array(
@@ -113,6 +114,7 @@ function agov_slideshow_content_defaults() {
           'filesize' => '486272',
           'status' => '1',
           'type' => 'image',
+          'uuid' => '3ed4f22a-a40c-4ef9-8b02-fbacf19748fd',
           'metatags' => array(),
           'rdf_mapping' => array(),
           'image_dimensions' => array(
@@ -170,6 +172,7 @@ function agov_slideshow_content_defaults() {
           'filesize' => '662642',
           'status' => '1',
           'type' => 'image',
+          'uuid' => 'b1c464ff-218b-4616-9c0a-616cd355c4fb',
           'metatags' => array(),
           'rdf_mapping' => array(),
           'image_dimensions' => array(
