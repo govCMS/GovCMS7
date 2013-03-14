@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_permissions_user_default_permissions() {
+function agov_permissions_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: access comments.
@@ -400,86 +400,9 @@ function agov_permissions_user_default_permissions() {
     'module' => 'bean',
   );
 
-  // Exported permission: view any unpublished blog_article content.
-  $permissions['view any unpublished blog_article content'] = array(
-    'name' => 'view any unpublished blog_article content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
   // Exported permission: view any unpublished content.
   $permissions['view any unpublished content'] = array(
     'name' => 'view any unpublished content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished event content.
-  $permissions['view any unpublished event content'] = array(
-    'name' => 'view any unpublished event content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished footer_teaser content.
-  $permissions['view any unpublished footer_teaser content'] = array(
-    'name' => 'view any unpublished footer_teaser content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished media_release content.
-  $permissions['view any unpublished media_release content'] = array(
-    'name' => 'view any unpublished media_release content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished news_article content.
-  $permissions['view any unpublished news_article content'] = array(
-    'name' => 'view any unpublished news_article content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished page content.
-  $permissions['view any unpublished page content'] = array(
-    'name' => 'view any unpublished page content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view any unpublished publication content.
-  $permissions['view any unpublished publication content'] = array(
-    'name' => 'view any unpublished publication content',
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
@@ -551,6 +474,85 @@ function agov_permissions_user_default_permissions() {
     ),
     'module' => 'system',
   );
+
+
+  // Create webform content.
+  $permissions['create webform content'] = array(
+    'name' => 'create webform content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+  
+  // Edit any webform content.
+  $permissions['edit any webform content'] = array(
+    'name' => 'edit any webform content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+  
+  // Delete any webform content.
+  $permissions['delete any webform content'] = array(
+    'name' => 'delete any webform content',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+  
+  // Exported permission: access all webform results.
+  $permissions['access all webform results'] = array(
+    'name' => 'access all webform results',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+
+  // Exported permission: edit own webform submissions.
+  $permissions['edit own webform submissions'] = array(
+    'name' => 'edit own webform submissions',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+
+  // Exported permission: delete own webform submissions.
+  $permissions['delete own webform submissions'] = array(
+    'name' => 'delete own webform submissions',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'webform',
+  );
+  
+  // Edit meta tags.
+  $permissions['edit meta tags'] = array(
+    'name' => 'edit meta tags',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'metatag',
+  );
+  
 
   return $permissions;
 }

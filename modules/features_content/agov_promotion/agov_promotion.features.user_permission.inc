@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_promotion_user_default_permissions() {
+function agov_promotion_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: create footer_teaser content.
@@ -25,15 +25,8 @@ function agov_promotion_user_default_permissions() {
   $permissions['delete any footer_teaser content'] = array(
     'name' => 'delete any footer_teaser content',
     'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: delete own footer_teaser content.
-  $permissions['delete own footer_teaser content'] = array(
-    'name' => 'delete own footer_teaser content',
-    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -42,17 +35,6 @@ function agov_promotion_user_default_permissions() {
   // Exported permission: edit any footer_teaser content.
   $permissions['edit any footer_teaser content'] = array(
     'name' => 'edit any footer_teaser content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: edit own footer_teaser content.
-  $permissions['edit own footer_teaser content'] = array(
-    'name' => 'edit own footer_teaser content',
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',

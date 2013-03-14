@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_contact_user_default_permissions() {
+function agov_contact_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: access site-wide contact form.
@@ -26,6 +26,8 @@ function agov_contact_user_default_permissions() {
     'name' => 'access user contact forms',
     'roles' => array(
       'administrator' => 'administrator',
+      'anonymous user' => 'anonymous user',
+      'administrator' => 'administrator',
     ),
     'module' => 'contact',
   );
@@ -33,7 +35,7 @@ function agov_contact_user_default_permissions() {
   // Exported permission: administer contact forms.
   $permissions['administer contact forms'] = array(
     'name' => 'administer contact forms',
-    'roles' => array(
+    'roles' => array(      
       'administrator' => 'administrator',
     ),
     'module' => 'contact',

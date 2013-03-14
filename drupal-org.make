@@ -131,6 +131,10 @@ projects[ctools][version] = "1.2"
 projects[ctools][subdir] = "contrib"
 projects[ctools][patch][] = "http://drupal.org/files/ctools-fix-warning-message-1739718-32.patch"
 
+projects[defaultconfig][version] = "1.0-alpha9"
+projects[defaultconfig][subdir] = "contrib"
+projects[defaultconfig][patch][] = "http://drupal.org/files/1940366-1-illegal-offset-warning.patch"
+
 projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
