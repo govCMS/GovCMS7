@@ -1071,7 +1071,7 @@ function agov_cleanup() {
 
   agov_rebuild_sitemap();
 
-  // rebuild default config (permissions)
+  // Rebuild default config (permissions).
   defaultconfig_rebuild_all();
 
   // Required by view_unpublished module.
