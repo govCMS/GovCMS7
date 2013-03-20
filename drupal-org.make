@@ -35,7 +35,7 @@ projects[ds][subdir] = "contrib"
 projects[entity][version] = "1.0"
 projects[entity][subdir] = "contrib"
 
-projects[file_entity][version] = "2.0-unstable6"
+projects[file_entity][version] = "2.0-unstable7"
 projects[file_entity][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
