@@ -8,7 +8,7 @@ api = 2
 projects[bean][version] = "1.1"
 projects[bean][subdir] = "contrib"
 
-projects[bean_panels][version] = "1.2"
+projects[bean_panels][version] = "1.3"
 projects[bean_panels][subdir] = "contrib"
 
 projects[captcha][version] = "1.0-beta2"
