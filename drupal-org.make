@@ -11,9 +11,6 @@ projects[bean][subdir] = "contrib"
 projects[bean_panels][version] = "1.3"
 projects[bean_panels][subdir] = "contrib"
 
-projects[captcha][version] = "1.0-beta2"
-projects[captcha][subdir] = "contrib"
-
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
@@ -40,6 +37,9 @@ projects[file_entity][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
+
+projects[honeypot][version] = "1.14"
+projects[honeypot][subdir] = "contrib"
 
 projects[libraries][version] = "2.1"
 projects[libraries][subdir] = "contrib"

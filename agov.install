@@ -70,6 +70,7 @@ function agov_install() {
   ->condition('cid', 1)
   ->execute();
 
+
   // @todo Image styles not being applied to beans on install. Needs manual
   // revert.
   cache_clear_all();
@@ -401,6 +402,12 @@ function _agov_default_variables() {
     'user_register' => USER_REGISTER_ADMINISTRATORS_ONLY,
     'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
     'node_admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
+
+    // Turn on honeypot protection for all forms.
+    'honeypot_protect_all_forms' => 1,
+    // Don't disable page caching.
+    'honeypot_time_limit' => "0",
+
   );
 
   foreach ($variables as $key => $value) {
