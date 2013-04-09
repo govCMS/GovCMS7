@@ -1541,6 +1541,10 @@ th.tabledrag-hide { display: none !important; }
 }
 
 /**
- * Node Page Content
- * Styling for content area of node page
+ * Sitemap
  */
+.feed-link {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
