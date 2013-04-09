@@ -60,21 +60,11 @@ function agov_install() {
   // Set the password policy.
   _agov_password_policy();
 
-  // Rebuild the sitemap now we have a menu.
-  agov_rebuild_sitemap();
+  // Set defaults for the contact form.
+  _agov_contact_form_defaults();
 
-  // Set default recipient for contact form.
-  db_update('contact')->fields(
-    array('recipients' => variable_get('site_mail', 'admin@example.com'))
-  )
-  ->condition('cid', 1)
-  ->execute();
-
-
-  // @todo Image styles not being applied to beans on install. Needs manual
-  // revert.
-  cache_clear_all();
-  features_revert(array('agov_beans' => array('field')));
+  // Clean up after install.
+  agov_cleanup();
 }
 
 /**
@@ -1087,6 +1077,14 @@ function agov_cleanup() {
   // Required by view_unpublished module.
   node_access_rebuild();
 
+  cache_clear_all();
+
+  // @todo Image styles not being applied to beans on install.
+  features_revert(array('agov_beans' => array('field')));
+
+  // @todo Wysiwyg profiles not being applied on install.
+  features_revert(array('agov_editing' => array('wysiwyg')));
+
 }
 
 /**
@@ -1166,4 +1164,17 @@ function _agov_password_policy() {
   }
   $query->execute();
 
+}
+
+/**
+ * Set defaults for contact form.
+ */
+function _agov_contact_form_defaults() {
+
+  // Set default recipient for contact form.
+  db_update('contact')->fields(
+    array('recipients' => variable_get('site_mail', 'admin@example.com'))
+  )
+    ->condition('cid', 1)
+    ->execute();
 }

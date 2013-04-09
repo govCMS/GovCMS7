@@ -44,7 +44,7 @@ projects[honeypot][subdir] = "contrib"
 projects[libraries][version] = "2.1"
 projects[libraries][subdir] = "contrib"
 
-projects[link][version] = "1.0"
+projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
 projects[media_vimeo][version] = "1.0-beta5"
@@ -116,9 +116,6 @@ projects[webform][subdir] = "contrib"
 projects[workbench][version] = "1.1"
 projects[workbench][subdir] = "contrib"
 
-projects[wysiwyg][version] = "2.2"
-projects[wysiwyg][subdir] = "contrib"
-
 projects[xmlsitemap][version] = "2.0-rc1"
 projects[xmlsitemap][subdir] = "contrib"
 
@@ -159,6 +156,10 @@ projects[uuid][subdir] = "contrib"
 projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"
+
+projects[wysiwyg][version] = "2.2"
+projects[wysiwyg][subdir] = "contrib"
+projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
 
 ; Included, but disabled modules
 
