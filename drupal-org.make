@@ -44,7 +44,7 @@ projects[google_analytics][subdir] = "contrib"
 projects[libraries][version] = "2.1"
 projects[libraries][subdir] = "contrib"
 
-projects[link][version] = "1.0"
+projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
 projects[media_vimeo][version] = "1.0-beta5"
