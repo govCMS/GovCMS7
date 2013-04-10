@@ -26,10 +26,10 @@ function agov_base_preprocess_html(&$vars) {
   $colour_toggle = theme_get_setting('colour_toggle');
   if ($colour_toggle == '1') {
     $colour_scheme = theme_get_setting('colour_scheme');
-    drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+    drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'screen', 'group' => CSS_THEME,));
   }
   else {
-    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'screen', 'group' => CSS_THEME,));
   }
 
   // Attributes for html element.
