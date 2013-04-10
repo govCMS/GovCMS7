@@ -107,7 +107,7 @@ projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = "3.5"
+projects[views][version] = "3.6"
 projects[views][subdir] = "contrib"
 
 projects[webform][version] = "3.18"
@@ -121,9 +121,8 @@ projects[xmlsitemap][subdir] = "contrib"
 
 ; Patched modules
 
-projects[ctools][version] = "1.2"
+projects[ctools][version] = "1.3"
 projects[ctools][subdir] = "contrib"
-projects[ctools][patch][] = "http://drupal.org/files/ctools-fix-warning-message-1739718-32.patch"
 
 projects[defaultconfig][version] = "1.0-alpha9"
 projects[defaultconfig][subdir] = "contrib"
@@ -166,7 +165,7 @@ projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-afte
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.0"
+projects[password_policy][version] = "1.3"
 projects[password_policy][subdir] = "contrib"
 
 projects[securepages][version] = "1.0-beta1"
