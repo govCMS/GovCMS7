@@ -258,6 +258,12 @@ function _agov_default_formats_and_permissions() {
       'search publication content',
     )
   );
+  user_role_revoke_permissions(
+    DRUPAL_ANONYMOUS_RID,
+    array(
+      'search all content'
+    )
+  );
   user_role_grant_permissions(
     DRUPAL_AUTHENTICATED_RID,
     array(
@@ -272,6 +278,12 @@ function _agov_default_formats_and_permissions() {
       'search media_release content',
       'search news_article content',
       'search publication content',
+    )
+  );
+  user_role_revoke_permissions(
+    DRUPAL_AUTHENTICATED_RID,
+    array(
+      'search all content'
     )
   );
 

@@ -55,6 +55,10 @@ class AgovTestBase extends DrupalWebTestCase {
       'create webform content',
       'edit any webform content',
       'search all content',
+      'bypass workbench moderation',
+      'administer nodes',
+      'moderate content from draft to needs_review',
+      'moderate content from needs_review to published',
     ));
 
     variable_set('site_name', 'Agov');

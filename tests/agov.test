@@ -222,14 +222,19 @@ class AgovTest extends AgovTestBase {
     $edit = array(
       'title' => 'Gods Are Bored',
       'field_slide_image[und][0][fid]' => $slide_image->fid,
+      'workbench_moderation_state_new' => 'published',
     );
-
     $this->drupalPost(NULL, $edit, t('Save'));
 
     // Create a page.
     $this->drupalGet('node/add/page');
-    $this->drupalPost(NULL, array('title' => 'Gold Halo'), t('Save'));
+    $this->drupalPost(NULL, array(
+      'title' => 'Gold Halo',
+      'workbench_moderation_state_new' => 'published',
+    ), t('Save'));
 
+    // Index content.
+    $this->cronRun();
     $this->cronRun();
 
     // Search as administrator.
