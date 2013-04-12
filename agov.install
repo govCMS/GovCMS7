@@ -245,7 +245,19 @@ function _agov_default_formats_and_permissions() {
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
+  user_role_grant_permissions(
+    DRUPAL_ANONYMOUS_RID,
+    array(
+      'access content',
+      $filtered_html_permission,
+      'search page content',
+      'search blog_article content',
+      'search event content',
+      'search media_release content',
+      'search news_article content',
+      'search publication content',
+    )
+  );
   user_role_grant_permissions(
     DRUPAL_AUTHENTICATED_RID,
     array(
@@ -254,6 +266,12 @@ function _agov_default_formats_and_permissions() {
       'post comments',
       'skip comment approval',
       $filtered_html_permission,
+      'search page content',
+      'search blog_article content',
+      'search event content',
+      'search media_release content',
+      'search news_article content',
+      'search publication content',
     )
   );
 
