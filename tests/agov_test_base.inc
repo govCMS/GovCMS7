@@ -54,6 +54,7 @@ class AgovTestBase extends DrupalWebTestCase {
       'create page content',
       'create webform content',
       'edit any webform content',
+      'search all content',
     ));
 
     variable_set('site_name', 'Agov');

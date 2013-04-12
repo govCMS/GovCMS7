@@ -202,4 +202,56 @@ class AgovTest extends AgovTestBase {
 
   }
 
+  /**
+   * Tests search_config.
+   */
+  public function testSearchConfig() {
+    // Cant use drupalLogin() as this only returns true if "Log out" is found.
+    $name = $this->testUser->name;
+    $pass = $this->testUser->pass_raw;
+    $this->drupalPost('user', array('name' => $name, 'pass' => $pass), t('Log in'));
+    $this->assertRaw($name, 'User logged in.');
+
+    // Get list of test images.
+    $images = $this->drupalGetTestFiles('image');
+    // Create a managed file for slide node.
+    $slide_image = file_save($images[4]);
+
+    // Create a slide.
+    $this->drupalGet('node/add/slide');
+    $edit = array(
+      'title' => 'Gods Are Bored',
+      'field_slide_image[und][0][fid]' => $slide_image->fid,
+    );
+
+    $this->drupalPost(NULL, $edit, t('Save'));
+
+    // Create a page.
+    $this->drupalGet('node/add/page');
+    $this->drupalPost(NULL, array('title' => 'Gold Halo'), t('Save'));
+
+    $this->cronRun();
+
+    // Search as administrator.
+    $this->drupalGet('search/node/bored');
+    $this->assertText('Gods Are Bored');
+    $this->drupalGet('search/node/gold');
+    $this->assertText('Gold Halo');
+
+    // Search as anonymous.
+    $this->drupalLogout();
+    $this->drupalGet('search/node/bored');
+    $this->assertNoText('Gods Are Bored');
+    $this->drupalGet('search/node/gold');
+    $this->assertText('Gold Halo');
+
+    // Search as logged in user.
+    $user = $this->drupalCreateUser();
+    $this->drupalPost('user', array('name' => $user->name, 'pass' => $user->pass_raw), t('Log in'));
+    $this->drupalGet('search/node/bored');
+    $this->assertNoText('Gods Are Bored');
+    $this->drupalGet('search/node/gold');
+    $this->assertText('Gold Halo');
+  }
+
 }
