@@ -19,7 +19,7 @@ function agov_disable_defaultcontent_menu() {
   $items['admin/config/content/default-content/disable'] = array(
     'title' => 'Disable Default Content',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('agov_disable_defaultcontent_disable_modules_form'),
+    'page arguments' => array('agov_disable_defaultcontent_disable_modules'),
     'access arguments' => array('administer site'),
   );
   return $items;
@@ -45,7 +45,7 @@ function agov_disable_defaultcontent_admin_form() {
  *
  * To avoid CSRF we setup a confirm form first.
  */
-function agov_disable_defaultcontent_disable_modules_form($form, &$form_state) {
+function agov_disable_defaultcontent_disable_modules($form, &$form_state) {
   return confirm_form(
     $form,
     'Disable aGov default content?',
@@ -94,7 +94,7 @@ function agov_disable_defaultcontent_init() {
   // Check if an install task variable exists so that we do not display this
   // message just after the content has been installed.
   $install_task = variable_get('install_task');
-  if ($install_task == 'done' && user_access('administer site') && current_path() != 'disable-default-content') {
+  if ($install_task == 'done' && user_access('administer site') && current_path() != 'admin/config/content/default-content/disable') {
     $default_content = agov_disable_defaultcontent_modules();
     if (!empty($default_content) && variable_get('agov_disable_defaultcontent_notice_enabled', 1)) {
       drupal_set_message(

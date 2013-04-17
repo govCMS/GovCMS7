@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_media_releases_user_default_permissions() {
+function agov_media_releases_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: create media_release content.
@@ -16,8 +16,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -29,21 +27,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: delete own media_release content.
-  $permissions['delete own media_release content'] = array(
-    'name' => 'delete own media_release content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -55,21 +38,6 @@ function agov_media_releases_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: edit own media_release content.
-  $permissions['edit own media_release content'] = array(
-    'name' => 'edit own media_release content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',

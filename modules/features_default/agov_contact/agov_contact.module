@@ -62,11 +62,12 @@ function _agov_contact_get_fid() {
 }
 
 /**
- * Implement hook_help()
+ * Implements hook_help().
  */
 function agov_contact_help($path, $arg) {
   switch ($path) {
     case 'contact':
-    return '<p class="form-help-text">Fields marked <span class="form-required">*</span> are required.</p>';
+      return '<p class="form-help-text">Fields marked <span class="form-required">*</span> are required.</p>';
   }
+  return NULL;
 }

@@ -26,13 +26,33 @@ function agov_base_preprocess_html(&$vars) {
   $colour_toggle = theme_get_setting('colour_toggle');
   if ($colour_toggle == '1') {
     $colour_scheme = theme_get_setting('colour_scheme');
-    drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+    drupal_add_css(drupal_get_path('theme','agov_base') . '/css/colour_schemes/' . $colour_scheme . '/theme-colour.css', array('media' => 'screen', 'group' => CSS_THEME,));
   }
   else {
-    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'all', 'group' => CSS_THEME,));
+    drupal_add_css(drupal_get_path('theme', variable_get('theme_default')) . '/css/colour_schemes/base/theme-colour.css', array('media' => 'screen', 'group' => CSS_THEME,));
   }
-  
+
+  // Attributes for html element.
+  $vars['html_attributes_array'] = array(
+    'lang' => $vars['language']->language,
+    'dir' => $vars['language']->dir,
+  );
+
 }
+
+/**
+ * Override or insert variables into the html templates.
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("html" in this case.)
+ */
+function agov_base_process_html(&$vars, $hook) {
+  // Flatten out html_attributes.
+  $vars['html_attributes'] = drupal_attributes($vars['html_attributes_array']);
+}
+
 
 /**
  * Implements hook_preprocess_node().
@@ -64,8 +84,9 @@ function agov_base_preprocess_entity(&$vars) {
  */
 function agov_base_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
-    // If this is the search form, add a new label.
-    $form['actions']['submit']['#prefix'] = '<label class="element-invisible" for="edit-submit">Search</label>';
+    // If this is the search form, set a unique id and provide a label element.
+    $form['actions']['submit']['#id'] = 'edit-agov-search';
+    $form['actions']['submit']['#prefix'] = '<label class="element-invisible" for="edit-agov-search">Search</label>';
   }
   elseif ($form_id == 'system_theme_settings') {
     unset($form['alpha_settings']['layout']['grid_layouts']['alpha_default']['fluid']);
@@ -116,7 +137,7 @@ function agov_base_preprocess_maintenance_page(&$variables) {
 }
 
 /**
- * Insert <img> element in the link for social media icon links as a WCAG requirement. 
+ * Insert <img> element in the link for social media icon links as a WCAG requirement.
  * Background image via CSS is not to be used.
  */
 function agov_base_menu_link__menu_social_media(array $variables) {
@@ -124,11 +145,10 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/facebook.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/facebook.png',
+        'alt' => 'Facebook icon',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -141,11 +161,10 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/twitter.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/twitter.png',
+        'alt' => 'Twitter icon',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -158,11 +177,10 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     $output = theme_link(array(
       'path' => $variables['element']['#href'],
       'text' => theme_image(array(
-        'path' => 'profiles/agov/themes/agov_base/images/email.png', 
-        'title' => $variables['element']['#title'], 
-        'alt' => '', 
-        'width' =>'32', 
-        'height' => '32', 
+        'path' => 'profiles/agov/themes/agov_base/images/email.png',
+        'alt' => 'Email icon',
+        'width' =>'32',
+        'height' => '32',
         'attributes' => array('typeof' => 'foaf:Image')
       )),
       'options' => array(
@@ -173,3 +191,35 @@ function agov_base_menu_link__menu_social_media(array $variables) {
     return '<li' . drupal_attributes(array('class' => $variables['element']['#attributes']['class'])) . '>' . $output . '</li>';
   }
 }
+
+function agov_base_views_more($variables) {
+  global $base_url;
+  if ($variables['view']->name == 'latest_news') {
+    $link_text = 'View more news';
+    $link_url = $base_url . '/news-media/news';
+  } else {
+    $link_text = $variables['link_text'];
+    $link_url = $base_url . $variables['more_url'];
+  }
+  return '<div class="more-link">' . l(t($link_text), $link_url, array('attributes' => array('title' => $link_text))) . '</div>';
+}
+
+/**
+ * Overrides theme_file_icon.
+ *
+ * @param (array) $vars
+ *   Theme hook variables.
+ *
+ * @return string
+ *   Themed output.
+ */
+function agov_base_file_icon(&$vars) {
+  $file = $vars['file'];
+  $icon_directory = $vars['icon_directory'];
+  $mime = check_plain($file->filemime);
+  $icon_url = file_icon_url($file, $icon_directory);
+  $mime_type_parse = explode('/', $mime, 2);
+  $mime_type = $mime_type_parse[1];
+  return '<img class="file-icon" alt="File type ' . $mime_type . ' icon" src="' . $icon_url . '" />';
+}
+

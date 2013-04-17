@@ -45,5 +45,19 @@ function agov_form_install_configure_form_alter(&$form, &$form_state) {
 function agov_block_info_alter(&$blocks, $theme, $code_blocks) {
   $blocks['system']['help']['region'] = 'content';
   $blocks['superfish'][1]['title'] = '<none>';
-  $blocks['menu']['menu-header-menu']['title'] = '<none>';
+  $blocks['system']['user-menu']['title'] = '<none>';
+}
+
+/**
+ * Implements hook_metatag_config_default_alter().
+ */
+function agov_metatag_config_default_alter(&$configs) {
+  $configs['global']->config['DCTERMS.creator'] = array('value' => '[site:name]');
+  $configs['global']->config['DCTERMS.date'] = array('value' => '[current-date:custom:Y-m-d\TH:iP]');
+  $configs['global']->config['DCTERMS.description'] = array('value' => '[site:slogan]');
+  $configs['global']->config['DCTERMS.language'] = array('value' => 'en');
+  $configs['global']->config['DCTERMS.publisher'] = array('value' => '[site:name]');
+  $configs['global']->config['DCTERMS.subject'] = array('value' => '[site:slogan]');
+  $configs['global']->config['DCTERMS.type'] = array('value' => 'other');
+  $configs['node']->config['DCTERMS.language'] = array('value' => 'en');
 }

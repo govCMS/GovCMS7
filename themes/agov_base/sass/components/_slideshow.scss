@@ -1,0 +1,161 @@
+// Slideshow 
+///////////////////////////////////////////////////////////////////////////////
+// Provides global layout and styling for the aGov slideshow when rendered in
+// any location.
+
+#slideshow-controls {
+  text-indent: -9999px;
+  height: 0;
+}
+
+#block-views-slideshow-block {
+  // @todo create mobile version of slideshow code.
+  display:none; // Hide slideshow on mobile.
+  
+  .block-title {
+    text-indent: -9999px;
+    padding: 0;
+    margin: 0;
+    height: 0;
+  }
+  
+  .view-slideshow {
+    position:relative;
+    overflow: hidden;
+    height: 200px;
+    width: 960px;
+  }
+  
+  .views-row {
+    display:none; // Hide all slide's initially.
+    position: absolute;
+    width: 720px;
+    padding-right: $indent-amount*2;
+  }
+  
+  .views-row-first {
+    display:block; // Show the first slide initially.
+  }
+  
+  // Font styling for title
+  .views-field-title {
+    @include leader(1, $h2-font-size);
+    .field-content {
+      @extend h2;
+      margin: 0px;
+      padding: 0px !important; // Using important here to override large-font change. Pretty sure this is justified.
+      font-family: 'OpenSansBold';
+      font-weight: normal;
+      a {
+        font-weight:normal;
+        text-decoration:none;
+        &:hover {text-decoration:underline;}
+      }
+    }
+  }
+  
+  // Font styling for body
+  .views-field-body {
+    p { margin: rhythm(.5) 0; }
+  }
+  
+  
+    
+    .view-slideshow { height: 475px; }
+    
+    #block-slideshow-block { height: 200px; }
+    
+    .views-field-field-slide-image {
+      width: 720px;
+      height: 315px;
+      img {display:block;width:100%;height:100%;}
+    }
+
+    .views-field-title,
+    .views-field-body,
+    .views-field-field-read-more {
+      float:none;
+      width:100%;
+      padding: 0 $indent_amount*2;
+      @include box-sizing(border-box);
+    }
+
+  
+  @include breakpoint(980px, $no-query: '.lt-ie9') {
+  
+    .view-slideshow {
+       height: 280px;
+     }
+     
+     .views-row {
+       width: auto;
+     }
+
+     .views-field-field-slide-image {
+       float: left;
+       width: 640px;
+       height: 280px;
+     }
+
+     .views-field-title,
+     .views-field-body,
+     .views-field-field-read-more {
+       float:left;
+       clear:right;
+       width:300px;
+       @include box-sizing(border-box);
+       padding: 0 $indent-amount*2;
+     }    
+     
+  }
+  
+  // Pager
+  #featured-article-pager {
+    position: absolute;
+    z-index: 1;
+    margin: 0;
+    // Position for pager mobile
+    top: 100px;
+    left: 10px;
+  
+    li {
+      float: left;
+      margin-left: 2px;
+      a {
+        display: block;
+        width: 27px;
+        height: 27px;
+        font-weight: bold;
+        line-height: 27px;
+        text-align: center;
+        text-decoration: none;
+        &.pause {
+          height: 0;
+          overflow: hidden;
+          padding-top: 27px; 
+        }
+        &.playing {
+          background-image: url('../images/featured-articles-pause.png');
+          background-position: 0px -27px;
+          background-repeat: no-repeat;
+        }
+        &.paused {
+          background-image: url('../images/featured-articles-pause.png');
+          background-repeat: no-repeat;
+        }
+      }
+    }
+    @include breakpoint(740px, $no-query: '.lt-ie9') {  
+       bottom:inherit;
+       left:inherit;
+       top: 268px;
+       right: 20px;
+    }
+    @include breakpoint(980px, $no-query: '.lt-ie9') { 
+      top:inherit;
+      left:inherit;
+      bottom: 20px;
+      right: 320px;
+    }
+  }
+}

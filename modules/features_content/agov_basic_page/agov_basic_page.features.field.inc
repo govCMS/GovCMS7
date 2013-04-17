@@ -47,6 +47,12 @@ function agov_basic_page_field_default_fields() {
 The <em>body</em> field is used for the main article content. 
 ',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -136,6 +142,12 @@ The <em>body</em> field is used for the main article content.
       'deleted' => '0',
       'description' => 'Provides a file that wil be associated with this <em>page</em> - examples may include a downloadable version of the content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'file',
@@ -221,6 +233,12 @@ The <em>body</em> field is used for the main article content.
       'deleted' => '0',
       'description' => 'Provide a feature image that will be associated with this <em>Page</em>.  The image will be rendered above the page body text.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -301,6 +319,12 @@ The <em>body</em> field is used for the main article content.
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this <em>Standard page</em>.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',

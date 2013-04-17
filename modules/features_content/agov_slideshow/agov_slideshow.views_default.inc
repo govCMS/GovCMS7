@@ -71,6 +71,8 @@ function agov_slideshow_views_default_views() {
 
   /* Display: Slideshow Block */
   $handler = $view->new_display('block', 'Slideshow Block', 'block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Slideshow';
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';

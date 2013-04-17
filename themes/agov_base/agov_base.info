@@ -37,10 +37,9 @@ zones[footer_copyright] = 'Footer Copyright'
 css[global.css][name] = 'Your custom global styles'
 css[global.css][description] = 'This file holds all the globally active custom CSS of your theme.'
 css[global.css][options][weight] = '10'
-css[alpha-reset.css][name] = Reset
-css[alpha-reset.css][description] = Rewritten reset styles from alpha theme.
-css[alpha-reset.css][options][weight] = -20
+css[global.css][options][media] = 'screen'
 stylesheets[only screen and (-webkit-min-device-pixel-ratio: 2)][] = css/retina.css
+stylesheets[print][] = css/print.css
 
 ; JAVASCRIPT
 
@@ -49,7 +48,6 @@ scripts[] = js/modernizr.min.js
 scripts[] = js/responsive.js
 scripts[] = js/common.js
 scripts[] = js/jquery.jumpMenu.js
-scripts[] = js/feature-articles.js
 
 ; THEME SETTING DEFAULTS
 
@@ -97,9 +95,6 @@ settings[alpha_layouts_alpha_fluid_normal_media] = 'all and (min-width: 740px) a
 settings[alpha_libraries][omega_formalize] = '0'
 settings[alpha_libraries][omega_mediaqueries] = '0'
 settings[alpha_libraries][omega_equalheights] = '0'
-settings[alpha_css][alpha-reset.css] = 'alpha-reset.css'
-settings[alpha_css][alpha-mobile.css] = 'alpha-mobile.css'
-settings[alpha_css][alpha-alpha.css] = 'alpha-alpha.css'
 settings[alpha_css][global.css] = 'global.css'
 settings[alpha_css][omega-text.css] = '0'
 settings[alpha_css][omega-branding.css] = '0'

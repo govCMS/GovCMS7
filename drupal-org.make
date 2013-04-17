@@ -5,22 +5,16 @@ api = 2
 
 ; Contrib modules
 
-projects[bean][version] = "1.0-rc6"
+projects[bean][version] = "1.1"
 projects[bean][subdir] = "contrib"
 
-projects[bean_panels][version] = "1.2"
+projects[bean_panels][version] = "1.3"
 projects[bean_panels][subdir] = "contrib"
-
-projects[captcha][version] = "1.0-beta2"
-projects[captcha][subdir] = "contrib"
 
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
-projects[chosen][download][type] = "git"
-projects[chosen][download][revision] = 4c4b8fd5e5b2c1912c3de1589d658049b49cdc90
-projects[chosen][download][branch] = 7.x-1.x
-projects[chosen][type] = "module"
+projects[chosen][version] = 2.0-alpha1
 projects[chosen][subdir] = "contrib"
 
 projects[context][version] = "3.0-beta6"
@@ -32,10 +26,10 @@ projects[date][subdir] = "contrib"
 projects[draggableviews][version] = "2.0"
 projects[draggableviews][subdir] = "contrib"
 
-projects[ds][version] = "2.0"
+projects[ds][version] = "2.2"
 projects[ds][subdir] = "contrib"
 
-projects[entity][version] = "1.0-rc3"
+projects[entity][version] = "1.0"
 projects[entity][subdir] = "contrib"
 
 projects[file_entity][version] = "2.0-unstable6"
@@ -44,10 +38,13 @@ projects[file_entity][subdir] = "contrib"
 projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
 
-projects[libraries][version] = "1.0"
+projects[honeypot][version] = "1.14"
+projects[honeypot][subdir] = "contrib"
+
+projects[libraries][version] = "2.1"
 projects[libraries][subdir] = "contrib"
 
-projects[link][version] = "1.0"
+projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
 projects[media_vimeo][version] = "1.0-beta5"
@@ -92,6 +89,7 @@ projects[search404][subdir] = "contrib"
 
 projects[site_map][version] = "1.0"
 projects[site_map][subdir] = "contrib"
+projects[site_map][patch][] = "http://drupal.org/files/accessibility_enhancements-1920722-2.patch"
 
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
@@ -109,7 +107,7 @@ projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = "3.5"
+projects[views][version] = "3.6"
 projects[views][subdir] = "contrib"
 
 projects[webform][version] = "3.18"
@@ -118,22 +116,23 @@ projects[webform][subdir] = "contrib"
 projects[workbench][version] = "1.1"
 projects[workbench][subdir] = "contrib"
 
-projects[wysiwyg][version] = "2.2"
-projects[wysiwyg][subdir] = "contrib"
-
 projects[xmlsitemap][version] = "2.0-rc1"
 projects[xmlsitemap][subdir] = "contrib"
 
 ; Patched modules
 
-projects[ctools][version] = "1.2"
+projects[ctools][version] = "1.3"
 projects[ctools][subdir] = "contrib"
-projects[ctools][patch][] = "http://drupal.org/files/ctools-fix-warning-message-1739718-32.patch"
+
+projects[defaultconfig][version] = "1.0-alpha9"
+projects[defaultconfig][subdir] = "contrib"
+projects[defaultconfig][patch][] = "http://drupal.org/files/1940366-1-illegal-offset-warning.patch"
 
 projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
+projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
 
 projects[features][version] = "2.0-beta1"
 projects[features][subdir] = "contrib"
@@ -147,6 +146,9 @@ projects[scheduler][version] = "1.0"
 projects[scheduler][subdir] = "contrib"
 projects[scheduler][patch][] = "http://drupal.org/files/more_integration_options.patch"
 
+projects[search_config][version] = "1.0"
+projects[search_config][subdir] = "contrib"
+
 projects[uuid][download][type] = "git"
 projects[uuid][download][revision] = 8b6d70f1764a83896e799712111d6b46cf482737
 projects[uuid][download][branch] = 7.x-1.x
@@ -157,12 +159,16 @@ projects[workbench_moderation][version] = "1.2"
 projects[workbench_moderation][subdir] = "contrib"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"
 
+projects[wysiwyg][version] = "2.2"
+projects[wysiwyg][subdir] = "contrib"
+projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.0"
+projects[password_policy][version] = "1.3"
 projects[password_policy][subdir] = "contrib"
 
 projects[securepages][version] = "1.0-beta1"
@@ -179,9 +185,6 @@ projects[login_security][subdir] = "contrib"
 projects[omega][version] = "3.1"
 projects[omega][patch][] = "http://drupal.org/files/omega_color_module_support.patch"
 projects[omega][subdir]= "contrib"
-
-projects[ember][version] = "1.0-alpha4"
-projects[ember][subdir]= "contrib"
 
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta1"

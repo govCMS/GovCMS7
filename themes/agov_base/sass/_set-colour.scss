@@ -59,22 +59,26 @@ input.form-submit:hover {
 }
 
 // Top Menu
-#region-header-top-menu .block-menu ul.menu li {
+#region-header-top-menu div.block .content {
+	border-left: 1px solid $top_menu_border_right;
+	overflow: hidden;
+}
+
+#region-header-top-menu ul.menu li {
 	border-left: 1px solid $top_menu_border_left;
 	border-right: 1px solid $top_menu_border_right;
 }
 
-#region-header-top-menu .block-menu ul.menu li.first {
+#region-header-top-menu ul.menu li.first {
 	border-left: 1px solid $top_menu_border_left;
 }
 
-#region-header-top-menu .block-menu ul.menu li a,
-#skip-to-content a {
+#zone-header a {
 	color: $topmenu_link_color;
 }
 
 #skip-to-content {
- border-right: 1px solid $top_menu_border_right;
+	border-right: 1px solid $top_menu_border_right;
 }
 
 #region-header-search form input.form-text {
@@ -145,6 +149,11 @@ input.form-submit:hover {
 #region-content h2 {
 	color: $h1;
 	border-top: 3px solid $border_theme;
+}
+
+.page-news-media #region-content .view h2, 
+.page-publications #region-content .view h2 {
+  color: $body-color;
 }
 
 .not-front .node-blog-article .field-name-post-date {
@@ -232,9 +241,12 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 // Featured Article Pager
+
 #block-views-slideshow-block ul li a {
+  background-color: #cececd; // this bg colour will be picked up by IE (other browsers will override this by the CSS immediately below this line)
   background-color: $link_light_alpha;
   color: $text_darkest;
+  border: none;
 }
 #block-views-slideshow-block ul li.current a {
   background-color: $text_active;
@@ -245,6 +257,12 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 #block-views-slideshow-block ul li a.paused {
 	background-color: $text_active;
+}
+#block-views-slideshow-block ul li a:focus {
+  border: 2px solid $link_color;
+}
+#block-views-slideshow-block ul li.current a:focus {
+  border: 2px solid $link_color;
 }
 
 // Home Page Latest News & From The Blog

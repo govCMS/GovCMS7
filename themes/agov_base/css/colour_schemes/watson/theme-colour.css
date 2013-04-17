@@ -52,17 +52,21 @@ input.form-submit:hover {
   background-image: none !important;
 }
 
-#region-header-top-menu .block-menu ul.menu li {
+#region-header-top-menu div.block .content {
+  border-left: 1px solid #5b5b61;
+  overflow: hidden;
+}
+
+#region-header-top-menu ul.menu li {
   border-left: 1px solid #27272d;
   border-right: 1px solid #5b5b61;
 }
 
-#region-header-top-menu .block-menu ul.menu li.first {
+#region-header-top-menu ul.menu li.first {
   border-left: 1px solid #27272d;
 }
 
-#region-header-top-menu .block-menu ul.menu li a,
-#skip-to-content a {
+#zone-header a {
   color: white;
 }
 
@@ -75,7 +79,7 @@ input.form-submit:hover {
 }
 
 #zone-menu-wrapper {
-  background-color: #797979;
+  background-color: #505050;
   border-top: 1px solid #dedede;
 }
 
@@ -139,6 +143,11 @@ input.form-submit:hover {
 #region-content h2 {
   color: #1b1b27;
   border-top: 3px solid #73737b;
+}
+
+.page-news-media #region-content .view h2,
+.page-publications #region-content .view h2 {
+  color: #5f5f5f;
 }
 
 .not-front .node-blog-article .field-name-post-date {
@@ -226,8 +235,10 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 #block-views-slideshow-block ul li a {
+  background-color: #cececd;
   background-color: rgba(255, 255, 255, 0.6);
   color: black;
+  border: none;
 }
 
 #block-views-slideshow-block ul li.current a {
@@ -241,6 +252,14 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 
 #block-views-slideshow-block ul li a.paused {
   background-color: #333333;
+}
+
+#block-views-slideshow-block ul li a:focus {
+  border: 2px solid #c53100;
+}
+
+#block-views-slideshow-block ul li.current a:focus {
+  border: 2px solid #c53100;
 }
 
 #block-views-latest-news-block .content .views-row,

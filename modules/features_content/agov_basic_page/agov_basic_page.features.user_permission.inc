@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_user_default_permissions().
+ * Implements hook_defaultconfig_user_default_permissions().
  */
-function agov_basic_page_user_default_permissions() {
+function agov_basic_page_defaultconfig_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: create page content.
@@ -16,8 +16,6 @@ function agov_basic_page_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -27,15 +25,8 @@ function agov_basic_page_user_default_permissions() {
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
     'roles' => array(
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
-
-  // Exported permission: delete own page content.
-  $permissions['delete own page content'] = array(
-    'name' => 'delete own page content',
-    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
@@ -47,25 +38,11 @@ function agov_basic_page_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
       'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
 
-  // Exported permission: edit own page content.
-  $permissions['edit own page content'] = array(
-    'name' => 'edit own page content',
-    'roles' => array(
-      'Content approver' => 'Content approver',
-      'Content editor' => 'Content editor',
-      'Site administrator' => 'Site administrator',
-      'Site builder' => 'Site builder',
-      'administrator' => 'administrator',
-    ),
-    'module' => 'node',
-  );
 
   return $permissions;
 }

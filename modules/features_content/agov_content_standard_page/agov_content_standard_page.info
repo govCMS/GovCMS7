@@ -5,6 +5,7 @@ package = aGov content
 php = 5.2.4
 version = 7.x-1.0
 project = agov_content_standard_page
+dependencies[] = defaultcontent
 features[content][] = agov_about_us
 features[content][] = agov_accessiblity_notice
 features[content][] = agov_disclaimer

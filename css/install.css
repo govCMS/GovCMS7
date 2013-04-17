@@ -144,3 +144,11 @@ legend a:hover {color:#fff;}
 .form-item-account-pass-pass2 {
   margin-top: 0.8em;
 }
+
+.form-item-agov-register-confirm {
+  margin-bottom: 0;
+}
+
+#agov-install-register-fields {
+  padding-top: .4em;
+}

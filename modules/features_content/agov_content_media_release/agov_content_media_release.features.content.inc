@@ -11,14 +11,14 @@ function agov_content_media_release_content_defaults() {
   $content = array();
 
   $content['agov_media_release_1'] = (object) array(
-    'exported_path' => 'media-releases/augue-sociis-augue-lundium-nec',
+    'exported_path' => 'news-media/media-releases/augue-sociis-augue-lundium-nec',
     'title' => 'Augue sociis augue lundium, nec?',
     'status' => '1',
     'promote' => '0',
     'sticky' => '0',
     'type' => 'media_release',
     'language' => 'und',
-    'created' => '1345372279',
+    'created' => time() - (1 * 24 * 60 * 60),
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_media_release_1',
@@ -65,7 +65,7 @@ function agov_content_media_release_content_defaults() {
       'und' => array(
         0 => array(
           'display' => '1',
-          'description' => 'Arcu',
+          'description' => NULL,
           'filename' => 'arcu.txt',
           'uri' => 'public://arcu.txt',
           'filemime' => 'text/plain',
@@ -114,14 +114,14 @@ function agov_content_media_release_content_defaults() {
   );
 
   $content['agov_media_release_2'] = (object) array(
-    'exported_path' => 'media-releases/proin-bibendum-egestas',
+    'exported_path' => 'news-media/media-releases/proin-bibendum-egestas',
     'title' => 'Proin bibendum egestas',
     'status' => '1',
     'promote' => '0',
     'sticky' => '0',
     'type' => 'media_release',
     'language' => 'und',
-    'created' => '1345177056',
+    'created' => time() - (7 * 24 * 60 * 60),
     'comment' => '1',
     'translate' => '0',
     'machine_name' => 'agov_media_release_2',
@@ -146,7 +146,7 @@ function agov_content_media_release_content_defaults() {
       'und' => array(
         0 => array(
           'display' => '1',
-          'description' => 'Proin bibendum egestas',
+          'description' => NULL,
           'filename' => 'COPYING.txt',
           'uri' => 'public://COPYING.txt',
           'filemime' => 'text/plain',

@@ -14,7 +14,7 @@
  */
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_THEME', 'agov_base');
-define('AGOV_DEFAULT_ADMIN_THEME', 'ember');
+define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
 /**
@@ -57,13 +57,14 @@ function agov_install() {
   // Set default tags.
   _agov_default_tags();
 
-  // Rebuild the sitemap now we have a menu.
-  agov_rebuild_sitemap();
+  // Set the password policy.
+  _agov_password_policy();
 
-  // @todo Image styles not being applied to beans on install. Needs manual
-  // revert.
-  cache_clear_all();
-  features_revert(array('agov_beans' => array('field')));
+  // Set defaults for the contact form.
+  _agov_contact_form_defaults();
+
+  // Clean up after install.
+  agov_cleanup();
 }
 
 /**
@@ -244,7 +245,25 @@ function _agov_default_formats_and_permissions() {
 
   // Enable default permissions for system roles.
   $filtered_html_permission = filter_permission_name($filtered_html_format);
-  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', $filtered_html_permission));
+  user_role_grant_permissions(
+    DRUPAL_ANONYMOUS_RID,
+    array(
+      'access content',
+      $filtered_html_permission,
+      'search page content',
+      'search blog_article content',
+      'search event content',
+      'search media_release content',
+      'search news_article content',
+      'search publication content',
+    )
+  );
+  user_role_revoke_permissions(
+    DRUPAL_ANONYMOUS_RID,
+    array(
+      'search all content'
+    )
+  );
   user_role_grant_permissions(
     DRUPAL_AUTHENTICATED_RID,
     array(
@@ -253,6 +272,18 @@ function _agov_default_formats_and_permissions() {
       'post comments',
       'skip comment approval',
       $filtered_html_permission,
+      'search page content',
+      'search blog_article content',
+      'search event content',
+      'search media_release content',
+      'search news_article content',
+      'search publication content',
+    )
+  );
+  user_role_revoke_permissions(
+    DRUPAL_AUTHENTICATED_RID,
+    array(
+      'search all content'
     )
   );
 
@@ -334,13 +365,12 @@ function _agov_default_blocks() {
 
   // Set default system block in primary theme.
   agov_core_insert_block('system', 'main', $themes, 'content', -12);
-  agov_core_insert_block('wcag_validate', 'wcag_validate', $themes, 'content', 24);
   agov_core_insert_block('system', 'help', $themes, 'content', -14);
   agov_core_insert_block('superfish', '1', $themes, 'header_main_menu');
   agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer_sub_menu');
 
   // Set aGov blocks.
-  agov_core_insert_block('menu', 'menu-header-menu', $themes, 'header_top_menu');
+  agov_core_insert_block('system', 'user-menu', $themes, 'header_top_menu');
   agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header_search');
   agov_core_insert_block('search', 'form', $themes, 'header_search');
   agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
@@ -357,6 +387,17 @@ function _agov_default_blocks() {
   // Set some blocks in the admin theme.
   agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
   agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, 'help');
+  agov_core_insert_block('agov_core', 'update_notification', AGOV_DEFAULT_ADMIN_THEME, 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
+
+  // Ensure Wcag validate block only appears on correct pages.
+  db_update('block')->fields(array(
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*",
+  ))
+  ->condition('module', 'wcag_validate')
+  ->condition('delta', 'wcag_validate')
+  ->execute();
+
 }
 
 /**
@@ -381,6 +422,12 @@ function _agov_default_variables() {
     'user_register' => USER_REGISTER_ADMINISTRATORS_ONLY,
     'admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
     'node_admin_theme' => AGOV_DEFAULT_ADMIN_THEME,
+
+    // Turn on honeypot protection for all forms.
+    'honeypot_protect_all_forms' => 1,
+    // Don't disable page caching.
+    'honeypot_time_limit' => "0",
+
   );
 
   foreach ($variables as $key => $value) {
@@ -456,11 +503,11 @@ function _agov_default_news_beans() {
 
   // Add menu links to main menu.
   $menus = array(
-    'current-news' => 'news-media/current-news',
+    'current-news' => 'news-media/news',
     'archived-news' => 'news-media/news-archive',
     'media-releases' => 'news-media/media-releases',
     'events' => 'news-media/events',
-    'blog' => 'blog',
+    'blog' => 'news-media/blog',
   );
 
   // @todo - Save these menu items below the news-media item.
@@ -752,9 +799,11 @@ function _agov_default_tags() {
  */
 function agov_install_tasks($install_state) {
   $task = array();
+
   $agov_example_content_batch = variable_get('agov_example_content_batch', FALSE);
-  $task['agov_example_content_requirements'] = array(
-    'display_name' => st('Example content'),
+
+  $task['agov_install_additional_options'] = array(
+    'display_name' => st('Additional options'),
     'display' => TRUE,
     'type' => 'form',
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
@@ -769,7 +818,7 @@ function agov_install_tasks($install_state) {
     'display_name' => st('Finish'),
     'display' => FALSE,
     'type' => 'normal',
-    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
   );
   return $task;
 }
@@ -778,17 +827,18 @@ function agov_install_tasks($install_state) {
  * Implements hook_install_tasks_alter().
  */
 function agov_install_tasks_alter(&$tasks, $install_state) {
- 
+
   $tasks['agov_finished'] = $tasks['install_finished'];
   unset($tasks['install_finished']);
- 
+
   _agov_set_theme(AGOV_INSTALL_DEFAULT_THEME);
   drupal_add_css('profiles/agov/css/install.css');
+  drupal_add_js('profiles/agov/js/install.js');
 }
 
 /**
-* Overrides the core install_finished.
-*/
+ * Overrides the core install_finished.
+ */
 function agov_finished() {
   drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
   $messages = drupal_set_message();
@@ -803,7 +853,7 @@ function agov_finished() {
   // Remember the profile which was used.
   variable_set('install_profile', drupal_get_profile());
 
-  // Installation profiles are always loaded last
+  // Installation profiles are always loaded last.
   db_update('system')
     ->fields(array('weight' => 1000))
     ->condition('type', 'module')
@@ -822,43 +872,102 @@ function agov_finished() {
 }
 
 /**
- * Check the server's max_execution_time can handle the installation content.
+ * Form callback for additional options install task.
  */
-function agov_example_content_requirements() {
+function agov_install_additional_options() {
 
   set_time_limit(300);
 
   $form = array();
-  drupal_add_css('#cancel {float:left;} #install {float:left;}', $option['type'] = 'inline');
-  drupal_set_title('Install example content');
+  drupal_set_title('Additional options');
+
+  $form['default_content'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Example content'),
+  );
+
   $max_execution_time = ini_get('max_execution_time');
-  
   if ($max_execution_time >= 300) {
     $form['default_content']['install'] = array(
       '#type' => 'checkbox',
-      '#title' => st('Yes, install example content'),
+      '#title' => st('Install example content'),
     );
   }
   else {
     drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
   }
-  
-  $form['default_content']['continue'] = array(
+
+  $form['register'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Register aGov'),
+  );
+  $form['register']['agov_register_confirm'] = array(
+    '#type' => 'checkbox',
+    '#title' => st('Register your aGov site'),
+  );
+
+  $form['register']['fields'] = array(
+    '#prefix' => '<div id="agov-install-register-fields">',
+    '#suffix' => '</div>',
+  );
+
+  // Default registration data.
+  $default_data = array(
+    'agov_register_agency' => variable_get('site_name'),
+    'agov_register_email' => variable_get('site_mail'),
+  );
+  $form['register']['fields'][] = agov_register_form_elements($default_data, TRUE);
+
+  $form['submit'] = array(
     '#type' => 'submit',
     '#value' => st('Continue'),
   );
-  
   return $form;
 }
 
 /**
- * Set variable for batch process if install button is clicked.
+ * Validate handler.
+ *
+ * @ingroup forms
  */
-function agov_example_content_requirements_submit(&$form, &$form_state) {
+function agov_install_additional_options_validate(&$form, &$form_state) {
+  if ($form_state['values']['agov_register_confirm']) {
+    if (!valid_email_address($form_state['values']['agov_register_email'])) {
+      form_set_error('agov_register_email', 'Please enter a valid email address.');
+    }
+  }
+}
 
-  if ($form_state['values']['install'] == TRUE) {
+/**
+ * Submit handler.
+ *
+ * @ingroup forms
+ */
+function agov_install_additional_options_submit(&$form, &$form_state) {
+
+  // If user selects to install default content. Set var.
+  if ($form_state['values']['install']) {
     variable_set('agov_example_content_batch', TRUE);
   }
+
+  // If the user selects to register the site, post the data.
+  if ($form_state['values']['agov_register_confirm']) {
+    $data = array(
+      'agov_register_agency' => check_plain($form_state['values']['agov_register_agency']),
+      'agov_register_contact' => check_plain($form_state['values']['agov_register_contact']),
+      'agov_register_email' => check_plain($form_state['values']['agov_register_email']),
+      'agov_register_notification' => check_plain($form_state['values']['agov_register_notification']),
+    );
+    $registration = agov_register_post($data);
+    if ($registration->code == 200) {
+      drupal_set_message('Thank you, your registration was successful');
+    }
+    else {
+      drupal_set_message('Sorry, your registration failed at this time. We will try again later to register your site. Visit `Configuration > aGov Registration` after installation to check the status.', 'warning');
+    }
+
+  }
+  return FALSE;
 }
 
 /**
@@ -976,7 +1085,6 @@ function agov_example_content_install_batch($type, $key, $name, $message, &$cont
   }
 }
 
-
 /**
  * Performs any cleanup and output on completion of example content batch.
  */
@@ -987,15 +1095,26 @@ function agov_example_content_install_finished(&$context) {
 }
 
 /**
-* Run any cleanup or other functions required after install is finished.
-*/
+ * Run any cleanup or other functions required after install is finished.
+ */
 function agov_cleanup() {
-  
+
   agov_rebuild_sitemap();
-  
+
+  // Rebuild default config (permissions).
+  defaultconfig_rebuild_all();
+
   // Required by view_unpublished module.
   node_access_rebuild();
-  
+
+  cache_clear_all();
+
+  // @todo Image styles not being applied to beans on install.
+  features_revert(array('agov_beans' => array('field')));
+
+  // @todo Wysiwyg profiles not being applied on install.
+  features_revert(array('agov_editing' => array('wysiwyg')));
+
 }
 
 /**
@@ -1030,4 +1149,62 @@ function agov_rebuild_sitemap() {
     // Run the batch process.
     xmlsitemap_run_unprogressive_batch('xmlsitemap_rebuild_batch', $rebuild_types, TRUE);
   }
+}
+
+/**
+ * Sets up default password policy.
+ *
+ * We don't have an API so insert into the db directly.
+ */
+function _agov_password_policy() {
+
+  // Define the password policy.
+  $policy = array(
+    "alphanumeric" => "1",
+    "complexity" => "3",
+    "delay" => "24",
+    "history" => "8",
+    "length" => "9",
+    "letter" => "1",
+    "alphanumeric" => "1",
+  );
+
+  // Insert the policy definition.
+  $pid = db_insert('password_policy')
+    ->fields(array(
+      'name' => 'Australian Government DSD Policy',
+      'description' => 'Password policy that conforms to Australian Government Information Security Manual guidelines 2012 September release.',
+      'enabled' => 0,
+      'policy' => serialize($policy),
+      'expiration' => 90,
+      'warning' => 7,
+    ))
+    ->execute();
+
+  // Get all role ids.
+  $rids = db_query("SELECT rid FROM {role}")->fetchAll(PDO::FETCH_COLUMN);
+
+  // Insert the roles that use this policy.
+  $query = db_insert('password_policy_role')->fields(array('pid', 'rid'));
+  foreach ($rids as $rid) {
+    // No need to add anonymous.
+    if ($rid != DRUPAL_ANONYMOUS_RID) {
+      $query->values(array($pid, $rid));
+    }
+  }
+  $query->execute();
+
+}
+
+/**
+ * Set defaults for contact form.
+ */
+function _agov_contact_form_defaults() {
+
+  // Set default recipient for contact form.
+  db_update('contact')->fields(
+    array('recipients' => variable_get('site_mail', 'admin@example.com'))
+  )
+    ->condition('cid', 1)
+    ->execute();
 }

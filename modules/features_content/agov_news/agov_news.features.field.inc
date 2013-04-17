@@ -45,6 +45,12 @@ function agov_news_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -118,6 +124,12 @@ function agov_news_field_default_fields() {
       'deleted' => '0',
       'description' => 'Upload an image to go with this article.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -202,6 +214,12 @@ function agov_news_field_default_fields() {
       'deleted' => '0',
       'description' => 'Enter a comma-separated list of words to describe your content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -271,6 +289,12 @@ function agov_news_field_default_fields() {
       'description' => 'The <em>Summary</em> field above is included in any listings of this page as well as the initial paragraph of the page view.
 The <em>body</em> field is used for the main article content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -369,6 +393,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Select this article as featured if you wish to have it displayed on the front page slideshow feature.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -449,6 +479,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Date that this news content took place.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'date',
@@ -512,7 +548,7 @@ The <em>body</em> field is used for the main article content.',
         'module' => 'date',
         'settings' => array(
           'increment' => '15',
-          'input_format' => 'm/d/Y - H:i:s',
+          'input_format' => 'd/m/Y - H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
           'text_parts' => array(),
@@ -564,6 +600,12 @@ The <em>body</em> field is used for the main article content.',
       'deleted' => '0',
       'description' => 'Enter a comma-separated list of words to describe your content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',

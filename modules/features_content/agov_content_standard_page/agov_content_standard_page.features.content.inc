@@ -235,24 +235,28 @@ function agov_content_standard_page_content_defaults() {
 <p>Suspendisse massa nibh, fringilla nec scelerisque vel, faucibus id leo. Vivamus feugiat egestas libero, et viverra ante adipiscing vitae. Nullam non magna iaculis nisi lobortis interdum ut non ipsum. Nulla eu interdum est.</p><p>Aenean iaculis tincidunt diam vel ullamcorper. Praesent rutrum blandit vehicula. Nunc vulputate, diam nec sagittis faucibus, turpis quam gravida mi, a laoreet velit purus vel nulla. Morbi a enim diam. Aliquam erat volutpat. Praesent lectus felis, iaculis ac pharetra a, elementum vitae elit. Phasellus sem ipsum, faucibus vel accumsan eget, iaculis sed arcu.</p><p>Duis nisi felis, posuere ullamcorper condimentum quis, malesuada fringilla augue. Ut pulvinar, nibh non mattis feugiat, dui odio tempor magna, a bibendum risus tortor non dui.</p>',
           'summary' => 'Lorem Ipsum',
           'format' => 'full_html',
-          'safe_value' => '<h3>Lorem Ipsum</h3>
+          'safe_value' => ' <h3>Lorem Ipsum</h3>
 <p>Lorem ipsum dolor sit amet, vim at movet sonet sapientem, eum prompta labitur deterruisset in. Ne magna primis virtute ius, pri cu recusabo tractatos.</p>
 <p>Quas luptatum dignissim duo ea, mea ne vide fabulas. Liber error cotidieque ea has, te quidam audiam convenire est, cu integre appareat assentior pro. Quem fierent cu eam.</p>
-<ul>
-<li>Phasellus eget nisl quis elit ullamcorper consequat.</li>
+<ul><li>Phasellus eget nisl quis elit ullamcorper consequat.</li>
 <li>Duis sodales lorem in urna feugiat nec adipiscing purus accumsan.</li>
 <li>Donec convallis volutpat tellus, at molestie tortor facilisis in.</li>
 <li>Integer nec tortor quis nulla iaculis malesuada.</li>
 <li>Vestibulum aliquet eros id lorem blandit at dignissim purus porttitor.</li>
 <li>In id augue quis nulla eleifend viverra vel a tellus.</li>
-</ul>
-<p>Ne pri semper iriure comprehensam, mei modus summo neglegentur ea. Vel at epicuri philosophia. Qui ad tota voluptaria, vitae scripta cu qui.</p>
-<h3>Sed ligula tellus</h3><p>Sed ligula tellus, sagittis sit amet consectetur vitae, gravida nec dui. Mauris vestibulum posuere mauris sed viverra. Nunc non blandit tortor. Curabitur tincidunt nunc a sapien sodales quis aliquam nunc placerat.</p><p>Maecenas auctor enim et lectus luctus tempus. Cras at eros luctus mauris laoreet tempus sed ac eros. Nullam ut velit vel elit ultrices venenatis.</p><p>Etiam pellentesque laoreet tempor. Nulla nulla sapien, adipiscing at accumsan vel, condimentum sed massa.</p><p>Aenean malesuada posuere egestas. Nulla eget felis et lectus dignissim interdum. Ut in odio vitae metus suscipit ultrices. Nunc aliquam enim id est convallis ullamcorper. Suspendisse porta sem nec augue pulvinar vel porta arcu dignissim. Aliquam mi enim, commodo ac lobortis at, sodales vitae libero.</p>
+</ul><p>Ne pri semper iriure comprehensam, mei modus summo neglegentur ea. Vel at epicuri philosophia. Qui ad tota voluptaria, vitae scripta cu qui.</p>
+<h3>Sed ligula tellus</h3>
+<p>Sed ligula tellus, sagittis sit amet consectetur vitae, gravida nec dui. Mauris vestibulum posuere mauris sed viverra. Nunc non blandit tortor. Curabitur tincidunt nunc a sapien sodales quis aliquam nunc placerat.</p>
+<p>Maecenas auctor enim et lectus luctus tempus. Cras at eros luctus mauris laoreet tempus sed ac eros. Nullam ut velit vel elit ultrices venenatis.</p>
+<p>Etiam pellentesque laoreet tempor. Nulla nulla sapien, adipiscing at accumsan vel, condimentum sed massa.</p>
+<p>Aenean malesuada posuere egestas. Nulla eget felis et lectus dignissim interdum. Ut in odio vitae metus suscipit ultrices. Nunc aliquam enim id est convallis ullamcorper. Suspendisse porta sem nec augue pulvinar vel porta arcu dignissim. Aliquam mi enim, commodo ac lobortis at, sodales vitae libero.</p>
 <h3>Suspendisse</h3>
-<p>Suspendisse massa nibh, fringilla nec scelerisque vel, faucibus id leo. Vivamus feugiat egestas libero, et viverra ante adipiscing vitae. Nullam non magna iaculis nisi lobortis interdum ut non ipsum. Nulla eu interdum est.</p><p>Aenean iaculis tincidunt diam vel ullamcorper. Praesent rutrum blandit vehicula. Nunc vulputate, diam nec sagittis faucibus, turpis quam gravida mi, a laoreet velit purus vel nulla. Morbi a enim diam. Aliquam erat volutpat. Praesent lectus felis, iaculis ac pharetra a, elementum vitae elit. Phasellus sem ipsum, faucibus vel accumsan eget, iaculis sed arcu.</p><p>Duis nisi felis, posuere ullamcorper condimentum quis, malesuada fringilla augue. Ut pulvinar, nibh non mattis feugiat, dui odio tempor magna, a bibendum risus tortor non dui.</p>
-',
-          'safe_summary' => '<p>Lorem Ipsum</p>
-',
+<p>Suspendisse massa nibh, fringilla nec scelerisque vel, faucibus id leo. Vivamus feugiat egestas libero, et viverra ante adipiscing vitae. Nullam non magna iaculis nisi lobortis interdum ut non ipsum. Nulla eu interdum est.</p>
+<p>Aenean iaculis tincidunt diam vel ullamcorper. Praesent rutrum blandit vehicula. Nunc vulputate, diam nec sagittis faucibus, turpis quam gravida mi, a laoreet velit purus vel nulla. Morbi a enim diam. Aliquam erat volutpat. Praesent lectus felis, iaculis ac pharetra a, elementum vitae elit. Phasellus sem ipsum, faucibus vel accumsan eget, iaculis sed arcu.</p>
+<p>Duis nisi felis, posuere ullamcorper condimentum quis, malesuada fringilla augue. Ut pulvinar, nibh non mattis feugiat, dui odio tempor magna, a bibendum risus tortor non dui.</p>
+ ',
+          'safe_summary' => ' <p>Lorem Ipsum</p>
+ ',
         ),
       ),
     ),

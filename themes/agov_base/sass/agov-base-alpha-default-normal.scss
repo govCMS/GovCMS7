@@ -11,43 +11,6 @@
 // apply to the widescreen layout unless they are overridden by the widescreen styles.
 
 
-
-// Slideshow 
-///////////////////////////////////////////////////////////////////////////////
-// Provides layout specific code to render slideshow in normal layout.
-
-#block-views-slideshow-block {
-
-  .view-slideshow {
-    height: 280px;
-  }
-
-  .views-field-field-slide-image {
-    float: left;
-    width: 640px;
-    height: 280px;
-  }
-
-  .views-field-title,
-  .views-field-body,
-  .views-field-field-read-more {
-    float:left;
-    clear:right;
-    width:300px;
-  }
-  
-  // Pager position
-  #featured-article-pager {
-    top:inherit;
-    left:inherit;
-    bottom: 20px;
-    right: 320px;
-  }
-  
-}
-
-
-
 /* Home Page Featured Articles */
 
 #region-feature-articles {
@@ -61,11 +24,6 @@
 
 
 /* Search Form */
-
-#region-header-search {
-	margin-left: 10px;
-	margin-right: 10px;
-}
 
 #region-header-search form {
 	float: right;
@@ -170,12 +128,6 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 
 /* Footer Feature/Teasers */
 
-#region-footer-feature {
-	width: 940px;
-	margin: 0 0 0 1px;
-	padding: 20px 10px;
-}
-
 #region-footer-feature .views-row {
 	width: 300px;
 }
@@ -217,9 +169,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 #zone-footer-copyright div.region {
-	height: 40px;
 	width: 440px;
-	line-height: 40px;
 }
 
 #zone-footer-copyright div.region#region-footer-sub-menu {
@@ -237,27 +187,12 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 
 #region-footer-sub-menu ul {
 	text-align: left;
-	margin-bottom: 0;
 }
 
 /* Copywright */
 
-#region-footer-copyright {
-	text-align: right;
-}
-
-#region-footer-copyright p {
-	line-height: 40px;
-}
-
-
 #block-agov-twitter-feed #tweets ul li .tweet_time {
   margin-left: 53px;
-}
-
-#section-content,
-#section-footer {
-  background: url('../images/shadow-bg.png') top center repeat-y;
 }
 
 #region-header-search form input.form-submit {

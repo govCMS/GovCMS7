@@ -2,13 +2,15 @@ name = aGov
 description = A distribution for government and the public sector in Australia
 version = 7.x-1.0-beta1
 core = 7.x
+exclusive = true
 
 ; System Requirements.
 php_memory_limit = 256M
 
 files[] = agov.profile
+files[] = tests/agov_test_base.inc
 files[] = tests/agov.test
-
+files[] = tests/agov_metadata.test
 
 ; Core
 
@@ -44,11 +46,10 @@ dependencies[] = update
 dependencies[] = agls
 dependencies[] = bean
 dependencies[] = bean_admin_ui
-dependencies[] = captcha
 dependencies[] = chosen
-dependencies[] = context
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = defaultconfig
 dependencies[] = defaultcontent
 dependencies[] = draggableviews
 dependencies[] = ds
@@ -56,6 +57,7 @@ dependencies[] = entity
 dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = googleanalytics
+dependencies[] = honeypot
 dependencies[] = libraries
 dependencies[] = link
 dependencies[] = media
@@ -70,6 +72,7 @@ dependencies[] = metatag
 dependencies[] = node_reference
 dependencies[] = panels
 dependencies[] = panels_ipe
+dependencies[] = password_policy
 dependencies[] = pathauto
 dependencies[] = pathauto_persist
 dependencies[] = references
@@ -97,6 +100,7 @@ dependencies[] = ccl_actions
 dependencies[] = ccl_blocks
 dependencies[] = ccl_local_actions
 dependencies[] = ccl_views
+dependencies[] = search_config
 
 ; Custom
 
@@ -120,6 +124,7 @@ dependencies[] = agov_contact
 ;dependencies[] = agov_content_requirements
 dependencies[] = agov_front
 dependencies[] = agov_menu_block
+dependencies[] = agov_register
 dependencies[] = agov_slideshow
 dependencies[] = agov_social_menu
 dependencies[] = agov_superfish_configuration

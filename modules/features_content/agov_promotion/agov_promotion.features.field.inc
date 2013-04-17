@@ -43,6 +43,12 @@ function agov_promotion_field_default_fields() {
       'deleted' => '0',
       'description' => '<em>Promotion Text</em> is the text that will appear with the promotion',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -115,6 +121,12 @@ function agov_promotion_field_default_fields() {
       'deleted' => '0',
       'description' => 'Provides a image to be associated with this <em>Promotion</em>.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'image',
@@ -213,6 +225,12 @@ function agov_promotion_field_default_fields() {
       'deleted' => '0',
       'description' => 'Link this promotion to a piece of site content that requires promotion.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -287,6 +305,12 @@ function agov_promotion_field_default_fields() {
       'deleted' => '0',
       'description' => 'Provides grouping and single word descriptions for this content.',
       'display' => array(
+        'blog_teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
