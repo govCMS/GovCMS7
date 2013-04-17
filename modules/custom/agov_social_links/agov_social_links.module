@@ -48,25 +48,25 @@ function agov_social_links_block_info() {
  */
 function agov_social_links_block_configure($delta = '') {
   global $services;
-  
+
   $form = array();
   if ($delta == 'services') {
     $form['social_links'] = array(
       '#type' => 'fieldset',
       '#title' => t('Social media service links'),
-      '#description' => 'Enter your social media service links. You may enter: <ul><li>Absolute urls, i.e. http://www.facebook.com/yourpage</li><li>Relative urls to internal pages, i.e. contact</li><li>mailto: links</li></ul> Services left blank will not show on the block.',
+      '#description' => 'Enter your social media service links. You may enter: <ul><li>Absolute urls, i.e. "http://www.facebook.com/yourpage"</li><li>Relative urls to internal pages, i.e. "contact"</li><li>mailto: links, i.e. "mailto:youremail@address.com"</li></ul> Services left blank will not show on the block.',
     );
-    
+
     foreach ($services as $service) {
       // Load default value for service.
       $service_default = constant('AGOV_SOCIAL_LINKS_' . strtoupper($service) . '_DEFAULT');
-      
+
       // Create a human readable service title.
       $service_title = ucfirst($service);
       if ($service == 'rss') {
         $service_title = 'RSS Feed';
       }
-      
+
       // Create an input field for each service url.
       $form['social_links'][$service] = array(
         '#type' => 'textfield',
@@ -74,7 +74,7 @@ function agov_social_links_block_configure($delta = '') {
         '#size' => 100,
         '#maxlength' => 255,
         '#default_value' => variable_get('agov_social_links_' . $service, $service_default),
-      ); 
+      );
     }
   }
   return $form;
@@ -86,7 +86,7 @@ function agov_social_links_block_configure($delta = '') {
  */
 function agov_social_links_block_save($delta = '', $edit = array()) {
   global $services;
-  
+
   if ($delta == 'services') {
     foreach ($services as $service) {
       variable_set('agov_social_links_' . $service, $edit[$service]);
@@ -99,7 +99,7 @@ function agov_social_links_block_save($delta = '', $edit = array()) {
  */
 function agov_social_links_block_view($delta = '') {
   global $services;
-  
+
   $block = array();
   switch ($delta) {
     case 'services':
@@ -109,26 +109,26 @@ function agov_social_links_block_view($delta = '') {
       foreach ($services as $service) {
         $service_default = constant('AGOV_SOCIAL_LINKS_' . strtoupper($service) . '_DEFAULT');
         $service_url = variable_get('agov_social_links_' . $service, $service_default);
-        
+
         if (!empty($service_url)) {
           // Create a human readable name for the service.
           $service_title = ucfirst($service);
           if ($service == 'rss') {
             $service_title = 'RSS Feed';
           }
-          
+
           // Load the service's image.
           $service_image = theme('image', array(
             'path' => drupal_get_path('module', 'agov_social_links') . '/images/' . $service . '.png',
             'alt' => '',
             'title' => $service_title,
           ));
-          
+
           // Build the service link.
           $block['content'] .= l($service_image, $service_url, array('html' => TRUE));
         }
-      }  
-      
+      }
+
       break;
   }
 
