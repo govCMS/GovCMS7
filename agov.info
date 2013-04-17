@@ -129,6 +129,7 @@ dependencies[] = agov_slideshow
 dependencies[] = agov_social_menu
 dependencies[] = agov_superfish_configuration
 dependencies[] = agov_sitemap
+dependencies[] = agov_social_links
 
 ; Content types
 

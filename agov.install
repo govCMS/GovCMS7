@@ -382,7 +382,7 @@ function _agov_default_blocks() {
   agov_core_insert_block('menu_block', 'agov_menu_block-sidebar', $themes, 'sidebar', -50);
   agov_core_insert_block('agov_twitter', 'feed', $themes, 'sidebar', -49);
   agov_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar', -48);
-  agov_core_insert_block('menu', 'menu-social-media', $themes, 'sidebar', -47);
+  agov_core_insert_block('agov_social_links', 'services', $themes, 'sidebar', -47);
 
   // Set some blocks in the admin theme.
   agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
