@@ -14,12 +14,10 @@ define('AGOV_SOCIAL_LINKS_RSS_DEFAULT','rss.xml');
 define('AGOV_SOCIAL_LINKS_EMAIL_DEFAULT','contact');
 
 /**
- * Implements hook_init().
+ * Returns a list of the social services.
  */
-function agov_social_links_init() {
-  // Define global services array.
-  global $services;
-  $services = array(
+function agov_social_links_services_list() {
+  return array(
     'facebook',
     'twitter',
     'youtube',
@@ -47,7 +45,7 @@ function agov_social_links_block_info() {
  * Implements hook_block_configure().
  */
 function agov_social_links_block_configure($delta = '') {
-  global $services;
+  $services = agov_social_links_services_list();
 
   $form = array();
   if ($delta == 'services') {
@@ -85,7 +83,7 @@ function agov_social_links_block_configure($delta = '') {
  * Implements hook_block_save().
  */
 function agov_social_links_block_save($delta = '', $edit = array()) {
-  global $services;
+  $services = agov_social_links_services_list();
 
   if ($delta == 'services') {
     foreach ($services as $service) {
@@ -98,7 +96,7 @@ function agov_social_links_block_save($delta = '', $edit = array()) {
  * Implements hook_block_view().
  */
 function agov_social_links_block_view($delta = '') {
-  global $services;
+  $services = agov_social_links_services_list();
 
   $block = array();
   switch ($delta) {
