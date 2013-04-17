@@ -16,7 +16,7 @@
 //
 // A Note for STARTERKIT users:
 // The STARTERKIT allows user's to complete override this file, loosing almost all aGov default styling.
-// Hence the construction of this file 
+// Hence the construction of this file
 
 
 // Imports
@@ -59,11 +59,11 @@ $breakpoint-no-query-wrappers: true;
 #section-content,
 #section-footer {
   background-color: white;
-  @include breakpoint(740px, $no-query: '.lt-ie9') { 
+  @include breakpoint(740px, $no-query: '.lt-ie9') {
     background: url('../images/shadow-bg-720.png') top center repeat-y;
     background-color: transparent;
   }
-  @include breakpoint(980px, $no-query: '.lt-ie9') { 
+  @include breakpoint(980px, $no-query: '.lt-ie9') {
     background: url('../images/shadow-bg.png') top center repeat-y;
   }
 }
@@ -103,7 +103,6 @@ $breakpoint-no-query-wrappers: true;
 	margin-left: 0;
 	margin-right: 0;
 }
-
 
 #zone-header-wrapper {
   background-image: url('../images/background.png');
@@ -348,9 +347,9 @@ input.form-submit {
  * h2 headings for teasers
  * Publications, News, Events, Media releases
  */
-.page-publications #region-content .view h2, 
+.page-publications #region-content .view h2,
 .page-news-media #region-content .view h2 {
-  
+
   font-weight: bold;
 }
 
@@ -704,7 +703,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
 	border-bottom: none;
 }
 
-.view-mode-teaser .field-name-field-thumbnail, 
+.view-mode-teaser .field-name-field-thumbnail,
 .view-mode-blog_teaser .field-name-field-thumbnail {
 	float: left;
 	margin-right: 10px;
@@ -810,7 +809,7 @@ body.page-search #section-content #region-content .content ul li {
 }
 
 #region-sidebar .block h2 {
-  @include background-image(linear-gradient(#3e7d9d, #246383)); 
+  @include background-image(linear-gradient(#3e7d9d, #246383));
   font-family: 'OpenSansBold';
   @include adjust-font-size-to(16px);
 	text-indent: 15px;
@@ -831,11 +830,11 @@ body.page-search #section-content #region-content .content ul li {
 
 #region-sidebar .block .content {
 	padding: 15px;
-	
+
 	p:last-child {
   	margin-bottom: 0;
   }
-  
+
   ul {
   	margin: 0;
     li {
@@ -848,10 +847,6 @@ body.page-search #section-content #region-content .content ul li {
     	margin-left: 0;
     }
   }
-  
-  // This should be done in image styles.
-  img { width:40px; height: 40px; }
-  
 }
 
 
@@ -933,11 +928,15 @@ body.page-search #section-content #region-content .content ul li {
 	margin-left: 7px;
 }
 
+#block-agov-twitter-feed img {
+  height:40px;width:40px;
+}
+
 /* Footer Feature/Teasers */
 
 #region-footer-feature .views-row {
 	padding: $base-line-height 0px;
-	@include breakpoint(740px, $no-query: '.lt-ie9') { 
+	@include breakpoint(740px, $no-query: '.lt-ie9') {
   	float: none;
   	@include box-sizing(border-box);
   	width: 32%;
@@ -1064,7 +1063,7 @@ body.page-search #section-content #region-content .content ul li {
       &:first-child:before {
       	content: "";
       }
-    } 
+    }
   }
 }
 
@@ -1075,7 +1074,7 @@ body.page-search #section-content #region-content .content ul li {
 	text-align: center;
 	margin: 0 0 rhythm(.75) 0;
 	text-align: center;
-	@include breakpoint(980px, $no-query: '.lt-ie9') { 
+	@include breakpoint(980px, $no-query: '.lt-ie9') {
 	  text-align: right;
 	  margin: rhythm(.75) 0;
   }
@@ -1170,7 +1169,7 @@ input.form-text {
   font-weight: bold;
 }
 
-.node-publication .field-name-field-date, 
+.node-publication .field-name-field-date,
 .node-event .field-name-field-event-date {
   margin-bottom: 1em;
 }
@@ -1297,7 +1296,7 @@ img.img-float-left {
   @include adjust-font-size-to(18px);
 }
 
-.node-event .field-label-inline, 
+.node-event .field-label-inline,
 .node-event dd {
   margin-bottom: 20px;
 }
@@ -1408,7 +1407,7 @@ img.img-float-left {
 /**
  * Customised h2 - with no border on top
  */
- 
+
 .page-news-media {
   #region-content h2 {
     border-top: none;
@@ -1457,18 +1456,18 @@ ul.contextual-links li {
   /*
  * Replaces background images with retina images for the iPhone 4.
  */
-  
+
   #block-agov-twitter h2 {
   	background: url('../images/twitter-feed-icon@2x.png') 94% 50% no-repeat !important;
   	-webkit-background-size: 31px 21px;
   }
-  
+
   #region-header-search form input.form-submit {
     background: #4C7296 url('../images/search-btn-mobile@2x.png') 50% 50% no-repeat !important;
   	-webkit-background-size: 19px 17px;
   }
-  
-  
+
+
   #block-system-main-menu select.menu {
   	background: #FFF url('../images/mobile-menu-arrow@2x.png') 95% 50% no-repeat !important;
   	-webkit-background-size: 10px 6px;
@@ -1497,7 +1496,7 @@ th.tabledrag-hide { display: none !important; }
 
 #region-content {
   outline: none;
-  
+
   .view h2 {
     margin-bottom: 0;
     border-top: none;
@@ -1547,4 +1546,18 @@ th.tabledrag-hide { display: none !important; }
   display: inline-block;
   position: relative;
   top: 2px;
+}
+
+// Social links
+///////////////////////////////////////////////////////////////////////////////
+
+.block-agov-social-links-services {
+  .content {padding:15px 5px 7px 15px !important;
+    a {
+      display:block;
+      float:left;
+      margin:0 8px 8px 0;
+    }
+    img {width:32px;height:32px;}
+  }
 }

@@ -1760,7 +1760,6 @@ body.page-search #section-content #region-content .content ul li {
   background-image: -webkit-linear-gradient(#3e7d9d, #246383);
   background-image: -moz-linear-gradient(#3e7d9d, #246383);
   background-image: -o-linear-gradient(#3e7d9d, #246383);
-  background-image: -ms-linear-gradient(#3e7d9d, #246383);
   background-image: linear-gradient(#3e7d9d, #246383);
   font-family: 'OpenSansBold';
   font-size: 1.23077em;
@@ -1798,10 +1797,6 @@ body.page-search #section-content #region-content .content ul li {
   list-style-image: none;
   padding-left: 14px;
   margin-left: 0;
-}
-#region-sidebar .block .content img {
-  width: 40px;
-  height: 40px;
 }
 
 #region-sidebar .block-menu-block .content {
@@ -1876,6 +1871,11 @@ body.page-search #section-content #region-content .content ul li {
 
 #block-agov-twitter-feed p {
   margin-left: 7px;
+}
+
+#block-agov-twitter-feed img {
+  height: 40px;
+  width: 40px;
 }
 
 /* Footer Feature/Teasers */
@@ -2521,4 +2521,17 @@ th.tabledrag-hide {
   display: inline-block;
   position: relative;
   top: 2px;
+}
+
+.block-agov-social-links-services .content {
+  padding: 15px 5px 7px 15px !important;
+}
+.block-agov-social-links-services .content a {
+  display: block;
+  float: left;
+  margin: 0 8px 8px 0;
+}
+.block-agov-social-links-services .content img {
+  width: 32px;
+  height: 32px;
 }
