@@ -5,8 +5,8 @@
  * Provides core functionality for agov_twitter.
  */
 
-define('AGOV_TWITTER_DEFAULT_TWEET_COUNT',4);
-define('AGOV_TWITTER_DEFAULT_TWITTER_NAME','PreviousNext');
+define('AGOV_TWITTER_DEFAULT_TWEET_COUNT', 4);
+define('AGOV_TWITTER_DEFAULT_TWITTER_NAME', 'PreviousNext');
 
 /**
  * Implements hook_preprocess_twitter_feed().
