@@ -5,13 +5,13 @@
  * Provides core functionality for agov_social_links.
  */
 
-define('AGOV_SOCIAL_LINKS_FACEBOOK_DEFAULT','http://www.facebook.com/pages/PreviousNext/170975076260877');
-define('AGOV_SOCIAL_LINKS_TWITTER_DEFAULT','http://www.twitter.com/PreviousNext');
-define('AGOV_SOCIAL_LINKS_YOUTUBE_DEFAULT','http://www.youtube.com');
-define('AGOV_SOCIAL_LINKS_VIMEO_DEFAULT','http://www.vimeo.com');
-define('AGOV_SOCIAL_LINKS_FLICKR_DEFAULT','http://www.flickr.com');
-define('AGOV_SOCIAL_LINKS_RSS_DEFAULT','rss.xml');
-define('AGOV_SOCIAL_LINKS_EMAIL_DEFAULT','contact');
+define('AGOV_SOCIAL_LINKS_FACEBOOK_DEFAULT', 'http://www.facebook.com/pages/PreviousNext/170975076260877');
+define('AGOV_SOCIAL_LINKS_TWITTER_DEFAULT', 'http://www.twitter.com/PreviousNext');
+define('AGOV_SOCIAL_LINKS_YOUTUBE_DEFAULT', 'http://www.youtube.com');
+define('AGOV_SOCIAL_LINKS_VIMEO_DEFAULT', 'http://www.vimeo.com');
+define('AGOV_SOCIAL_LINKS_FLICKR_DEFAULT', 'http://www.flickr.com');
+define('AGOV_SOCIAL_LINKS_RSS_DEFAULT', 'rss.xml');
+define('AGOV_SOCIAL_LINKS_EMAIL_DEFAULT', 'contact');
 
 /**
  * Returns a list of the social services.
