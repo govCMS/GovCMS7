@@ -54,6 +54,7 @@ dependencies[] = defaultcontent
 dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
+dependencies[] = entitycache
 dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = googleanalytics
