@@ -14,11 +14,14 @@ projects[bean_panels][subdir] = "contrib"
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
-projects[chosen][version] = 2.0-alpha1
+projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
 
 projects[context][version] = "3.0-beta6"
 projects[context][subdir] = "contrib"
+
+projects[ctools][version] = "1.3"
+projects[ctools][subdir] = "contrib"
 
 projects[date][version] = "2.6"
 projects[date][subdir] = "contrib"
@@ -29,7 +32,7 @@ projects[draggableviews][subdir] = "contrib"
 projects[ds][version] = "2.2"
 projects[ds][subdir] = "contrib"
 
-projects[entity][version] = "1.0"
+projects[entity][version] = "1.1"
 projects[entity][subdir] = "contrib"
 
 projects[entitycache][version] = "1.1"
@@ -66,10 +69,10 @@ projects[menu_block][subdir] = "contrib"
 projects[menu_trail_by_path][version] = "2.0"
 projects[menu_trail_by_path][subdir] = "contrib"
 
-projects[metatag][version] = "1.0-beta2"
+projects[metatag][version] = "1.0-beta7"
 projects[metatag][subdir] = "contrib"
 
-projects[references][version] = "2.0"
+projects[references][version] = "2.1"
 projects[references][subdir] = "contrib"
 
 projects[panels][version] = "3.3"
@@ -84,7 +87,10 @@ projects[pathauto_persist][subdir] = "contrib"
 projects[r4032login][version] = "1.5"
 projects[r4032login][subdir] = "contrib"
 
-projects[scheduler_workbench][version] = "1.0-alpha3"
+projects[scheduler][version] = "1.1"
+projects[scheduler][subdir] = "contrib"
+
+projects[scheduler_workbench][version] = "1.2"
 projects[scheduler_workbench][subdir] = "contrib"
 
 projects[search404][version] = "1.2"
@@ -97,10 +103,10 @@ projects[site_map][patch][] = "http://drupal.org/files/accessibility_enhancement
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
 
-projects[superfish][version] = "1.9-beta4"
+projects[superfish][version] = "1.9"
 projects[superfish][subdir] = "contrib"
 
-projects[token][version] = "1.4"
+projects[token][version] = "1.5"
 projects[token][subdir] = "contrib"
 
 projects[view_unpublished][download][type] = "git"
@@ -110,23 +116,19 @@ projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = "3.6"
+projects[views][version] = "3.7"
 projects[views][subdir] = "contrib"
 
 projects[webform][version] = "3.18"
 projects[webform][subdir] = "contrib"
 
-projects[workbench][version] = "1.1"
+projects[workbench][version] = "1.2"
 projects[workbench][subdir] = "contrib"
 
-projects[xmlsitemap][version] = "2.0-rc1"
+projects[xmlsitemap][version] = "2.0-rc2"
 projects[xmlsitemap][subdir] = "contrib"
 
 ; Patched modules
-
-projects[ctools][version] = "1.3"
-projects[ctools][subdir] = "contrib"
-
 projects[defaultconfig][version] = "1.0-alpha9"
 projects[defaultconfig][subdir] = "contrib"
 projects[defaultconfig][patch][] = "http://drupal.org/files/1940366-1-illegal-offset-warning.patch"
@@ -137,30 +139,28 @@ projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.pat
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[features][version] = "2.0-beta1"
+projects[features][version] = "2.0-beta2"
 projects[features][subdir] = "contrib"
-projects[features][patch][] = "http://drupal.org/files/features_static_caches-1063204-32.patch"
+projects[features][patch][] = "http://drupal.org/files/features--1063204-65-catch-permission-exception.patch"
 
-projects[media][version] = "2.0-unstable6"
+
+projects[media][download][type] = "git"
+projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
+projects[media][download][branch] = 7.x-2.x
+projects[media][type] = "module"
 projects[media][subdir] = "contrib"
-projects[media][patch][] = "http://drupal.org/files/media_alt_and_title-1307054-7.patch"
-
-projects[scheduler][version] = "1.0"
-projects[scheduler][subdir] = "contrib"
-projects[scheduler][patch][] = "http://drupal.org/files/more_integration_options.patch"
 
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = "contrib"
 
-projects[uuid][download][type] = "git"
-projects[uuid][download][revision] = 8b6d70f1764a83896e799712111d6b46cf482737
-projects[uuid][download][branch] = 7.x-1.x
-projects[uuid][type] = "module"
+projects[securepages][version] = "1.0-beta1"
+projects[securepages][subdir] = "contrib"
+
+projects[uuid][version] = "1.0-alpha4"
 projects[uuid][subdir] = "contrib"
 
-projects[workbench_moderation][version] = "1.2"
+projects[workbench_moderation][version] = "1.3"
 projects[workbench_moderation][subdir] = "contrib"
-projects[workbench_moderation][patch][] = "http://drupal.org/files/1825614-compare-original-before-field_attach_update.patch"
 
 projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = "contrib"
@@ -173,9 +173,6 @@ projects[flood_control][subdir] = "contrib"
 
 projects[password_policy][version] = "1.3"
 projects[password_policy][subdir] = "contrib"
-
-projects[securepages][version] = "1.0-beta1"
-projects[securepages][subdir] = "contrib"
 
 ; Login Security only has a dev release, so is pinned to a commit.
 projects[login_security][download][type] = "git"
