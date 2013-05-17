@@ -105,16 +105,16 @@ function agov_base_form_system_theme_settings_alter(&$form, &$form_state) {
 
   $form['#submit'][] = 'agov_base_form_system_theme_settings_alter_submit';
 
-  // Rearrange visual settings into design config tabs group
+  // Rearrange visual settings into design config tabs group.
   $form['design_settings']['logo'] = $form['logo'];
   $form['design_settings']['logo']['#title'] = t('Logo');
   unset($form['logo']);
   unset($form['design_settings']['logo']['#attributes']);
-  
+
   $form['design_settings']['favicon'] = $form['favicon'];
   $form['design_settings']['favicon']['#title'] = t('Favicon');
   unset($form['favicon']);
-  
+
   $form['design_settings']['theme_settings'] = $form['theme_settings'];
   unset($form['theme_settings']);
 

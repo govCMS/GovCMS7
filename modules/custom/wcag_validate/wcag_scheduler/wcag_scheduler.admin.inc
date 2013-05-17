@@ -66,7 +66,7 @@ function wcag_scheduler_config_form() {
   $form['actions']['resend'] = array(
     '#type' => 'submit',
     '#value' => 'Resend Request',
-    '#submit' => array('wcag_scheduler_resend')
+    '#submit' => array('wcag_scheduler_resend'),
   );
 
   return system_settings_form($form);
