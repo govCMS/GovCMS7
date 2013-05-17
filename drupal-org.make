@@ -35,7 +35,10 @@ projects[ds][subdir] = "contrib"
 projects[entity][version] = "1.1"
 projects[entity][subdir] = "contrib"
 
-projects[entitycache][version] = "1.1"
+projects[entitycache][download][type] = "git"
+projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce873284
+projects[entitycache][download][branch] = 7.x-1.x
+projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
 projects[file_entity][version] = "2.0-unstable7"
