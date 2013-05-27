@@ -25,7 +25,7 @@
 
 
 $breakpoint-no-queries: false;
-$breakpoint-no-query-wrappers: true;
+$breakpoint-no-query-fallbacks: true;
 
 // Base partials
 @import "base";
