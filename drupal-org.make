@@ -5,7 +5,7 @@ api = 2
 
 ; Contrib modules
 
-projects[bean][version] = "1.1"
+projects[bean][version] = "1.2"
 projects[bean][subdir] = "contrib"
 
 projects[bean_panels][version] = "1.3"
