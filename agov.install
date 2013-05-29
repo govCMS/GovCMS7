@@ -261,7 +261,7 @@ function _agov_default_formats_and_permissions() {
   user_role_revoke_permissions(
     DRUPAL_ANONYMOUS_RID,
     array(
-      'search all content'
+      'search all content',
     )
   );
   user_role_grant_permissions(
@@ -283,7 +283,7 @@ function _agov_default_formats_and_permissions() {
   user_role_revoke_permissions(
     DRUPAL_AUTHENTICATED_RID,
     array(
-      'search all content'
+      'search all content',
     )
   );
 
@@ -1027,7 +1027,7 @@ function agov_default_content() {
       'title' => st('Default slides'),
       'type' => 'module',
       'key' => 'agov_content_slides',
-    )
+    ),
   );
 
 }
