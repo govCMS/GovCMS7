@@ -54,4 +54,7 @@ features[variable][] = scheduler_unpublish_required_slide
 features[variable][] = scheduler_unpublish_revision_slide
 features[views_view][] = slideshow
 features_exclude[dependencies][image] = image
+features_exclude[field][node-slide-body] = node-slide-body
+features_exclude[field][node-slide-field_read_more] = node-slide-field_read_more
+features_exclude[field][node-slide-field_slide_image] = node-slide-field_slide_image
 project path = profiles/agov/modules/features_content
