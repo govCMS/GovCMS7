@@ -1023,6 +1023,11 @@ function agov_default_content() {
       'key' => '_agov_default_news_beans',
       'message' => st('Enabled Deafult News Beans'),
     ),
+    9 => array(
+      'title' => st('Default slides'),
+      'type' => 'module',
+      'key' => 'agov_content_slides',
+    )
   );
 
 }
