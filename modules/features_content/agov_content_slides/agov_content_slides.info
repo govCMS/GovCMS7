@@ -1,0 +1,11 @@
+name = Slides
+description = Slides for aGov Slideshow
+core = 7.x
+package = aGov content
+dependencies[] = defaultcontent
+features[content][] = slide_1
+features[content][] = slide_2
+features[content][] = slide_3
+features[features_api][] = api:1
+features_exclude[dependencies][defaultcontent] = defaultcontent
+project path = profiles/agov/modules/features_content
