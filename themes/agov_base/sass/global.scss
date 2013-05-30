@@ -25,7 +25,7 @@
 
 
 $breakpoint-no-queries: false;
-$breakpoint-no-query-wrappers: true;
+$breakpoint-no-query-fallbacks: true;
 
 // Base partials
 @import "base";
@@ -1188,6 +1188,8 @@ input.form-text {
   background: #ccc;
   box-shadow: 1px 1px 2px #000;
 }
+
+.file img { display: inline; }
 
 .node-type-media-release .file a {
   position: relative;
