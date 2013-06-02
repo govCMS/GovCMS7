@@ -145,5 +145,6 @@ function _agov_disable_defaultcontent_list() {
     'agov_content_news_article',
     'agov_content_promotion',
     'agov_content_standard_page',
+    'agov_content_slides',
   );
 }

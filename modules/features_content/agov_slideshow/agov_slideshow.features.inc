@@ -45,10 +45,10 @@ function agov_slideshow_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '320',
-          'height' => '140',
+          'width' => 320,
+          'height' => 140,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
