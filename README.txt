@@ -10,6 +10,7 @@ in this folder that can be used to build aGov with a command such as:
 
 drush make --prepare-install build-agov.make INSTALL_PATH
 
+Drupal's 'clean urls' feature is required.
 
 INSTALLING WITH AEGIR
 ---------------------
