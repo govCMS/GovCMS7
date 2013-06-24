@@ -29,7 +29,7 @@ projects[date][subdir] = "contrib"
 projects[draggableviews][version] = "2.0"
 projects[draggableviews][subdir] = "contrib"
 
-projects[ds][version] = "2.3"
+projects[ds][version] = "2.4"
 projects[ds][subdir] = "contrib"
 
 projects[entity][version] = "1.1"
@@ -96,7 +96,7 @@ projects[scheduler][subdir] = "contrib"
 projects[scheduler_workbench][version] = "1.2"
 projects[scheduler_workbench][subdir] = "contrib"
 
-projects[search404][version] = "1.2"
+projects[search404][version] = "1.3"
 projects[search404][subdir] = "contrib"
 
 projects[site_map][version] = "1.0"
