@@ -41,6 +41,9 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
+projects[features][version] = "2.0-rc1"
+projects[features][subdir] = "contrib"
+
 projects[file_entity][version] = "2.0-unstable7"
 projects[file_entity][subdir] = "contrib"
 
@@ -141,11 +144,6 @@ projects[defaultcontent][subdir] = "contrib"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
-
-projects[features][version] = "2.0-beta2"
-projects[features][subdir] = "contrib"
-projects[features][patch][] = "http://drupal.org/files/features--1063204-65-catch-permission-exception.patch"
-
 
 projects[media][download][type] = "git"
 projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
