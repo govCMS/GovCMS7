@@ -41,8 +41,14 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
-projects[file_entity][version] = "2.0-unstable7"
+projects[file_entity][download][type] = "git"
+projects[file_entity][download][revision] = a254741e575c2ae3a93734514736db6b56f89fef
+projects[file_entity][download][branch] = 7.x-2.x
+projects[file_entity][type] = "module"
 projects[file_entity][subdir] = "contrib"
+
+projects[fitvids][version] = "1.12"
+projects[fitvids][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
@@ -56,10 +62,16 @@ projects[libraries][subdir] = "contrib"
 projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
+projects[media][download][type] = "git"
+projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
+projects[media][download][branch] = 7.x-2.x
+projects[media][type] = "module"
+projects[media][subdir] = "contrib"
+
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][subdir] = "contrib"
 
-projects[media_youtube][version] = "1.0-beta3"
+projects[media_youtube][version] = "2.0-rc1"
 projects[media_youtube][subdir] = "contrib"
 
 projects[menu_attributes][version] = "1.0-rc2"
@@ -147,12 +159,6 @@ projects[features][subdir] = "contrib"
 projects[features][patch][] = "http://drupal.org/files/features--1063204-65-catch-permission-exception.patch"
 
 
-projects[media][download][type] = "git"
-projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
-projects[media][download][branch] = 7.x-2.x
-projects[media][type] = "module"
-projects[media][subdir] = "contrib"
-
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = "contrib"
 
@@ -195,11 +201,6 @@ projects[agls][subdir] = "contrib"
 
 ; Libraries
 
-libraries[chosen][download][type] = "git"
-libraries[chosen][download][url] = "https://github.com/harvesthq/chosen.git"
-libraries[chosen][directory_name] = "chosen"
-libraries[chosen][type] = "library"
-
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/master.zip"
 libraries[superfish][directory_name] = "superfish"
@@ -210,3 +211,7 @@ libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymc
 libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
 
+libraries[fitvids][download][type] = "get"
+libraries[fitvids][download][url] = "https://raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js"
+libraries[fitvids][directory_name] = "fitvids"
+libraries[fitvids][destination] = "libraries"
