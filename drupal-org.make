@@ -16,6 +16,7 @@ projects[ccl][subdir] = "contrib"
 
 projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
+projects[chosen][patch][] = "https://drupal.org/files/specified_library_version-2021641-4.patch"
 
 projects[context][version] = "3.0-beta6"
 projects[context][subdir] = "contrib"
@@ -195,11 +196,6 @@ projects[agls][subdir] = "contrib"
 
 ; Libraries
 
-libraries[chosen][download][type] = "git"
-libraries[chosen][download][url] = "https://github.com/harvesthq/chosen.git"
-libraries[chosen][directory_name] = "chosen"
-libraries[chosen][type] = "library"
-
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/master.zip"
 libraries[superfish][directory_name] = "superfish"
@@ -209,4 +205,3 @@ libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
 libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
-
