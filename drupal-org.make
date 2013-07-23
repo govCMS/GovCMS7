@@ -41,14 +41,15 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
+projects[features][version] = "2.0-rc1"
+projects[features][subdir] = "contrib"
+
+projects[file_entity][version] = "2.0-unstable7"
 projects[file_entity][download][type] = "git"
 projects[file_entity][download][revision] = a254741e575c2ae3a93734514736db6b56f89fef
 projects[file_entity][download][branch] = 7.x-2.x
 projects[file_entity][type] = "module"
 projects[file_entity][subdir] = "contrib"
-
-projects[fitvids][version] = "1.12"
-projects[fitvids][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
@@ -154,10 +155,11 @@ projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.pat
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[features][version] = "2.0-beta2"
-projects[features][subdir] = "contrib"
-projects[features][patch][] = "http://drupal.org/files/features--1063204-65-catch-permission-exception.patch"
-
+projects[media][download][type] = "git"
+projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
+projects[media][download][branch] = 7.x-2.x
+projects[media][type] = "module"
+projects[media][subdir] = "contrib"
 
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = "contrib"
