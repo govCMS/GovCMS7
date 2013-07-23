@@ -1015,13 +1015,13 @@ function agov_default_content() {
       'title' => st('Default Beans'),
       'type' => 'function',
       'key' => '_agov_default_beans',
-      'message' => st('Enabled Deafult Beans'),
+      'message' => st('Enabled Default Beans'),
     ),
     8 => array(
       'title' => st('Default News Beans'),
       'type' => 'function',
       'key' => '_agov_default_news_beans',
-      'message' => st('Enabled Deafult News Beans'),
+      'message' => st('Enabled Default News Beans'),
     ),
     9 => array(
       'title' => st('Default slides'),
