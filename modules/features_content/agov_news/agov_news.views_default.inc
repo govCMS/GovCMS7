@@ -65,7 +65,7 @@ function agov_news_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'news_article' => 'news_article',
   );
-  /* Filter criterion: Content: Featured (field_featured) */
+  /* Filter criterion: Broken/missing handler */
   $handler->display->display_options['filters']['field_featured_value']['id'] = 'field_featured_value';
   $handler->display->display_options['filters']['field_featured_value']['table'] = 'field_data_field_featured';
   $handler->display->display_options['filters']['field_featured_value']['field'] = 'field_featured_value';
