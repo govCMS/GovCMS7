@@ -295,28 +295,31 @@ body.page-search #section-content ol.search-results li {
   border-bottom: 1px solid #cccccc;
 }
 
-#region-sidebar .block {
+#region-sidebar .block,
+#region-sidebar .entity-bean {
   border-top: 3px solid #204f7d;
 }
-
-#region-sidebar .block h2 {
+#region-sidebar .block h2,
+#region-sidebar .entity-bean h2 {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #27619c), color-stop(100%, #1d4873));
+  background-image: -webkit-linear-gradient(#27619c, #1d4873);
+  background-image: -moz-linear-gradient(#27619c, #1d4873);
+  background-image: -o-linear-gradient(#27619c, #1d4873);
+  background-image: linear-gradient(#27619c, #1d4873);
   background-color: #1d4873;
   color: white;
 }
-
-#region-sidebar .block .content {
+#region-sidebar .block .content,
+#region-sidebar .entity-bean .content {
   background-color: #dee7ef;
 }
 
 #region-sidebar .block-menu-block .content ul li a {
   border-top: 1px solid #cdccce;
 }
-
-#region-sidebar .block-menu-block .content ul li a:hover,
-#region-sidebar .block-menu-block .content ul li.active a {
+#region-sidebar .block-menu-block .content ul li a:hover, #region-sidebar .block-menu-block .content ul li a.active a {
   background-color: white;
 }
-
 #region-sidebar .block-menu-block .content ul li.last.active a {
   border-bottom: 1px solid #cdccce;
 }

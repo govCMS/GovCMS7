@@ -223,6 +223,13 @@ function agov_superfish_configuration_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'superfish_small_1';
+  $strongarm->value = '0';
+  $export['superfish_small_1'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'superfish_speed_1';
   $strongarm->value = 'fast';
   $export['superfish_speed_1'] = $strongarm;
@@ -259,14 +266,14 @@ function agov_superfish_configuration_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'superfish_touchua_1';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['superfish_touchua_1'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'superfish_touch_1';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['superfish_touch_1'] = $strongarm;
 
   $strongarm = new stdClass();
