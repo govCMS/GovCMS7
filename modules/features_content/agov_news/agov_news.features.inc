@@ -49,10 +49,10 @@ function agov_news_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '640',
-          'height' => '280',
+          'width' => 640,
+          'height' => 280,
         ),
-        'weight' => '2',
+        'weight' => 2,
       ),
     ),
   );
@@ -68,7 +68,7 @@ function agov_news_node_info() {
     'news_article' => array(
       'name' => t('News Article'),
       'base' => 'node_content',
-      'description' => t('Use <em>News articles</em> to keep your audience up-to-date with the latest news. Articles flagged as "Featured" will be shown on the front page slideshow. Articles flagged "Promoted to front page" will appear in the "Latest News" section of the front page.'),
+      'description' => t('Use <em>News articles</em> to keep your audience up-to-date with the latest news. Articles flagged "Promoted to front page" will appear in the "Latest News" section of the front page.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
