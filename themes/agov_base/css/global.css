@@ -29,6 +29,62 @@
   font-style: normal;
 }
 
+#region-sidebar .block,
+#region-sidebar .entity-bean {
+  margin-bottom: 25px;
+}
+#region-sidebar .block h2,
+#region-sidebar .entity-bean h2, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content,
+#region-sidebar .entity-bean #block-views-slideshow-block .views-field-title .field-content,
+#block-views-slideshow-block .views-field-title #region-sidebar .entity-bean .field-content {
+  font-family: 'OpenSansBold';
+  font-size: 1.23077em;
+  line-height: 2.25em;
+  text-indent: 15px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+#region-sidebar .block h2 a,
+#region-sidebar .entity-bean h2 a, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content a, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content a,
+#region-sidebar .entity-bean #block-views-slideshow-block .views-field-title .field-content a,
+#block-views-slideshow-block .views-field-title #region-sidebar .entity-bean .field-content a {
+  color: #FFF;
+  text-decoration: none;
+}
+#region-sidebar .block h2 a:hover,
+#region-sidebar .entity-bean h2 a:hover, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content a:hover, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content a:hover,
+#region-sidebar .entity-bean #block-views-slideshow-block .views-field-title .field-content a:hover,
+#block-views-slideshow-block .views-field-title #region-sidebar .entity-bean .field-content a:hover {
+  text-decoration: underline;
+}
+#region-sidebar .block .content,
+#region-sidebar .entity-bean .content {
+  padding: 15px;
+}
+#region-sidebar .block .content p:last-child,
+#region-sidebar .entity-bean .content p:last-child {
+  margin-bottom: 0;
+}
+#region-sidebar .block .content p:first-child,
+#region-sidebar .entity-bean .content p:first-child {
+  margin-top: 0;
+}
+#region-sidebar .block ul,
+#region-sidebar .entity-bean ul {
+  margin: 0;
+}
+#region-sidebar .block ul li,
+#region-sidebar .entity-bean ul li {
+  background-image: url("../images/block-li-bg.png");
+  background-position: 0px 8px;
+  background-repeat: no-repeat;
+  list-style: none;
+  list-style-image: none;
+  padding-left: 14px;
+  margin-left: 0;
+}
+
 /* normalize.css v2.1.0 | MIT License | git.io/normalize */
 /* normalize.scss v2.1.0 | MIT/GPLv2 License | bit.ly/normalize-with-compass */
 /* =============================================================================
@@ -915,6 +971,74 @@ table {
   right: 320px;
 }
 
+/* Side Bar Blocks */
+#region-sidebar .block-menu-block .content {
+  padding: 0;
+}
+#region-sidebar .block-menu-block .content ul li {
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+#region-sidebar .block-menu-block .content ul li a {
+  background: url("../images/block-li-bg.png") 16px 14px no-repeat;
+  padding: 8px 0;
+  display: block;
+  text-indent: 30px;
+  font-weight: bold;
+}
+#region-sidebar .block-menu-block .content ul li.first a {
+  border-top: none;
+}
+
+/* Stay Connected */
+#region-sidebar #block-menu-menu-social-media .content ul li {
+  float: left;
+  margin-right: 15px;
+  padding-left: 0 !important;
+  background-image: none;
+}
+#region-sidebar #block-menu-menu-social-media .content ul li a {
+  display: block;
+}
+#region-sidebar #block-menu-menu-social-media .content ul .sc-item-last {
+  margin-right: 0;
+}
+
+/* Twitter Feed */
+#block-agov-twitter-feed h2, #block-agov-twitter-feed #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title #block-agov-twitter-feed .field-content {
+  background: url("../images/twitter-feed-icon.png") 94% 50% no-repeat;
+}
+#block-agov-twitter-feed h2 a, #block-agov-twitter-feed #block-views-slideshow-block .views-field-title .field-content a, #block-views-slideshow-block .views-field-title #block-agov-twitter-feed .field-content a {
+  text-decoration: none;
+}
+#block-agov-twitter-feed p {
+  margin-left: 7px;
+}
+#block-agov-twitter-feed img {
+  height: 40px;
+  width: 40px;
+}
+#block-agov-twitter-feed #tweets ul li {
+  background: none;
+  padding: 0 0 10px 3px;
+  margin-bottom: 10px;
+  padding-left: 0 !important;
+}
+#block-agov-twitter-feed #tweets ul li .tweet_avatar {
+  float: left;
+  margin-right: 10px;
+}
+#block-agov-twitter-feed #tweets ul li .tweet_text {
+  width: 217px;
+  word-wrap: break-word;
+}
+#block-agov-twitter-feed #tweets ul li .tweet_time {
+  margin-left: 50px;
+  font-size: 0.84615em;
+  line-height: 1.63636em;
+}
+
 #zone-content {
   padding: 18px 0;
 }
@@ -1748,134 +1872,6 @@ body.page-search #section-content ol.search-results h3.title a {
 body.page-search #section-content #region-content .content ul li {
   list-style: disc;
   margin: 0 0 5px 15px;
-}
-
-/* Side Bar Blocks */
-#region-sidebar .block {
-  margin-bottom: 25px;
-}
-
-#region-sidebar .block h2, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3e7d9d), color-stop(100%, #246383));
-  background-image: -webkit-linear-gradient(#3e7d9d, #246383);
-  background-image: -moz-linear-gradient(#3e7d9d, #246383);
-  background-image: -o-linear-gradient(#3e7d9d, #246383);
-  background-image: linear-gradient(#3e7d9d, #246383);
-  font-family: 'OpenSansBold';
-  font-size: 1.23077em;
-  line-height: 2.25em;
-  text-indent: 15px;
-  font-weight: normal;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 0;
-}
-
-#region-sidebar .block h2 a, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content a, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content a {
-  color: #FFF;
-  text-decoration: none;
-}
-
-#region-sidebar .block h2 a:hover, #region-sidebar .block #block-views-slideshow-block .views-field-title .field-content a:hover, #block-views-slideshow-block .views-field-title #region-sidebar .block .field-content a:hover {
-  text-decoration: underline;
-}
-
-#region-sidebar .block .content {
-  padding: 15px;
-}
-#region-sidebar .block .content p:last-child {
-  margin-bottom: 0;
-}
-#region-sidebar .block .content ul {
-  margin: 0;
-}
-#region-sidebar .block .content ul li {
-  background-image: url("../images/block-li-bg.png");
-  background-position: 0px 8px;
-  background-repeat: no-repeat;
-  list-style: none;
-  list-style-image: none;
-  padding-left: 14px;
-  margin-left: 0;
-}
-
-#region-sidebar .block-menu-block .content {
-  padding: 0;
-}
-
-#region-sidebar .block-menu-block .content ul li {
-  background: none;
-  padding: 0;
-  margin: 0;
-}
-
-#region-sidebar .block-menu-block .content ul li a {
-  background: url("../images/block-li-bg.png") 16px 14px no-repeat;
-  padding: 8px 0;
-  display: block;
-  text-indent: 30px;
-  font-weight: bold;
-}
-
-#region-sidebar .block-menu-block .content ul li.first a {
-  border-top: none;
-}
-
-/* Stay Connected */
-#region-sidebar #block-menu-menu-social-media .content ul li {
-  float: left;
-  margin-right: 15px;
-  padding-left: 0 !important;
-  background-image: none;
-}
-
-#region-sidebar #block-menu-menu-social-media .content ul .sc-item-last {
-  margin-right: 0;
-}
-
-#region-sidebar #block-menu-menu-social-media .content ul li a {
-  display: block;
-}
-
-/* Twitter Feed */
-#block-agov-twitter-feed h2, #block-agov-twitter-feed #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title #block-agov-twitter-feed .field-content {
-  background: url("../images/twitter-feed-icon.png") 94% 50% no-repeat;
-}
-
-#block-agov-twitter-feed h2 a, #block-agov-twitter-feed #block-views-slideshow-block .views-field-title .field-content a, #block-views-slideshow-block .views-field-title #block-agov-twitter-feed .field-content a {
-  text-decoration: none;
-}
-
-#block-agov-twitter-feed #tweets ul li {
-  background: none;
-  padding: 0 0 10px 3px;
-  margin-bottom: 10px;
-  padding-left: 0 !important;
-}
-
-#block-agov-twitter-feed #tweets ul li .tweet_avatar {
-  float: left;
-  margin-right: 10px;
-}
-
-#block-agov-twitter-feed #tweets ul li .tweet_text {
-  width: 217px;
-  word-wrap: break-word;
-}
-
-#block-agov-twitter-feed #tweets ul li .tweet_time {
-  margin-left: 50px;
-  font-size: 0.84615em;
-  line-height: 1.63636em;
-}
-
-#block-agov-twitter-feed p {
-  margin-left: 7px;
-}
-
-#block-agov-twitter-feed img {
-  height: 40px;
-  width: 40px;
 }
 
 /* Footer Feature/Teasers */
