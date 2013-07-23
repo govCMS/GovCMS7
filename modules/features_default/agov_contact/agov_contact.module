@@ -4,8 +4,6 @@
  * Code for the Contact feature.
  */
 
-include_once 'agov_contact.features.inc';
-
 /**
  * Implements hook_menu().
  */
