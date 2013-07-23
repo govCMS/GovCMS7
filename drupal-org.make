@@ -51,9 +51,6 @@ projects[file_entity][download][branch] = 7.x-2.x
 projects[file_entity][type] = "module"
 projects[file_entity][subdir] = "contrib"
 
-projects[fitvids][version] = "1.12"
-projects[fitvids][subdir] = "contrib"
-
 projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
 
