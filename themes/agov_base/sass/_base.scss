@@ -24,10 +24,6 @@ $legacy-support-for-ie8: true;
 // Font faces, stacks and sizes.
 //
 
-
-// Font declarations
-@import "fonts";
-
 $arial:          Arial, sans-serif;
 $base-font-family: $arial; // The font family set on the html element.
 
@@ -57,3 +53,7 @@ $font-size-small-l:		16px;
 
 @import "breakpoint";  // Add Compass.
 @import "compass";  // Add Compass.
+
+// Mixins
+
+@import "components/blocks/_m_blocks";

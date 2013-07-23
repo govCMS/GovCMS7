@@ -57,6 +57,7 @@ dependencies[] = entity
 dependencies[] = entitycache
 dependencies[] = features
 dependencies[] = file_entity
+dependencies[] = fitvids
 dependencies[] = googleanalytics
 dependencies[] = honeypot
 dependencies[] = libraries
