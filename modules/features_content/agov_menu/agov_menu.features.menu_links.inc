@@ -18,11 +18,11 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'Home',
     'options' => array(),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '1',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-50',
+    'hidden' => 0,
+    'external' => 1,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
   );
   // Exported menu link: main-menu:contact
   $menu_links['main-menu:contact'] = array(
@@ -32,11 +32,11 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'Contact',
     'options' => array(),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
   );
   // Exported menu link: main-menu:news-media
   $menu_links['main-menu:news-media'] = array(
@@ -46,27 +46,27 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'News & Media',
     'options' => array(),
     'module' => 'system',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '1',
-    'expanded' => '0',
-    'weight' => '-46',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 1,
+    'expanded' => 0,
+    'weight' => -46,
   );
   // Exported menu link: main-menu:news-media/blog
   $menu_links['main-menu:news-media/blog'] = array(
     'menu_name' => 'main-menu',
     'link_path' => 'news-media/blog',
-    'router_path' => 'news-media',
+    'router_path' => 'news-media/blog',
     'link_title' => 'Blog',
     'options' => array(
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-46',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -46,
     'parent_path' => 'news-media',
   );
   // Exported menu link: main-menu:news-media/events
@@ -79,11 +79,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-49',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -49,
     'parent_path' => 'news-media',
   );
   // Exported menu link: main-menu:news-media/media-releases
@@ -96,28 +96,28 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-47',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -47,
     'parent_path' => 'news-media',
   );
   // Exported menu link: main-menu:news-media/news
   $menu_links['main-menu:news-media/news'] = array(
     'menu_name' => 'main-menu',
     'link_path' => 'news-media/news',
-    'router_path' => 'news-media',
+    'router_path' => 'news-media/news',
     'link_title' => 'Current News',
     'options' => array(
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-50',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
     'parent_path' => 'news-media',
   );
   // Exported menu link: main-menu:news-media/news-archive
@@ -130,11 +130,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -48,
     'parent_path' => 'news-media',
   );
   // Exported menu link: main-menu:node/1
@@ -145,39 +145,11 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'About Us',
     'options' => array(),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '1',
-    'expanded' => '0',
-    'weight' => '-49',
-  );
-  // Exported menu link: main-menu:node/14
-  $menu_links['main-menu:node/14'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/14',
-    'router_path' => 'node/%',
-    'link_title' => 'Services',
-    'options' => array(),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
-  // Exported menu link: main-menu:node/15
-  $menu_links['main-menu:node/15'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/15',
-    'router_path' => 'node/%',
-    'link_title' => 'Resources',
-    'options' => array(),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-45',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 1,
+    'expanded' => 0,
+    'weight' => -49,
   );
   // Exported menu link: main-menu:publications
   $menu_links['main-menu:publications'] = array(
@@ -187,11 +159,11 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'Publications',
     'options' => array(),
     'module' => 'system',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-47',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -47,
   );
   // Exported menu link: menu-footer-sub-menu:sitemap
   $menu_links['menu-footer-sub-menu:sitemap'] = array(
@@ -201,11 +173,11 @@ function agov_menu_menu_default_menu_links() {
     'link_title' => 'Sitemap and Feeds',
     'options' => array(),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-39',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -39,
   );
   // Exported menu link: menu-quick-links:http://australia.gov.au
   $menu_links['menu-quick-links:http://australia.gov.au'] = array(
@@ -219,11 +191,11 @@ function agov_menu_menu_default_menu_links() {
       ),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '1',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
+    'hidden' => 0,
+    'external' => 1,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
   );
   // Exported menu link: menu-quick-links:http://www.agedcareaustralia.gov.au/
   $menu_links['menu-quick-links:http://www.agedcareaustralia.gov.au/'] = array(
@@ -235,11 +207,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '1',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
+    'hidden' => 0,
+    'external' => 1,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
   );
   // Exported menu link: menu-quick-links:http://www.smartraveller.gov.au/
   $menu_links['menu-quick-links:http://www.smartraveller.gov.au/'] = array(
@@ -251,11 +223,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '1',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
+    'hidden' => 0,
+    'external' => 1,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
   );
   // Exported menu link: user-menu:sitemap
   $menu_links['user-menu:sitemap'] = array(
@@ -267,11 +239,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-50',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -50,
   );
   // Exported menu link: user-menu:user/login
   $menu_links['user-menu:user/login'] = array(
@@ -283,11 +255,11 @@ function agov_menu_menu_default_menu_links() {
       'attributes' => array(),
     ),
     'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => 0,
   );
   // Translatables
   // Included for use with string extractors like potx.
@@ -300,12 +272,10 @@ function agov_menu_menu_default_menu_links() {
   t('Current News');
   t('Events');
   t('Home');
-  t('Member login');
   t('Media Releases');
+  t('Member login');
   t('News & Media');
   t('Publications');
-  t('Resources');
-  t('Services');
   t('Site map and Feeds');
   t('Sitemap and Feeds');
   t('Smartraveller');
