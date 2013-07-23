@@ -58,11 +58,7 @@ function agov_content_promotion_content_defaults() {
       ),
     ),
     'field_reference' => array(
-      'und' => array(
-        0 => array(
-          'machine_name' => 'agov_publication_4',
-        ),
-      ),
+      'und' => array(),
     ),
     'field_tags' => array(
       'und' => array(
@@ -125,11 +121,7 @@ function agov_content_promotion_content_defaults() {
       ),
     ),
     'field_reference' => array(
-      'und' => array(
-        0 => array(
-          'machine_name' => 'agov_publication_8',
-        ),
-      ),
+      'und' => array(),
     ),
     'field_tags' => array(
       'und' => array(
@@ -188,11 +180,7 @@ function agov_content_promotion_content_defaults() {
       ),
     ),
     'field_reference' => array(
-      'und' => array(
-        0 => array(
-          'machine_name' => 'agov_publication_3',
-        ),
-      ),
+      'und' => array(),
     ),
     'field_tags' => array(
       'und' => array(
