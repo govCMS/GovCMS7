@@ -213,8 +213,3 @@ libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
 libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
-
-libraries[fitvids][download][type] = "get"
-libraries[fitvids][download][url] = "https://raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js"
-libraries[fitvids][directory_name] = "fitvids"
-libraries[fitvids][destination] = "libraries"
