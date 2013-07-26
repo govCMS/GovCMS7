@@ -78,7 +78,12 @@ input.form-submit:hover {
   border: 1px solid white !important;
 }
 
-#zone-menu-wrapper {
+div #zone-menu-wrapper {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0f0f0f), color-stop(100%, #020202));
+  background-image: -webkit-linear-gradient(#0f0f0f, #020202);
+  background-image: -moz-linear-gradient(#0f0f0f, #020202);
+  background-image: -o-linear-gradient(#0f0f0f, #020202);
+  background-image: linear-gradient(#0f0f0f, #020202);
   background-color: #020202;
   border-top: 1px solid #7a7a7a;
 }
@@ -301,11 +306,11 @@ body.page-search #section-content ol.search-results li {
 }
 #region-sidebar .block h2,
 #region-sidebar .entity-bean h2 {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #008cc6), color-stop(100%, #006893));
-  background-image: -webkit-linear-gradient(#008cc6, #006893);
-  background-image: -moz-linear-gradient(#008cc6, #006893);
-  background-image: -o-linear-gradient(#008cc6, #006893);
-  background-image: linear-gradient(#008cc6, #006893);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #007aac), color-stop(100%, #006893));
+  background-image: -webkit-linear-gradient(#007aac, #006893);
+  background-image: -moz-linear-gradient(#007aac, #006893);
+  background-image: -o-linear-gradient(#007aac, #006893);
+  background-image: linear-gradient(#007aac, #006893);
   background-color: #006893;
   color: white;
 }
