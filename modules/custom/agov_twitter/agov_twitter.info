@@ -1,5 +1,0 @@
-; $Id$
-name = Twitter Feed
-description = "Provides a twitter feed block"
-core = 7.x
-package = aGov core

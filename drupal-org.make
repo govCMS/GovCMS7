@@ -126,6 +126,9 @@ projects[superfish][subdir] = "contrib"
 projects[token][version] = "1.5"
 projects[token][subdir] = "contrib"
 
+projects[twitter_block][version] = "2.1"
+projects[twitter_block][subdir] = "contrib"
+
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
 projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4ede493123f
