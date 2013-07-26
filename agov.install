@@ -12,6 +12,7 @@
 /**
  * Define a default theme constant
  */
+define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_THEME', 'agov_base');
 define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
@@ -47,6 +48,9 @@ function agov_install() {
 
   // Setup some default blocks.
   _agov_default_blocks();
+
+  // Set up twitter block.
+  _agov_twitter_block();
 
   // Set some PathAuto settings.
   _agov_default_variables();
@@ -380,7 +384,6 @@ function _agov_default_blocks() {
 
   // Set aGov sidebar blocks.
   agov_core_insert_block('menu_block', 'agov_menu_block-sidebar', $themes, 'sidebar', -50);
-  agov_core_insert_block('agov_twitter', 'feed', $themes, 'sidebar', -49);
   agov_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar', -48);
   agov_core_insert_block('agov_social_links', 'services', $themes, 'sidebar', -47);
 
@@ -397,6 +400,44 @@ function _agov_default_blocks() {
   ->condition('module', 'wcag_validate')
   ->condition('delta', 'wcag_validate')
   ->execute();
+
+}
+
+/**
+ * Insert the twitter block.
+ */
+function _agov_twitter_block() {
+  // Get all the aGov supported themes.
+  $themes = agov_core_theme_info();
+
+  $data = array(
+    "theme" => "",
+    "link_color" => "",
+    "width" => "",
+    "height" => "",
+    "chrome" => array(
+      "noheader" => "noheader",
+      "nofooter" => "nofooter",
+      "noborders" => "noborders",
+      "noscrollbar" => "noscrollbar",
+      "transparent" => "transparent",
+    ),
+    "border_color" => "",
+    "language" => "",
+    "tweet_limit" => "",
+    "related" => "",
+    "polite" => "polite",
+  );
+
+  $bid = db_insert('twitter_block')
+    ->fields(array(
+      'info' => 'Twitter Feed',
+      'widget_id' => AGOV_TWITTER_WIDGET_ID,
+      'data' => serialize($data),
+    ))
+    ->execute();
+
+  agov_core_insert_block('twitter_block', $bid, $themes, 'sidebar', -49);
 
 }
 
