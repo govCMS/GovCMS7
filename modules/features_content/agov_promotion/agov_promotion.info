@@ -7,6 +7,7 @@ version = 7.x-1.1
 project = agov_promotion
 dependencies[] = agov_news
 dependencies[] = agov_tags
+dependencies[] = agov_common_fields
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = image
