@@ -13,5 +13,6 @@ dependencies[] = image
 dependencies[] = media
 
 features[features_api][] = api:2
+features[field_base][] = body
 features[field_base][] = field_file
 features[field_base][] = field_image

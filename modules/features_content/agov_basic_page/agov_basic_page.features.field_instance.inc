@@ -205,46 +205,6 @@ The <em>body</em> field is used for the main article content.
     ),
   );
 
-  // Exported field_instance: 'node-page-field_tags'
-  $field_instances['node-page-field_tags'] = array(
-    'bundle' => 'page',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Provides grouping and single word descriptions for this <em>Standard page</em>.',
-    'display' => array(
-      'blog_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_tags',
-    'label' => 'Tags',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'apply_chosen' => 0,
-      ),
-      'type' => 'options_select',
-      'weight' => 1,
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
@@ -252,8 +212,6 @@ The <em>body</em> field is used for the main article content.
   t('Image');
   t('Provide a feature image that will be associated with this <em>Page</em>.  The image will be rendered above the page body text.');
   t('Provides a file that wil be associated with this <em>page</em> - examples may include a downloadable version of the content.');
-  t('Provides grouping and single word descriptions for this <em>Standard page</em>.');
-  t('Tags');
   t('The <em>Summary</em> field above is included in any listings of this page as well as the initial paragraph of the page view.
 The <em>body</em> field is used for the main article content. 
 ');

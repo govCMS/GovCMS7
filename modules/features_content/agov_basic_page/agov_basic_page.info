@@ -22,7 +22,6 @@ features[features_api][] = api:2
 features[field_instance][] = node-page-body
 features[field_instance][] = node-page-field_file
 features[field_instance][] = node-page-field_image
-features[field_instance][] = node-page-field_tags
 features[node][] = page
 features[variable][] = comment_anonymous_page
 features[variable][] = comment_default_mode_page
