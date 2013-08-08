@@ -469,7 +469,35 @@ function _agov_default_variables() {
     // Don't disable page caching.
     'honeypot_time_limit' => "0",
 
+
+    'xmlsitemap_settings_node_page' => array(
+      'status' => '1',
+      'priority' => '0.5',
+    ),
+
   );
+
+  // Enable xmlsitemap includes for content types.
+  $xmlsitemap_settings = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+
+  $types = array(
+    'node_page',
+    'node_blog_article',
+    'node_event',
+    'node_footer_teaser',
+    'node_media_release',
+    'node_news_article',
+    'node_page',
+    'node_publication',
+    'node_webform',
+  );
+
+  foreach ($types as $type) {
+    $variables['xmlsitemap_settings_' . $type] = $xmlsitemap_settings;
+  }
 
   foreach ($variables as $key => $value) {
     variable_set($key, $value);
