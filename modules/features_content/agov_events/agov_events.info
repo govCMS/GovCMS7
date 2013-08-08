@@ -4,7 +4,6 @@ package = aGov
 php = 5.2.4
 version = 7.x-1.6
 project = agov_events
-dependencies[] = agov_events
 dependencies[] = agov_news
 dependencies[] = agov_slideshow
 dependencies[] = agov_tags

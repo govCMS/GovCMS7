@@ -38,11 +38,11 @@ function agov_beans_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
-          'width' => '300',
+          'width' => 300,
           'height' => '',
           'upscale' => 0,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -61,11 +61,11 @@ function agov_beans_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
-          'width' => '690',
+          'width' => 690,
           'height' => '',
           'upscale' => 1,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -84,10 +84,10 @@ function agov_beans_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '80',
-          'height' => '80',
+          'width' => 80,
+          'height' => 80,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );

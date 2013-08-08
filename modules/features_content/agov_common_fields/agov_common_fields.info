@@ -1,0 +1,17 @@
+name = aGov Common Fields
+description = Common fields used in content types.
+core = 7.x
+package = aGov
+version = 7.x-1.0-beta1
+project = agov_common_fields
+features[features_api][] = api:2
+
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = file
+dependencies[] = image
+dependencies[] = media
+
+features[features_api][] = api:2
+features[field_base][] = field_file
+features[field_base][] = field_image

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * agov_media_releases.features.field_base.inc
+ * agov_common_fields.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function agov_media_releases_field_default_field_bases() {
+function agov_common_fields_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'field_file'
