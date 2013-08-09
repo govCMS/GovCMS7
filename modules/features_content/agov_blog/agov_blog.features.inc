@@ -45,10 +45,10 @@ function agov_blog_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '64',
-          'height' => '64',
+          'width' => 64,
+          'height' => 64,
         ),
-        'weight' => '2',
+        'weight' => 2,
       ),
     ),
   );

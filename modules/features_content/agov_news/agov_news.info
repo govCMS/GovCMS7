@@ -6,6 +6,7 @@ php = 5.2.4
 version = 7.x-1.4
 project = agov_news
 dependencies[] = agov_beans
+dependencies[] = agov_common_fields
 dependencies[] = agov_core
 dependencies[] = agov_tags
 dependencies[] = ctools
