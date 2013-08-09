@@ -5,6 +5,9 @@ api = 2
 
 ; Contrib modules
 
+projects[admin_views][version] = "1.2"
+projects[admin_views][subdir] = "contrib"
+
 projects[bean][version] = "1.2"
 projects[bean][subdir] = "contrib"
 
@@ -138,6 +141,9 @@ projects[view_unpublished][subdir] = "contrib"
 
 projects[views][version] = "3.7"
 projects[views][subdir] = "contrib"
+
+projects[views_bulk_operations][version] = "3.1"
+projects[views_bulk_operations][subdir] = "contrib"
 
 projects[webform][version] = "3.18"
 projects[webform][subdir] = "contrib"
