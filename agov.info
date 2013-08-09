@@ -44,6 +44,7 @@ dependencies[] = update
 ; Contrib
 
 dependencies[] = agls
+dependencies[] = admin_views
 dependencies[] = bean
 dependencies[] = bean_admin_ui
 dependencies[] = chosen
@@ -88,6 +89,7 @@ dependencies[] = superfish
 dependencies[] = twitter_block
 dependencies[] = views
 dependencies[] = views_ui
+dependencies[] = views_bulk_operations
 dependencies[] = view_unpublished
 dependencies[] = webform
 dependencies[] = workbench
