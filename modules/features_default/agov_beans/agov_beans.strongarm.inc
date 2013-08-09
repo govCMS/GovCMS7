@@ -37,6 +37,18 @@ function agov_beans_strongarm() {
         'metatags' => array(
           'weight' => '3',
         ),
+        'label' => array(
+          'weight' => '-10',
+        ),
+        'title' => array(
+          'weight' => '-9',
+        ),
+        'revision' => array(
+          'weight' => '10',
+        ),
+        'view_mode' => array(
+          'weight' => '10',
+        ),
       ),
       'display' => array(
         'title' => array(
