@@ -48,11 +48,7 @@ projects[entitycache][subdir] = "contrib"
 projects[features][version] = "2.0-rc1"
 projects[features][subdir] = "contrib"
 
-projects[file_entity][version] = "2.0-unstable7"
-projects[file_entity][download][type] = "git"
-projects[file_entity][download][revision] = a254741e575c2ae3a93734514736db6b56f89fef
-projects[file_entity][download][branch] = 7.x-2.x
-projects[file_entity][type] = "module"
+projects[file_entity][version] = "2.0-alpha1"
 projects[file_entity][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
@@ -67,10 +63,7 @@ projects[libraries][subdir] = "contrib"
 projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
-projects[media][download][type] = "git"
-projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
-projects[media][download][branch] = 7.x-2.x
-projects[media][type] = "module"
+projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
 
 projects[media_vimeo][version] = "1.0-beta5"
