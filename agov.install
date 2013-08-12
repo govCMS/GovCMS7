@@ -55,6 +55,9 @@ function agov_install() {
   // Set some PathAuto settings.
   _agov_default_variables();
 
+  // Enable full image display mode.
+  _agov_install_full_image_display();
+
   // Set default menu items.
   _agov_set_menu();
 
@@ -1281,4 +1284,36 @@ function _agov_contact_form_defaults() {
   )
     ->condition('cid', 1)
     ->execute();
+}
+
+/**
+ * Set up full display mode for media wysiwyg image display.
+ */
+function _agov_install_full_image_display() {
+  variable_set('field_bundle_settings_file__image', array(
+    'view_modes' => array(
+      'teaser' => array('custom_settings' => TRUE),
+      'full' => array('custom_settings' => TRUE),
+      'preview' => array('custom_settings' => TRUE),
+      'rss' => array('custom_settings' => FALSE),
+      'search_index' => array('custom_settings' => FALSE),
+      'search_result' => array('custom_settings' => FALSE),
+      'token' => array('custom_settings' => FALSE),
+    ),
+    'extra_fields' => array(
+      'form' => array(),
+      'display' => array(
+        'file' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
+    ),
+  ));
 }
