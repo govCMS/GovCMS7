@@ -49,7 +49,6 @@ function agov_editing_wysiwyg_default_profiles() {
       'css_path' => '',
       'css_classes' => '',
     ),
-    'metatags' => array(),
     'rdf_mapping' => array(),
   );
 
@@ -113,7 +112,6 @@ function agov_editing_wysiwyg_default_profiles() {
       'css_path' => '%bprofiles/agov/modules/features_default/agov_editing/agov_editing.tinymce.css',
       'css_classes' => '',
     ),
-    'metatags' => array(),
     'rdf_mapping' => array(),
   );
 
@@ -133,6 +131,8 @@ function agov_editing_wysiwyg_default_profiles() {
           'italic' => 1,
           'bullist' => 1,
           'numlist' => 1,
+          'outdent' => 1,
+          'indent' => 1,
           'link' => 1,
           'unlink' => 1,
           'formatselect' => 1,
@@ -140,7 +140,11 @@ function agov_editing_wysiwyg_default_profiles() {
           'sup' => 1,
           'sub' => 1,
           'blockquote' => 1,
-          'code' => 1,
+          'removeformat' => 1,
+          'charmap' => 1,
+        ),
+        'paste' => array(
+          'pasteword' => 1,
         ),
         'drupal' => array(
           'media' => 1,
@@ -162,7 +166,6 @@ function agov_editing_wysiwyg_default_profiles() {
       'css_classes' => 'Image: Inline Right=img-float-right
 Image: Inline Left=img-float-left',
     ),
-    'metatags' => array(),
     'rdf_mapping' => array(),
   );
 
