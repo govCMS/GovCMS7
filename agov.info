@@ -95,6 +95,7 @@ dependencies[] = webform
 dependencies[] = workbench
 dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
+dependencies[] = wysiwyg_filter
 dependencies[] = xmlsitemap
 dependencies[] = xmlsitemap_menu
 dependencies[] = xmlsitemap_node

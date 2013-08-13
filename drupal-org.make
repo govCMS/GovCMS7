@@ -180,6 +180,9 @@ projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
 
+projects[wysiwyg_filter][version] = "1.6-rc2"
+projects[wysiwyg_filter][subdir] = "contrib"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
