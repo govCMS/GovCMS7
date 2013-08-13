@@ -188,11 +188,7 @@ projects[flood_control][subdir] = "contrib"
 projects[password_policy][version] = "1.3"
 projects[password_policy][subdir] = "contrib"
 
-; Login Security only has a dev release, so is pinned to a commit.
-projects[login_security][download][type] = "git"
-projects[login_security][download][revision] = b78cbc902a5b517d36c0bb1d71ad0d36e53d58e5
-projects[login_security][download][branch] = 7.x-1.x
-projects[login_security][type] = "module"
+projects[login_security][version] = "1.4"
 projects[login_security][subdir] = "contrib"
 
 ; Themes
