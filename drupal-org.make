@@ -202,6 +202,7 @@ projects[omega][subdir]= "contrib"
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta1"
 projects[agls][subdir] = "contrib"
+projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.patch"
 
 ; Libraries
 
