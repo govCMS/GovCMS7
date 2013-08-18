@@ -7,12 +7,10 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function agov_beans_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function agov_beans_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "bean_admin_ui" && $api == "bean") {
     return array("version" => "5");
   }
-  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -45,6 +43,7 @@ function agov_beans_image_default_styles() {
         'weight' => 1,
       ),
     ),
+    'label' => 'image_and_text_bean',
   );
 
   // Exported image style: image_and_text_bean_large.
@@ -68,6 +67,7 @@ function agov_beans_image_default_styles() {
         'weight' => 1,
       ),
     ),
+    'label' => 'image_and_text_bean_large',
   );
 
   // Exported image style: image_and_text_bean_small.
@@ -90,6 +90,7 @@ function agov_beans_image_default_styles() {
         'weight' => 1,
       ),
     ),
+    'label' => 'image_and_text_bean_small',
   );
 
   return $styles;

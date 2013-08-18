@@ -2,7 +2,6 @@ name = Slideshow
 description = Slideshow displayed on home page.
 core = 7.x
 package = aGov
-php = 5.2.4
 version = 7.x-1.1
 project = agov_slideshow
 dependencies[] = agov_common_fields
