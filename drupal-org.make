@@ -75,7 +75,6 @@ projects[media_youtube][subdir] = "contrib"
 projects[menu_attributes][version] = "1.0-rc2"
 projects[menu_attributes][subdir] = "contrib"
 
-; FLAG
 projects[menu_block][version] = "2.3"
 projects[menu_block][subdir] = "contrib"
 
@@ -131,6 +130,7 @@ projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4e
 projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
+projects[view_unpublished][patch][] = "https://drupal.org/files/view-unpublished-wb_0.patch"
 
 projects[views][version] = "3.7"
 projects[views][subdir] = "contrib"
