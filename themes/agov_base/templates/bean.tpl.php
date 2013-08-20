@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Default theme implementation for beans.
+ * Theme implementation for beans.
  *
  * Available variables:
  * - $content: An array of comment items. Use render($content) to print them

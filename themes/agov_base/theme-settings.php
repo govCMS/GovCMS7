@@ -9,8 +9,12 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function agov_base_form_system_theme_settings_alter(&$form, &$form_state) {
+
   // Add CSS & JS.
-  drupal_add_css(drupal_get_path('theme', 'agov_base') . '/css/theme-settings.css', array('group' => CSS_THEME, 'weight' => 100));
+  drupal_add_css(drupal_get_path('theme', 'agov_base') . '/css/theme-settings.css', array(
+    'group' => CSS_THEME,
+    'weight' => 100
+  ));
   drupal_add_js(drupal_get_path('theme', 'agov_base') . '/js/theme-settings.js');
 
   // Create aGov settings tab group.

@@ -1,11 +1,12 @@
-//
-// @file
-// All print styles and overrides.
-
+/**
+ * @file
+ * Print styles.
+ */
 @import "base";
 
-// BASE PRINT STYLES
-// *****************************************************************************
+/******************************************
+ * Base print styles
+ *****************************************/
 
 * {
   background: transparent;
@@ -15,15 +16,15 @@
 }
 
 body {
-  background-color:transparent !important;
-  font-family:Arial, sans-serif;
+  background-color: transparent !important;
+  font-family: Arial, sans-serif;
 }
 
 a,
 a:visited,
 a * {
   text-decoration: underline;
-  color:blue;
+  color: blue;
 }
 
 // Add the link href after any link text
@@ -79,8 +80,6 @@ h3 {
   page-break-after: avoid;
 }
 
-
-
 // HIDDEN ELEMENTS
 // *****************************************************************************
 
@@ -90,17 +89,16 @@ h3 {
 #region-sidebar,
 #zone-featured-articles,
 #breadcrumb,
-#section-footer
-{display:none;}
+#section-footer {
+  display: none;
+}
 
 // Hide href text for site logo & name
 a.site-name[href]:after,
 a.site-logo[href]:after {
   content: "";
-  text-decoration:none;
+  text-decoration: none;
 }
-
-
 
 // ADDITIONAL STYLING
 // *****************************************************************************
@@ -108,7 +106,7 @@ a.site-logo[href]:after {
 .container-12,
 .container-16,
 .container-24 {
-  width:100% !important;
+  width: 100% !important;
 }
 
 .grid-1,
@@ -123,24 +121,24 @@ a.site-logo[href]:after {
 .grid-10,
 .grid-11,
 .grid-12 {
-  width:100% !important;
-  float:none !important;
-  margin:0 !important;
+  width: 100% !important;
+  float: none !important;
+  margin: 0 !important;
 }
 
 h1.page-title {
-  margin-top:0;
+  margin-top: 0;
 }
 
 div.views-row {
-  border-bottom:1px solid #999;
-  padding-bottom:12pt;
-  margin-bottom:12pt;
+  border-bottom: 1px solid #999;
+  padding-bottom: 12pt;
+  margin-bottom: 12pt;
 }
 
 #page #zone-header {
-  height:auto !important;
-  margin-bottom:14pt;
-  padding-bottom:14pt;
-  border-bottom:1px solid #000;
+  height: auto !important;
+  margin-bottom: 14pt;
+  padding-bottom: 14pt;
+  border-bottom: 1px solid #000;
 }

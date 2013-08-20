@@ -2,6 +2,7 @@
 
 %block-styled {
   margin-bottom: 25px;
+  width: 100%;
 
   h2 {
     font-family: 'OpenSansBold';
@@ -35,7 +36,7 @@
   ul {
     margin: 0;
     li {
-      background-image: url('../images/block-li-bg.png');
+      background-image: url('../../../images/block-li-bg.png');
       background-position: 0px 8px;
       background-repeat: no-repeat;
       list-style: none;

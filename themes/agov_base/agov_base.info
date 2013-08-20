@@ -34,10 +34,11 @@ zones[footer_copyright] = 'Footer Copyright'
 
 ; STYLESHEETS
 
-css[global.css][name] = 'Your custom global styles'
-css[global.css][description] = 'This file holds all the globally active custom CSS of your theme.'
+css[global.css][name] = 'Global styles'
+css[global.css][description] = 'Global aGov stylesheet.'
 css[global.css][options][weight] = '10'
 css[global.css][options][media] = 'screen'
+
 stylesheets[only screen and (-webkit-min-device-pixel-ratio: 2)][] = css/retina.css
 stylesheets[print][] = css/print.css
 

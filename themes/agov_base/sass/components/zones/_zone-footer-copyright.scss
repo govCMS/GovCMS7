@@ -1,0 +1,23 @@
+/*
+ * @file
+ * Compass styles for the footer copyright zone.
+ */
+
+#region-footer-copyright {
+  @include adjust-font-size-to(12px);
+  text-align: center;
+  margin: 0 0 rhythm(.75) 0;
+  text-align: center;
+  @include breakpoint($breakpoint-wide, $no-query: '.lt-ie9') {
+    text-align: right;
+    margin: rhythm(.75) 0;
+  }
+}
+
+#region-footer-copyright h2 {
+  display: none;
+}
+
+body.responsive-layout-mobile #region-footer-copyright span.pipe {
+  display: none;
+}

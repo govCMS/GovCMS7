@@ -1,0 +1,68 @@
+/*
+ * @file
+ * Compass styles for Beans
+ */
+
+#region-content .entity-bean.highlight {
+  background: #F7F7F4;
+  padding: 19px 14px;
+  border-top: 3px solid #8D98A2;
+  border-bottom: 3px solid #8D98A2;
+  margin-bottom: 30px;
+}
+
+#region-content .entity-bean.default {
+  padding-bottom: 17px;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 19px;
+}
+
+#region-content .entity-bean.bean-basic-content {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#region-content .entity-bean.highlight .field-name-field-bean-text {
+  color: #444;
+  font-weight: bold;
+  @include adjust-font-size-to(14px);
+  @include reset-baseline();
+}
+
+#region-content .entity-bean.summary-text h2 {
+  font-family: 'OpenSansSemibold';
+  border-top: none;
+  padding-top: 0;
+  @include adjust-font-size-to(18px);
+  color: #444;
+}
+
+#region-content .entity-bean.default .summary-text h2 {
+  @include adjust-font-size-to(14px);
+  padding-top: 0;
+  border-top: none;
+}
+
+#region-content .entity-bean.highlight .image {
+  margin-bottom: 19px;
+  width: 100%;
+}
+
+#region-content .entity-bean.highlight .image img {
+  width: 100%;
+  height: auto;
+}
+
+#region-content .entity-bean.summary-text p {
+  margin-bottom: 0;
+}
+
+#region-content .entity-bean.default .image {
+  float: left;
+  margin-right: 14px;
+}
+
+#region-content .entity-bean.default .summary-text {
+  margin-left: 95px;
+}
+

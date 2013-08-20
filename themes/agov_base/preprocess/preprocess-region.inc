@@ -18,7 +18,10 @@ if (strpos($theme->page['logo'], 'themes/agov_base/logo.png')) {
 }
 
 // Build logo html.
-$logo_img = theme('image', array('path' => $theme->page['logo'], 'alt' => check_plain($site_name)));
+$logo_img = theme('image', array(
+  'path' => $theme->page['logo'],
+  'alt' => check_plain($site_name)
+));
 $vars['logo'] = l($logo_img, '<front>', array('html' => TRUE));
 
 // Vars for content region.
@@ -26,22 +29,20 @@ if ($vars['elements']['#region'] == 'content') {
   $vars['tabs'] = render($theme->page['tabs']);
 }
 
-
-
 // Adds ARIA roles.
-if($vars['attributes_array']['id'] == 'region-content') {
+if ($vars['attributes_array']['id'] == 'region-content') {
   $vars['attributes_array']['role'] = 'main';
 }
 
-if($vars['attributes_array']['id'] == 'region-sidebar') {
+if ($vars['attributes_array']['id'] == 'region-sidebar') {
   $vars['attributes_array']['role'] = 'complementary';
 }
 
-if($vars['attributes_array']['id'] == 'region-header-logo') {
+if ($vars['attributes_array']['id'] == 'region-header-logo') {
   $vars['attributes_array']['role'] = 'banner';
 }
 
-if($vars['attributes_array']['id'] == 'region-header-main-menu') {
+if ($vars['attributes_array']['id'] == 'region-header-main-menu') {
   $vars['attributes_array']['role'] = 'navigation';
 }
 

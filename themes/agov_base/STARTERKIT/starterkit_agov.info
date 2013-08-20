@@ -34,9 +34,9 @@ zones[footer_copyright] = 'Footer Copyright'
 
 ; STYLESHEETS: UNCOMMENT THE THREE LINES BELOW TO REPLACE AGOV'S GLOBAL STYLESHEET
 
-;css[global.css][name] = 'Your custom global styles'
-;css[global.css][description] = 'This file holds all the globally active custom CSS of your theme.'
-;css[global.css][options][weight] = '10'
+css[styles.css][name] = 'STARTERKIT styles'
+css[styles.css][description] = 'Styles for STARTERKIT.'
+css[styles.css][options][weight] = '10'
 
 ; THEME SETTINGS DEFAULTS
 

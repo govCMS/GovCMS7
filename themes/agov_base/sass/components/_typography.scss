@@ -1,0 +1,89 @@
+/*
+ * @file
+ * Compass styles for typography.
+ */
+
+body.large-fonts {
+  @include adjust-font-size-to(16px);
+  @include reset-baseline();
+  $original-base-font-size: $base-font-size;
+  $base-font-size: 16px;
+  h1 {
+    @include h1;
+  }
+  h2 {
+    @include h2;
+  }
+  h3 {
+    @include h3;
+  }
+  $base-font-size: $original-base-font-size;
+  #region-header-search form input.form-submit {
+    width: 80px;
+  }
+  #region-header-search {
+    width: 376px;
+  }
+}
+
+ul.links li {
+  padding-left: 0;
+}
+
+a {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+html.js fieldset {
+
+  &.collapsed .fieldset-legend {
+    background: url('../../images/open-plus.jpg') 0% 50% no-repeat !important;
+  }
+
+  &.collapsible .fieldset-legend {
+    background: url('../../images/close-minus.jpg') 0% 50% no-repeat;
+  }
+}
+
+#region-content {
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+  }
+
+  ul {
+    list-style-type: square;
+    margin-left: 16px;
+  }
+
+  .no-bullets {
+    margin-left: 0;
+    li {
+      list-style: none;
+    }
+  }
+
+  .node ul.links {
+    margin-left: 0;
+    display: block;
+  }
+}
+
+/* Display image inline to the right */
+p.img-float-right,
+img.img-float-right {
+  float: right;
+  margin: 5px 0 5px 5px;
+}
+
+/* Display image inline to the left */
+p.img-float-left,
+img.img-float-left {
+  float: left;
+  margin: 0 5px 5px 5px;
+}

@@ -1,0 +1,142 @@
+/*
+ * @file
+ * Compass styles for
+ */
+body.page-comment {
+
+  @include content-default-style;
+}
+
+#comments {
+  margin-bottom: 20px;
+}
+
+#comments #comment-wrapper-header {
+  padding-top: 10px;
+}
+
+#comments #comment-wrapper-header h2 {
+  padding-top: 0;
+  border-top: none;
+}
+
+#comments #comment-wrapper-header .add-new-link a {
+  font-weight: bold;
+}
+
+#comments .comment {
+  background-image: url('../images/comment-icon.png');
+  background-position: 13px 15px;
+  background-repeat: no-repeat;
+  padding: 15px 13px 15px 46px;
+}
+
+#comments .comment.even {
+  background-image: url('../images/comment-icon.png');
+  background-position: 13px 15px;
+  background-repeat: no-repeat;
+}
+
+#comments .comment .submitted p {
+  @include adjust-font-size-to(11px);
+}
+
+#comments .comment .field-name-comment-body p:last-child {
+  margin-bottom: 0;
+}
+
+#comments #add-new-comment {
+  margin-top: 25px;
+}
+
+#comments #add-new-comment h2.title {
+  @include adjust-font-size-to(18px);
+}
+
+#comments #add-new-comment .filter-wrapper {
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+#comments #add-new-comment .filter-wrapper .form-item {
+  padding-left: 0;
+  margin-top: 0;
+  @include adjust-font-size-to(12px);
+}
+
+#comments #add-new-comment .filter-wrapper label {
+  @include adjust-font-size-to(12px);
+}
+
+#comments #add-new-comment .filter-help {
+  padding-right: 0;
+}
+
+#comments #add-new-comment .filter-help p {
+  @include adjust-font-size-to(12px);
+}
+
+#comments #add-new-comment .filter-guidelines {
+  padding-left: 0;
+  padding-top: 10px;
+}
+
+#comments #add-new-comment .filter-guidelines li {
+  @include adjust-font-size-to(12px);
+}
+
+#comments #add-new-comment label {
+  @include adjust-font-size-to(14px);
+  margin-bottom: 5px;
+}
+
+#comments #add-new-comment input.form-text {
+  width: 617px;
+  height: 22px;
+  border: 1px solid #DDD;
+}
+
+#comments #add-new-comment textarea {
+  opacity: 1 !important;
+}
+
+#comments #add-new-comment input#edit-submit {
+  float: left;
+  margin-right: 18px;
+}
+
+#comments #add-new-comment input#edit-preview {
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  text-decoration: underline;
+  margin-top: 7px;
+  background: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+#comments #add-new-comment input#edit-preview:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+#comments #add-new-comment #edit-author--2 {
+  height: 14px; /* clearfix-ish */
+}
+
+#comments #add-new-comment #edit-author--2 label {
+  float: left;
+  margin-right: 10px;
+}
+
+#comments #add-new-comment #edit-author--2 a {
+  @include adjust-font-size-to(14px);
+  float: left;
+}
+
+.form-item-subject {
+  clear: both;
+}
