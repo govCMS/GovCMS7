@@ -4,23 +4,19 @@
  *
  * Adds all global styles
  *
+ * This file includes:
+ *   1. Styles for the mobile version of aGov (mobile first).
+ *   2. ANY global CSS that applies site-wide.
+ *
+ * This file does not include:
+ *   1. Any layout-specific code for narrow or normal layouts. These should go
+ *      into specific alpha-default files.
+ *   2. Base variables, mixins, etc. This should go into _base.scss.
  */
 
-// This file includes:
-// 1. Styles for the mobile version of aGov (mobile first).
-// 2. ANY global CSS that applies site-wide.
-//
-// This file does not include:
-// 1. Any layout-specific code for narrow or normal layouts (these should go into specific alpha-default files).
-// 2. Base variables, mixins, etc (this should go into _base.scss).
-//
-// A Note for STARTERKIT users:
-// The STARTERKIT allows user's to complete override this file, loosing almost all aGov default styling.
-// Hence the construction of this file
-
-// Imports
-///////////////////////////////////////////////////////////////////////////////
-// First, lets import all our global styles, compass plugins, base partials, etc.
+/******************************************
+ * Imports
+ *****************************************/
 
 $breakpoint-no-queries: false;
 $breakpoint-no-query-fallbacks: true;
@@ -38,8 +34,10 @@ $breakpoint-no-query-fallbacks: true;
 @import "components/slideshow";
 @import "components/blocks/_blocks";
 
-// Layout Related Styles - Before some of them were in alpha-default, which was really confusing.
-// It would be nice to have a simple partial for layout rather than controlling with Omega which is confusing.
+/******************************************
+ * Layout-related styles
+ *****************************************/
+
 #zone-content {
   padding: $base-line-height 0;
 }
@@ -71,7 +69,9 @@ $breakpoint-no-query-fallbacks: true;
   padding: 0 $indent-amount;
 }
 
-// Fixes a strange clearfix bug adding padding to bottom of page. Remove clear classes later.
+/* Fixes a strange clearfix bug adding padding to bottom of page. Remove clear
+ * classes later.
+ */
 #zone-footer-menu, .page {
   overflow: hidden;
   &:after {
@@ -79,7 +79,9 @@ $breakpoint-no-query-fallbacks: true;
   }
 }
 
-/* Regions */
+/******************************************
+ * Regions
+ *****************************************/
 
 #region-feature-articles {
   width: 100%;
@@ -113,9 +115,9 @@ $breakpoint-no-query-fallbacks: true;
   height: 135px;
 }
 
-// Top Menu
-///////////////////////////////////////////////////////////////////////////////
-// Sets layout for top (user) menu links & skip to content link.
+/******************************************
+ * Top menu
+ *****************************************/
 
 #region-header-top-menu {
   height: 30px;
@@ -158,7 +160,9 @@ $breakpoint-no-query-fallbacks: true;
   }
 }
 
-/* Global / Overwrites */
+/******************************************
+ * Globals
+ *****************************************/
 
 body.toolbar {
   background-image: url('../images/background.png');
@@ -264,15 +268,17 @@ input.form-submit {
   margin-bottom: 10px;
 }
 
-/* ---------------------------
-	Page Layout
------------------------------- */
+/******************************************
+ * Page layout
+ *****************************************/
 
 #page.clearfix {
   display: block;
 }
 
-/* Search Form */
+/******************************************
+ * Search Form
+ *****************************************/
 
 #skip-to-content a {
   background: url('../images/skip-to-content-arrow.png') 0% 60% no-repeat;
@@ -363,19 +369,18 @@ input.form-submit {
   @include adjust-font-size-to(13px);
 }
 
-/**
- * h2 headings for teasers
- * Publications, News, Events, Media releases
- */
+/******************************************
+ * Content types
+ *****************************************/
 .page-publications #region-content .view h2,
 .page-news-media #region-content .view h2 {
 
   font-weight: bold;
 }
 
-/*
- * Node type blog article
- */
+/******************************************
+ * Blog
+ *****************************************/
 body.node-type-article #region-content h1,
 body.node-type-blog-article #region-content h1 {
   font-family: 'OpenSansBold';
@@ -413,16 +418,18 @@ body.node-type-blog-article #region-content h1 {
   line-height: 1.4em;
 }
 
-/*
-* Node type publication
-*/
+/******************************************
+ * Publications
+ *****************************************/
 body.node-type-publication .region-content .field-name-field-subtitle {
   margin-top: -10px;
   margin-bottom: 10px;
   font-weight: bold;
 }
 
-/* Page/Article/Comment Node */
+/******************************************
+ * Page/articles
+ *****************************************/
 
 body.page-node- #region-content #block-system-main,
 body.page-comment #region-content #block-system-main {
@@ -449,7 +456,9 @@ body.page-node #region-content .node .field-type-image img {
   height: auto;
 }
 
-/* Comments */
+/******************************************
+ * Comments
+ *****************************************/
 
 #comments {
   margin-bottom: 20px;
@@ -585,7 +594,9 @@ body.page-node #region-content .node .field-type-image img {
   clear: both;
 }
 
-/* Tabs */
+/******************************************
+ * Tabs
+ *****************************************/
 
 .tabbed-nav {
   margin-bottom: 20px;
@@ -655,15 +666,17 @@ body.page-user .tabbed-nav {
   border-left: none;
 }
 
-/**
+/******************************************
  * Workbench
- */
+ *****************************************/
 .block-workbench {
   clear: both;
   padding: 5px 0 20px;
 }
 
-/* User Login */
+/******************************************
+ * User log in
+ *****************************************/
 
 body.page-user #region-content #block-system-main {
   padding-left: 0;
@@ -705,7 +718,9 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
   line-height: 17px;
 }
 
-/* Home Page Latest News & From The Blog */
+/******************************************
+ * Site sections
+ *****************************************/
 
 .view-latest-news {
   margin-bottom: 20px;
@@ -762,7 +777,9 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
   margin: 10px 0;
 }
 
-/* Search Results */
+/******************************************
+ * Search results
+ *****************************************/
 
 body.page-search #section-content #search-form {
   padding: 25px 14px;
@@ -826,7 +843,9 @@ body.page-search #section-content #region-content .content ul li {
   margin: 0 0 5px 15px;
 }
 
-/* Footer Feature/Teasers */
+/******************************************
+ * Footer
+ *****************************************/
 
 #region-footer-feature .views-row {
   padding: $base-line-height 0px;
@@ -884,7 +903,9 @@ body.page-search #section-content #region-content .content ul li {
   float: right;
 }
 
-/* Footer Menu */
+/******************************************
+ * Footer menu
+ *****************************************/
 #zone-footer-menu {
   background-image: url('../images/footer-menu-bg.png');
   background-position: 0 0;
@@ -934,7 +955,9 @@ body.page-search #section-content #region-content .content ul li {
   font-weight: normal;
 }
 
-/* Footer Sub Menu */
+/******************************************
+ * Footer sub-menu
+ *****************************************/
 
 #region-footer-sub-menu {
   margin: rhythm(.75) 0;
@@ -960,7 +983,9 @@ body.page-search #section-content #region-content .content ul li {
   }
 }
 
-/* Copyright */
+/******************************************
+ * Copyright
+ *****************************************/
 
 #region-footer-copyright {
   @include adjust-font-size-to(12px);
@@ -1226,7 +1251,9 @@ img.img-float-left {
   float: none;
 }
 
-/* Beans */
+/******************************************
+ * Beans
+ *****************************************/
 
 #region-content .entity-bean.highlight {
   background: #F7F7F4;
@@ -1311,9 +1338,9 @@ img.img-float-left {
   }
 }
 
-/*
- ** Contextual links
- */
+/******************************************
+ * Contextual links
+ *****************************************/
 .panel-pane .contextual-links-wrapper {
   margin-top: 20px;
 }
@@ -1413,9 +1440,9 @@ th.tabledrag-hide {
   }
 }
 
-/**
+/******************************************
  * Lists
- */
+ *****************************************/
 #region-content {
   .no-bullets {
     margin-left: 0;
@@ -1425,11 +1452,9 @@ th.tabledrag-hide {
   }
 }
 
-/**
- * Event page
- * Styling for event details
- */
-
+/******************************************
+ * Events
+ *****************************************/
 .node-event {
   dt {
     font-weight: bold;
@@ -1446,17 +1471,18 @@ th.tabledrag-hide {
   display: none;
 }
 
-/**
+/******************************************
  * Sitemap
- */
+ *****************************************/
 .feed-link {
   display: inline-block;
   position: relative;
   top: 2px;
 }
 
-// Social links
-///////////////////////////////////////////////////////////////////////////////
+/******************************************
+ * Social links
+ *****************************************/
 
 .block-agov-social-links-services {
   .content {
