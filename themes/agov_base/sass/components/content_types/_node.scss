@@ -1,0 +1,40 @@
+/*
+ * @file
+ * Compass styles for Nodes.
+ */
+
+body.page-node- {
+
+  @include content-default-style;
+}
+
+.field-name-field-tags {
+  margin-bottom: 1em;
+  padding: 1em 0;
+}
+
+.field-name-field-tags .field-label {
+  float: left;
+}
+
+.field-name-field-tags .field-item {
+  display: inline;
+}
+
+.field-name-field-tags .field-item:before {
+  content: ', ';
+}
+
+.field-name-field-tags .field-item:first-child:before {
+  content: '';
+}
+
+.node-publication .field-name-field-date,
+.node-event .field-name-field-event-date {
+  margin-bottom: 1em;
+}
+
+.node-news-article ul.links,
+.node .submitted {
+  margin-bottom: 1em;
+}

@@ -1,0 +1,59 @@
+/*
+ * @file
+ * Compass styles for
+ */
+
+/* Defines a default content entity style */
+@mixin content-default-style {
+  p.article-author-date {
+    @include adjust-font-size-to(12px);
+    font-style: italic;
+  }
+
+  #region-content #block-system-main {
+    padding-left: 0;
+
+    .node {
+      .field-name-field-image {
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .field-name-field-image img,
+      .field-name-field-image img,
+      .field-name-field-feature-image img,
+      field-type-image img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+/* Defines additional styles for articles types */
+@mixin content-style-article {
+
+  padding: 10px 0;
+
+  .field-name-post-date,
+  .field-name-field-news-date {
+    font-style: italic;
+    @include adjust-font-size-to(13px);
+    margin-bottom: 3px;
+  }
+
+  .field-name-summary {
+    @include adjust-font-size-to(15px);
+    font-weight: bold;
+  }
+
+  .field-name-field-thumbnail {
+    margin-bottom: 10px;
+  }
+
+  .field-name-summary p {
+    @include adjust-font-size-to(16px);
+    font-weight: bold;
+    color: #444;;
+  }
+}

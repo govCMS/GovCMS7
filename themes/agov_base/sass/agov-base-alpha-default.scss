@@ -58,31 +58,6 @@ body.toolbar {
   float: right;
 }
 
-#region-header-search .block-agov-text-resize-text-resize {
-  display: block;
-  width: 95px;
-  float: left;
-}
-
-#region-header-search .block-agov-text-resize-text-resize #resize-buttons ul {
-  margin: 0;
-  height: 27px;
-}
-
-#region-header-search .block-agov-text-resize-text-resize #resize-buttons li {
-  float: left;
-  list-style: none;
-  margin-right: 2px;
-}
-
-#region-header-search .block-agov-text-resize-text-resize #resize-buttons li a {
-  display: block;
-  width: 27px;
-  height: 0;
-  overflow: hidden;
-  padding-top: 27px;
-}
-
 // Top Menu
 ///////////////////////////////////////////////////////////////////////////////
 // Sets layout for top (user) menu links & skip to content link.
@@ -99,10 +74,6 @@ body.toolbar {
     float: left;
     display: block;
   }
-}
-
-.block-agov-text-resize-text-resize {
-  display: block;
 }
 
 #region-header-search form input.form-submit {

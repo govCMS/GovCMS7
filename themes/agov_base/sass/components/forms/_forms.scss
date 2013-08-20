@@ -1,0 +1,27 @@
+/*
+ * @file
+ * Compass styles for
+ */
+
+.form-textarea-wrapper textarea {
+  min-height: 138px;
+}
+
+input, textarea {
+  @include form-input;
+}
+
+input.form-submit {
+  @include form-submit;
+}
+
+input.form-text {
+  height: 30px;
+  padding: 0 5px;
+}
+
+.form-item label {
+  @include adjust-font-size-to(13px);
+  margin: rhythm(.5) 0;
+  font-weight: bold;
+}

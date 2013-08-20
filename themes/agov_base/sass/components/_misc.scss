@@ -1,0 +1,72 @@
+/*
+ * @file
+ * Compass styles for miscellaneous items
+ */
+
+#skip-to-content a {
+  background: url('../../images/skip-to-content-arrow.png') 0% 60% no-repeat;
+}
+
+.block-workbench {
+  clear: both;
+  padding: 5px 0 20px;
+}
+
+.file img {
+  display: inline;
+}
+
+div.messages {
+  background-image: none;
+  padding-left: 10px;
+}
+
+/* Contextual links */
+.panel-pane .contextual-links-wrapper {
+  margin-top: 20px;
+}
+
+.panel-pane .contextual-links-trigger {
+  margin-top: 10px;
+}
+
+.panel-pane ul.contextual-links {
+  position: absolute;
+  top: 28px !important;
+}
+
+ul.contextual-links li {
+  list-style: none !important;
+}
+
+.panel-pane .contextual-links li a {
+  margin-top: 10px;
+  z-index: 2;
+}
+
+/* Front page */
+.gov-front-layout .grid-4 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.feed-link {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
+  /*
+ * Replaces background images with retina images for the iPhone 4.
+ */
+  #block-system-main-menu select.menu {
+    background: #FFF url('../../images/mobile-menu-arrow@2x.png') 95% 50% no-repeat !important;
+    -webkit-background-size: 10px 6px;
+  }
+}
+
+.wcag_validate {
+  display: none;
+}
+

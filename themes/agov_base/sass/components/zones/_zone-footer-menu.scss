@@ -1,0 +1,83 @@
+/*
+ * @file
+ * Compass styles for
+ */
+
+#zone-footer-menu {
+  background-image: url('../../../images/footer-menu-bg.png');
+  background-position: 0 0;
+  background-repeat: repeat-x;
+}
+
+#region-footer-menu {
+  padding-top: 20px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#region-footer-menu h2 {
+  display: none;
+}
+
+#region-footer-menu ul {
+  margin: 0;
+}
+
+#region-footer-menu ul li {
+  list-style: none;
+  padding: 0;
+  width: 42.5%;
+  margin-right: 5%;
+  margin-bottom: 20px;
+  float: left;
+}
+
+#region-footer-menu ul li.first {
+  display: none;
+}
+
+#region-footer-menu ul ul li {
+  float: none;
+  margin: 0;
+  line-height: 16px;
+}
+
+#region-footer-menu ul ul li.first {
+  display: inline-block;
+}
+
+#region-footer-menu ul li a {
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+#region-footer-menu ul ul li a {
+  @include adjust-font-size-to(11px);
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+#region-footer-sub-menu {
+  margin: rhythm(.75) 0;
+  h2 {
+    display: none;
+  }
+  ul {
+    text-align: center;
+    margin: 0;
+    li {
+      @include adjust-font-size-to(12px);
+      display: inline;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      &:before {
+        content: " | ";
+      }
+      &:first-child:before {
+        content: "";
+      }
+    }
+  }
+}

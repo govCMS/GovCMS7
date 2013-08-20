@@ -1,59 +1,37 @@
-///
-// @file
-// Base Partials
-//
-// Global variable, mixin, & others.
-///
+/**
+ * @file
+ * Base settings.
+ */
 
 
-// Font Sizes
-///////////////////////////////////////////////////////////////////////////////
-// Generic font-sizes, and their enlarged counterparts.
-
-
-
-
+/* Fonts */
 $indent-amount: 10px;
-
 
 $legacy-support-for-ie6: false;
 $legacy-support-for-ie7: false;
 $legacy-support-for-ie8: true;
 
-//
-// Font faces, stacks and sizes.
-//
+$arial:             Arial, sans-serif;
+$base-font-family:  $arial; // The font family set on the html element.
 
-$arial:          Arial, sans-serif;
-$base-font-family: $arial; // The font family set on the html element.
+$open:            'OpenSansRegular', $base-font-family;
+$open-bold:       'OpenSansBold', $base-font-family;
+$open-semibold:   'OpenSansSemibold', $base-font-family;
 
+$header-font-family:  $open-semibold;
+$font-body:           $arial;
+$font-monospace:      sans-serif;
 
-$open: 'OpenSansRegular', $base-font-family;
-$open-bold: 'OpenSansBold', $base-font-family;
-$open-semibold: 'OpenSansSemibold', $base-font-family;
+$base-font-size:    13px; // The font size set on the root html element.
+$base-line-height:  18px; // This line-height determines the basic unit of vertical rhythm.
 
+$h1-font-size:      28px;
+$h2-font-size:      22px;
+$h3-font-size:      15px;
 
-$header-font-family: $open-semibold;
-$font-body:        $arial;
-$font-monospace:   sans-serif;
-
-
-$base-font-size:   13px; // The font size set on the root html element.
-$base-line-height: 18px; // This line-height determines the basic unit of vertical rhythm.
-
-$h1-font-size: 28px;
-$h2-font-size: 22px;
-$h3-font-size: 15px;
-
-$font-size-small:			12px;
-$font-size-small-l:		16px;
-
-
+$font-size-small:   12px;
+$font-size-small-l: 16px;
 
 
 @import "breakpoint";  // Add Compass.
 @import "compass";  // Add Compass.
-
-// Mixins
-
-@import "components/blocks/_m_blocks";

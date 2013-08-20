@@ -1,0 +1,25 @@
+/*
+ * @file
+ * Compass styles for Media releases
+ */
+
+.node-media-release .field-name-field-file {
+  margin: 10px 0;
+}
+
+.node-media-release .field-name-field-file .field-items .field-item {
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.node-type-media-release .file-icon {
+  padding: 5px;
+  background: #ccc;
+  box-shadow: 1px 1px 2px #000;
+}
+
+.node-type-media-release .file a {
+  position: relative;
+  top: -3px;
+  margin-left: 8px;
+}

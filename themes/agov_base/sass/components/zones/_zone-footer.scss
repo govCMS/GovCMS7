@@ -1,0 +1,60 @@
+/*
+ * @file
+ * Compass styles for the footer.
+ */
+
+#region-footer-feature .views-row {
+  padding: $base-line-height 0px;
+  @include breakpoint($breakpoint-medium, $no-query: '.lt-ie9') {
+    float: none;
+    @include box-sizing(border-box);
+    width: 32%;
+    margin: 0px;
+    margin-right: 2%;
+    float: left;
+    &.views-row-last {
+      margin-right: 0px;
+    }
+  }
+  overflow: hidden;
+  display: block;
+}
+
+#region-footer-feature .block h2 {
+  display: none;
+}
+
+#region-footer-feature .block .content h2 {
+  display: block;
+  @include adjust-font-size-to(16px);
+  line-height: inherit;
+  @include padding-leader(0, 16px);
+  @include padding-trailer(.25, 16px);
+}
+
+#region-footer-feature .block .content .submitted {
+  display: none;
+}
+
+#region-footer-feature .block .content h2 a {
+  text-decoration: none;
+}
+
+#region-footer-feature .views-row {
+  border-top-style: solid;
+  border-top-width: 3px;
+}
+
+#region-footer-feature .views-row .node {
+  padding-left: 16px;
+}
+
+#region-footer-feature .views-row .field-name-field-description p {
+  @include adjust-font-size-to(12px);
+  @include leader(0, 12px);
+  @include trailer(0, 12px);
+}
+
+#region-footer-feature .views-row .views-field-field-image {
+  float: right;
+}

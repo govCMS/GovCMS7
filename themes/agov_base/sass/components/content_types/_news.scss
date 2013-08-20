@@ -1,0 +1,9 @@
+/*
+ * @file
+ * Compass styles for the News Article content type.
+ */
+
+.not-front .node-news-article {
+
+  @include content-style-article;
+}

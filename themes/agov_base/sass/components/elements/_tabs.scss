@@ -1,0 +1,72 @@
+/*
+ * @file
+ * Compass styles for tabs
+ */
+
+.tabbed-nav {
+  margin-bottom: 20px;
+}
+
+body.page-user .tabbed-nav {
+  margin-bottom: 0;
+}
+
+.tabbed-nav h2 {
+  display: none;
+}
+
+.tabbed-nav {
+  border-bottom: none;
+  height: 56px;
+}
+
+.tabbed-nav ul.tabs {
+  background-image: url('../../../images/bottom-shadow.png');
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 100%;
+  height: 56px;
+  white-space: normal !important; /* overwrites system.menus.css */
+}
+
+#region-content .tabbed-nav ul.tabs {
+  margin-left: 0;
+}
+
+.tabbed-nav ul.tabs li {
+  float: left;
+  width: 33.3%;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+}
+
+.tabbed-nav ul.tabs li a {
+  background-image: url('../../../images/bottom-shadow.png');
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  display: block;
+  height: 47px;
+  padding: 10px 0 0 0;
+  margin: 0;
+  border: none;
+  text-align: center;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.tabbed-nav ul.tabs li.active a {
+  margin-top: -2px;
+  text-decoration: none;
+}
+
+.tabbed-nav ul.tabs li a:hover {
+  text-decoration: none;
+}
+
+.tabbed-nav ul.tabs li:first-child.active a {
+  border-left: none;
+}

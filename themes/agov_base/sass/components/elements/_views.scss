@@ -1,0 +1,140 @@
+/*
+ * @file
+ * Compass styles for views and pagers.
+ */
+
+.item-list .pager {
+  height: 36px;
+  line-height: 36px;
+  margin-top: 30px;
+}
+
+.item-list .pager li {
+  margin: 0;
+}
+
+.pager a,
+.pager a.active {
+  font-weight: bold;
+}
+
+.pager .pager-current {
+  height: 26px;
+  line-height: 26px;
+  padding: 0 5px;
+}
+
+/* TODO: Refactor this into content types */
+.view-news-archive .article {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.view-news-archive .views-row-last .article {
+  padding-bottom: 0;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.view-publications .views-row,
+.view-media-releases .views-row,
+.view-events .views-row {
+  margin-bottom: 1em;
+}
+
+.view-publications .view-content h3,
+.view-media-releases .view-content h3,
+.view-events .view-content h3 {
+  margin-bottom: 5px;
+}
+
+.view-publications .views-row-last,
+.view-media-releases .views-row-last,
+.view-events .views-row-last {
+  margin-bottom: 22px;
+}
+
+.view-publications .date,
+.view-media-releases .date,
+.view-events .date,
+.not-front .view-latest-news .date {
+  font-style: italic;
+  @include adjust-font-size-to(12px);
+  display: inline-block;
+}
+
+.view-events .date br,
+.view-publications .date br,
+.view-media-releases .date br,
+.not-front .view-latest-news .date br {
+  display: none;
+}
+
+.views-field-title a {
+  font-weight: bold;
+}
+
+.view-feature-article .field-name-field-image {
+  height: 131px;
+  overflow: hidden;
+}
+
+.view-feature-article .field-name-field-image img {
+  width: 100%;
+  height: auto;
+}
+
+#region-content ul.pager {
+  margin-left: 0;
+}
+
+.block-views-latest-news-block .more-link,
+.block-views-home-page-blog-articles-block .more-link {
+  margin-top: 10px;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+#block-views-home-page-blog-articles-block .article .article-teaser-content {
+  width: auto;
+  float: none;
+}
+
+.view-events .views-field-title p {
+  margin-top: 3px;
+}
+
+.views-table {
+  width: 100%;
+}
+
+.views-table td {
+  padding: 8px;
+  vertical-align: top;
+  border: 1px solid #CCC;
+}
+
+.draggable a.tabledrag-handle {
+  margin-left: -1em;
+}
+
+.views-table td.views-field-title a {
+  line-height: 20px;
+}
+
+th.tabledrag-hide {
+  display: none !important;
+}
+
+.tabledrag-toggle-weight {
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+#region-content .view h2 {
+  margin-bottom: 0;
+  border-top: none;
+  padding: 0;
+  @include adjust-font-size-to(15px);
+  font-family: $arial;
+}
