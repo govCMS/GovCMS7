@@ -4,7 +4,6 @@
 //
 // Creates selectors necessary for aGov's SASS-powered colour scheme system.
 ///
-
 @import "base";
 
 body {
@@ -13,25 +12,27 @@ body {
 }
 
 body.toolbar {
-	background-color: $body_toolbar_bg;
+  background-color: $body_toolbar_bg;
 }
+
 body.toolbar-drawer {
   background-color: $body_toolbardrawer_bg;
 }
 
 .marker, .form-required {
-	color: $input_button;
+  color: $input_button;
 }
 
 a {
   color: $link_color;
 }
+
 a:hover {
-	color: $hover_color;
+  color: $hover_color;
 }
 
 body.page-search #section-content #search-form .search-advanced a {
-	color: $search_button;
+  color: $search_button;
 }
 
 h3 {
@@ -39,15 +40,15 @@ h3 {
 }
 
 .form-textarea-wrapper textarea {
-	border-color: $border_general;
+  border-color: $border_general;
 }
 
 input.form-submit {
-	background: $button_bg;
-	color: $button_color_light;
-	box-shadow: 1px 1px 1px $box_shadow;
-	-webkit-box-shadow: 1px 1px 1px $box_shadow;
-	-moz-box-shadow: 1px 1px 1px $box_shadow;
+  background: $button_bg;
+  color: $button_color_light;
+  box-shadow: 1px 1px 1px $box_shadow;
+  -webkit-box-shadow: 1px 1px 1px $box_shadow;
+  -moz-box-shadow: 1px 1px 1px $box_shadow;
 }
 
 input.form-submit:hover {
@@ -62,25 +63,25 @@ input.form-submit:hover {
 
 // Top Menu
 #region-header-top-menu div.block .content {
-	border-left: 1px solid $top_menu_border_right;
-	overflow: hidden;
+  border-left: 1px solid $top_menu_border_right;
+  overflow: hidden;
 }
 
 #region-header-top-menu ul.menu li {
-	border-left: 1px solid $top_menu_border_left;
-	border-right: 1px solid $top_menu_border_right;
+  border-left: 1px solid $top_menu_border_left;
+  border-right: 1px solid $top_menu_border_right;
 }
 
 #region-header-top-menu ul.menu li.first {
-	border-left: 1px solid $top_menu_border_left;
+  border-left: 1px solid $top_menu_border_left;
 }
 
 #zone-header a {
-	color: $topmenu_link_color;
+  color: $topmenu_link_color;
 }
 
 #skip-to-content {
-	border-right: 1px solid $top_menu_border_right;
+  border-right: 1px solid $top_menu_border_right;
 }
 
 #region-header-search form input.form-text {
@@ -95,36 +96,40 @@ div #zone-menu-wrapper {
 }
 
 #block-system-main-menu select.menu {
-	background-color: $base_light;
-	color: $body_color;
-	box-shadow: inset 2px 2px 2px $base_midrange;
-	-webkit-box-shadow: inset 2px 2px 2px $base_midrange;
-	-moz-box-shadow: inset 2px 2px 2px $base_midrange;
+  background-color: $base_light;
+  color: $body_color;
+  box-shadow: inset 2px 2px 2px $base_midrange;
+  -webkit-box-shadow: inset 2px 2px 2px $base_midrange;
+  -moz-box-shadow: inset 2px 2px 2px $base_midrange;
 }
 
 #region-header-main-menu .menu li ul {
   background-color: $dropdown_menu_bg;
 }
+
 #region-header-main-menu .menu li {
   border-left-color: $main_menu_border;
 }
+
 #region-header-main-menu .menu li a {
-	color: $mainmenu_link;
+  color: $mainmenu_link;
 }
+
 #region-header-main-menu .menu li ul li a {
-	color: $link_color;
-	border-bottom: 1px solid $base_light;
+  color: $link_color;
+  border-bottom: 1px solid $base_light;
 }
+
 #region-header-main-menu .menu li ul li a:hover {
-	background: $base_light;
-	color: $hover_color;
+  background: $base_light;
+  color: $hover_color;
 }
 
 #region-header-main-menu .menu :hover a,
 #region-header-main-menu .menu ul ul :hover a {
-	background: $dropdown_menu_bg;
-	color: $link_color;
-	text-shadow: none;
+  background: $dropdown_menu_bg;
+  color: $link_color;
+  text-shadow: none;
 }
 
 #region-header-main-menu .menu a.active {
@@ -138,7 +143,7 @@ div #zone-menu-wrapper {
   background: $text_bg;
 }
 
-#region-header-search form input.form-submit  {
+#region-header-search form input.form-submit {
   background-image: none;
   background-color: $search_button;
 }
@@ -150,8 +155,8 @@ div #zone-menu-wrapper {
 
 #region-content h1,
 #region-content h2 {
-	color: $h1;
-	border-top: 3px solid $border_theme;
+  color: $h1;
+  border-top: 3px solid $border_theme;
 }
 
 .page-news-media #region-content .view h2,
@@ -173,11 +178,11 @@ div #zone-menu-wrapper {
 }
 
 #comments .comment {
-	background-color: $comment_bg;
+  background-color: $comment_bg;
 }
 
 #comments .comment.even {
-	background-color: $text_bg;
+  background-color: $text_bg;
 }
 
 #comments #add-new-comment .filter-wrapper {
@@ -185,11 +190,11 @@ div #zone-menu-wrapper {
 }
 
 #comments #add-new-comment input#edit-preview {
-	color: $input_button;
+  color: $input_button;
 }
 
 #comments #add-new-comment input#edit-preview:hover {
-	color: $text_darkest;
+  color: $text_darkest;
 }
 
 // Tabs
@@ -198,49 +203,53 @@ div #zone-menu-wrapper {
 }
 
 .tabbed-nav ul.tabs {
-	background-color: $tab_bg;
+  background-color: $tab_bg;
 }
 
 .tabbed-nav ul.tabs li a {
-	background-color: $tab_bg;
+  background-color: $tab_bg;
 }
 
 .tabbed-nav ul.tabs li.active a {
-	background: $text_bg;
-	color: $text_active;
-	border-top: 2px solid $border_util;
-	border-left: 1px solid $border_tab;
-	border-right: 1px solid $border_tab;
+  background: $text_bg;
+  color: $text_active;
+  border-top: 2px solid $border_util;
+  border-left: 1px solid $border_tab;
+  border-right: 1px solid $border_tab;
 }
 
 // User Login
 body.page-user #region-content #block-system-main {
-	border: 1px solid $border_tab;
+  border: 1px solid $border_tab;
 }
 
 body.page-user #region-content #block-system-main .block-inner form .form-item label {
-	color: $text_blog;
+  color: $text_blog;
 }
+
 body.page-user #region-content #block-system-main .block-inner form .form-item input.form-text {
-	background: $content_bg;
-	border: 1px solid $border_tab;
-	color: $text_light;
+  background: $content_bg;
+  border: 1px solid $border_tab;
+  color: $text_light;
 }
 
 // Home Page Featured Articles
 #block-views-slideshow-block {
   background-color: $home_feature_bg;
 }
+
 #zone-featured-articles {
-	background: $text_bg;
+  background: $text_bg;
 }
+
 #region-feature-articles {
-	background-color: $region_feature_bg;
+  background-color: $region_feature_bg;
 }
+
 #region-feature-articles .views-field-title a,
 #region-feature-articles .views-field-title {
-	color: $h2;
-	text-shadow: 1px 1px 0 $text_bg;
+  color: $h2;
+  text-shadow: 1px 1px 0 $text_bg;
 }
 
 // Featured Article Pager
@@ -251,19 +260,24 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
   color: $text_darkest;
   border: none;
 }
+
 #block-views-slideshow-block ul li.current a {
   background-color: $text_active;
-	color: $text_bg !important;
+  color: $text_bg !important;
 }
+
 #block-views-slideshow-block ul li a.playing {
-	background-color: $link_light_alpha;
+  background-color: $link_light_alpha;
 }
+
 #block-views-slideshow-block ul li a.paused {
-	background-color: $text_active;
+  background-color: $text_active;
 }
+
 #block-views-slideshow-block ul li a:focus {
   border: 2px solid $link_color;
 }
+
 #block-views-slideshow-block ul li.current a:focus {
   border: 2px solid $link_color;
 }
@@ -271,31 +285,36 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 // Home Page Latest News & From The Blog
 #block-views-latest-news-block .content .views-row,
 .view-home-page-blog-articles .views-row {
-	border-bottom: 1px solid $border_tab;
+  border-bottom: 1px solid $border_tab;
 }
 
 // Search results
 body.page-search #section-content #search-form {
-	background-color: $comment_bg;
-	border-top: 3px solid $border_util;
+  background-color: $comment_bg;
+  border-top: 3px solid $border_util;
 }
+
 body.page-search #section-content #search-form #edit-basic {
-	border-bottom: 1px solid $border_tab;
+  border-bottom: 1px solid $border_tab;
 }
+
 body.page-search #section-content #search-form #edit-basic input.form-text {
   box-shadow: inset 0 0 3px $box_shadow;
-	border: 1px solid $border_tab;
-	color: $text_light;
+  border: 1px solid $border_tab;
+  color: $text_light;
 }
+
 body.page-search #section-content #search-form #edit-basic input.form-submit {
-	background: $input_button;
-	color: $text_bg;
+  background: $input_button;
+  color: $text_bg;
 }
+
 body.page-search #section-content .content h2 {
-	border-top: 3px solid $border_theme;
+  border-top: 3px solid $border_theme;
 }
+
 body.page-search #section-content ol.search-results li {
-	border-bottom: 1px solid $border_tab;
+  border-bottom: 1px solid $border_tab;
 }
 
 // Sidebar blocks
@@ -333,24 +352,28 @@ body.page-search #section-content ol.search-results li {
 
 // Twitter feed
 #block-agov-twitter-feed h2 a {
-	color: $block_h2;
+  color: $block_h2;
 }
+
 #block-agov-twitter-feed #tweets ul li {
-	border-bottom: 1px solid $twitter_border;
+  border-bottom: 1px solid $twitter_border;
 }
 
 // Footer Feature/Teasers
 #region-footer-feature {
-	background: $footer_feature_bg;
+  background: $footer_feature_bg;
 }
+
 #region-footer-feature .block .content h2 {
-	color: $footer_h2;
+  color: $footer_h2;
 }
+
 #region-footer-feature .block .content h2 a {
-	color: $h2;
+  color: $h2;
 }
+
 #region-footer-feature .views-row {
-	border-top: 1px solid $border_tab;
+  border-top: 1px solid $border_tab;
 }
 
 // Footer menu
@@ -358,39 +381,46 @@ body.page-search #section-content ol.search-results li {
   background-image: none !important;
   background-color: $footer_region_bg;
 }
+
 #region-footer-menu ul li a {
-	color: $footer_link;
-	font-weight:bold;
+  color: $footer_link;
+  font-weight: bold;
 }
 
 // Footer bottom
 #zone-footer-copyright {
-	background-color: $content_bg;
+  background-color: $content_bg;
 }
 
 // Footer sub menu
 #region-footer-sub-menu ul li a {
-	color: $link_color;
+  color: $link_color;
 }
+
 .view-news-archive .article {
   border-bottom: 1px solid $border_tab;
 }
+
 .item-list .pager {
   background-color: $comment_bg;
   border-top: 3px solid $comment_border_top;
 }
+
 .pager a,
 .pager a.active {
   color: $pager_active;
 }
+
 .pager .pager-current {
   background-color: $pager_current;
   color: $text_bg;
 }
+
 input.form-text {
   border: 1px solid $border_tab;
   color: $text_blog;
 }
+
 .view-events caption,
 .view-publications caption,
 .view-media-releases caption,
@@ -398,6 +428,7 @@ input.form-text {
 .not-front .view-latest-news caption {
   color: $text_summary;
 }
+
 .view-events tbody tr,
 .view-publications tbody tr,
 .view-media-releases tbody tr,
@@ -405,24 +436,30 @@ input.form-text {
 .not-front .view-latest-news tbody tr {
   border-bottom: 1px solid $border_tab;
 }
+
 .field-name-field-documentation {
   border-bottom: 1px solid $border_tab;
 }
+
 div.messages {
   background-color: $region_feature_bg;
   border: 1px solid $message_border;
   color: $message_color;
 }
+
 .field-name-field-tags {
   border-bottom: 1px solid $border_tab;
   border-top: 1px solid $border_tab;
 }
+
 #region-content .node-event h2 {
   border-top: 1px solid $border_tab;
 }
+
 #region-header-main-menu .menu li.active-trail li a {
   color: $input_button;
 }
+
 .block-views-latest-news-block .more-link,
 .block-views-home-page-blog-articles-block .more-link {
   border-top: 1px solid $border_tab;

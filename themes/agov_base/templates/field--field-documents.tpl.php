@@ -1,3 +1,9 @@
+<?php
+/**
+ * @file
+ * Theme implementation to render the documents field.
+ */
+?>
 <div class="<?php print $classes; ?>">
   <div class="field-label">Documents:</div>
   <ul class="field-items no-bullets">

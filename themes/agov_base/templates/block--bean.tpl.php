@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a block.
+ * Theme implementation to display a bean rendered as a block.
  *
  * Available variables:
  * - $block->subject: Block title.

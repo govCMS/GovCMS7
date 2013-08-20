@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation to display a block.
+ * Default theme implementation to display an Image and Text bean.
  *
  * Available variables:
  * - $block->subject: Block title.
@@ -47,7 +47,7 @@
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <div class="content"<?php print $content_attributes; ?>>
-    
+
     <?php if (!empty($content['field_bean_image'])) : ?>
       <div class="image">
         <?php print render($content['field_bean_image']); ?>
@@ -65,6 +65,6 @@
         </div>
       <?php endif; ?>
     </div>
-    
+
   </div>
 </div>

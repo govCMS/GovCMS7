@@ -7,26 +7,26 @@
  */
 
 body {
-	background-position: 0 0;
+  background-position: 0 0;
 }
 
 body.toolbar {
-	background-position: 0px 30px;
+  background-position: 0px 30px;
 }
 
 /* Regions */
 
 #zone-header {
-	height: 115px !important;
+  height: 115px !important;
 }
 
 #region-header-logo {
-	float: left;
-	margin-top: 20px;
+  float: left;
+  margin-top: 20px;
 }
 
 #region-header-search {
-	float: right;
+  float: right;
 }
 
 /* Drop Down Menu */
@@ -54,56 +54,55 @@ body.toolbar {
 }
 
 #block-search-form {
-	display: block;
-	float: right;
+  display: block;
+  float: right;
 }
 
 #region-header-search .block-agov-text-resize-text-resize {
-	display: block;
-	width: 95px;
-	float: left;
+  display: block;
+  width: 95px;
+  float: left;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons ul {
-	margin: 0;
-	height: 27px;
+  margin: 0;
+  height: 27px;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons li {
-	float: left;
-	list-style: none;
-	margin-right: 2px;
+  float: left;
+  list-style: none;
+  margin-right: 2px;
 }
 
 #region-header-search .block-agov-text-resize-text-resize #resize-buttons li a {
-	display: block;
-	width: 27px;
-	height: 0;
-	overflow: hidden;
-	padding-top: 27px;
+  display: block;
+  width: 27px;
+  height: 0;
+  overflow: hidden;
+  padding-top: 27px;
 }
-
 
 // Top Menu
 ///////////////////////////////////////////////////////////////////////////////
 // Sets layout for top (user) menu links & skip to content link.
 
 #region-header-top-menu {
-	background: none;
-	padding:0;
-	float:right;
-	margin:14px 10px 19px;
-	text-align:right;
-	width: auto;
+  background: none;
+  padding: 0;
+  float: right;
+  margin: 14px 10px 19px;
+  text-align: right;
+  width: auto;
 
-	#skip-to-content,#block-system-user-menu {
-	  float: left; 
-    display: block;  
-	}
+  #skip-to-content, #block-system-user-menu {
+    float: left;
+    display: block;
+  }
 }
 
 .block-agov-text-resize-text-resize {
-	display: block;
+  display: block;
 }
 
 #region-header-search form input.form-submit {
@@ -129,10 +128,10 @@ body.toolbar {
 }
 
 #region-footer-feature .views-row .field-name-field-description {
-	float: left;
+  float: left;
 }
 
-#zone-content, 
+#zone-content,
 #zone-footer-copyright,
 #zone-featured-articles {
   background: none;
@@ -187,5 +186,5 @@ body.toolbar {
 }
 
 #block-views-slideshow-block {
-  display:block;
+  display: block;
 }

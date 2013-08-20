@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Default theme implementation for comments.
+ * Theme implementation for comments.
  *
  * Available variables:
  * - $author: Comment author. Can be link or plain text.
@@ -59,13 +59,14 @@
 ?>
 
 <div class="<?php print $zebra . ' ' . $classes; ?> clearfix"<?php print $attributes; ?>>
-	<div class="submitted">
-		<p>Posted by <strong><?php print check_plain($comment->name); ?></strong> on <?php print format_date($comment->created, 'custom', 'l jS F, Y'); ?>
+  <div class="submitted">
+    <p>Posted by <strong><?php print check_plain($comment->name); ?></strong>
+      on <?php print format_date($comment->created, 'custom', 'l jS F, Y'); ?>
   </div>
   <div class="content"<?php print $content_attributes; ?>>
     <?php
-      hide($content['links']);
-      print render($content);
+    hide($content['links']);
+    print render($content);
     ?>
   </div>
 </div>
