@@ -34,7 +34,7 @@ function agov_media_releases_views_default_views() {
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['grouping'] = array(
     0 => array(
-      'field' => 'created',
+      'field' => 'created_1',
       'rendered' => 1,
       'rendered_strip' => 1,
     ),
