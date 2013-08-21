@@ -3,6 +3,11 @@
  * Base settings.
  */
 
+$breakpoint-no-queries: false;
+$breakpoint-no-query-fallbacks: true;
+
+$breakpoint-wide: 980px;
+$breakpoint-medium: 740px;
 
 /* Fonts */
 $indent-amount: 10px;

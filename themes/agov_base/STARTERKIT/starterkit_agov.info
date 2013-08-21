@@ -32,7 +32,7 @@ zones[footer] = 'Footer'
 zones[footer_menu] = 'Footer Menu'
 zones[footer_copyright] = 'Footer Copyright'
 
-; STYLESHEETS: UNCOMMENT THE THREE LINES BELOW TO REPLACE AGOV'S GLOBAL STYLESHEET
+; STYLESHEETS:
 
 css[styles.css][name] = 'STARTERKIT styles'
 css[styles.css][description] = 'Styles for STARTERKIT.'
