@@ -30,9 +30,12 @@ $font-monospace:      sans-serif;
 $base-font-size:    13px; // The font size set on the root html element.
 $base-line-height:  18px; // This line-height determines the basic unit of vertical rhythm.
 
-$h1-font-size:      28px;
-$h2-font-size:      22px;
-$h3-font-size:      15px;
+$h1-font-size:      34px;
+$h2-font-size:      $h1-font-size * 0.8;
+$h3-font-size:      $h1-font-size * 0.6;
+$h4-font-size:      $h1-font-size * 0.5;
+$h5-font-size:      $h1-font-size * 0.5;
+$h6-font-size:      $base-font-size;
 
 $font-size-small:   12px;
 $font-size-small-l: 16px;

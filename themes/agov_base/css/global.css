@@ -234,27 +234,54 @@ h1, h2, #block-views-slideshow-block .views-field-title .field-content {
 
 h1 {
   /* Set the font-size and line-height while keeping a proper vertical rhythm. */
-  font-size: 2.15385em;
-  line-height: 1.28571em;
+  font-size: 2.61538em;
+  line-height: 1.58824em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  padding-top: 0.32143em;
-  padding-bottom: 0.32143em;
+  padding-top: 0.26471em;
+  padding-bottom: 0.26471em;
   margin: 0px;
 }
 
 h2, #block-views-slideshow-block .views-field-title .field-content {
-  font-size: 1.69231em;
-  line-height: 1.63636em;
-  padding-top: 0.40909em;
-  padding-bottom: 0.40909em;
+  font-size: 2.09231em;
+  line-height: 1.32353em;
+  padding-top: 0.33088em;
+  padding-bottom: 0.33088em;
   margin: 0px;
 }
 
 h3 {
-  font-size: 1.15385em;
-  line-height: 2.4em;
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+  font-size: 1.56923em;
+  line-height: 1.76471em;
+  margin-top: 0.44118em;
+  margin-bottom: 0.44118em;
+  color: #555;
+  line-height: 1.38462em;
+}
+
+h4 {
+  font-size: 1.30769em;
+  line-height: 2.11765em;
+  margin-top: 0.52941em;
+  margin-bottom: 0.52941em;
+  color: #555;
+  line-height: 1.38462em;
+}
+
+h5 {
+  font-size: 1.30769em;
+  line-height: 2.11765em;
+  margin-top: 0.52941em;
+  margin-bottom: 0.52941em;
+  color: #555;
+  line-height: 1.38462em;
+}
+
+h6 {
+  font-size: 1em;
+  line-height: 1.38462em;
+  margin-top: 0.69231em;
+  margin-bottom: 0.69231em;
   color: #555;
   line-height: 1.38462em;
 }
@@ -617,25 +644,25 @@ body.large-fonts {
 }
 body.large-fonts h1 {
   /* Set the font-size and line-height while keeping a proper vertical rhythm. */
-  font-size: 1.75em;
-  line-height: 1.28571em;
+  font-size: 2.125em;
+  line-height: 1.58824em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  padding-top: 0.32143em;
-  padding-bottom: 0.32143em;
+  padding-top: 0.26471em;
+  padding-bottom: 0.26471em;
   margin: 0px;
 }
 body.large-fonts h2, body.large-fonts #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title body.large-fonts .field-content {
-  font-size: 1.375em;
-  line-height: 1.63636em;
-  padding-top: 0.40909em;
-  padding-bottom: 0.40909em;
+  font-size: 1.7em;
+  line-height: 1.32353em;
+  padding-top: 0.33088em;
+  padding-bottom: 0.33088em;
   margin: 0px;
 }
 body.large-fonts h3 {
-  font-size: 0.9375em;
-  line-height: 2.4em;
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+  font-size: 1.275em;
+  line-height: 1.76471em;
+  margin-top: 0.44118em;
+  margin-bottom: 0.44118em;
   color: #555;
   line-height: 1.125em;
 }
@@ -1384,7 +1411,7 @@ body.responsive-layout-mobile #region-footer-copyright span.pipe {
   display: block;
 }
 #block-views-slideshow-block .views-field-title {
-  margin-top: 0.81818em;
+  margin-top: 0.66176em;
 }
 #block-views-slideshow-block .views-field-title .field-content {
   margin: 0px;

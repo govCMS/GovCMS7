@@ -215,10 +215,10 @@ blockquote {
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari 5, and Chrome.
  */
- 
-h1, h2 { 
-  font-family: $header-font-family; 
-  font-weight: normal; 
+
+h1, h2 {
+  font-family: $header-font-family;
+  font-weight: normal;
 }
 
 @mixin h1() {
@@ -246,11 +246,53 @@ h1, h2 {
   @include reset-baseline;
 }
 
+@mixin h4() {
+  @include adjust-font-size-to($h4-font-size);
+  @include leader(.5, $h4-font-size);
+  @include trailer(.5, $h4-font-size);
+  color: #555;
+  @include reset-baseline;
+}
 
-h1 { @include h1; }
-h2 { @include h2; }
-h3 { @include h3; }
+@mixin h5() {
+  @include adjust-font-size-to($h5-font-size);
+  @include leader(.5, $h5-font-size);
+  @include trailer(.5, $h5-font-size);
+  color: #555;
+  @include reset-baseline;
+}
 
+@mixin h6() {
+  @include adjust-font-size-to($h6-font-size);
+  @include leader(.5, $h6-font-size);
+  @include trailer(.5, $h6-font-size);
+  color: #555;
+  @include reset-baseline;
+}
+
+h1 {
+  @include h1;
+}
+
+h2 {
+  @include h2;
+}
+
+h3 {
+  @include h3;
+}
+
+h4 {
+  @include h4;
+}
+
+h5 {
+  @include h5;
+}
+
+h6 {
+  @include h6;
+}
 
 /**
  * Address styling not present in IE 8/9, Safari 5, and Chrome.
