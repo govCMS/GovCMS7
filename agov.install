@@ -340,7 +340,7 @@ function _agov_date_formats() {
     'agov_month_day_year' => array(
       'format' => array(
         'type' => 'agov_month_day_year',
-        'format' => 'F j, Y',
+        'format' => 'j F Y',
         'locked' => TRUE,
         'is_new' => TRUE,
       ),
