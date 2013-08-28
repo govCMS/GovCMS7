@@ -14,7 +14,7 @@
     margin: 0;
 
     a {
-      background: url('../../../images/block-li-bg.png') 16px 14px no-repeat;
+      background: image-url('block-li-bg.png') 16px 14px no-repeat;
       padding: 8px 0;
       display: block;
       text-indent: 30px;
@@ -51,7 +51,7 @@
 
 #block-agov-twitter-feed {
   h2 {
-    background: url('../../../images/twitter-feed-icon.png') 94% 50% no-repeat;
+    background: image-url('twitter-feed-icon.png') 94% 50% no-repeat;
 
     a {
       text-decoration: none;

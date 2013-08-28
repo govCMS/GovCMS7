@@ -7,6 +7,7 @@ sass_dir = "sass"
 images_dir = "images"
 javascripts_dir = "js"
 fonts_dir = "fonts"
+relative_assets = true
 
 # Leave this as expanded for now.
 output_style = :expanded

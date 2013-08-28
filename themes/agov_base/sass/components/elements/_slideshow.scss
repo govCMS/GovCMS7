@@ -135,12 +135,12 @@
           padding-top: 27px; 
         }
         &.playing {
-          background-image: url('../images/featured-articles-pause.png');
+          background-image: image-url('featured-articles-pause.png');
           background-position: 0px -27px;
           background-repeat: no-repeat;
         }
         &.paused {
-          background-image: url('../images/featured-articles-pause.png');
+          background-image: image-url('featured-articles-pause.png');
           background-repeat: no-repeat;
         }
       }

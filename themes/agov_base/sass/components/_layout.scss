@@ -6,12 +6,12 @@
 body {
 
   .toolbar {
-    background-image: url('../../images/background.png');
+    background-image: image-url('background.png');
     background-repeat: repeat-x;
   }
 
   .toolbar-drawer {
-    background-image: url('../../images/background.png') !important;
+    background-image: image-url('background.png') !important;
     background-position: 0px 65px !important;
     background-repeat: repeat-x !important;
   }
@@ -26,7 +26,7 @@ body {
 }
 
 #zone-header-wrapper {
-  background-image: url('../../images/background.png');
+  background-image: image-url('background.png');
   background-position: 0 0;
   background-repeat: repeat-x;
   height: 135px;
@@ -44,7 +44,7 @@ body {
 }
 
 #zone-menu-wrapper {
-  background-image: url('../../images/menu-bg.png');
+  background-image: image-url('menu-bg.png');
   background-position: 0 0;
   background-repeat: repeat-x;
   height: 39px;
@@ -56,9 +56,9 @@ body {
 }
 
 #region-feature-articles {
-  background-image: url('../../images/mobile-menu-shadow.png');
+  background-image: image-url('mobile-menu-shadow.png');
   background-repeat: repeat-x;
-  background: #DEE7EF url('../../images/mobile-menu-shadow.png') repeat-x;
+  background: #DEE7EF image-url('mobile-menu-shadow.png') repeat-x;
   margin-left: 0;
   margin-right: 0;
 }

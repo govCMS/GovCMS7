@@ -39,7 +39,7 @@ body.page-search #section-content #search-form .search-advanced a {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   border: none;
-  background-image: url('../../../images/search-btn-mobile.png');
+  background-image: image-url('search-btn-mobile.png');
   background-position: 50% 50%;
   background-repeat: no-repeat;
   width: 32px;
@@ -122,7 +122,7 @@ body.page-search #section-content #region-content .content ul li {
  */
 
   #region-header-search form input.form-submit {
-    background: #4C7296 url('../../../images/search-btn-mobile@2x.png') 50% 50% no-repeat !important;
+    background: #4C7296 image-url('search-btn-mobile@2x.png') 50% 50% no-repeat !important;
     -webkit-background-size: 19px 17px;
   }
 }

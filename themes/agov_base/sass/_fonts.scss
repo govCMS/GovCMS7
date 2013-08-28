@@ -4,33 +4,33 @@
  */
 @font-face {
   font-family: 'OpenSansRegular';
-  src: url('../fonts/opensans-regular-webfont.eot');
-  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/opensans-regular-webfont.woff') format('woff'),
-    url('../fonts/opensans-regular-webfont.ttf') format('truetype'),
-    url('../fonts/opensans-regular-webfont.svg#OpenSansRegular') format('svg');
+  src: font-url('opensans-regular-webfont.eot');
+  src: font-url('opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('opensans-regular-webfont.woff') format('woff'),
+    font-url('opensans-regular-webfont.ttf') format('truetype'),
+    font-url('opensans-regular-webfont.svg#OpenSansRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'OpenSansBold';
-  src: url('../fonts/opensans-bold-webfont.eot');
-  src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/opensans-bold-webfont.woff') format('woff'),
-    url('../fonts/opensans-bold-webfont.ttf') format('truetype'),
-    url('../fonts/opensans-bold-webfont.svg#OpenSansBold') format('svg');
+  src: font-url('opensans-bold-webfont.eot');
+  src: font-url('opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('opensans-bold-webfont.woff') format('woff'),
+    font-url('opensans-bold-webfont.ttf') format('truetype'),
+    font-url('opensans-bold-webfont.svg#OpenSansBold') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'OpenSansSemibold';
-  src: url('../fonts/opensans-semibold-webfont.eot');
-  src: url('../fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/opensans-semibold-webfont.woff') format('woff'),
-    url('../fonts/opensans-semibold-webfont.ttf') format('truetype'),
-    url('../fonts/opensans-semibold-webfont.svg#OpenSansSemibold') format('svg');
+  src: font-url('opensans-semibold-webfont.eot');
+  src: font-url('opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+    font-url('opensans-semibold-webfont.woff') format('woff'),
+    font-url('opensans-semibold-webfont.ttf') format('truetype'),
+    font-url('opensans-semibold-webfont.svg#OpenSansSemibold') format('svg');
   font-weight: normal;
   font-style: normal;
 }
