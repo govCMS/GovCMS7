@@ -59,6 +59,7 @@ class AgovTestBase extends DrupalWebTestCase {
       'administer nodes',
       'moderate content from draft to needs_review',
       'moderate content from needs_review to published',
+      'administer files',
     ));
 
     variable_set('site_name', 'Agov');

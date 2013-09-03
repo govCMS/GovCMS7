@@ -259,4 +259,18 @@ class AgovTest extends AgovTestBase {
     $this->assertText('Gold Halo');
   }
 
+  /**
+   * Tests admin/content/file works.
+   */
+  public function testFileListing() {
+    // Cant use drupalLogin() as this only returns true if "Log out" is found.
+    $name = $this->testUser->name;
+    $pass = $this->testUser->pass_raw;
+    $this->drupalPost('user', array('name' => $name, 'pass' => $pass), t('Log in'));
+    $this->assertRaw($name, 'User logged in.');
+
+    $this->drupalGet('admin/content/file');
+    $this->assertResponse(200);
+  }
+
 }
