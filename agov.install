@@ -25,7 +25,7 @@ define('AGOV_ADMIN_ROLE_ID', '3');
  */
 function agov_install() {
 
-  ini_set('max_execution_time', 300);
+  ini_set('max_execution_time', '300');
 
   // Ensure the beans feature is reverted.
   $revert = array('agov_beans');
