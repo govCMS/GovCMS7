@@ -188,7 +188,7 @@ projects[wysiwyg_filter][subdir] = "contrib"
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.4"
+projects[password_policy][version] = "1.5"
 projects[password_policy][subdir] = "contrib"
 
 projects[login_security][version] = "1.4"
