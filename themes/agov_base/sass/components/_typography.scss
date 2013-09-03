@@ -41,11 +41,11 @@ a {
 html.js fieldset {
 
   &.collapsed .fieldset-legend {
-    background: url('../../images/open-plus.jpg') 0% 50% no-repeat !important;
+    background: image-url('open-plus.jpg') 0% 50% no-repeat !important;
   }
 
   &.collapsible .fieldset-legend {
-    background: url('../../images/close-minus.jpg') 0% 50% no-repeat;
+    background: image-url('close-minus.jpg') 0% 50% no-repeat;
   }
 }
 

@@ -19,28 +19,6 @@
   }
 }
 
-/* Twitter block */
-.block-agov-twitter-feed {
-  display: none;
-
-  @media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
-    /*
-   * Replaces background images with retina images for the iPhone 4.
-   */
-
-    h2 {
-      background: url('../../../images/twitter-feed-icon@2x.png') 94% 50% no-repeat !important;
-      -webkit-background-size: 31px 21px;
-    }
-  }
-}
-
-
-
-.front .block-agov-twitter-feed {
-  display: block;
-}
-
 /* Text resize */
 .block-agov-text-resize-text-resize {
   display: none;

@@ -25,14 +25,14 @@ body.page-comment {
 }
 
 #comments .comment {
-  background-image: url('../images/comment-icon.png');
+  background-image: image-url('comment-icon.png');
   background-position: 13px 15px;
   background-repeat: no-repeat;
   padding: 15px 13px 15px 46px;
 }
 
 #comments .comment.even {
-  background-image: url('../images/comment-icon.png');
+  background-image: image-url('comment-icon.png');
   background-position: 13px 15px;
   background-repeat: no-repeat;
 }

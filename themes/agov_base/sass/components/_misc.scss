@@ -4,7 +4,7 @@
  */
 
 #skip-to-content a {
-  background: url('../../images/skip-to-content-arrow.png') 0% 60% no-repeat;
+  background: image-url('skip-to-content-arrow.png') 0% 60% no-repeat;
 }
 
 .block-workbench {
@@ -61,7 +61,7 @@ ul.contextual-links li {
  * Replaces background images with retina images for the iPhone 4.
  */
   #block-system-main-menu select.menu {
-    background: #FFF url('../../images/mobile-menu-arrow@2x.png') 95% 50% no-repeat !important;
+    background: #FFF image-url('mobile-menu-arrow@2x.png') 95% 50% no-repeat !important;
     -webkit-background-size: 10px 6px;
   }
 }

@@ -15,11 +15,11 @@
   background-color: white;
 
   @include breakpoint($breakpoint-medium, $no-query: '.lt-ie9') {
-    background: url('../images/shadow-bg-720.png') top center repeat-y;
+    background: image-url('shadow-bg-720.png') top center repeat-y;
     background-color: transparent;
   }
   @include breakpoint($breakpoint-wide, $no-query: '.lt-ie9') {
-    background: url('../images/shadow-bg.png') top center repeat-y;
+    background: image-url('shadow-bg.png') top center repeat-y;
   }
 }
 
@@ -50,13 +50,13 @@
         }
 
         &.font-small a {
-          background: url('../images/font-resize-bg.png') 0px 0px no-repeat;
+          background: image-url('font-resize-bg.png') 0px 0px no-repeat;
         }
         &.font-large a {
-          background: url('../images/font-resize-bg.png') 0px -27px no-repeat;
+          background: image-url('font-resize-bg.png') 0px -27px no-repeat;
         }
         &.reset a {
-          background: url('../images/font-resize-bg.png') 0px -54px no-repeat;
+          background: image-url('font-resize-bg.png') 0px -54px no-repeat;
         }
       }
     }

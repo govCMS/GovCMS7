@@ -21,7 +21,7 @@ body.page-user .tabbed-nav {
 }
 
 .tabbed-nav ul.tabs {
-  background-image: url('../../../images/bottom-shadow.png');
+  background-image: image-url('bottom-shadow.png');
   background-position: bottom left;
   background-repeat: repeat-x;
   padding: 0;
@@ -45,7 +45,7 @@ body.page-user .tabbed-nav {
 }
 
 .tabbed-nav ul.tabs li a {
-  background-image: url('../../../images/bottom-shadow.png');
+  background-image: image-url('bottom-shadow.png');
   background-position: bottom left;
   background-repeat: repeat-x;
   display: block;
