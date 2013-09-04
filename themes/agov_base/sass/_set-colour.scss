@@ -479,7 +479,11 @@ div.messages {
 
 .bean-image-and-text {
   color: $h1;
-  border-top: 1px solid lighten($border_theme, 30%);
+  border-top: 1px solid #ddd;
+
+  h2 {
+    @include adjust-font-size-to($base-font-size * 1.2);
+  }
 }
 
 .front .panel-pane {

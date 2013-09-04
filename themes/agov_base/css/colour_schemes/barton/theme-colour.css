@@ -449,7 +449,11 @@ div.messages {
 
 .bean-image-and-text {
   color: #004961;
-  border-top: 1px solid #00bcfa;
+  border-top: 1px solid #ddd;
+}
+.bean-image-and-text h2 {
+  font-size: 1.2em;
+  line-height: 2.33333em;
 }
 
 .front .panel-pane {
