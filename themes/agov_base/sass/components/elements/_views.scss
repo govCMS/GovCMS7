@@ -63,3 +63,15 @@ th.tabledrag-hide {
 
   @include view-mode-teaser();
 }
+
+.not-front .view .node-blog-article {
+
+  h2 {
+    @include adjust-font-size-to($base-font-size);
+    font-family: $arial;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+}

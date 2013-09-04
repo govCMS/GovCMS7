@@ -174,11 +174,6 @@ div #zone-menu-wrapper {
   background-color: $content_bg;
 }
 
-.page-news-media #region-content .view h2,
-.page-publications #region-content .view h2 {
-  color: $body-color;
-}
-
 .not-front .node-blog-article .field-name-post-date {
   color: $text_light;
 }
@@ -487,4 +482,17 @@ div.messages {
 
 .breadcrumb {
   border-bottom: 3px solid $border_theme;
+
+h1 {
+  color: $h1;
+}
+
+h2 {
+  color: $h2;
+}
+
+h3 {
+  color: $h3;
+}
+
 }
