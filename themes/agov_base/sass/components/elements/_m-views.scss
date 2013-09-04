@@ -1,0 +1,66 @@
+/*
+ * @file
+ * Compass mixin styles for Views
+ */
+@mixin view-date-field {
+  .date {
+    font-style: italic;
+    @include adjust-font-size-to(12px);
+    display: inline-block;
+
+    br {
+      display: none;
+    }
+  }
+}
+
+// Provides a standard teaser view used throughout
+// aGov. This was previously handled by multiple, mismatched
+// per-view styles.
+@mixin standard-teaser-view {
+
+  h2, h3 {
+    margin-top: 0;
+  }
+
+  .views-row {
+    margin-bottom: 1em;
+    border-bottom: 1px solid #efefef;
+  }
+
+  .views-row-last {
+    margin-bottom: 22px;
+  }
+
+  .views-field-title a {
+    font-weight: bold;
+  }
+
+  .field-name-field-image {
+    height: 131px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .view-content > h2 {
+
+    @include adjust-font-size-to(14px);
+
+    font-family: $arial;
+    font-weight: bold;
+    border-bottom: 2px solid #A3A1A1;
+    margin-bottom: 1em;
+    padding-bottom: 0.1em;
+  }
+
+  .more-link {
+    margin: 10px 0;
+  }
+
+  @include view-date-field();
+}
+

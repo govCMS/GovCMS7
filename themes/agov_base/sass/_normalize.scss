@@ -123,6 +123,8 @@ html {
   -ms-text-size-adjust: 100%; /* 2 */
   // Establish a vertical rhythm unit using $base-line-height.
   @include adjust-leading-to(1);
+
+  word-spacing: -0.05em;
 }
 
 @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
@@ -203,7 +205,7 @@ a:hover {
 
 p,
 pre {
-  margin: rhythm(1) 0;
+  margin: rhythm(1) 0 rhythm(0.5);
 }
 
 blockquote {
@@ -221,57 +223,64 @@ h1, h2 {
   font-weight: normal;
 }
 
+
+
 @mixin h1() {
+
   /* Set the font-size and line-height while keeping a proper vertical rhythm. */
   @include adjust-font-size-to( $h1-font-size );
 
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  @include padding-leader(.5, $h1-font-size);
-  @include padding-trailer(.5, $h1-font-size);
-  margin: 0px;
+  @include leader($heading_padding, $h1-font-size);
+  @include trailer($heading_padding, $h1-font-size);
+  @include adjust-leading-to($heading_leading);
 }
 
 @mixin h2() {
   @include adjust-font-size-to( $h2-font-size );
-  @include padding-leader(.5, $h2-font-size);
-  @include padding-trailer(.5, $h2-font-size);
-  margin: 0px;
+  @include leader($heading_padding, $h2-font-size);
+  @include trailer($heading_padding, $h2-font-size);
+  @include adjust-leading-to($heading_leading);
 }
 
 @mixin h3() {
   @include adjust-font-size-to( $h3-font-size );
-  @include leader(.5, $h3-font-size);
-  @include trailer(.5, $h3-font-size);
+  @include leader($heading_padding, $h3-font-size);
+  @include trailer($heading_padding, $h3-font-size);
+  @include adjust-leading-to($heading_leading);
   color: #555;
-  @include reset-baseline;
 }
 
 @mixin h4() {
   @include adjust-font-size-to($h4-font-size);
-  @include leader(.5, $h4-font-size);
-  @include trailer(.5, $h4-font-size);
+  @include leader($heading_padding, $h4-font-size);
+  @include trailer($heading_padding, $h4-font-size);
+  @include adjust-leading-to($heading_leading);
   color: #555;
-  @include reset-baseline;
 }
 
 @mixin h5() {
   @include adjust-font-size-to($h5-font-size);
-  @include leader(.5, $h5-font-size);
-  @include trailer(.5, $h5-font-size);
+  @include leader($heading_padding, $h5-font-size);
+  @include trailer($heading_padding, $h5-font-size);
+  @include adjust-leading-to($heading_leading);
   color: #555;
-  @include reset-baseline;
 }
 
 @mixin h6() {
   @include adjust-font-size-to($h6-font-size);
-  @include leader(.5, $h6-font-size);
-  @include trailer(.5, $h6-font-size);
+  @include leader($heading_padding, $h6-font-size);
+  @include trailer($heading_padding, $h6-font-size);
+  @include adjust-leading-to($heading_leading);
   color: #555;
-  @include reset-baseline;
 }
 
 h1 {
   @include h1;
+
+  &.page-title {
+    margin-top: 0;
+  }
 }
 
 h2 {
