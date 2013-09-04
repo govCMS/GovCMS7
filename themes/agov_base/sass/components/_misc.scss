@@ -70,3 +70,10 @@ ul.contextual-links li {
   display: none;
 }
 
+.breadcrumb {
+  font-weight: bold;
+  padding-top: $base-line-height * 0.5;
+  padding-bottom: $base-line-height * 0.5;
+  margin-bottom: $base-line-height * 0.8;
+}
+

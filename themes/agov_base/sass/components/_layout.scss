@@ -64,7 +64,7 @@ body {
 }
 
 #zone-content {
-  padding: $base-line-height 0;
+  padding: 0 0 $base-line-height 0;
 }
 
 #section-content {
@@ -84,10 +84,15 @@ body {
   }
 }
 
-#region-feature-articles,
 #region-footer-feature,
 #region-footer-menu {
   @include box-full-width;
+}
+
+#region-feature-articles {
+  @include box-full-width;
+
+  margin-bottom: 1em;
 }
 
 .region-footer-feature {
