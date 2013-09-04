@@ -33,7 +33,7 @@ a:hover {
 }
 
 body.page-search #section-content #search-form .search-advanced a {
-  color: #006eae;
+  color: #c53100;
 }
 
 h3 {
@@ -45,7 +45,7 @@ h3 {
 }
 
 input.form-submit {
-  background: #a52b36;
+  background: #c53100;
   color: white;
   box-shadow: 1px 1px 1px #c9c9c9;
   -webkit-box-shadow: 1px 1px 1px #c9c9c9;
@@ -105,38 +105,47 @@ div #zone-menu-wrapper {
   -moz-box-shadow: inset 2px 2px 2px #bfbfbf;
 }
 
-#region-header-main-menu .menu li ul {
-  background-color: #efeee9;
-}
-
 #region-header-main-menu .menu li {
   border-left-color: #999999;
 }
-
 #region-header-main-menu .menu li a {
   color: #eeeeee;
 }
-
+#region-header-main-menu .menu li ul {
+  background-color: #efeee9;
+}
 #region-header-main-menu .menu li ul li a {
   color: #c53100;
   border-bottom: 1px solid white;
 }
-
 #region-header-main-menu .menu li ul li a:hover {
   background: white;
   color: #330000;
 }
-
-#region-header-main-menu .menu :hover a,
-#region-header-main-menu .menu ul ul :hover a {
+#region-header-main-menu .menu li ul ul:hover a {
   background: #efeee9;
   color: #c53100;
   text-shadow: none;
 }
-
+#region-header-main-menu .menu li.active-trail {
+  background: white;
+}
+#region-header-main-menu .menu li.active-trail a {
+  font-family: "OpenSansSemibold", Arial, sans-serif;
+  color: #c53100;
+}
+#region-header-main-menu .menu li.active-trail li a {
+  font-family: Arial, sans-serif;
+  color: #767676;
+}
+#region-header-main-menu .menu li:hover a {
+  background: #efeee9;
+  color: #c53100;
+  text-shadow: none;
+}
 #region-header-main-menu .menu a.active {
   background: white;
-  color: #006eae;
+  color: #c53100;
 }
 
 #region-header-search form input.form-text {
@@ -146,16 +155,11 @@ div #zone-menu-wrapper {
 
 #region-header-search form input.form-submit {
   background-image: none;
-  background-color: #006eae;
+  background-color: #c53100;
 }
 
 #zone-content {
   background-color: white;
-}
-
-.page-news-media #region-content .view h2,
-.page-publications #region-content .view h2 {
-  color: #5f5f5f;
 }
 
 .not-front .node-blog-article .field-name-post-date {
@@ -376,6 +380,7 @@ body.page-search #section-content ol.search-results li {
 div #region-content .entity-bean.highlight {
   background: #f1efed;
   border-bottom: 3px solid #73737b;
+  border-top: 3px solid #73737b;
 }
 
 .view-news-archive .article {
@@ -437,16 +442,36 @@ div.messages {
   border-top: 1px solid #cccccc;
 }
 
-#region-header-main-menu .menu li.active-trail li a {
-  color: #767676;
-}
-
 .block-views-latest-news-block .more-link,
 .block-views-home-page-blog-articles-block .more-link {
   border-top: 1px solid #cccccc;
 }
 
-.panel-pane {
+.bean-image-and-text {
   color: #1b1b27;
+  border-top: 1px solid #c2c2c5;
+}
+
+.front .panel-pane {
   border-top: 3px solid #73737b;
+}
+
+.breadcrumb {
+  border-bottom: 3px solid #73737b;
+}
+
+h1 {
+  color: #1b1b27;
+}
+
+h2 {
+  color: #082949;
+}
+
+h3 {
+  color: #555555;
+}
+
+div .section-content .view .view-content > h2 {
+  border-bottom-color: #cccccc;
 }
