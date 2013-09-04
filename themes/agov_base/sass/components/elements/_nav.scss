@@ -74,23 +74,34 @@
 }
 
 #region-header-main-menu {
+
   .block-title {
     display: none;
   }
+
   ul.menu {
+
     display: none;
+
     @include breakpoint(740px, $no-query: '.lt-ie9') {
       display: block;
     }
 
     li {
+
       margin: 0px;
-      &:first-child:before {
+
+      &:first-child:before,
+      &.active-trail:before,
+      &.active-trail + li:before,
+      &:hover:before,
+      &:hover + li:before{
         background: transparent;
       }
+
       a {
         padding: rhythm(.75) rhythm(.9);
-        font-family: 'OpenSansRegular';
+        font-family: $open;
         display: block;
         text-transform: uppercase;
         text-decoration: none;
@@ -100,7 +111,7 @@
 
     > li:before {
       content: "";
-      background: #4f4f4f;
+      background: #cdcdcd;
       position: absolute;
       display: block;
       width: 1px;
@@ -112,7 +123,7 @@
       // Sublinks
       background: none;
       display: block;
-      font-family: Arial, sans-serif;
+      font-family: $arial;
       font-weight: bold;
       text-transform: none;
       text-shadow: none;

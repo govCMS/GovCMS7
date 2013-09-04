@@ -101,38 +101,61 @@ div #zone-menu-wrapper {
   -moz-box-shadow: inset 2px 2px 2px $base_midrange;
 }
 
-#region-header-main-menu .menu li ul {
-  background-color: $dropdown_menu_bg;
-}
+#region-header-main-menu .menu {
 
-#region-header-main-menu .menu li {
-  border-left-color: $main_menu_border;
-}
+  li {
+    border-left-color: $main_menu_border;
 
-#region-header-main-menu .menu li a {
-  color: $mainmenu_link;
-}
+    a {
+      color: $mainmenu_link;
+    }
 
-#region-header-main-menu .menu li ul li a {
-  color: $link_color;
-  border-bottom: 1px solid $base_light;
-}
+    ul {
+      background-color: $dropdown_menu_bg;
 
-#region-header-main-menu .menu li ul li a:hover {
-  background: $base_light;
-  color: $hover_color;
-}
+      li a {
+        color: $link_color;
+        border-bottom: 1px solid $base_light;
 
-#region-header-main-menu .menu :hover a,
-#region-header-main-menu .menu ul ul :hover a {
-  background: $dropdown_menu_bg;
-  color: $link_color;
-  text-shadow: none;
-}
+        &:hover {
+          background: $base_light;
+          color: $hover_color;
+        }
+      }
 
-#region-header-main-menu .menu a.active {
-  background: $text_bg;
-  color: $menu_active;
+      ul:hover a {
+        background: $dropdown_menu_bg;
+        color: $link_color;
+        text-shadow: none;
+      }
+    }
+
+    &.active-trail {
+
+      background: $menu_active_bg;
+
+      a {
+        font-family: $open-semibold;
+        color: $menu_active;
+      }
+
+      li a {
+        font-family: $arial;
+        color: $input_button;
+      }
+    }
+
+    &:hover a {
+      background: $dropdown_menu_bg;
+      color: $link_color;
+      text-shadow: none;
+    }
+  }
+
+  a.active {
+    background: $text_bg;
+    color: $menu_active;
+  }
 }
 
 // Search Form
@@ -450,10 +473,6 @@ div.messages {
 
 #region-content .node-event h2 {
   border-top: 1px solid $border_tab;
-}
-
-#region-header-main-menu .menu li.active-trail li a {
-  color: $input_button;
 }
 
 .block-views-latest-news-block .more-link,
