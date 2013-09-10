@@ -65,6 +65,8 @@ projects[link][subdir] = "contrib"
 
 projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
+projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
+projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
 
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][subdir] = "contrib"
