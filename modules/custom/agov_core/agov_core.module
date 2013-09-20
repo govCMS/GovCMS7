@@ -66,7 +66,6 @@ function agov_core_save_bean($bean_type, $label, $description = '', $title = '',
   drupal_set_message('Created a new bean "' . $label . '" of type <em>' . $bean_type . '</em>');
 }
 
-
 /**
  * Create a bean from configuration.
  *
