@@ -21,7 +21,7 @@ projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
 projects[chosen][patch][] = http://drupal.org/files/2021639-pin-chosen-26.patch
 
-projects[context][version] = "3.0-beta6"
+projects[context][version] = "3.1"
 projects[context][subdir] = "contrib"
 
 projects[ctools][version] = "1.3"
