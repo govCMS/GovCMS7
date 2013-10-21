@@ -1,8 +1,7 @@
-name = Event
+name = Event Content
 description = Provides default content for event content type.
 core = 7.x
 package = aGov content
-php = 5.2.4
 version = 7.x-1.2
 project = agov_content_event
 dependencies[] = agov_events

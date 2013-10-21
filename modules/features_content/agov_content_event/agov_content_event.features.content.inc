@@ -32,10 +32,11 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 ',
           'summary' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
           'format' => 'rich_text',
-          'safe_value' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?',
-          'safe_summary' => 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+          'safe_value' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+',
+          'safe_summary' => '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+',
         ),
       ),
     ),
@@ -71,8 +72,8 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     'field_feature_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing event alt text 1',
-          'title' => 'Testing event title text 1',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 522,
           'filename' => 'bigstock-Australian-Soldiers-2673666.jpg',
@@ -81,7 +82,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
           'filesize' => 486272,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '1829d700-eb2e-4ce7-9924-850fc4254a31',
+          'uuid' => '59987951-c2a9-4b82-8bc8-9640ed46bf37',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -139,8 +140,10 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
           'safe_value' => '<p>Lorem ipsum dolor sit amet, ne facer volumus perpetua duo, eos cu nobis scriptorem. Pro omnes eligendi an. Ei his diceret laoreet ullamcorper. Omnium gloriatur sea et, an rebum euismod nec.</p>
 <p>Eu utinam inciderint sit, illum ipsum persequeris ne quo, sit cu quas temporibus theophrastus. Eum an utinam vocent suavitate, in mel ferri aliquando. Et his ipsum putent, dico facilis accumsan pro et. Ius prima epicurei ei.</p>
 <p>Has vidisse expetendis in, everti apeirian referrentur vel ea, elit principes consectetuer ne ius. Sit tantas facete an. Cu volumus adipiscing mediocritatem eam, usu quis aeterno an. Scaevola atomorum vel id, duo in novum praesent mnesarchum, maluisset reformidans efficiantur his eu. Aperiri consectetuer mel cu, minimum theophrastus sed te, ad sanctus dignissim efficiendi per.</p>
-<p>Id errem possim moderatius nec. No corpora voluptua sed, falli latine est ad. Tale graecis ei usu, pri ex liber voluptaria, brute rationibus ex eum. Sea falli feugait et, facer appetere sit ea, solum scripta inimicus sit et.</p>',
-          'safe_summary' => 'Eu utinam inciderint sit, illum ipsum persequeris ne quo, sit cu quas temporibus theophrastus. Eum an utinam vocent suavitate, in mel ferri aliquando. Et his ipsum putent, dico facilis accumsan pro et. Ius prima epicurei ei.',
+<p>Id errem possim moderatius nec. No corpora voluptua sed, falli latine est ad. Tale graecis ei usu, pri ex liber voluptaria, brute rationibus ex eum. Sea falli feugait et, facer appetere sit ea, solum scripta inimicus sit et.</p>
+',
+          'safe_summary' => '<p>Eu utinam inciderint sit, illum ipsum persequeris ne quo, sit cu quas temporibus theophrastus. Eum an utinam vocent suavitate, in mel ferri aliquando. Et his ipsum putent, dico facilis accumsan pro et. Ius prima epicurei ei.</p>
+',
         ),
       ),
     ),
@@ -178,8 +181,8 @@ Julius Caesar',
     'field_feature_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing event alt text 2',
-          'title' => 'Testing event title text 2',
+          'alt' => '',
+          'title' => '',
           'width' => 500,
           'height' => 500,
           'filename' => '29154_1449985657557_5939583_n.jpeg',
@@ -188,7 +191,7 @@ Julius Caesar',
           'filesize' => 80777,
           'status' => 1,
           'type' => 'image',
-          'uuid' => 'f8ddebfb-26c0-4a63-8ec1-974bf976e18f',
+          'uuid' => 'dfe8e316-2c7a-49ff-a3f2-9c8faedbbf0e',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -243,8 +246,10 @@ Julius Caesar',
           'safe_value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et tortor sed arcu ultricies cursus. Duis fermentum vulputate velit eget dignissim. Nullam tempor, leo vel cursus facilisis, erat lectus aliquam nibh, ultricies pellentesque lacus justo nec neque. Sed congue velit non metus porta lobortis. Suspendisse pharetra vehicula metus. Etiam vel eros enim, in gravida nulla. Aenean massa urna, aliquet a posuere quis, eleifend ac mauris.</p>
 <p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p>
 <p>Fusce vel cursus lectus. Maecenas dignissim scelerisque porttitor. Vivamus pharetra lacinia malesuada. Ut semper, dui at dictum sodales, elit ante pellentesque libero, non egestas ligula sem molestie justo. Nam quis semper felis. Ut accumsan tristique massa, ut aliquam velit eleifend eu. Fusce urna lacus, gravida non fermentum at, ultrices a justo. Suspendisse arcu velit, ornare a congue ac, placerat sit amet metus. Ut interdum ante ac arcu porttitor vitae commodo velit pretium. Nullam rhoncus, magna iaculis consectetur pellentesque, velit nulla venenatis urna, vitae sollicitudin est odio sed odio. Proin consequat, eros quis fermentum pretium, turpis quam scelerisque nulla, quis accumsan turpis quam vel augue. Nulla ultricies felis nec dui blandit vitae luctus turpis elementum. Vestibulum sit amet sodales odio. Vestibulum malesuada risus scelerisque nisi bibendum auctor. Quisque pharetra, tellus et dapibus lobortis, sem ipsum consequat ipsum, nec rutrum libero nunc eu ipsum. Donec lobortis metus id libero pellentesque a rhoncus mi tristique.</p>
-<p>Etiam ligula leo, dignissim non porta ac, tempor eget nunc. Nulla vehicula sagittis viverra. Nulla sagittis libero ac dui ultrices egestas eget eu leo. Donec in imperdiet nisi. Aliquam erat volutpat. Suspendisse felis leo, blandit sed venenatis a, sagittis vel lacus. Curabitur non leo eget sapien fermentum porta sit amet et nisi.</p>',
-          'safe_summary' => 'Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.',
+<p>Etiam ligula leo, dignissim non porta ac, tempor eget nunc. Nulla vehicula sagittis viverra. Nulla sagittis libero ac dui ultrices egestas eget eu leo. Donec in imperdiet nisi. Aliquam erat volutpat. Suspendisse felis leo, blandit sed venenatis a, sagittis vel lacus. Curabitur non leo eget sapien fermentum porta sit amet et nisi.</p>
+',
+          'safe_summary' => '<p>Sed gravida, dui et sodales auctor, lacus massa ultrices neque, ut venenatis odio nisi vitae dolor. Mauris eu dui purus, non consectetur ipsum. Donec quis nisi ante, egestas egestas urna. Nam eget placerat sapien. Sed a metus vel felis sodales scelerisque. Morbi molestie rutrum justo, non tincidunt lectus tincidunt a. Vestibulum et auctor tortor.</p>
+',
         ),
       ),
     ),
@@ -280,8 +285,8 @@ Julius Caesar',
     'field_feature_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing event alt text 3',
-          'title' => 'Testing event title text 3',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 600,
           'filename' => 'bigstock-Brisbane-Australia--June---20681357.jpg',
@@ -290,7 +295,7 @@ Julius Caesar',
           'filesize' => 566753,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '103b05d2-ef65-46a7-97f7-7f8aa11bd96b',
+          'uuid' => '7a17db06-e097-43ca-858e-78a48c54963d',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
