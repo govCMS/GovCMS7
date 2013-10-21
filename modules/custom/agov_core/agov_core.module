@@ -9,6 +9,38 @@
  */
 
 /**
+ * Implements hook_menu().
+ */
+function agov_core_menu() {
+  $items['about-agov'] = array(
+    'title' => 'About aGov',
+    'page callback' => 'agov_core_about_agov_page',
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Page callback for about aGov page.
+ *
+ * @return array
+ *   A render array for the page callback.
+ */
+function agov_core_about_agov_page() {
+  $output = array(
+    'about' => array(
+      '#type' => 'markup',
+      '#markup' => "<p>" . l(t('aGov'), 'http://agov.com.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
+    ),
+    'previousnext' => array(
+      '#type' => 'markup',
+      '#markup' => "<p>aGov is designed and developed by " . l(t('PreviousNext'), 'http://previousnext.com.au') . " and is free to " . l(t("download"), "https://drupal.org/project/agov") . ".</p>",
+    ),
+  );
+  return $output;
+}
+
+/**
  * Helper to manufacture a new Bean of a given type.
  *
  * @param string $bean_type
