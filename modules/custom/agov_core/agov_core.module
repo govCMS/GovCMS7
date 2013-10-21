@@ -11,7 +11,7 @@
 /**
  * Implements hook_menu().
  */
-function agov_core_menu(){
+function agov_core_menu() {
   $items['about-agov'] = array(
     'title' => 'About aGov',
     'page callback' => 'agov_core_about_agov_page',
@@ -30,11 +30,11 @@ function agov_core_about_agov_page() {
   $output = array(
     'about' => array(
       '#type' => 'markup',
-      '#markup' => "<p>" . l('aGov', 'http://agov.com.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
+      '#markup' => "<p>" . l(t('aGov'), 'http://agov.com.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
     ),
     'previousnext' => array(
       '#type' => 'markup',
-      '#markup' => "<p>aGov is designed and developed by " . l('PreviousNext', 'http://previousnext.com.au') . " and is free to " . l("download", "https://drupal.org/project/agov") . ".</p>",
+      '#markup' => "<p>aGov is designed and developed by " . l(t('PreviousNext'), 'http://previousnext.com.au') . " and is free to " . l(t("download"), "https://drupal.org/project/agov") . ".</p>",
     ),
   );
   return $output;
