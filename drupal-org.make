@@ -67,6 +67,7 @@ projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
+projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][subdir] = "contrib"
@@ -161,12 +162,6 @@ projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.pat
 projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[media][download][type] = "git"
-projects[media][download][revision] = ecb93923272336edcbe83db2cb6871ead8188912
-projects[media][download][branch] = 7.x-2.x
-projects[media][type] = "module"
-projects[media][subdir] = "contrib"
-
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = "contrib"
 
@@ -182,6 +177,7 @@ projects[workbench_moderation][subdir] = "contrib"
 projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
+projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-bookmarking.patch"
 
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = "contrib"
