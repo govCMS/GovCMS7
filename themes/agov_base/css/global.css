@@ -2515,6 +2515,10 @@ body.page-user #region-content #block-system-main .block-inner form .form-item .
 .page-publications #region-content .view h2, .page-publications #region-content .view #block-views-slideshow-block .views-field-title .field-content, #block-views-slideshow-block .views-field-title .page-publications #region-content .view .field-content {
   font-weight: bold;
 }
+.page-publications #region-content .view h3 {
+  font-size: 1.2em;
+  font-weight: normal;
+}
 
 /*
  * @file
