@@ -67,3 +67,32 @@
     display: none;
   }
 }
+
+@mixin view-mode-teaser {
+
+  h3 {
+    @include adjust-font-size-to(14px);
+    @include leader(0, 14px);
+    @include trailer(.25, 14px);
+  }
+
+  .article-author-date {
+    font-style: italic;
+    @include adjust-font-size-to(12px);
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .field-name-field-thumbnail {
+    float: left;
+    margin-right: 10px;
+  }
+  .field-name-post-date {
+    font-style: italic;
+  }
+}
+
+@mixin collapse-top-margin {
+  margin-top: 0;
+  padding-top: 0;
+}

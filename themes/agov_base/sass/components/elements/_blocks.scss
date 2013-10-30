@@ -3,6 +3,10 @@
 #region-sidebar .block,
 #region-sidebar .entity-bean {
   @extend %block-styled;
+
+  h2 {
+    margin: 0;
+  }
 }
 
 #region-sidebar .block-menu-block .content {
@@ -23,6 +27,14 @@
 
     &.first a {
       border-top: none;
+    }
+
+    &.active-trail {
+      background: #FFF;
+
+      a {
+        text-decoration: none;
+      }
     }
   }
 }

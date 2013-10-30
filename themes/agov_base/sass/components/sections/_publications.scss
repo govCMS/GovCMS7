@@ -3,7 +3,14 @@
  * Compass styles for
  */
 
-.page-publications #region-content .view h2 {
+.page-publications #region-content .view {
 
-  font-weight: bold;
+  h2 {
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 1.2em;
+    font-weight: normal;
+  }
 }

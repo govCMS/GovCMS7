@@ -18,12 +18,6 @@
  * Imports
  *****************************************/
 
-$breakpoint-no-queries: false;
-$breakpoint-no-query-fallbacks: true;
-
-$breakpoint-wide: 980px;
-$breakpoint-medium: 740px;
-
 // Base partials
 @import "base";
 
@@ -56,6 +50,7 @@ $breakpoint-medium: 740px;
 @import "components/elements/taxonomy";
 @import "components/elements/search";
 @import "components/elements/nav";
+@import "components/elements/m-views";
 @import "components/elements/views";
 
 // Content types

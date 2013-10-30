@@ -4,6 +4,9 @@
  * @file
  * Default simple view template to display a list of rows.
  *
+ * Changes from default views-view-unformatted.tpl.php:
+ *  - Changes title from h3 to h2, for accessiblity.
+ *
  * @ingroup views_templates
  */
 ?>

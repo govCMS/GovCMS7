@@ -101,38 +101,61 @@ div #zone-menu-wrapper {
   -moz-box-shadow: inset 2px 2px 2px $base_midrange;
 }
 
-#region-header-main-menu .menu li ul {
-  background-color: $dropdown_menu_bg;
-}
+#region-header-main-menu .menu {
 
-#region-header-main-menu .menu li {
-  border-left-color: $main_menu_border;
-}
+  li {
+    border-left-color: $main_menu_border;
 
-#region-header-main-menu .menu li a {
-  color: $mainmenu_link;
-}
+    a {
+      color: $mainmenu_link;
+    }
 
-#region-header-main-menu .menu li ul li a {
-  color: $link_color;
-  border-bottom: 1px solid $base_light;
-}
+    ul {
+      background-color: $dropdown_menu_bg;
 
-#region-header-main-menu .menu li ul li a:hover {
-  background: $base_light;
-  color: $hover_color;
-}
+      li a {
+        color: $link_color;
+        border-bottom: 1px solid $base_light;
 
-#region-header-main-menu .menu :hover a,
-#region-header-main-menu .menu ul ul :hover a {
-  background: $dropdown_menu_bg;
-  color: $link_color;
-  text-shadow: none;
-}
+        &:hover {
+          background: $base_light;
+          color: $hover_color;
+        }
+      }
 
-#region-header-main-menu .menu a.active {
-  background: $text_bg;
-  color: $menu_active;
+      ul:hover a {
+        background: $dropdown_menu_bg;
+        color: $link_color;
+        text-shadow: none;
+      }
+    }
+
+    &.active-trail {
+
+      background: $menu_active_bg;
+
+      a {
+        font-family: $open-semibold;
+        color: $menu_active;
+      }
+
+      li a {
+        font-family: $arial;
+        color: $input_button;
+      }
+    }
+
+    &:hover a {
+      background: $dropdown_menu_bg;
+      color: $link_color;
+      text-shadow: none;
+    }
+  }
+
+  a.active {
+    background: $text_bg;
+    color: $menu_active;
+  }
 }
 
 // Search Form
@@ -149,17 +172,6 @@ div #zone-menu-wrapper {
 // Content
 #zone-content {
   background-color: $content_bg;
-}
-
-#region-content h1,
-#region-content h2 {
-  color: $h1;
-  border-top: 3px solid $border_theme;
-}
-
-.page-news-media #region-content .view h2,
-.page-publications #region-content .view h2 {
-  color: $body-color;
 }
 
 .not-front .node-blog-article .field-name-post-date {
@@ -281,8 +293,7 @@ body.page-user #region-content #block-system-main .block-inner form .form-item i
 }
 
 // Home Page Latest News & From The Blog
-#block-views-latest-news-block .content .views-row,
-.view-home-page-blog-articles .views-row {
+div.section-content .view .views-row {
   border-bottom: 1px solid $border_tab;
 }
 
@@ -395,6 +406,12 @@ body.page-search #section-content ol.search-results li {
   color: $link_color;
 }
 
+div #region-content .entity-bean.highlight {
+  background: $home_feature_bg;
+  border-bottom: 3px solid $border_theme;
+  border-top: 3px solid $border_theme;
+}
+
 .view-news-archive .article {
   border-bottom: 1px solid $border_tab;
 }
@@ -454,11 +471,41 @@ div.messages {
   border-top: 1px solid $border_tab;
 }
 
-#region-header-main-menu .menu li.active-trail li a {
-  color: $input_button;
-}
-
 .block-views-latest-news-block .more-link,
 .block-views-home-page-blog-articles-block .more-link {
   border-top: 1px solid $border_tab;
+}
+
+
+.bean-image-and-text {
+  color: $h1;
+  border-top: 1px solid #ddd;
+
+  h2 {
+    @include adjust-font-size-to($base-font-size * 1.2);
+  }
+}
+
+.front .panel-pane {
+  border-top: 3px solid $border_theme;
+}
+
+.breadcrumb {
+  border-bottom: 3px solid $border_theme;
+}
+
+h1 {
+  color: $h1;
+}
+
+h2 {
+  color: $h2;
+}
+
+h3 {
+  color: $h3;
+}
+
+div .section-content .view .view-content > h2 {
+  border-bottom-color: $border_tab;
 }

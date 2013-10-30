@@ -11,23 +11,23 @@ body.page-node- {
 .field-name-field-tags {
   margin-bottom: 1em;
   padding: 1em 0;
+
+  .field-label {
+    float: left;
+  }
+
+  .field-item {
+    display: inline;
+
+    &:before {
+      content: ', ';
+    }
+    &:first-child:before {
+      content: '';
+    }
+  }
 }
 
-.field-name-field-tags .field-label {
-  float: left;
-}
-
-.field-name-field-tags .field-item {
-  display: inline;
-}
-
-.field-name-field-tags .field-item:before {
-  content: ', ';
-}
-
-.field-name-field-tags .field-item:first-child:before {
-  content: '';
-}
 
 .node-publication .field-name-field-date,
 .node-event .field-name-field-event-date {
@@ -37,4 +37,12 @@ body.page-node- {
 .node-news-article ul.links,
 .node .submitted {
   margin-bottom: 1em;
+}
+
+.article .article-teaser-content,
+.node-teaser,
+.view-mode-teaser,
+.view-mode-blog_teaser {
+
+  @include view-mode-teaser();
 }
