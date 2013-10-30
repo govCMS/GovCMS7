@@ -28,7 +28,8 @@ function agov_content_slides_content_defaults() {
           'value' => '<p>Appellatio autem natu os. Cui ex plaga similis tamen veniam. Brevitas in nimis quae tum vel. Appellatio nimis nunc ratis vel. Distineo gilvus pneum quia quidne tamen vereor.&nbsp;</p>',
           'summary' => '',
           'format' => 'rich_text',
-          'safe_value' => '<p>Appellatio autem natu os. Cui ex plaga similis tamen veniam. Brevitas in nimis quae tum vel. Appellatio nimis nunc ratis vel. Distineo gilvus pneum quia quidne tamen vereor.&nbsp;</p>',
+          'safe_value' => '<p>Appellatio autem natu os. Cui ex plaga similis tamen veniam. Brevitas in nimis quae tum vel. Appellatio nimis nunc ratis vel. Distineo gilvus pneum quia quidne tamen vereor. </p>
+',
           'safe_summary' => '',
         ),
       ),
@@ -45,8 +46,8 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Os Praemitto Refero Tation',
-          'title' => NULL,
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 637,
           'filename' => 'bigstock-Conference-26104.jpg',
@@ -55,7 +56,7 @@ function agov_content_slides_content_defaults() {
           'filesize' => 999455,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '6b7b8c0c-5f15-4cc4-b0d2-cbda93cafa9a',
+          'uuid' => 'fcd31d37-a7ce-449c-8179-c2938bf42dff',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -106,8 +107,8 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Diam Eum In Probo',
-          'title' => NULL,
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 522,
           'filename' => 'bigstock-Australian-Soldiers-2673666.jpg',
@@ -116,7 +117,7 @@ function agov_content_slides_content_defaults() {
           'filesize' => 486272,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '1829d700-eb2e-4ce7-9924-850fc4254a31',
+          'uuid' => '59987951-c2a9-4b82-8bc8-9640ed46bf37',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -149,7 +150,8 @@ function agov_content_slides_content_defaults() {
           'value' => '<p>Eligo gilvus molior tation virtus. Bene camur eros. Autem diam feugiat jugis mos pagus quidne similis vel venio. Obruo ratis saluto suscipit. Abluo utinam uxor.</p>',
           'summary' => '',
           'format' => 'rich_text',
-          'safe_value' => '<p>Eligo gilvus molior tation virtus. Bene camur eros. Autem diam feugiat jugis mos pagus quidne similis vel venio. Obruo ratis saluto suscipit. Abluo utinam uxor.</p>',
+          'safe_value' => '<p>Eligo gilvus molior tation virtus. Bene camur eros. Autem diam feugiat jugis mos pagus quidne similis vel venio. Obruo ratis saluto suscipit. Abluo utinam uxor.</p>
+',
           'safe_summary' => '',
         ),
       ),
@@ -166,7 +168,7 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Koala',
+          'alt' => '',
           'title' => '',
           'width' => 900,
           'height' => 600,
@@ -176,7 +178,7 @@ function agov_content_slides_content_defaults() {
           'filesize' => 662642,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '4708eaa4-a9a0-4d57-983b-5bcb91027ac6',
+          'uuid' => '40e27229-4862-4c10-a10e-529fe1255912',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),

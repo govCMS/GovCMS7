@@ -46,8 +46,10 @@ function agov_content_blog_content_defaults() {
 <p>Pulvinar, dolor enim aenean magnis? Augue, vel pellentesque porta, scelerisque aliquam elementum rhoncus nunc augue integer, cras placerat pulvinar purus odio odio odio tincidunt habitasse et dolor! Tristique pid sociis ridiculus vel pulvinar, platea phasellus? Amet nascetur duis sagittis odio augue rhoncus porta quis porttitor turpis a nunc rhoncus, a augue enim habitasse aliquam, rhoncus a nunc sit elit. Augue lectus! Sed, auctor aenean tempor tincidunt tristique eros placerat magna in egestas tristique, parturient amet turpis odio dis et, lacus habitasse porta in non, enim purus dolor, habitasse lectus, elit eros amet et turpis enim! Porta facilisis nunc, nec! In! Montes cum pellentesque, tincidunt dictumst, dolor magnis, rhoncus sagittis scelerisque pid sit auctor natoque proin rhoncus dis dictumst sagittis.</p>
 <p>Magna habitasse dapibus? Adipiscing, in! Ultrices risus amet vut aliquam enim phasellus augue turpis cursus purus a, sit ut, magna lectus penatibus cum. Enim cras mus ridiculus hac. Arcu, tempor mattis adipiscing, cursus turpis, a dapibus arcu odio magna. Ut ac, parturient risus proin? Placerat rhoncus augue tincidunt odio nascetur aliquet. Aliquam etiam, a nisi, ac velit pellentesque non, nunc habitasse ut cras turpis eu tortor et ultricies montes! Nunc? Et purus magnis nisi lundium in turpis diam purus proin mattis risus pellentesque? Parturient, parturient urna dignissim non eros nisi vut magna ac tincidunt, ac eros dapibus cursus, cum, cras, dis tristique porta? Proin ut adipiscing tortor? Lacus nec! Pid tempor, enim, egestas, tempor placerat enim odio sociis mauris.</p>
 <p>Mattis magna ac rhoncus massa mid lorem ut dictumst, sit rhoncus ut magna pulvinar turpis habitasse sed eu mauris, in, montes sociis turpis, urna pulvinar ultricies phasellus vut sit? Odio sit, cras amet mus sed? Amet sit sit tincidunt. Sed? Sed facilisis magna. Lorem! Porttitor enim pellentesque, cursus amet magna, et velit eu sociis proin ac placerat turpis natoque tristique turpis duis sit amet, a! Porttitor sit! Tempor, augue tortor lorem mauris scelerisque! In? Pulvinar, mid nec, a platea sed montes adipiscing auctor lorem turpis amet amet risus quis duis, sed, mus. Integer eros sed penatibus? In in augue scelerisque facilisis adipiscing integer amet, dis et etiam, pellentesque dis rhoncus placerat! Habitasse rhoncus urna placerat, dictumst sed, aenean proin.</p>
-<p>Et quis nunc, vel montes rhoncus parturient! Pellentesque turpis nisi elementum, pulvinar amet phasellus. Ac pellentesque nunc. Proin integer. Dis porttitor et tincidunt, a eros amet ut nascetur mid? Augue vel, penatibus urna porta cursus, tincidunt. Elementum penatibus non quis lectus, elit scelerisque? Vut dapibus vel, vel porttitor porta a! Cum placerat enim, tempor eros sit scelerisque in placerat tempor est parturient? Turpis? Elementum eu dis sed! Tortor hac quis. In! Augue porta dictumst nunc integer mid, nisi proin dolor sed! Turpis nascetur turpis a! Aliquam, tristique amet! Nisi? Egestas lorem penatibus eu facilisis auctor? Parturient ac cras lacus! Diam tortor. Nunc ut dolor. Porttitor et tincidunt placerat dapibus. Et sagittis placerat sit, purus pellentesque, mauris auctor! Ultrices aliquet.</p>',
-          'safe_summary' => 'Sed ut nunc nisi proin et facilisis tincidunt turpis hac ridiculus pulvinar tincidunt eros a ac integer. Tristique! Magna rhoncus magna! Nisi magna enim nisi mattis porttitor amet placerat augue.',
+<p>Et quis nunc, vel montes rhoncus parturient! Pellentesque turpis nisi elementum, pulvinar amet phasellus. Ac pellentesque nunc. Proin integer. Dis porttitor et tincidunt, a eros amet ut nascetur mid? Augue vel, penatibus urna porta cursus, tincidunt. Elementum penatibus non quis lectus, elit scelerisque? Vut dapibus vel, vel porttitor porta a! Cum placerat enim, tempor eros sit scelerisque in placerat tempor est parturient? Turpis? Elementum eu dis sed! Tortor hac quis. In! Augue porta dictumst nunc integer mid, nisi proin dolor sed! Turpis nascetur turpis a! Aliquam, tristique amet! Nisi? Egestas lorem penatibus eu facilisis auctor? Parturient ac cras lacus! Diam tortor. Nunc ut dolor. Porttitor et tincidunt placerat dapibus. Et sagittis placerat sit, purus pellentesque, mauris auctor! Ultrices aliquet.</p>
+',
+          'safe_summary' => '<p>Sed ut nunc nisi proin et facilisis tincidunt turpis hac ridiculus pulvinar tincidunt eros a ac integer. Tristique! Magna rhoncus magna! Nisi magna enim nisi mattis porttitor amet placerat augue. </p>
+',
         ),
       ),
     ),
@@ -67,8 +69,8 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing blog alt text 1',
-          'title' => 'Testing blog title text 1',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 600,
           'filename' => 'bigstock-Vegetable-Market-19473113.jpg',
@@ -77,7 +79,7 @@ function agov_content_blog_content_defaults() {
           'filesize' => 893972,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '5b019e64-0485-4527-90db-0f3b719bb377',
+          'uuid' => '9b1b85d2-c77d-4651-bbe7-560124b62533',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -114,8 +116,10 @@ function agov_content_blog_content_defaults() {
           'format' => 'rich_text',
           'safe_value' => '<p>Vivamus risus erat, fermentum fermentum mattis ut, eleifend vel enim. Duis tincidunt ultricies congue. Mauris vitae felis quis nibh ultrices vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris eu quam turpis, vitae blandit enim. In eget dolor nulla, ac vehicula libero. Nunc eget ante elementum velit pretium euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 <p>Fusce tortor elit, fringilla vitae hendrerit vel, consequat ut lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam laoreet, lectus et ultrices aliquet, metus arcu pretium ipsum, vitae faucibus nibh turpis id elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed massa libero, fermentum quis tincidunt dignissim, blandit sit amet tellus. Nam feugiat mauris sit amet tortor venenatis tristique.</p>
-<p>Nulla auctor imperdiet nibh, nec bibendum magna rutrum a. Aliquam quis eros augue. Cras mauris enim, feugiat sagittis suscipit non, cursus et ligula. Vivamus eu nisi eros. Mauris odio tellus, venenatis ac lobortis sed, cursus quis ligula. Nam felis nisi, blandit ultrices scelerisque quis, blandit at nisi. Nullam at ligula ipsum, a placerat orci. Vivamus urna lacus, bibendum ut commodo vehicula, volutpat et dui. Cras commodo feugiat aliquam.</p>',
-          'safe_summary' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tortor turpis, porttitor at aliquam sed, pulvinar quis lacus. In hac habitasse platea dictumst. Suspendisse rhoncus urna quis nunc tristique faucibus. Aliquam erat volutpat. In eget nunc eget arcu eleifend fermentum. Aenean hendrerit, metus ut facilisis egestas, metus lacus viverra magna, id ultricies ante arcu pellentesque diam. Maecenas aliquet risus nec purus malesuada euismod. Sed venenatis tincidunt felis, sed tristique velit imperdiet vitae.',
+<p>Nulla auctor imperdiet nibh, nec bibendum magna rutrum a. Aliquam quis eros augue. Cras mauris enim, feugiat sagittis suscipit non, cursus et ligula. Vivamus eu nisi eros. Mauris odio tellus, venenatis ac lobortis sed, cursus quis ligula. Nam felis nisi, blandit ultrices scelerisque quis, blandit at nisi. Nullam at ligula ipsum, a placerat orci. Vivamus urna lacus, bibendum ut commodo vehicula, volutpat et dui. Cras commodo feugiat aliquam.</p>
+',
+          'safe_summary' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tortor turpis, porttitor at aliquam sed, pulvinar quis lacus. In hac habitasse platea dictumst. Suspendisse rhoncus urna quis nunc tristique faucibus. Aliquam erat volutpat. In eget nunc eget arcu eleifend fermentum. Aenean hendrerit, metus ut facilisis egestas, metus lacus viverra magna, id ultricies ante arcu pellentesque diam. Maecenas aliquet risus nec purus malesuada euismod. Sed venenatis tincidunt felis, sed tristique velit imperdiet vitae. </p>
+',
         ),
       ),
     ),
@@ -129,8 +133,8 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing blog alt text 2',
-          'title' => 'Testing blog title text 2',
+          'alt' => '',
+          'title' => '',
           'width' => 700,
           'height' => 467,
           'filename' => '29154_1449985497553_3374537_n.jpeg',
@@ -139,7 +143,7 @@ function agov_content_blog_content_defaults() {
           'filesize' => 79284,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '9f2dc39f-54c4-43ec-a568-17e155282a2f',
+          'uuid' => 'bb0687f1-38ad-4833-a1df-e8847f34bfed',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -178,8 +182,10 @@ function agov_content_blog_content_defaults() {
           'safe_value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rutrum gravida. Maecenas luctus dolor id enim hendrerit sed auctor mi porta. Suspendisse mattis tincidunt ipsum id faucibus. Ut augue eros, tempus id consequat aliquam, blandit sed diam. Etiam euismod vulputate mauris non molestie. Nulla eu massa in mauris tincidunt interdum non venenatis est. Fusce dictum libero sit amet sem consectetur egestas pellentesque mi pharetra. Cras egestas semper aliquam. Sed id mattis metus. Aenean mi quam, semper blandit porttitor sit amet, tincidunt a justo. Nam eu massa ac diam blandit scelerisque vel ac turpis. Mauris molestie lacus luctus augue convallis lacinia varius lectus blandit.</p>
 <p>Etiam neque dui, porta id imperdiet quis, volutpat in elit. Vivamus orci turpis, blandit ac commodo eu, pretium eget velit. Proin congue tellus sit amet justo interdum sit amet placerat nisi tempus. Ut scelerisque congue tellus, ac malesuada lacus mollis et. Mauris purus mi, lobortis id pulvinar vitae, molestie eget tortor. Nulla mollis justo sed augue porttitor ac scelerisque nulla elementum. Maecenas elementum, augue ut sollicitudin adipiscing, elit magna tristique eros, vitae ornare neque nisl non eros. Proin ligula libero, feugiat ut cursus et, pellentesque at mauris. Vivamus gravida iaculis ligula, vel dictum dolor sagittis nec. Vivamus tempor luctus eros, quis suscipit mauris pulvinar at. Fusce pretium nibh et ligula vestibulum eget rutrum nunc ullamcorper. Duis sit amet est ligula, eu tincidunt tortor. Nam pretium, velit id tempor hendrerit, neque nulla mattis leo, sed adipiscing nibh lorem vitae velit. Curabitur ullamcorper, tellus eu suscipit blandit, lectus metus eleifend mi, id elementum dolor nisi posuere diam. Phasellus euismod libero in tellus ullamcorper vestibulum. Nullam condimentum aliquet tellus, sit amet pretium sem imperdiet vel.</p>
 <p>Mauris ultricies gravida dolor a pellentesque. Integer suscipit lacinia risus in semper. Pellentesque tincidunt consectetur feugiat. Etiam vel dolor enim. Nunc scelerisque bibendum metus, id dictum neque tincidunt ut. Aliquam mi purus, mollis quis congue sed, varius ut neque. Cras id interdum quam.</p>
-<p>Vivamus nec vehicula lacus. Aliquam et dui sapien. Vivamus tellus velit, auctor eu fringilla ac, porttitor ac orci. Ut varius quam at dolor tristique feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.</p>',
-          'safe_summary' => 'Mauris ultricies gravida dolor a pellentesque. Integer suscipit lacinia risus in semper. Pellentesque tincidunt consectetur feugiat. Etiam vel dolor enim. Nunc scelerisque bibendum metus, id dictum neque tincidunt ut. Aliquam mi purus, mollis quis congue sed, varius ut neque. Cras id interdum quam.',
+<p>Vivamus nec vehicula lacus. Aliquam et dui sapien. Vivamus tellus velit, auctor eu fringilla ac, porttitor ac orci. Ut varius quam at dolor tristique feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.</p>
+',
+          'safe_summary' => '<p>Mauris ultricies gravida dolor a pellentesque. Integer suscipit lacinia risus in semper. Pellentesque tincidunt consectetur feugiat. Etiam vel dolor enim. Nunc scelerisque bibendum metus, id dictum neque tincidunt ut. Aliquam mi purus, mollis quis congue sed, varius ut neque. Cras id interdum quam.</p>
+',
         ),
       ),
     ),
@@ -196,8 +202,8 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing blog alt text 3',
-          'title' => 'Testing blog title text 3',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 600,
           'filename' => 'bigstock-Elementary-school-teacher-read-14086283.jpg',
@@ -206,7 +212,7 @@ function agov_content_blog_content_defaults() {
           'filesize' => 576931,
           'status' => 1,
           'type' => 'image',
-          'uuid' => 'e9b47628-53d6-45cc-8bcd-2062be74f7bb',
+          'uuid' => '13add88f-d4e1-48a1-ad63-bd0ca211260f',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -245,8 +251,10 @@ function agov_content_blog_content_defaults() {
           'safe_value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc semper rutrum gravida. Maecenas luctus dolor id enim hendrerit sed auctor mi porta. Suspendisse mattis tincidunt ipsum id faucibus. Ut augue eros, tempus id consequat aliquam, blandit sed diam. Etiam euismod vulputate mauris non molestie. Nulla eu massa in mauris tincidunt interdum non venenatis est. Fusce dictum libero sit amet sem consectetur egestas pellentesque mi pharetra. Cras egestas semper aliquam. Sed id mattis metus. Aenean mi quam, semper blandit porttitor sit amet, tincidunt a justo. Nam eu massa ac diam blandit scelerisque vel ac turpis. Mauris molestie lacus luctus augue convallis lacinia varius lectus blandit.</p>
 <p>Etiam neque dui, porta id imperdiet quis, volutpat in elit. Vivamus orci turpis, blandit ac commodo eu, pretium eget velit. Proin congue tellus sit amet justo interdum sit amet placerat nisi tempus. Ut scelerisque congue tellus, ac malesuada lacus mollis et. Mauris purus mi, lobortis id pulvinar vitae, molestie eget tortor. Nulla mollis justo sed augue porttitor ac scelerisque nulla elementum. Maecenas elementum, augue ut sollicitudin adipiscing, elit magna tristique eros, vitae ornare neque nisl non eros. Proin ligula libero, feugiat ut cursus et, pellentesque at mauris. Vivamus gravida iaculis ligula, vel dictum dolor sagittis nec. Vivamus tempor luctus eros, quis suscipit mauris pulvinar at. Fusce pretium nibh et ligula vestibulum eget rutrum nunc ullamcorper. Duis sit amet est ligula, eu tincidunt tortor. Nam pretium, velit id tempor hendrerit, neque nulla mattis leo, sed adipiscing nibh lorem vitae velit. Curabitur ullamcorper, tellus eu suscipit blandit, lectus metus eleifend mi, id elementum dolor nisi posuere diam. Phasellus euismod libero in tellus ullamcorper vestibulum. Nullam condimentum aliquet tellus, sit amet pretium sem imperdiet vel.</p>
 <p>Mauris ultricies gravida dolor a pellentesque. Integer suscipit lacinia risus in semper. Pellentesque tincidunt consectetur feugiat. Etiam vel dolor enim. Nunc scelerisque bibendum metus, id dictum neque tincidunt ut. Aliquam mi purus, mollis quis congue sed, varius ut neque. Cras id interdum quam.</p>
-<p>Vivamus nec vehicula lacus. Aliquam et dui sapien. Vivamus tellus velit, auctor eu fringilla ac, porttitor ac orci. Ut varius quam at dolor tristique feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.</p>',
-          'safe_summary' => 'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.',
+<p>Vivamus nec vehicula lacus. Aliquam et dui sapien. Vivamus tellus velit, auctor eu fringilla ac, porttitor ac orci. Ut varius quam at dolor tristique feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.</p>
+',
+          'safe_summary' => '<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin aliquet libero non sapien suscipit iaculis. Quisque ultrices tristique odio vitae posuere. Nam vestibulum tempor risus sagittis ullamcorper. Proin eros massa, aliquam vel accumsan vel, fringilla at nulla.</p>
+',
         ),
       ),
     ),
@@ -263,8 +271,8 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing blog alt text 4',
-          'title' => 'Testing blog title text 4',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 637,
           'filename' => 'bigstock-Conference-26104.jpg',
@@ -273,7 +281,7 @@ function agov_content_blog_content_defaults() {
           'filesize' => 999455,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '6b7b8c0c-5f15-4cc4-b0d2-cbda93cafa9a',
+          'uuid' => 'fcd31d37-a7ce-449c-8179-c2938bf42dff',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),
@@ -312,8 +320,10 @@ function agov_content_blog_content_defaults() {
           'safe_value' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut leo risus, ut sodales mi. Nam venenatis dapibus arcu, quis blandit libero lacinia quis. Suspendisse dui sapien, feugiat sit amet fringilla in, pharetra sed orci. Nulla facilisi. Donec eleifend vehicula egestas. Nam porta sem vitae nisl dictum auctor. Nam placerat mattis nulla faucibus sagittis. Nunc varius sodales velit, at ullamcorper sapien dignissim at. Vestibulum magna quam, ultrices sit amet accumsan quis, pulvinar nec enim. Nullam id varius tellus. Morbi a sem erat, sit amet rhoncus lorem. Praesent mauris arcu, pellentesque quis laoreet sit amet, tristique quis tortor. Maecenas mollis, sapien vel pellentesque scelerisque, diam mi ultrices erat, a vehicula est erat eu nisi. Aliquam erat volutpat.</p>
 <p>In adipiscing quam ut dolor vehicula vitae feugiat erat dapibus. Nulla facilisi. Donec in purus diam, eget lobortis odio. Curabitur ut sapien est, et iaculis metus. Nam semper urna quis augue cursus ultricies lobortis nunc pellentesque. Cras tortor nulla, pellentesque ut tempor id, lacinia sit amet mauris. Sed porttitor elit sed turpis elementum placerat. Vestibulum sagittis tincidunt odio eu mattis. Ut dignissim, tortor nec commodo commodo, dui nibh viverra arcu, at tempor mauris elit sed eros. Nam nibh dui, vulputate id malesuada nec, pulvinar vitae arcu. Pellentesque bibendum consequat dui, et tristique dolor feugiat vel. In ullamcorper, massa sed eleifend condimentum, augue felis semper sem, sit amet posuere libero lorem eget felis. Donec rutrum eleifend turpis, vel posuere sem fringilla et. Vestibulum vitae dolor nibh. Vivamus ipsum nisl, dictum eget gravida vel, suscipit a sapien.</p>
 <p>Proin lorem felis, convallis quis ornare nec, fermentum nec augue. Morbi eros neque, condimentum a sodales vitae, euismod vitae arcu. Aliquam vestibulum turpis eget dolor gravida et feugiat leo ornare. Ut sit amet felis leo. Sed vel cursus leo. Integer at sapien nulla. Sed vitae semper orci. Aenean consequat aliquet diam nec rhoncus. Sed mauris metus, posuere ut eleifend eu, molestie eu est. Fusce sem leo, vulputate quis interdum quis, ultrices sit amet tortor. Aenean ultrices scelerisque vulputate. Vivamus augue dui, cursus nec ultricies quis, posuere venenatis ipsum.</p>
-<p>Aliquam erat volutpat. Duis quis leo ut erat congue accumsan eget nec magna. Nulla lectus justo, adipiscing ut sollicitudin vestibulum, viverra id justo. Duis vitae adipiscing purus. Integer condimentum, elit vel bibendum mollis, erat tortor adipiscing dolor, non aliquam massa velit sit amet leo. Aliquam risus turpis, volutpat a mattis sed, eleifend accumsan mauris. Etiam consequat nibh ac enim congue sed ultrices diam fringilla. Pellentesque fringilla ligula vel erat cursus molestie. Phasellus odio diam, aliquet sit amet ullamcorper non, consectetur eu mauris. Curabitur nibh elit, blandit et facilisis eget, aliquam in leo. Ut eget luctus odio. Mauris at neque vitae augue elementum porta eget eu sem. Duis ac volutpat enim. Donec sollicitudin lacinia purus, eu vehicula est fermentum nec.</p>',
-          'safe_summary' => 'Proin lorem felis, convallis quis ornare nec, fermentum nec augue. Morbi eros neque, condimentum a sodales vitae, euismod vitae arcu. Aliquam vestibulum turpis eget dolor gravida et feugiat leo ornare. Ut sit amet felis leo. Sed vel cursus leo. Integer at sapien nulla. Sed vitae semper orci.',
+<p>Aliquam erat volutpat. Duis quis leo ut erat congue accumsan eget nec magna. Nulla lectus justo, adipiscing ut sollicitudin vestibulum, viverra id justo. Duis vitae adipiscing purus. Integer condimentum, elit vel bibendum mollis, erat tortor adipiscing dolor, non aliquam massa velit sit amet leo. Aliquam risus turpis, volutpat a mattis sed, eleifend accumsan mauris. Etiam consequat nibh ac enim congue sed ultrices diam fringilla. Pellentesque fringilla ligula vel erat cursus molestie. Phasellus odio diam, aliquet sit amet ullamcorper non, consectetur eu mauris. Curabitur nibh elit, blandit et facilisis eget, aliquam in leo. Ut eget luctus odio. Mauris at neque vitae augue elementum porta eget eu sem. Duis ac volutpat enim. Donec sollicitudin lacinia purus, eu vehicula est fermentum nec.</p>
+',
+          'safe_summary' => '<p>Proin lorem felis, convallis quis ornare nec, fermentum nec augue. Morbi eros neque, condimentum a sodales vitae, euismod vitae arcu. Aliquam vestibulum turpis eget dolor gravida et feugiat leo ornare. Ut sit amet felis leo. Sed vel cursus leo. Integer at sapien nulla. Sed vitae semper orci.</p>
+',
         ),
       ),
     ),
@@ -333,8 +343,8 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => 'Testing blog alt text 5',
-          'title' => 'Testing blog title text 5',
+          'alt' => '',
+          'title' => '',
           'width' => 900,
           'height' => 598,
           'filename' => 'bigstock-Farmer-hand-holding-a-fresh-yo-14504939.jpg',
@@ -343,7 +353,7 @@ function agov_content_blog_content_defaults() {
           'filesize' => 424471,
           'status' => 1,
           'type' => 'image',
-          'uuid' => '66483298-28a7-4ae1-a411-6dc31454fd9b',
+          'uuid' => '406be54e-9db9-4da1-afdb-953c59600571',
           'field_file_image_alt_text' => array(),
           'field_file_image_title_text' => array(),
           'metatags' => array(),

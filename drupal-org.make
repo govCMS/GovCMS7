@@ -21,7 +21,7 @@ projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
 projects[chosen][patch][] = http://drupal.org/files/2021639-pin-chosen-26.patch
 
-projects[context][version] = "3.0-beta6"
+projects[context][version] = "3.1"
 projects[context][subdir] = "contrib"
 
 projects[ctools][version] = "1.3"
@@ -65,6 +65,8 @@ projects[link][subdir] = "contrib"
 
 projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
+projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
+projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
 
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][subdir] = "contrib"
@@ -208,7 +210,7 @@ projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.
 ; Libraries
 
 libraries[superfish][download][type] = "get"
-libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/master.zip"
+libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
 

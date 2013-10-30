@@ -5,7 +5,6 @@ package = aGov
 version = 7.x-1.2
 project = agov_blog
 dependencies[] = agov_common_fields
-dependencies[] = agov_news
 dependencies[] = agov_tags
 dependencies[] = ctools
 dependencies[] = ds

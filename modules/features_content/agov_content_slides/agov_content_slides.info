@@ -1,8 +1,7 @@
-name = Slides
+name = Slides Content
 description = Slides for aGov Slideshow
 core = 7.x
 package = aGov content
-php = 5.2.4
 version = 7.x-1.0-beta1
 project = agov_content_slides
 dependencies[] = defaultcontent
