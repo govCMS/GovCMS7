@@ -63,8 +63,9 @@
   }
 
   // Hide the resize button below 740px.
-  @include breakpoint(max-width $breakpoint-medium, $no-query: '.lt-ie9') {
-    display: none;
+  display: none;
+  @include breakpoint($breakpoint-medium, $no-query: '.lt-ie9') {
+    display: block;
   }
 }
 
