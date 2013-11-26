@@ -241,7 +241,7 @@ function agov_core_update_block($module, $delta, $theme = '', $region = BLOCK_RE
  */
 function agov_core_theme_info() {
   return array(
-    'agov_base',
+    'agov',
   );
 }
 
