@@ -10,3 +10,10 @@ features[content][] = agov_promotion_1
 features[content][] = agov_promotion_2
 features[content][] = agov_promotion_3
 features[features_api][] = api:2
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+

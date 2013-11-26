@@ -3,3 +3,10 @@ name = Social Links
 description = "Provides block with links to social media services."
 core = 7.x
 package = aGov core
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+

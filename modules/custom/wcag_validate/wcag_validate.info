@@ -1,3 +1,10 @@
 name = WCAG Validate
 description = WCAG Validate allows developers and editors to validate individual pages against the PreviousNext WCAG service
 core = 7.x
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+

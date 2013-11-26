@@ -4,3 +4,10 @@ core = 7.x
 package = aGov core
 
 files[] = views/includes/node_freshness_handler_filter.inc
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+

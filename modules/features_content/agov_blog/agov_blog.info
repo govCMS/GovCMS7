@@ -60,3 +60,10 @@ features[variable][] = scheduler_unpublish_moderation_state_blog_article
 features[variable][] = scheduler_unpublish_required_blog_article
 features[variable][] = scheduler_unpublish_revision_blog_article
 features[views_view][] = home_page_blog_articles
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+

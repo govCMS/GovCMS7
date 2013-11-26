@@ -2,3 +2,10 @@ name = Menu Block
 description = Provides menu_block implemenation
 core = 7.x
 dependencies[] = menu_block
+
+; Information added by  packaging script on 2013-11-10
+version = "7.x-1.0-rc5"
+core = "7.x"
+project = "agov"
+datestamp = "1384120168"
+
