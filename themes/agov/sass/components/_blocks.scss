@@ -1,0 +1,15 @@
+.sidebar .block {
+	.block__title {
+		background: $blue;
+		color: white;
+		padding: 0 0 0 20px;
+	}
+	.block__content {
+		background: $block-content-grey;
+		padding: 20px;
+	}
+	.menu, p {
+		@include no-space;
+	}
+	
+}

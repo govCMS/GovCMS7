@@ -1,0 +1,56 @@
+.region-navigation {
+	background: black;
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.region-navigation .block__content > .menu {
+	@include inline-list;
+	background: black;
+	> li > a { 
+		display: inline-block;
+		padding: 10px; 
+		text-decoration: none;
+		text-transform: uppercase;
+		color: white; 
+	}
+	> li > a:hover {
+		background: $grey;
+		color: $red;
+	}
+	
+	> li > a.active-trail {
+		&, & a:hover {
+			color: black;
+		  background: white;
+		}
+	}
+}
+
+#block-system-main-menu {
+	@include no-space;
+	margin: auto;
+	@include breakpoint($medium) { max-width: $medium; }
+  @include breakpoint($large) { max-width: $large; }
+}
+
+.sf-menu li ul {
+	background: $grey;
+	padding: 5px;
+}
+
+.sf-menu li ul li{
+	width: 100%;
+}
+
+.sf-menu li ul li a {
+	padding: 5px;
+	display: block;
+	color: $red;
+}
+
+.sf-menu li ul li a:hover {
+	background: white;
+	color: black;
+}

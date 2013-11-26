@@ -1,0 +1,45 @@
+$medium: 720px;
+$large: 960px;
+
+#page,
+.region-bottom {
+  margin-left: auto;
+  margin-right: auto;
+  @include breakpoint($medium) { max-width: $medium; }
+  @include breakpoint($large) { max-width: $large; }
+	padding: 10px;
+}
+
+#main, 
+#footer {
+	clear: both;
+}
+
+.header {
+	overflow: hidden;
+}
+
+.header__inner {
+	@include breakpoint($medium) { max-width: $medium; }
+  @include breakpoint($large) { max-width: $large; }
+	margin: auto;
+}
+
+/*
+* Column logic.
+*/
+#content {
+ 	@include breakpoint($medium) {
+	   float: left; 
+	   width: 460px;
+	 }
+	 @include breakpoint($large) { width: 620px; }
+}
+
+.region-sidebar-second {
+ @include breakpoint($medium) {
+   float: right; 
+   width: 220px;
+ }
+ @include breakpoint($large) { width: 300px; } 
+}

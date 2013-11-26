@@ -1,0 +1,12 @@
+/* styles for desktop */
+.tinynav { display: none }
+
+/* styles for mobile */
+.tinynav { 
+	display: block;
+	@include breakpoint($medium) { display: none; }
+}
+.region-navigation .block__content > .menu { 
+	display: none;  
+	@include breakpoint($medium) { display: block; }
+}
