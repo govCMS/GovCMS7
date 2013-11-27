@@ -16,4 +16,9 @@
 
 .header__region {
 	clear: right;
+  float: right;
+}
+
+.block-agov-text-resize {
+  @include show-at($breakpoint-medium, inline-block);
 }

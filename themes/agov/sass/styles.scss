@@ -8,6 +8,10 @@
 
 /* Import Sass mixins, variables, Compass modules, etc. */
 @import "init";
+@import "breakpoints";
+@import "colors";
+@import "mixins";
+@import "fonts";
 
 /* Color Pallet for SCSS */
 @import "colors";
@@ -33,3 +37,14 @@
 /* SMACSS theme rules */
 /* @import "theme-A"; */
 /* @import "theme-B"; */
+
+
+
+
+
+
+
+
+
+
+

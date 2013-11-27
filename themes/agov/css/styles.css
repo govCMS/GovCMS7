@@ -6,29 +6,56 @@
  * of these @include files will be combined into a single file.
  */
 /* Import Sass mixins, variables, Compass modules, etc. */
-/* Color Pallet for SCSS */
-/* HTML element (SMACSS base) rules */
 /**
  * @file
- * Normalize.css is intended to be used as an alternative to CSS resets.
- *
- * This file is a slight fork of these original sources:
- * - normalize.css v2.1.2 | MIT License | git.io/normalize
- * - normalize.scss v2.1.2 | MIT/GPLv2 License | bit.ly/normalize-with-compass
- *
- * It's suggested that you read the normalize.scss file and customise it to meet
- * your needs, rather then including the file in your project and overriding the
- * defaults later in your CSS.
- * @see http://nicolasgallagher.com/about-normalize-css/
- *
- * Also: @see http://meiert.com/en/blog/20080419/reset-style-sheets-are-bad/
- *       @see http://snook.ca/archives/html_and_css/no_css_reset/
+ * Font declarations
  */
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: url('../fonts/opensans-regular-webfont.eot');
+  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-regular-webfont.woff') format("woff"), url('../fonts/opensans-regular-webfont.ttf') format("truetype"), url('../fonts/opensans-regular-webfont.svg#OpenSansRegular') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url('../fonts/opensans-bold-webfont.eot');
+  src: url('../fonts/opensans-bold-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-bold-webfont.woff') format("woff"), url('../fonts/opensans-bold-webfont.ttf') format("truetype"), url('../fonts/opensans-bold-webfont.svg#OpenSansBold') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansSemibold';
+  src: url('../fonts/opensans-semibold-webfont.eot');
+  src: url('../fonts/opensans-semibold-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-semibold-webfont.woff') format("woff"), url('../fonts/opensans-semibold-webfont.ttf') format("truetype"), url('../fonts/opensans-semibold-webfont.svg#OpenSansSemibold') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Color Pallet for SCSS */
+/* HTML element (SMACSS base) rules */
+/* normalize.css v2.1.0 | MIT License | git.io/normalize */
+/* normalize.scss v2.1.0 | MIT/GPLv2 License | bit.ly/normalize-with-compass */
+/* =============================================================================
+   Normalize.css is intended to be used as an alternative to CSS resets.
+
+   It's suggested that you read the normalize.scss file and customise it to meet
+   your needs, rather then including the file in your project and overriding the
+   defaults later in your CSS.
+   @see http://nicolasgallagher.com/about-normalize-css/
+
+   Also: @see http://meiert.com/en/blog/20080419/reset-style-sheets-are-bad/
+         @see http://snook.ca/archives/html_and_css/no_css_reset/
+   ========================================================================== */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
 /**
- * HTML5 display definitions
+ * Correct `block` display not defined in IE 8/9.
  */
-/* Correct `block` display not defined in IE 8/9. */
-/* line 33, ../sass/_normalize.scss */
+/* line 34, ../sass/_normalize.scss */
 article,
 aside,
 details,
@@ -36,6 +63,7 @@ figcaption,
 figure,
 footer,
 header,
+hgroup,
 main,
 nav,
 section,
@@ -43,8 +71,10 @@ summary {
   display: block;
 }
 
-/* Correct `inline-block` display not defined in IE 8/9. */
-/* line 40, ../sass/_normalize.scss */
+/**
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+/* line 44, ../sass/_normalize.scss */
 audio,
 canvas,
 video {
@@ -55,42 +85,45 @@ video {
  * Prevent modern browsers from displaying `audio` without controls.
  * Remove excess height in iOS 5 devices.
  */
-/* line 52, ../sass/_normalize.scss */
+/* line 57, ../sass/_normalize.scss */
 audio:not([controls]) {
   display: none;
   height: 0;
 }
 
-/* Address styling not present in IE 8/9. */
-/* line 58, ../sass/_normalize.scss */
+/**
+ * Address styling not present in IE 7/8/9.
+ * Known issue: no IE 6 support.
+ */
+/* line 67, ../sass/_normalize.scss */
 [hidden] {
   display: none;
 }
 
-/**
- * Base
- *
- * Instead of relying on the fonts that are available on a user's computer, you
- * can use web fonts which, like images, are resources downloaded to the user's
- * browser. Because of the bandwidth and rendering resources required, web fonts
- * should be used with care.
- *
- * Numerous resources for web fonts can be found on Google. Here are a few
- * websites where you can find Open Source fonts to download:
- * - http://www.fontsquirrel.com/fontface
- * - http://www.theleagueofmoveabletype.com
- *
- * In order to use these fonts, you will need to convert them into formats
- * suitable for web fonts. We recommend the free-to-use Font Squirrel's
- * Font-Face Generator:
- *   http://www.fontsquirrel.com/fontface/generator
- *
- * The following is an example @font-face declaration. This font can then be
- * used in any ruleset using a property like this:  font-family: Example, serif;
- *
- * Since we're using Sass, you'll need to declare your font faces here, then you
- * can add them to the font variables in the _base.scss partial.
- */
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/* Instead of relying on the fonts that are available on a user's computer, you
+   can use web fonts which, like images, are resources downloaded to the user's
+   browser. Because of the bandwidth and rendering resources required, web fonts
+   should be used with care.
+
+   Numerous resources for web fonts can be found on Google. Here are a few
+   websites where you can find Open Source fonts to download:
+   - http://www.fontsquirrel.com/fontface
+   - http://www.theleagueofmoveabletype.com
+
+   In order to use these fonts, you will need to convert them into formats
+   suitable for web fonts. We recommend the free-to-use Font Squirrel's
+   Font-Face Generator:
+     http://www.fontsquirrel.com/fontface/generator
+
+   The following is an example @font-face declaration. This font can then be
+   used in any ruleset using a property like this:  font-family: Example, serif;
+
+   Since we're using Sass, you'll need to declare your font faces here, then you
+   can add them to the font variables in the _base.scss partial.
+*/
 /*
 @font-face {
   font-family: 'Example';
@@ -110,192 +143,243 @@ audio:not([controls]) {
  * 3. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
  *    `em` units.
  */
-/* line 106, ../sass/_normalize.scss */
+/* line 118, ../sass/_normalize.scss */
 html {
-  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;
+  font-family: Arial, sans-serif;
   /* 1 */
-  font-size: 100%;
+  font-size: 81.25%;
   /* 3 */
-  -ms-text-size-adjust: 100%;
-  /* 2 */
   -webkit-text-size-adjust: 100%;
   /* 2 */
-  line-height: 1.5em;
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  line-height: 1.4em;
+  word-spacing: -0.05em;
 }
 
-/* Remove default margin. */
-/* line 126, ../sass/_normalize.scss */
+/**
+ * Remove default margin.
+ */
+/* line 147, ../sass/_normalize.scss */
 body {
   margin: 0;
   padding: 0;
 }
 
+/* ==========================================================================
+   Links
+   ========================================================================== */
 /**
- * Links
- *
  * The order of link states are based on Eric Meyer's article:
  * http://meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states
  */
-/* Address `outline` inconsistency between Chrome and other browsers. */
-/* line 148, ../sass/_normalize.scss */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+/* line 178, ../sass/_normalize.scss */
 a:focus {
   outline: thin dotted;
 }
 
-/* Improve readability when focused and also mouse hovered in all browsers. */
-/* line 154, ../sass/_normalize.scss */
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+/* line 187, ../sass/_normalize.scss */
 a:active,
 a:hover {
   outline: 0;
 }
 
+/* ==========================================================================
+   Typography
+
+   To achieve a pleasant vertical rhythm, we use Compass' Vertical Rhythm mixins
+   so that the line height of our base font becomes the basic unit of vertical
+   measurement. We use multiples of that unit to set the top and bottom margins
+   for our block level elements and to set the line heights of any fonts.
+   For more information, see http://24ways.org/2006/compose-to-a-vertical-rhythm
+   ========================================================================== */
 /**
- * Typography
- *
- * To achieve a pleasant vertical rhythm, we use Compass' Vertical Rhythm mixins
- * so that the line height of our base font becomes the basic unit of vertical
- * measurement. We use multiples of that unit to set the top and bottom margins
- * for our block level elements and to set the line heights of any fonts.
- * For more information, see http://24ways.org/2006/compose-to-a-vertical-rhythm
+ * Set 1 unit of vertical rhythm on the top and bottom margin.
  */
-/* Set 1 unit of vertical rhythm on the top and bottom margin. */
-/* line 170, ../sass/_normalize.scss */
+/* line 206, ../sass/_normalize.scss */
 p,
 pre {
-  margin: 1.5em 0;
+  margin: 1.4em 0 0.7em;
 }
 
-/* line 173, ../sass/_normalize.scss */
+/* line 210, ../sass/_normalize.scss */
 blockquote {
-  /* Also indent the quote on both sides. */
-  margin: 1.5em 30px;
+  /* Set 1 unit of vertical rhythm on the top and bottom margin. */
+  margin: 1.4em 30px;
 }
 
 /**
  * Address variable `h1` font-size and margin within `section` and `article`
  * contexts in Firefox 4+, Safari 5, and Chrome.
  */
-/* line 182, ../sass/_normalize.scss */
+/* line 220, ../sass/_normalize.scss */
+h1, h2 {
+  font-family: "OpenSansSemibold", Arial, sans-serif;
+  font-weight: normal;
+}
+
+/* line 277, ../sass/_normalize.scss */
 h1 {
   /* Set the font-size and line-height while keeping a proper vertical rhythm. */
-  font-size: 2em;
-  line-height: 1.5em;
+  font-size: 2.4em;
+  line-height: 1.16667em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  margin-top: 0.75em;
-  margin-bottom: 0.75em;
+  margin-top: 0.29167em;
+  margin-bottom: 0.29167em;
+  line-height: 1.4em;
+}
+/* line 280, ../sass/_normalize.scss */
+h1.page-title {
+  margin-top: 0;
 }
 
-/* line 190, ../sass/_normalize.scss */
+/* line 285, ../sass/_normalize.scss */
 h2 {
-  font-size: 1.5em;
-  line-height: 2em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  font-size: 1.68em;
+  line-height: 1.66667em;
+  margin-top: 0.41667em;
+  margin-bottom: 0.41667em;
+  line-height: 1.4em;
 }
 
-/* line 195, ../sass/_normalize.scss */
+/* line 289, ../sass/_normalize.scss */
 h3 {
-  font-size: 1.17em;
-  line-height: 1.28205em;
-  margin-top: 1.28205em;
-  margin-bottom: 1.28205em;
+  font-size: 1.44em;
+  line-height: 1.94444em;
+  margin-top: 0.48611em;
+  margin-bottom: 0.48611em;
+  line-height: 1.4em;
+  color: #555;
 }
 
-/* line 200, ../sass/_normalize.scss */
+/* line 293, ../sass/_normalize.scss */
 h4 {
-  font-size: 1em;
-  line-height: 1.5em;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  font-size: 1.2em;
+  line-height: 2.33333em;
+  margin-top: 0.58333em;
+  margin-bottom: 0.58333em;
+  line-height: 1.4em;
+  color: #555;
 }
 
-/* line 205, ../sass/_normalize.scss */
+/* line 297, ../sass/_normalize.scss */
 h5 {
-  font-size: 0.83em;
-  line-height: 1.80723em;
-  margin-top: 1.80723em;
-  margin-bottom: 1.80723em;
+  font-size: 1.2em;
+  line-height: 2.33333em;
+  margin-top: 0.58333em;
+  margin-bottom: 0.58333em;
+  line-height: 1.4em;
+  color: #555;
 }
 
-/* line 210, ../sass/_normalize.scss */
+/* line 301, ../sass/_normalize.scss */
 h6 {
-  font-size: 0.67em;
-  line-height: 2.23881em;
-  margin-top: 2.23881em;
-  margin-bottom: 2.23881em;
+  font-size: 1em;
+  line-height: 1.4em;
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+  line-height: 1.4em;
+  color: #555;
 }
 
-/* Address styling not present in IE 8/9, Safari 5, and Chrome. */
-/* line 217, ../sass/_normalize.scss */
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+/* line 309, ../sass/_normalize.scss */
 abbr[title] {
   border-bottom: 1px dotted;
 }
 
-/* Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome. */
-/* line 223, ../sass/_normalize.scss */
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+/* line 318, ../sass/_normalize.scss */
 b,
 strong {
   font-weight: bold;
 }
 
-/* Address styling not present in Safari 5 and Chrome. */
-/* line 228, ../sass/_normalize.scss */
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+/* line 326, ../sass/_normalize.scss */
 dfn {
   font-style: italic;
 }
 
-/* Address differences between Firefox and other browsers. */
-/* line 233, ../sass/_normalize.scss */
+/**
+ * Address differences between Firefox and other browsers.
+ * Known issue: no IE 6/7 normalization.
+ */
+/* line 335, ../sass/_normalize.scss */
 hr {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 1px;
   border: 1px solid #666;
   padding-bottom: -1px;
-  margin: 1.5em 0;
+  margin: 1.4em 0;
 }
 
-/* Address styling not present in IE 8/9. */
-/* line 242, ../sass/_normalize.scss */
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 347, ../sass/_normalize.scss */
 mark {
   background: #ff0;
   color: #000;
 }
 
-/* Correct font family set oddly in Safari 5 and Chrome. */
-/* line 253, ../sass/_normalize.scss */
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+/* line 361, ../sass/_normalize.scss */
 code,
 kbd,
 pre,
 samp,
 tt,
 var {
-  font-family: "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+  font-family: sans-serif;
   font-size: 1em;
-  line-height: 1.5em;
+  line-height: 1.4em;
 }
 
-/* Improve readability of pre-formatted text in all browsers. */
-/* line 262, ../sass/_normalize.scss */
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+/* line 373, ../sass/_normalize.scss */
 pre {
   white-space: pre-wrap;
 }
 
-/* Set consistent quote types. */
-/* line 274, ../sass/_normalize.scss */
+/**
+ * Set consistent quote types.
+ */
+/* line 381, ../sass/_normalize.scss */
 q {
   quotes: "\201C" "\201D" "\2018" "\2019";
 }
 
-/* Address inconsistent and variable font size in all browsers. */
-/* line 279, ../sass/_normalize.scss */
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 389, ../sass/_normalize.scss */
 small {
   font-size: 80%;
 }
 
-/* Prevent `sub` and `sup` affecting `line-height` in all browsers. */
-/* line 285, ../sass/_normalize.scss */
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 398, ../sass/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -304,103 +388,115 @@ sup {
   vertical-align: baseline;
 }
 
-/* line 291, ../sass/_normalize.scss */
+/* line 405, ../sass/_normalize.scss */
 sup {
   top: -0.5em;
 }
 
-/* line 294, ../sass/_normalize.scss */
+/* line 409, ../sass/_normalize.scss */
 sub {
   bottom: -0.25em;
 }
 
+/* ==========================================================================
+   Lists
+   ========================================================================== */
 /**
- * Lists
+ * Set 1 unit of vertical rhythm and a consistent indentation.
  */
-/* line 304, ../sass/_normalize.scss */
+/* line 424, ../sass/_normalize.scss */
 dl,
 menu,
 ol,
 ul {
-  /* Address margins set differently in IE 6/7. */
-  margin: 1.5em 0;
+  margin: 1.4em 0;
+  padding: 0 0 0 0;
+  /* LTR */
 }
 
-/* line 311, ../sass/_normalize.scss */
-ol ol,
-ol ul,
-ul ol,
-ul ul {
-  /* Turn off margins on nested lists. */
+/* line 429, ../sass/_normalize.scss */
+ul, ol {
+  list-style: none;
+}
+/* line 430, ../sass/_normalize.scss */
+ul ul, ul ol, ol ul, ol ol {
   margin: 0;
+  /* Turn off margins on nested lists. */
 }
 
-/* line 316, ../sass/_normalize.scss */
+/* line 436, ../sass/_normalize.scss */
+dl {
+  padding: 0;
+}
+
+/* line 440, ../sass/_normalize.scss */
 dd {
   margin: 0 0 0 30px;
   /* LTR */
 }
 
-/* Address paddings set differently in IE 6/7. */
-/* line 323, ../sass/_normalize.scss */
-menu,
-ol,
-ul {
-  padding: 0 0 0 30px;
-  /* LTR */
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+/* line 464, ../sass/_normalize.scss */
+img {
+  border: 0;
+  /* vertical-align: bottom; */
+  /* Suppress the space beneath the baseline */
+  /* Responsive images */
+  /* @todo Look into adding responsive embedded video. */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  width: auto;
+  /* Correct IE 8 not scaling image height when resized. */
 }
 
 /**
- * Embedded content and figures
- *
- * @todo Look into adding responsive embedded video.
+ * Correct overflow displayed oddly in IE 9.
  */
-/* line 341, ../sass/_normalize.scss */
-img {
-  /* Remove border when inside `a` element in IE 8/9. */
-  border: 0;
-  /* Suppress the space beneath the baseline */
-  /* vertical-align: bottom; */
-  /* Responsive images */
-  max-width: 100%;
-  height: auto;
-  /* Correct IE 8 not scaling image height when resized. */
-  width: auto;
-}
-
-/* Correct overflow displayed oddly in IE 9. */
-/* line 362, ../sass/_normalize.scss */
+/* line 487, ../sass/_normalize.scss */
 svg:not(:root) {
   overflow: hidden;
 }
 
-/* Address margin not present in IE 8/9 and Safari 5. */
-/* line 367, ../sass/_normalize.scss */
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+/* line 499, ../sass/_normalize.scss */
 figure {
   margin: 0;
 }
 
+/* ==========================================================================
+   Forms
+   ========================================================================== */
 /**
- * Forms
+ * Define consistent border, margin, and padding.
  */
-/* Define consistent border, margin, and padding. */
-/* line 383, ../sass/_normalize.scss */
+/* line 521, ../sass/_normalize.scss */
 fieldset {
+  border-color: #c0c0c0;
   margin: 0 2px;
   /* Apply borders and padding that keep the vertical rhythm. */
-  border-color: #c0c0c0;
   border-top-style: solid;
-  border-top-width: 0.0625em;
-  padding-top: 0.4625em;
+  border-top-width: 0.07692em;
+  padding-top: 0.41308em;
   border-bottom-style: solid;
-  border-bottom-width: 0.0625em;
-  padding-bottom: 0.9125em;
+  border-bottom-width: 0.07692em;
+  padding-bottom: 0.83308em;
   border-left-style: solid;
-  border-left-width: 0.0625em;
-  padding-left: 0.9125em;
+  border-left-width: 0.07692em;
+  padding-left: 0.83308em;
   border-right-style: solid;
-  border-right-width: 0.0625em;
-  padding-right: 0.9125em;
+  border-right-width: 0.07692em;
+  padding-right: 0.83308em;
 }
 
 /**
@@ -408,7 +504,7 @@ fieldset {
  * 2. Remove padding so people aren't caught out if they zero out fieldsets.
  * 3. Correct alignment displayed oddly in IE 6/7.
  */
-/* line 398, ../sass/_normalize.scss */
+/* line 537, ../sass/_normalize.scss */
 legend {
   border: 0;
   /* 1 */
@@ -421,9 +517,8 @@ legend {
  * 2. Correct font size not being inherited in all browsers.
  * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  * 4. Improve appearance and consistency with IE 6/7.
- * 5. Keep form elements constrained in their containers.
  */
-/* line 416, ../sass/_normalize.scss */
+/* line 555, ../sass/_normalize.scss */
 button,
 input,
 select,
@@ -434,19 +529,13 @@ textarea {
   /* 2 */
   margin: 0;
   /* 3 */
-  max-width: 100%;
-  /* 5 */
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  /* 5 */
 }
 
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
  * the UA stylesheet.
  */
-/* line 433, ../sass/_normalize.scss */
+/* line 571, ../sass/_normalize.scss */
 button,
 input {
   line-height: normal;
@@ -458,7 +547,7 @@ input {
  * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
  * Correct `select` style inheritance in Firefox 4+ and Opera.
  */
-/* line 444, ../sass/_normalize.scss */
+/* line 583, ../sass/_normalize.scss */
 button,
 select {
   text-transform: none;
@@ -473,7 +562,7 @@ select {
  * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
  *    Known issue: inner spacing remains in IE 6.
  */
-/* line 460, ../sass/_normalize.scss */
+/* line 600, ../sass/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -487,7 +576,7 @@ input[type="submit"] {
 /**
  * Re-set default cursor for disabled elements.
  */
-/* line 472, ../sass/_normalize.scss */
+/* line 613, ../sass/_normalize.scss */
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -499,7 +588,7 @@ html input[disabled] {
  * 3. Remove excess padding in IE 7.
  *    Known issue: excess padding remains in IE 6.
  */
-/* line 483, ../sass/_normalize.scss */
+/* line 625, ../sass/_normalize.scss */
 input[type="checkbox"],
 input[type="radio"] {
   -webkit-box-sizing: border-box;
@@ -515,7 +604,7 @@ input[type="radio"] {
  * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
  *    (include `-moz` to future-proof).
  */
-/* line 497, ../sass/_normalize.scss */
+/* line 640, ../sass/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
@@ -529,14 +618,16 @@ input[type="search"] {
  * Remove inner padding and search cancel button in Safari 5 and Chrome
  * on OS X.
  */
-/* line 507, ../sass/_normalize.scss */
+/* line 651, ../sass/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-/* Remove inner padding and border in Firefox 4+. */
-/* line 513, ../sass/_normalize.scss */
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 660, ../sass/_normalize.scss */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -547,7 +638,7 @@ input::-moz-focus-inner {
  * 1. Remove default vertical scrollbar in IE 8/9.
  * 2. Improve readability and alignment in all browsers.
  */
-/* line 522, ../sass/_normalize.scss */
+/* line 670, ../sass/_normalize.scss */
 textarea {
   overflow: auto;
   /* 1 */
@@ -555,26 +646,27 @@ textarea {
   /* 2 */
 }
 
-/* Drupal-style form labels. */
-/* line 528, ../sass/_normalize.scss */
+/* line 675, ../sass/_normalize.scss */
 label {
   display: block;
   font-weight: bold;
 }
 
+/* ==========================================================================
+   Tables
+   ========================================================================== */
 /**
- * Tables
+ * Remove most spacing between table cells.
  */
-/* line 536, ../sass/_normalize.scss */
+/* line 688, ../sass/_normalize.scss */
 table {
-  /* Remove most spacing between table cells. */
   border-collapse: collapse;
   border-spacing: 0;
-  /* Prevent cramped-looking tables */
   /* width: 100%; */
+  /* Prevent cramped-looking tables */
   /* Add vertical rhythm margins. */
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 1.4em;
+  margin-bottom: 1.4em;
 }
 
 /* Layout rules */
@@ -677,6 +769,32 @@ table {
   padding: 0;
 }
 
+/*
+ * @file
+ * Compass styles for custom aGov blocks.
+ */
+/* Social links */
+/* line 25, ../sass/components/_blocks.scss */
+.block-agov-social-links-services .content {
+  padding: 15px 5px 7px 15px !important;
+}
+/* line 27, ../sass/components/_blocks.scss */
+.block-agov-social-links-services .content a {
+  display: block;
+  float: left;
+  margin: 0 8px 8px 0;
+}
+/* line 32, ../sass/components/_blocks.scss */
+.block-agov-social-links-services .content img {
+  width: 32px;
+  height: 32px;
+}
+
+/* line 1, ../sass/components/_lists.scss */
+ul.links li {
+  padding-left: 0;
+}
+
 /**
  * @file
  * SMACSS Modules
@@ -773,8 +891,8 @@ table {
 /* line 98, ../sass/components/_misc.scss */
 .header__site-name {
   margin: 0;
-  font-size: 2em;
-  line-height: 1.5em;
+  font-size: 2.4em;
+  line-height: 1.16667em;
 }
 
 /* The link around the name of the website. */
@@ -869,7 +987,7 @@ table {
  */
 /* line 191, ../sass/components/_misc.scss */
 .messages, .messages--status, .messages--warning, .messages--error {
-  margin: 1.5em 0;
+  margin: 1.4em 0;
   padding: 10px 10px 10px 50px;
   /* LTR */
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAD6UlEQVR42s2WX0xbVRzH3YwmC4k+GF/0ZS/S267/bmnX9nL7bwstZlnbjTDYyoC5GCbB0ZW5pdJCe6swbLFA6bpWIGuRMWVjKGP+21QW3SZBSAjGh4XEaTZTH82Cm/3ztS2xs7mw4KLRk3xyzj33/H6fe5Pz7zEA/yr/vUDukj9FH6drqTaqT8EoPs/UV+nX6TD1BlUh9AqLHlmgPKLcRHmoCOWmElK/FOKTYpS8UwLJkASiUyLI3pKhlClN0g46qj+qL/pbArlbrlO1q25JeiSgR2iYJ8ywXLSg/qP6LNl2ro8+Q4MMkKCd9K2t3q3KdQnkXXIF5aISkgEJzONm1F2qW52pDJN1MI2bUBIuAdVOJWSMTPNQgX6/vkjVpvpREpag6oMqWCYta1IzbsHh9ga0RJtzY8URMdRO9U/KSuWmNQUqh2pY3CtG+fvlqJyofMAFNrZAE+7e/RWR4X4cD9tgOGsA2U2CdtMDqwqyMyIzQ5KKqAKmcyaYxkzYd3YvjGNGFtXRPRj58DT+LOemRrFnrBLyITmUDmUyO/NYgu2d26ukHVJo3tXAMGpAs+cQmh0NeClan30uwN7TgnQ6nRd4r3thOGOAJqYB2UVC79AfZAnKHGUxQa8A2tNaNLW/jKvXv8Dyb8s4yryKA4O10A3roIvpUB+swTdz1/LJZ27PQBvT5lBH1RD4BChzlQ2wBNtc22aE/ULQgzRCl4P5BPcT93GMOYz9wb2QhCRgAq35d8u/L2PXe7tADVGgBlcQ+AXQtmlvsP/gzbJZvp8PMkJCFBYh8m0knyiVSsHe0YIGZz1+/uVOvt8z7QGvnwf+ST5EIRHIUyR4fh50rbp5lsDcYR4ReAXgBrng9q/Qfa0bfy035r7Ot2dvz4IX4IEIEAXwvDzscOw4zxJUd1YfEXlE4Aa4BQHMlwzSSBeI7iXvoTxWDqKPYCFsFaKmr+YVliB0JfS89DVpiuhlB9k/tSOZTuYFvq98yI7L0/MAsVWcGp0bfW61hbahwltxSeARsIKyWKesSKQSWIwvYkvvllwfx88pgOvhwthu/AzAxlVX8vz385tLbaVxwpcLZtEw0QDjsBGctzksiE4CimZFfHp++oWHbnbuUfdB0komMgHsRN1r0MWBsEmYODF5onY92/UTwcvBxuzXcN1ccHycVSn2FaPYWwzCQUDWKIt7z3utAJ5c74Hz+OLSomynY+cVfiM/xW3JiDyZpB3FuZrj4oCwE+Ad4qWMjPHjpTtL0mzMoxyZz9yM39Q7Y85Ok930icqm+k59TL2wm9l90dZv8y/8sPAigGf/iUN/Q4anM2zOsdLe+L+4VfwBVVjDs2rTYx0AAAAASUVORK5CYII=');
@@ -940,11 +1058,12 @@ table {
   background-image: -webkit-linear-gradient(bottom, #bbbbbb 1px, transparent 1px);
   background-image: -moz-linear-gradient(bottom, #bbbbbb 1px, transparent 1px);
   background-image: -o-linear-gradient(bottom, #bbbbbb 1px, transparent 1px);
+  background-image: -ms-linear-gradient(bottom, #bbbbbb 1px, transparent 1px);
   background-image: linear-gradient(bottom, #bbbbbb 1px, transparent 1px);
   /* IE 9 and earlier don't understand gradients. */
   list-style: none;
   border-bottom: 1px solid #bbbbbb \0/ie;
-  margin: 1.5em 0;
+  margin: 1.4em 0;
   padding: 0 2px;
   white-space: nowrap;
 }
@@ -963,7 +1082,7 @@ a.tabs-primary__tab-link, a.tabs-secondary__tab-link {
   border-right: 0;
   border-bottom: 0;
   display: block;
-  line-height: 1.5em;
+  line-height: 1.4em;
   text-decoration: none;
 }
 
@@ -976,7 +1095,7 @@ a.tabs-primary__tab-link, a.tabs-secondary__tab-link {
   -moz-border-radius-topright: 4px;
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
-  text-shadow: 1px 1px 0 white;
+  text-shadow: white 1px 1px 0;
   border: 1px solid #bbbbbb;
   border-bottom-color: transparent;
   /* IE 9 and earlier don't understand gradients. */
@@ -998,6 +1117,7 @@ a.tabs-primary__tab-link, a.tabs-primary__tab-link.is-active {
   border-top-right-radius: 4px;
   -webkit-transition: background-color 0.3s;
   -moz-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
   color: #333;
@@ -1021,6 +1141,7 @@ a.tabs-primary__tab-link:active, a.tabs-primary__tab-link.is-active {
   background-image: -webkit-linear-gradient(#e9e9e9, rgba(233, 233, 233, 0));
   background-image: -moz-linear-gradient(#e9e9e9, rgba(233, 233, 233, 0));
   background-image: -o-linear-gradient(#e9e9e9, rgba(233, 233, 233, 0));
+  background-image: -ms-linear-gradient(#e9e9e9, rgba(233, 233, 233, 0));
   background-image: linear-gradient(#e9e9e9, rgba(233, 233, 233, 0));
   border-color: #fff;
 }
@@ -1030,13 +1151,13 @@ a.tabs-primary__tab-link:active, a.tabs-primary__tab-link.is-active {
 .tabs-secondary {
   font-size: .9em;
   /* Collapse bottom margin of ul.primary. */
-  margin-top: -1.5em;
+  margin-top: -1.4em;
 }
 
 /* line 346, ../sass/components/_misc.scss */
 .tabs-secondary__tab,
 .tabs-secondary__tab.is-active {
-  margin: 0.75em 3px;
+  margin: 0.7em 3px;
 }
 
 /* line 352, ../sass/components/_misc.scss */
@@ -1048,9 +1169,10 @@ a.tabs-secondary__tab-link, a.tabs-secondary__tab-link.is-active {
   border-radius: 0.75em;
   -webkit-transition: background-color 0.3s;
   -moz-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
-  text-shadow: 1px 1px 0 white;
+  text-shadow: white 1px 1px 0;
   background-color: #f2f2f2;
   color: #666;
   padding: 0 .5em;
@@ -1065,7 +1187,7 @@ a.tabs-secondary__tab-link:hover, a.tabs-secondary__tab-link:focus {
 
 /* line 366, ../sass/components/_misc.scss */
 a.tabs-secondary__tab-link:active, a.tabs-secondary__tab-link.is-active {
-  text-shadow: 1px 1px 0 #333333;
+  text-shadow: #333333 1px 1px 0;
   background-color: #666;
   border-color: #000;
   color: #fff;
@@ -1166,7 +1288,7 @@ span.field-label {
 /* Block wrapper. */
 /* line 466, ../sass/components/_misc.scss */
 .block {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.4em;
 }
 
 /**
@@ -1236,7 +1358,7 @@ span.field-label {
 /* Wrapper for the list of comments and its title. */
 /* line 545, ../sass/components/_misc.scss */
 .comments {
-  margin: 1.5em 0;
+  margin: 1.4em 0;
 }
 
 /* Preview of the comment before submitting new or updated comment. */
@@ -1271,7 +1393,7 @@ span.field-label {
 /* Wrapper for a form element (or group of form elements) and its label. */
 /* line 576, ../sass/components/_misc.scss */
 .form-item {
-  margin: 1.5em 0;
+  margin: 1.4em 0;
   /* Pack groups of checkboxes and radio buttons closer together. */
   /* Form items in a table. */
   /* Highlight the form elements that caused a form submission error. */
@@ -1355,7 +1477,7 @@ a.button {
 /* line 654, ../sass/components/_misc.scss */
 .openid-link,
 .user-link {
-  margin-top: 1.5em;
+  margin-top: 1.4em;
 }
 
 /* line 658, ../sass/components/_misc.scss */
@@ -1368,7 +1490,7 @@ html.js #user-login-form li.openid-link,
 
 /* line 662, ../sass/components/_misc.scss */
 #user-login ul {
-  margin: 1.5em 0;
+  margin: 1.4em 0;
 }
 
 /**
@@ -1574,6 +1696,114 @@ tr.selected td {
   transition: background .2s;
 }
 
+/* line 1, ../sass/components/_text-resize.scss */
+.text-resize {
+  list-style-type: none;
+}
+/* line 5, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+.text-resize, .text-resize li {
+  margin: 0px;
+  padding: 0px;
+  display: inline;
+}
+/* line 3, ../sass/components/_text-resize.scss */
+.text-resize a {
+  text-indent: 110%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  width: 19px;
+  padding: 4px;
+  background-image: url('../images/font-resize-bg.png?1383871531');
+  background-repeat: no-repeat;
+}
+/* line 10, ../sass/components/_text-resize.scss */
+.text-resize a.font-small {
+  background-position: 0px px;
+}
+/* line 11, ../sass/components/_text-resize.scss */
+.text-resize a.font-large {
+  background-position: 0px -27px;
+}
+/* line 12, ../sass/components/_text-resize.scss */
+.text-resize a.reset {
+  background-position: 0px -54px;
+}
+
+/* line 1, ../sass/components/_typography.scss */
+body.large-fonts {
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  line-height: 1.4em;
+}
+/* line 6, ../sass/components/_typography.scss */
+body.large-fonts h1 {
+  /* Set the font-size and line-height while keeping a proper vertical rhythm. */
+  font-size: 1.95em;
+  line-height: 1.16667em;
+  /* Set 1 unit of vertical rhythm on the top and bottom margins. */
+  margin-top: 0.29167em;
+  margin-bottom: 0.29167em;
+  line-height: 1.1375em;
+}
+/* line 9, ../sass/components/_typography.scss */
+body.large-fonts h2 {
+  font-size: 1.365em;
+  line-height: 1.66667em;
+  margin-top: 0.41667em;
+  margin-bottom: 0.41667em;
+  line-height: 1.1375em;
+}
+/* line 12, ../sass/components/_typography.scss */
+body.large-fonts h3 {
+  font-size: 1.17em;
+  line-height: 1.94444em;
+  margin-top: 0.48611em;
+  margin-bottom: 0.48611em;
+  line-height: 1.1375em;
+  color: #555;
+}
+
+/* line 19, ../sass/components/_typography.scss */
+#region-content ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+/* line 24, ../sass/components/_typography.scss */
+#region-content ul {
+  list-style-type: square;
+  margin-left: 16px;
+}
+/* line 29, ../sass/components/_typography.scss */
+#region-content .no-bullets {
+  margin-left: 0;
+}
+/* line 31, ../sass/components/_typography.scss */
+#region-content .no-bullets li {
+  list-style: none;
+}
+/* line 36, ../sass/components/_typography.scss */
+#region-content .node ul.links {
+  margin-left: 0;
+  display: block;
+}
+
+/* Display image inline to the right */
+/* line 44, ../sass/components/_typography.scss */
+p.img-float-right,
+img.img-float-right {
+  float: right;
+  margin: 5px 0 5px 5px;
+}
+
+/* Display image inline to the left */
+/* line 51, ../sass/components/_typography.scss */
+p.img-float-left,
+img.img-float-left {
+  float: left;
+  margin: 0 5px 5px 5px;
+}
+
 /* line 1, ../sass/sections/_base.scss */
 body {
   background: #efeee9;
@@ -1610,6 +1840,22 @@ body {
 /* line 17, ../sass/sections/_header.scss */
 .header__region {
   clear: right;
+  float: right;
+}
+
+/* line 22, ../sass/sections/_header.scss */
+.block-agov-text-resize {
+  display: none;
+}
+@media (min-width: 740px) {
+  /* line 22, ../sass/sections/_header.scss */
+  .block-agov-text-resize {
+    display: inline-block;
+  }
+}
+/* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
+.lt-ie9 .block-agov-text-resize {
+  display: inline-block;
 }
 
 /* line 1, ../sass/sections/_navigation.scss */
@@ -1625,7 +1871,7 @@ body {
   list-style-type: none;
   background: black;
 }
-/* line 5, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
+/* line 5, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/lists/_inline-list.scss */
 .region-navigation .block__content > .menu, .region-navigation .block__content > .menu li {
   margin: 0px;
   padding: 0px;
@@ -1756,7 +2002,7 @@ body {
   #content a[href]:after {
     content: " (" attr(href) ")";
     font-weight: normal;
-    font-size: 16px;
+    font-size: 13px;
   }
   /* line 35, ../sass/_print.scss */
   #content a[href^="javascript:"]:after,
