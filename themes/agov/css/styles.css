@@ -1713,19 +1713,20 @@ tr.selected td {
   overflow: hidden;
   display: inline-block;
   width: 19px;
+  height: 19px;
   padding: 4px;
   background-image: url('../images/font-resize-bg.png?1383871531');
   background-repeat: no-repeat;
 }
-/* line 10, ../sass/components/_text-resize.scss */
+/* line 11, ../sass/components/_text-resize.scss */
 .text-resize a.font-small {
   background-position: 0px px;
 }
-/* line 11, ../sass/components/_text-resize.scss */
+/* line 12, ../sass/components/_text-resize.scss */
 .text-resize a.font-large {
   background-position: 0px -27px;
 }
-/* line 12, ../sass/components/_text-resize.scss */
+/* line 13, ../sass/components/_text-resize.scss */
 .text-resize a.reset {
   background-position: 0px -54px;
 }

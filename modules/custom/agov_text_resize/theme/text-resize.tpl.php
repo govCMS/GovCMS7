@@ -7,18 +7,18 @@
 
 ?>
 <ul class="text-resize">
-    <li class="font-small">
-        <a href="#">
+    <li>
+        <a href="#" class="font-small">
         <?php print t('Smaller text'); ?>
         </a>
     </li>
-    <li class="font-large">
-        <a href="#">
+    <li >
+        <a href="#" class="font-large">
             <?php print t('Larger text'); ?>
         </a>
     </li>
-    <li class="reset">
-        <a href="#">
+    <li >
+        <a href="#" class="reset">
             <?php print t('Reset text size'); ?>
         </a>
     </li>
