@@ -4,8 +4,14 @@
     float: left;
     border-right: solid 1px lighten($blue, 10%);
     border-left: solid 1px darken($blue, 10%);
-    &:first-child { border-left: none; }
-    &:last-child { border-right: none; }
+    &:first-child {
+      border-left: none;
+      a { padding-left: 0; }
+    }
+    &:last-child {
+      border-right: none;
+      a { padding-right: 0; }
+    }
   }
   a {
     color: white;

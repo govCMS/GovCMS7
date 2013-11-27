@@ -1,0 +1,18 @@
+.form-submit {
+  border: none;
+}
+
+#block-search-form {
+  .form-text, .form-submit { float: left; }
+  .form-text {
+    width: 180px;
+    color: #767676;
+  }
+  .form-submit {
+    background: #1b1b1b;
+    width: 70px;
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+  }
+}

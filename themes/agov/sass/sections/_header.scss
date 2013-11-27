@@ -17,8 +17,15 @@
 .header__region {
 	clear: right;
   float: right;
+  margin: rhythm(1) 0;
 }
 
-.block-agov-text-resize {
+.header .block {
+  float: left;
+  margin: 0 10px;
+}
+
+.header .block-agov-text-resize {
   @include show-at($breakpoint-medium, inline-block);
+  margin-right: 0px; // Bring search block closer to search form
 }

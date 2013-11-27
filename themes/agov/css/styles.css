@@ -670,7 +670,7 @@ table {
 }
 
 /* Layout rules */
-/* line 5, ../sass/layouts/_responsive.scss */
+/* line 5, ../sass/_layout.scss */
 #page,
 .region-bottom {
   margin-left: auto;
@@ -678,43 +678,43 @@ table {
   padding: 10px;
 }
 @media (min-width: 720px) {
-  /* line 5, ../sass/layouts/_responsive.scss */
+  /* line 5, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 5, ../sass/layouts/_responsive.scss */
+  /* line 5, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 960px;
   }
 }
 
-/* line 14, ../sass/layouts/_responsive.scss */
+/* line 14, ../sass/_layout.scss */
 #main,
 #footer {
   clear: both;
 }
 
-/* line 18, ../sass/layouts/_responsive.scss */
+/* line 18, ../sass/_layout.scss */
 .header {
   overflow: hidden;
 }
 
-/* line 22, ../sass/layouts/_responsive.scss */
+/* line 22, ../sass/_layout.scss */
 .header__inner {
   margin: auto;
 }
 @media (min-width: 720px) {
-  /* line 22, ../sass/layouts/_responsive.scss */
+  /* line 22, ../sass/_layout.scss */
   .header__inner {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 22, ../sass/layouts/_responsive.scss */
+  /* line 22, ../sass/_layout.scss */
   .header__inner {
     max-width: 960px;
   }
@@ -724,31 +724,69 @@ table {
 * Column logic.
 */
 @media (min-width: 720px) {
-  /* line 31, ../sass/layouts/_responsive.scss */
+  /* line 31, ../sass/_layout.scss */
   #content {
     float: left;
     width: 460px;
   }
 }
 @media (min-width: 960px) {
-  /* line 31, ../sass/layouts/_responsive.scss */
+  /* line 31, ../sass/_layout.scss */
   #content {
     width: 620px;
   }
 }
 
 @media (min-width: 720px) {
-  /* line 39, ../sass/layouts/_responsive.scss */
+  /* line 39, ../sass/_layout.scss */
   .region-sidebar-second {
     float: right;
     width: 220px;
   }
 }
 @media (min-width: 960px) {
-  /* line 39, ../sass/layouts/_responsive.scss */
+  /* line 39, ../sass/_layout.scss */
   .region-sidebar-second {
     width: 300px;
   }
+}
+
+/* Global form elements */
+/* line 1, ../sass/_forms.scss */
+.form-item label {
+  font-size: 1em;
+  line-height: 1.4em;
+  margin: 0.7em 0;
+  font-weight: bold;
+}
+
+/* line 7, ../sass/_forms.scss */
+.form-textarea-wrapper textarea {
+  min-height: 138px;
+}
+
+/* line 11, ../sass/_forms.scss */
+.form-text, textarea {
+  -webkit-box-shadow: inset 0 0 3px #c9c9c9;
+  -moz-box-shadow: inset 0 0 3px #c9c9c9;
+  box-shadow: inset 0 0 3px #c9c9c9;
+}
+
+/* line 20, ../sass/_forms.scss */
+.form-text {
+  height: 21px;
+  padding: 2px 10px;
+  border: solid 1px white;
+}
+
+/* line 25, ../sass/_forms.scss */
+.form-submit {
+  text-align: center;
+  font-family: 'OpenSansRegular';
+  font-weight: bold;
+  border: none;
+  padding: 0 15px;
+  height: 27px;
 }
 
 /* Component (SMACSS module) rules */
@@ -810,11 +848,19 @@ table {
 .links--bordered li:first-child {
   border-left: none;
 }
-/* line 8, ../sass/components/_links.scss */
+/* line 9, ../sass/components/_links.scss */
+.links--bordered li:first-child a {
+  padding-left: 0;
+}
+/* line 11, ../sass/components/_links.scss */
 .links--bordered li:last-child {
   border-right: none;
 }
-/* line 10, ../sass/components/_links.scss */
+/* line 13, ../sass/components/_links.scss */
+.links--bordered li:last-child a {
+  padding-right: 0;
+}
+/* line 16, ../sass/components/_links.scss */
 .links--bordered a {
   color: white;
   padding: 10px;
@@ -1310,7 +1356,7 @@ span.field-label {
  */
 /* Block wrapper. */
 /* line 457, ../sass/components/_misc.scss */
-.block {
+#page .block {
   margin-bottom: 1.4em;
 }
 
@@ -1664,6 +1710,29 @@ tr.selected td {
   background-image: url('../images/progress.gif?1376896851');
 }
 
+/* line 1, ../sass/components/_search.scss */
+.form-submit {
+  border: none;
+}
+
+/* line 6, ../sass/components/_search.scss */
+#block-search-form .form-text, #block-search-form .form-submit {
+  float: left;
+}
+/* line 7, ../sass/components/_search.scss */
+#block-search-form .form-text {
+  width: 180px;
+  color: #767676;
+}
+/* line 11, ../sass/components/_search.scss */
+#block-search-form .form-submit {
+  background: #1b1b1b;
+  width: 70px;
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+}
+
 /** Remove space from all elements */
 /* line 2, ../sass/components/_superfish.scss */
 .sf-menu, .sf-menu * {
@@ -1870,20 +1939,28 @@ body {
 .header__region {
   clear: right;
   float: right;
+  margin: 1.4em 0;
 }
 
-/* line 22, ../sass/sections/_header.scss */
-.block-agov-text-resize {
+/* line 23, ../sass/sections/_header.scss */
+.header .block {
+  float: left;
+  margin: 0 10px;
+}
+
+/* line 28, ../sass/sections/_header.scss */
+.header .block-agov-text-resize {
   display: none;
+  margin-right: 0px;
 }
 @media (min-width: 740px) {
-  /* line 22, ../sass/sections/_header.scss */
-  .block-agov-text-resize {
+  /* line 28, ../sass/sections/_header.scss */
+  .header .block-agov-text-resize {
     display: inline-block;
   }
 }
 /* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
-.lt-ie9 .block-agov-text-resize {
+.lt-ie9 .header .block-agov-text-resize {
   display: inline-block;
 }
 

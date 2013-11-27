@@ -1,0 +1,34 @@
+.form-item label {
+  @include adjust-font-size-to(13px);
+  margin: rhythm(.5) 0;
+  font-weight: bold;
+}
+
+.form-textarea-wrapper textarea {
+  min-height: 138px;
+}
+
+.form-text, textarea {
+  @include box-shadow(inset 0 0 3px #c9c9c9);
+}
+
+// These variables keep form elements the same height.
+$inputHeight: 21px;
+$inputVPadding: 2px;
+$borderWidth: 1px;
+
+.form-text {
+  height: $inputHeight;
+  padding: $inputVPadding 10px;
+  border: solid $borderWidth white;
+}
+.form-submit {
+  text-align: center;
+  font-family: 'OpenSansRegular';
+  font-weight: bold;
+  border: none;
+  padding: 0 15px;
+  height: $inputHeight + $inputVPadding*2 + $borderWidth*2;
+}
+
+

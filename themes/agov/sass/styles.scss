@@ -20,7 +20,10 @@
 @import "normalize";
 
 /* Layout rules */
-@import "layouts/responsive";
+@import "layout";
+
+/* Global form elements */
+@import "forms";
 
 /* Component (SMACSS module) rules */
 @import "components/*";
