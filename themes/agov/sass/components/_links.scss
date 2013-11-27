@@ -1,0 +1,14 @@
+%links--bordered, .links--bordered {
+  @include inline-list;
+  li {
+    float: left;
+    border-right: solid 1px lighten($blue, 10%);
+    border-left: solid 1px darken($blue, 10%);
+    &:first-child { border-left: none; }
+    &:last-child { border-right: none; }
+  }
+  a {
+    color: white;
+    padding: 10px;
+  }
+}
