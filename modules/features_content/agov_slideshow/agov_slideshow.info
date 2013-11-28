@@ -2,20 +2,22 @@ name = Slideshow
 description = Slideshow displayed on home page.
 core = 7.x
 package = aGov
-version = 7.x-1.1
+version = 7.x-1.0-rc5
 project = agov_slideshow
-scripts[] = js/slideshow.js
 dependencies[] = agov_common_fields
 dependencies[] = ctools
 dependencies[] = defaultcontent
 dependencies[] = ds
 dependencies[] = features
 dependencies[] = image
+dependencies[] = image_link_formatter
 dependencies[] = link
 dependencies[] = media
 dependencies[] = strongarm
 dependencies[] = text
 dependencies[] = views
+scripts[] = js/slideshow.js
+datestamp = 1384120168
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
@@ -54,11 +56,3 @@ features[variable][] = scheduler_unpublish_required_slide
 features[variable][] = scheduler_unpublish_revision_slide
 features[views_view][] = slideshow
 project path = profiles/agov/modules/features_content
-
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-

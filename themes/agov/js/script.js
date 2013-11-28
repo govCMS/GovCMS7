@@ -34,4 +34,16 @@ Drupal.behaviors.mainMenuSuperfish = {
   }
 };
 
+Drupal.behaviors.responsiveSlides = {
+    attach: function(context, settings) {
+        $(".view-slideshow ul").responsiveSlides({
+            "pager": true,           // Boolean: Show pager, true or false
+            "pause": true,           // Boolean: Pause on hover, true or false
+            "pauseControls": true,   // Boolean: Pause when hovering controls, true or false
+            "pauseButton": true,   // Boolean: Create Pause Button
+        });
+    }
+};
+
+
 })(jQuery, Drupal, this, this.document);

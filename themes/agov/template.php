@@ -6,6 +6,9 @@
 function agov_preprocess_html(&$vars) {
   /* Adds HTML5 placeholder shim */
   drupal_add_js(libraries_get_path('html5placeholder') . "/jquery.html5-placeholder-shim.js", 'file');
+
+  /* Adds HTML5 placeholder shim */
+  drupal_add_js(libraries_get_path('ResponsiveSlides.js-1.32') . "/responsiveslides.js", 'file');
 }
 
 /**
