@@ -3,54 +3,66 @@
 	position: relative;
 	display: inline-block;
 	width: 100%;
+  .block {
+    @include no-space;
+    @include adaptively-centered;
+  }
 }
 
+$firstLiPaddingX: 20px; // Used for calculation is sub-menu below.
+
+/* First-level Menu */
 .region-navigation .block__content > .menu {
-	@include inline-list;
+  @extend %inlineLinks--bordered;
 	background: black;
-	> li > a { 
-		display: inline-block;
-		padding: 10px; 
-		text-decoration: none;
-		text-transform: uppercase;
-		color: white; 
-	}
-	> li > a:hover {
-		background: $grey;
-		color: $red;
-	}
-	
-	> li > a.active-trail {
-		&, & a:hover {
-			color: black;
-		  background: white;
-		}
-	}
+  > li {
+    > a {
+      padding: 10px $firstLiPaddingX;
+      font-family: $open;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+    }
+    &.active-trail > a {
+      &, & a:hover {
+        color: black;
+        background: white;
+      }
+    }
+    & > a:hover, &.sfHover > a {
+      background: $grey;
+      color: $red;
+    }
+    // Remove border on hover, sfHover, active link, and first link.
+    &.sfHover, &:hover, &.active-trail {
+      &, & + li { // removes this border as well as ajacent border
+        a:before {
+          border: 0;
+        }
+      }
+    }
+  }
 }
 
-#block-system-main-menu {
-	@include no-space;
-	margin: auto;
-	@include breakpoint($medium) { max-width: $medium; }
-  @include breakpoint($large) { max-width: $large; }
-}
+/* Sub-menu */
+$subMenuPadding: 3px;
+$subLiPaddingX: $firstLiPaddingX - $subMenuPadding;
 
 .sf-menu li ul {
 	background: $grey;
-	padding: 5px;
-}
-
-.sf-menu li ul li{
-	width: 100%;
-}
-
-.sf-menu li ul li a {
-	padding: 5px;
-	display: block;
-	color: $red;
-}
-
-.sf-menu li ul li a:hover {
-	background: white;
-	color: black;
+	padding: $subMenuPadding;
+  li {
+    width: 100%;
+    a {
+      display: block;
+      padding: 8px $subLiPaddingX;
+      border-bottom: 1px solid white;
+      color: $red;
+      font-weight: bold;
+      &:hover {
+        background: white;
+        color: black;
+      }
+    }
+  }
 }

@@ -1,12 +1,15 @@
 $medium: 720px;
 $large: 960px;
 
-#page,
-.region-bottom {
-  margin-left: auto;
-  margin-right: auto;
+@mixin adaptively-centered {
+  margin: auto;
   @include breakpoint($medium) { max-width: $medium; }
   @include breakpoint($large) { max-width: $large; }
+}
+
+#page,
+.region-bottom {
+  @include adaptively-centered;
 	padding: 10px;
 }
 
@@ -20,9 +23,7 @@ $large: 960px;
 }
 
 .header__inner {
-	@include breakpoint($medium) { max-width: $medium; }
-  @include breakpoint($large) { max-width: $large; }
-	margin: auto;
+  @include adaptively-centered;
 }
 
 /*
@@ -38,7 +39,7 @@ $large: 960px;
 
 .region-sidebar-second {
  @include breakpoint($medium) {
-   float: right; 
+   float: right;
    width: 220px;
  }
  @include breakpoint($large) { width: 300px; } 

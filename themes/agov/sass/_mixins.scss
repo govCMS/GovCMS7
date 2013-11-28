@@ -41,6 +41,11 @@
 	padding: 0;
 }
 
+%pseudo-block {
+  content: "";
+  display: block;
+}
+
 @mixin h1() {
 
 /* Set the font-size and line-height while keeping a proper vertical rhythm. */

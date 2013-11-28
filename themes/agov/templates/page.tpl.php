@@ -19,7 +19,7 @@
 	    <?php print theme('links__system_secondary_menu', array(
 	      'links' => $secondary_menu,
 	      'attributes' => array(
-	        'class' => array('links', 'links--bordered', 'clearfix'),
+	        'class' => array('links', 'inlineLinks--bordered--double', 'clearfix'),
 	      ),
 	      'heading' => array(
 	        'text' => $secondary_menu_heading,

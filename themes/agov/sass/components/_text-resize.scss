@@ -13,3 +13,21 @@
     &.reset { background-position: 0px -54px; }
   }
 }
+
+/* Text-resize body text */
+body.large-fonts {
+  @include adjust-font-size-to(16px);
+  @include reset-baseline();
+  $original-base-font-size: $base-font-size;
+  $base-font-size: 16px;
+  h1 {
+    @include h1;
+  }
+  h2 {
+    @include h2;
+  }
+  h3 {
+    @include h3;
+  }
+  $base-font-size: $original-base-font-size;
+}

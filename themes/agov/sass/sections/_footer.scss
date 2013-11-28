@@ -1,0 +1,5 @@
+.region-footer .block-menu .menu {
+  @extend %inlineLinks--bordered;
+  a { padding: 5px; }
+
+}

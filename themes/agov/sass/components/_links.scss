@@ -1,20 +1,38 @@
-%links--bordered, .links--bordered {
+%inlineLinks {
   @include inline-list;
-  li {
+  > li {
     float: left;
-    border-right: solid 1px lighten($blue, 10%);
-    border-left: solid 1px darken($blue, 10%);
-    &:first-child {
-      border-left: none;
-      a { padding-left: 0; }
-    }
-    &:last-child {
-      border-right: none;
-      a { padding-right: 0; }
+    position: relative;
+    display: inline-block;
+  }
+  a { display: block; }
+}
+
+%inlineLinks--bordered {
+  @extend %inlineLinks;
+  > li > a {
+    &:before {
+      @extend %pseudo-block;
+      border-left: solid 1px #5f5f5f;
+      height: 60%;
+      top: 20%;
+      left: 0px;
+      position: absolute;
     }
   }
-  a {
+  // Remove border on first link.
+  li:first-child a:before { border: 0; }
+}
+
+%inlineLinks--bordered--double, .inlineLinks--bordered--double {
+  @extend %inlineLinks--bordered;
+  > li > a {
     color: white;
-    padding: 10px;
+    &:before {
+      border-left: solid 1px lighten($blue, 10%);
+      border-right: solid 1px darken($blue, 10%);
+      left: -3px;
+    }
   }
+  a { padding: 5px 10px; }
 }
