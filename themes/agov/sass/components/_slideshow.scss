@@ -1,31 +1,35 @@
 #block-views-slideshow-block {
   position: relative;
+  overflow: hidden;
+  background: #f1efed;
   .rslides { margin: 0px; }
-  .group-left, .group-right { width: 100%; }
-  .group-left {
+  .group-left, .group-right {
+    width: 100%;
     @include box-sizing(border-box);
-    @include breakpoint($medium) {
-      width: 70%;
-      padding-right: 15px;
-    }
+  }
+  .group-left {
+    @include breakpoint($large) { width: inherit; }
   }
   .group-right {
-    width: 100%;
-    @include breakpoint($medium) { width: 30%; }
+    padding: 15px;
+    @include breakpoint($large) { width: 30%; }
   }
-
   .block-title {
     @include hide-text;
     line-height: 0;
   }
-  .field-name-field-slide-image { position: relative; }
+  .field-name-field-slide-image {
+    img {
+      width: 100%;
+      @include breakpoint($large) { width: auto; }
+    }
+    position: relative;
+  }
   .views-field-title { @include h2; }
   .views-field-body {
     p { margin: rhythm(.5) 0; }
   }
 }
-
-
 
 // Pager
 .rslides_tabs {

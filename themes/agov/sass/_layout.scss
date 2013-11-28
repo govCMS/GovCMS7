@@ -1,10 +1,11 @@
 $medium: 720px;
 $large: 960px;
 
+
 @mixin adaptively-centered {
   margin: auto;
   @include breakpoint($medium) { max-width: $medium; }
-  @include breakpoint($large) { max-width: $large; }
+  @include breakpoint($large) { max-width: $large - 20px; }
 }
 
 #page,
