@@ -1,3 +1,6 @@
+$medium: 720px;
+$large: 960px;
+
 @mixin bp-nq($breakpoint) {
   @include breakpoint($breakpoint, $no-query: '.lt-ie9') {
     @content
@@ -8,6 +11,12 @@
   display: none;
   @include bp-nq($breakpoint) {
     display: $display;
+  }
+}
+
+@mixin small-screens {
+  @include bp-nq($medium max-width) {
+    @content
   }
 }
 

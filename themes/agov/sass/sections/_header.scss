@@ -4,6 +4,7 @@
 
 .header__logo {
 	margin: rhythm(1) 0;
+  max-width: 50%;
 }
 
 .header__secondary-menu {
@@ -12,20 +13,20 @@
 
 .block-search {
 	float: right;
+  max-width: 50%;
 }
 
 .header__region {
-	clear: right;
-  float: right;
   margin: rhythm(1) 0;
 }
 
-.header .block {
-  float: left;
-  margin: 0 10px;
-}
-
-.header .block-agov-text-resize {
-  @include show-at($breakpoint-medium, inline-block);
-  margin-right: 0px; // Bring search block closer to search form
+.header {
+  .block-agov-text-resize, .block-search {
+    @include show-at($breakpoint-medium, inline-block);
+    margin: 0 10px;
+    display: inline-block;
+  }
+  .block-agov-text-resize {
+    margin-right: 0px;
+  }
 }

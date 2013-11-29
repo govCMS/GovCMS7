@@ -19,3 +19,15 @@ function agov_form_alter(&$form, &$form_state, $form_id) {
     $form['search_block_form']['#attributes']['placeholder'] = 'Enter keywords...';
   }
 }
+
+/**
+ * Override or insert variables into the page template.
+ *
+ * @param $variables
+ *   An array of variables to pass to the theme template.
+ * @param $hook
+ *   The name of the template being rendered ("page" in this case.)
+ */
+function agov_preprocess_page(&$variables, $hook) {
+  unset($variables['breadcrumb']);
+}

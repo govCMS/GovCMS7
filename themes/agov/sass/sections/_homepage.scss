@@ -1,0 +1,7 @@
+.front .page__title {
+  @include element-invisible;
+}
+
+.front .breadcrumb {
+  display: none; // hide breadcrumb from screenreaders and display on homepage.
+}

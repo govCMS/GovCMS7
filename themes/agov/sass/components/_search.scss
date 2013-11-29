@@ -1,16 +1,16 @@
-.form-submit {
-  border: none;
-}
+.block-search .form-text, .form-submit { float: left; }
 
-#block-search-form {
-  .form-text, .form-submit { float: left; }
-  .form-text {
-    width: 180px;
-    color: #767676;
-  }
+.block-search {
+  padding-right: 32px;
+  position: relative;
+  @include box-sizing(border-box);
   .form-submit {
-    background: #1b1b1b;
-    width: 70px;
+    position: absolute;
+    right: 0px;
+    text-indent: -100px;
+    background: image-url('search-btn-mobile.png') 50% 50% no-repeat;
+    background-color: #1b1b1b;
+    width: 32px;
     color: #FFF;
     font-weight: bold;
     text-align: center;

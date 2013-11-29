@@ -1,7 +1,3 @@
-$medium: 720px;
-$large: 960px;
-
-
 @mixin adaptively-centered {
   margin: auto;
   @include breakpoint($medium) { max-width: $medium; }

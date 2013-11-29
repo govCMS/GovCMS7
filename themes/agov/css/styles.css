@@ -682,50 +682,50 @@ table {
 }
 
 /* Layout rules */
-/* line 12, ../sass/_layout.scss */
+/* line 8, ../sass/_layout.scss */
 #page,
 .region-bottom {
   margin: auto;
   padding: 10px;
 }
 @media (min-width: 720px) {
-  /* line 12, ../sass/_layout.scss */
+  /* line 8, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 12, ../sass/_layout.scss */
+  /* line 8, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 940px;
   }
 }
 
-/* line 18, ../sass/_layout.scss */
+/* line 14, ../sass/_layout.scss */
 #main,
 #footer {
   clear: both;
 }
 
-/* line 22, ../sass/_layout.scss */
+/* line 18, ../sass/_layout.scss */
 .header {
   overflow: hidden;
 }
 
-/* line 26, ../sass/_layout.scss */
+/* line 22, ../sass/_layout.scss */
 .header__inner {
   margin: auto;
 }
 @media (min-width: 720px) {
-  /* line 26, ../sass/_layout.scss */
+  /* line 22, ../sass/_layout.scss */
   .header__inner {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 26, ../sass/_layout.scss */
+  /* line 22, ../sass/_layout.scss */
   .header__inner {
     max-width: 940px;
   }
@@ -735,28 +735,28 @@ table {
 * Column logic.
 */
 @media (min-width: 720px) {
-  /* line 33, ../sass/_layout.scss */
+  /* line 29, ../sass/_layout.scss */
   #content {
     float: left;
     width: 460px;
   }
 }
 @media (min-width: 960px) {
-  /* line 33, ../sass/_layout.scss */
+  /* line 29, ../sass/_layout.scss */
   #content {
     width: 620px;
   }
 }
 
 @media (min-width: 720px) {
-  /* line 41, ../sass/_layout.scss */
+  /* line 37, ../sass/_layout.scss */
   .region-sidebar-second {
     float: right;
     width: 220px;
   }
 }
 @media (min-width: 960px) {
-  /* line 41, ../sass/_layout.scss */
+  /* line 37, ../sass/_layout.scss */
   .region-sidebar-second {
     width: 300px;
   }
@@ -837,6 +837,11 @@ table {
 .block-agov-social-links-services .content img {
   width: 32px;
   height: 32px;
+}
+
+/* line 1, ../sass/components/_fields.scss */
+.field-name-post-date {
+  font-style: italic;
 }
 
 /* line 1, ../sass/components/_links.scss */
@@ -1710,24 +1715,62 @@ tr.selected td {
   background-image: url('../images/progress.gif?1376896851');
 }
 
-/* line 1, ../sass/components/_search.scss */
-.form-submit {
-  border: none;
+/* line 1, ../sass/components/_panes.scss */
+.panel-pane {
+  border-top: 3px solid #004961;
+  margin-bottom: 15px;
 }
 
-/* line 6, ../sass/components/_search.scss */
-#block-search-form .form-text, #block-search-form .form-submit {
+/* line 7, ../sass/components/_panes.scss */
+.gov-front-col {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media (min-width: 720px) {
+  /* line 7, ../sass/components/_panes.scss */
+  .gov-front-col {
+    width: 50%;
+    float: left;
+  }
+  /* line 12, ../sass/components/_panes.scss */
+  .gov-front-col.gov-front-left {
+    padding-right: 10px;
+  }
+  /* line 13, ../sass/components/_panes.scss */
+  .gov-front-col.gov-front-right {
+    padding-left: 10px;
+  }
+}
+
+/* line 17, ../sass/components/_panes.scss */
+.pane-block .views-row {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* line 1, ../sass/components/_search.scss */
+.block-search .form-text, .form-submit {
   float: left;
 }
-/* line 7, ../sass/components/_search.scss */
-#block-search-form .form-text {
-  width: 180px;
-  color: #767676;
+
+/* line 3, ../sass/components/_search.scss */
+.block-search {
+  padding-right: 32px;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-/* line 11, ../sass/components/_search.scss */
-#block-search-form .form-submit {
-  background: #1b1b1b;
-  width: 70px;
+/* line 7, ../sass/components/_search.scss */
+.block-search .form-submit {
+  position: absolute;
+  right: 0px;
+  text-indent: -100px;
+  background: url('../images/search-btn-mobile.png?1383871531') 50% 50% no-repeat;
+  background-color: #1b1b1b;
+  width: 32px;
   color: #FFF;
   font-weight: bold;
   text-align: center;
@@ -1739,11 +1782,11 @@ tr.selected td {
   overflow: hidden;
   background: #f1efed;
 }
-/* line 5, ../sass/components/_slideshow.scss */
+/* line 6, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .rslides {
   margin: 0px;
 }
-/* line 6, ../sass/components/_slideshow.scss */
+/* line 7, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .group-left, #block-views-slideshow-block .group-right {
   width: 100%;
   -webkit-box-sizing: border-box;
@@ -1751,43 +1794,43 @@ tr.selected td {
   box-sizing: border-box;
 }
 @media (min-width: 960px) {
-  /* line 10, ../sass/components/_slideshow.scss */
+  /* line 11, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .group-left {
     width: inherit;
   }
 }
-/* line 13, ../sass/components/_slideshow.scss */
+/* line 14, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .group-right {
   padding: 15px;
 }
 @media (min-width: 960px) {
-  /* line 13, ../sass/components/_slideshow.scss */
+  /* line 14, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .group-right {
     width: 30%;
   }
 }
-/* line 17, ../sass/components/_slideshow.scss */
+/* line 18, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .block-title {
   text-indent: 110%;
   white-space: nowrap;
   overflow: hidden;
   line-height: 0;
 }
-/* line 21, ../sass/components/_slideshow.scss */
+/* line 22, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image {
   position: relative;
 }
-/* line 22, ../sass/components/_slideshow.scss */
+/* line 23, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image img {
   width: 100%;
 }
 @media (min-width: 960px) {
-  /* line 22, ../sass/components/_slideshow.scss */
+  /* line 23, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .field-name-field-slide-image img {
     width: auto;
   }
 }
-/* line 28, ../sass/components/_slideshow.scss */
+/* line 29, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .views-field-title {
   font-size: 1.68em;
   line-height: 1.66667em;
@@ -1795,40 +1838,40 @@ tr.selected td {
   margin-bottom: 0.41667em;
   line-height: 1.4em;
 }
-/* line 30, ../sass/components/_slideshow.scss */
+/* line 31, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .views-field-body p {
   margin: 0.7em 0;
 }
 
-/* line 35, ../sass/components/_slideshow.scss */
+/* line 36, ../sass/components/_slideshow.scss */
 .rslides_tabs {
   position: absolute;
   left: 0px;
   top: 0px;
   margin: 15px;
 }
-/* line 40, ../sass/components/_slideshow.scss */
+/* line 41, ../sass/components/_slideshow.scss */
 .rslides_tabs li {
   float: left;
   margin-right: 2px;
   background: rgba(255, 255, 255, 0.9);
 }
-/* line 44, ../sass/components/_slideshow.scss */
+/* line 45, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here {
   background: black;
 }
-/* line 46, ../sass/components/_slideshow.scss */
+/* line 47, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here a {
   color: white;
 }
-/* line 48, ../sass/components/_slideshow.scss */
+/* line 49, ../sass/components/_slideshow.scss */
 .rslides_tabs li a {
   display: block;
   padding: 5px 10px;
   text-decoration: none;
   font-weight: bold;
 }
-/* line 53, ../sass/components/_slideshow.scss */
+/* line 54, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause {
   text-indent: 110%;
   white-space: nowrap;
@@ -1837,12 +1880,12 @@ tr.selected td {
   padding: 5px 14px;
   background: url('../images/featured-articles-pause.png?1383871531') no-repeat 0px -27px;
 }
-/* line 58, ../sass/components/_slideshow.scss */
+/* line 59, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
   background-color: black;
 }
-/* line 62, ../sass/components/_slideshow.scss */
+/* line 63, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.playing {
   background-position: 0px -27px;
 }
@@ -1973,43 +2016,60 @@ body.large-fonts h3 {
 }
 
 /* Links */
-/* line 2, ../sass/components/_typography.scss */
+/* line 3, ../sass/components/_typography.scss */
+a {
+  color: #c53100;
+}
+/* line 18, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+a:visited {
+  color: #c53100;
+}
+/* line 24, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+a:hover {
+  color: #c53100;
+}
+/* line 27, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
+a:active {
+  color: #c53100;
+}
+
+/* line 7, ../sass/components/_typography.scss */
 a:hover {
   text-decoration: none;
 }
 
 /* Content List Styles */
-/* line 9, ../sass/components/_typography.scss */
+/* line 14, ../sass/components/_typography.scss */
 #region-content ol {
   list-style-type: decimal;
   margin-left: 20px;
 }
-/* line 14, ../sass/components/_typography.scss */
+/* line 19, ../sass/components/_typography.scss */
 #region-content ul {
   list-style-type: square;
   margin-left: 16px;
 }
-/* line 19, ../sass/components/_typography.scss */
+/* line 24, ../sass/components/_typography.scss */
 #region-content .no-bullets {
   margin-left: 0;
 }
-/* line 21, ../sass/components/_typography.scss */
+/* line 26, ../sass/components/_typography.scss */
 #region-content .no-bullets li {
   list-style: none;
 }
-/* line 26, ../sass/components/_typography.scss */
+/* line 31, ../sass/components/_typography.scss */
 #region-content .node ul.links {
   margin-left: 0;
   display: block;
 }
 
-/* line 32, ../sass/components/_typography.scss */
+/* line 37, ../sass/components/_typography.scss */
 ul.links li {
   padding-left: 0;
 }
 
 /* Display image inline to the right */
-/* line 38, ../sass/components/_typography.scss */
+/* line 43, ../sass/components/_typography.scss */
 p.img-float-right,
 img.img-float-right {
   float: right;
@@ -2017,19 +2077,43 @@ img.img-float-right {
 }
 
 /* Display image inline to the left */
-/* line 45, ../sass/components/_typography.scss */
+/* line 50, ../sass/components/_typography.scss */
 p.img-float-left,
 img.img-float-left {
   float: left;
   margin: 0 5px 5px 5px;
 }
 
+/* line 1, ../sass/components/_view-modes.scss */
+.node-teaser .field-type-image {
+  float: left;
+  margin-right: 10px;
+}
+
+/* Headings */
+/* line 7, ../sass/components/_view-modes.scss */
+.node-teaser h3 {
+  font-size: 1.07692em;
+  line-height: 1.3em;
+  margin: 0.35em 0 0.7em;
+}
+/* line 10, ../sass/components/_view-modes.scss */
+.node-teaser h3 a {
+  color: #c53100;
+}
+
+/* line 14, ../sass/components/_view-modes.scss */
+.node-teaser p {
+  margin: 0;
+}
+
 /* line 1, ../sass/sections/_base.scss */
 body {
   background: #efeee9;
+  color: #5f5f5f;
 }
 
-/* line 5, ../sass/sections/_base.scss */
+/* line 6, ../sass/sections/_base.scss */
 #page {
   background: white;
   -webkit-box-shadow: 0 0 15px 5px grey;
@@ -2051,45 +2135,58 @@ body {
 /* line 5, ../sass/sections/_header.scss */
 .header__logo {
   margin: 1.4em 0;
+  max-width: 50%;
 }
 
-/* line 9, ../sass/sections/_header.scss */
+/* line 10, ../sass/sections/_header.scss */
 .header__secondary-menu {
   margin: 10px;
 }
 
-/* line 13, ../sass/sections/_header.scss */
+/* line 14, ../sass/sections/_header.scss */
 .block-search {
   float: right;
+  max-width: 50%;
 }
 
-/* line 17, ../sass/sections/_header.scss */
+/* line 19, ../sass/sections/_header.scss */
 .header__region {
-  clear: right;
-  float: right;
   margin: 1.4em 0;
 }
 
-/* line 23, ../sass/sections/_header.scss */
-.header .block {
-  float: left;
-  margin: 0 10px;
-}
-
-/* line 28, ../sass/sections/_header.scss */
-.header .block-agov-text-resize {
+/* line 24, ../sass/sections/_header.scss */
+.header .block-agov-text-resize, .header .block-search {
   display: none;
-  margin-right: 0px;
+  margin: 0 10px;
+  display: inline-block;
 }
 @media (min-width: 740px) {
-  /* line 28, ../sass/sections/_header.scss */
-  .header .block-agov-text-resize {
+  /* line 24, ../sass/sections/_header.scss */
+  .header .block-agov-text-resize, .header .block-search {
     display: inline-block;
   }
 }
 /* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
-.lt-ie9 .header .block-agov-text-resize {
+.lt-ie9 .header .block-agov-text-resize, .lt-ie9 .header .block-search {
   display: inline-block;
+}
+/* line 29, ../sass/sections/_header.scss */
+.header .block-agov-text-resize {
+  margin-right: 0px;
+}
+
+/* line 1, ../sass/sections/_homepage.scss */
+.front .page__title {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* line 5, ../sass/sections/_homepage.scss */
+.front .breadcrumb {
+  display: none;
 }
 
 /* line 1, ../sass/sections/_navigation.scss */

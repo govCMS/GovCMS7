@@ -1,4 +1,9 @@
 /* Links */
+
+a {
+  @include link-colors($red, $red, $red, $red);
+}
+
 a:hover {
   text-decoration: none;
 }
