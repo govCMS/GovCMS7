@@ -8,25 +8,41 @@
 }
 
 .header__secondary-menu {
-  margin: 10px;
-}
-
-.block-search {
-	float: right;
+  margin: rhythm(.5) 0;
   max-width: 50%;
 }
 
 .header__region {
   margin: rhythm(1) 0;
+  clear: right;
+  float: right;
+
 }
 
 .header {
+  position: relative; // Fences block-search
   .block-agov-text-resize, .block-search {
-    @include show-at($breakpoint-medium, inline-block);
     margin: 0 10px;
     display: inline-block;
   }
+  .block-search {
+    @include small-screens {
+      max-width: 50%;
+      position: absolute;
+      right: 0px;
+      bottom: -34px;
+      z-index: 100;
+    }
+    @include breakpoint($medium) {
+      position: relative;
+      float: right;
+      width: 215px; // Bigger on larger screens.
+    }
+  }
   .block-agov-text-resize {
-    margin-right: 0px;
+    @include show-at($medium, inline-block) {
+      margin-right: 0px;
+      float: left;
+    }
   }
 }

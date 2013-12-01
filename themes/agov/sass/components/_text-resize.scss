@@ -2,6 +2,7 @@
   @include inline-list;
   a {
     @include hide-text;
+    text-indent: 130%; // adds extra indent for firefox hiding.
     display: inline-block;
     width: 19px;
     height: 19px;

@@ -3,6 +3,8 @@
 	position: relative;
 	display: inline-block;
 	width: 100%;
+  padding: 7px;
+  @include breakpoint($medium) { padding: 0px;}
   .block {
     @include no-space;
     @include adaptively-centered;

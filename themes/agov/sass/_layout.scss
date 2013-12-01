@@ -16,7 +16,8 @@
 }
 
 .header {
-	overflow: hidden;
+	@include pie-clearfix;
+
 }
 
 .header__inner {

@@ -10,3 +10,10 @@
 	display: none;  
 	@include breakpoint($medium) { display: block; }
 }
+
+select#tinynav1 {
+  background: #fff;
+  border: none;
+  padding: 5px;
+  height: 27px;
+}
