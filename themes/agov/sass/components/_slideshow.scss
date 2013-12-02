@@ -1,3 +1,4 @@
+// Layout
 #block-views-slideshow-block {
   position: relative;
   overflow: hidden;
@@ -15,10 +16,11 @@
     padding: 15px;
     @include breakpoint($large) { width: 30%; }
   }
-  .block-title {
-    @include hide-text;
-    line-height: 0;
-  }
+}
+
+// Theme
+#block-views-slideshow-block {
+  .block-title { @extend %element-invisible; }
   .field-name-field-slide-image {
     img {
       width: 100%;

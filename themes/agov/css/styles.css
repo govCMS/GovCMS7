@@ -803,6 +803,56 @@ table {
 }
 
 /* Component (SMACSS module) rules */
+/* line 1, ../sass/components/_beans.scss */
+.bean-image-and-text.highlight {
+  background: #f1efed;
+  border: solid #004961;
+  border-width: 3px 0;
+}
+/* line 38, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.bean-image-and-text.highlight:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 6, ../sass/components/_beans.scss */
+.bean-image-and-text.highlight .field {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media (min-width: 720px) {
+  /* line 6, ../sass/components/_beans.scss */
+  .bean-image-and-text.highlight .field {
+    float: left;
+    width: 50%;
+  }
+}
+/* line 13, ../sass/components/_beans.scss */
+.bean-image-and-text.highlight .field-type-text-long {
+  padding: 0 15px;
+  font-size: 1.07692em;
+  line-height: 1.3em;
+  font-weight: bold;
+  color: #444444;
+}
+
+/* line 22, ../sass/components/_beans.scss */
+.bean-image-and-text.default h2 {
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  margin-top: 0;
+}
+/* line 26, ../sass/components/_beans.scss */
+.bean-image-and-text.default .field-type-image {
+  float: left;
+  margin-right: 15px;
+}
+/* line 30, ../sass/components/_beans.scss */
+.bean-image-and-text.default p {
+  margin: 0px;
+}
+
 /*
  * @file
  * Compass styles for custom aGov blocks.
@@ -911,6 +961,7 @@ table {
 .element-focusable,
 #navigation .block-menu .block__title,
 #navigation .block-menu-block .block__title,
+#block-views-slideshow-block .block-title,
 .region-footer .block-title {
   position: absolute !important;
   height: 1px;
@@ -1703,15 +1754,16 @@ tr.selected td {
 
 /* line 1, ../sass/components/_panes.scss */
 .panel-pane {
-  border-top: 3px solid #004961;
-  margin-bottom: 15px;
+  border-top: 1px solid #cccccc;
+  padding: 15px 0;
+  margin: 0;
 }
 
-/* line 6, ../sass/components/_panes.scss */
+/* line 7, ../sass/components/_panes.scss */
 .pane-block .views-row {
   border-bottom: 1px solid #efefef;
   padding-bottom: 10px;
-  margin-bottom: 15px;
+  margin: 15px 0;
 }
 
 /* line 1, ../sass/components/_search.scss */
@@ -1744,17 +1796,17 @@ tr.selected td {
   text-align: center;
 }
 
-/* line 1, ../sass/components/_slideshow.scss */
+/* line 2, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block {
   position: relative;
   overflow: hidden;
   background: #f1efed;
 }
-/* line 6, ../sass/components/_slideshow.scss */
+/* line 7, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .rslides {
   margin: 0px;
 }
-/* line 7, ../sass/components/_slideshow.scss */
+/* line 8, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .group-left, #block-views-slideshow-block .group-right {
   width: 100%;
   -webkit-box-sizing: border-box;
@@ -1762,81 +1814,75 @@ tr.selected td {
   box-sizing: border-box;
 }
 @media (min-width: 960px) {
-  /* line 11, ../sass/components/_slideshow.scss */
+  /* line 12, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .group-left {
     width: inherit;
   }
 }
-/* line 14, ../sass/components/_slideshow.scss */
+/* line 15, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .group-right {
   padding: 15px;
 }
 @media (min-width: 960px) {
-  /* line 14, ../sass/components/_slideshow.scss */
+  /* line 15, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .group-right {
     width: 30%;
   }
 }
-/* line 18, ../sass/components/_slideshow.scss */
-#block-views-slideshow-block .block-title {
-  text-indent: 110%;
-  white-space: nowrap;
-  overflow: hidden;
-  line-height: 0;
-}
-/* line 22, ../sass/components/_slideshow.scss */
+
+/* line 24, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image {
   position: relative;
 }
-/* line 23, ../sass/components/_slideshow.scss */
+/* line 25, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image img {
   width: 100%;
 }
 @media (min-width: 960px) {
-  /* line 23, ../sass/components/_slideshow.scss */
+  /* line 25, ../sass/components/_slideshow.scss */
   #block-views-slideshow-block .field-name-field-slide-image img {
     width: auto;
   }
 }
-/* line 29, ../sass/components/_slideshow.scss */
+/* line 31, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-title h2 {
   margin: 0;
   padding: 0;
 }
-/* line 33, ../sass/components/_slideshow.scss */
+/* line 35, ../sass/components/_slideshow.scss */
 #block-views-slideshow-block .field-name-body p {
   margin: 0.7em 0;
 }
 
-/* line 38, ../sass/components/_slideshow.scss */
+/* line 40, ../sass/components/_slideshow.scss */
 .rslides_tabs {
   position: absolute;
   left: 0px;
   top: 0px;
   margin: 15px;
 }
-/* line 43, ../sass/components/_slideshow.scss */
+/* line 45, ../sass/components/_slideshow.scss */
 .rslides_tabs li {
   float: left;
   margin-right: 2px;
   background: rgba(255, 255, 255, 0.9);
 }
-/* line 47, ../sass/components/_slideshow.scss */
+/* line 49, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here {
   background: black;
 }
-/* line 49, ../sass/components/_slideshow.scss */
+/* line 51, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here a {
   color: white;
 }
-/* line 51, ../sass/components/_slideshow.scss */
+/* line 53, ../sass/components/_slideshow.scss */
 .rslides_tabs li a {
   display: block;
   padding: 5px 10px;
   text-decoration: none;
   font-weight: bold;
 }
-/* line 56, ../sass/components/_slideshow.scss */
+/* line 58, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause {
   text-indent: 110%;
   white-space: nowrap;
@@ -1845,12 +1891,12 @@ tr.selected td {
   padding: 5px 14px;
   background: url('../images/featured-articles-pause.png?1383871531') no-repeat 0px -27px;
 }
-/* line 61, ../sass/components/_slideshow.scss */
+/* line 63, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
   background-color: black;
 }
-/* line 65, ../sass/components/_slideshow.scss */
+/* line 67, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.playing {
   background-position: 0px -27px;
 }
@@ -2374,6 +2420,11 @@ body {
   }
 }
 
+/* line 19, ../sass/sections/_homepage.scss */
+.front .panel-pane {
+  border-top: 3px solid #004961;
+}
+
 /* line 1, ../sass/sections/_navigation.scss */
 .region-navigation {
   background: black;
@@ -2483,7 +2534,7 @@ body {
   padding: 0;
 }
 
-/* line 23, ../sass/sections/_sidebar.scss */
+/* line 20, ../sass/sections/_sidebar.scss */
 .block-agov-social-links a {
   display: inline-block;
   margin-right: 5px;
