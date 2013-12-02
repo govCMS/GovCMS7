@@ -803,39 +803,22 @@ table {
 }
 
 /* Component (SMACSS module) rules */
-/* line 2, ../sass/components/_blocks.scss */
-.sidebar .block .block__title {
-  background: #006893;
-  color: white;
-  padding: 0 0 0 20px;
-}
-/* line 7, ../sass/components/_blocks.scss */
-.sidebar .block .block__content {
-  background: #f1efed;
-  padding: 20px;
-}
-/* line 11, ../sass/components/_blocks.scss */
-.sidebar .block .menu, .sidebar .block p {
-  margin: 0;
-  padding: 0;
-}
-
 /*
  * @file
  * Compass styles for custom aGov blocks.
  */
 /* Social links */
-/* line 25, ../sass/components/_blocks.scss */
+/* line 8, ../sass/components/_blocks.scss */
 .block-agov-social-links-services .content {
   padding: 15px 5px 7px 15px !important;
 }
-/* line 27, ../sass/components/_blocks.scss */
+/* line 10, ../sass/components/_blocks.scss */
 .block-agov-social-links-services .content a {
   display: block;
   float: left;
   margin: 0 8px 8px 0;
 }
-/* line 32, ../sass/components/_blocks.scss */
+/* line 15, ../sass/components/_blocks.scss */
 .block-agov-social-links-services .content img {
   width: 32px;
   height: 32px;
@@ -2117,7 +2100,7 @@ img.img-float-left {
 
 /* line 1, ../sass/sections/_base.scss */
 body {
-  background: #efeee9;
+  background: #f1efed;
   color: #5f5f5f;
 }
 
@@ -2441,7 +2424,7 @@ body {
 }
 /* line 34, ../sass/sections/_navigation.scss */
 .region-navigation .block__content > .menu > li > a:hover, .region-navigation .block__content > .menu > li.sfHover > a {
-  background: #efeee9;
+  background: #f1efed;
   color: #c53100;
 }
 /* line 41, ../sass/sections/_navigation.scss */
@@ -2452,7 +2435,7 @@ body {
 /* Sub-menu */
 /* line 53, ../sass/sections/_navigation.scss */
 .sf-menu li ul {
-  background: #efeee9;
+  background: #f1efed;
   padding: 3px;
 }
 /* line 56, ../sass/sections/_navigation.scss */
@@ -2471,6 +2454,36 @@ body {
 .sf-menu li ul li a:hover {
   background: white;
   color: black;
+}
+
+/* line 3, ../sass/sections/_sidebar.scss */
+.sidebar .block .block__title {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #007aac), color-stop(100%, #006893));
+  background-image: -webkit-linear-gradient(#007aac, #006893);
+  background-image: -moz-linear-gradient(#007aac, #006893);
+  background-image: -o-linear-gradient(#007aac, #006893);
+  background-image: -ms-linear-gradient(#007aac, #006893);
+  background-image: linear-gradient(#007aac, #006893);
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  color: white;
+  padding: 0 0 0 20px;
+}
+/* line 9, ../sass/sections/_sidebar.scss */
+.sidebar .block .block__content {
+  background: #f1efed;
+  padding: 15px;
+}
+/* line 13, ../sass/sections/_sidebar.scss */
+.sidebar .block .menu, .sidebar .block p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 23, ../sass/sections/_sidebar.scss */
+.block-agov-social-links a {
+  display: inline-block;
+  margin-right: 5px;
 }
 
 /* styles for desktop */

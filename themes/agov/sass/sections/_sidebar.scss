@@ -1,0 +1,27 @@
+.sidebar {
+  .block {
+    .block__title {
+      @include background-image(linear-gradient(lighten($blue, 5%), $blue));
+      @include adjust-font-size-to(16px);
+      color: white;
+      padding: 0 0 0 20px;
+    }
+    .block__content {
+      background: $grey;
+      padding: 15px;
+    }
+    .menu, p {
+      @include noSpace;
+    }
+  }
+}
+
+
+
+
+.block-agov-social-links {
+  a {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
