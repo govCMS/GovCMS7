@@ -26,8 +26,10 @@
     }
     position: relative;
   }
-  .views-field-title { @include h2; }
-  .views-field-body {
+  .field-name-title h2 {
+    @include noSpace;
+  }
+  .field-name-body {
     p { margin: rhythm(.5) 0; }
   }
 }

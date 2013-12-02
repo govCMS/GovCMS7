@@ -1707,29 +1707,7 @@ tr.selected td {
   margin-bottom: 15px;
 }
 
-/* line 7, ../sass/components/_panes.scss */
-.gov-front-col {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-@media (min-width: 720px) {
-  /* line 7, ../sass/components/_panes.scss */
-  .gov-front-col {
-    width: 50%;
-    float: left;
-  }
-  /* line 12, ../sass/components/_panes.scss */
-  .gov-front-col.gov-front-left {
-    padding-right: 10px;
-  }
-  /* line 13, ../sass/components/_panes.scss */
-  .gov-front-col.gov-front-right {
-    padding-left: 10px;
-  }
-}
-
-/* line 17, ../sass/components/_panes.scss */
+/* line 6, ../sass/components/_panes.scss */
 .pane-block .views-row {
   border-bottom: 1px solid #efefef;
   padding-bottom: 10px;
@@ -1821,47 +1799,44 @@ tr.selected td {
   }
 }
 /* line 29, ../sass/components/_slideshow.scss */
-#block-views-slideshow-block .views-field-title {
-  font-size: 1.68em;
-  line-height: 1.66667em;
-  margin-top: 0.41667em;
-  margin-bottom: 0.41667em;
-  line-height: 1.4em;
+#block-views-slideshow-block .field-name-title h2 {
+  margin: 0;
+  padding: 0;
 }
-/* line 31, ../sass/components/_slideshow.scss */
-#block-views-slideshow-block .views-field-body p {
+/* line 33, ../sass/components/_slideshow.scss */
+#block-views-slideshow-block .field-name-body p {
   margin: 0.7em 0;
 }
 
-/* line 36, ../sass/components/_slideshow.scss */
+/* line 38, ../sass/components/_slideshow.scss */
 .rslides_tabs {
   position: absolute;
   left: 0px;
   top: 0px;
   margin: 15px;
 }
-/* line 41, ../sass/components/_slideshow.scss */
+/* line 43, ../sass/components/_slideshow.scss */
 .rslides_tabs li {
   float: left;
   margin-right: 2px;
   background: rgba(255, 255, 255, 0.9);
 }
-/* line 45, ../sass/components/_slideshow.scss */
+/* line 47, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here {
   background: black;
 }
-/* line 47, ../sass/components/_slideshow.scss */
+/* line 49, ../sass/components/_slideshow.scss */
 .rslides_tabs li.rslides_here a {
   color: white;
 }
-/* line 49, ../sass/components/_slideshow.scss */
+/* line 51, ../sass/components/_slideshow.scss */
 .rslides_tabs li a {
   display: block;
   padding: 5px 10px;
   text-decoration: none;
   font-weight: bold;
 }
-/* line 54, ../sass/components/_slideshow.scss */
+/* line 56, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause {
   text-indent: 110%;
   white-space: nowrap;
@@ -1870,12 +1845,12 @@ tr.selected td {
   padding: 5px 14px;
   background: url('../images/featured-articles-pause.png?1383871531') no-repeat 0px -27px;
 }
-/* line 59, ../sass/components/_slideshow.scss */
+/* line 61, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
   background-color: black;
 }
-/* line 63, ../sass/components/_slideshow.scss */
+/* line 65, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.playing {
   background-position: 0px -27px;
 }
@@ -2029,38 +2004,44 @@ a:hover {
   text-decoration: none;
 }
 
+/* Headings */
+/* line 12, ../sass/components/_typography.scss */
+h1, h2, h3, h4, h5 {
+  color: black;
+}
+
 /* Content List Styles */
-/* line 14, ../sass/components/_typography.scss */
+/* line 19, ../sass/components/_typography.scss */
 #region-content ol {
   list-style-type: decimal;
   margin-left: 20px;
 }
-/* line 19, ../sass/components/_typography.scss */
+/* line 24, ../sass/components/_typography.scss */
 #region-content ul {
   list-style-type: square;
   margin-left: 16px;
 }
-/* line 24, ../sass/components/_typography.scss */
+/* line 29, ../sass/components/_typography.scss */
 #region-content .no-bullets {
   margin-left: 0;
 }
-/* line 26, ../sass/components/_typography.scss */
+/* line 31, ../sass/components/_typography.scss */
 #region-content .no-bullets li {
   list-style: none;
 }
-/* line 31, ../sass/components/_typography.scss */
+/* line 36, ../sass/components/_typography.scss */
 #region-content .node ul.links {
   margin-left: 0;
   display: block;
 }
 
-/* line 37, ../sass/components/_typography.scss */
+/* line 42, ../sass/components/_typography.scss */
 ul.links li {
   padding-left: 0;
 }
 
 /* Display image inline to the right */
-/* line 43, ../sass/components/_typography.scss */
+/* line 48, ../sass/components/_typography.scss */
 p.img-float-right,
 img.img-float-right {
   float: right;
@@ -2068,7 +2049,7 @@ img.img-float-right {
 }
 
 /* Display image inline to the left */
-/* line 50, ../sass/components/_typography.scss */
+/* line 55, ../sass/components/_typography.scss */
 p.img-float-left,
 img.img-float-left {
   float: left;
@@ -2369,6 +2350,28 @@ body {
 /* line 5, ../sass/sections/_homepage.scss */
 .front .breadcrumb {
   display: none;
+}
+
+/* line 9, ../sass/sections/_homepage.scss */
+.gov-front-col {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@media (min-width: 720px) {
+  /* line 9, ../sass/sections/_homepage.scss */
+  .gov-front-col {
+    width: 50%;
+    float: left;
+  }
+  /* line 14, ../sass/sections/_homepage.scss */
+  .gov-front-col.gov-front-left {
+    padding-right: 10px;
+  }
+  /* line 15, ../sass/sections/_homepage.scss */
+  .gov-front-col.gov-front-right {
+    padding-left: 10px;
+  }
 }
 
 /* line 1, ../sass/sections/_navigation.scss */

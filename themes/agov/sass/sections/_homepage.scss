@@ -5,3 +5,13 @@
 .front .breadcrumb {
   display: none; // hide breadcrumb from screenreaders and display on homepage.
 }
+
+.gov-front-col {
+  @include box-sizing(border-box);
+  @include breakpoint($medium) {
+    width: 50%;
+    float: left;
+    &.gov-front-left { padding-right: 10px; }
+    &.gov-front-right { padding-left: 10px; }
+  }
+}
