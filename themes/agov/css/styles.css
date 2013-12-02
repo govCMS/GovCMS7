@@ -6,13 +6,13 @@
  * of these @include files will be combined into a single file.
  */
 /* Import Sass mixins, variables, Compass modules, etc. */
-/* line 44, ../sass/_mixins.scss */
+/* line 49, ../sass/_mixins.scss */
 .inlineLinks--bordered--double > li > a:before, .region-footer .block-menu .menu > li > a:before, .region-navigation .block__content > .menu > li > a:before {
   content: "";
   display: block;
 }
 
-/* line 44, ../sass/_mixins.scss */
+/* line 49, ../sass/_mixins.scss */
 .inlineLinks--bordered--double > li > a:before, .region-footer .block-menu .menu > li > a:before, .region-navigation .block__content > .menu > li > a:before {
   content: "";
   display: block;
@@ -682,28 +682,28 @@ table {
 }
 
 /* Layout rules */
-/* line 8, ../sass/_layout.scss */
+/* line 12, ../sass/_layout.scss */
 #page,
 .region-bottom {
   margin: auto;
   padding: 10px;
 }
 @media (min-width: 720px) {
-  /* line 8, ../sass/_layout.scss */
+  /* line 12, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 8, ../sass/_layout.scss */
+  /* line 12, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 940px;
   }
 }
 
-/* line 14, ../sass/_layout.scss */
+/* line 18, ../sass/_layout.scss */
 #main,
 #footer {
   clear: both;
@@ -716,18 +716,18 @@ table {
   clear: both;
 }
 
-/* line 23, ../sass/_layout.scss */
+/* line 27, ../sass/_layout.scss */
 .header__inner {
   margin: auto;
 }
 @media (min-width: 720px) {
-  /* line 23, ../sass/_layout.scss */
+  /* line 27, ../sass/_layout.scss */
   .header__inner {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 23, ../sass/_layout.scss */
+  /* line 27, ../sass/_layout.scss */
   .header__inner {
     max-width: 940px;
   }
@@ -737,28 +737,28 @@ table {
 * Column logic.
 */
 @media (min-width: 720px) {
-  /* line 30, ../sass/_layout.scss */
+  /* line 34, ../sass/_layout.scss */
   #content {
     float: left;
     width: 460px;
   }
 }
 @media (min-width: 960px) {
-  /* line 30, ../sass/_layout.scss */
+  /* line 34, ../sass/_layout.scss */
   #content {
     width: 620px;
   }
 }
 
 @media (min-width: 720px) {
-  /* line 38, ../sass/_layout.scss */
+  /* line 42, ../sass/_layout.scss */
   .region-sidebar-second {
     float: right;
     width: 220px;
   }
 }
 @media (min-width: 960px) {
-  /* line 38, ../sass/_layout.scss */
+  /* line 42, ../sass/_layout.scss */
   .region-sidebar-second {
     width: 300px;
   }
@@ -927,7 +927,8 @@ table {
 .element-invisible,
 .element-focusable,
 #navigation .block-menu .block__title,
-#navigation .block-menu-block .block__title {
+#navigation .block-menu-block .block__title,
+.region-footer .block-title {
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -2132,6 +2133,175 @@ body {
 /* line 3, ../sass/sections/_footer.scss */
 .region-footer .block-menu .menu a {
   padding: 5px;
+}
+
+/* line 13, ../sass/sections/_footer.scss */
+.view-footer-teaser {
+  margin: -10px;
+  padding: 10px;
+}
+/* line 38, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.view-footer-teaser:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 720px) {
+  /* line 46, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
+  .view-footer-teaser:before, .view-footer-teaser:after {
+    content: "";
+    display: table;
+  }
+  /* line 50, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
+  .view-footer-teaser:after {
+    clear: both;
+  }
+  /* line 23, ../sass/sections/_footer.scss */
+  .view-footer-teaser .views-row-1 {
+    clear: left;
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 24, ../sass/sections/_footer.scss */
+  .view-footer-teaser .views-row-2 {
+    float: left;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: -66.66667%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+  /* line 25, ../sass/sections/_footer.scss */
+  .view-footer-teaser .views-row-3 {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+  }
+}
+/* line 46, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
+.lt-ie9 .view-footer-teaser:before, .lt-ie9 .view-footer-teaser:after {
+  content: "";
+  display: table;
+}
+/* line 50, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
+.lt-ie9 .view-footer-teaser:after {
+  clear: both;
+}
+/* line 23, ../sass/sections/_footer.scss */
+.lt-ie9 .view-footer-teaser .views-row-1 {
+  clear: left;
+  float: left;
+  width: 33.33333%;
+  margin-left: 0%;
+  margin-right: -33.33333%;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 24, ../sass/sections/_footer.scss */
+.lt-ie9 .view-footer-teaser .views-row-2 {
+  float: left;
+  width: 33.33333%;
+  margin-left: 33.33333%;
+  margin-right: -66.66667%;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+/* line 25, ../sass/sections/_footer.scss */
+.lt-ie9 .view-footer-teaser .views-row-3 {
+  float: left;
+  width: 33.33333%;
+  margin-left: 66.66667%;
+  margin-right: -100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+/* line 30, ../sass/sections/_footer.scss */
+.view-footer-teaser {
+  background: #F3F3F3;
+}
+/* line 32, ../sass/sections/_footer.scss */
+.view-footer-teaser p {
+  margin: 0;
+}
+/* line 33, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* line 35, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-field-title {
+  padding-top: 10px;
+  border-top: solid 3px #CCCCCC;
+}
+/* line 38, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-field-title h2 {
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  line-height: 1.4em;
+}
+/* line 42, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-field-title a {
+  text-decoration: none;
+  color: #222222;
+}
+/* line 46, ../sass/_mixins.scss */
+.view-footer-teaser .views-field-title a:hover {
+  text-decoration: underline;
+}
+
+/* line 51, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-row {
+  position: relative;
+  min-height: 90px;
+}
+/* line 54, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-row .views-field-title, .view-footer-teaser .views-row .views-field-field-description {
+  padding-right: 75px;
+}
+/* line 55, ../sass/sections/_footer.scss */
+.view-footer-teaser .views-row .views-field-field-image {
+  position: absolute;
+  top: 20px;
+  right: 10px;
 }
 
 /* line 1, ../sass/sections/_header.scss */

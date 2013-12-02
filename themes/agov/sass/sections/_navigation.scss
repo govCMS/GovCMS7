@@ -6,8 +6,8 @@
   padding: 7px;
   @include breakpoint($medium) { padding: 0px;}
   .block {
-    @include no-space;
-    @include adaptively-centered;
+    @include noSpace;
+    @include adaptivelyCentered;
   }
 }
 

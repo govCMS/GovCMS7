@@ -36,9 +36,14 @@
   }
 }
 
-@mixin no-space {
+@mixin noSpace {
 	margin: 0;
 	padding: 0;
+}
+
+@mixin underlineOnHover {
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
 }
 
 %pseudo-block {

@@ -1,12 +1,16 @@
-@mixin adaptively-centered {
+@mixin adaptivelyCentered {
   margin: auto;
   @include breakpoint($medium) { max-width: $medium; }
   @include breakpoint($large) { max-width: $large - 20px; }
 }
 
+@mixin ignoreParentMargin {
+  margin: -10px;
+}
+
 #page,
 .region-bottom {
-  @include adaptively-centered;
+  @include adaptivelyCentered;
 	padding: 10px;
 }
 
@@ -21,7 +25,7 @@
 }
 
 .header__inner {
-  @include adaptively-centered;
+  @include adaptivelyCentered;
 }
 
 /*
