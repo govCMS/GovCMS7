@@ -1,3 +1,27 @@
+%linksDoubleArrow {
+  a {
+    background: image-url("block-li-bg.png") no-repeat scroll left center;
+    display: block;
+    text-indent: 15px;
+    padding-bottom: 2px;
+  }
+}
+
+%linksTabbed {
+  > li {
+    border-top: 1px solid #CDCCCE;
+    &:first-child { border-top: none; }
+    &:hover { background-color: white; }
+    > a {
+      padding: 8px 15px;
+      display: block;
+      font-weight: bold;
+      &:hover { color: $blue; }
+    }
+  }
+}
+
+
 %inlineLinks {
   @include inline-list;
   > li {
@@ -5,7 +29,7 @@
     position: relative;
     display: inline-block;
   }
-  a { display: block; }
+  > li > a { display: block; }
 }
 
 %inlineLinks--bordered {
@@ -28,11 +52,11 @@
   @extend %inlineLinks--bordered;
   > li > a {
     color: white;
+    padding: 5px 10px;
     &:before {
       border-left: solid 1px lighten($blue, 10%);
       border-right: solid 1px darken($blue, 10%);
       left: -3px;
     }
   }
-  a { padding: 5px 10px; }
 }

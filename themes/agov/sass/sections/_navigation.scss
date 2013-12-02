@@ -50,21 +50,15 @@ $firstLiPaddingX: 15px; // Used for calculation is sub-menu below.
 $subMenuPadding: 3px;
 $subLiPaddingX: $firstLiPaddingX - $subMenuPadding;
 
-.sf-menu li ul {
+.sf-menu > li > ul {
 	background: $grey;
 	padding: $subMenuPadding;
-  li {
-    width: 100%;
-    a {
-      display: block;
-      padding: 8px $subLiPaddingX;
-      border-bottom: 1px solid white;
-      color: $red;
-      font-weight: bold;
-      &:hover {
-        background: white;
-        color: black;
-      }
-    }
+  @extend %linksTabbed;
+  // %linksTabbed overrides
+  > li {
+    display: block !important;
+    border-top-color: white;
+    > a { padding-left: $subLiPaddingX; }
   }
 }
+

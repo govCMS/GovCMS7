@@ -4,10 +4,6 @@
   @include breakpoint($large) { max-width: $large - 20px; }
 }
 
-@mixin ignoreParentMargin {
-  margin: -10px;
-}
-
 #page,
 .region-bottom {
   @include adaptivelyCentered;

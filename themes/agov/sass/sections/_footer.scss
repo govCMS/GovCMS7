@@ -11,7 +11,7 @@
 // Layout for footer promos
 // Todo: Currently named "footer-teaser" should be changed to "promos" or something later.
 .view-footer-teaser {
-  @include ignoreParentMargin;
+  margin: -10px; //ignore parent spacing
   @include pie-clearfix;
   padding: 10px;
 }

@@ -682,28 +682,28 @@ table {
 }
 
 /* Layout rules */
-/* line 12, ../sass/_layout.scss */
+/* line 8, ../sass/_layout.scss */
 #page,
 .region-bottom {
   margin: auto;
   padding: 10px;
 }
 @media (min-width: 720px) {
-  /* line 12, ../sass/_layout.scss */
+  /* line 8, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 12, ../sass/_layout.scss */
+  /* line 8, ../sass/_layout.scss */
   #page,
   .region-bottom {
     max-width: 940px;
   }
 }
 
-/* line 18, ../sass/_layout.scss */
+/* line 14, ../sass/_layout.scss */
 #main,
 #footer {
   clear: both;
@@ -716,18 +716,18 @@ table {
   clear: both;
 }
 
-/* line 27, ../sass/_layout.scss */
+/* line 23, ../sass/_layout.scss */
 .header__inner {
   margin: auto;
 }
 @media (min-width: 720px) {
-  /* line 27, ../sass/_layout.scss */
+  /* line 23, ../sass/_layout.scss */
   .header__inner {
     max-width: 720px;
   }
 }
 @media (min-width: 960px) {
-  /* line 27, ../sass/_layout.scss */
+  /* line 23, ../sass/_layout.scss */
   .header__inner {
     max-width: 940px;
   }
@@ -737,28 +737,28 @@ table {
 * Column logic.
 */
 @media (min-width: 720px) {
-  /* line 34, ../sass/_layout.scss */
+  /* line 30, ../sass/_layout.scss */
   #content {
     float: left;
     width: 460px;
   }
 }
 @media (min-width: 960px) {
-  /* line 34, ../sass/_layout.scss */
+  /* line 30, ../sass/_layout.scss */
   #content {
     width: 620px;
   }
 }
 
 @media (min-width: 720px) {
-  /* line 42, ../sass/_layout.scss */
+  /* line 38, ../sass/_layout.scss */
   .region-sidebar-second {
     float: right;
     width: 220px;
   }
 }
 @media (min-width: 960px) {
-  /* line 42, ../sass/_layout.scss */
+  /* line 38, ../sass/_layout.scss */
   .region-sidebar-second {
     width: 300px;
   }
@@ -806,7 +806,7 @@ table {
 /* line 1, ../sass/components/_beans.scss */
 .bean-image-and-text.highlight {
   background: #f1efed;
-  border: solid #004961;
+  border: solid #006893;
   border-width: 3px 0;
 }
 /* line 38, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
@@ -879,7 +879,38 @@ table {
   font-style: italic;
 }
 
-/* line 1, ../sass/components/_links.scss */
+/* line 2, ../sass/components/_links.scss */
+#block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
+  background: url('../images/block-li-bg.png?1383871531') no-repeat scroll left center;
+  display: block;
+  text-indent: 15px;
+  padding-bottom: 2px;
+}
+
+/* line 11, ../sass/components/_links.scss */
+.sf-menu > li > ul > li, .menu-block-agov_menu_block-sidebar .menu > li {
+  border-top: 1px solid #CDCCCE;
+}
+/* line 13, ../sass/components/_links.scss */
+.sf-menu > li > ul > li:first-child, .menu-block-agov_menu_block-sidebar .menu > li:first-child {
+  border-top: none;
+}
+/* line 14, ../sass/components/_links.scss */
+.sf-menu > li > ul > li:hover, .menu-block-agov_menu_block-sidebar .menu > li:hover {
+  background-color: white;
+}
+/* line 15, ../sass/components/_links.scss */
+.sf-menu > li > ul > li > a, .menu-block-agov_menu_block-sidebar .menu > li > a {
+  padding: 8px 15px;
+  display: block;
+  font-weight: bold;
+}
+/* line 19, ../sass/components/_links.scss */
+.sf-menu > li > ul > li > a:hover, .menu-block-agov_menu_block-sidebar .menu > li > a:hover {
+  color: #006893;
+}
+
+/* line 25, ../sass/components/_links.scss */
 .inlineLinks--bordered--double, .region-footer .block-menu .menu, .region-navigation .block__content > .menu {
   list-style-type: none;
 }
@@ -889,18 +920,18 @@ table {
   padding: 0px;
   display: inline;
 }
-/* line 3, ../sass/components/_links.scss */
+/* line 27, ../sass/components/_links.scss */
 .inlineLinks--bordered--double > li, .region-footer .block-menu .menu > li, .region-navigation .block__content > .menu > li {
   float: left;
   position: relative;
   display: inline-block;
 }
-/* line 8, ../sass/components/_links.scss */
-.inlineLinks--bordered--double a, .region-footer .block-menu .menu a, .region-navigation .block__content > .menu a {
+/* line 32, ../sass/components/_links.scss */
+.inlineLinks--bordered--double > li > a, .region-footer .block-menu .menu > li > a, .region-navigation .block__content > .menu > li > a {
   display: block;
 }
 
-/* line 14, ../sass/components/_links.scss */
+/* line 38, ../sass/components/_links.scss */
 .inlineLinks--bordered--double > li > a:before, .region-footer .block-menu .menu > li > a:before, .region-navigation .block__content > .menu > li > a:before {
   border-left: solid 1px #5f5f5f;
   height: 60%;
@@ -908,24 +939,21 @@ table {
   left: 0px;
   position: absolute;
 }
-/* line 24, ../sass/components/_links.scss */
+/* line 48, ../sass/components/_links.scss */
 .inlineLinks--bordered--double li:first-child a:before, .region-footer .block-menu .menu li:first-child a:before, .region-navigation .block__content > .menu li:first-child a:before {
   border: 0;
 }
 
-/* line 29, ../sass/components/_links.scss */
+/* line 53, ../sass/components/_links.scss */
 .inlineLinks--bordered--double > li > a {
   color: white;
+  padding: 5px 10px;
 }
-/* line 31, ../sass/components/_links.scss */
+/* line 56, ../sass/components/_links.scss */
 .inlineLinks--bordered--double > li > a:before {
   border-left: solid 1px #008cc6;
   border-right: solid 1px #004460;
   left: -3px;
-}
-/* line 37, ../sass/components/_links.scss */
-.inlineLinks--bordered--double a {
-  padding: 5px 10px;
 }
 
 /**
@@ -2422,7 +2450,7 @@ body {
 
 /* line 19, ../sass/sections/_homepage.scss */
 .front .panel-pane {
-  border-top: 3px solid #004961;
+  border-top: 3px solid #006893;
 }
 
 /* line 1, ../sass/sections/_navigation.scss */
@@ -2488,26 +2516,18 @@ body {
 
 /* Sub-menu */
 /* line 53, ../sass/sections/_navigation.scss */
-.sf-menu li ul {
+.sf-menu > li > ul {
   background: #f1efed;
   padding: 3px;
 }
-/* line 56, ../sass/sections/_navigation.scss */
-.sf-menu li ul li {
-  width: 100%;
-}
 /* line 58, ../sass/sections/_navigation.scss */
-.sf-menu li ul li a {
-  display: block;
-  padding: 8px 12px;
-  border-bottom: 1px solid white;
-  color: #c53100;
-  font-weight: bold;
+.sf-menu > li > ul > li {
+  display: block !important;
+  border-top-color: white;
 }
-/* line 64, ../sass/sections/_navigation.scss */
-.sf-menu li ul li a:hover {
-  background: white;
-  color: black;
+/* line 61, ../sass/sections/_navigation.scss */
+.sf-menu > li > ul > li > a {
+  padding-left: 12px;
 }
 
 /* line 3, ../sass/sections/_sidebar.scss */
@@ -2538,6 +2558,18 @@ body {
 .block-agov-social-links a {
   display: inline-block;
   margin-right: 5px;
+}
+
+/* Sidebar Menus */
+/* line 33, ../sass/sections/_sidebar.scss */
+.sidebar .block
+.menu-block-agov_menu_block-sidebar .menu {
+  margin: -15px;
+}
+
+/* line 39, ../sass/sections/_sidebar.scss */
+.menu-block-agov_menu_block-sidebar .menu a {
+  background-position: 15px center;
 }
 
 /* styles for desktop */
