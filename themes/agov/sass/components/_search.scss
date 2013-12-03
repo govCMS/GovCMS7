@@ -3,7 +3,6 @@
 .block-search {
   padding-right: 32px;
   position: relative;
-  @include box-sizing(border-box);
   .form-text { width: 100%; }
   .form-submit {
     position: absolute;

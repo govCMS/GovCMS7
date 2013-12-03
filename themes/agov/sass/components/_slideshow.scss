@@ -7,7 +7,6 @@
   .rslides { margin: 0px; }
   .group-left, .group-right {
     width: 100%;
-    @include box-sizing(border-box);
   }
   .group-left {
     @include breakpoint($large) { width: inherit; }

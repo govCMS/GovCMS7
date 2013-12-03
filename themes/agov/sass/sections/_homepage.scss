@@ -7,7 +7,6 @@
 }
 
 .gov-front-col {
-  @include box-sizing(border-box);
   @include breakpoint($medium) {
     width: 50%;
     float: left;

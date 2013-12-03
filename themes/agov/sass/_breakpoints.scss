@@ -2,7 +2,7 @@ $breakpoint-no-queries: false;
 $breakpoint-no-query-fallbacks: true;
 
 $medium: 720px;
-$large: 960px;
+$large: 980px;
 
 @mixin bp-nq($breakpoint) {
   @include breakpoint($breakpoint, $no-query: '.lt-ie9') {

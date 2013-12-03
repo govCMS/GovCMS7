@@ -107,6 +107,8 @@ audio:not([controls]) {
 }
 */
 
+* { @include box-sizing(border-box); }
+
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
@@ -333,7 +335,6 @@ dfn {
  */
 
 hr {
-  @include box-sizing(border-box);
   height: 1px;
   border: 1px solid #666;
   padding-bottom: -1px;
@@ -623,7 +624,6 @@ html input[disabled] {
 
 input[type="checkbox"],
 input[type="radio"] {
-  @include box-sizing(border-box); /* 1 */
   padding: 0; /* 2 */
   @if $legacy-support-for-ie7 {
     *height: 13px; /* 3 */

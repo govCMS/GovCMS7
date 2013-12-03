@@ -4,9 +4,8 @@
     @include hide-text;
     text-indent: 130%; // adds extra indent for firefox hiding.
     display: inline-block;
-    width: 19px;
-    height: 19px;
-    padding: 4px;
+    width: 26px;
+    height: 26px;
     background-image: image-url('font-resize-bg.png');
     background-repeat: no-repeat;
     &.font-small { background-position: 0px px; }

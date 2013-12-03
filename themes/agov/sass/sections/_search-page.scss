@@ -1,0 +1,57 @@
+#search-form {
+
+  background-color: #F7F7F4;
+  padding: 25px 14px;
+  @include pie-clearfix;
+  label, .form-text, .form-submit { margin: rhythm(.5) 0; }
+  label {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    font-weight: bold;
+  }
+  .form-text {
+    float: left;
+    min-width: 75%;
+    @include bp-nq($medium) { min-width: 50%; }
+    margin: rhythm(.5) 0 0;
+  }
+  .form-submit {
+    clear: left;
+    @include bp-nq($large) { clear: none; }
+    background: darken($red, 10%);
+    color: white;
+  }
+  fieldset { display: none; }
+}
+
+
+
+#search-form
+
+.content h2 {
+  padding-top: 10px;
+  margin-bottom: 30px;
+}
+
+ol.search-results li {
+  padding-bottom: 12px;
+}
+
+ol.search-results li:last-child {
+  border-bottom: none;
+}
+
+ol.search-results h3.title {
+  margin-bottom: 5px;
+}
+
+ol.search-results h3.title a {
+  @include adjust-font-size-to(14px);
+  font-weight: bold;
+}
+
+#region-content .content ul li {
+  list-style: disc;
+  margin: 0 0 5px 15px;
+}

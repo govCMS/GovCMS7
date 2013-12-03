@@ -13,22 +13,30 @@
 }
 
 // These variables keep form elements the same height.
-$inputHeight: 21px;
+$inputHeight: 25px;
 $inputVPadding: 2px;
 $borderWidth: 1px;
 
 .form-text {
   height: $inputHeight;
   padding: $inputVPadding 5px;
-  border: solid $borderWidth white;
+  border: solid $borderWidth $grey2;
 }
+.form-type-textfield label {
+  @include bp-nq($medium) {
+    height: $inputHeight;
+    padding: $inputVPadding * 2 0;
+  }
+}
+
 .form-submit {
   text-align: center;
   font-family: 'OpenSansRegular';
   font-weight: bold;
   border: none;
   padding: 0 15px;
-  height: $inputHeight + $inputVPadding*2 + $borderWidth*2;
+  height: $inputHeight;
 }
+
 
 
