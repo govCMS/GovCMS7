@@ -32,7 +32,7 @@
       bottom: -34px;
       z-index: 100;
     }
-    @include breakpoint($medium) {
+    @include bp-nq($medium) {
       position: relative;
       float: right;
       width: 215px; // Bigger on larger screens.

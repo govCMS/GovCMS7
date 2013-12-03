@@ -7,7 +7,7 @@
 }
 
 .gov-front-col {
-  @include breakpoint($medium) {
+  @include bp-nq($medium) {
     width: 50%;
     float: left;
     &.gov-front-left { padding-right: 10px; }

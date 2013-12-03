@@ -9,11 +9,11 @@
     width: 100%;
   }
   .group-left {
-    @include breakpoint($large) { width: inherit; }
+    @include bp-nq($large) { width: inherit; }
   }
   .group-right {
     padding: 15px;
-    @include breakpoint($large) { width: 30%; }
+    @include bp-nq($large) { width: 30%; }
   }
 }
 
@@ -23,7 +23,7 @@
   .field-name-field-slide-image {
     img {
       width: 100%;
-      @include breakpoint($large) { width: auto; }
+      @include bp-nq($large) { width: auto; }
     }
     position: relative;
   }

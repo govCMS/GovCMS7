@@ -5,7 +5,7 @@
   border-width: 3px 0;
   .field {
     @include box-sizing(border-box);
-    @include breakpoint($medium) {
+    @include bp-nq($medium) {
       float: left;
       width: 50%;
     }

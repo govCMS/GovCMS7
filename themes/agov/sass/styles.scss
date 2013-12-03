@@ -22,6 +22,9 @@
 /* Layout rules */
 @import "layout";
 
+/* Typographic rules */
+@import "typography";
+
 /* Global form elements */
 @import "forms";
 
@@ -31,8 +34,10 @@
 // Sections - This is where section specific non-modular styles go. You will not find yourself duplicating these styles.
 @import "sections/*";
 
-// Javascript States
-@import "states/tinynav";
+/* Customized third-party CSS */
+// Loaded last because TinyNav needs to happen last.
+// Todo: pull out tinynav state and place in states. Then place vendor stuff first.
+@import "vendor/*";
 
 // Optionally, add your own components here.
 @import "print";

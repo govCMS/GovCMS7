@@ -1,7 +1,7 @@
 @mixin adaptivelyCentered {
   margin: auto;
-  @include breakpoint($medium) { max-width: $medium; }
-  @include breakpoint($large) { max-width: $large - 20px; }
+  @include bp-nq($medium) { max-width: $medium; }
+  @include bp-nq($large) { max-width: $large - 20px; }
 }
 
 #page,
@@ -21,17 +21,17 @@
 * Column logic.
 */
 #content {
- 	@include breakpoint($medium) {
+ 	@include bp-nq($medium) {
 	   float: left; 
 	   width: 460px;
 	 }
-	 @include breakpoint($large) { width: 620px; }
+	 @include bp-nq($large) { width: 620px; }
 }
 
 .region-sidebar-second {
- @include breakpoint($medium) {
+ @include bp-nq($medium) {
    float: right;
    width: 220px;
  }
- @include breakpoint($large) { width: 300px; } 
+ @include bp-nq($large) { width: 300px; }
 }
