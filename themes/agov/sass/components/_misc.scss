@@ -174,18 +174,6 @@
 }
 
 /**
- * Titles.
- */
-.page__title,          /* The title of the page. */
-.node__title,          /* Title of a piece of content when it is given in a list of content. */
-.block__title,         /* Block title. */
-.comments__title,      /* Comment section heading. */
-.comments__form-title, /* Comment form heading. */
-.comment__title {      /* Comment title. */
-  margin: 0;
-}
-
-/**
  * Messages.
  */
 .messages {
@@ -531,7 +519,7 @@ span.field-label {
 /* Nested comments are indented. */
 .indented {
   /* Drupal core uses a 25px left margin. */
-  margin-left: $indent-amount; /* LTR */
+  margin-left: 30px; /* LTR */
 }
 
 /**

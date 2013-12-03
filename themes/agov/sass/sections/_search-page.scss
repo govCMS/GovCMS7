@@ -1,8 +1,36 @@
-#search-form {
 
-  background-color: #F7F7F4;
-  padding: 25px 14px;
+.search-results { padding: 0 15px;}
+
+.search-results li {
+  @extend %listing;
+}
+
+.search-results h3.title {
+  @extend %listing--header;
+}
+
+.search-results h3.title a {
+  @include adjust-font-size-to(14px);
+  font-weight: bold;
+}
+
+#region-content .content ul li {
+  list-style: disc;
+  margin: 0 0 5px 15px;
+}
+
+.search-results .search-snippet-info {
+  padding: 0;
+  font-style: italic;
+}
+
+
+#search-form {
   @include pie-clearfix;
+  padding: 15px;
+  background-color: $grey;
+  border-top: solid 3px $blue;
+
   label, .form-text, .form-submit { margin: rhythm(.5) 0; }
   label {
     float: left;
@@ -23,35 +51,4 @@
     color: white;
   }
   fieldset { display: none; }
-}
-
-
-
-#search-form
-
-.content h2 {
-  padding-top: 10px;
-  margin-bottom: 30px;
-}
-
-ol.search-results li {
-  padding-bottom: 12px;
-}
-
-ol.search-results li:last-child {
-  border-bottom: none;
-}
-
-ol.search-results h3.title {
-  margin-bottom: 5px;
-}
-
-ol.search-results h3.title a {
-  @include adjust-font-size-to(14px);
-  font-weight: bold;
-}
-
-#region-content .content ul li {
-  list-style: disc;
-  margin: 0 0 5px 15px;
 }

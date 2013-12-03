@@ -11,18 +11,11 @@
 }
 
 #main, 
-#footer {
-	clear: both;
-}
+#footer {	clear: both; }
 
-.header {
-	@include pie-clearfix;
+.header { @include pie-clearfix; }
 
-}
-
-.header__inner {
-  @include adaptivelyCentered;
-}
+.header__inner { @include adaptivelyCentered; }
 
 /*
 * Column logic.

@@ -19,6 +19,9 @@
 }
 
 .bean-image-and-text.default {
+  border-top: solid 1px $grey;
+  padding: 15px 0;
+  margin: 0;
   h2 {
     @include adjust-font-size-to(16px);
     margin-top: 0;
