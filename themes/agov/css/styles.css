@@ -224,7 +224,7 @@ a:hover {
 /* line 208, ../sass/_normalize.scss */
 p,
 pre {
-  margin: 1.4em 0 0.7em;
+  margin: 0.7em 0;
 }
 
 /* line 212, ../sass/_normalize.scss */
@@ -962,6 +962,15 @@ img.img-float-left {
 }
 
 /* line 1, ../sass/components/_fields.scss */
+.field-label-inline {
+  margin: 1.4em 0;
+}
+/* line 2, ../sass/components/_fields.scss */
+.field-label-inline .field-label {
+  width: 100px;
+}
+
+/* line 6, ../sass/components/_fields.scss */
 .field-name-post-date {
   font-style: italic;
 }
