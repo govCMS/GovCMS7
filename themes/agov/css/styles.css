@@ -1500,56 +1500,16 @@ span.field-label {
 }
 
 /**
- * Pager.
- */
-/* A list of page numbers when more than 1 page of content is available. */
-/* line 413, ../sass/components/_misc.scss */
-.pager {
-  clear: both;
-  padding: 0;
-  text-align: center;
-}
-
-/* line 418, ../sass/components/_misc.scss */
-.pager-item,
-.pager-first,
-.pager-previous,
-.pager-next,
-.pager-last,
-.pager-ellipsis, .pager-current {
-  display: inline;
-  padding: 0 0.5em;
-  list-style-type: none;
-  background-image: none;
-}
-
-/* line 430, ../sass/components/_misc.scss */
-.pager-item,
-.pager-first,
-.pager-previous,
-.pager-next,
-.pager-last,
-.pager-ellipsis {
-  /* A concatenation of several list items using an ellipsis. */
-}
-
-/* The current page's list item. */
-/* line 435, ../sass/components/_misc.scss */
-.pager-current {
-  font-weight: bold;
-}
-
-/**
  * Blocks.
  */
 /* Block wrapper. */
-/* line 445, ../sass/components/_misc.scss */
+/* line 414, ../sass/components/_misc.scss */
 #page .block {
   margin-bottom: 1.4em;
 }
 
 /* The active item in a Drupal menu. */
-/* line 450, ../sass/components/_misc.scss */
+/* line 419, ../sass/components/_misc.scss */
 .menu a.active {
   color: #000;
 }
@@ -1558,7 +1518,7 @@ span.field-label {
  * Marker.
  */
 /* The "new" or "updated" marker. */
-/* line 460, ../sass/components/_misc.scss */
+/* line 429, ../sass/components/_misc.scss */
 .new,
 .update {
   color: #c00;
@@ -1570,7 +1530,7 @@ span.field-label {
  * Unpublished note.
  */
 /* The word "Unpublished" displayed underneath the content. */
-/* line 471, ../sass/components/_misc.scss */
+/* line 440, ../sass/components/_misc.scss */
 .unpublished {
   height: 0;
   overflow: visible;
@@ -1591,31 +1551,31 @@ span.field-label {
  * Comments.
  */
 /* Wrapper for the list of comments and its title. */
-/* line 499, ../sass/components/_misc.scss */
+/* line 468, ../sass/components/_misc.scss */
 .comments {
   margin: 1.4em 0;
 }
 
 /* Preview of the comment before submitting new or updated comment. */
-/* line 504, ../sass/components/_misc.scss */
+/* line 473, ../sass/components/_misc.scss */
 .comment-preview {
   /* Drupal core will use a #ffffea background. See #1110842. */
   background-color: #ffffea;
 }
 
 /* Wrapper for a single comment. */
-/* line 510, ../sass/components/_misc.scss */
+/* line 479, ../sass/components/_misc.scss */
 .comment {
   /* Comment's permalink wrapper. */
 }
-/* line 513, ../sass/components/_misc.scss */
+/* line 482, ../sass/components/_misc.scss */
 .comment .permalink {
   text-transform: uppercase;
   font-size: 75%;
 }
 
 /* Nested comments are indented. */
-/* line 520, ../sass/components/_misc.scss */
+/* line 489, ../sass/components/_misc.scss */
 .indented {
   /* Drupal core uses a 25px left margin. */
   margin-left: 30px;
@@ -1626,7 +1586,7 @@ span.field-label {
  * Forms.
  */
 /* Wrapper for a form element (or group of form elements) and its label. */
-/* line 530, ../sass/components/_misc.scss */
+/* line 499, ../sass/components/_misc.scss */
 .form-item {
   margin: 1.4em 0;
   /* Pack groups of checkboxes and radio buttons closer together. */
@@ -1634,47 +1594,47 @@ span.field-label {
   /* Highlight the form elements that caused a form submission error. */
   /* The descriptive help text (separate from the label). */
 }
-/* line 535, ../sass/components/_misc.scss */
+/* line 504, ../sass/components/_misc.scss */
 .form-checkboxes .form-item, .form-radios .form-item {
   /* Drupal core uses "0.4em 0". */
   margin: 0;
 }
-/* line 542, ../sass/components/_misc.scss */
+/* line 511, ../sass/components/_misc.scss */
 tr.odd .form-item, tr.even .form-item {
   margin: 0;
 }
-/* line 549, ../sass/components/_misc.scss */
+/* line 518, ../sass/components/_misc.scss */
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
   border: 1px solid #c00;
 }
-/* line 554, ../sass/components/_misc.scss */
+/* line 523, ../sass/components/_misc.scss */
 .form-item .description {
   font-size: 0.85em;
 }
 
-/* line 561, ../sass/components/_misc.scss */
+/* line 530, ../sass/components/_misc.scss */
 .form-type-radio .description,
 .form-type-checkbox .description {
   margin-left: 2.4em;
 }
 
 /* The part of the label that indicates a required field. */
-/* line 567, ../sass/components/_misc.scss */
+/* line 536, ../sass/components/_misc.scss */
 .form-required {
   color: #c00;
 }
 
 /* Labels for radios and checkboxes. */
-/* line 572, ../sass/components/_misc.scss */
+/* line 541, ../sass/components/_misc.scss */
 label.option {
   display: inline;
   font-weight: normal;
 }
 
 /* Buttons used by contrib modules like Media. */
-/* line 578, ../sass/components/_misc.scss */
+/* line 547, ../sass/components/_misc.scss */
 a.button {
   -webkit-appearance: button;
   -moz-appearance: button;
@@ -1682,14 +1642,14 @@ a.button {
 }
 
 /* Password confirmation. */
-/* line 584, ../sass/components/_misc.scss */
+/* line 553, ../sass/components/_misc.scss */
 .password-parent,
 .confirm-parent {
   margin: 0;
 }
 
 /* Drupal's default login form block. */
-/* line 589, ../sass/components/_misc.scss */
+/* line 558, ../sass/components/_misc.scss */
 #user-login-form {
   text-align: left;
   /* LTR */
@@ -1702,20 +1662,20 @@ a.button {
  * styling of list items.
  */
 /* OpenID creates a new ul above the login form's links. */
-/* line 601, ../sass/components/_misc.scss */
+/* line 570, ../sass/components/_misc.scss */
 .openid-links {
   /* Position OpenID's ul next to the rest of the links. */
   margin-bottom: 0;
 }
 
 /* The "Log in using OpenID" and "Cancel OpenID login" links. */
-/* line 608, ../sass/components/_misc.scss */
+/* line 577, ../sass/components/_misc.scss */
 .openid-link,
 .user-link {
   margin-top: 1.4em;
 }
 
-/* line 612, ../sass/components/_misc.scss */
+/* line 581, ../sass/components/_misc.scss */
 html.js #user-login-form li.openid-link,
 #user-login-form li.openid-link {
   /* Un-do some of the padding on the ul list. */
@@ -1723,7 +1683,7 @@ html.js #user-login-form li.openid-link,
   /* LTR */
 }
 
-/* line 616, ../sass/components/_misc.scss */
+/* line 585, ../sass/components/_misc.scss */
 #user-login ul {
   margin: 1.4em 0;
 }
@@ -1731,7 +1691,7 @@ html.js #user-login-form li.openid-link,
 /**
  * Drupal admin tables.
  */
-/* line 624, ../sass/components/_misc.scss */
+/* line 593, ../sass/components/_misc.scss */
 form th {
   text-align: left;
   /* LTR */
@@ -1739,16 +1699,16 @@ form th {
   /* LTR */
   border-bottom: 3px solid #ccc;
 }
-/* line 629, ../sass/components/_misc.scss */
+/* line 598, ../sass/components/_misc.scss */
 form tbody {
   border-top: 1px solid #ccc;
 }
-/* line 632, ../sass/components/_misc.scss */
+/* line 601, ../sass/components/_misc.scss */
 form table ul {
   margin: 0;
 }
 
-/* line 637, ../sass/components/_misc.scss */
+/* line 606, ../sass/components/_misc.scss */
 tr.even,
 tr.odd {
   background-color: #eee;
@@ -1756,26 +1716,26 @@ tr.odd {
   padding: 0.1em 0.6em;
 }
 
-/* line 642, ../sass/components/_misc.scss */
+/* line 611, ../sass/components/_misc.scss */
 tr.even {
   background-color: #fff;
 }
 
 /* Markup generated by theme_tablesort_indicator(). */
-/* line 657, ../sass/components/_misc.scss */
+/* line 626, ../sass/components/_misc.scss */
 td.active {
   background-color: #ddd;
 }
 
 /* Center checkboxes inside table cell. */
-/* line 663, ../sass/components/_misc.scss */
+/* line 632, ../sass/components/_misc.scss */
 td.checkbox,
 th.checkbox {
   text-align: center;
 }
 
 /* Drupal core wrongly puts this in system.menus.css. Since we override that, add it back. */
-/* line 668, ../sass/components/_misc.scss */
+/* line 637, ../sass/components/_misc.scss */
 td.menu-disabled {
   background: #ccc;
 }
@@ -1786,7 +1746,7 @@ td.menu-disabled {
  * @see autocomplete.js
  */
 /* Suggestion list. */
-/* line 679, ../sass/components/_misc.scss */
+/* line 648, ../sass/components/_misc.scss */
 #autocomplete .selected {
   background: #0072b9;
   color: #fff;
@@ -1797,7 +1757,7 @@ td.menu-disabled {
  *
  * @see collapse.js
  */
-/* line 690, ../sass/components/_misc.scss */
+/* line 659, ../sass/components/_misc.scss */
 html.js .collapsible .fieldset-legend {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABJJREFUeJxj+MdQw2DBIMAABgAUsAHD3c3BpwAAAABJRU5ErkJggg==');
   background-position: 5px 65%;
@@ -1806,14 +1766,14 @@ html.js .collapsible .fieldset-legend {
   padding-left: 15px;
   /* LTR */
 }
-/* line 699, ../sass/components/_misc.scss */
+/* line 668, ../sass/components/_misc.scss */
 html.js .collapsed .fieldset-legend {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABFJREFUCB1jVmCGQClmEWYOAAZ8AMy3HPLXAAAAAElFTkSuQmCC');
   /* LTR */
   background-position: 5px 50%;
   /* LTR */
 }
-/* line 706, ../sass/components/_misc.scss */
+/* line 675, ../sass/components/_misc.scss */
 .fieldset-legend .summary {
   color: #999;
   font-size: 0.9em;
@@ -1825,17 +1785,17 @@ html.js .collapsed .fieldset-legend {
  *
  * @see tabledrag.js
  */
-/* line 718, ../sass/components/_misc.scss */
+/* line 687, ../sass/components/_misc.scss */
 tr.drag {
   background-color: #fffff0;
 }
 
-/* line 721, ../sass/components/_misc.scss */
+/* line 690, ../sass/components/_misc.scss */
 tr.drag-previous {
   background-color: #ffd;
 }
 
-/* line 724, ../sass/components/_misc.scss */
+/* line 693, ../sass/components/_misc.scss */
 .tabledrag-toggle-weight {
   font-size: 0.9em;
 }
@@ -1845,7 +1805,7 @@ tr.drag-previous {
  *
  * @see tableselect.js
  */
-/* line 733, ../sass/components/_misc.scss */
+/* line 702, ../sass/components/_misc.scss */
 tr.selected td {
   background: #ffc;
 }
@@ -1855,11 +1815,11 @@ tr.selected td {
  *
  * @see progress.js
  */
-/* line 742, ../sass/components/_misc.scss */
+/* line 711, ../sass/components/_misc.scss */
 .progress {
   font-weight: bold;
 }
-/* line 745, ../sass/components/_misc.scss */
+/* line 714, ../sass/components/_misc.scss */
 .progress .bar {
   background: #ccc;
   border-color: #666;
@@ -1870,10 +1830,54 @@ tr.selected td {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 751, ../sass/components/_misc.scss */
+/* line 720, ../sass/components/_misc.scss */
 .progress .filled {
   background-color: #0072b9;
   background-image: url('../images/progress.gif?1376896851');
+}
+
+/**
+ * Pager.
+ */
+/* A list of page numbers when more than 1 page of content is available. */
+/* line 6, ../sass/components/_pager.scss */
+.pager {
+  clear: both;
+  padding: 0.7em;
+  text-align: center;
+  border-top: solid 3px #006893;
+  background: #f8f7f6;
+}
+
+/* line 13, ../sass/components/_pager.scss */
+.pager-item,
+.pager-first,
+.pager-previous,
+.pager-next,
+.pager-last,
+.pager-ellipsis, .pager-current {
+  display: inline-block;
+  padding: 0 0.35em;
+  list-style-type: none;
+  background-image: none;
+  font-weight: bold;
+}
+
+/* line 26, ../sass/components/_pager.scss */
+.pager-item,
+.pager-first,
+.pager-previous,
+.pager-next,
+.pager-last,
+.pager-ellipsis {
+  /* A concatenation of several list items using an ellipsis. */
+}
+
+/* The current page's list item. */
+/* line 31, ../sass/components/_pager.scss */
+.pager-current {
+  color: white;
+  background: #006893;
 }
 
 /* line 2, ../sass/components/_slideshow.scss */
