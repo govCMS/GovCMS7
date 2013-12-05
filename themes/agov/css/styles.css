@@ -1929,8 +1929,9 @@ th a, th img {
   border-top: solid 2px #006893;
   border-bottom: none;
   position: relative;
+  color: black;
 }
-/* line 35, ../sass/components/_tabs.scss */
+/* line 37, ../sass/components/_tabs.scss */
 .tabs-primary__tab-link.is-active:after {
   width: 100%;
   content: "";
@@ -1940,7 +1941,7 @@ th a, th img {
   bottom: -1px;
   left: 0px;
 }
-/* line 45, ../sass/components/_tabs.scss */
+/* line 47, ../sass/components/_tabs.scss */
 .tabs-primary__tab:first-child .tabs-primary__tab-link.is-active {
   border-left: none;
 }
@@ -2460,28 +2461,28 @@ body {
 }
 
 /* line 4, ../sass/sections/_page-user.scss */
-#user-login {
+.page-user #main form {
   overflow: hidden;
   border: 1px solid #dbd5d0;
   border-top: none;
   padding: 0 15px 15px 15px;
 }
 /* line 9, ../sass/sections/_page-user.scss */
-#user-login .form-text {
+.page-user #main form .form-text {
   width: 100%;
 }
 @media (min-width: 720px) {
   /* line 9, ../sass/sections/_page-user.scss */
-  #user-login .form-text {
+  .page-user #main form .form-text {
     width: auto;
   }
 }
 /* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
-.lt-ie9 #user-login .form-text {
+.lt-ie9 .page-user #main form .form-text {
   width: auto;
 }
 /* line 13, ../sass/sections/_page-user.scss */
-#user-login .form-submit {
+.page-user #main form .form-submit {
   background: #c53100;
   color: white;
   -webkit-box-shadow: 0 4px 4px -2px #cccccc;
@@ -2489,7 +2490,7 @@ body {
   box-shadow: 0 4px 4px -2px #cccccc;
 }
 /* line 18, ../sass/sections/_page-user.scss */
-#user-login .form-type-password {
+.page-user #main form .form-type-password {
   margin-bottom: 0.7em;
 }
 

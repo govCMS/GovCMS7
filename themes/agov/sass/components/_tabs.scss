@@ -11,13 +11,13 @@
 }
 
 // tabs
-  .tabs-primary__tab {
-    display: inline-block;
-  }
+.tabs-primary__tab {
+  display: inline-block;
+}
 
-  // tab-links
-  .tabs-primary__tab-link {
-    display: block;
+// tab-links
+.tabs-primary__tab-link {
+  display: block;
   padding: rhythm(.5) rhythm(1);
   text-align: center;
   text-decoration: none;
@@ -32,6 +32,8 @@
   border-bottom: none;
   // Adds white pseudo-border for visual presentation.
   position: relative;
+  color: black;
+
   &:after {
     width: 100%; // of parent element
     content: "";
