@@ -975,6 +975,28 @@ img.img-float-left {
   font-style: italic;
 }
 
+/* line 10, ../sass/components/_fields.scss */
+.field-name-field-tags {
+  width: 100%;
+  border-top: solid 1px #dbd5d0;
+  border-bottom: solid 1px #dbd5d0;
+  padding: 0.7em 0;
+  margin: 0.7em 0;
+  display: block;
+}
+/* line 17, ../sass/components/_fields.scss */
+.field-name-field-tags div {
+  display: inline;
+}
+/* line 19, ../sass/components/_fields.scss */
+.field-name-field-tags .field-item:before {
+  content: ", ";
+}
+/* line 20, ../sass/components/_fields.scss */
+.field-name-field-tags .field-item:first-child:before {
+  content: "";
+}
+
 /* line 2, ../sass/components/_links.scss */
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
   background: url('../images/block-li-bg.png?1383871531') no-repeat scroll left center;
@@ -2505,6 +2527,11 @@ body {
 /* line 61, ../sass/sections/_navigation.scss */
 .sf-menu > li > ul > li > a {
   padding-left: 12px;
+}
+
+/* line 1, ../sass/sections/_page-node.scss */
+.page-node .field-name-field-thumbnail {
+  margin-top: 0.7em;
 }
 
 /* line 4, ../sass/sections/_page-views.scss */
