@@ -899,6 +899,11 @@ img.img-float-left {
   height: 25px;
 }
 
+/* line 41, ../sass/_forms.scss */
+.form-item .description {
+  padding: 0.7em 0;
+}
+
 /* Component (SMACSS module) rules */
 /* line 1, ../sass/components/_beans.scss */
 .bean-image-and-text.highlight {
@@ -1879,6 +1884,15 @@ tr.selected td {
   background-position: 0px -27px;
 }
 
+/* line 1, ../sass/components/_tables.scss */
+th {
+  padding: 5px;
+}
+/* line 3, ../sass/components/_tables.scss */
+th a, th img {
+  display: inline-block;
+}
+
 /**
  * Tabs.
  */
@@ -2438,6 +2452,45 @@ body {
 /* line 1, ../sass/sections/_page-node.scss */
 .page-node .field-name-field-thumbnail {
   margin-top: 0.7em;
+}
+
+/* line 1, ../sass/sections/_page-user.scss */
+.page-user .tabs {
+  margin-bottom: 0;
+}
+
+/* line 4, ../sass/sections/_page-user.scss */
+#user-login {
+  overflow: hidden;
+  border: 1px solid #dbd5d0;
+  border-top: none;
+  padding: 0 15px 15px 15px;
+}
+/* line 9, ../sass/sections/_page-user.scss */
+#user-login .form-text {
+  width: 100%;
+}
+@media (min-width: 720px) {
+  /* line 9, ../sass/sections/_page-user.scss */
+  #user-login .form-text {
+    width: auto;
+  }
+}
+/* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
+.lt-ie9 #user-login .form-text {
+  width: auto;
+}
+/* line 13, ../sass/sections/_page-user.scss */
+#user-login .form-submit {
+  background: #c53100;
+  color: white;
+  -webkit-box-shadow: 0 4px 4px -2px #cccccc;
+  -moz-box-shadow: 0 4px 4px -2px #cccccc;
+  box-shadow: 0 4px 4px -2px #cccccc;
+}
+/* line 18, ../sass/sections/_page-user.scss */
+#user-login .form-type-password {
+  margin-bottom: 0.7em;
 }
 
 /* line 4, ../sass/sections/_page-views.scss */
