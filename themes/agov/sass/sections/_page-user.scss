@@ -10,10 +10,5 @@
     width: 100%;
     @include bp-nq($medium) { width: auto; }
   }
-  .form-submit {
-    background: $red;
-    color: white;
-    @include box-shadow(0 4px 4px -2px #cccccc);
-  }
   .form-type-password { margin-bottom: rhythm(.5); }
 }

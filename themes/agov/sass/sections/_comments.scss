@@ -1,0 +1,37 @@
+/*
+ * @file
+ * Compass styles for
+ */
+
+#comments {
+  margin-bottom: 20px;
+
+  #comment-wrapper-header {
+    padding-top: 10px;
+    .add-new-link a { font-weight: bold; }
+  }
+
+  #comment-wrapper-header h2 {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .comment {
+    background-image: image-url('comment-icon.png');
+    background-position: 13px 15px;
+    background-repeat: no-repeat;
+    background-color: $grey;
+    padding: 15px 13px 15px 46px;
+    &.even { background-color: transparent; }
+    .submitted {
+      @include adjust-font-size-to(11px);
+      margin: 0;
+    }
+    .field-name-comment-body p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-submit { margin: rhythm(.5) rhythm(.5) 0 0; }
+
+}

@@ -900,6 +900,15 @@ img.img-float-left {
 }
 
 /* line 41, ../sass/_forms.scss */
+#main .form-submit {
+  background: #c53100;
+  color: white;
+  -webkit-box-shadow: 1px 1px 1px #c9c9c9;
+  -moz-box-shadow: 1px 1px 1px #c9c9c9;
+  box-shadow: 1px 1px 1px #c9c9c9;
+}
+
+/* line 47, ../sass/_forms.scss */
 .form-item .description {
   padding: 0.7em 0;
 }
@@ -2036,6 +2045,54 @@ body {
   line-height: 1.51667em;
 }
 
+/*
+ * @file
+ * Compass styles for
+ */
+/* line 6, ../sass/sections/_comments.scss */
+#comments {
+  margin-bottom: 20px;
+}
+/* line 9, ../sass/sections/_comments.scss */
+#comments #comment-wrapper-header {
+  padding-top: 10px;
+}
+/* line 11, ../sass/sections/_comments.scss */
+#comments #comment-wrapper-header .add-new-link a {
+  font-weight: bold;
+}
+/* line 14, ../sass/sections/_comments.scss */
+#comments #comment-wrapper-header h2 {
+  padding-top: 0;
+  border-top: none;
+}
+/* line 19, ../sass/sections/_comments.scss */
+#comments .comment {
+  background-image: url('../images/comment-icon.png?1383871531');
+  background-position: 13px 15px;
+  background-repeat: no-repeat;
+  background-color: #f1efed;
+  padding: 15px 13px 15px 46px;
+}
+/* line 25, ../sass/sections/_comments.scss */
+#comments .comment.even {
+  background-color: transparent;
+}
+/* line 26, ../sass/sections/_comments.scss */
+#comments .comment .submitted {
+  font-size: 0.84615em;
+  line-height: 1.65455em;
+  margin: 0;
+}
+/* line 30, ../sass/sections/_comments.scss */
+#comments .comment .field-name-comment-body p:last-child {
+  margin-bottom: 0;
+}
+/* line 35, ../sass/sections/_comments.scss */
+#comments .form-submit {
+  margin: 0.7em 0.7em 0 0;
+}
+
 /* line 1, ../sass/sections/_footer.scss */
 footer .block {
   margin: 0;
@@ -2547,14 +2604,6 @@ footer .block {
   width: auto;
 }
 /* line 13, ../sass/sections/_page-user.scss */
-.page-user #main form .form-submit {
-  background: #c53100;
-  color: white;
-  -webkit-box-shadow: 0 4px 4px -2px #cccccc;
-  -moz-box-shadow: 0 4px 4px -2px #cccccc;
-  box-shadow: 0 4px 4px -2px #cccccc;
-}
-/* line 18, ../sass/sections/_page-user.scss */
 .page-user #main form .form-type-password {
   margin-bottom: 0.7em;
 }
