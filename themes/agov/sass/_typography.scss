@@ -1,7 +1,7 @@
 /* Links */
 
 a {
-  @include link-colors($red, $red, $red, $red);
+  @include link-colors($red, black, $red, $red);
 }
 
 a:hover {
