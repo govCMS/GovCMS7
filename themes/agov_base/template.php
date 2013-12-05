@@ -45,6 +45,10 @@ function agov_base_preprocess_html(&$vars) {
     'dir' => $vars['language']->dir,
   );
 
+  // Use IE edge mode for better cross-browser compatibility.
+  if (is_null(drupal_get_http_header('X-UA-Compatible'))) {
+    drupal_add_http_header('X-UA-Compatible', 'IE=edge,chrome=1');
+  }
 }
 
 /**

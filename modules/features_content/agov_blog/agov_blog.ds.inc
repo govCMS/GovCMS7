@@ -72,6 +72,11 @@ function agov_blog_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
+    'comments' => array(
+      'weight' => '5',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'post_date' => array(
       'weight' => '0',
       'label' => 'hidden',
@@ -181,8 +186,6 @@ function agov_blog_ds_layout_settings_info() {
   $ds_layout->view_mode = 'full';
   $ds_layout->layout = 'ds_1col';
   $ds_layout->settings = array(
-    'hide_empty_regions' => 0,
-    'hide_sidebars' => 0,
     'regions' => array(
       'ds_content' => array(
         0 => 'post_date',
@@ -190,6 +193,7 @@ function agov_blog_ds_layout_settings_info() {
         2 => 'summary',
         3 => 'body',
         4 => 'field_tags',
+        5 => 'comments',
       ),
     ),
     'fields' => array(
@@ -198,8 +202,15 @@ function agov_blog_ds_layout_settings_info() {
       'summary' => 'ds_content',
       'body' => 'ds_content',
       'field_tags' => 'ds_content',
+      'comments' => 'ds_content',
     ),
     'classes' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
   );
   $export['node|blog_article|full'] = $ds_layout;
 

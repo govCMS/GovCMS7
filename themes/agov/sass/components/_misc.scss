@@ -276,7 +276,7 @@ span.field-label {
  */
 
 /* Block wrapper. */
-#page .block {
+#main .block, .region-highlighted .block, .sidebar .block {
   margin-bottom: rhythm(1);
 }
 

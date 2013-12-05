@@ -1394,7 +1394,7 @@ span.field-label {
  */
 /* Block wrapper. */
 /* line 279, ../sass/components/_misc.scss */
-#page .block {
+#main .block, .region-highlighted .block, .sidebar .block {
   margin-bottom: 1.4em;
 }
 
@@ -2036,12 +2036,17 @@ body {
   line-height: 1.51667em;
 }
 
-/* line 3, ../sass/sections/_footer.scss */
+/* line 1, ../sass/sections/_footer.scss */
+footer .block {
+  margin: 0;
+}
+
+/* line 6, ../sass/sections/_footer.scss */
 .region-footer .block-menu .menu a {
   padding: 5px;
 }
 
-/* line 13, ../sass/sections/_footer.scss */
+/* line 16, ../sass/sections/_footer.scss */
 .view-footer-teaser {
   margin: -10px;
   padding: 10px;
@@ -2053,6 +2058,10 @@ body {
   clear: both;
 }
 
+/* line 22, ../sass/sections/_footer.scss */
+.view-footer-teaser {
+  padding-bottom: 1.4em;
+}
 @media (min-width: 720px) {
   /* line 46, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
   .view-footer-teaser:before, .view-footer-teaser:after {
@@ -2063,7 +2072,7 @@ body {
   .view-footer-teaser:after {
     clear: both;
   }
-  /* line 23, ../sass/sections/_footer.scss */
+  /* line 27, ../sass/sections/_footer.scss */
   .view-footer-teaser .views-row-1 {
     clear: left;
     float: left;
@@ -2077,8 +2086,9 @@ body {
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     word-wrap: break-word;
+    padding-left: 0px;
   }
-  /* line 24, ../sass/sections/_footer.scss */
+  /* line 28, ../sass/sections/_footer.scss */
   .view-footer-teaser .views-row-2 {
     float: left;
     width: 33.33333%;
@@ -2092,7 +2102,7 @@ body {
     box-sizing: border-box;
     word-wrap: break-word;
   }
-  /* line 25, ../sass/sections/_footer.scss */
+  /* line 29, ../sass/sections/_footer.scss */
   .view-footer-teaser .views-row-3 {
     float: left;
     width: 33.33333%;
@@ -2105,6 +2115,7 @@ body {
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     word-wrap: break-word;
+    padding-right: 0px;
   }
 }
 /* line 46, ../sass-extensions/zen-grids/stylesheets/zen/_grids.scss */
@@ -2116,7 +2127,7 @@ body {
 .lt-ie9 .view-footer-teaser:after {
   clear: both;
 }
-/* line 23, ../sass/sections/_footer.scss */
+/* line 27, ../sass/sections/_footer.scss */
 .lt-ie9 .view-footer-teaser .views-row-1 {
   clear: left;
   float: left;
@@ -2130,8 +2141,9 @@ body {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   word-wrap: break-word;
+  padding-left: 0px;
 }
-/* line 24, ../sass/sections/_footer.scss */
+/* line 28, ../sass/sections/_footer.scss */
 .lt-ie9 .view-footer-teaser .views-row-2 {
   float: left;
   width: 33.33333%;
@@ -2145,7 +2157,7 @@ body {
   box-sizing: border-box;
   word-wrap: break-word;
 }
-/* line 25, ../sass/sections/_footer.scss */
+/* line 29, ../sass/sections/_footer.scss */
 .lt-ie9 .view-footer-teaser .views-row-3 {
   float: left;
   width: 33.33333%;
@@ -2158,33 +2170,34 @@ body {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   word-wrap: break-word;
+  padding-right: 0px;
 }
 
-/* line 30, ../sass/sections/_footer.scss */
+/* line 34, ../sass/sections/_footer.scss */
 .view-footer-teaser {
   background: #F3F3F3;
 }
-/* line 32, ../sass/sections/_footer.scss */
+/* line 36, ../sass/sections/_footer.scss */
 .view-footer-teaser p {
   margin: 0;
 }
-/* line 33, ../sass/sections/_footer.scss */
+/* line 37, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-row {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-/* line 35, ../sass/sections/_footer.scss */
+/* line 39, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-field-title {
   padding-top: 10px;
   border-top: solid 3px #CCCCCC;
 }
-/* line 38, ../sass/sections/_footer.scss */
+/* line 42, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-field-title h2 {
   font-size: 1.23077em;
   line-height: 2.275em;
   line-height: 1.4em;
 }
-/* line 42, ../sass/sections/_footer.scss */
+/* line 46, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-field-title a {
   text-decoration: none;
   color: #222222;
@@ -2194,20 +2207,72 @@ body {
   text-decoration: underline;
 }
 
-/* line 51, ../sass/sections/_footer.scss */
+/* line 55, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-row {
   position: relative;
   min-height: 90px;
 }
-/* line 54, ../sass/sections/_footer.scss */
+/* line 58, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-row .views-field-title, .view-footer-teaser .views-row .views-field-field-description {
-  padding-right: 75px;
+  padding-right: 85px;
 }
-/* line 55, ../sass/sections/_footer.scss */
+/* line 59, ../sass/sections/_footer.scss */
 .view-footer-teaser .views-row .views-field-field-image {
   position: absolute;
   top: 20px;
   right: 10px;
+}
+
+/* line 70, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer {
+  overflow: hidden;
+  margin: 0 -10px;
+  padding: 15px;
+  background: #006893;
+}
+/* line 75, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer a {
+  color: white;
+}
+/* line 77, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 79, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul > li {
+  float: left;
+  padding: 0 15px 15px 0;
+  position: relative;
+  font-weight: bold;
+}
+@media (min-width: 720px) {
+  /* line 79, ../sass/sections/_footer.scss */
+  #block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul > li {
+    width: 16%;
+  }
+}
+/* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
+.lt-ie9 #block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul > li {
+  width: 16%;
+}
+/* line 85, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul > li.first {
+  display: none;
+}
+/* line 87, ../sass/sections/_footer.scss */
+#block-menu-block-agov-menu-block-footer .menu-block-wrapper > ul > li.is-expanded ul li {
+  display: block;
+  width: 100%;
+  font-size: 0.92308em;
+  line-height: 1.51667em;
+  font-weight: normal;
+}
+
+/* line 98, ../sass/sections/_footer.scss */
+#block-menu-menu-footer-sub-menu {
+  overflow: hidden;
+  padding: 10px 0 0;
 }
 
 /* line 1, ../sass/sections/_header.scss */

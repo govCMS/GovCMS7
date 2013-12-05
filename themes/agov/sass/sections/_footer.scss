@@ -1,3 +1,6 @@
+footer .block { margin: 0; }
+
+
 .region-footer .block-menu .menu {
   @extend %inlineLinks--bordered;
   a { padding: 5px; }
@@ -17,12 +20,13 @@
 }
 
 .view-footer-teaser {
+  padding-bottom: rhythm(1);
   @include bp-nq($medium) {
     $zen-column-count:  3;
     @include zen-grid-container();
-    .views-row-1 { @include zen-clear(); @include zen-grid-item(1, 1);}
+    .views-row-1 { @include zen-clear(); @include zen-grid-item(1, 1); padding-left: 0px; }
     .views-row-2 { @include zen-grid-item(1, 2);}
-    .views-row-3 { @include zen-grid-item(1, 3);}
+    .views-row-3 { @include zen-grid-item(1, 3); padding-right: 0px; }
   }
 }
 
@@ -51,10 +55,51 @@
 .view-footer-teaser .views-row {
   position: relative;
   min-height: 90px; // Avoid height not recognizing image.
-  .views-field-title, .views-field-field-description { padding-right: 75px; }
+  .views-field-title, .views-field-field-description { padding-right: 85px; }
   .views-field-field-image {
     position: absolute;
     top: 20px;
     right: 10px;
   }
 }
+
+
+
+// Main Menu Footer
+
+#block-menu-block-agov-menu-block-footer {
+  overflow: hidden;
+  margin: 0 -10px;
+  padding: 15px;
+  background: $blue;
+  a { color: white; }
+
+  .menu-block-wrapper > ul {
+    @include noSpace;
+    > li {
+      float: left;
+      padding: 0 15px 15px 0;
+      @include bp-nq($medium) { width: 16%; }
+      position: relative;
+      font-weight:bold;
+      &.first { display: none; } // Legacy removal of first LI
+      &.is-expanded ul {
+        li {
+          display: block;
+          width: 100%;
+          @include adjust-font-size-to(12px);
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}
+
+#block-menu-menu-footer-sub-menu {
+  overflow: hidden;
+  padding: 10px 0 0;
+}
+
+
+
+
