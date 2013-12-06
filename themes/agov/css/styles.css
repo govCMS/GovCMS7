@@ -1013,7 +1013,7 @@ img.img-float-left {
 
 /* line 2, ../sass/components/_links.scss */
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
-  background: url('../images/block-li-bg.png?1383871531') no-repeat scroll left center;
+  background: url('../images/block-li-bg.png?1386287931') no-repeat scroll left center;
   display: block;
   text-indent: 15px;
   padding-bottom: 2px;
@@ -1732,7 +1732,7 @@ tr.selected td {
 /* line 585, ../sass/components/_misc.scss */
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1376896851');
+  background-image: url('../images/progress.gif?1386287931');
 }
 
 /**
@@ -1881,7 +1881,7 @@ tr.selected td {
   overflow: hidden;
   text-indent: -100px;
   padding: 5px 14px;
-  background: url('../images/featured-articles-pause.png?1383871531') no-repeat 0px -27px;
+  background: url('../images/featured-articles-pause.png?1386287931') no-repeat 0px -27px;
 }
 /* line 62, ../sass/components/_slideshow.scss */
 .rslides_tabs li a.pause.paused {
@@ -1974,7 +1974,7 @@ th a, th img {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-image: url('../images/font-resize-bg.png?1383871531');
+  background-image: url('../images/font-resize-bg.png?1386287931');
   background-repeat: no-repeat;
 }
 /* line 11, ../sass/components/_text-resize.scss */
@@ -2054,41 +2054,80 @@ body {
   margin-bottom: 20px;
 }
 /* line 9, ../sass/sections/_comments.scss */
+#comments h2 {
+  margin-top: 0.7em;
+}
+/* line 13, ../sass/sections/_comments.scss */
 #comments #comment-wrapper-header {
   padding-top: 10px;
 }
-/* line 11, ../sass/sections/_comments.scss */
+/* line 15, ../sass/sections/_comments.scss */
 #comments #comment-wrapper-header .add-new-link a {
   font-weight: bold;
 }
-/* line 14, ../sass/sections/_comments.scss */
+/* line 18, ../sass/sections/_comments.scss */
 #comments #comment-wrapper-header h2 {
   padding-top: 0;
   border-top: none;
 }
-/* line 19, ../sass/sections/_comments.scss */
+/* line 23, ../sass/sections/_comments.scss */
 #comments .comment {
-  background-image: url('../images/comment-icon.png?1383871531');
+  background-image: url('../images/comment-icon.png?1386287931');
   background-position: 13px 15px;
   background-repeat: no-repeat;
   background-color: #f1efed;
   padding: 15px 13px 15px 46px;
 }
-/* line 25, ../sass/sections/_comments.scss */
+/* line 29, ../sass/sections/_comments.scss */
+#comments .comment a {
+  text-decoration: none;
+}
+/* line 30, ../sass/sections/_comments.scss */
+#comments .comment .links a {
+  font-style: italic;
+}
+/* line 31, ../sass/sections/_comments.scss */
 #comments .comment.even {
   background-color: transparent;
 }
-/* line 26, ../sass/sections/_comments.scss */
+/* line 32, ../sass/sections/_comments.scss */
 #comments .comment .submitted {
   font-size: 0.84615em;
   line-height: 1.65455em;
   margin: 0;
 }
-/* line 30, ../sass/sections/_comments.scss */
+/* line 36, ../sass/sections/_comments.scss */
+#comments .comment h3 {
+  margin-bottom: 0;
+  line-height: 1.4em;
+}
+/* line 41, ../sass/sections/_comments.scss */
+#comments .comment .field-name-comment-body p:first-child {
+  margin-top: 0;
+}
+/* line 44, ../sass/sections/_comments.scss */
 #comments .comment .field-name-comment-body p:last-child {
   margin-bottom: 0;
 }
-/* line 35, ../sass/sections/_comments.scss */
+/* line 50, ../sass/sections/_comments.scss */
+#comments .form-item:first-child {
+  margin: 0px;
+}
+/* line 52, ../sass/sections/_comments.scss */
+#comments .form-text {
+  width: 100%;
+}
+@media (min-width: 720px) {
+  /* line 52, ../sass/sections/_comments.scss */
+  #comments .form-text {
+    width: auto;
+  }
+}
+/* line 133, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/breakpoint-2.0.6/stylesheets/_breakpoint.scss */
+.lt-ie9 #comments .form-text {
+  width: auto;
+}
+/* line 57, ../sass/sections/_comments.scss */
 #comments .form-submit {
   margin: 0.7em 0.7em 0 0;
 }
@@ -2427,7 +2466,7 @@ footer .block {
   position: absolute;
   right: 0px;
   text-indent: -100px;
-  background: url('../images/search-btn-mobile.png?1383871531') 50% 50% no-repeat;
+  background: url('../images/search-btn-mobile.png?1386287931') 50% 50% no-repeat;
   background-color: #1b1b1b;
   width: 32px;
   color: #FFF;
