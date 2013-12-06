@@ -120,7 +120,7 @@ function agov_editing_wysiwyg_default_profiles() {
       'paste_auto_cleanup_on_paste' => 1,
       'block_formats' => 'p,h2,h3,h4,h5,h6',
       'css_setting' => 'self',
-      'css_path' => '%bprofiles/agov/modules/features_default/agov_editing/agov_editing.tinymce.css',
+      'css_path' => '%bprofiles/agov/themes/agov/css/wysiwyg.css',
       'css_classes' => 'Image: Inline Right=img-float-right
 Image: Inline Left=img-float-left',
     ),

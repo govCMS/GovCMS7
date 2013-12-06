@@ -46,7 +46,6 @@
   font-style: normal;
 }
 
-/* Color Pallet for SCSS */
 /* HTML element (SMACSS base) rules */
 /* normalize.css v2.1.0 | MIT License | git.io/normalize */
 /* normalize.scss v2.1.0 | MIT/GPLv2 License | bit.ly/normalize-with-compass */
@@ -727,8 +726,16 @@ table {
 }
 
 /* Typographic rules */
+/* Headings */
+/* line 2, ../sass/_typography.scss */
+h1, h2, h3, h4, h5 {
+  font-family: "OpenSansSemibold", Arial, sans-serif;
+  font-weight: normal;
+  color: #006893;
+}
+
 /* Links */
-/* line 3, ../sass/_typography.scss */
+/* line 9, ../sass/_typography.scss */
 a {
   color: #c53100;
 }
@@ -745,20 +752,15 @@ a:active {
   color: #c53100;
 }
 
-/* line 7, ../sass/_typography.scss */
+/* line 13, ../sass/_typography.scss */
 a:hover {
   text-decoration: none;
 }
 
-/* Headings */
-/* line 12, ../sass/_typography.scss */
-h1, h2, h3, h4, h5 {
-  font-family: "OpenSansSemibold", Arial, sans-serif;
-  font-weight: normal;
-  color: #006893;
-}
-
-/* line 18, ../sass/_typography.scss */
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+/* line 21, ../sass/_typography.scss */
 h1 {
   font-size: 2.4em;
   line-height: 1.16667em;
@@ -766,7 +768,7 @@ h1 {
   margin-bottom: 0.29167em;
 }
 
-/* line 23, ../sass/_typography.scss */
+/* line 26, ../sass/_typography.scss */
 h2 {
   font-size: 1.68em;
   line-height: 1.66667em;
@@ -774,7 +776,7 @@ h2 {
   margin-bottom: 0.41667em;
 }
 
-/* line 29, ../sass/_typography.scss */
+/* line 32, ../sass/_typography.scss */
 h3 {
   font-size: 1.44em;
   line-height: 1.94444em;
@@ -782,7 +784,7 @@ h3 {
   margin-bottom: 0.48611em;
 }
 
-/* line 34, ../sass/_typography.scss */
+/* line 37, ../sass/_typography.scss */
 h4 {
   font-size: 1.2em;
   line-height: 2.33333em;
@@ -790,60 +792,31 @@ h4 {
   margin-bottom: 0.58333em;
 }
 
-/**
- * Titles.
- */
-/* line 47, ../sass/_typography.scss */
-.block__title,
-.comments__title,
-.comments__form-title,
-.comment__title {
-  /* Comment title. */
-  margin: 0;
-}
-
-/* Content List Styles */
-/* line 54, ../sass/_typography.scss */
-#region-content ol {
-  list-style-type: decimal;
-  margin-left: 20px;
-}
-/* line 59, ../sass/_typography.scss */
-#region-content ul {
-  list-style-type: square;
-  margin-left: 16px;
-}
-/* line 64, ../sass/_typography.scss */
-#region-content .no-bullets {
-  margin-left: 0;
-}
-/* line 66, ../sass/_typography.scss */
-#region-content .no-bullets li {
-  list-style: none;
-}
-/* line 71, ../sass/_typography.scss */
-#region-content .node ul.links {
-  margin-left: 0;
-  display: block;
-}
-
 /* line 77, ../sass/_typography.scss */
-ul.links li {
-  padding-left: 0;
+.field-name-body {
+  /* Content List Styles */
+  /* Display image inline to the right */
+  /* Display image inline to the left */
 }
-
-/* Display image inline to the right */
-/* line 83, ../sass/_typography.scss */
-p.img-float-right,
-img.img-float-right {
+/* line 51, ../sass/_typography.scss */
+.field-name-body ol {
+  list-style-type: decimal;
+  margin-left: 19px;
+}
+/* line 56, ../sass/_typography.scss */
+.field-name-body ul {
+  list-style-type: square;
+  margin-left: 15px;
+}
+/* line 63, ../sass/_typography.scss */
+.field-name-body p.img-float-right,
+.field-name-body img.img-float-right {
   float: right;
   margin: 5px 0 5px 5px;
 }
-
-/* Display image inline to the left */
-/* line 90, ../sass/_typography.scss */
-p.img-float-left,
-img.img-float-left {
+/* line 70, ../sass/_typography.scss */
+.field-name-body p.img-float-left,
+.field-name-body img.img-float-left {
   float: left;
   margin: 0 5px 5px 5px;
 }
@@ -1399,16 +1372,28 @@ span.field-label {
 }
 
 /**
+ * Titles.
+ */
+/* line 280, ../sass/components/_misc.scss */
+.block__title,
+.comments__title,
+.comments__form-title,
+.comment__title {
+  /* Comment title. */
+  margin: 0;
+}
+
+/**
  * Blocks.
  */
 /* Block wrapper. */
-/* line 279, ../sass/components/_misc.scss */
+/* line 290, ../sass/components/_misc.scss */
 #main .block, .region-highlighted .block, .sidebar .block {
   margin-bottom: 1.4em;
 }
 
 /* The active item in a Drupal menu. */
-/* line 284, ../sass/components/_misc.scss */
+/* line 295, ../sass/components/_misc.scss */
 .menu a.active {
   color: #000;
 }
@@ -1417,7 +1402,7 @@ span.field-label {
  * Marker.
  */
 /* The "new" or "updated" marker. */
-/* line 294, ../sass/components/_misc.scss */
+/* line 305, ../sass/components/_misc.scss */
 .new,
 .update {
   color: #c00;
@@ -1429,7 +1414,7 @@ span.field-label {
  * Unpublished note.
  */
 /* The word "Unpublished" displayed underneath the content. */
-/* line 305, ../sass/components/_misc.scss */
+/* line 316, ../sass/components/_misc.scss */
 .unpublished {
   height: 0;
   overflow: visible;
@@ -1450,31 +1435,31 @@ span.field-label {
  * Comments.
  */
 /* Wrapper for the list of comments and its title. */
-/* line 333, ../sass/components/_misc.scss */
+/* line 344, ../sass/components/_misc.scss */
 .comments {
   margin: 1.4em 0;
 }
 
 /* Preview of the comment before submitting new or updated comment. */
-/* line 338, ../sass/components/_misc.scss */
+/* line 349, ../sass/components/_misc.scss */
 .comment-preview {
   /* Drupal core will use a #ffffea background. See #1110842. */
   background-color: #ffffea;
 }
 
 /* Wrapper for a single comment. */
-/* line 344, ../sass/components/_misc.scss */
+/* line 355, ../sass/components/_misc.scss */
 .comment {
   /* Comment's permalink wrapper. */
 }
-/* line 347, ../sass/components/_misc.scss */
+/* line 358, ../sass/components/_misc.scss */
 .comment .permalink {
   text-transform: uppercase;
   font-size: 75%;
 }
 
 /* Nested comments are indented. */
-/* line 354, ../sass/components/_misc.scss */
+/* line 365, ../sass/components/_misc.scss */
 .indented {
   /* Drupal core uses a 25px left margin. */
   margin-left: 30px;
@@ -1485,7 +1470,7 @@ span.field-label {
  * Forms.
  */
 /* Wrapper for a form element (or group of form elements) and its label. */
-/* line 364, ../sass/components/_misc.scss */
+/* line 375, ../sass/components/_misc.scss */
 .form-item {
   margin: 1.4em 0;
   /* Pack groups of checkboxes and radio buttons closer together. */
@@ -1493,47 +1478,47 @@ span.field-label {
   /* Highlight the form elements that caused a form submission error. */
   /* The descriptive help text (separate from the label). */
 }
-/* line 369, ../sass/components/_misc.scss */
+/* line 380, ../sass/components/_misc.scss */
 .form-checkboxes .form-item, .form-radios .form-item {
   /* Drupal core uses "0.4em 0". */
   margin: 0;
 }
-/* line 376, ../sass/components/_misc.scss */
+/* line 387, ../sass/components/_misc.scss */
 tr.odd .form-item, tr.even .form-item {
   margin: 0;
 }
-/* line 383, ../sass/components/_misc.scss */
+/* line 394, ../sass/components/_misc.scss */
 .form-item input.error,
 .form-item textarea.error,
 .form-item select.error {
   border: 1px solid #c00;
 }
-/* line 388, ../sass/components/_misc.scss */
+/* line 399, ../sass/components/_misc.scss */
 .form-item .description {
   font-size: 0.85em;
 }
 
-/* line 395, ../sass/components/_misc.scss */
+/* line 406, ../sass/components/_misc.scss */
 .form-type-radio .description,
 .form-type-checkbox .description {
   margin-left: 2.4em;
 }
 
 /* The part of the label that indicates a required field. */
-/* line 401, ../sass/components/_misc.scss */
+/* line 412, ../sass/components/_misc.scss */
 .form-required {
   color: #c00;
 }
 
 /* Labels for radios and checkboxes. */
-/* line 406, ../sass/components/_misc.scss */
+/* line 417, ../sass/components/_misc.scss */
 label.option {
   display: inline;
   font-weight: normal;
 }
 
 /* Buttons used by contrib modules like Media. */
-/* line 412, ../sass/components/_misc.scss */
+/* line 423, ../sass/components/_misc.scss */
 a.button {
   -webkit-appearance: button;
   -moz-appearance: button;
@@ -1541,14 +1526,14 @@ a.button {
 }
 
 /* Password confirmation. */
-/* line 418, ../sass/components/_misc.scss */
+/* line 429, ../sass/components/_misc.scss */
 .password-parent,
 .confirm-parent {
   margin: 0;
 }
 
 /* Drupal's default login form block. */
-/* line 423, ../sass/components/_misc.scss */
+/* line 434, ../sass/components/_misc.scss */
 #user-login-form {
   text-align: left;
   /* LTR */
@@ -1561,20 +1546,20 @@ a.button {
  * styling of list items.
  */
 /* OpenID creates a new ul above the login form's links. */
-/* line 435, ../sass/components/_misc.scss */
+/* line 446, ../sass/components/_misc.scss */
 .openid-links {
   /* Position OpenID's ul next to the rest of the links. */
   margin-bottom: 0;
 }
 
 /* The "Log in using OpenID" and "Cancel OpenID login" links. */
-/* line 442, ../sass/components/_misc.scss */
+/* line 453, ../sass/components/_misc.scss */
 .openid-link,
 .user-link {
   margin-top: 1.4em;
 }
 
-/* line 446, ../sass/components/_misc.scss */
+/* line 457, ../sass/components/_misc.scss */
 html.js #user-login-form li.openid-link,
 #user-login-form li.openid-link {
   /* Un-do some of the padding on the ul list. */
@@ -1582,7 +1567,7 @@ html.js #user-login-form li.openid-link,
   /* LTR */
 }
 
-/* line 450, ../sass/components/_misc.scss */
+/* line 461, ../sass/components/_misc.scss */
 #user-login ul {
   margin: 1.4em 0;
 }
@@ -1590,7 +1575,7 @@ html.js #user-login-form li.openid-link,
 /**
  * Drupal admin tables.
  */
-/* line 458, ../sass/components/_misc.scss */
+/* line 469, ../sass/components/_misc.scss */
 form th {
   text-align: left;
   /* LTR */
@@ -1598,16 +1583,16 @@ form th {
   /* LTR */
   border-bottom: 3px solid #ccc;
 }
-/* line 463, ../sass/components/_misc.scss */
+/* line 474, ../sass/components/_misc.scss */
 form tbody {
   border-top: 1px solid #ccc;
 }
-/* line 466, ../sass/components/_misc.scss */
+/* line 477, ../sass/components/_misc.scss */
 form table ul {
   margin: 0;
 }
 
-/* line 471, ../sass/components/_misc.scss */
+/* line 482, ../sass/components/_misc.scss */
 tr.even,
 tr.odd {
   background-color: #eee;
@@ -1615,26 +1600,26 @@ tr.odd {
   padding: 0.1em 0.6em;
 }
 
-/* line 476, ../sass/components/_misc.scss */
+/* line 487, ../sass/components/_misc.scss */
 tr.even {
   background-color: #fff;
 }
 
 /* Markup generated by theme_tablesort_indicator(). */
-/* line 491, ../sass/components/_misc.scss */
+/* line 502, ../sass/components/_misc.scss */
 td.active {
   background-color: #ddd;
 }
 
 /* Center checkboxes inside table cell. */
-/* line 497, ../sass/components/_misc.scss */
+/* line 508, ../sass/components/_misc.scss */
 td.checkbox,
 th.checkbox {
   text-align: center;
 }
 
 /* Drupal core wrongly puts this in system.menus.css. Since we override that, add it back. */
-/* line 502, ../sass/components/_misc.scss */
+/* line 513, ../sass/components/_misc.scss */
 td.menu-disabled {
   background: #ccc;
 }
@@ -1645,7 +1630,7 @@ td.menu-disabled {
  * @see autocomplete.js
  */
 /* Suggestion list. */
-/* line 513, ../sass/components/_misc.scss */
+/* line 524, ../sass/components/_misc.scss */
 #autocomplete .selected {
   background: #0072b9;
   color: #fff;
@@ -1656,7 +1641,7 @@ td.menu-disabled {
  *
  * @see collapse.js
  */
-/* line 524, ../sass/components/_misc.scss */
+/* line 535, ../sass/components/_misc.scss */
 html.js .collapsible .fieldset-legend {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABJJREFUeJxj+MdQw2DBIMAABgAUsAHD3c3BpwAAAABJRU5ErkJggg==');
   background-position: 5px 65%;
@@ -1665,14 +1650,14 @@ html.js .collapsible .fieldset-legend {
   padding-left: 15px;
   /* LTR */
 }
-/* line 533, ../sass/components/_misc.scss */
+/* line 544, ../sass/components/_misc.scss */
 html.js .collapsed .fieldset-legend {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABFJREFUCB1jVmCGQClmEWYOAAZ8AMy3HPLXAAAAAElFTkSuQmCC');
   /* LTR */
   background-position: 5px 50%;
   /* LTR */
 }
-/* line 540, ../sass/components/_misc.scss */
+/* line 551, ../sass/components/_misc.scss */
 .fieldset-legend .summary {
   color: #999;
   font-size: 0.9em;
@@ -1684,17 +1669,17 @@ html.js .collapsed .fieldset-legend {
  *
  * @see tabledrag.js
  */
-/* line 552, ../sass/components/_misc.scss */
+/* line 563, ../sass/components/_misc.scss */
 tr.drag {
   background-color: #fffff0;
 }
 
-/* line 555, ../sass/components/_misc.scss */
+/* line 566, ../sass/components/_misc.scss */
 tr.drag-previous {
   background-color: #ffd;
 }
 
-/* line 558, ../sass/components/_misc.scss */
+/* line 569, ../sass/components/_misc.scss */
 .tabledrag-toggle-weight {
   font-size: 0.9em;
 }
@@ -1704,7 +1689,7 @@ tr.drag-previous {
  *
  * @see tableselect.js
  */
-/* line 567, ../sass/components/_misc.scss */
+/* line 578, ../sass/components/_misc.scss */
 tr.selected td {
   background: #ffc;
 }
@@ -1714,11 +1699,11 @@ tr.selected td {
  *
  * @see progress.js
  */
-/* line 576, ../sass/components/_misc.scss */
+/* line 587, ../sass/components/_misc.scss */
 .progress {
   font-weight: bold;
 }
-/* line 579, ../sass/components/_misc.scss */
+/* line 590, ../sass/components/_misc.scss */
 .progress .bar {
   background: #ccc;
   border-color: #666;
@@ -1729,7 +1714,7 @@ tr.selected td {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 585, ../sass/components/_misc.scss */
+/* line 596, ../sass/components/_misc.scss */
 .progress .filled {
   background-color: #0072b9;
   background-image: url('../images/progress.gif?1386287931');
@@ -2101,24 +2086,28 @@ body {
   margin-bottom: 0;
   line-height: 1.4em;
 }
-/* line 41, ../sass/sections/_comments.scss */
+/* line 39, ../sass/sections/_comments.scss */
+#comments .comment h3 a.permalink {
+  text-transform: none;
+}
+/* line 42, ../sass/sections/_comments.scss */
 #comments .comment .field-name-comment-body p:first-child {
   margin-top: 0;
 }
-/* line 44, ../sass/sections/_comments.scss */
+/* line 45, ../sass/sections/_comments.scss */
 #comments .comment .field-name-comment-body p:last-child {
   margin-bottom: 0;
 }
-/* line 50, ../sass/sections/_comments.scss */
+/* line 51, ../sass/sections/_comments.scss */
 #comments .form-item:first-child {
   margin: 0px;
 }
-/* line 52, ../sass/sections/_comments.scss */
+/* line 53, ../sass/sections/_comments.scss */
 #comments .form-text {
   width: 100%;
 }
 @media (min-width: 720px) {
-  /* line 52, ../sass/sections/_comments.scss */
+  /* line 53, ../sass/sections/_comments.scss */
   #comments .form-text {
     width: auto;
   }
@@ -2127,7 +2116,7 @@ body {
 .lt-ie9 #comments .form-text {
   width: auto;
 }
-/* line 57, ../sass/sections/_comments.scss */
+/* line 58, ../sass/sections/_comments.scss */
 #comments .form-submit {
   margin: 0.7em 0.7em 0 0;
 }

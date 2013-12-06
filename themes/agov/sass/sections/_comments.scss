@@ -36,6 +36,7 @@
     h3 {
       margin-bottom: 0;
       @include reset-baseline;
+      a.permalink { text-transform: none; } // overirride system styles
     }
     .field-name-comment-body p {
       &:first-child {

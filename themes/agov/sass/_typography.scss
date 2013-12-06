@@ -1,5 +1,11 @@
-/* Links */
+/* Headings */
+%headings {
+  font-family: $header-font-family;
+  font-weight: normal;
+  color: $blue;
+}
 
+/* Links */
 a {
   @include link-colors($red, black, $red, $red);
 }
@@ -8,12 +14,9 @@ a:hover {
   text-decoration: none;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5 {
-  font-family: $header-font-family;
-  font-weight: normal;
-  color: $blue;
-}
+/* ==========================================================================
+   Headings
+   ========================================================================== */
 
 h1 {
   @include adjust-font-size-to( $h1-font-size );
@@ -37,57 +40,40 @@ h4 {
   @include trailer(.5, $h4-font-size);
 }
 
-/**
- * Titles.
- */
-
-.block__title,         /* Block title. */
-.comments__title,      /* Comment section heading. */
-.comments__form-title, /* Comment form heading. */
-.comment__title {      /* Comment title. */
-  margin: 0;
+// Decalare heading styles globally.
+h1, h2, h3, h4, h5 {
+  @extend %headings;
 }
 
-
-/* Content List Styles */
-#region-content {
+// Mixin to include body styles into wysiwyg but only inside body fields in default theme.
+@mixin body-text-syles {
+  /* Content List Styles */
   ol {
     list-style-type: decimal;
-    margin-left: 20px;
+    margin-left: 19px;
   }
 
   ul {
     list-style-type: square;
-    margin-left: 16px;
+    margin-left: 15px;
   }
 
-  .no-bullets {
-    margin-left: 0;
-    li {
-      list-style: none;
-    }
+  /* Display image inline to the right */
+  p.img-float-right,
+  img.img-float-right {
+    float: right;
+    margin: 5px 0 5px 5px;
   }
 
-  .node ul.links {
-    margin-left: 0;
-    display: block;
+  /* Display image inline to the left */
+  p.img-float-left,
+  img.img-float-left {
+    float: left;
+    margin: 0 5px 5px 5px;
   }
 }
 
-ul.links li {
-  padding-left: 0;
-}
-
-/* Display image inline to the right */
-p.img-float-right,
-img.img-float-right {
-  float: right;
-  margin: 5px 0 5px 5px;
-}
-
-/* Display image inline to the left */
-p.img-float-left,
-img.img-float-left {
-  float: left;
-  margin: 0 5px 5px 5px;
+// On default theme only implement these styles inside field-name-body.
+.field-name-body {
+  @include body-text-syles;
 }

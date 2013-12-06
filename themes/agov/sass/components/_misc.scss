@@ -270,6 +270,17 @@ span.field-label {
   padding: 1px 0 1px 20px; /* LTR */
 }
 
+/**
+ * Titles.
+ */
+
+.block__title,         /* Block title. */
+.comments__title,      /* Comment section heading. */
+.comments__form-title, /* Comment form heading. */
+.comment__title {      /* Comment title. */
+  margin: 0;
+}
+
 
 /**
  * Blocks.
