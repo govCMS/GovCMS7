@@ -2699,21 +2699,56 @@ a.tabledrag-handle .handle {
 }
 
 /* line 2, ../sass/sections/_slideshow.scss */
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* line 11, ../sass/sections/_slideshow.scss */
+.rslides li {
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+/* line 19, ../sass/sections/_slideshow.scss */
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+/* line 25, ../sass/sections/_slideshow.scss */
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+}
+
+/* line 35, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block {
   position: relative;
   overflow: hidden;
   background: #f1efed;
 }
-/* line 7, ../sass/sections/_slideshow.scss */
+/* line 40, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .rslides {
   margin: 0px;
 }
-/* line 8, ../sass/sections/_slideshow.scss */
+/* line 41, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .group-left, #block-views-slideshow-block .group-right {
   width: 100%;
 }
 @media (min-width: 980px) {
-  /* line 11, ../sass/sections/_slideshow.scss */
+  /* line 44, ../sass/sections/_slideshow.scss */
   #block-views-slideshow-block .group-left {
     width: inherit;
   }
@@ -2722,12 +2757,12 @@ a.tabledrag-handle .handle {
 .lt-ie9 #block-views-slideshow-block .group-left {
   width: inherit;
 }
-/* line 14, ../sass/sections/_slideshow.scss */
+/* line 47, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .group-right {
   padding: 15px;
 }
 @media (min-width: 980px) {
-  /* line 14, ../sass/sections/_slideshow.scss */
+  /* line 47, ../sass/sections/_slideshow.scss */
   #block-views-slideshow-block .group-right {
     width: 30%;
   }
@@ -2736,21 +2771,21 @@ a.tabledrag-handle .handle {
 .lt-ie9 #block-views-slideshow-block .group-right {
   width: 30%;
 }
-/* line 18, ../sass/sections/_slideshow.scss */
+/* line 51, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .views-row {
   width: 100%;
 }
 
-/* line 24, ../sass/sections/_slideshow.scss */
+/* line 57, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image {
   position: relative;
 }
-/* line 25, ../sass/sections/_slideshow.scss */
+/* line 58, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .field-name-field-slide-image img {
   width: 100%;
 }
 @media (min-width: 980px) {
-  /* line 25, ../sass/sections/_slideshow.scss */
+  /* line 58, ../sass/sections/_slideshow.scss */
   #block-views-slideshow-block .field-name-field-slide-image img {
     width: auto;
   }
@@ -2759,45 +2794,45 @@ a.tabledrag-handle .handle {
 .lt-ie9 #block-views-slideshow-block .field-name-field-slide-image img {
   width: auto;
 }
-/* line 31, ../sass/sections/_slideshow.scss */
+/* line 64, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .field-name-title h2 {
   margin: 0;
   padding: 0;
 }
-/* line 35, ../sass/sections/_slideshow.scss */
+/* line 68, ../sass/sections/_slideshow.scss */
 #block-views-slideshow-block .field-name-body p {
   margin: 0.7em 0;
 }
 
-/* line 40, ../sass/sections/_slideshow.scss */
+/* line 73, ../sass/sections/_slideshow.scss */
 .rslides_tabs {
   position: absolute;
   left: 0px;
   top: 0px;
   margin: 15px;
 }
-/* line 45, ../sass/sections/_slideshow.scss */
+/* line 78, ../sass/sections/_slideshow.scss */
 .rslides_tabs li {
   float: left;
   margin-right: 2px;
   background: rgba(255, 255, 255, 0.9);
 }
-/* line 49, ../sass/sections/_slideshow.scss */
+/* line 82, ../sass/sections/_slideshow.scss */
 .rslides_tabs li.rslides_here {
   background: black;
 }
-/* line 51, ../sass/sections/_slideshow.scss */
+/* line 84, ../sass/sections/_slideshow.scss */
 .rslides_tabs li.rslides_here a {
   color: white;
 }
-/* line 53, ../sass/sections/_slideshow.scss */
+/* line 86, ../sass/sections/_slideshow.scss */
 .rslides_tabs li a {
   display: block;
   padding: 5px 10px;
   text-decoration: none;
   font-weight: bold;
 }
-/* line 58, ../sass/sections/_slideshow.scss */
+/* line 91, ../sass/sections/_slideshow.scss */
 .rslides_tabs li a.pause {
   text-indent: 110%;
   white-space: nowrap;
@@ -2806,12 +2841,12 @@ a.tabledrag-handle .handle {
   padding: 5px 14px;
   background: url('../images/featured-articles-pause.png?1386287931') no-repeat 0px -27px;
 }
-/* line 63, ../sass/sections/_slideshow.scss */
+/* line 96, ../sass/sections/_slideshow.scss */
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
   background-color: black;
 }
-/* line 67, ../sass/sections/_slideshow.scss */
+/* line 100, ../sass/sections/_slideshow.scss */
 .rslides_tabs li a.pause.playing {
   background-position: 0px -27px;
 }

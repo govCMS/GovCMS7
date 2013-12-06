@@ -71,6 +71,7 @@ scripts[] = js/tinynav.min.js
 scripts[] = js/script.js
 scripts[] = js/superfish.js
 scripts[] = js/hoverIntent.js
+scripts[] = js/responsiveslides.js
 
 
 ; This section lists the regions defined in Zen's default page.tpl.php and
