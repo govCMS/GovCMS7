@@ -15,6 +15,7 @@
     padding: 15px;
     @include bp-nq($large) { width: 30%; }
   }
+  .views-row { width: 100%; }
 }
 
 // Theme

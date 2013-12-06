@@ -71,7 +71,7 @@
     ?>
 
     <?php if ($sidebar_first || $sidebar_second): ?>
-      <aside class="sidebars">
+      <aside class="sidebars" role="complementary">
         <?php print $sidebar_first; ?>
         <?php print $sidebar_second; ?>
       </aside>

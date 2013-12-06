@@ -20,3 +20,12 @@
     &:first-child:before { content: "";}
   }
 }
+
+.field-type-file {
+  img, a { display: inline-block; }
+}
+
+// Publications
+.field-name-field-subtitle { font-weight: bold; }
+
+.field-name-field-date.field-label-inline .field-label { width: auto; }

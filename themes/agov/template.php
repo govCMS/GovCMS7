@@ -31,3 +31,14 @@ function agov_form_alter(&$form, &$form_state, $form_id) {
 function agov_preprocess_page(&$variables, $hook) {
   unset($variables['breadcrumb']);
 }
+
+
+/**
+ * Implements hook_preprocess_maintenance_page().
+ */
+function agov_preprocess_maintenance_page(&$variables) {
+  $variables['footer'] = t('!aGov is developed by !PreviousNext', array(
+    '!aGov' => l(t('aGov'), 'http://agov.com.au'),
+    '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
+  ));
+}
