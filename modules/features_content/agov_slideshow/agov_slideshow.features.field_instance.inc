@@ -28,7 +28,7 @@ function agov_slideshow_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 1,
+        'weight' => 2,
       ),
       'feature' => array(
         'label' => 'hidden',
@@ -85,7 +85,7 @@ function agov_slideshow_field_default_field_instances() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'feature' => array(
         'label' => 'hidden',

@@ -47,12 +47,14 @@ function agov_slideshow_ds_layout_settings_info() {
         0 => 'field_slide_image',
       ),
       'right' => array(
-        1 => 'body',
-        2 => 'field_read_more',
+        1 => 'title',
+        2 => 'body',
+        3 => 'field_read_more',
       ),
     ),
     'fields' => array(
       'field_slide_image' => 'left',
+      'title' => 'right',
       'body' => 'right',
       'field_read_more' => 'right',
     ),
