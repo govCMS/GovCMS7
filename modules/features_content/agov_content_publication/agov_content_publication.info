@@ -19,10 +19,3 @@ features[content][] = agov_publication_7
 features[content][] = agov_publication_8
 features[content][] = agov_publication_9
 features[features_api][] = api:2
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-

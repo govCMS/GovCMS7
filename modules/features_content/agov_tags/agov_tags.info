@@ -12,10 +12,3 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[taxonomy][] = tags
 features[views_view][] = agov_taxonomy_term_page
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-

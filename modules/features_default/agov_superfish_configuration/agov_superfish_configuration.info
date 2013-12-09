@@ -52,10 +52,3 @@ features[variable][] = superfish_wraphlt_1
 features[variable][] = superfish_wrapmul_1
 features[variable][] = superfish_wrapul_1
 features[variable][] = superfish_zebra_1
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-

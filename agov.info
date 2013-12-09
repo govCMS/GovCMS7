@@ -149,10 +149,3 @@ dependencies[] = agov_permissions
 
 dependencies[] = agov_menu
 dependencies[] = agov_tags
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-

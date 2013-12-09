@@ -53,10 +53,3 @@ features[variable][] = scheduler_unpublish_required_footer_teaser
 features[variable][] = scheduler_unpublish_revision_footer_teaser
 features[views_view][] = footer_teaser
 features_exclude[field_base][field_image] = field_image
-
-; Information added by  packaging script on 2013-11-10
-version = "7.x-1.0-rc5"
-core = "7.x"
-project = "agov"
-datestamp = "1384120168"
-
