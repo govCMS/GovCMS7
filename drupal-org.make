@@ -182,6 +182,9 @@ projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = "contrib"
 
+projects[image_link_formatter][version] = "7.x-1.0"
+projects[image_link_formatter][subdir] = "contrib"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
