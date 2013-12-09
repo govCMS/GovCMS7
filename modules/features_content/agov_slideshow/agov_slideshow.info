@@ -22,6 +22,7 @@ features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[ds_field_settings][] = node|slide|feature
+features[ds_layout_settings][] = node|slide|default
 features[ds_layout_settings][] = node|slide|feature
 features[features_api][] = api:2
 features[field_base][] = field_read_more
