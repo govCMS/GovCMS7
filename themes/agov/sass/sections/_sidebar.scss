@@ -1,6 +1,7 @@
 .sidebar {
   .block {
     .block__title {
+      background: $blue;
       @include background-image(linear-gradient(lighten($blue, 5%), $blue));
       @include adjust-font-size-to(16px);
       color: white;
