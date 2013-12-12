@@ -5,7 +5,7 @@ core = 7.x
 exclusive = true
 
 ; System Requirements.
-php_memory_limit = 256M
+php_memory_limit = 128M
 
 files[] = agov.profile
 files[] = tests/agov_test_base.inc

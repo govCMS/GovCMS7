@@ -595,10 +595,10 @@ function _agov_default_news_beans() {
   );
   foreach ($images as $delta => $image) {
     // Load the files contents.
-    $image_path = file_get_contents(dirname(__FILE__) . '/images/' . $image);
-
+    $handle = fopen(dirname(__FILE__) . '/images/' . $image, 'r');
     // Returns the new file object.
-    $files[$delta] = file_save_data($image_path, 'public://' . $image, FILE_EXISTS_RENAME);
+    $files[$delta] = file_save_data($handle, 'public://' . $image, FILE_EXISTS_RENAME);
+    fclose($handle);
   }
 
   // Install the required blocks.
@@ -920,6 +920,8 @@ function agov_finished() {
   // Flush all caches to ensure that any full bootstraps during the installer
   // do not leave stale cached data, and that any content types or other items
   // registered by the installation profile are registered correctly.
+
+  variable_set('features_rebuild_on_flush', FALSE);
   drupal_flush_all_caches();
 
   // Remember the profile which was used.
@@ -939,6 +941,7 @@ function agov_finished() {
   // will be warned if they've installed an out of date Drupal version.
   // Will also trigger indexing of profile-supplied content or feeds.
   drupal_cron_run();
+  variable_set('features_rebuild_on_flush', TRUE);
 
   return $output;
 }
@@ -948,7 +951,7 @@ function agov_finished() {
  */
 function agov_install_additional_options() {
 
-  set_time_limit(300);
+  set_time_limit(0);
 
   $form = array();
   drupal_set_title('Additional options');
@@ -958,17 +961,10 @@ function agov_install_additional_options() {
     '#title' => st('Example content'),
   );
 
-  $max_execution_time = ini_get('max_execution_time');
-  if ($max_execution_time >= 300) {
-    $form['default_content']['install'] = array(
-      '#type' => 'checkbox',
-      '#title' => st('Install example content'),
-    );
-  }
-  else {
-    drupal_set_message(st('Your server\'s max_execution_time (@max_execution_time) setting is too low to install example content. This should be increased to 300 or higher. You cannot install the example content.', array('@max_execution_time' => $max_execution_time)), 'warning', FALSE);
-  }
-
+  $form['default_content']['install'] = array(
+    '#type' => 'checkbox',
+    '#title' => st('Install example content'),
+  );
   $form['register'] = array(
     '#type' => 'fieldset',
     '#title' => st('Register aGov'),
@@ -1111,7 +1107,8 @@ function agov_example_content_install() {
 
   $operations = array();
 
-  foreach (agov_default_content() as $content) {
+  $steps = agov_default_content();
+  foreach ($steps as $content) {
     $operations[] = array(
       'agov_example_content_install_batch',
       array(
