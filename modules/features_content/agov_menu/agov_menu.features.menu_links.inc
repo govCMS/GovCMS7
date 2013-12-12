@@ -198,11 +198,11 @@ function agov_menu_menu_default_menu_links() {
     'weight' => 0,
   );
   // Exported menu link: menu-quick-links:http://www.agedcareaustralia.gov.au/
-  $menu_links['menu-quick-links:http://www.agedcareaustralia.gov.au/'] = array(
+  $menu_links['menu-quick-links:http://business.gov.au/'] = array(
     'menu_name' => 'menu-quick-links',
-    'link_path' => 'http://www.agedcareaustralia.gov.au/',
+    'link_path' => 'http://business.gov.au/',
     'router_path' => '',
-    'link_title' => 'Aged Care Australia',
+    'link_title' => 'business.gov.au',
     'options' => array(
       'attributes' => array(),
     ),
@@ -264,7 +264,7 @@ function agov_menu_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About Us');
-  t('Aged Care Australia');
+  t('business.gov.au');
   t('Archived News');
   t('Australia.gov.au');
   t('Blog');
