@@ -72,7 +72,7 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
     'field_feature_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Australian soldiers at War Memorial',
           'title' => '',
           'width' => 900,
           'height' => 522,
@@ -285,7 +285,7 @@ Julius Caesar',
     'field_feature_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Brisbane Ausrralia',
           'title' => '',
           'width' => 900,
           'height' => 600,

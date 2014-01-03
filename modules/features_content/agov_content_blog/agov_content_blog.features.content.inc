@@ -69,7 +69,7 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Vegetable Market',
           'title' => '',
           'width' => 900,
           'height' => 600,
@@ -202,7 +202,7 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Elementary school teacher',
           'title' => '',
           'width' => 900,
           'height' => 600,
@@ -271,7 +271,7 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'People sit at conference',
           'title' => '',
           'width' => 900,
           'height' => 637,
@@ -343,7 +343,7 @@ function agov_content_blog_content_defaults() {
     'field_thumbnail' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Farmer holds plant seedling',
           'title' => '',
           'width' => 900,
           'height' => 598,

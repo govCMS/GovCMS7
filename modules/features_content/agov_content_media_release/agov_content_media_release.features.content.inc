@@ -87,7 +87,7 @@ function agov_content_media_release_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Brisbane landmark',
           'title' => '',
           'width' => 600,
           'height' => 900,
@@ -177,7 +177,7 @@ function agov_content_media_release_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'People at conference',
           'title' => '',
           'width' => 900,
           'height' => 637,
