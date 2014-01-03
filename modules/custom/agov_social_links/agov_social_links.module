@@ -118,8 +118,7 @@ function agov_social_links_block_view($delta = '') {
           // Load the service's image.
           $service_image = theme('image', array(
             'path' => drupal_get_path('module', 'agov_social_links') . '/images/' . $service . '.png',
-            'alt' => '',
-            'title' => $service_title,
+            'alt' => $service_title,
           ));
 
           // Build the service link.
