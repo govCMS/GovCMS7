@@ -1,8 +1,8 @@
 %linksDoubleArrow {
   a {
-    background: image-url("block-li-bg.png") no-repeat scroll left center;
+    background: image-url("block-li-bg.png") no-repeat scroll left 5px;
     display: block;
-    text-indent: 15px;
+    padding-left: 15px;
     padding-bottom: 2px;
   }
 }
