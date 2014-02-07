@@ -116,14 +116,22 @@ function agov_social_links_block_view($delta = '') {
           }
 
           // Load the service's image.
-          $service_image = theme('image', array(
-            'path' => drupal_get_path('module', 'agov_social_links') . '/images/' . $service . '.png',
-            'alt' => '',
-            'title' => $service_title,
-          ));
+          $service_image = array(
+            '#theme' => 'image',
+            '#path' => drupal_get_path('module', 'agov_social_links') . '/images/' . $service . '.png',
+            '#alt' => '',
+            '#title' => $service_title,
+          );
 
-          // Build the service link.
-          $block['content'] .= l($service_image, $service_url, array('html' => TRUE));
+          $block['content'][$service] = array(
+            '#theme' => 'link',
+            '#text' => drupal_render($service_image),
+            '#path' => $service_url,
+            '#options' => array(
+              'html' => TRUE,
+              'attributes' => array(),
+            ),
+          );
         }
       }
 
