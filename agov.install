@@ -1248,7 +1248,7 @@ function _agov_password_policy() {
     ->fields(array(
       'name' => 'Australian Government DSD Policy',
       'description' => 'Password policy that conforms to Australian Government Information Security Manual guidelines 2012 September release.',
-      'enabled' => 0,
+      'enabled' => 1,
       'policy' => serialize($policy),
       'expiration' => 90,
       'warning' => 7,
