@@ -74,6 +74,7 @@ dependencies[] = node_reference
 dependencies[] = panels
 dependencies[] = panels_ipe
 dependencies[] = password_policy
+dependencies[] = paranoia
 dependencies[] = pathauto
 dependencies[] = pathauto_persist
 dependencies[] = references

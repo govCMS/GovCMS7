@@ -93,6 +93,9 @@ projects[references][subdir] = "contrib"
 projects[panels][version] = "3.3"
 projects[panels][subdir] = "contrib"
 
+projects[paranoia][version] = "1.3"
+projects[paranoia][subdir] = "contrib"
+
 projects[pathauto][version] = "1.2"
 projects[pathauto][subdir] = "contrib"
 
