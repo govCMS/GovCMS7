@@ -24,7 +24,7 @@ projects[chosen][patch][] = http://drupal.org/files/2021639-pin-chosen-26.patch
 projects[context][version] = "3.1"
 projects[context][subdir] = "contrib"
 
-projects[ctools][version] = "1.3"
+projects[ctools][version] = "1.4"
 projects[ctools][subdir] = "contrib"
 
 projects[date][version] = "2.6"
@@ -142,7 +142,7 @@ projects[views][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
 projects[views_bulk_operations][subdir] = "contrib"
 
-projects[webform][version] = "3.18"
+projects[webform][version] = "3.20"
 projects[webform][subdir] = "contrib"
 
 projects[workbench][version] = "1.2"
