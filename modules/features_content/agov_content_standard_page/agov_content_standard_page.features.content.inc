@@ -60,7 +60,7 @@ function agov_content_standard_page_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Australian Parliment House',
           'title' => '',
           'width' => 900,
           'height' => 467,
@@ -309,7 +309,7 @@ function agov_content_standard_page_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Vegetable Market',
           'title' => '',
           'width' => 900,
           'height' => 600,
@@ -392,7 +392,7 @@ function agov_content_standard_page_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Under construction',
           'title' => '',
           'width' => 900,
           'height' => 600,

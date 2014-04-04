@@ -1,0 +1,55 @@
+/**
+ * @file
+ * Styles are organized using the SMACSS technique. @see http://smacss.com/book/
+ *
+ * When you turn on CSS aggregation at admin/config/development/performance, all
+ * of these @include files will be combined into a single file.
+ */
+
+/* Import Sass mixins, variables, Compass modules, etc. */
+@import "init";
+@import "breakpoints";
+@import "colors";
+@import "mixins";
+@import "fonts";
+
+/* HTML element (SMACSS base) rules */
+@import "normalize";
+
+/* Layout rules */
+@import "layout";
+
+/* Typographic rules */
+@import "typography";
+
+/* Global form elements */
+@import "forms";
+
+/* Component (SMACSS module) rules */
+@import "components/*";
+
+// Sections - This is where section specific non-modular styles go. You will not find yourself duplicating these styles.
+@import "sections/*";
+
+/* Customized third-party CSS */
+// Loaded last because TinyNav needs to happen last.
+// Todo: pull out tinynav state and place in states. Then place vendor stuff first.
+@import "vendor/*";
+
+// Optionally, add your own components here.
+@import "print";
+
+/* SMACSS theme rules */
+/* @import "theme-A"; */
+/* @import "theme-B"; */
+
+
+
+
+
+
+
+
+
+
+

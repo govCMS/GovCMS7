@@ -35,7 +35,7 @@ function agov_content_promotion_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'A koala in a tree',
           'title' => '',
           'width' => 78,
           'height' => 52,
@@ -96,7 +96,7 @@ function agov_content_promotion_content_defaults() {
     'field_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'A traffic jam with rows of cars',
           'title' => '',
           'width' => 78,
           'height' => 52,

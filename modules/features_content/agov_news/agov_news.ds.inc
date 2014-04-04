@@ -62,6 +62,11 @@ function agov_news_ds_field_settings_info() {
         'class' => '',
       ),
     ),
+    'post_date' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_agov_month_day_year',
+    ),
   );
   $export['node|news_article|teaser'] = $ds_fieldsetting;
 
@@ -140,23 +145,25 @@ function agov_news_ds_layout_settings_info() {
   $ds_layout->view_mode = 'teaser';
   $ds_layout->layout = 'ds_1col';
   $ds_layout->settings = array(
-    'hide_empty_regions' => 0,
-    'hide_sidebars' => 0,
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_news_date',
+        0 => 'post_date',
         1 => 'title',
-        2 => 'field_image',
-        3 => 'body',
+        2 => 'body',
       ),
     ),
     'fields' => array(
-      'field_news_date' => 'ds_content',
+      'post_date' => 'ds_content',
       'title' => 'ds_content',
-      'field_image' => 'ds_content',
       'body' => 'ds_content',
     ),
     'classes' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
   );
   $export['node|news_article|teaser'] = $ds_layout;
 

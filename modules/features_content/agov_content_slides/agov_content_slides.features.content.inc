@@ -46,7 +46,7 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'People sitting at conference',
           'title' => '',
           'width' => 900,
           'height' => 637,
@@ -107,7 +107,7 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Australian soldiers ar War Memorial',
           'title' => '',
           'width' => 900,
           'height' => 522,
@@ -168,7 +168,7 @@ function agov_content_slides_content_defaults() {
     'field_slide_image' => array(
       'und' => array(
         0 => array(
-          'alt' => '',
+          'alt' => 'Koala in tree',
           'title' => '',
           'width' => 900,
           'height' => 600,

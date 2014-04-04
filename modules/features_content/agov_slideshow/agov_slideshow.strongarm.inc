@@ -66,7 +66,7 @@ function agov_slideshow_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'feature' => array(
         'custom_settings' => FALSE,
@@ -87,6 +87,9 @@ function agov_slideshow_strongarm() {
         'custom_settings' => FALSE,
       ),
       'revision' => array(
+        'custom_settings' => FALSE,
+      ),
+      'blog_teaser' => array(
         'custom_settings' => FALSE,
       ),
     ),

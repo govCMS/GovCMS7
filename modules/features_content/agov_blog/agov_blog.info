@@ -17,6 +17,7 @@ dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views
+datestamp = 1384120168
 features[ctools][] = ds:ds:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
