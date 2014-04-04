@@ -19,7 +19,7 @@ projects[ccl][subdir] = "contrib"
 
 projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
-projects[chosen][patch][] = http://drupal.org/files/2021639-pin-chosen-26.patch
+projects[chosen][patch][] = https://drupal.org/files/2021639-pin-chosen-26.patch
 
 projects[context][version] = "3.1"
 projects[context][subdir] = "contrib"
@@ -116,7 +116,7 @@ projects[search404][subdir] = "contrib"
 
 projects[site_map][version] = "1.0"
 projects[site_map][subdir] = "contrib"
-projects[site_map][patch][] = "http://drupal.org/files/accessibility_enhancements-1920722-2.patch"
+projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
 
 projects[strongarm][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
@@ -131,7 +131,7 @@ projects[twitter_block][version] = "2.1"
 projects[twitter_block][subdir] = "contrib"
 
 projects[view_unpublished][download][type] = "git"
-projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
+projects[view_unpublished][download][url] = "https://git.drupal.org/project/view_unpublished.git"
 projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4ede493123f
 projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
@@ -157,13 +157,13 @@ projects[xmlsitemap][subdir] = "contrib"
 ; Patched modules
 projects[defaultconfig][version] = "1.0-alpha9"
 projects[defaultconfig][subdir] = "contrib"
-projects[defaultconfig][patch][] = "http://drupal.org/files/1940366-1-illegal-offset-warning.patch"
+projects[defaultconfig][patch][] = "https://drupal.org/files/1940366-1-illegal-offset-warning.patch"
 
 projects[defaultcontent][version] = "2.x-dev"
 projects[defaultcontent][subdir] = "contrib"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1611928-fix-alt.patch"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
-projects[defaultcontent][patch][] = "http://drupal.org/files/1896232-defaultcontent-nid.patch"
+projects[defaultcontent][patch][] = "https://drupal.org/files/1611928-fix-alt.patch"
+projects[defaultcontent][patch][] = "https://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
+projects[defaultcontent][patch][] = "https://drupal.org/files/1896232-defaultcontent-nid.patch"
 
 projects[search_config][version] = "1.0"
 projects[search_config][subdir] = "contrib"
@@ -179,8 +179,9 @@ projects[workbench_moderation][subdir] = "contrib"
 
 projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][patch][] = "http://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
-projects[wysiwyg][patch][] = "http://drupal.org/files/wysiwyg-857362-selection-bookmarking.patch"
+
+projects[wysiwyg][patch][] = "https://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
+projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-bookmarking.patch"
 
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = "contrib"
@@ -204,7 +205,7 @@ projects[zen][version] = "5.4"
 projects[zen][subdir]= "contrib"
 
 projects[omega][version] = "3.1"
-projects[omega][patch][] = "http://drupal.org/files/omega_color_module_support.patch"
+projects[omega][patch][] = "https://drupal.org/files/omega_color_module_support.patch"
 projects[omega][subdir]= "contrib"
 
 ; PreviousNext modules
