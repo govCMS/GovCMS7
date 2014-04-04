@@ -65,9 +65,9 @@ projects[link][subdir] = "contrib"
 
 projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
-projects[media][patch][] = "http://drupal.org/files/media.media-browser.1956620-10.patch"
-projects[media][patch][] = "http://drupal.org/files/media.code_.1701914-2.patch"
-projects[media][patch][] = "http://drupal.org/files/media-857362-selection-bookmarking.patch"
+projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
+projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
+projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
 projects[media_vimeo][version] = "1.0-beta5"
 projects[media_vimeo][subdir] = "contrib"
@@ -136,8 +136,8 @@ projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4e
 projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
-projects[view_unpublished][patch][] = "http://drupal.org/files/view-unpublished-wb_0.patch"
-projects[view_unpublished][patch][] = "http://drupal.org/files/view_unpublished.code_.1857656-8.patch"
+projects[view_unpublished][patch][] = "https://drupal.org/files/view-unpublished-wb_0.patch"
+projects[view_unpublished][patch][] = "https://drupal.org/files/view_unpublished.code_.1857656-8.patch"
 
 projects[views][version] = "3.7"
 projects[views][subdir] = "contrib"
@@ -211,16 +211,16 @@ projects[omega][subdir]= "contrib"
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta1"
 projects[agls][subdir] = "contrib"
-projects[agls][patch][] = "http://drupal.org/files/1998728-agls-node-summary-3.patch"
+projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.patch"
 
 ; Libraries
 
 libraries[superfish][download][type] = "get"
-libraries[superfish][download][url] = "http://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
+libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
 
 libraries[tinymce][download][type] = "get"
-libraries[tinymce][download][url] = "http://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
+libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
 libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
