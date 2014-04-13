@@ -130,13 +130,8 @@ projects[token][subdir] = "contrib"
 projects[twitter_block][version] = "2.1"
 projects[twitter_block][subdir] = "contrib"
 
-projects[view_unpublished][download][type] = "git"
-projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
-projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4ede493123f
-projects[view_unpublished][download][branch] = "7.x-1.x"
-projects[view_unpublished][type] = "module"
+projects[view_unpublished][version] = "1.1"
 projects[view_unpublished][subdir] = "contrib"
-projects[view_unpublished][patch][] = "https://drupal.org/files/view-unpublished-wb_0.patch"
 projects[view_unpublished][patch][] = "https://drupal.org/files/view_unpublished.code_.1857656-8.patch"
 
 projects[views][version] = "3.7"
