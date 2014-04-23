@@ -17,26 +17,25 @@ projects[bean_panels][subdir] = "contrib"
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
-projects[chosen][version] = 2.0-alpha2
+projects[chosen][version] = "2.0-beta4"
 projects[chosen][subdir] = "contrib"
-projects[chosen][patch][] = http://drupal.org/files/2021639-pin-chosen-26.patch
 
-projects[context][version] = "3.1"
+projects[context][version] = "3.2"
 projects[context][subdir] = "contrib"
 
 projects[ctools][version] = "1.4"
 projects[ctools][subdir] = "contrib"
 
-projects[date][version] = "2.6"
+projects[date][version] = "2.7"
 projects[date][subdir] = "contrib"
 
 projects[draggableviews][version] = "2.0"
 projects[draggableviews][subdir] = "contrib"
 
-projects[ds][version] = "2.4"
+projects[ds][version] = "2.6"
 projects[ds][subdir] = "contrib"
 
-projects[entity][version] = "1.3"
+projects[entity][version] = "1.5"
 projects[entity][subdir] = "contrib"
 
 projects[entitycache][download][type] = "git"
@@ -45,19 +44,19 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
-projects[features][version] = "2.0-rc2"
+projects[features][version] = "2.0"
 projects[features][subdir] = "contrib"
 
-projects[file_entity][version] = "2.0-alpha1"
+projects[file_entity][version] = "2.0-alpha3"
 projects[file_entity][subdir] = "contrib"
 
-projects[google_analytics][version] = "1.3"
+projects[google_analytics][version] = "1.4"
 projects[google_analytics][subdir] = "contrib"
 
-projects[honeypot][version] = "1.14"
+projects[honeypot][version] = "1.16"
 projects[honeypot][subdir] = "contrib"
 
-projects[libraries][version] = "2.1"
+projects[libraries][version] = "2.2"
 projects[libraries][subdir] = "contrib"
 
 projects[link][version] = "1.1"
