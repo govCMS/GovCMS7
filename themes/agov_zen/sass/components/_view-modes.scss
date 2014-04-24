@@ -7,7 +7,7 @@
 .node-teaser h3 {
   @include adjust-font-size-to(14px);
   margin: rhythm(1/4) 0 rhythm(1/2);
-  a { color: $red; }
+  a { color: $color-highlight; }
 
 }
 

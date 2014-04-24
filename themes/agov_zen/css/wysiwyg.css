@@ -31,17 +31,17 @@
 h1, h2, h3, h4, h5 {
   font-family: "OpenSansSemibold", Arial, sans-serif;
   font-weight: normal;
-  color: #006893;
+  color: #141314;
 }
 
 /* Links */
 /* line 9, ../sass/_typography.scss */
 a {
-  color: #c53100;
+  color: #464445;
 }
 /* line 18, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:visited {
-  color: #c53100;
+  color: #464445;
 }
 /* line 24, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:hover {
@@ -49,7 +49,7 @@ a:hover {
 }
 /* line 27, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:active {
-  color: #c53100;
+  color: #464445;
 }
 
 /* line 13, ../sass/_typography.scss */

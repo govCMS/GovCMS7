@@ -1,5 +1,5 @@
 .header {
-  background: $blue;
+  background: $color-header;
 }
 
 .header__logo {
@@ -61,7 +61,6 @@
     background: image-url('search-btn-mobile.png') 50% 50% no-repeat;
     background-color: #1b1b1b;
     width: 32px;
-    color: #FFF;
     font-weight: bold;
     text-align: center;
   }

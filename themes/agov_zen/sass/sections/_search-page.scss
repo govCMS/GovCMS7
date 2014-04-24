@@ -28,8 +28,8 @@
 #search-form {
   @include pie-clearfix;
   padding: 15px;
-  background-color: $grey;
-  border-top: solid 3px $blue;
+  background-color: $color-tertiary-light;
+  border-top: solid 3px $color-primary;
 
   label, .form-text, .form-submit { margin: rhythm(.5) 0; }
   label {
@@ -47,7 +47,7 @@
   .form-submit {
     clear: left;
     @include bp-nq($large) { clear: none; }
-    background: darken($red, 10%);
+    background: darken($color-highlight, 10%);
     color: white;
   }
   fieldset { display: none; }

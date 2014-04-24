@@ -1,14 +1,14 @@
 .sidebar {
   .block {
     .block__title {
-      background: $blue;
-      @include background-image(linear-gradient(lighten($blue, 5%), $blue));
+      background: $color-primary;
+      @include background-image(linear-gradient(lighten($color-primary, 5%), $color-primary));
       @include adjust-font-size-to(16px);
       color: white;
       padding: 0 0 0 20px;
     }
     .block__content {
-      background: $grey;
+      background: $color-tertiary-light;
       padding: 15px;
     }
     .menu, p {

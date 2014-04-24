@@ -9,14 +9,14 @@
 
 %linksTabbed {
   > li {
-    border-top: 1px solid #CDCCCE;
+    border-top: 1px solid $color-tertiary-light;
     &:first-child { border-top: none; }
-    &:hover { background-color: white; }
+    &:hover { background-color: transparent; }
     > a {
       padding: 8px 15px;
       display: block;
       font-weight: bold;
-      &:hover { color: $blue; }
+      &:hover { color: $color-primary; }
     }
   }
 }
@@ -37,7 +37,7 @@
   > li > a {
     &:before {
       @extend %pseudo-block;
-      border-left: solid 1px #5f5f5f;
+      border-left: solid 1px $color-tertiary-dark;
       height: 60%;
       top: 20%;
       left: 0px;
@@ -51,11 +51,11 @@
 %inlineLinks--bordered--double, .inlineLinks--bordered--double {
   @extend %inlineLinks--bordered;
   > li > a {
-    color: white;
+
     padding: 5px 10px;
     &:before {
-      border-left: solid 1px lighten($blue, 10%);
-      border-right: solid 1px darken($blue, 10%);
+      border-left: solid 1px lighten($color-primary, 10%);
+      border-right: solid 1px darken($color-primary, 10%);
       left: -3px;
     }
   }
