@@ -20,7 +20,7 @@ projects[ccl][subdir] = "contrib"
 projects[chosen][version] = 2.0-beta4
 projects[chosen][subdir] = "contrib"
 
-projects[context][version] = "3.1"
+projects[context][version] = "3.2"
 projects[context][subdir] = "contrib"
 
 projects[ctools][version] = "1.4"
