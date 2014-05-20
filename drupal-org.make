@@ -69,10 +69,10 @@ projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
 projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
-projects[media_vimeo][version] = "1.0-beta5"
+projects[media_vimeo][version] = "2.0"
 projects[media_vimeo][subdir] = "contrib"
 
-projects[media_youtube][version] = "2.0-rc1"
+projects[media_youtube][version] = "2.0-rc4"
 projects[media_youtube][subdir] = "contrib"
 
 projects[menu_attributes][version] = "1.0-rc2"
