@@ -33,7 +33,7 @@ projects[date][subdir] = "contrib"
 projects[draggableviews][version] = "2.0"
 projects[draggableviews][subdir] = "contrib"
 
-projects[ds][version] = "2.4"
+projects[ds][version] = "2.6"
 projects[ds][subdir] = "contrib"
 
 projects[entity][version] = "1.3"
