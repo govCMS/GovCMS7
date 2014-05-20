@@ -27,7 +27,7 @@ projects[context][subdir] = "contrib"
 projects[ctools][version] = "1.4"
 projects[ctools][subdir] = "contrib"
 
-projects[date][version] = "2.6"
+projects[date][version] = "2.7"
 projects[date][subdir] = "contrib"
 
 projects[draggableviews][version] = "2.0"
