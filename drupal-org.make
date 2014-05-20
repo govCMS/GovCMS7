@@ -36,7 +36,7 @@ projects[draggableviews][subdir] = "contrib"
 projects[ds][version] = "2.6"
 projects[ds][subdir] = "contrib"
 
-projects[entity][version] = "1.3"
+projects[entity][version] = "1.5"
 projects[entity][subdir] = "contrib"
 
 projects[entitycache][download][type] = "git"
