@@ -21,22 +21,22 @@ projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
 projects[chosen][patch][] = https://drupal.org/files/2021639-pin-chosen-26.patch
 
-projects[context][version] = "3.1"
+projects[context][version] = "3.2"
 projects[context][subdir] = "contrib"
 
 projects[ctools][version] = "1.4"
 projects[ctools][subdir] = "contrib"
 
-projects[date][version] = "2.6"
+projects[date][version] = "2.7"
 projects[date][subdir] = "contrib"
 
 projects[draggableviews][version] = "2.0"
 projects[draggableviews][subdir] = "contrib"
 
-projects[ds][version] = "2.4"
+projects[ds][version] = "2.6"
 projects[ds][subdir] = "contrib"
 
-projects[entity][version] = "1.3"
+projects[entity][version] = "1.5"
 projects[entity][subdir] = "contrib"
 
 projects[entitycache][download][type] = "git"
@@ -48,7 +48,7 @@ projects[entitycache][subdir] = "contrib"
 projects[features][version] = "2.0-rc2"
 projects[features][subdir] = "contrib"
 
-projects[file_entity][version] = "2.0-alpha1"
+projects[file_entity][version] = "2.0-alpha3"
 projects[file_entity][subdir] = "contrib"
 
 projects[google_analytics][version] = "1.3"
@@ -69,10 +69,10 @@ projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
 projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
-projects[media_vimeo][version] = "1.0-beta5"
+projects[media_vimeo][version] = "2.0"
 projects[media_vimeo][subdir] = "contrib"
 
-projects[media_youtube][version] = "2.0-rc1"
+projects[media_youtube][version] = "2.0-rc4"
 projects[media_youtube][subdir] = "contrib"
 
 projects[menu_attributes][version] = "1.0-rc2"
@@ -132,12 +132,11 @@ projects[twitter_block][subdir] = "contrib"
 
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "https://git.drupal.org/project/view_unpublished.git"
-projects[view_unpublished][download][revision] = 780699356fc84b0ba590b4aad722e4ede493123f
+projects[view_unpublished][download][revision] = e9df1d3f33b93410bb62e65f70981286db2007bd
 projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
-projects[view_unpublished][patch][] = "https://drupal.org/files/view-unpublished-wb_0.patch"
-projects[view_unpublished][patch][] = "https://drupal.org/files/view_unpublished.code_.1857656-8.patch"
+
 
 projects[views][version] = "3.7"
 projects[views][subdir] = "contrib"
