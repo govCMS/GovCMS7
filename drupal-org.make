@@ -131,7 +131,7 @@ projects[twitter_block][version] = "2.1"
 projects[twitter_block][subdir] = "contrib"
 
 projects[view_unpublished][download][type] = "git"
-projects[view_unpublished][download][url] = "https://git.drupal.org/project/view_unpublished.git"
+projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
 projects[view_unpublished][download][revision] = e9df1d3f33b93410bb62e65f70981286db2007bd
 projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
@@ -200,7 +200,7 @@ projects[login_security][version] = "1.4"
 projects[login_security][subdir] = "contrib"
 
 ; Themes
-projects[zen][version] = "5.4"
+projects[zen][version] = "5.5"
 projects[zen][subdir]= "contrib"
 
 projects[omega][version] = "3.1"
