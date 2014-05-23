@@ -138,7 +138,7 @@ projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
 
 
-projects[views][version] = "3.7"
+projects[views][version] = "3.8"
 projects[views][subdir] = "contrib"
 
 projects[views_bulk_operations][version] = "3.1"
@@ -189,7 +189,7 @@ projects[wysiwyg_filter][subdir] = "contrib"
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.5"
+projects[password_policy][version] = "1.6"
 projects[password_policy][subdir] = "contrib"
 
 projects[login_security][version] = "1.4"
