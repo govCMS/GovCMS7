@@ -5,6 +5,9 @@ api = 2
 
 ; Contrib modules
 
+projects[admin_menu][version] = "3.0-rc4"
+projects[admin_menu][subdir] = "contrib"
+
 projects[admin_views][version] = "1.2"
 projects[admin_views][subdir] = "contrib"
 
@@ -17,8 +20,9 @@ projects[bean_panels][subdir] = "contrib"
 projects[ccl][version] = "1.5"
 projects[ccl][subdir] = "contrib"
 
-projects[chosen][version] = "2.0-beta4"
+projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
+projects[chosen][patch][] = https://drupal.org/files/2021639-pin-chosen-26.patch
 
 projects[context][version] = "3.2"
 projects[context][subdir] = "contrib"
@@ -44,19 +48,19 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 projects[entitycache][subdir] = "contrib"
 
-projects[features][version] = "2.0"
+projects[features][version] = "2.0-rc2"
 projects[features][subdir] = "contrib"
 
 projects[file_entity][version] = "2.0-alpha3"
 projects[file_entity][subdir] = "contrib"
 
-projects[google_analytics][version] = "1.4"
+projects[google_analytics][version] = "1.3"
 projects[google_analytics][subdir] = "contrib"
 
-projects[honeypot][version] = "1.16"
+projects[honeypot][version] = "1.14"
 projects[honeypot][subdir] = "contrib"
 
-projects[libraries][version] = "2.2"
+projects[libraries][version] = "2.1"
 projects[libraries][subdir] = "contrib"
 
 projects[link][version] = "1.1"
@@ -68,10 +72,10 @@ projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
 projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
-projects[media_vimeo][version] = "1.0-beta5"
+projects[media_vimeo][version] = "2.0"
 projects[media_vimeo][subdir] = "contrib"
 
-projects[media_youtube][version] = "2.0-rc1"
+projects[media_youtube][version] = "2.0-rc4"
 projects[media_youtube][subdir] = "contrib"
 
 projects[menu_attributes][version] = "1.0-rc2"
@@ -136,7 +140,7 @@ projects[view_unpublished][download][branch] = "7.x-1.x"
 projects[view_unpublished][type] = "module"
 projects[view_unpublished][subdir] = "contrib"
 
-projects[views][version] = "3.7"
+projects[views][version] = "3.8"
 projects[views][subdir] = "contrib"
 
 projects[views_bulk_operations][version] = "3.1"
@@ -191,14 +195,14 @@ projects[image_link_formatter][subdir] = "contrib"
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.5"
+projects[password_policy][version] = "1.6"
 projects[password_policy][subdir] = "contrib"
 
 projects[login_security][version] = "1.4"
 projects[login_security][subdir] = "contrib"
 
 ; Themes
-projects[zen][version] = "5.4"
+projects[zen][version] = "5.5"
 projects[zen][subdir]= "contrib"
 
 projects[omega][version] = "3.1"
