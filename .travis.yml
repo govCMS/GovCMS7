@@ -77,7 +77,7 @@ before_script:
 
 script:
 
-  - phpcs --report=full --standard=sites/all/modules/coder/coder_sniffer/Drupal/ruleset.xml profiles/agov/modules/custom
+  - phpcs --report=full --extensions=module,profile,inc,install --standard=sites/all/modules/coder/coder_sniffer/Drupal/ruleset.xml profiles/agov/modules/custom
 
 after_script:
 
