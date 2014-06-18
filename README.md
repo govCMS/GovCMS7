@@ -1,6 +1,8 @@
 INSTALLATION
 ------------
 
+[![Build Status](https://travis-ci.org/previousnext/agov-profile.svg?branch=master)](https://travis-ci.org/previousnext/agov-profile)
+
 aGov is available as a full drupal site in tgz and zip format at:
 
   http://drupal.org/project/agov
@@ -14,7 +16,6 @@ Drupal's 'clean urls' feature is required.
 
 INSTALLING WITH AEGIR
 ---------------------
-(Thanks to dman!)
 
 I pull my makefile bases into /var/aegir/makefiles as a place to store them. This is not a convention, just a convenience. Substitute paths as you see fit...
 
@@ -62,4 +63,4 @@ drush -v  @dev.agov.coders.co.nz provision-install
 drush @agov7xdev provision-verify
 # Other lower level attempts seemed to work, but then get re-run anyway when the platform noticed the new site.
 
-
+- Thanks to dman for the Aegir install instructions.
