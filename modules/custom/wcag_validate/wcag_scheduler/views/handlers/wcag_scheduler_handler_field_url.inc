@@ -1,5 +1,5 @@
 <?php
-
+// @codingStandardsIgnoreFile
 /**
  * @file
  * Custom handler for wcag_scheduler that sets a link to external reports.

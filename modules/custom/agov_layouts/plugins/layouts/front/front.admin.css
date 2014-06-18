@@ -4,21 +4,19 @@
  * @copyright Copyright(c) 2012 Previous Next Pty Ltd
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  * @author Nick Schuch nick at previousnext dot com dot au
- *
  */
 
 /* Add a float to all */
 .gov-front-col {
-	float: left;
+  float: left;
 }
 
 .gov-front-main {
-	width: 60%;
+  width: 60%;
 }
 
 /* Half Widths */
 .gov-front-left,
 .gov-front-right {
-	width: 50%;
+  width: 50%;
 }
-

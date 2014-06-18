@@ -1,5 +1,5 @@
 <?php
-
+// @codingStandardsIgnoreFile
 /**
  * @file
  * Provides node_freshness views handler implementation.
