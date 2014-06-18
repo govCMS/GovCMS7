@@ -5,11 +5,11 @@
  */
 
 (function ($) {
-  
+
 /*
  * @function govAccessibilityTextSize
  * Controls the text resizer
- */ 
+ */
 Drupal.behaviors.govAccessibilityTextSize = {
   attach: function (context, settings) {
 
