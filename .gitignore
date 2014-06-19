@@ -1,5 +1,6 @@
 .sass-cache
 behat.local.yml
+bin/*
 vendor/*
 build/*
 build.properties
