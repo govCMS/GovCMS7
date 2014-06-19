@@ -29,6 +29,7 @@ install:
 
   # Prepare build and install composer dependencies
   - phing prepare
+  - phing behat:init
 
   # Build the codebase.
   - cp build.travis.properties build.properties
