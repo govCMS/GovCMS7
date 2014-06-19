@@ -41,7 +41,7 @@
 
   <target name="phpcs"
           description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
-    <exec command="${project.basedir}/bin/phpcs --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules} ${src.custom.themes}" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
   <target name="verify-make" description="Verify the drush makefile is valid for d.o">
