@@ -1,4 +1,10 @@
 .sass-cache
-libraries
+behat.local.yml
+vendor/*
+build/*
+build.properties
+
+# Exclude files added by drush make
+libraries/*
 modules/contrib
 themes/contrib

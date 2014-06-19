@@ -19,34 +19,22 @@ matrix:
 
 install:
 
-  # Create a database for our Drupal site.
-  - "mysql -e 'create database drupal;'"
+  # Install composer dependencies
+  - composer selfupdate
+  - composer install
 
-  # Install the latest Drush 6.
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  # Install global composer requires.
   - composer global require --prefer-source --no-interaction drush/drush:6.*
+  - composer global require --prefer-source --no-interaction phing/phing:2.7.*
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+  # Download make file validator.
   - drush dl -y drupalorg_drush-7.x-1.x-dev --destination=$HOME/.drush
   - drush cc drush
 
-  # Codesniffer.
-  - pyrus install pear/PHP_CodeSniffer
-  - phpenv rehash
-
   # Build Codebase
-  - cd ../
-  - mkdir profiles
-  - mv agov-profile profiles/agov
-  - mkdir drupal
-  - mv profiles drupal/
-
-  # Build the current branch.
-  - cd drupal
-  - drush make --yes profiles/agov/drupal-org-core.make --prepare-install
-  - drush make --yes profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov
-  - mkdir sites/default/private
-  - mkdir sites/default/private/files
-  - mkdir sites/default/private/temp
-  - cd ../
+  - cp build.travis.properties build.properties
+  - phing make
 
   # Verify that all the .make files will work on Drupal.org.
   - drush verify-makefile drupal/profiles/agov/drupal-org.make
@@ -58,17 +46,13 @@ install:
   # Disable sendmail
   - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
-  # Clone Coder module for later.
-  - git clone --branch $CODER_VERSION $CODER_REPO drupal/sites/all/modules/coder
+  # Create a database for our Drupal site.
+  - "mysql -e 'create database drupal;'"
 
 before_script:
 
-  - cd drupal/
-  - drush si agov --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=admin --site-mail=admin@example.com --site-name="agov" agov_install_additional_options.install=1 --yes
-  - drush dis -y dblog
-  - drush vset -y file_private_path "sites/default/private/files"
-  - drush vset -y file_temporary_path "sites/default/private/temp"
-  - cd ../drupal
+  - phing site-install
+  - phing file-dirs
 
   # Start the server
   - drush runserver --server=builtin 8888 > /dev/null 2>&1 &
@@ -77,7 +61,7 @@ before_script:
 
 script:
 
-  - phpcs --report=full --extensions=module,profile,inc,install --standard=sites/all/modules/coder/coder_sniffer/Drupal/ruleset.xml profiles/agov/modules/custom
+  - phing phpcs
 
 after_script:
 

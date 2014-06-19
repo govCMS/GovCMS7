@@ -1,0 +1,57 @@
+<project name="agov" default="prepare">
+
+  <property name="codestyle.standard.drupal" value="vendor/drupal/coder/coder_sniffer/Drupal" />
+  <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
+  <property name="src.profile.dir" value="profiles/agov" />
+  <property name="src.custom.modules" value="modules/custom" />
+  <property name="src.custom.themes" value="themes/agov_base" />
+  <property name="build.dir" value="build" />
+  <property name="build.drupal.dir" value="../drupal" />
+  <property file="build.properties" />
+
+
+  <target name="clean" description="Clean the build environment">
+
+    <chmod file="${build.drupal.dir}/sites/default" mode="777" />
+    <delete dir="${build.drupal.dir}" />
+    <delete dir="${build.dir}" />
+
+  </target>
+
+  <target name="prepare" description="Prepare for build">
+    <!-- Create log directory structure -->
+    <mkdir dir="build/logs/checkstyle"/>
+    <mkdir dir="build/logs/behat"/>
+
+    <!-- Install common packages -->
+    <exec command="composer install" logoutput="true" passthru="true"/>
+
+  </target>
+  
+  <target name="prepare-dirs">
+    <mkdir dir="${build.drupal.dir}/profiles" />
+    <symlink link="${build.drupal.dir}/profiles/agov" target="${project.basedir}" />
+  </target>
+
+  <target name="phpcs"
+          description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
+    <exec command="${project.basedir}/bin/phpcs --report=checkstyle --report-file=build/logs/checkstyle.xml --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules} ${src.custom.themes}" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+  <target name="si" description="Install Drupal on a clean database">
+    <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://root:@localhost/agov_profile_local agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
+  </target>
+
+  <target name="site-install" depends="si" />
+
+  <target name="file-dirs" description="Set the drupal file dirs">
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private/files'" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/private/temp'" logoutput="true" passthru="true" />
+  </target>
+
+  <target name="make" depends="prepare-dirs" description="Build Drupal and contrib core modules from a make file">
+    <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov" checkreturn="true" logoutput="true" passthru="true"/>
+    <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org-core.make --prepare-install" checkreturn="true" logoutput="true" passthru="true"/>
+  </target>
+
+</project>
