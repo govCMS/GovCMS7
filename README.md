@@ -1,7 +1,7 @@
 # INSTALLATION
 
 
-[![Build Status](https://travis-ci.org/previousnext/agov-profile.svg?branch=master)](https://travis-ci.org/previousnext/agov-profile)
+[![Build Status](https://travis-ci.org/previousnext/agov-profile.svg?branch=2.x)](https://travis-ci.org/previousnext/agov-profile)
 
 aGov is available as a full drupal site in tgz and zip format at: http://drupal.org/project/agov
 
