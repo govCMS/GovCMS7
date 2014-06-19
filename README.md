@@ -6,6 +6,8 @@ aGov is available as a full drupal site in tgz and zip format at: http://drupal.
 
 ## Building from Source
 
+Source is available from GitHub at https://github.com/previousnext/agov
+
 ### Requirements
 
 Install phing and drush in the standard way. You can use composer to install both
