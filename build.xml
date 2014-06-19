@@ -25,7 +25,7 @@
     </if>
   </target>
 
-  <target name="prepare:all" depends="prepare:dirs, prepare:composer" />
+  <target name="prepare:all" depends="prepare:dirs, prepare:composer" description="Prepares the project for building"/>
 
   <target name="prepare:dirs" description="Prepare for build">
     <mkdir dir="${build.drupal.dir}/profiles" />
@@ -66,17 +66,13 @@
     <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/files/tmp'" logoutput="true" passthru="true" />
   </target>
 
+  <target name="test:all" depends="test:behat" description="Run all tests" />
+
   <target name="behat:init">
-    <copy file="behat.example.yml"
-          tofile="behat.local.yml"
-          overwrite="true">
-      <filterchain>
-        <expandproperties />
-      </filterchain>
+    <copy file="behat.example.yml" tofile="behat.local.yml" overwrite="true">
+      <filterchain><expandproperties /></filterchain>
     </copy>
   </target>
-
-  <target name="test:all" depends="test:behat" description="Run all tests" />
 
   <target name="test:behat" depends="behat:init" description="Run behat tests">
     <exec command="${project.basedir}/bin/behat --format pretty --ansi" logoutput="true" passthru="true" checkreturn="true" />
