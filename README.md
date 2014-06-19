@@ -31,9 +31,11 @@ Run the following phing commands to build a site in a directory _at the same lev
 as the current directory called `drupal`.
 
 ```
-phing prepare
+phing prepare:all
+phing validate:all
 phing make
 phing site-install
+phing login
 ```
 
 You should point your apache vhost configuration to `drupal`.
@@ -43,6 +45,5 @@ You should point your apache vhost configuration to `drupal`.
 aGov uses behat for its functional tests. To run behat tests, use the following:
 
 ```
-phing behat:init
-phing behat
+phing test:all
 ```
