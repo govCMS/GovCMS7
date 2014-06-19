@@ -20,7 +20,7 @@
   <target name="fix-perms">
     <if><available file="${build.drupal.dir}/sites/default" type="dir" property="available.sites.default"/>
     <then>
-      <chmod file="${build.drupal.dir}/sites/default" mode="777" />
+      <chmod file="${build.drupal.dir}/sites/default" mode="2775" />
     </then>
     </if>
   </target>
@@ -29,6 +29,11 @@
 
   <target name="prepare:dirs" description="Prepare for build">
     <mkdir dir="${build.drupal.dir}/profiles" />
+    <mkdir dir="${build.drupal.dir}/sites/default/files" />
+    <chmod file="${build.drupal.dir}/sites/default/files" mode="2775" />
+    <mkdir dir="${build.drupal.dir}/sites/default/files/tmp" />
+    <mkdir dir="${build.drupal.dir}/sites/default/private" />
+    <chmod file="${build.drupal.dir}/sites/default/private" mode="2775" />
     <symlink link="${build.drupal.dir}/profiles/agov" target="${project.basedir}" />
   </target>
 
@@ -57,8 +62,8 @@
   <target name="site-install" description="Install Drupal on a clean database">
     <phingcall target="fix-perms" />
     <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://root:@localhost/agov_profile_local agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
-    <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private/files'" logoutput="true" passthru="true" />
-    <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/private/temp'" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private'" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/files/tmp'" logoutput="true" passthru="true" />
   </target>
 
   <target name="behat:init">
