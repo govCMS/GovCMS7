@@ -11,11 +11,13 @@
 
 
   <target name="clean" description="Clean the build environment">
-
-    <chmod file="${build.drupal.dir}/sites/default" mode="777" />
+    <phingcall target="fix-perms" />
     <delete dir="${build.drupal.dir}" />
     <delete dir="${build.dir}" />
+  </target>
 
+  <target name="fix-perms">
+    <chmod file="${build.drupal.dir}/sites/default" mode="777" />
   </target>
 
   <target name="prepare" description="Prepare for build">
@@ -45,6 +47,7 @@
   </target>
 
   <target name="make" depends="prepare-dirs" description="Build Drupal and contrib core modules from a make file">
+    <phingcall target="fix-perms" />
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov" checkreturn="true" logoutput="true" passthru="true"/>
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org-core.make --prepare-install" checkreturn="true" logoutput="true" passthru="true"/>
   </target>
@@ -69,9 +72,8 @@
     </copy>
   </target>
 
-  <target name="behat:run">
-
-
+  <target name="behat">
+    <exec command="${project.basedir}/bin/behat --format pretty --ansi" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
 </project>
