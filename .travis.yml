@@ -1,13 +1,9 @@
 language: php
 
 php:
+  - 5.3
   - 5.4
   - 5.5
-
-env:
-  global:
-    - CODER_REPO='git://drupalcode.org/project/coder.git'
-    - CODER_VERSION='7.x-2.2'
 
 mysql:
   database: drupal
@@ -22,7 +18,7 @@ install:
   # Update composer
   - composer selfupdate
 
-  # Install global composer requires.
+  # Install global composer dependencies.
   - composer global require --prefer-dist --no-interaction drush/drush:6.*
   - composer global require --prefer-dist --no-interaction phing/phing:2.7.*
   - composer global require --prefer-dist --no-interaction youngj/httpserver:dev-master#41dd2b7
@@ -30,19 +26,18 @@ install:
 
   # Prepare build and install composer dependencies
   - cp build.travis.properties build.properties
-  - phing prepare
-  - phing behat:init
+  - phing prepare:all
 
   # Build the codebase.
   - phing make
-
-  # Verify that all the .make files will work on Drupal.org.
-  - phing verify-make
 
   # Disable sendmail.
   - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 before_script:
+
+  # Validate source code.
+  - phing validate:all
 
   # Install the site.
   - phing site-install
@@ -54,8 +49,7 @@ before_script:
 
 script:
 
-  - phing phpcs
-  - phing behat
+  - phing test:all
 
 after_script:
 
