@@ -1,4 +1,4 @@
-# aGov [![Build Status](https://travis-ci.org/previousnext/agov-profile.svg?branch=2.x)](https://travis-ci.org/previousnext/agov-profile)
+# aGov [![Build Status](https://travis-ci.org/previousnext/agov.svg?branch=2.x)](https://travis-ci.org/previousnext/agov)
 
 ## Download
 
