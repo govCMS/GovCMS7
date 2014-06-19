@@ -28,11 +28,11 @@ install:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Prepare build and install composer dependencies
+  - cp build.travis.properties build.properties
   - phing prepare
   - phing behat:init
 
   # Build the codebase.
-  - cp build.travis.properties build.properties
   - phing make
 
   # Verify that all the .make files will work on Drupal.org.
