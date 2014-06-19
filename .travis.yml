@@ -25,7 +25,7 @@ install:
   # Install global composer requires.
   - composer global require --prefer-dist --no-interaction drush/drush:6.*
   - composer global require --prefer-dist --no-interaction phing/phing:2.7.*
-  - composer global require --prefer-dist --no-interaction youngj/httpserver:dev-master
+  - composer global require --prefer-dist --no-interaction youngj/httpserver:dev-master#41dd2b7
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
   # Prepare build and install composer dependencies

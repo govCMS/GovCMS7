@@ -30,7 +30,7 @@
     <mkdir dir="build/logs/behat"/>
 
     <!-- Install common packages -->
-    <exec command="composer install" logoutput="true" passthru="true"/>
+    <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
 
   </target>
   
