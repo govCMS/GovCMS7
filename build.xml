@@ -59,4 +59,19 @@
     <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/private/temp'" logoutput="true" passthru="true" />
   </target>
 
+  <target name="behat:init">
+    <copy file="behat.example.yml"
+          tofile="behat.local.yml"
+          overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
+  </target>
+
+  <target name="behat:run">
+
+
+  </target>
+
 </project>

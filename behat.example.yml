@@ -1,19 +1,17 @@
 default:
-  &app_url: 'http://127.0.0.1:8888'
-  &app_dir: drupal
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: *app_url
+      base_url: ${app.uri}
     Drupal\DrupalExtension\Extension:
       drush:
-        root: *app_dir
+        root: ${app.dir}
       drupal:
-        drupal_root: *app_dir
+        drupal_root: ${app.dir}
 
 drupal7:
   extensions:
     Drupal\DrupalExtension\Extension:
       drupal:
-        drupal_root: *app_dir
+        drupal_root: ${app.dir}
       drush:
-        root: *app_dir
+        root: ${app.dir}

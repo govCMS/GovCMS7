@@ -19,18 +19,16 @@ matrix:
 
 install:
 
-  # Install composer dependencies
+  # Update composer
   - composer selfupdate
-  - composer install
 
   # Install global composer requires.
   - composer global require --prefer-source --no-interaction drush/drush:6.*
   - composer global require --prefer-source --no-interaction phing/phing:2.7.*
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-  # Download make file validator.
-  - drush dl -y drupalorg_drush-7.x-1.x-dev --destination=$HOME/.drush
-  - drush cc drush
+  # Prepare build and install composer dependencies
+  - phing prepare
 
   # Build the codebase.
   - cp build.travis.properties build.properties
