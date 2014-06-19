@@ -48,6 +48,10 @@
     <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
+  <target name="validate:phpmd" description="Find code complexity issues">
+    <exec command="bin/phpmd ${src.custom.modules} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
   <target name="validate:make" description="Verify the drush makefile is valid for d.o">
     <exec command="drush dl -y drupalorg_drush-7.x-1.x-dev --destination=${user.home}/.drush" logoutput="true" passthru="true" />
     <exec command="drush cc drush" logoutput="true" passthru="true" />
