@@ -7,6 +7,10 @@
   <property name="src.custom.themes" value="themes/agov_base" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
+  <property name="db.username" value="root" />
+  <property name="db.password" value="" />
+  <property name="db.name" value="agov_test" />
+  <property name="db.host" value="localhost" />
   <property file="build.properties" />
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all" description="Build the project" />
@@ -61,7 +65,7 @@
 
   <target name="site-install" description="Install Drupal on a clean database">
     <phingcall target="fix-perms" />
-    <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://root:@localhost/agov_profile_local agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://${db.username}:${db.password}@${db.host}/${db.name} agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
     <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private'" logoutput="true" passthru="true" />
     <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/files/tmp'" logoutput="true" passthru="true" />
   </target>
