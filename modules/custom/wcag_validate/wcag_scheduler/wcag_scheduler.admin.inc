@@ -75,7 +75,7 @@ function wcag_scheduler_config_form() {
 /**
  * Ensures that we have a zulu clock integer less than 2400.
  */
-function wcag_scheduler_validate_zulu($element, &$form_state) {
+function wcag_scheduler_validate_zulu($element) {
   $value = $element['#value'];
   if ($value > 2400) {
     form_error($element, t('%name must be in 24 hour format (between 0001 and 2400).', array('%name' => $element['#title'])));
