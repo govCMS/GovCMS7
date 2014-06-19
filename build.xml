@@ -1,0 +1,83 @@
+<project name="agov" default="prepare">
+
+  <property name="codestyle.standard.drupal" value="vendor/drupal/coder/coder_sniffer/Drupal" />
+  <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
+  <property name="src.profile.dir" value="profiles/agov" />
+  <property name="src.custom.modules" value="modules/custom" />
+  <property name="src.custom.themes" value="themes/agov_base" />
+  <property name="build.dir" value="build" />
+  <property name="build.drupal.dir" value="../drupal" />
+  <property file="build.properties" />
+
+
+  <target name="clean" description="Clean the build environment">
+    <phingcall target="fix-perms" />
+    <delete dir="${build.drupal.dir}" />
+    <delete dir="${build.dir}" />
+  </target>
+
+  <target name="fix-perms">
+    <if><available file="${build.drupal.dir}/sites/default" type="dir" property="available.sites.default"/>
+    <then>
+      <chmod file="${build.drupal.dir}/sites/default" mode="777" />
+    </then>
+    </if>
+  </target>
+
+  <target name="prepare" description="Prepare for build">
+    <!-- Create log directory structure -->
+    <mkdir dir="build/logs/checkstyle"/>
+    <mkdir dir="build/logs/behat"/>
+
+    <!-- Install common packages -->
+    <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
+
+  </target>
+  
+  <target name="prepare-dirs">
+    <mkdir dir="${build.drupal.dir}/profiles" />
+    <symlink link="${build.drupal.dir}/profiles/agov" target="${project.basedir}" />
+  </target>
+
+  <target name="phpcs"
+          description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
+    <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+  <target name="verify-make" description="Verify the drush makefile is valid for d.o">
+    <exec command="drush dl -y drupalorg_drush-7.x-1.x-dev --destination=${user.home}/.drush" logoutput="true" passthru="true" />
+    <exec command="drush cc drush" logoutput="true" passthru="true" />
+    <exec command="drush verify-makefile" logoutput="true" passthru="true" checkreturn="true"/>
+  </target>
+
+  <target name="make" depends="prepare-dirs" description="Build Drupal and contrib core modules from a make file">
+    <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov" checkreturn="true" logoutput="true" passthru="true"/>
+    <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org-core.make --prepare-install" checkreturn="true" logoutput="true" passthru="true"/>
+  </target>
+
+  <target name="site-install" description="Install Drupal on a clean database">
+    <phingcall target="fix-perms" />
+    <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://root:@localhost/agov_profile_local agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
+    <phingcall target="set-file-dirs" />
+  </target>
+
+  <target name="set-file-dirs">
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private/files'" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/private/temp'" logoutput="true" passthru="true" />
+  </target>
+
+  <target name="behat:init">
+    <copy file="behat.example.yml"
+          tofile="behat.local.yml"
+          overwrite="true">
+      <filterchain>
+        <expandproperties />
+      </filterchain>
+    </copy>
+  </target>
+
+  <target name="behat">
+    <exec command="${project.basedir}/bin/behat --format pretty --ansi" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+</project>
