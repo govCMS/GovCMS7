@@ -37,11 +37,7 @@ install:
   - phing make
 
   # Verify that all the .make files will work on Drupal.org.
-  - drush verify-makefile drupal/profiles/agov/drupal-org.make
-  - find drupal/profiles/agov/modules -name \*.make -print0 | xargs -0 -n1 drush verify-makefile
-
-  # Setup files
-  - sudo chmod -R 777 drupal/sites/all
+  - phing verify-make
 
   # Disable sendmail
   - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
