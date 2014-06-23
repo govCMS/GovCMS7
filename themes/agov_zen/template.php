@@ -11,7 +11,7 @@
 function agov_zen_preprocess_html(&$vars) {
 
   /* Adds HTML5 placeholder shim */
-  drupal_add_js(libraries_get_path('html5placeholder') . "/jquery.html5-placeholder-shim.js", 'file');
+  drupal_add_js(libraries_get_path('html5placeholder') . "/jquery.placeholder.js", 'file');
 }
 
 /**
