@@ -227,6 +227,6 @@ libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][type] = "library"
 
 libraries[html5placeholder][download][type] = "get"
-libraries[html5placeholder][download][url] = "https://github.com/parndt/jquery-html5-placeholder-shim/archive/master.zip"
+libraries[html5placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.0.8.zip"
 libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
