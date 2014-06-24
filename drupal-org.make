@@ -195,7 +195,7 @@ projects[image_link_formatter][subdir] = "contrib"
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
 
-projects[password_policy][version] = "1.6"
+projects[password_policy][version] = "1.8"
 projects[password_policy][subdir] = "contrib"
 
 projects[login_security][version] = "1.4"
