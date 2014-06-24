@@ -27,7 +27,6 @@
 }
 
 /* Headings */
-/* line 2, ../sass/_typography.scss */
 h1, h2, h3, h4, h5 {
   font-family: "OpenSansSemibold", Arial, sans-serif;
   font-weight: normal;
@@ -35,24 +34,19 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Links */
-/* line 9, ../sass/_typography.scss */
 a {
   color: #c53100;
 }
-/* line 18, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:visited {
   color: #c53100;
 }
-/* line 24, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:hover {
   color: black;
 }
-/* line 27, ../../../../../../../../../../../../.rbenv/versions/1.9.3-p194/lib/ruby/gems/1.9.1/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/typography/links/_link-colors.scss */
 a:active {
   color: #c53100;
 }
 
-/* line 13, ../sass/_typography.scss */
 a:hover {
   text-decoration: none;
 }
@@ -60,7 +54,6 @@ a:hover {
 /* ==========================================================================
    Headings
    ========================================================================== */
-/* line 21, ../sass/_typography.scss */
 h1 {
   font-size: 2.4em;
   line-height: 1.16667em;
@@ -68,7 +61,6 @@ h1 {
   margin-bottom: 0.29167em;
 }
 
-/* line 26, ../sass/_typography.scss */
 h2 {
   font-size: 1.68em;
   line-height: 1.66667em;
@@ -76,7 +68,6 @@ h2 {
   margin-bottom: 0.41667em;
 }
 
-/* line 32, ../sass/_typography.scss */
 h3 {
   font-size: 1.44em;
   line-height: 1.94444em;
@@ -84,7 +75,6 @@ h3 {
   margin-bottom: 0.48611em;
 }
 
-/* line 37, ../sass/_typography.scss */
 h4 {
   font-size: 1.2em;
   line-height: 2.33333em;
@@ -92,29 +82,24 @@ h4 {
   margin-bottom: 0.58333em;
 }
 
-/* line 77, ../sass/_typography.scss */
 .field-name-body {
   /* Content List Styles */
   /* Display image inline to the right */
   /* Display image inline to the left */
 }
-/* line 51, ../sass/_typography.scss */
 .field-name-body ol {
   list-style-type: decimal;
   margin-left: 19px;
 }
-/* line 56, ../sass/_typography.scss */
 .field-name-body ul {
   list-style-type: square;
   margin-left: 15px;
 }
-/* line 63, ../sass/_typography.scss */
 .field-name-body p.img-float-right,
 .field-name-body img.img-float-right {
   float: right;
   margin: 5px 0 5px 5px;
 }
-/* line 70, ../sass/_typography.scss */
 .field-name-body p.img-float-left,
 .field-name-body img.img-float-left {
   float: left;
@@ -122,20 +107,17 @@ h4 {
 }
 
 /* Content List Styles */
-/* line 51, ../sass/_typography.scss */
 ol {
   list-style-type: decimal;
   margin-left: 19px;
 }
 
-/* line 56, ../sass/_typography.scss */
 ul {
   list-style-type: square;
   margin-left: 15px;
 }
 
 /* Display image inline to the right */
-/* line 63, ../sass/_typography.scss */
 p.img-float-right,
 img.img-float-right {
   float: right;
@@ -143,14 +125,12 @@ img.img-float-right {
 }
 
 /* Display image inline to the left */
-/* line 70, ../sass/_typography.scss */
 p.img-float-left,
 img.img-float-left {
   float: left;
   margin: 0 5px 5px 5px;
 }
 
-/* line 9, ../sass/wysiwyg.scss */
 ul, ol {
   margin: 1.4em 0;
 }

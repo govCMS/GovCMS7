@@ -11,6 +11,8 @@ GEM
       sass (~> 3.2.19)
     fssm (0.2.10)
     sass (3.2.19)
+    sass-globbing (1.1.1)
+      sass (>= 3.1)
 
 PLATFORMS
   ruby
@@ -18,3 +20,4 @@ PLATFORMS
 DEPENDENCIES
   breakpoint (~> 2.0.5)
   compass (~> 0.12.2)
+  sass-globbing (~> 1.1.1)
