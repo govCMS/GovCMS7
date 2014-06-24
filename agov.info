@@ -58,6 +58,7 @@ dependencies[] = entity
 dependencies[] = entitycache
 dependencies[] = features
 dependencies[] = file_entity
+dependencies[] = globalredirect
 dependencies[] = googleanalytics
 dependencies[] = honeypot
 dependencies[] = libraries

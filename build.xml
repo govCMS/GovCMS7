@@ -62,13 +62,12 @@
     <exec command="drush verify-makefile" logoutput="true" passthru="true" checkreturn="true"/>
   </target>
 
-  <target name="make" depends="prepare:dirs" description="Build Drupal and contrib core modules from a make file">
+  <target name="make" depends="prepare:dirs, fix-perms" description="Build Drupal and contrib core modules from a make file">
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov" checkreturn="true" logoutput="true" passthru="true"/>
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org-core.make --prepare-install" checkreturn="true" logoutput="true" passthru="true"/>
   </target>
 
-  <target name="site-install" description="Install Drupal on a clean database">
-    <phingcall target="fix-perms" />
+  <target name="site-install" depends="fix-perms" description="Install Drupal on a clean database">
     <exec dir="${build.drupal.dir}" command="drush site-install agov -y --site-name=aGov --db-url=mysql://${db.username}:${db.password}@${db.host}/${db.name} agov_install_additional_options.install=1 agov" logoutput="true" passthru="true" />
     <exec dir="${build.drupal.dir}" command="drush vset -y file_private_path 'sites/default/private'" logoutput="true" passthru="true" />
     <exec dir="${build.drupal.dir}" command="drush vset -y file_temporary_path 'sites/default/files/tmp'" logoutput="true" passthru="true" />
