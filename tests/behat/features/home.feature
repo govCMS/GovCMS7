@@ -19,3 +19,5 @@ Feature: Home Page
     And I should see "Twitter Feed"
     And I should see "Quick Links"
     And I should see "Connect with us"
+#   Slide show titles
+    And I should see "Macto Oppeto"

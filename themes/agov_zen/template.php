@@ -47,3 +47,12 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
   ));
 }
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function agov_zen_preprocess_node(&$variables) {
+  if ('slide' == $variables['type']) {
+    $variables['title_link'] = l($variables['title'], $variables['field_read_more'][0]['url']);
+  }
+}
