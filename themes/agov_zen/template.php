@@ -28,7 +28,6 @@ function agov_zen_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_preprocess_page().
  */
 function agov_zen_preprocess_page(&$variables) {
-  unset($variables['breadcrumb']);
 }
 
 /**
