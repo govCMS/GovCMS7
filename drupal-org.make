@@ -111,6 +111,9 @@ projects[pathauto_persist][subdir] = "contrib"
 projects[r4032login][version] = "1.5"
 projects[r4032login][subdir] = "contrib"
 
+projects[simple_aggregation][version] = "1.0"
+projects[simple_aggregation][subdir] = "contrib"
+
 projects[scheduler][version] = "1.1"
 projects[scheduler][subdir] = "contrib"
 
