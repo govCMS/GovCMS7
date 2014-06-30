@@ -87,6 +87,7 @@ dependencies[] = search404
 dependencies[] = scheduler
 dependencies[] = scheduler_workbench
 dependencies[] = r4032login
+dependencies[] = simple_aggregation
 dependencies[] = site_map
 dependencies[] = superfish
 dependencies[] = twitter_block
