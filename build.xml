@@ -91,4 +91,8 @@
     <exec dir="${build.drupal.dir}" command="drush uli -l ${app.uri}" logoutput="true" passthru="true" />
   </target>
 
+  <target name="devify" description="Set up dev environment defaults">
+    <exec dir="${build.drupal.dir}" command="drush -l ${app.uri} en devel search_krumo diff --yes" logoutput="true" passthru="true" />
+  </target>
+
 </project>
