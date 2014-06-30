@@ -19,6 +19,8 @@
     <phingcall target="fix-perms" />
     <delete dir="${build.drupal.dir}" />
     <delete dir="${build.dir}" />
+    <delete dir="modules/contrib"/>
+    <delete dir="themes/contrib"/>
   </target>
 
   <target name="fix-perms">
