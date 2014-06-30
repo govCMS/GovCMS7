@@ -208,10 +208,6 @@ projects[login_security][subdir] = "contrib"
 projects[zen][version] = "5.5"
 projects[zen][subdir]= "contrib"
 
-projects[omega][version] = "3.1"
-projects[omega][patch][] = "https://drupal.org/files/omega_color_module_support.patch"
-projects[omega][subdir]= "contrib"
-
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta1"
 projects[agls][subdir] = "contrib"
