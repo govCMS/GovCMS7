@@ -4,7 +4,7 @@
   <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
   <property name="src.profile.dir" value="profiles/agov" />
   <property name="src.custom.modules" value="modules/custom" />
-  <property name="src.custom.themes" value="themes/agov_base" />
+  <property name="src.custom.themes" value="themes/agov_zen" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
   <property name="db.username" value="root" />
@@ -93,6 +93,19 @@
 
   <target name="devify" description="Set up dev environment defaults">
     <exec dir="${build.drupal.dir}" command="drush -l ${app.uri} en devel search_krumo diff --yes" logoutput="true" passthru="true" />
+  </target>
+
+  <target name="compass:clean"
+          description="Cleanup compass files">
+    <exec dir="${src.custom.themes}" command="bundle exec compass clean"
+          passthru="true" />
+  </target>
+
+  <target name="compass:compile"
+          depends="compass:clean"
+          description="Compile all sass files for production">
+    <exec dir="${src.custom.themes}" command="bundle exec compass compile -e production --force"
+          passthru="true" />
   </target>
 
 </project>
