@@ -14,7 +14,7 @@ function agov_editing_ckeditor_profile_defaults() {
       'settings' => array(
         'ss' => 2,
         'toolbar' => '[
-    [\'Bold\',\'Italic\',\'NumberedList\',\'-\',\'BulletedList\',\'Blockquote\',\'Outdent\',\'Indent\',\'-\',\'Link\',\'Unlink\',\'Format\',\'Styles\',\'PasteFromWord\',\'PasteText\',\'Media\']
+    [\'Bold\',\'Italic\',\'-\',\'NumberedList\',\'BulletedList\',\'Blockquote\',\'-\',\'Outdent\',\'Indent\',\'-\',\'Link\',\'Unlink\',\'Format\',\'Styles\',\'PasteFromWord\',\'PasteText\',\'Media\']
 ]',
         'expand' => 't',
         'default' => 't',
