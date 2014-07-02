@@ -27,14 +27,10 @@ First create a copy of build.properties and update it for your local settings.
 cp build.example.properties build.properties
 ```
 
-Run the following phing commands to build a site in a directory _at the same level_
-as the current directory called `drupal`.
+Run phing to build a site in a directory _at the same level_ as the current directory called `drupal`.
 
 ```
-phing prepare:all
-phing validate:all
-phing make
-phing site-install
+phing
 phing login
 ```
 
