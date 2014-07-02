@@ -131,6 +131,19 @@ img.img-float-left {
   margin: 0 5px 5px 5px;
 }
 
+html {
+  font-family: Arial, sans-serif;
+  /* 1 */
+  font-size: 81.25%;
+  /* 3 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  line-height: 1.4em;
+  word-spacing: -0.05em;
+}
+
 ul, ol {
   margin: 1.4em 0;
 }
