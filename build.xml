@@ -11,7 +11,7 @@
   <property name="db.password" value="" />
   <property name="db.name" value="agov_test" />
   <property name="db.host" value="localhost" />
-  <property file="build.properties" />
+  <property file="build.properties" override="true"/>
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all" description="Build the project" />
 
