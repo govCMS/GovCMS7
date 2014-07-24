@@ -70,6 +70,9 @@ function agov_install() {
   // Set defaults for the contact form.
   _agov_contact_form_defaults();
 
+  // Final modules.
+  module_enable(array('agov_password_policy'));
+
   // Clean up after install.
   agov_cleanup();
 }
@@ -1228,45 +1231,9 @@ function agov_rebuild_sitemap() {
 /**
  * Sets up default password policy.
  *
- * We don't have an API so insert into the db directly.
+ * @deprecated This now happens in agov_password_policy.
  */
 function _agov_password_policy() {
-
-  // Define the password policy.
-  $policy = array(
-    "alphanumeric" => "1",
-    "complexity" => "3",
-    "delay" => "24",
-    "history" => "8",
-    "length" => "9",
-    "letter" => "1",
-    "alphanumeric" => "1",
-  );
-
-  // Insert the policy definition.
-  $pid = db_insert('password_policy')
-    ->fields(array(
-      'name' => 'Australian Government DSD Policy',
-      'description' => 'Password policy that conforms to Australian Government Information Security Manual guidelines 2012 September release.',
-      'enabled' => 1,
-      'policy' => serialize($policy),
-      'expiration' => 90,
-      'warning' => 7,
-    ))
-    ->execute();
-
-  // Get all role ids.
-  $rids = db_query("SELECT rid FROM {role}")->fetchAll(PDO::FETCH_COLUMN);
-
-  // Insert the roles that use this policy.
-  $query = db_insert('password_policy_role')->fields(array('pid', 'rid'));
-  foreach ($rids as $rid) {
-    // No need to add anonymous.
-    if ($rid != DRUPAL_ANONYMOUS_RID) {
-      $query->values(array($pid, $rid));
-    }
-  }
-  $query->execute();
 
 }
 
