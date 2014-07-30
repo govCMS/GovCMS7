@@ -213,6 +213,9 @@ projects[agls][version] = "1.0-beta1"
 projects[agls][subdir] = "contrib"
 projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.patch"
 
+projects[agov_components][version] = "1.0-rc8"
+projects[agov_components][subdir] = "agov"
+
 ; Libraries
 
 libraries[superfish][download][type] = "get"

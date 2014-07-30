@@ -1,5 +1,0 @@
-; $Id$
-name = Text Resizes
-description = "Provides a block with buttons to resize the page text"
-core = 7.x
-package = aGov core
