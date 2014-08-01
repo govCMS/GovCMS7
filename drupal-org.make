@@ -24,9 +24,6 @@ projects[chosen][version] = 2.0-alpha2
 projects[chosen][subdir] = "contrib"
 projects[chosen][patch][] = https://drupal.org/files/2021639-pin-chosen-26.patch
 
-projects[ckeditor][version] = "1.14"
-projects[ckeditor][subdir] = "contrib"
-
 projects[context][version] = "3.2"
 projects[context][subdir] = "contrib"
 
@@ -187,6 +184,12 @@ projects[uuid][subdir] = "contrib"
 projects[workbench_moderation][version] = "1.3"
 projects[workbench_moderation][subdir] = "contrib"
 
+projects[wysiwyg][version] = "2.2"
+projects[wysiwyg][subdir] = "contrib"
+
+projects[wysiwyg][patch][] = "https://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
+projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-bookmarking.patch"
+
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[wysiwyg_filter][subdir] = "contrib"
 
@@ -219,6 +222,11 @@ libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
+
+libraries[tinymce][download][type] = "get"
+libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
+libraries[tinymce][directory_name] = "tinymce"
+libraries[tinymce][type] = "library"
 
 libraries[html5placeholder][download][type] = "get"
 libraries[html5placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.0.8.zip"
