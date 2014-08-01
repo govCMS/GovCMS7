@@ -73,7 +73,6 @@ projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
-projects[media][patch][] = "https://drupal.org/files/media-857362-selection-bookmarking.patch"
 
 projects[media_vimeo][version] = "2.0"
 projects[media_vimeo][subdir] = "contrib"
@@ -186,7 +185,6 @@ projects[workbench_moderation][subdir] = "contrib"
 
 projects[wysiwyg][version] = "2.2"
 projects[wysiwyg][subdir] = "contrib"
-
 projects[wysiwyg][patch][] = "https://drupal.org/files/1954910-wysiwyg-empty-after-installation_fixed.patch"
 projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-bookmarking.patch"
 
@@ -223,12 +221,12 @@ libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-fo
 libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
 
-libraries[tinymce][download][type] = "get"
-libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.5.8_jquery.zip"
-libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][type] = "library"
-
 libraries[html5placeholder][download][type] = "get"
 libraries[html5placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.0.8.zip"
 libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
+
+libraries[ckeditor][download][type] = "get"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip"
+libraries[ckeditor][directory_name] = "ckeditor"
+libraries[ckeditor][type] = "library"
