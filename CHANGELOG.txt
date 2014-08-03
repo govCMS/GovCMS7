@@ -1,6 +1,18 @@
 
 aGov Changelog
 
+7.x-2.0-dev
+===========
+Features
+- aGov's base theme is now based on Zen, rather than Omega. Existing Omega themes
+  will still work, but may have a naming conflict.
+- TinyMCE has been replaced with CKEditor
+- Global Redirect has been added
+
+Updates
+- Google Analytics is updated to 2.x
+- Drupal core up to date
+
 7.x-1.0
 =======
 Features
