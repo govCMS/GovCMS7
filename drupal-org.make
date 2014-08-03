@@ -57,7 +57,7 @@ projects[file_entity][subdir] = "contrib"
 projects[globalredirect][version] = "1.5"
 projects[globalredirect][subdir] = "contrib"
 
-projects[google_analytics][version] = "1.3"
+projects[google_analytics][version] = "2.0"
 projects[google_analytics][subdir] = "contrib"
 
 projects[honeypot][version] = "1.14"
