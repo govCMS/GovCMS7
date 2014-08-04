@@ -1,4 +1,0 @@
-[submodule "modules/dev/agov_components"]
-	path = modules/dev/agov_components
-	url = git.drupal.org:project/agov_components.git
-	branch = 7.x-1.x
