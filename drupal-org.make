@@ -30,7 +30,7 @@ projects[context][subdir] = "contrib"
 projects[ctools][version] = "1.4"
 projects[ctools][subdir] = "contrib"
 
-projects[date][version] = "2.7"
+projects[date][version] = "2.8"
 projects[date][subdir] = "contrib"
 
 projects[draggableviews][version] = "2.0"
@@ -103,6 +103,9 @@ projects[panels][subdir] = "contrib"
 
 projects[paranoia][version] = "1.3"
 projects[paranoia][subdir] = "contrib"
+
+projects[password_policy][version] = "1.9"
+projects[password_policy][subdir] = "contrib"
 
 projects[pathauto][version] = "1.2"
 projects[pathauto][subdir] = "contrib"
@@ -201,9 +204,6 @@ projects[image_link_formatter][subdir] = "contrib"
 
 projects[flood_control][version] = "1.0"
 projects[flood_control][subdir] = "contrib"
-
-projects[password_policy][version] = "1.8"
-projects[password_policy][subdir] = "contrib"
 
 projects[login_security][version] = "1.4"
 projects[login_security][subdir] = "contrib"
