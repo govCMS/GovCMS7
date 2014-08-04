@@ -1,0 +1,26 @@
+{
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "drupal/coder",
+        "version": "master",
+        "source": {
+          "url": "git://drupalcode.org/project/coder.git",
+          "type": "git",
+          "reference": "7.x-2.2"
+        }
+      }
+    }
+  ],
+  "require-dev": {
+    "drupal/drupal-extension": "~1.0",
+    "squizlabs/php_codesniffer": "~1.5",
+    "drupal/coder": "master",
+    "phpmd/phpmd": "~2.0"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "bin-dir": "bin/"
+  }
+}

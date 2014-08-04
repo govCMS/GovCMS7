@@ -237,6 +237,15 @@ function agov_core_update_block($module, $delta, $theme = '', $region = BLOCK_RE
 }
 
 /**
+ * Returns a list of the themes that aGov supports.
+ */
+function agov_core_theme_info() {
+  return array(
+    AGOV_DEFAULT_THEME,
+  );
+}
+
+/**
  * Implements hook_form_alter().
  */
 function agov_core_form_alter(&$form, &$form_alter, $form_id) {

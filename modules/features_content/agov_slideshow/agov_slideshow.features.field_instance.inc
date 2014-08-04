@@ -37,6 +37,13 @@ function agov_slideshow_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
       'teaser' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -88,6 +95,13 @@ function agov_slideshow_field_default_field_instances() {
         'weight' => 3,
       ),
       'feature' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 3,
+      ),
+      'full' => array(
         'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
@@ -164,6 +178,16 @@ function agov_slideshow_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 1,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'image_link_formatter',
+        'settings' => array(
+          'image_link' => 'field_read_more',
+          'image_style' => 'feature_article',
+        ),
+        'type' => 'image_link_formatter',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',

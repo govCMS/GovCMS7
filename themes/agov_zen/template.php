@@ -11,7 +11,7 @@
 function agov_zen_preprocess_html(&$vars) {
 
   /* Adds HTML5 placeholder shim */
-  drupal_add_js(libraries_get_path('html5placeholder') . "/jquery.html5-placeholder-shim.js", 'file');
+  drupal_add_js(libraries_get_path('html5placeholder') . "/jquery.placeholder.js", 'file');
 }
 
 /**
@@ -28,7 +28,6 @@ function agov_zen_form_alter(&$form, &$form_state, $form_id) {
  * Implements hook_preprocess_page().
  */
 function agov_zen_preprocess_page(&$variables) {
-  unset($variables['breadcrumb']);
 }
 
 /**
@@ -46,4 +45,13 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
     '!aGov' => l(t('aGov'), 'http://agov.com.au'),
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
   ));
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function agov_zen_preprocess_node(&$variables) {
+  if ('slide' == $variables['type']) {
+    $variables['title_link'] = l($variables['title'], $variables['field_read_more'][0]['url']);
+  }
 }

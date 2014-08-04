@@ -31,4 +31,16 @@ function agov_contact_install() {
 
   // Rebuild the menu.
   menu_rebuild();
+
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array("access site-wide contact form"));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array("access site-wide contact form"));
+
+}
+
+/**
+ * Assign access contact form permission.
+ */
+function agov_contact_update_7001() {
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array("access site-wide contact form"));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array("access site-wide contact form"));
 }

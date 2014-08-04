@@ -1,5 +1,5 @@
 <?php
-
+// @codingStandardsIgnoreFile
 /**
  * @file
  * Custom handler for wcag_scheduler that sets a link to external reports.
@@ -20,8 +20,6 @@ class wcag_scheduler_handler_field_url extends views_handler_field_url {
       $text = !empty($this->options['text']) ? $this->sanitize_value($this->options['text']) : $this->sanitize_value($value, 'url');
       return $text;
     }
-    else {
-      return $this->sanitize_value($value, 'url');
-    }
+    return $this->sanitize_value($value, 'url');
   }
 }

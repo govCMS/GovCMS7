@@ -1,0 +1,66 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+
+mysql:
+  database: drupal
+  username: root
+  encoding: utf8
+
+matrix:
+  fast_finish: true
+
+install:
+
+  # Update composer
+#  - composer selfupdate
+
+  # Install global composer dependencies.
+  - composer global require --prefer-dist --no-interaction drush/drush:6.* phing/phing:2.7.* youngj/httpserver:dev-master#41dd2b7
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+  # Prepare build and install composer dependencies
+  - cp build.travis.properties build.properties
+  - phing prepare:all
+
+  # Build the codebase.
+  - phing make
+
+  # Disable sendmail.
+  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+before_script:
+
+  # Validate source code.
+  - phing validate:all
+
+  # Install the site.
+  - phing site-install
+
+  # Start the server.
+  - cd ../drupal && drush runserver --server=builtin 8888 > /dev/null 2>&1 &
+  - SERVER_PID=$!
+  - sleep 3
+
+script:
+
+  - phing test:all
+
+after_script:
+
+  # Stop the webserver so that it's not still running when MySQL is stopped.
+  - kill $SERVER_PID
+
+notifications:
+  email:
+    recipients:
+      - agov-devs@previousnext.com.au
+    on_success: always
+    on_failure: always
+  irc:
+    channels:
+      - "chat.freenode.net#agov"
+    on_success: always
+    on_failure: always

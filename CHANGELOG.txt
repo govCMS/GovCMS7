@@ -1,0 +1,40 @@
+
+aGov Changelog
+
+7.x-2.0-dev
+===========
+Features
+- aGov's base theme is now based on Zen, rather than Omega. Existing Omega themes
+  will still work, but may have a naming conflict.
+- TinyMCE has been replaced with CKEditor
+- Global Redirect has been added
+- LinkIt has been added
+
+Updates
+- Google Analytics is updated to 2.x
+- Drupal core up to date
+
+7.x-1.0
+=======
+Features
+- All aGov components are now in a new module ('agov_components') which is
+  held separately on Drupal.org. This effectively enables proper security
+  updates for aGov. If you are updating from an earlier release, you should
+  enable this module.
+- A new module, aGov Password Policy, provides new password complexity rules
+  compatible with ISM April 2014
+- The "Manage Display" tab is now generally hidden
+- The Redirect 403 to User Login module has been added
+- Global Redirect has been added and is enabled on new installs
+- Updates to Password Policy, Chosen, Context, Date, Display Suite, Entity API, File Entity,
+  Google Analytics, Honeypot and Libraries
+- Drupal has been updated to 7.30
+
+Fixes
+- The Contact Page was sometimes not visible to anonymous users
+- TinyMCE packaging is broken on Drupal.org, the make file uses a different source
+  till this is rectified. This should have no practical impact.
+
+Other notes
+- aGov is now tested automatically using Travis, PHPCS, Behat and other testing
+  tools
