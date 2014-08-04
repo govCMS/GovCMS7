@@ -13,7 +13,7 @@ function agov_editing_default_linkit_profiles() {
   $linkit_profile = new LinkitProfile();
   $linkit_profile->disabled = FALSE; /* Edit this to true to make a default linkit_profile disabled initially */
   $linkit_profile->api_version = 1;
-  $linkit_profile->name = 'wywiwyg';
+  $linkit_profile->name = 'wysiwyg';
   $linkit_profile->admin_title = 'WYSIWYG';
   $linkit_profile->admin_description = 'Default WYSIWYG Profile';
   $linkit_profile->profile_type = '1';
@@ -163,7 +163,7 @@ function agov_editing_default_linkit_profiles() {
       'remoteTimeout' => '10000',
     ),
   );
-  $export['wywiwyg'] = $linkit_profile;
+  $export['wysiwyg'] = $linkit_profile;
 
   return $export;
 }
