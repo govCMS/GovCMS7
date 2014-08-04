@@ -8,6 +8,7 @@ Features
   will still work, but may have a naming conflict.
 - TinyMCE has been replaced with CKEditor
 - Global Redirect has been added
+- LinkIt has been added
 
 Updates
 - Google Analytics is updated to 2.x
