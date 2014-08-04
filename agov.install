@@ -1188,6 +1188,9 @@ function agov_cleanup() {
   // @todo Image styles not being applied to beans on install.
   features_revert(array('agov_beans' => array('field')));
 
+  // @todo Wysiwyg profiles not being applied on install.
+  features_revert(array('agov_editing' => array('wysiwyg')));
+
 }
 
 /**
