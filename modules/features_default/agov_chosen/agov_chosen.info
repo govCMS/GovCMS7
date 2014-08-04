@@ -1,0 +1,14 @@
+name = Chosen
+description = Provides default chosen module configuration.
+core = 7.x
+package = aGov core
+php = 5.2.4
+dependencies[] = chosen
+dependencies[] = libraries
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:1
+features[variable][] = chosen_jquery_selector
+features[variable][] = chosen_minimum
+features[variable][] = chosen_minimum_width
+features[variable][] = chosen_search_contains

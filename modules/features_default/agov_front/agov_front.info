@@ -1,0 +1,16 @@
+name = Front
+description = Provides default front page panels layout configuration.
+core = 7.x
+package = aGov
+version = 7.x-1.0
+project = agov_front
+dependencies[] = ctools
+dependencies[] = page_manager
+dependencies[] = agov_layouts
+dependencies[] = agov_core
+dependencies[] = bean_panels
+dependencies[] = agov_beans
+dependencies[] = panels_ipe
+features[ctools][] = page_manager:pages_default:1
+features[features_api][] = api:1
+features[page_manager_pages][] = front_page

@@ -1,0 +1,14 @@
+name = Blog Content
+description = Provides default content for blog content type.
+core = 7.x
+package = aGov content
+version = 7.x-1.2
+project = agov_content_blog
+dependencies[] = agov_blog
+dependencies[] = defaultcontent
+features[content][] = agov_blog_1
+features[content][] = agov_blog_2
+features[content][] = agov_blog_3
+features[content][] = agov_blog_4
+features[content][] = agov_blog_5
+features[features_api][] = api:2

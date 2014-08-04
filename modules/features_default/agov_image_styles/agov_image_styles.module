@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Image Styles feature.
+ */
+
+include_once 'agov_image_styles.features.inc';

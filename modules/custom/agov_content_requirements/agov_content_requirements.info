@@ -1,0 +1,7 @@
+; $Id$
+name = Gov Content Requirements
+description = "Creates a content requirements info section on create node forms"
+core = 7.x
+package = aGov core
+
+configure = admin/config/content/agov_content_requirements

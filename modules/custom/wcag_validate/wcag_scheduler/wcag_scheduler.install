@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * @file
+ * Provides install functionality for wcag_scheduler module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function wcag_scheduler_enable() {
+  // Check if table exists, if not install the schema.
+  if (db_table_exists(WCAG_SCHEDULER_TABLE) == FALSE) {
+    drupal_install_schema(WCAG_SCHEDULER_TABLE);
+  }
+}
+
+/**
+ * Implements hook_schema().
+ */
+function wcag_scheduler_schema() {
+  $schema['wcag_scheduler_reports'] = array(
+    'description' => 'Provides WCAG Scheduler reports local storage.',
+    'fields' => array(
+      'rid' => array(
+        'description' => 'Report ID provided by service.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'url' => array(
+        'description' => 'URL of the page this report references.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'latest' => array(
+        'description' => 'Is this a latest report.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'last_updated' => array(
+        'description' => 'The last time this pages report was updated in the backend.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'major' => array(
+        'description' => 'The number of major issues.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'minor' => array(
+        'description' => 'The number of minor issues.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'suggestions' => array(
+        'description' => 'The number of suggestions.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'indexes' => array(
+      'rid' => array('rid'),
+    ),
+    'primary key' => array('rid'),
+  );
+
+  return $schema;
+}

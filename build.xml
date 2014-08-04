@@ -3,9 +3,8 @@
   <property name="codestyle.standard.drupal" value="vendor/drupal/coder/coder_sniffer/Drupal" />
   <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
   <property name="src.profile.dir" value="profiles/agov" />
-  <property name="src.agov.modules" value="modules/agov" />
-  <property name="src.agov.themes" value="themes/agov_base" />
-
+  <property name="src.custom.modules" value="modules/custom" />
+  <property name="src.custom.themes" value="themes/agov_zen" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
   <property name="db.username" value="root" />
@@ -14,7 +13,7 @@
   <property name="db.host" value="localhost" />
   <property file="build.properties" override="true"/>
 
-  <target name="build" depends="clean:all, prepare:all, make, validate:all, site-install, test:all" description="Build the project" />
+  <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all, login" description="Build the project" />
 
   <target name="clean:all" description="Clean the build environment">
     <phingcall target="fix-perms" />
@@ -26,9 +25,9 @@
 
   <target name="fix-perms">
     <if><available file="${build.drupal.dir}/sites/default" type="dir" property="available.sites.default"/>
-      <then>
-        <chmod file="${build.drupal.dir}/sites/default" mode="2775" />
-      </then>
+    <then>
+      <chmod file="${build.drupal.dir}/sites/default" mode="2775" />
+    </then>
     </if>
   </target>
 
@@ -49,6 +48,16 @@
     <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
   </target>
 
+  <target name="validate:all" depends="validate:phpcs, validate:make" description="Validate the source code" />
+
+  <target name="validate:phpcs" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
+    <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+  <target name="validate:phpmd" description="Find code complexity issues">
+    <exec command="bin/phpmd ${src.custom.modules} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
   <target name="validate:make" description="Verify the drush makefile is valid for d.o">
     <exec command="drush dl -y drupalorg_drush-7.x-1.x-dev --destination=${user.home}/.drush" logoutput="true" passthru="true" />
     <exec command="drush cc drush" logoutput="true" passthru="true" />
@@ -58,17 +67,6 @@
   <target name="make" depends="prepare:dirs, fix-perms" description="Build Drupal and contrib core modules from a make file">
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org.make --no-core --contrib-destination=profiles/agov" checkreturn="true" logoutput="true" passthru="true"/>
     <exec dir="${build.drupal.dir}" command="drush make -y profiles/agov/drupal-org-core.make --prepare-install" checkreturn="true" logoutput="true" passthru="true"/>
-  </target>
-
-  <target name="validate:all" depends="validate:phpcs, validate:make" description="Validate the source code" />
-
-  <target name="validate:phpcs" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
-    <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.agov.modules} --ignore=*.features.*,*.field_group.*,*.layouts.*,*.pages_default.*,*.panelizer.*,*.panels_default.*,*.strongarm.*,*.views_default.*" logoutput="true" passthru="true" checkreturn="true" />
-
-  </target>
-
-  <target name="validate:phpmd" description="Find code complexity issues">
-    <exec command="bin/phpmd ${src.agov.modules} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
   <target name="site-install" depends="fix-perms" description="Install Drupal on a clean database">

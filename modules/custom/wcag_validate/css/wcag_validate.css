@@ -1,0 +1,31 @@
+/**
+ * @file
+ * Provides the theming for wcag module
+ * @copyright Copyright(c) 2012 Previous Next Pty Ltd
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Nick Schuch nick at previousnext dot com dot au
+ */
+
+/* Wcag Validate link theming */
+#wcag_validate_link {
+  top: 40%;
+  left: 0;
+  width: 38px;
+  height: 102px;
+  color: white;
+  cursor: pointer;
+  text-indent: -100000px;
+  overflow: hidden;
+  position: fixed;
+  z-index: 100000;
+  margin-left: -4px;
+  background-color: #006893;
+  background-image: url('../images/validate_trans_tab.png');
+  _position: absolute;
+  _background-image: url('../images/validate_tab_ie6.png');
+}
+
+/* Add some feedback when hovered */
+#wcag_validate_link:hover {
+  margin-left: -3px;
+}
