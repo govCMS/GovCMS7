@@ -69,6 +69,9 @@ projects[libraries][subdir] = "contrib"
 projects[link][version] = "1.1"
 projects[link][subdir] = "contrib"
 
+projects[linkit][version] = "3.1"
+projects[linkit][subdir] = "contrib"
+
 projects[media][version] = "2.0-alpha1"
 projects[media][subdir] = "contrib"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"

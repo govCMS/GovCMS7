@@ -64,6 +64,7 @@ dependencies[] = googleanalytics
 dependencies[] = honeypot
 dependencies[] = libraries
 dependencies[] = link
+dependencies[] = linkit
 dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = media_vimeo
