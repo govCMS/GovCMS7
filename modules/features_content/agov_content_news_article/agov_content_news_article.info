@@ -1,0 +1,11 @@
+name = News Article Content
+description = Provides default content for news article content type.
+core = 7.x
+package = aGov content
+version = 7.x-1.2
+project = agov_content_news_article
+dependencies[] = defaultcontent
+features[content][] = agov_news_article_1
+features[content][] = agov_news_article_2
+features[content][] = agov_news_article_3
+features[features_api][] = api:2

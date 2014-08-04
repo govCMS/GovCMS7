@@ -110,9 +110,6 @@ dependencies[] = ccl_local_actions
 dependencies[] = ccl_views
 dependencies[] = search_config
 
-; aGov components
-dependencies[] = agov_components
-
 ; Custom
 
 dependencies[] = node_freshness
