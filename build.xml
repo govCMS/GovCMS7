@@ -15,6 +15,8 @@
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all, login" description="Build the project" />
 
+  <target name="build-fast" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make or tests" />
+
   <target name="clean:all" description="Clean the build environment">
     <phingcall target="fix-perms" />
     <delete dir="${build.drupal.dir}" />
