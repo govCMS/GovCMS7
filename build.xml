@@ -73,7 +73,7 @@
     <copy todir="${build.profile.dir}">
       <fileset dir="${project.basedir}"/>
     </copy>
-    <exec dir="${build.drupal.dir}" command="drush updb" logoutput="true" passthru="true" />
+    <exec dir="${build.drupal.dir}" command="drush updb -y" logoutput="true" passthru="true" />
   </target>
 
   <target name="validate:phpmd" description="Find code complexity issues">
