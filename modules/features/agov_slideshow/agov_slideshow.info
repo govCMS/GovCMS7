@@ -45,4 +45,4 @@ features[variable][] = scheduler_unpublish_required_slide
 features[variable][] = scheduler_unpublish_revision_slide
 features[views_view][] = slideshow
 features_exclude[dependencies][ds] = ds
-project path = profiles/agov/modules/features_content
+project path = profiles/agov/modules/features
