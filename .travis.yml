@@ -9,6 +9,10 @@ mysql:
   username: root
   encoding: utf8
 
+env:
+  - UPGRADE=none
+  - UPGRADE=7.x-2.x-dev
+
 matrix:
   fast_finish: true
 
@@ -36,8 +40,14 @@ before_script:
   # Validate source code.
   - phing validate:all
 
+  # Prepare a previous version for upgrade (optional)
+  - phing prepare:upgrade
+
   # Install the site.
   - phing site-install
+
+  # Upgrade the site
+  - phing upgrade
 
   # Start the server.
   - cd ../drupal && drush runserver --server=builtin 8888 > /dev/null 2>&1 &

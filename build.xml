@@ -7,6 +7,7 @@
   <property name="src.custom.themes" value="themes/agov_zen" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
+  <property name="build.profile.dir" value="${build.drupal.dir}/profiles/agov" />
   <property name="db.username" value="root" />
   <property name="db.password" value="" />
   <property name="db.name" value="agov_test" />
@@ -56,6 +57,23 @@
 
   <target name="validate:phpcs" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
     <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+  <target name="check:upgrade" description="Checks if we are testing an upgrade and if so, sets a property.">
+    <condition property="is.upgrade">
+      <contains string="${env.UPGRADE}" substring="7.x"/>
+    </condition>
+  </target>
+
+  <target name="prepare:upgrade" depends="check:upgrade" if="is.upgrade" description="Downloads a previous aGov version to be updated.">
+    <exec command="drush dl agov-${env.UPGRADE} --destination=.. --drupal-project-rename=drupal --yes" logoutput="true" passthru="true" checkreturn="true"/>
+  </target>
+
+  <target name="upgrade" depends="check:upgrade" if="is.upgrade" description="Upgrades previous aGov version with the latest.">
+    <copy todir="${build.profile.dir}">
+      <fileset dir="${project.basedir}"/>
+    </copy>
+    <exec dir="${build.drupal.dir}" command="drush updb -y" logoutput="true" passthru="true" />
   </target>
 
   <target name="validate:phpmd" description="Find code complexity issues">
