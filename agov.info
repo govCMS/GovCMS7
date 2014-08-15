@@ -81,6 +81,7 @@ dependencies[] = paranoia
 dependencies[] = pathauto
 dependencies[] = pathauto_persist
 dependencies[] = references
+dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views_content
