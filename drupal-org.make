@@ -30,13 +30,14 @@ projects[draggableviews][version] = "2.0"
 projects[ds][version] = "2.6"
 
 projects[entity][version] = "1.5"
+projects[entity][patch][2307807] = https://www.drupal.org/files/issues/2307807-entity-reset-insert-1.patch
 
 projects[entitycache][download][type] = "git"
 projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce873284
 projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
-projects[features][version] = "2.0-rc2"
+projects[features][version] = 2.2
 
 projects[file_entity][version] = "2.0-alpha3"
 

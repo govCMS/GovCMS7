@@ -40,9 +40,6 @@ function agov_install() {
   // Set default front-end and admin themes.
   _agov_set_default_themes();
 
-  // Set up default terms.
-  _agov_enable_vocabs();
-
   // Create additional date formats.
   _agov_date_formats();
 
