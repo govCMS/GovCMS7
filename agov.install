@@ -143,23 +143,6 @@ function _agov_set_default_themes() {
 }
 
 /**
- * Sets up default vocabularies.
- */
-function _agov_enable_vocabs() {
-
-  // Create a default vocabulary named "Tags"
-  $description = st('Use tags to group articles on similar topics into categories.');
-  $help = st('Enter a comma-separated list of words to describe your content.');
-  $vocabulary = (object) array(
-    'name' => st('Tags'),
-    'description' => $description,
-    'machine_name' => 'tags',
-    'help' => $help,
-  );
-  taxonomy_vocabulary_save($vocabulary);
-}
-
-/**
  * Add default text formats and create a default role for administrators.
  */
 function _agov_default_formats_and_permissions() {
