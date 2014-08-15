@@ -147,4 +147,4 @@ settings[zen_wireframes]           = 0
 
 ; To add a Panels layout (which can also be used by Display Suite), uncomment
 ; the line below and see the documentation at: https://drupal.org/node/495654
-;plugins[panels][layouts] = panels-layouts
+plugins[panels][layouts] = panels-layouts

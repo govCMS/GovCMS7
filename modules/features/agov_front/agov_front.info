@@ -6,7 +6,6 @@ version = 7.x-1.0
 project = agov_front
 dependencies[] = ctools
 dependencies[] = page_manager
-dependencies[] = agov_layouts
 dependencies[] = agov_core
 dependencies[] = bean_panels
 dependencies[] = agov_beans

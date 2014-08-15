@@ -125,7 +125,6 @@ dependencies[] = agov_disable_defaultcontent
 dependencies[] = agov_core
 dependencies[] = agov_common_fields
 dependencies[] = agov_beans
-dependencies[] = agov_layouts
 dependencies[] = agov_text_resize
 dependencies[] = agov_image_styles
 dependencies[] = agov_editing
