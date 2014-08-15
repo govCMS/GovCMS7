@@ -2,5 +2,4 @@ name = Permissions
 description = Provides permissions.
 core = 7.x
 package = aGov core
-php = 5.2.4
-features[features_api][] = api:1
+features[features_api][] = api:2
