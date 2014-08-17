@@ -1,8 +1,10 @@
 name = aGov
+project = agov
+distribution_name = aGov
 description = A distribution for government and the public sector in Australia
-version = 7.x-1.0-dev
 core = 7.x
-exclusive = true
+exclusive = TRUE
+hidden = FALSE
 
 ; System Requirements.
 php_memory_limit = 128M
