@@ -7,8 +7,7 @@
 /**
  * Implements hook_ctools_plugin_api().
  */
-function agov_image_styles_ctools_plugin_api() {
-  list($module, $api) = func_get_args();
+function agov_image_styles_ctools_plugin_api($module = NULL, $api = NULL) {
   if ($module == "file_entity" && $api == "file_default_displays") {
     return array("version" => "1");
   }
@@ -34,12 +33,13 @@ function agov_image_styles_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '620',
-          'height' => '349',
+          'width' => 620,
+          'height' => 349,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
+    'label' => 'article_page_620x349',
   );
 
   return $styles;

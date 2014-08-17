@@ -40,9 +40,6 @@ function agov_install() {
   // Set default front-end and admin themes.
   _agov_set_default_themes();
 
-  // Set up default terms.
-  _agov_enable_vocabs();
-
   // Create additional date formats.
   _agov_date_formats();
 
@@ -143,23 +140,6 @@ function _agov_set_default_themes() {
 
   // Disable the default Bartik & default admin theme.
   theme_disable(array('bartik', AGOV_DEFAULT_ADMIN_THEME));
-}
-
-/**
- * Sets up default vocabularies.
- */
-function _agov_enable_vocabs() {
-
-  // Create a default vocabulary named "Tags"
-  $description = st('Use tags to group articles on similar topics into categories.');
-  $help = st('Enter a comma-separated list of words to describe your content.');
-  $vocabulary = (object) array(
-    'name' => st('Tags'),
-    'description' => $description,
-    'machine_name' => 'tags',
-    'help' => $help,
-  );
-  taxonomy_vocabulary_save($vocabulary);
 }
 
 /**

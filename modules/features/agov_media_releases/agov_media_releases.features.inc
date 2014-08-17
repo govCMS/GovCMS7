@@ -37,5 +37,6 @@ function agov_media_releases_node_info() {
       'help' => '',
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }

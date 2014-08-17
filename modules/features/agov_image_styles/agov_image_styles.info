@@ -1,7 +1,6 @@
 name = Image Styles
 core = 7.x
 package = aGov core
-php = 5.2.4
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = field_sql_storage
@@ -9,7 +8,7 @@ dependencies[] = file_entity
 dependencies[] = image
 dependencies[] = text
 features[ctools][] = file_entity:file_default_displays:1
-features[features_api][] = api:1
+features[features_api][] = api:2
 features[file_display][] = image__default__file_image
 features[file_display][] = image__media_small__file_image
 features[image][] = article_page_620x349
