@@ -4,7 +4,7 @@ distribution_name = aGov
 description = A distribution for government and the public sector in Australia
 core = 7.x
 exclusive = TRUE
-hidden = TRUE
+hidden = FALSE
 php = 5.3
 
 ; System Requirements.
