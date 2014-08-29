@@ -1,4 +1,5 @@
 name = aGov
+project = agov
 package = aGov Profile
 distribution_name = aGov
 description = A distribution for government and the public sector in Australia
