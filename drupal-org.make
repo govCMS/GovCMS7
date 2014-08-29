@@ -23,6 +23,8 @@ projects[context][version] = "3.2"
 
 projects[ctools][version] = "1.4"
 
+projects[crumbs][version] = "2.0-beta19"
+
 projects[date][version] = "2.8"
 
 projects[draggableviews][version] = "2.0"

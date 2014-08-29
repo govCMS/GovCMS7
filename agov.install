@@ -487,6 +487,14 @@ function _agov_default_variables() {
   foreach ($variables as $key => $value) {
     variable_set($key, $value);
   }
+
+  // Set Crumbs weights.
+  $crumbs_weights = array(
+    'crumbs.home_title' => 1,
+    'path'  => 2,
+    '*' => 3,
+  );
+  variable_set('crumbs_weights', $crumbs_weights);
 }
 
 /**
