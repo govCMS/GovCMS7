@@ -132,7 +132,6 @@ dependencies[] = agov_image_styles
 dependencies[] = agov_editing
 dependencies[] = agov_chosen
 dependencies[] = agov_contact
-;dependencies[] = agov_content_requirements
 dependencies[] = agov_front
 dependencies[] = agov_menu_block
 dependencies[] = agov_register
