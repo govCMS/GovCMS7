@@ -73,7 +73,7 @@ projects[metatag][version] = "1.0-beta7"
 
 projects[references][version] = "2.1"
 
-projects[panels][version] = "3.3"
+projects[panels][version] = "3.4"
 
 projects[paranoia][version] = "1.3"
 
