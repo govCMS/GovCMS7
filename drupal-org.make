@@ -49,6 +49,8 @@ projects[google_analytics][version] = "2.0"
 
 projects[honeypot][version] = "1.14"
 
+projects[jquery_update][version] = "2.4"
+
 projects[libraries][version] = "2.1"
 
 projects[link][version] = "1.1"
