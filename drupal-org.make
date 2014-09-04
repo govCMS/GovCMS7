@@ -107,6 +107,8 @@ projects[token][version] = "1.5"
 
 projects[twitter_block][version] = "2.1"
 
+projects[username_enumeration_prevention][version] = "1.0"
+
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
 projects[view_unpublished][download][revision] = e9df1d3f33b93410bb62e65f70981286db2007bd
