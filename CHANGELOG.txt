@@ -1,6 +1,27 @@
 
 aGov Changelog
 
+7.x-2.0-alpha2
+===========
+Features
+- Breadcrumbs are now provided by the more flexible Crumbs module.
+- The Username Enumeration Prevention module has been added for improved
+  security. This prevents brute-force username discovery via the password
+  reset screen.
+- All aGov custom code is now passed through an automated security check and is
+  also properly tested in PHP 5.3 (was previously 5.4 and 5.5 only)
+
+Updates
+- Panels has been updated 3.4
+
+Changes and fixes
+- Breadcrumbs are now provided by the more flexible Crumbs module. Menu trail by
+  path has been removed.
+- The aGov Content Requirements module has been removed
+- aGov panels layouts are now found in the theme, not a separate module
+- The generator metatag now also lists aGov
+- Disabling the defaultcontent module is no longer blocked by the Slideshow feature
+
 7.x-2.0-alpha1
 ===========
 Features
