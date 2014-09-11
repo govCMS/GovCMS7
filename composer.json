@@ -1,6 +1,20 @@
 {
   "name": "previousnext/agov",
   "type": "drupal-profile",
+  "licence": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "PreviousNext",
+      "email": "info@previousnext.com.au",
+      "homepage": "http://agov.com.au",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "info@previousnext.com.au",
+    "issues": "https://www.drupal.org/project/issues/agov",
+    "source": "https://github.com/previousnext/agov"
+  },
   "repositories": [
     {
       "type": "package",
