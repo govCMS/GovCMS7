@@ -1,4 +1,6 @@
 {
+  "name": "previousnext/agov",
+  "type": "drupal-profile",
   "repositories": [
     {
       "type": "package",
@@ -26,6 +28,9 @@
     }
 
   ],
+  "require": {
+    "composer/installers": "~1.0"
+  },
   "require-dev": {
     "drupal/drupal-extension": "~1.0",
     "squizlabs/php_codesniffer": "~1.5",
