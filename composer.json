@@ -40,7 +40,6 @@
         }
       }
     }
-
   ],
   "require": {
     "composer/installers": "~1.0"
@@ -55,5 +54,11 @@
   "minimum-stability": "dev",
   "config": {
     "bin-dir": "bin/"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-7.x-2.x": "2.x-dev",
+      "dev-7.x-1.x": "1.x-dev"
+    }
   }
 }
