@@ -16,6 +16,9 @@ env:
 matrix:
   fast_finish: true
 
+before_install:
+  - sudo apt-get update > /dev/null
+
 install:
 
   # Update composer
