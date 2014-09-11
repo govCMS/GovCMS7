@@ -57,3 +57,6 @@ behat.local.yml
 .vagrant
 .bundle
 node_modules
+
+# GovCMS
+docroot/profiles/agov/.git
