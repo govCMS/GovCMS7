@@ -1,0 +1,8 @@
+name = WCAG Scheduler
+description = Provides scheduled WCAG checking functionality.
+core = 7.x
+dependencies[] = views
+dependencies[] = wcag_validate
+files[] = wcag_scheduler.views.inc
+files[] = views/handlers/wcag_scheduler_handler_field_url.inc
+files[] = wcag_scheduler.views_default.inc

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Chosen feature.
+ */
+
+include_once 'agov_chosen.features.inc';

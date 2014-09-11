@@ -45,5 +45,9 @@
     "installer-paths": {
       "docroot/profiles/{$name}/": ["type:drupal-profile"]
     }
+  },
+  "scripts": {
+    "post-update-cmd": ["echo Deleting aGov .git dirs", "rm -rf docroot/profiles/agov/.git"],
+    "post-install-cmd": ["echo Deleting aGov .git dirs", "rm -rf docroot/profiles/agov/.git"]
   }
 }

@@ -1,0 +1,81 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+mysql:
+  database: drupal
+  username: root
+  encoding: utf8
+
+env:
+  - UPGRADE=none
+
+matrix:
+  fast_finish: true
+
+before_install:
+  - sudo apt-get update > /dev/null
+
+install:
+
+  # Update composer
+#  - composer selfupdate
+
+  # install php packages required for running a web server from drush on php 5.3
+  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
+
+  # Install global composer dependencies.
+  - composer global require --prefer-dist --no-interaction drush/drush:6.* phing/phing:2.7.* youngj/httpserver:dev-master#aabdd56e2be82c12c313b236cee94da1fa3401a2
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+  # Prepare build and install composer dependencies
+  - cp build.travis.properties build.properties
+  - phing prepare:all
+
+  # Build the codebase.
+  - phing make
+
+  # Disable sendmail.
+  - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+
+before_script:
+
+  # Validate source code.
+  - phing validate:all
+
+  # Prepare a previous version for upgrade (optional)
+  - phing prepare:upgrade
+
+  # Install the site.
+  - phing site-install
+
+  # Upgrade the site
+  - phing upgrade
+
+  # Start the server.
+  - cd ../drupal && drush runserver 8888 &
+  - until netstat -an 2>/dev/null | grep '8888.*LISTEN'; do true; done
+
+script:
+
+  - phing test:all
+
+after_script:
+
+  # Stop the webserver so that it's not still running when MySQL is stopped.
+  - kill $SERVER_PID
+
+notifications:
+  email:
+    recipients:
+      - agov-devs@previousnext.com.au
+    on_success: always
+    on_failure: always
+  irc:
+    channels:
+      - "chat.freenode.net#agov"
+    on_success: always
+    on_failure: always

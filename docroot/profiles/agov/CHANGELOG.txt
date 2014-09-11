@@ -1,0 +1,46 @@
+
+aGov Changelog
+
+7.x-2.0-alpha2
+===========
+Features
+- Breadcrumbs are now provided by the more flexible Crumbs module.
+- The Username Enumeration Prevention module has been added for improved
+  security. This prevents brute-force username discovery via the password
+  reset screen.
+- All aGov custom code is now passed through an automated security check and is
+  also properly tested in PHP 5.3 (was previously 5.4 and 5.5 only)
+
+Updates
+- Panels has been updated 3.4
+
+Changes and fixes
+- Breadcrumbs are now provided by the more flexible Crumbs module. Menu trail by
+  path has been removed.
+- The aGov Content Requirements module has been removed
+- aGov panels layouts are now found in the theme, not a separate module
+- The generator metatag now also lists aGov
+- Disabling the defaultcontent module is no longer blocked by the Slideshow feature
+
+7.x-2.0-alpha1
+===========
+Features
+- aGov's base theme is now based on Zen, rather than Omega. Existing Omega themes
+  will still work if carried over, but may have a naming conflict.
+- TinyMCE has been replaced with CKEditor
+- No more duplicate paths thanks to Global Redirect
+- Manage site redirects and maintain content links with Redirect
+- Better content cross-linking from the WYSIWYG via LinkIT
+- Simple Aggregation has been added
+- Upgrades between minor versions now get tested
+- aGov now checks itself for updates
+
+Updates
+- Google Analytics is updated to 2.x
+- Drupal core up-to-date
+
+Changes and fixes
+- URLs in link fields no long truncate at 80 chars
+- The warning for example content has been changed for clarity, and is less
+  intrusive.
+- The organisation of feature module directories has been simplified.

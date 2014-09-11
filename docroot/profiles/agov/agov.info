@@ -1,0 +1,160 @@
+name = aGov
+project = agov
+package = aGov Profile
+distribution_name = aGov
+description = A distribution for government and the public sector in Australia
+core = 7.x
+exclusive = TRUE
+hidden = FALSE
+php = 5.3
+
+; System Requirements.
+php_memory_limit = 128M
+
+files[] = agov.profile
+files[] = tests/agov_test_base.inc
+files[] = tests/agov.test
+files[] = tests/agov_metadata.test
+
+; Core
+
+dependencies[] = block
+dependencies[] = contact
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = syslog
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = field
+dependencies[] = field_ui
+dependencies[] = text
+dependencies[] = file
+dependencies[] = image
+dependencies[] = list
+dependencies[] = rdf
+dependencies[] = update
+
+
+; Contrib
+
+dependencies[] = agls
+dependencies[] = admin_views
+dependencies[] = admin_menu
+dependencies[] = admin_menu_toolbar
+dependencies[] = bean
+dependencies[] = bean_admin_ui
+dependencies[] = chosen
+dependencies[] = ctools
+dependencies[] = crumbs
+dependencies[] = date
+dependencies[] = defaultconfig
+dependencies[] = defaultcontent
+dependencies[] = draggableviews
+dependencies[] = ds
+dependencies[] = entity
+dependencies[] = entitycache
+dependencies[] = features
+dependencies[] = file_entity
+dependencies[] = globalredirect
+dependencies[] = googleanalytics
+dependencies[] = honeypot
+dependencies[] = libraries
+dependencies[] = link
+dependencies[] = linkit
+dependencies[] = media
+dependencies[] = media_internet
+dependencies[] = media_vimeo
+dependencies[] = media_youtube
+dependencies[] = menu_block
+dependencies[] = menu_block_export
+dependencies[] = metatag
+dependencies[] = node_reference
+dependencies[] = panels
+dependencies[] = panels_ipe
+dependencies[] = password_policy
+dependencies[] = paranoia
+dependencies[] = pathauto
+dependencies[] = pathauto_persist
+dependencies[] = references
+dependencies[] = redirect
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = views_content
+dependencies[] = search404
+dependencies[] = scheduler
+dependencies[] = scheduler_workbench
+dependencies[] = r4032login
+dependencies[] = simple_aggregation
+dependencies[] = site_map
+dependencies[] = superfish
+dependencies[] = twitter_block
+dependencies[] = username_enumeration_prevention
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = views_bulk_operations
+dependencies[] = view_unpublished
+dependencies[] = webform
+dependencies[] = workbench
+dependencies[] = workbench_moderation
+dependencies[] = wysiwyg
+dependencies[] = wysiwyg_filter
+dependencies[] = xmlsitemap
+dependencies[] = xmlsitemap_menu
+dependencies[] = xmlsitemap_node
+dependencies[] = ccl
+dependencies[] = ccl_actions
+dependencies[] = ccl_blocks
+dependencies[] = ccl_local_actions
+dependencies[] = ccl_views
+dependencies[] = search_config
+
+; Custom
+
+dependencies[] = node_freshness
+dependencies[] = text_summary_options
+dependencies[] = wcag_validate
+dependencies[] = wcag_scheduler
+dependencies[] = agov_disable_defaultcontent
+
+; aGov
+
+dependencies[] = agov_core
+dependencies[] = agov_common_fields
+dependencies[] = agov_beans
+dependencies[] = agov_text_resize
+dependencies[] = agov_image_styles
+dependencies[] = agov_editing
+dependencies[] = agov_chosen
+dependencies[] = agov_contact
+dependencies[] = agov_front
+dependencies[] = agov_menu_block
+dependencies[] = agov_register
+dependencies[] = agov_slideshow
+dependencies[] = agov_superfish_configuration
+dependencies[] = agov_sitemap
+dependencies[] = agov_social_links
+
+; Content types
+
+dependencies[] = agov_basic_page
+dependencies[] = agov_blog
+dependencies[] = agov_events
+dependencies[] = agov_media_releases
+dependencies[] = agov_news
+dependencies[] = agov_publications
+dependencies[] = agov_promotion
+dependencies[] = agov_permissions
+
+; Content
+
+dependencies[] = agov_menu
+dependencies[] = agov_tags

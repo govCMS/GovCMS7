@@ -58,5 +58,3 @@ behat.local.yml
 .bundle
 node_modules
 
-# GovCMS
-docroot/profiles/agov/.git
