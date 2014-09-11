@@ -1,0 +1,101 @@
+<?php
+/**
+ * @file
+ * Tests for Linkit module.
+ */
+
+/**
+ * Abstract class for Linkit testing.
+ */
+//abstract class LinkitTestCase extends SimpleTestCloneTestCase {
+abstract class LinkitTestCase extends DrupalWebTestCase {
+
+  /**
+   * Permissions to apply to administers.
+   *
+   * @var array
+   */
+  public $admin_permissions = array(
+    'administer linkit',
+  );
+
+  /**
+   * A user object.
+   *
+   * @var object
+   */
+  public $account;
+
+  /**
+   * A Linkit profile object.
+   *
+   * @var LinkitProfile object
+   */
+  public $_profile;
+
+  function setUp($extra_modules = array()) {
+    $modules = array('ctools', 'entity', 'linkit');
+    $modules += $extra_modules;
+    parent::setUp($modules);
+  }
+
+  /**
+   * Helper function: Create a Linkit profile.
+   */
+  protected function createProfile($extra = array()) {
+    ctools_include('export');
+    $profile = ctools_export_crud_new('linkit_profiles');
+
+    $profile->name = isset($extra['name']) ? $extra['name'] : 'test_profile';
+    $profile->admin_title = isset($extra['admin_title']) ? $extra['admin_title'] : 'Test Profile';
+    $profile->admin_description = isset($extra['admin_description']) ? $extra['admin_description'] : 'This is a description for the Test Profile.';
+    $profile->data = array();
+
+    if (isset($extra['data'])) {
+      $profile->data += $extra['data'];
+    }
+
+    if (empty($profile->data['profile_type'])) {
+      $profile->profile_type = LINKIT_PROFILE_TYPE_EDITOR;
+    }
+
+    if (!isset($profile->data['insert_plugin']) && $profile->profile_type == LINKIT_PROFILE_TYPE_FIELD) {
+      $profile->data['insert_plugin'] = array(
+        'plugin' => 'raw_url',
+        'url_method' => LINKIT_URL_METHOD_RAW,
+      );
+    }
+
+    // Save the profile.
+    ctools_export_crud_save('linkit_profiles', $profile);
+
+    // Load and return the saved profile.
+    $this->_profile = linkit_profile_load($profile->name);
+  }
+
+  /**
+   * Helper function: Update a Linkit profile.
+   */
+  protected function updateProfile() {
+    ctools_include('export');
+
+    // Save the changes to the profile.
+    ctools_export_crud_save('linkit_profiles', $this->_profile);
+
+    // Load the saved profile.
+    $this->_profile = linkit_profile_load($this->_profile->name);
+  }
+
+  /**
+   * Helper method to process the autocomplete call.
+   */
+  protected function autocompleteCall() {
+    // Call the autocomplete.
+    $path = 'linkit/autocomplete/' . $this->_profile->name;
+    $response = $this->drupalGetAJAX($path, array('query' => array(LINKIT_BAC_QUERY_KEY => $this->search_string)));
+    $this->assertResponse(200);
+
+    $this->assertNotNull($response, 'The JSON respone is seems to be ok.');
+    return $response;
+  }
+}

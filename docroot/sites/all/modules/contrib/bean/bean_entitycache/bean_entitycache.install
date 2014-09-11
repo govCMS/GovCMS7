@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ *   Install functions for the Bean Entity cache module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function bean_entitycache_schema() {
+  $schema = array();
+
+  $schema['cache_entity_bean'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_entity_bean']['description'] = 'Entity Cache table for the Bean module.';
+
+  return $schema;
+}

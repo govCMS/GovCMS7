@@ -1,0 +1,17 @@
+name = View Unpublished
+description = "Select which roles should be able to see unpublished nodes."
+package = "Permissions"
+version = 7.x-1.x-dev
+
+; Core version (required)
+core = 7.x
+
+files[] = view_unpublished_handler_filter_node_status.inc
+
+
+; Information added by drush on 2014-09-11
+version = "7.x-1.1+5-dev"
+core = "7.x"
+project = "view_unpublished"
+datestamp = "1410414137"
+

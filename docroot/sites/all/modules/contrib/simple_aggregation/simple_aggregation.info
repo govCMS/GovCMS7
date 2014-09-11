@@ -1,0 +1,10 @@
+name = Simple aggregation
+description = Improved CSS aggregation
+core = 7.x
+
+; Information added by drupal.org packaging script on 2013-08-29
+version = "7.x-1.0"
+core = "7.x"
+project = "simple_aggregation"
+datestamp = "1377804769"
+

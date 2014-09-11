@@ -1,0 +1,16 @@
+
+.pager-item,     /* A list item containing a page number in the list of pages. */
+.pager-first,    /* The first page's list item. */
+.pager-previous, /* The previous page's list item. */
+.pager-next,     /* The next page's list item. */
+.pager-last,     /* The last page's list item. */
+.pager-ellipsis, /* A concatenation of several list items using an ellipsis. */
+.pager-current { /* The current page's list item. */
+  display: inline;
+  padding: 0 0.5em;
+  list-style-type: none;
+  background-image: none;
+}
+.pager-current {
+  font-weight: bold;
+}

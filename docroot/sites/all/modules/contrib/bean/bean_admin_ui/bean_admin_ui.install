@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * @file
+ * Install files
+ */
+
+/**
+ * Implements of hook_schema().
+ */
+function bean_admin_ui_schema() {
+  $schema['bean_type'] = array(
+    'description' => 'Stores information about all defined bean types.',
+    'export' => array(
+      'key' => 'name',
+      'identifier' => 'bean_type',
+      'default hook' => 'bean_admin_ui_types',
+      'admin_title' => 'label',
+      'api' => array(
+        'owner' => 'bean_admin_ui',
+        'api' => 'bean',
+        'minimum_version' => 4,
+        'current_version' => 5,
+      ),
+    ),
+    'fields' => array(
+      'type_id' => array(
+        'description' => 'The Type ID of this block. Only used internally by CTools',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'no export' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The machine-readable name of this bean type.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'label' => array(
+        'description' => 'The human-readable name of this bean type.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'options' => array(
+        'description' => 'Block content configuration.',
+        'type' => 'text',
+        'size' => 'big',
+      ),
+      'description' => array(
+        'description' => 'The description of this bean type.',
+        'type' => 'text',
+        'size' => 'big',
+      ),
+    ),
+    'primary key' => array('type_id'),
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
+  );
+  return $schema;
+}
+
+/**
+ * Add support for CTools exportables.
+ */
+function bean_admin_ui_update_7001() {
+  db_drop_primary_key('bean_type');
+
+  // Add a type_id column for use by CTools.
+  $spec = array(
+    'description' => 'The Type ID of this block. Only used internally by CTools',
+    'type' => 'serial',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'no export' => TRUE,
+  );
+  $new_keys = array(
+    'primary key' => array('type_id'),
+  );
+  db_add_field('bean_type', 'type_id', $spec, $new_keys);
+
+  // Add the options column.
+  $spec = array(
+    'description' => 'Block content configuration.',
+    'type' => 'text',
+    'size' => 'big',
+  );
+  db_add_field('bean_type', 'options', $spec);
+
+  // Adjust the type column so tat it doesn't clash with CTools.
+  $spec = array(
+    'description' => 'The machine-readable name of this bean type.',
+    'type' => 'varchar',
+    'length' => 32,
+    'not null' => TRUE,
+  );
+  $new_keys = array(
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
+  );
+  db_change_field('bean_type', 'type', 'name', $spec, $new_keys);
+
+  // Force a cache flush to ensure CTools plugins can be found and menus are rebuilt.
+  cache_clear_all('*', 'cache', TRUE);
+
+  return t('Added new fields required for CTools exportable support.');
+}
+
+/**
+ * Add description column to bean
+ *
+ */
+function bean_admin_ui_update_7002() {
+  // Add the description column.
+  $spec = array(
+    'description' => 'Block description.',
+    'type' => 'text',
+    'size' => 'big',
+  );
+  db_add_field('bean_type', 'description', $spec);
+
+  return t('Added description field to beans.');
+}
+
+/**
+ * Rebuild registry to ensure autoloading for renamed plugin.
+ */
+function bean_admin_ui_update_7003() {
+  registry_rebuild();
+  return t('Registry has been rebuilt');
+}
+

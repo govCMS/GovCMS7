@@ -1,0 +1,66 @@
+<?php
+
+/**
+ * @file
+ * Scheduler module test case file.
+ */
+class SchedulerTestCase extends DrupalWebTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'Scheduler functionality',
+      'description' => 'Publish/unpublish on time.',
+      'group' => 'Scheduler',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('scheduler');
+    $this->web_user = $this->drupalCreateUser(array('edit own page content', 'create page content', 'administer nodes', 'schedule (un)publishing of nodes'));
+    // Add scheduler functionality to the page node type.
+    variable_set('scheduler_publish_enable_page', 1);
+    variable_set('scheduler_unpublish_enable_page', 1);
+  }
+
+  function testScheduler() {
+    // Create node to edit.
+    $edit = array(
+      'title' => 'title',
+      'publish_on' => format_date(time() + 3600, 'custom', 'Y-m-d H:i:s'),
+      'status' => 1,
+      'promote' => 1,
+    );
+    $this->helpTestScheduler($edit);
+    $edit['unpublish_on'] = $edit['publish_on'];
+    unset($edit['publish_on']);
+    $this->helpTestScheduler($edit);
+  }
+
+  function helpTestScheduler($edit) {
+    $langcode = LANGUAGE_NONE;
+    $body = $this->randomName();
+    $edit["body[$langcode][0][value]"] = $body;
+    $this->drupalLogin($this->web_user);
+    $this->drupalPost('node/add/page', $edit, t('Save'));
+    $this->drupalLogout();
+    $this->drupalGet('node');
+    if (isset($edit['publish_on'])) {
+      $key = 'publish_on';
+      $this->assertNoText($body, t('Node is unpublished'));
+    }
+    else {
+      $key = 'unpublish_on';
+      $this->assertText($body, t('Node is published'));
+    }
+    db_update('scheduler')->fields(array($key => time() - 1))->execute();
+    $this->assertTrue(db_query('SELECT COUNT(*) FROM {scheduler}')->fetchField(), 'Scheduler table is not empty');
+    $this->cronRun();
+    $this->assertFalse(db_query('SELECT COUNT(*) FROM {scheduler}')->fetchField(), 'Scheduler table is empty');
+    $this->drupalGet('node');
+    if (isset($edit['publish_on'])) {
+      $this->assertText($body, t('Node is published'));
+    }
+    else {
+      $this->assertNoText($body, t('Node is unpublished'));
+    }
+  }
+}

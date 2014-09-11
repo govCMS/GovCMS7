@@ -1,0 +1,13 @@
+name = Crumbs example
+description = Example module for Crumbs custom plugins.
+core = 7.x
+
+; This allows to put our plugin classes into dedicated folders.
+dependencies[] = xautoload
+
+; Information added by Drupal.org packaging script on 2014-08-04
+version = "7.x-2.0-beta19"
+core = "7.x"
+project = "crumbs"
+datestamp = "1407151129"
+

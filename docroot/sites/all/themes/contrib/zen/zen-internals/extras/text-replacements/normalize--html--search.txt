@@ -1,0 +1,6 @@
+html {
+  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif; /* 1 */
+  font-size: 100%; /* 3 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  line-height: 1.5em;

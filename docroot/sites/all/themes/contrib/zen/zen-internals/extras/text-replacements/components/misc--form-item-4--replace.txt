@@ -1,0 +1,3 @@
+
+/* The descriptive help text (separate from the label). */
+.form-item .description {

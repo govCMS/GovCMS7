@@ -1,0 +1,3 @@
+  .sidebar-second .region-sidebar-second {
+    float: right;
+    width: 20%;

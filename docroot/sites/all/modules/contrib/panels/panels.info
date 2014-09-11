@@ -1,0 +1,18 @@
+name = Panels
+description = Core Panels display functions; provides no external UI, at least one other Panels module should be enabled.
+core = 7.x
+package = "Panels"
+configure = admin/structure/panels
+dependencies[] = ctools (>=1.4)
+files[] = panels.module
+files[] = includes/common.inc
+files[] = includes/legacy.inc
+files[] = includes/plugins.inc
+files[] = plugins/views/panels_views_plugin_row_fields.inc
+
+; Information added by Drupal.org packaging script on 2014-02-12
+version = "7.x-3.4"
+core = "7.x"
+project = "panels"
+datestamp = "1392221614"
+

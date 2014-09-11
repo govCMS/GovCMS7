@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Provides install, upgrade and un-install functions for ccl_blocks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Remove links created by this submodule.
+ */
+function ccl_local_actions_uninstall() {
+  db_delete('ccl')
+  ->condition('type', 'local_action')
+  ->execute();
+}

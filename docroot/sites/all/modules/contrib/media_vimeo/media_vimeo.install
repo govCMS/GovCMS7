@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Media: Vimeo module.
+ */
+
+/**
+ * Empty update function.
+ */
+function media_vimeo_update_7200() {
+  // Code removed in response to http://drupal.org/node/1911970.
+}
+
+/**
+ * Remove obsolete variables.
+ */
+function media_vimeo_update_7201() {
+  // Create an array of variables sans 'media_vimeo' prefix.
+  $variables = array('width', 'height', 'preview_uri', 'api', 'autoplay', 'byline', 'color', 'loop', 'portrait', 'title', 'protocol');
+
+  foreach ($variables as $variable) {
+    // Remove the old variable.
+    variable_del('media_vimeo__' . $variable);
+  }
+}

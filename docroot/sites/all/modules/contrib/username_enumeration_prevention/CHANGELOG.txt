@@ -1,0 +1,5 @@
+CHANGELOG for Username Enumeration Prevention for Drupal 7
+
+Username Enumeration Prevention 7.x-1.0
+=================
+7.x-1.0 by ToneUK: Initial release 

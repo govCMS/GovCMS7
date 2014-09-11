@@ -1,0 +1,8 @@
+  .two-sidebars {
+    /* Span 3 columns, starting in 2nd column from left. */
+    /* Span 1 column, starting in 1st column from left. */
+    /* Span 1 column, starting in 5th column from left. */
+  }
+  .two-sidebars #content {
+    float: left;
+    width: 60%;

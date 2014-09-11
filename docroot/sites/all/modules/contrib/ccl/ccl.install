@@ -1,0 +1,130 @@
+<?php
+/**
+ * @file
+ * Provides install, upgrade and un-install functions for ccl.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function ccl_schema() {
+  $schema['ccl'] = array(
+    'description' => 'The base table for custom context links.',
+    'fields' => array(
+      'clid' => array(
+        'description' => 'The primary identifier for a link.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'no export' => TRUE,
+        'not null' => TRUE,
+      ),
+      'type' => array(
+        'description' => 'The type the link will target.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'title' => array(
+        'description' => 'The title of link.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'link' => array(
+        'description' => 'The URL of link.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'options' => array(
+        'description' => 'The options for this specific link.',
+        'type' => 'blob',
+        'not null' => TRUE,
+        'size' => 'big',
+      ),
+    ),
+    'primary key' => array('clid'),
+  );
+  return $schema;
+}
+
+/**
+ * Fix entries with old node ID tokens to work with the core token integration.
+ */
+function ccl_update_7101() {
+  $rows = db_select('ccl', 'c')
+    ->fields('c', array('clid', 'link'))
+    ->condition('link', '%\%nid%', 'LIKE')
+    ->execute();
+
+  foreach ($rows as $row) {
+    $row->link = str_replace('%nid', '[node:nid]', $row->link);
+    db_update('ccl')
+      ->fields(array('link' => $row->link))
+      ->condition('clid', $row->clid)
+      ->execute();
+  }
+}
+
+/**
+ * Adjust table for modular plugin system.
+ */
+function ccl_update_7102() {
+  // First add new options field.
+  $options_field = array(
+    'description' => 'The options for this specific link.',
+    'type' => 'blob',
+    'not null' => TRUE,
+    'size' => 'big',
+    'initial' => serialize(array()),
+  );
+  db_add_field('ccl', 'options', $options_field);
+
+  $rows = db_select('ccl', 'c')
+    ->fields('c')
+    ->execute();
+
+  foreach ($rows as $row) {
+    $default = array(
+      'node_options' => '',
+      'node_type' => '',
+      'node_id' => '',
+      'block_global' => '',
+      'block_select' => '',
+    );
+
+    if ($row->type == 'block' && $row->global) {
+      $default['block_global'] = 1;
+
+    }
+    elseif ($row->type == 'block' && !$row->global) {
+      $default['block_select'] = $row->block;
+    }
+    elseif ($row->type == 'node' && $row->global) {
+      $default['node_options'] = 'global';
+    }
+    elseif ($row->type == 'node' && !$row->global && !$row->nid) {
+      $default['node_options'] = 'ct';
+      $default['node_type'] = $row->ct;
+    }
+    else {
+      $default['node_options'] = 'node';
+      $default['node_id'] = $row->nid;
+    }
+
+    db_update('ccl')
+      ->fields(array('options' => serialize($default)))
+      ->condition('clid', $row->clid)
+      ->execute();
+  }
+
+  db_drop_field('ccl', 'global');
+  db_drop_field('ccl', 'ct');
+  db_drop_field('ccl', 'nid');
+  db_drop_field('ccl', 'block');
+
+  module_enable(array('ccl_blocks'));
+}

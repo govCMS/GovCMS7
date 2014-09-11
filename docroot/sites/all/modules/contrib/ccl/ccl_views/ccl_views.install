@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * Provides install, upgrade and un-install functions for ccl_views.
+ */
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Remove links created by the views submodule.
+ */
+function ccl_views_uninstall() {
+  db_delete('ccl')
+  ->condition('type', 'view')
+  ->execute();
+}

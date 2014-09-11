@@ -1,0 +1,76 @@
+<!--
+  name: build.xml
+  description: The main project build file for phing operations. This file can
+               be overridden with project specific configuration.
+-->
+
+<project name="govcms" default="prepare" phingVersion="2.4.11">
+
+  <includepath classpath="vendor/previousnext/scaffold" />
+  <includepath classpath="vendor/previousnext/phing-semanticgit" />
+
+  <!-- We set this to optional as is managed by composer -->
+  <import file="vendor/previousnext/scaffold/build.standard.xml" optional="true" />
+  <import file="vendor/previousnext/phing-semanticgit/build.xml" optional="true" />
+
+  <!--               -->
+  <!--  Properties   -->
+  <!-- ============= -->
+
+  <!-- The following override properties provided in imported build files. -->
+  <property name="app.profile" value="${phing.project.name}" />
+  <property name="build.logs.dir" value="${project.basedir}/build/logs" />
+  <property name="src.custom.modules" value="${project.basedir}/app/sites/all/modules/custom" />
+  <property name="src.custom.themes" value="${project.basedir}/app/sites/all/themes/custom" />
+  <property name="simpletest.group" value="${phing.project.name}" />
+  <property name="drush.source" value="@${phing.project.name}.dev" />
+  <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
+
+  <property file="build.properties" override="true" />
+
+  <!--               -->
+  <!-- Basic targets -->
+  <!-- ============= -->
+
+  <target name="clean"
+          description="Cleanup build artifacts">
+    <delete dir="${build.logs.dir}"/>
+  </target>
+
+  <target name="prepare"
+          depends="clean"
+          description="Prepare for build">
+    <!-- Create log directory structure -->
+    <mkdir dir="${build.logs.dir}/phpunit"/>
+    <mkdir dir="${build.logs.dir}/checkstyle"/>
+    <mkdir dir="${build.logs.dir}/simpletest"/>
+    <mkdir dir="${build.logs.dir}/behat"/>
+
+    <!-- Install common packages -->
+    <!-- @todo Should we commit composer.phar to the repo. -->
+    <!-- <composer command="install" /> -->
+    <exec command="composer install --prefer-dist --dev --no-progress" logoutput="true" />
+
+    <!-- add node modules -->
+    <!-- <exec command="npm install" logoutput="true"/> -->
+
+    <!-- Ensure compass gems -->
+    <exec command="bundle install --path vendor/bundle" />
+  </target>
+
+  <!--                -->
+  <!-- Custom targets -->
+  <!-- ============== -->
+
+  <!-- Custom build tasks go here. -->
+
+  <!-- Drush make the build -->
+  <target name="make"
+          description="Run drush make">
+
+    <!-- Build GovCMS -->
+    <exec command="drush make build-govcms.make docroot" />
+
+  </target>
+
+</project>

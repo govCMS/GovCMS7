@@ -1,0 +1,218 @@
+<?php
+
+/**
+ * @file
+ *   Provides an API for building breadcrumbs.
+ */
+
+define('CRUMBS_SHOW_CURRENT_PAGE', 1);
+define('CRUMBS_TRAILING_SEPARATOR', 2);
+define('CRUMBS_SHOW_CURRENT_PAGE_SPAN', 5);
+define('CRUMBS_SHOW_CURRENT_PAGE_LINK', 9);
+
+// Register the module-provided autoloader if xautoload is missing.
+if (!module_exists('xautoload')) {
+  spl_autoload_register('_crumbs_autoload');
+}
+
+require_once dirname(__FILE__) . '/includes/crumbs.callbacks.inc';
+
+/**
+ * Crumbs autoloader.
+ *
+ * Takes the class name, strips the "crumbs_" prefix, converts underscores
+ * to directory separators.
+ *
+ * For example, crumbs_InjectedAPI_describeMonoPlugin will be loaded
+ * from lib/InjectedAPI/describeMonoPlugin.php.
+ *
+ * @param $class
+ *   The name of the class to load.
+ */
+function _crumbs_autoload($class) {
+  if (preg_match('#^crumbs_(.*)$#', $class, $m)) {
+    $path = strtr($m[1], '_', '/');
+    module_load_include('php', 'crumbs', "lib/$path");
+  }
+}
+
+
+// Hook management
+// -----------------------------------------------------------------------------
+
+/**
+ * Implements hook_module_implements_alter()
+ *
+ * @param string[] $implementations
+ * @param string $hook
+ */
+function crumbs_module_implements_alter(&$implementations, $hook) {
+
+  switch ($hook) {
+
+    case 'theme_registry_alter':
+    case 'permission':
+    case 'menu':
+    case 'themekey_properties':
+    case 'theme':
+      // These hook implementations live in crumbs.info.inc
+      $implementations['crumbs'] = 'info';
+      break;
+
+    case 'block_info':
+    case 'block_view':
+      // These hook implementations live in crumbs.block.inc
+      $implementations['crumbs'] = 'block';
+      break;
+
+    case 'help':
+      $implementations['crumbs'] = 'help';
+      break;
+
+    case 'element_info':
+      $implementations['crumbs'] = 'form';
+      break;
+
+    default:
+      return;
+  }
+
+  require_once dirname(__FILE__) . '/crumbs.' . $implementations['crumbs'] . '.inc';
+}
+
+
+// Page hook implementations
+// -----------------------------------------------------------------------------
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * @param array $vars
+ */
+function crumbs_preprocess_page(&$vars) {
+
+  $vars['crumbs_trail'] = crumbs()->page->trail;
+  $vars['breadcrumb'] = crumbs()->page->breadcrumbHtml;
+}
+
+
+// Public API functions
+// -----------------------------------------------------------------------------
+
+/**
+ * Returns the breadcrumb data for the current page.
+ *
+ * Gets the menu trail for the current page, and then uses it to build the
+ * breadcrumb. Each link is themed separately, and then the links are passed
+ * to theme('breadcrumb'), which returns the final rendered breadcrumb.
+ *
+ * Note: If the existing Drupal-provided breadcrumb is empty, then Crumbs
+ * makes no effort to calculate its own, since it means that a module has
+ * intentionally removed it.
+ *
+ * Breadcrumbs with one item are also ignored, to prevent the breadcrumb
+ * from being shown on the frontpage.
+ *
+ * @return array
+ *   An associative array with the following keys:
+ *   - trail: An array containing the menu trail of the current page.
+ *   - items: An array containing the built breadcrumb.
+ *   - html: The rendered breadcrumb received from theme('breadcrumb').
+ *   or FALSE if the breadcrumb could not be determined.
+ */
+function crumbs_get_breadcrumb_data() {
+  return crumbs()->page->breadcrumbData;
+}
+
+/**
+ * Returns the trail for the provided path.
+ *
+ * @param $path
+ *   The path for which the trail is built. If NULL, the url of the
+ *   current page is assumed.
+ *
+ * @return mixed
+ *   An associative array containing the trail, with the paths as the keys, and
+ *   the router items (as received from crumbs_get_router_item()) as the values.
+ *
+ * @see crumbs_TrailFinder
+ */
+function crumbs_get_trail($path = NULL) {
+  if (!isset($path)) {
+    $path = $_GET['q'];
+  }
+  return crumbs()->trails->getForPath($path);
+}
+
+/**
+ * Returns a router item.
+ *
+ * This is a wrapper around menu_get_item() that sets additional keys
+ * (route, link_path, alias, fragments).
+ *
+ * @param $path
+ *   The path for which the corresponding router item is returned.
+ *   For example, node/5.
+ *
+ * @return array
+ *   The router item.
+ */
+function crumbs_get_router_item($path) {
+  return crumbs()->router->getRouterItem($path);
+}
+
+/**
+ * Chop off path fragments until we find a valid path.
+ *
+ * @param $path
+ *   Starting path or alias
+ * @param $depth
+ *   Max number of fragments we try to chop off. -1 means no limit.
+ *
+ * @return null|string
+ */
+function crumbs_reduce_path($path, $depth = -1) {
+  return crumbs()->router->reducePath($path, $depth);
+}
+
+/**
+ * Clean tokens so they are URL friendly.
+ * Taken directly from pathauto_clean_token_values()
+ *
+ * @param $replacements
+ *   An array of token replacements that need to be "cleaned" for use in the URL.
+ * @param $data
+ *   An array of objects used to generate the replacements.
+ * @param $options
+ *   An array of options used to generate the replacements.
+ */
+function crumbs_clean_token_values(&$replacements, $data = array(), $options = array()) {
+  crumbs_Util::cleanTokenValues($replacements, $data, $options);
+}
+
+
+// Service cache
+// -----------------------------------------------------------------------------
+
+/**
+ * Get the service with the given key.
+ * If it does not exist, it will be lazy-created with all its dependencies.
+ *
+ * @param string|null $key
+ *   Optional service name.
+ *
+ * @return crumbs_DIC_ServiceContainer|object
+ *   The service container, or a service obtained from the container.
+ */
+function crumbs($key = NULL) {
+  static $services = NULL;
+  if (!isset($services)) {
+    $services = new crumbs_DIC_ServiceContainer();
+  }
+  if (isset($key)) {
+    return $services->__get($key);
+  }
+  else {
+    return $services;
+  }
+}

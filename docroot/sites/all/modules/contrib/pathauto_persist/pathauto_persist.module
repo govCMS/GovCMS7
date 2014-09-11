@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * Implements hook_entity_load().
+ */
+function pathauto_persist_entity_load($entities, $type) {
+  $states = pathauto_persist_entity_state_load_multiple($type, array_keys($entities));
+  foreach ($states as $id => $state) {
+    if (!isset($entities[$id]->path['pathauto'])) {
+      $entities[$id]->path['pathauto'] = $state;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function pathauto_persist_entity_presave($entity, $type) {
+  if (isset($entity->path['pathauto']) && is_array($entity->path)) {
+    // We must set an empty alias string for the path to prevent path.module
+    // from saving an alias.
+    $entity->path += array('alias' => '');
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function pathauto_persist_entity_insert($entity, $type) {
+  if (isset($entity->path['pathauto'])) {
+    pathauto_persist_entity_state_save($type, $entity, $entity->path['pathauto']);
+  }
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function pathauto_persist_entity_update($entity, $type) {
+  if (isset($entity->path['pathauto'])) {
+    pathauto_persist_entity_state_save($type, $entity, $entity->path['pathauto']);
+  }
+}
+
+/**
+ * Load a pathauto state for an entity.
+ *
+ * @param $entity_type
+ *   An entity type.
+ * @param $entity_id
+ *   An entity ID.
+ */
+function pathauto_persist_entity_state_load($entity_type, $entity_id) {
+  $pathauto_state = pathauto_persist_entity_state_load_multiple($entity_type, array($entity_id));
+  return !empty($pathauto_state) ? reset($pathauto_state) : FALSE;
+}
+
+/**
+ * Load a pathauto state for multiple entities.
+ *
+ * @param $entity_type
+ *   An entity type.
+ * @param $entity_ids
+ *   An array of entity IDs.
+ */
+function pathauto_persist_entity_state_load_multiple($entity_type, $entity_ids) {
+  $pathauto_state = db_query("SELECT entity_id, pathauto FROM {pathauto_persist} WHERE entity_type = :entity_type AND entity_id IN (:entity_ids)", array(':entity_type' => $entity_type, ':entity_ids' => $entity_ids))->fetchAllKeyed();
+  return $pathauto_state;
+}
+
+/**
+ * Save the pathauto state for an entity.
+ *
+ * @param $entity_type
+ *   An entity type.
+ * @param $entity
+ *   The entity object.
+ * @param $pathauto_state
+ *   A boolean flag if TRUE means that Pathauto should keep controlling this
+ *   entity's path in the future. A FALSE value means Pathauto should stay out.
+ */
+function pathauto_persist_entity_state_save($entity_type, $entity, $pathauto_state) {
+  list($entity_id) = entity_extract_ids($entity_type, $entity);
+  db_merge('pathauto_persist')
+    ->key(array(
+      'entity_type' => $entity_type,
+      'entity_id' => $entity_id,
+    ))
+    ->fields(array(
+      'pathauto' => $pathauto_state ? 1 : 0,
+    ))
+    ->execute();
+}

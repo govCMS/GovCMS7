@@ -1,0 +1,14 @@
+name = Search Configuration
+description = Modify search form and including enforing search restrictions by content type.
+package = Search
+core = 7.x
+dependencies[] = search
+configure = admin/config/search/settings
+
+
+; Information added by drupal.org packaging script on 2011-07-07
+version = "7.x-1.0"
+core = "7.x"
+project = "search_config"
+datestamp = "1309996978"
+

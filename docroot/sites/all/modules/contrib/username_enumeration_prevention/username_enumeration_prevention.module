@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Main file for the Username Enumeration Prevention.
+ * Adds the required functionality for removing the reset password error message.
+ * Also, if views is installed restricts the callback function to work only for users with 
+ * the access user profiles permission.
+ */
+
+/**
+ * Implements hook_form_alter().
+ * Check to see if any callbacks are enabled for anonymous users and warn user.
+ */
+
+function username_enumeration_prevention_enable() {
+  $username_enumeration_prevention_roles = user_roles(FALSE, 'access user profiles');
+  if (isset($username_enumeration_prevention_roles[1]) && $username_enumeration_prevention_roles[1] == "anonymous user") {
+    drupal_set_message(t('WARNING! You have anonymous users set up with the permission to access user profiles. This is a security risk because it 
+    allows users that are not logged into the system to obtain usernames using callbacks. You can read more about this in the
+    module README or at the project page.'), 'warning');
+  }  
+}
+
+/**
+ * Implements hook_menu_alter().
+ * Disable the callback for the views module when users don't have access user profiles permission.
+ */
+   
+function username_enumeration_prevention_menu_alter(&$items) {
+  // disable views callback when user does not have permission to access user profiles.
+  $items['admin/views/ajax/autocomplete/user']['access arguments'] = array('access user profiles');
+}
+
+/**
+ * Implements hook_form_alter().
+ * Checks for the user password reset form and changes the validate and submit functions.
+ * Uses the overrided functions defined in this module instead of Drupal cores.
+ */
+
+function username_enumeration_prevention_form_alter(&$form, &$form_state, $form_id) {
+  // check to see if form is the reset password form	
+  if (strlen(strstr($form_id, 'user_pass')) > 0) {
+    // change validate and submit actions. Use functions defined in this module rather than core.
+    $form['#validate'][0] = 'username_enumeration_prevention_pass_validate';
+    $form['#submit'][0] = 'username_enumeration_prevention_pass_submit';
+  }
+}
+
+/**
+ * Overrides the Drupal Core user_pass_validate() function found in user.pages.inc
+ */
+
+function username_enumeration_prevention_pass_validate($form, &$form_state) {
+  $name = trim($form_state['values']['name']);
+  // Try to load by email.
+  $users = user_load_multiple(array(), array('mail' => $name, 'status' => '1'));
+  $account = reset($users);
+  if (!$account) {
+    // No success, try to load by name.
+    $users = user_load_multiple(array(), array('name' => $name, 'status' => '1'));
+    $account = reset($users);
+  }
+  if (isset($account->uid)) {
+    form_set_value(array('#parents' => array('account')), $account, $form_state);
+  }
+  else {
+    // set the same message as when an email has been sent but only if a value was entered in form.
+    if ($name != '') {
+      drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
+    }
+  }
+}
+
+/**
+ * Overrides the Drupal Core user_pass_submit() function found in user.pages.inc
+ */
+
+function username_enumeration_prevention_pass_submit($form, &$form_state) {
+  global $language;
+  
+  if (isset($form_state['values']['account'])) {
+    $account = $form_state['values']['account'];
+
+    // Mail one time login URL and instructions using current language.
+    _user_mail_notify('password_reset', $account, $language);
+    watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
+    drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
+  }
+  $form_state['redirect'] = 'user';
+  return;
+}

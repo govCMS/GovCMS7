@@ -1,0 +1,17 @@
+html {
+  font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif; /* 1 */
+
+  /* Delete all but one of the following font-size declarations: */
+
+  /* Use a 12px base font size. 16px x 75% = 12px */
+  font-size: 75%; /* 3 */
+  /* Use a 14px base font size. 16px x .875 = 14px */
+  font-size: 87.5%; /* 3 */
+  /* Use a 16px base font size. */
+  font-size: 100%; /* 3 */
+
+  -ms-text-size-adjust: 100%;     /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+
+  /* Establish a vertical rhythm. */
+  line-height: 1.5em;

@@ -1,0 +1,5 @@
+    clear: left;
+  }
+
+  /* Apply the shared properties of grid items in a single, efficient ruleset. */
+  .two-sidebars .region-sidebar-second .block {

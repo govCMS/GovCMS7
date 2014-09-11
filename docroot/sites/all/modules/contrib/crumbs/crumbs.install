@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the crumbs module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function crumbs_uninstall() {
+  variable_del('crumbs');
+  variable_del('crumbs_weights');
+  variable_del('crumbs_show_current_page');
+  variable_del('crumbs_node_parent_patterns');
+  variable_del('crumbs_show_front_page');
+  variable_del('crumbs_home_link_title');
+  variable_del('crumbs_minimum_trail_items');
+  variable_del('crumbs_separator_span');
+  variable_del('crumbs_separator');
+  variable_del('crumbs_override_theme_breadcrumb');
+  variable_del('crumbs_original_theme_breadcrumb');
+}
+
+/**
+ * Restore the original name of taxonomy.termReference.* plugins,
+ * without losing configuration.
+ */
+function crumbs_update_7201() {
+  $user_weights = variable_get('crumbs_weights', array());
+
+  // Rename taxonomy.termReference plugins.
+  foreach ($user_weights as $old_key => $value) {
+    if ('taxonomy.field_' === substr($old_key, 0, 15)) {
+      $new_key = 'taxonomy.termReference.' . substr($old_key, 9);
+      $user_weights[$new_key] = $value;
+    }
+  }
+
+  // Save and flush caches.
+  variable_set('crumbs_weights', $user_weights);
+  cache_clear_all();
+  cache_clear_all('crumbs:', 'cache', TRUE);
+}
+
+/**
+ * Rename the crumbs_override_theme_breadcrumb settings.
+ */
+function crumbs_update_7202() {
+  $overrides = variable_get('crumbs_override_theme_breadcrumb', array('(other)'));
+  $overrides_updated = array();
+  foreach ($overrides as $key => $value) {
+    if (!empty($value)) {
+      if ('(other)' === $value) {
+        $f = 'theme_breadcrumb';
+      }
+      elseif ('_breadcrumb' !== substr($value, -11)) {
+        $f = $value . '_breadcrumb';
+      }
+      else {
+        $f = $value;
+      }
+      $overrides_updated[$f] = $f;
+    }
+  }
+  variable_set('crumbs_override_theme_breadcrumb', $overrides_updated);
+}
+
+/**
+ * Flush crumbs plugin cache after refactoring of the plugin system.
+ */
+function crumbs_update_7203() {
+  cache_clear_all('crumbs:', 'cache', TRUE);
+}

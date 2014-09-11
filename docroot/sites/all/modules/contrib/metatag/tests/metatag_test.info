@@ -1,0 +1,12 @@
+name = Meta Tag Test
+description = Testing module for metatag.module
+core = 7.x
+dependencies[] = metatag
+hidden = TRUE
+
+; Information added by drupal.org packaging script on 2013-04-22
+version = "7.x-1.0-beta7"
+core = "7.x"
+project = "metatag"
+datestamp = "1366640119"
+

@@ -1,0 +1,6 @@
+  #content {
+    /* Add visible URL after links. */
+    /* Only display useful links. */
+    /* Add visible title after abbreviations. */
+  }
+  #content a[href]:after {

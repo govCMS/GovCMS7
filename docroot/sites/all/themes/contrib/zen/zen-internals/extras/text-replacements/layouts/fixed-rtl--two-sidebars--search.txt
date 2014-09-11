@@ -1,0 +1,6 @@
+.two-sidebars {
+  /* Span 3 columns, starting in 2nd column from right. */
+  /* Span 1 column, starting in 1st column from right. */
+  /* Span 1 column, starting in 5th column from right. */
+}
+.two-sidebars #content {

@@ -1,0 +1,261 @@
+<?php
+
+/**
+ * @file
+ * Main functionality for the Search Configuration module.
+ *
+ * Features:
+ *   a) Content type search are govened by permissions.
+ *   b) Individual advanced search components are toggled using the main search
+ *      form settings. These may have role settings applied.
+ *   c) Filters for content types field
+ *   d) Grouping options for content types field
+ *   e) Title label overrides
+ *   f) Title display options
+ *
+ * @todo
+ *   g) Local menu tab label overrides OR find the native method of doing this
+ *   h) Categories field
+ *   i) Search result limits
+ *
+ * @todo (maybe, depends on scale)
+ *   j) Add node level exclude from search options
+ *   k) Add new fields to the search form
+ */
+
+/**
+ * Helper function to get the settings.
+ */
+function search_config_node_settings() {
+  $settings = variable_get('search_config', array());
+  $settings += array(
+    'forms' => array(
+      'toggle_forms' => 0,            // Show adv if both forms are present
+      'move_keyword_search' => 0,     // Move keyword search into adv form
+      'advanced_populate' => 0,       // Try and repopulate the adv form
+      'advanced_expand' => 'default', // Control the presentation of adv form
+      // Controls all 3 'Containing...' fields.
+      'remove_containing_wrapper' => 'default',
+    ),
+    'fields' => array(
+      'containing_any' => array(),
+      'containing_phrase' => array(),
+      'containing_none' => array(),
+      'types' => array(),
+      'category' => array(),
+    ),
+    'restrictions' => array(
+      'admin_bypass' => 1,
+    ),
+  );
+  foreach ($settings['fields'] as $field => $info) {
+    $settings['fields'][$field] += array(
+      'remove' => 0,                  // Hides the field
+      'roles' => array()              // Readds it if role selected
+    );
+    if ($field == 'types') {
+      $settings['fields'][$field] += array(
+        'filter' => array(),          // Content type to HIDE
+        'groupings' => array(),       // Combine type filters into groupings
+      );
+    }
+    // @todo: What features do we need here?
+    if ($field == 'category') {
+      $settings['fields'][$field] += array(
+        'filter' => array(),          // Vocabs to HIDE
+        'widget' => 'textfield',      // Autocomplete?
+      );
+    }
+  }
+  return $settings;
+}
+
+function search_config_string_overrides($key = NULL) {
+  $overrides = variable_get('search_config_string_overrides', array());
+  $overrides += array(
+    'labels' => array(
+      'basic' => '',
+      'basic_with_keys' => '',
+      'basic_submit' => '',
+      'advanced_fieldset' => '',
+      'advanced_fieldset_with_keys' => '',
+      'advanced_any' => '',
+      'advanced_phrase' => '',
+      'advanced_none' => '',
+      'advanced_type' => '',
+      'advanced_language' => '',
+      'advanced_submit' => '',
+    ),
+    'title_display' => array(
+      'basic' => 'default',
+      'advanced_any' => 'default',
+      'advanced_phrase' => 'default',
+      'advanced_none' => 'default',
+      'advanced_type' => 'default',
+      'advanced_language' => 'default',
+    ),
+    'menu' => array(
+      'node' => '',
+      'user' => '',
+    ),
+  );
+  if (isset($key)) {
+    return array_filter($overrides[$key]);
+  }
+  return $overrides;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function search_config_permission() {
+  $permissions = array(
+    'search all content' => array(
+      'title' => t('Search all content'),
+      'description' => t('Allow users to search any content, overriding individual content type permissions.'),
+    ),
+  );
+
+  foreach (search_config_content_types() as $type => $label) {
+    $permissions["search $type content"] = array(
+      'title' => t('%type_name: Search content of this type', array('%type_name' => $label)),
+    );
+  }
+
+  return $permissions;
+}
+
+/**
+ * Implements of hook_query_node_access_alter().
+ */
+function search_config_query_node_access_alter(QueryAlterableInterface $query) {
+  global $user;
+  if ($user->uid == 1) {
+    return;
+  }
+  $search = FALSE;
+  $node = FALSE;
+  foreach ($query->getTables() as $alias => $table) {
+    if ($table['table'] == 'search_index') {
+      $search = $alias;
+    }
+    elseif ($table['table'] == 'node') {
+      $node = $alias;
+    }
+  }
+
+  if ($node && $search) {
+    if (user_access('search all content')) {
+      return;
+    }
+
+    $excluded_content_types = array();
+    foreach (search_config_content_types() as $type => $label) {
+      if (!user_access("search $type content")) {
+        $excluded_content_types[] = $type;
+      }
+    }
+
+    // A core bug results in a DB error if we use the following: Ref: #1210072
+    // $query->condition($node . '.type', array($excluded_content_types), 'NOT IN');
+    if (!empty($excluded_content_types)) {
+      $db_and = db_and();
+      foreach ($excluded_content_types as $type) {
+        $db_and->condition($node . '.type', $type, '!=');
+      }
+      $query->condition($db_and);
+    }
+    
+  }
+}
+
+/**
+ * Implement hook_theme().
+ */
+function search_config_theme() {
+  return array(
+    'search_config_admin_label_form' => array(
+      'render element' => 'form',
+      'template' => 'templates/search-config-admin-labels-form'
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_search_results().
+ *
+ * The only reason for this hook is to record if there are any active
+ * search results found.
+ */
+function search_config_node_search_result($node) {
+  global $search_config_node_results;
+  $search_config_node_results [$node->nid] = $node->nid;
+}
+
+/**
+ * Implements of hook_form_FORM_alter().
+ */
+function search_config_form_search_form_alter(&$form, $form_state) {
+  // See if this is the node search form with the advanced fieldset present.
+  if (isset($form['advanced']) && isset($form['module']['#value'])
+      && $form['module']['#value'] == 'node') {
+    module_load_include('inc', 'search_config', 'search_config.node');
+    _search_config_advanced_form($form, $form_state);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_alter().
+ *
+ * This hooks into the main administration search form to append the additional
+ * configuration options.
+ */
+function search_config_form_search_admin_settings_alter(&$form, $form_state) {
+  module_load_include('inc', 'search_config', 'search_config.admin');
+  _search_config_form_search_admin_settings_alter($form, $form_state);
+  $form['#submit'][] = 'search_config_search_admin_settings_alter';
+}
+
+/**
+ * Additional submit handler to save the additional fields added by the form alter.
+ */
+function search_config_search_admin_settings_alter(&$form, $form_state) {
+  variable_set('search_config_string_overrides', $form_state['values']['content_node_search_config']['string_overrides']);
+  unset($form_state['values']['content_node_search_config']['string_overrides']);
+  variable_set('search_config', $form_state['values']['content_node_search_config']);
+}
+
+/**
+ * Helper function to get an array of safe to use content type names.
+ */
+function search_config_content_types() {
+  return array_map('check_plain', node_type_get_names());
+}
+
+/**
+ * Helper function to test the users configured access rights to a field.
+ *
+ * @param bool $remove
+ *   A flag to block access.
+ *
+ * @param array $grant
+ *   An additional array of roles to overrule the main flag
+ */
+function search_config_get_access($remove, $grant) {
+  global $user;
+  if ($remove) {
+    return (bool) array_intersect_key($user->roles, array_filter($grant));
+  }
+  return TRUE;
+}
+
+/**
+ * Helper function for the installation, upgrades and permission overviews.
+ */
+function search_config_get_roles_by_permission($permission) {
+  return db_select('role_permission', 'p')
+            ->fields('p', array('rid'))
+            ->condition('permission', $permission)
+            ->execute()
+            ->fetchCol();
+}

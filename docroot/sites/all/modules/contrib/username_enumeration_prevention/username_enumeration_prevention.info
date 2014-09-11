@@ -1,0 +1,11 @@
+name = Username Enumeration Prevention
+description = "Removes the error message produced, from the forgot password form, when an incorrect user has been supplied."
+core = 7.x
+files[] = username_enumeration_prevention.module
+version = "7.x-1.0"
+; Information added by drupal.org packaging script on 2012-02-19
+version = "7.x-1.0"
+core = "7.x"
+project = "username_enumeration_prevention"
+datestamp = "1329610645"
+

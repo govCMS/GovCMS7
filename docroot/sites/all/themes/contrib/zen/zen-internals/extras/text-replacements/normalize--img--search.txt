@@ -1,0 +1,4 @@
+  -ms-interpolation-mode: bicubic;
+  /* Suppress the space beneath the baseline */
+  /* vertical-align: bottom; */
+  /* Responsive images */

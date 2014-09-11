@@ -1,0 +1,239 @@
+<?php
+/**
+ * @file
+ * Implements support of views in CCL.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Add additional form elements to the main CCL add/edit form.
+ */
+function ccl_views_form_ccl_add_form_alter(&$form, &$form_state, $form_id) {
+  // Check if we are in edit mode.
+  if (isset($form_state['clid'])) {
+    $clid = $form_state['clid'];
+    $link = $form_state['link'];
+  }
+  else {
+    $clid = 0;
+  }
+  // Add blocks as an option for links.
+  $form['options_group']['ccl_type']['#options']['view'] = t('View');
+
+  // Follow the naming conventions outlined here in order to avoid
+  // naming conflicts.
+  if ($clid && isset($link->options['view_options'])) {
+    $view_options_default = $link->options['view_options'];
+  }
+  else {
+    $view_options_default = 2;
+  }
+
+  $form['options_group']['view_options'] = array(
+    '#type' => 'radios',
+    '#title' => t('Add this link to:'),
+    '#default_value' => $view_options_default,
+    '#options' => array(
+      t('All views'),
+      t('All displays of a view.'),
+      t('A specific display of a view.'),
+    ),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="ccl_type"]' => array('value' => 'view'),
+      ),
+    ),
+  );
+
+  $options = _ccl_views_get_info();
+  $form['options_group']['view_display'] = array(
+    '#type' => 'select',
+    '#title' => t('Views displays'),
+    '#description' => t('Select the views display this link should be added to.'),
+    '#options' => $options['displays'],
+    '#default_value' => ($clid && isset($link->options['view_display'])) ? $link->options['view_display'] : -1,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="view_options"]' => array('value' => '2'),
+        ':input[name="ccl_type"]' => array('value' => 'view'),
+      ),
+    ),
+  );
+
+  $form['options_group']['view_view'] = array(
+    '#type' => 'select',
+    '#title' => t('Views'),
+    '#description' => t('Select the view this link should be added to.'),
+    '#options' => $options['views'],
+    '#default_value' => ($clid && isset($link->options['view_view'])) ? $link->options['view_view'] : -1,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="view_options"]' => array('value' => '1'),
+        ':input[name="ccl_type"]' => array('value' => 'view'),
+      ),
+    ),
+  );
+
+  // Add validation for blocks.
+  $form['#validate'][] = "ccl_views_validation";
+}
+
+/**
+ * Custom validation for the block options.
+ */
+function ccl_views_validation($form, &$form_state) {
+}
+
+/**
+ * Hook function to process the contextual links element.
+ */
+function ccl_views_ccl_add_link($element, $dest) {
+  // View processing.
+  if (isset($element['#element']['#views_contextual_links_info'])) {
+    $vid = $element['#element']['#views_contextual_links_info']['views_ui']['view_name'];
+    $vdid = $element['#element']['#views_contextual_links_info']['views_ui']['view_name'] . '|' . $element['#element']['#views_contextual_links_info']['views_ui']['view_display_id'];
+    $views_cache = ccl_cache_get('ccl_view');
+
+    // Global Views.
+    foreach ($views_cache['global'] as $id => $link) {
+      if ($processed_link = _ccl_prepare_link($link, $dest)) {
+        $element['#links']['ccl-global-view-' . $id] = $processed_link;
+      }
+    }
+
+    // Individual view.
+    if (in_array($vid, array_keys($views_cache['views']))) {
+      foreach ($views_cache['views'][$vid] as $id => $link) {
+        if ($processed_link = _ccl_prepare_link($link, $dest)) {
+          $element['#links']['ccl-view-' . $id] = $processed_link;
+        }
+      }
+    }
+
+    // Individual display.
+    if (in_array($vdid, array_keys($views_cache['displays']))) {
+      foreach ($views_cache['displays'][$vdid] as $id => $link) {
+        if ($processed_link = _ccl_prepare_link($link, $dest)) {
+          $element['#links']['ccl-display-' . $id] = $processed_link;
+        }
+      }
+    }
+  }
+  return $element;
+}
+
+/**
+ * Hook function triggered by the chache update routine of the main module.
+ */
+function ccl_views_ccl_cache_update() {
+  $views = db_query("SELECT * FROM {ccl} WHERE type = :type", array(':type' => 'view'));
+  $view_cache = array(
+    'global' => array(),
+    'displays' => array(),
+    'views' => array(),
+  );
+  foreach ($views as $view) {
+    $view->options = unserialize($view->options);
+    $advanced = array();
+    if (isset($view->options['advanced_css'])) {
+      $advanced['class'] = $view->options['advanced_css'];
+    }
+    if (isset($view->options['advanced_query'])) {
+      $advanced['query'] = $view->options['advanced_query'];
+    }
+
+    if ($view->options['view_options'] == 0) {
+      $view_cache['global'][] = array(
+        'title' => $view->title,
+        'href' => $view->link,
+        'advanced' => $advanced,
+      );
+    }
+    elseif ($view->options['view_options'] == 2) {
+      $view_cache['displays'][$view->options['view_display']][] = array(
+        'title' => $view->title,
+        'href' => $view->link,
+        'advanced' => $advanced,
+      );
+    }
+    elseif ($view->options['view_options'] == 1) {
+      $view_cache['views'][$view->options['view_view']][] = array(
+        'title' => $view->title,
+        'href' => $view->link,
+        'advanced' => $advanced,
+      );
+    }
+  }
+  cache_set('ccl_view', $view_cache);
+}
+
+/**
+ * Helper function to retrieve all the information for all views in the system.
+ */
+function _ccl_views_get_info() {
+  $view_info = cache_get('ccl_view_info');
+
+  // If no data is found in the cache get all views with
+  // views_get_applicable_view('handler').
+  if (empty($view_info)) {
+    $views = views_get_applicable_views('handler');
+    if ($views) {
+      foreach ($views as $key => $view) {
+        $view['name'] = $view[0]->name;
+        $view['id'] = $view[1];
+        $view['human_name'] = $view[0]->human_name;
+        $view['display_title'] = $view[0]->display[$view[1]]->display_title;
+        $view['vdid'] = "{$view['name']}|{$view['id']}";
+        $view['vid'] = $view['name'];
+        $view['result_display'] = (empty($view['human_name']) ? $view['name'] : $view['human_name']) . " - {$view['display_title']} [{$view['id']}]";
+        $view['result_view'] = empty($view['human_name']) ? $view['name'] : $view['human_name'];
+        $view_info['options'] = 0;
+        $view_info['displays'][$view['vdid']] = $view['result_display'];
+        $view_info['views'][$view['vid']] = $view['result_view'];
+      }
+      cache_set('ccl_view_info', $view_info);
+    }
+    // Catch if no views have been created yet.
+    else {
+      $view_info['displays'] = array();
+      $view_info['views'] = array();
+    }
+  }
+
+  if (isset($view_info->cid)) {
+    return $view_info->data;
+  }
+  else {
+    return $view_info;
+  }
+}
+
+/**
+ * Hook function to provide link option information for the link list page.
+ */
+function ccl_views_ccl_link_info($record) {
+  if ($record->type == 'view') {
+    $options_return = array(
+      'desc' => '',
+      'op' => l(t('Edit'), 'admin/config/user-interface/ccl/' . $record->clid . '/edit') . ' | ' . l(t('Delete'), 'admin/config/user-interface/ccl/' . $record->clid . '/delete'),
+    );
+    $options = unserialize($record->options);
+
+    if ($options['view_options'] == 0) {
+      $options_return['desc'] = t('Attached to all views.');
+    }
+    elseif ($options['view_options'] == 1) {
+      $views = _ccl_views_get_info();
+      $options_return['desc'] = t('Attached to the %view view.', array('%view' => $views['views'][$options['view_view']]));
+    }
+    elseif ($options['view_options'] == 2) {
+      $views = _ccl_views_get_info();
+      $options_return['desc'] = t('Attached to the %view view display.', array('%view' => $views['displays'][$options['view_display']]));
+    }
+    return $options_return;
+  }
+  else {
+    return "";
+  }
+}

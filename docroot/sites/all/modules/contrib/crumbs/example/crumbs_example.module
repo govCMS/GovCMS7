@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_crumbs_plugins()
+ *
+ * @param crumbs_InjectedAPI_hookCrumbsPlugins $api
+ */
+function crumbs_example_crumbs_plugins($api) {
+
+  // The class will be crumbs_example_CrumbsMonoPlugin_NewsByDate.
+  $api->monoPlugin('NewsByDate');
+
+  // The class will be crumbs_example_CrumbsMultiPlugin_ListOfNews.
+  $api->multiPlugin('ListOfNews');
+
+  if (module_exists('entity')) {
+    // Let the breadcrumb item title be
+    // - "node[123] (article)" on node/123, and
+    // - "taxonomy_term[55] (categories)" taxonomy/term/55, and
+    // - "node[1] (administrator)" on user/1.
+    $api->entityTitleCallback('experiment', function($entity, $entity_type, $distinction_key) {
+      // The entity_id() function is provided by entity.module.
+      $etid = entity_id($entity_type, $entity);
+      return $entity_type . '[' . $etid . '] (' . $distinction_key . ')';
+    });
+  }
+
+  // Custom breadcrumb for search/node/% pages.
+  // Let <front> be the breadcrumb parent of search/node/%.
+  // The second argument will make this behavior available as
+  // "crumbs_example.search.node.parent" on the weights configuration form,
+  // where it can be prioritized against other behaviors.
+  $api->routeParentPath('search/node/%', 'search.node.parent', '<front>');
+
+  // Let "Search for 'xyz'" be the breadcrumb item title for search/node/%.
+  // The second argument will make this behavior available as
+  // "crumbs_example.search.node.title" on the weights configuration form.
+  $api->routeTitleCallback('search/node/%', 'search.node.title', function($path, $item) {
+    return t("Search for '@terms'", array('@terms' => $item['map'][2]));
+  });
+}

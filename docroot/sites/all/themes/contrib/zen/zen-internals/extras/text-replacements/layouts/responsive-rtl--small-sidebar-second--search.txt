@@ -1,0 +1,10 @@
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+  .sidebar-second {
+    /* Span 2 columns, starting in 1st column from right. */
+    /* Span 1 column, starting in 3rd column from right. */
+  }
+  .sidebar-second #content {
+    float: right;
+    width: 66.66667%;

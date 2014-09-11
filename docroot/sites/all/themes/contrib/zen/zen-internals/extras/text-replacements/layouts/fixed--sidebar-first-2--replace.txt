@@ -1,0 +1,3 @@
+
+/* Span 1 column, starting in 1st column from left. */
+.sidebar-first .region-sidebar-first {

@@ -1,0 +1,96 @@
+<?php
+
+class MetaTagsTestHelper extends DrupalWebTestCase {
+  function setUp(array $modules = array()) {
+    $modules[] = 'ctools';
+    $modules[] = 'token';
+    $modules[] = 'metatag';
+    $modules[] = 'metatag_test';
+    parent::setUp($modules);
+  }
+}
+
+class MetaTagsUnitTest extends MetaTagsTestHelper {
+  public static function getInfo() {
+    return array(
+      'name' => 'Meta tag unit tests',
+      'description' => 'Test basic meta tag functionality.',
+      'group' => 'Meta tags',
+    );
+  }
+
+  /**
+   * Test the metatag_config_load_with_defaults() function.
+   */
+  public function testConfigLoadDefaults() {
+    $defaults = metatag_config_load_with_defaults('test:foo');
+    $this->assertEqual($defaults, array(
+      'description' => array('value' => 'Test foo description'),
+      'abstract' => array('value' => 'Test foo abstract'),
+      'title' => array('value' => 'Test altered title'),
+      'test:foo' => array('value' => 'foobar'),
+      'generator' => array('value' => 'Drupal 7 (http://drupal.org)'),
+      'canonical' => array('value' => '[current-page:url:absolute]'),
+      'shortlink' => array('value' => '[current-page:url:unaliased]'),
+    ));
+  }
+
+  public function testEntitySupport() {
+    $test_cases[1] = array('type' => 'node', 'bundle' => 'article', 'expected' => TRUE);
+    $test_cases[2] = array('type' => 'node', 'bundle' => 'page', 'expected' => TRUE);
+    $test_cases[3] = array('type' => 'node', 'bundle' => 'invalid-bundle', 'expected' => FALSE);
+    $test_cases[4] = array('type' => 'user', 'expected' => TRUE);
+    foreach ($test_cases as $test_case) {
+      $test_case += array('bundle' => NULL);
+      $this->assertMetatagEntityHasMetatags($test_case['type'], $test_case['bundle'], $test_case['expected']);
+    }
+
+    variable_set('metatag_test_entity_info_disable', TRUE);
+    drupal_static_reset('metatag_entity_has_metatags');
+    drupal_static_reset('metatag_entity_supports_metatags');
+    entity_info_cache_clear();
+
+    $test_cases[2]['expected'] = FALSE;
+    $test_cases[4]['expected'] = FALSE;
+    foreach ($test_cases as $test_case) {
+      $test_case += array('bundle' => NULL);
+      $this->assertMetatagEntityHasMetatags($test_case['type'], $test_case['bundle'], $test_case['expected']);
+    }
+  }
+
+  function assertMetatagEntityHasMetatags($entity_type, $bundle, $expected) {
+    $entity = entity_create_stub_entity($entity_type, array(0, NULL, $bundle));
+    return $this->assertEqual(
+      metatag_entity_has_metatags($entity_type, $entity),
+      $expected,
+      t("metatag_entity_has_metatags(:type, :entity) is :expected", array(
+        ':type' => var_export($entity_type, TRUE),
+        ':entity' => var_export($entity, TRUE),
+        ':expected' => var_export($expected, TRUE),
+      ))
+    );
+  }
+
+  /**
+   * Test the metatag_config_instance_label() function.
+   */
+  public function testConfigLabels() {
+    $test_cases = array(
+      'node' => 'Node',
+      'node:article' => 'Node: Article',
+      'node:article:c' => 'Node: Article: Unknown (c)',
+      'node:b' => 'Node: Unknown (b)',
+      'node:b:c' => 'Node: Unknown (b): Unknown (c)',
+      'a' => 'Unknown (a)',
+      'a:b' => 'Unknown (a): Unknown (b)',
+      'a:b:c' => 'Unknown (a): Unknown (b): Unknown (c)',
+      'a:b:c:d' => 'Unknown (a): Unknown (b): Unknown (c): Unknown (d)',
+    );
+
+    foreach ($test_cases as $input => $expected_output) {
+      drupal_static_reset('metatag_config_instance_label');
+      $actual_output = metatag_config_instance_label($input);
+      $this->assertEqual($actual_output, $expected_output);
+    }
+  }
+}

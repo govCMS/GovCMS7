@@ -1,0 +1,5 @@
+
+  /* Span 4 columns, starting in 2nd column from left. */
+  .sidebar-first #content {
+    float: left;
+    width: 80%;

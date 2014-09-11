@@ -1,0 +1,20 @@
+/**
+ * @file
+ * RTL companion for the styles.scss file.
+ */
+
+@import "init"; /* Import Sass mixins, variables, Compass modules, etc. */
+
+
+/* Base HTML element rules */
+@import "normalize-rtl";
+
+/* Layout rules */
+@import "layouts/fixed-rtl";
+
+/* Component (SMACSS module) rules */
+@import "components/misc-rtl";
+
+/* Theme rules */
+/* @import "theme-A-rtl"; */
+/* @import "theme-B-rtl"; */

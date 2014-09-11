@@ -1,0 +1,216 @@
+<?php
+/**
+ * @file
+ * Simple aggregation for Drupal 7.
+ */
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Ensure custom module's hook_css_alter() runs last.
+ */
+function simple_aggregation_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'css_alter') {
+    // Make simple_aggregation_css_alter() run last.
+    $group = $implementations['simple_aggregation'];
+    unset($implementations['simple_aggregation']);
+    $implementations['simple_aggregation'] = $group;
+  }
+}
+
+/**
+ * Implements hook_css_alter().
+ *
+ * Reduce the number of CSS aggregates.
+ */
+function simple_aggregation_css_alter(&$css) {
+  foreach (array_keys($css) as $file) {
+    // The CSS_SYSTEM aggregate is dumb.
+    if ($css[$file]['group'] == CSS_SYSTEM) {
+      $css[$file]['group'] = CSS_DEFAULT;
+      $css[$file]['weight'] += CSS_SYSTEM;
+    }
+    // Don't let stupid modules be stupid.
+    if ($css[$file]['media'] == 'screen') {
+      $css[$file]['media'] = 'all';
+    }
+  }
+
+  // Sort CSS items, so that they appear in the correct order.
+  uasort($css, 'simple_aggregation_sort_css');
+  // Save this sorting by re-weighting items.
+  $i = 0;
+  foreach (array_keys($css) as $file) {
+    $css[$file]['weight'] = $i;
+    $i++;
+  }
+}
+
+/**
+ * Copy of drupal_sort_css_js() with additional optimizations.
+ */
+function simple_aggregation_sort_css($a, $b) {
+  if ($a['group'] < $b['group']) {
+    return -1;
+  }
+  elseif ($a['group'] > $b['group']) {
+    return 1;
+  }
+  elseif ($a['every_page'] && !$b['every_page']) {
+    return -1;
+  }
+  elseif (!$a['every_page'] && $b['every_page']) {
+    return 1;
+  }
+  // Sort external and inline CSS away from aggregated CSS.
+  elseif (($comparison = strcmp($a['type'], $b['type'])) !== 0) {
+    return ($comparison < 0 ) ? -1 : 1;
+  }
+  // Sort IE conditional comments.
+  elseif (($comparison = strcmp($a['browsers']['!IE'], $b['browsers']['!IE'])) !== 0) {
+    return ($comparison < 0 ) ? -1 : 1;
+  }
+  elseif (($comparison = strcmp($a['browsers']['IE'], $b['browsers']['IE'])) !== 0) {
+    return ($comparison < 0 ) ? -1 : 1;
+  }
+  // Sort different media types.
+  elseif (($comparison = strcmp($a['media'], $b['media'])) !== 0) {
+    return ($comparison < 0 ) ? -1 : 1;
+  }
+
+  // Finally, order by weight.
+  elseif ($a['weight'] < $b['weight']) {
+    return -1;
+  }
+  elseif ($a['weight'] > $b['weight']) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ *
+ * Overrides drupal_aggregate_css() with a custom one.
+ */
+function simple_aggregation_element_info_alter(&$type) {
+  // Conditionally check for empty CSS aggregate files.
+  if (isset($type['styles'])) {
+    $type['styles']['#aggregate_callback'] = 'simple_aggregation_aggregate_css';
+  }
+}
+
+/**
+ * Custom callback to aggregate CSS files and inline content.
+ *
+ * This is a copy of drupal_aggregate_css() that checks for an empty aggregate.
+ */
+function simple_aggregation_aggregate_css(&$css_groups) {
+  $preprocess_css = (variable_get('preprocess_css', FALSE) && (!defined('MAINTENANCE_MODE') || MAINTENANCE_MODE != 'update'));
+
+  // For each group that needs aggregation, aggregate its items.
+  foreach ($css_groups as $key => $group) {
+    switch ($group['type']) {
+      // If a file group can be aggregated into a single file, do so, and set
+      // the group's data property to the file path of the aggregate file.
+      case 'file':
+        if ($group['preprocess'] && $preprocess_css) {
+          $css_groups[$key]['data'] = simple_aggregation_build_css_cache($group['items']);
+          // An empty string indicates an empty agregate; remove the group.
+          if ($css_groups[$key]['data'] == '') {
+            unset($css_groups[$key]);
+          }
+        }
+        break;
+      // Aggregate all inline CSS content into the group's data property.
+      case 'inline':
+        $css_groups[$key]['data'] = '';
+        foreach ($group['items'] as $item) {
+          $css_groups[$key]['data'] .= drupal_load_stylesheet_content($item['data'], $item['preprocess']);
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Aggregates and optimizes CSS files into a cache file in the files directory.
+ *
+ * Copy of drupal_build_css_cache() with sane checks for empty aggregates.
+ */
+function simple_aggregation_build_css_cache($css) {
+  $data = '';
+  $uri = '';
+  $map = variable_get('drupal_css_cache_files', array());
+  // Create a new array so that only the file names are used to create the hash.
+  // This prevents new aggregates from being created unnecessarily.
+  $css_data = array();
+  foreach ($css as $css_file) {
+    $css_data[] = $css_file['data'];
+  }
+  $key = hash('sha256', serialize($css_data));
+  if (isset($map[$key])) {
+    $uri = $map[$key];
+  }
+
+  if (empty($uri) || !file_exists($uri)) {
+    // Build aggregate CSS file.
+    foreach ($css as $stylesheet) {
+      // Only 'file' stylesheets can be aggregated.
+      if ($stylesheet['type'] == 'file') {
+        if ($contents = drupal_load_stylesheet($stylesheet['data'], TRUE)) {
+          // Build the base URL of this CSS file: start with the full URL.
+          $css_base_url = file_create_url($stylesheet['data']);
+          // Move to the parent.
+          $css_base_url = substr($css_base_url, 0, strrpos($css_base_url, '/'));
+          // Simplify to a relative URL if the stylesheet URL starts with the
+          // base URL of the website.
+          if (substr($css_base_url, 0, strlen($GLOBALS['base_root'])) == $GLOBALS['base_root']) {
+            $css_base_url = substr($css_base_url, strlen($GLOBALS['base_root']));
+          }
+
+          _drupal_build_css_path(NULL, $css_base_url . '/');
+          // Anchor all paths in the CSS with its base URL, ignoring external and absolute paths.
+          $data .= preg_replace_callback('/url\(\s*[\'"]?(?![a-z]+:|\/+)([^\'")]+)[\'"]?\s*\)/i', '_drupal_build_css_path', $contents);
+        }
+      }
+    }
+
+    // Don't aggregate a set of empty files.
+    if ($data) {
+      // Per the W3C specification at http://www.w3.org/TR/REC-CSS2/cascade.html#at-import,
+      // @import rules must proceed any other style, so we move those to the top.
+      $regexp = '/@import[^;]+;/i';
+      preg_match_all($regexp, $data, $matches);
+      $data = preg_replace($regexp, '', $data);
+      $data = implode('', $matches[0]) . $data;
+
+      // Prefix filename to prevent blocking by firewalls which reject files
+      // starting with "ad*".
+      $filename = 'css_' . drupal_hash_base64($data) . '.css';
+      // Create the css/ within the files folder.
+      $csspath = 'public://css';
+      $uri = $csspath . '/' . $filename;
+      // Create the CSS file.
+      file_prepare_directory($csspath, FILE_CREATE_DIRECTORY);
+      if (!file_exists($uri) && !file_unmanaged_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
+        return FALSE;
+      }
+      // If CSS gzip compression is enabled, clean URLs are enabled (which means
+      // that rewrite rules are working) and the zlib extension is available then
+      // create a gzipped version of this file. This file is served conditionally
+      // to browsers that accept gzip using .htaccess rules.
+      if (variable_get('css_gzip_compression', TRUE) && variable_get('clean_url', 0) && extension_loaded('zlib')) {
+        if (!file_exists($uri . '.gz') && !file_unmanaged_save_data(gzencode($data, 9, FORCE_GZIP), $uri . '.gz', FILE_EXISTS_REPLACE)) {
+          return FALSE;
+        }
+      }
+      // Save the updated map.
+      $map[$key] = $uri;
+      variable_set('drupal_css_cache_files', $map);
+    }
+  }
+  return $uri;
+}

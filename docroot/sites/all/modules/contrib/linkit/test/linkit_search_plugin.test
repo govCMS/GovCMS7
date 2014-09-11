@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Tests for Linkit module.
+ */
+
+/**
+ * Search plugin test helper class.
+ */
+abstract class LinkitsearchPluginTestCase extends LinkitTestCase {
+  /**
+   * The string to search for when doing autocomplete calls.
+   *
+   * @var string
+   */
+  protected $search_string = 'lorem';
+}

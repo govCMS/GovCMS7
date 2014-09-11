@@ -1,0 +1,479 @@
+<?php
+
+/**
+ * Test requirements for installation and running.
+ */
+function panels_requirements($phase) {
+  $function = "panels_requirements_$phase";
+  return function_exists($function) ? $function() : array();
+}
+
+/**
+ * Check install-time requirements.
+ */
+function panels_requirements_install() {
+  $requirements = array();
+  $t = get_t();
+  // Assume that if the user is running an installation profile that both
+  // Panels and CTools are the same release.
+  if (!(defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'install')) {
+    // apparently the install process doesn't include .module files,
+    // so we need to force the issue in order for our versioning
+    // check to work.
+    if (!defined('PANELS_REQUIRED_CTOOLS_API')) {
+      include_once drupal_get_path('module', 'panels') . '/panels.module';
+    }
+
+    // In theory we should check module_exists, but Drupal's gating should
+    // actually prevent us from getting here otherwise.
+    if (!defined('CTOOLS_API_VERSION')) {
+      include_once drupal_get_path('module', 'ctools') . '/ctools.module';
+    }
+    if (!module_invoke('ctools', 'api_version', PANELS_REQUIRED_CTOOLS_API)) {
+       $requirements['panels_ctools'] = array(
+         'title' => $t('CTools API Version'),
+         'value' => CTOOLS_API_VERSION,
+         'severity' => REQUIREMENT_ERROR,
+         'description' => t('The CTools API version is too old for Panels. Panels needs at least %version.', array('%version' => PANELS_REQUIRED_CTOOLS_API))
+       );
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implementation of hook_schema().
+ */
+function panels_schema() {
+  // This should always point to our 'current' schema. This makes it relatively easy
+  // to keep a record of schema as we make changes to it.
+  return panels_schema_5();
+}
+
+function panels_schema_5() {
+  $schema = panels_schema_4();
+
+  $schema['panels_display']['fields']['uuid'] = array(
+    'type' => 'char',
+    'length' => '36',
+  );
+  $schema['panels_display']['export']['key'] = 'uuid';
+  $schema['panels_display']['export']['key name'] = 'UUID';
+
+  $schema['panels_pane']['fields']['uuid'] = array(
+    'type' => 'char',
+    'length' => '36',
+  );
+  $schema['panels_pane']['export']['key'] = 'uuid';
+  $schema['panels_pane']['export']['key name'] = 'UUID';
+
+  return $schema;
+}
+
+function panels_schema_4() {
+  $schema = panels_schema_3();
+
+  $schema['panels_pane']['fields']['locks'] = array(
+    'type' => 'text',
+    'size' => 'big',
+    'serialize' => TRUE,
+    'object default' => array(),
+    'initial' => array(),
+  );
+
+  return $schema;
+}
+
+/**
+ * Schema from the D6 version.
+ */
+function panels_schema_3() {
+  // Schema 3 is now locked. If you need to make changes, please create
+  // schema 4 and add them.
+  $schema = array();
+
+  $schema['panels_display'] = array(
+    'export' => array(
+      'object' => 'panels_display',
+      'bulk export' => FALSE,
+      'export callback' => 'panels_export_display',
+      'can disable' => FALSE,
+      'identifier' => 'display',
+    ),
+    'fields' => array(
+      'did' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'no export' => TRUE,
+      ),
+      'layout' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'default' => '',
+      ),
+      'layout_settings' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'panel_settings' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'cache' => array(
+        'type' => 'text',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'default' => '',
+      ),
+      'hide_title' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 0,
+        'no export' => TRUE,
+      ),
+      'title_pane' => array(
+        'type' => 'int',
+        'default' => 0,
+        'no export' => TRUE,
+      ),
+    ),
+    'primary key' => array('did'),
+  );
+
+  $schema['panels_pane'] = array(
+    'export' => array(
+      'can disable' => FALSE,
+      'identifier' => 'pane',
+      'bulk export' => FALSE,
+    ),
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'did' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'no export' => TRUE,
+      ),
+      'panel' => array(
+        'type' => 'varchar',
+        'length' => '32',
+        'default' => '',
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => '32',
+        'default' => '',
+      ),
+      'subtype' => array(
+        'type' => 'varchar',
+        'length' => '64',
+        'default' => '',
+      ),
+      'shown' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'default' => 1,
+      ),
+      'access' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'configuration' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'cache' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'style' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'css' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'extras' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'serialize' => TRUE,
+        'object default' => array(),
+        'initial' => array(),
+      ),
+      'position' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('pid'),
+    'indexes' => array(
+      'did_idx' => array('did')
+    ),
+  );
+
+  $schema['panels_renderer_pipeline'] = array(
+    'description' => 'Contains renderer pipelines for Panels. Each pipeline contains one or more renderers and access rules to select which renderer gets used.',
+    'export' => array(
+      'identifier' => 'pipeline',
+      'bulk export' => TRUE,
+      'primary key' => 'rpid',
+      'api' => array(
+        'owner' => 'panels',
+        'api' => 'pipelines',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'rpid' => array(
+        'type' => 'serial',
+        'description' => 'A database primary key to ensure uniqueness.',
+        'not null' => TRUE,
+        'no export' => TRUE,
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'Unique ID for this content. Used to identify it programmatically.',
+      ),
+      'admin_title' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'Administrative title for this pipeline.',
+      ),
+      'admin_description' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Administrative description for this pipeline.',
+        'object default' => '',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'size' => 'small',
+        'default' => 0,
+      ),
+      'settings' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Serialized settings for the actual pipeline. The contents of this field are up to the plugin that uses it.',
+        'serialize' => TRUE,
+        'object default' => array(),
+      ),
+    ),
+    'primary key' => array('rpid'),
+  );
+
+  $schema['panels_layout'] = array(
+    'description' => 'Contains exportable customized layouts for this site.',
+    'export' => array(
+      'identifier' => 'layout',
+      'bulk export' => TRUE,
+      'primary key' => 'lid',
+      'api' => array(
+        'owner' => 'panels',
+        'api' => 'layouts',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'lid' => array(
+        'type' => 'serial',
+        'description' => 'A database primary key to ensure uniqueness.',
+        'not null' => TRUE,
+        'no export' => TRUE,
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'Unique ID for this content. Used to identify it programmatically.',
+      ),
+      'admin_title' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'Administrative title for this layout.',
+      ),
+      'admin_description' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Administrative description for this layout.',
+        'object default' => '',
+      ),
+      'category' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'Administrative category for this layout.',
+      ),
+      'plugin' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'description' => 'The layout plugin that owns this layout.',
+      ),
+      'settings' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Serialized settings for the actual layout. The contents of this field are up to the plugin that uses it.',
+        'serialize' => TRUE,
+        'object default' => array(),
+      ),
+    ),
+    'primary key' => array('lid'),
+  );
+
+  $schema['cache_panels'] = drupal_get_schema_unprocessed('system', 'cache');
+
+  return $schema;
+}
+
+/**
+ * Change panels_display.layout to match the size of panels_layout.name.
+ */
+function panels_update_7300() {
+  // Load the schema.
+  $schema = panels_schema_3();
+  $table = 'panels_display';
+  $field = 'layout';
+  $spec = $schema[$table]['fields'][$field];
+
+  // Re-define the column.
+  db_change_field($table, $field, $field, $spec);
+
+  return t('Changed the panels_display.layout field to the correct size.');
+}
+
+/**
+ * Add lock field to panels_pane table.
+ */
+function panels_update_7301() {
+  // Load the schema.
+
+  // Due to a previous failure, the field may already exist:
+
+  $schema = panels_schema_4();
+  $table = 'panels_pane';
+  $field = 'locks';
+
+  if (!db_field_exists($table, $field)) {
+    $spec = $schema[$table]['fields'][$field];
+
+    // Core does not properly respect 'initial' and 'serialize'.
+    unset($spec['initial']);
+
+    // Re-define the column.
+    db_add_field($table, $field, $spec);
+    return t('Added panels_pane.lock field.');
+  }
+
+  return t('panels_pane.lock field already existed, update skipped.');
+}
+
+/**
+ * Adding universally unique identifiers to panels.
+ */
+function panels_update_7302() {
+  // Load the schema.
+  $schema = panels_schema_5();
+  $msg = array();
+
+  // Add the uuid column to the pane table.
+  $table = 'panels_pane';
+  $field = 'uuid';
+  // Due to a previous failure, the column may already exist:
+  if (!db_field_exists($table, $field)) {
+    $spec = $schema[$table]['fields'][$field];
+    db_add_field($table, $field, $spec);
+    $msg[] = t('Added panels_pane.uuid column.');
+  }
+
+  // Add the uuid column to the display table.
+  $table = 'panels_display';
+  $field = 'uuid';
+  // Due to a previous failure, the column may already exist:
+  if (!db_field_exists($table, $field)) {
+    $spec = $schema[$table]['fields'][$field];
+    db_add_field($table, $field, $spec);
+    $msg[] = t('Added panels_display.uuid column.');
+  }
+
+  if (empty($msg)) {
+    $msg[] = t('UUID column already present in the panels_display & panels_pane tables.');
+  }
+
+  // Update all DB-based panes & displays to ensure that they all contain a UUID.
+  $display_dids = db_select('panels_display')
+    ->fields('panels_display', array('did'))
+    ->condition(db_or()
+      ->condition('uuid', '')
+      ->isNull('uuid')
+    )
+    ->execute()
+    ->fetchCol();
+
+  // Check the panes as well, for paranoia.
+  $pane_dids = db_select('panels_pane')
+    ->distinct()
+    ->fields('panels_pane', array('did'))
+    ->condition(db_or()
+      ->condition('uuid', '')
+      ->isNull('uuid')
+    )
+    ->execute()
+    ->fetchCol();
+
+  $dids = array_unique(array_merge($display_dids, $pane_dids));
+
+  if ($displays = panels_load_displays($dids)) {
+    foreach ($displays as $display) {
+      // A display save also triggers pane saves.
+      panels_save_display($display);
+    }
+    $msg[] = t('Generated UUIDs for database-based panel displays and panes.');
+  }
+  else {
+    $msg[] = t('No database-based panel displays or panes for which to generate UUIDs.');
+  }
+
+  return implode("\n", $msg);
+}
+
+/**
+ * Add a custom cache table for Panels.
+ */
+function panels_update_7303() {
+  $table_name = 'cache_panels';
+  if (!db_table_exists($table_name)) {
+    $schema = drupal_get_schema_unprocessed('system', 'cache');
+    db_create_table($table_name, $schema);
+  }
+}

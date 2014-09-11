@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * Draggableviews defines a new database schema
+ * for saving the order.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function draggableviews_schema() {
+  $schema['draggableviews_structure'] = array(
+    'description' => 'The table saves the order settings of an draggableview.',
+    'fields' => array(
+      'dvid' => array(
+        'description' => 'The primary identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'view_name' => array(
+        'description' => 'Makes the order unique for each view.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'view_display' => array(
+        'description' => 'Makes the order unique for each view display.',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'args' => array(
+        'description' => 'Makes the order unique for a given set of arguments',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'description' => 'Id of the entity that we are sorting (node, user, etc.).',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'weight' => array(
+        'description' => 'The order weight.',
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'unique keys' => array(
+      'dvid' => array('dvid'),
+    ),
+    'primary key' => array('dvid'),
+  );
+  return $schema;
+}
+
+/**
+ * Increase sizes of view_name and view_display fields of
+ * draggableviews_strucutre table.
+ */
+function draggableviews_update_7001() {
+  $new_field = array(
+    'description' => 'Makes the order unique for each view.',
+    'type' => 'varchar',
+    'length' => 128,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_change_field('draggableviews_structure', 'view_name', 'view_name', $new_field);
+
+  $new_field = array(
+    'description' => 'Makes the order unique for each view display.',
+    'type' => 'varchar',
+    'length' => 64,
+    'not null' => TRUE,
+    'default' => '',
+  );
+  db_change_field('draggableviews_structure', 'view_display', 'view_display', $new_field);
+}

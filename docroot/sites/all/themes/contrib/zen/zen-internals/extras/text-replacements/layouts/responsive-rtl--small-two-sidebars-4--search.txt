@@ -1,0 +1,7 @@
+    clear: right;
+    /* Apply the shared properties of grid items in a single, efficient ruleset. */
+    /* Span 1 column, starting in the 1st column from right. */
+    /* Span 1 column, starting in the 2nd column from right. */
+    /* Span 1 column, starting in the 3rd column from right. */
+  }
+  .two-sidebars .region-sidebar-second .block {

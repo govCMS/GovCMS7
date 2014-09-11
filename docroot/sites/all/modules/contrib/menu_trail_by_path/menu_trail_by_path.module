@@ -1,0 +1,141 @@
+<?php
+
+/**
+ * @file
+ * Expand menu items and set active-trail according to current path
+ *
+ * Drupal default set active-trail for parent menu items only if
+ * the menu contains a link to the current page.
+ * This module sets the active-trail according to the path URL
+ * It works for pages even if they are not in menu
+ *
+ * eg. if current page is foo/bar/zee
+ * foo & foo/bar menu items are set as active-trail and expanded
+ */
+
+/**
+ * Implements hook_page_delivery_callback_alter().
+ * 
+ * This is the only hook that occurs after the page callback, but before
+ * hook_page_build (when blocks are added). We're using this hook for its
+ * timing, not its data.
+ */
+function menu_trail_by_path_page_delivery_callback_alter() {
+  global $language;
+  $parent_candidates = _menu_trail_by_path_get_parent_candidates(drupal_get_path_alias());
+  // Don't even bother if current page is root
+  if (empty($parent_candidates)) {
+    return;
+  }
+
+  // Find link items matching the parent candidates in all menus
+  $matched_menus = array();
+  $matched_link_titles = array();
+  $results = db_select('menu_links','ml')
+    ->fields('ml',array('menu_name','mlid','link_path','link_title','depth'))
+    ->condition('link_path',$parent_candidates,'IN')
+    ->execute();
+
+  foreach ($results as $record) {
+    // Do not touch admin menus
+    if (in_array($record->menu_name, array('management','devel'))) {
+      continue;
+    }
+
+    // If there is more than one matched link in a menu, use the deepest
+    elseif (!isset($matched_menus[$record->menu_name]) || $record->depth > $matched_menus[$record->menu_name]['depth']) {
+      $matched_menus[$record->menu_name]['link_path'] = $record->link_path;
+      $matched_menus[$record->menu_name]['depth'] = $record->depth;
+    }
+
+    // Get the Link Title if it can be found in a menu item
+    if ($record->link_title && !isset($matched_link_titles[$record->link_path])) {
+      $matched_link_titles[$record->link_path] = $record->link_title;
+      if (module_exists('i18n_menu')) {
+        $matched_link_titles[$record->link_path] = _i18n_menu_link_title((array)$record, $language->language);
+      }
+    }
+  }
+
+  // Set the active-trail for each menu containing one of the candidates
+  foreach ($matched_menus as $menu_name => $menu_link) {
+    menu_tree_set_path($menu_name, $menu_link['link_path']);
+  }
+
+  // Also set breadcrumb according to path URL as well
+  if (variable_get('menu_trail_by_path_breadcrumb_handling', TRUE)) {
+    // First breadcrumbs is always Home
+    $breadcrumbs[] = l(t('Home'),'<front>');
+
+    // Remove current page from breadcrumb
+    array_pop($parent_candidates);
+
+    foreach($parent_candidates as $link_path) {
+      // If title of the page is found on a menu item, use it
+      if (isset($matched_link_titles[$link_path])) {
+        $breadcrumbs[] = l($matched_link_titles[$link_path],$link_path);
+      }
+      // Otherwise, use slow method to find out the title of page
+      elseif ($menu_item = menu_get_item($link_path)) {
+        $breadcrumbs[] = l($menu_item['title'],$link_path);
+      }
+    }
+    drupal_set_breadcrumb($breadcrumbs);
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function menu_trail_by_path_permission() {
+  return array(
+    'administer menu_trail_by_path' => array(
+      'title' => t('Administer Menu Trail By Path settings'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function menu_trail_by_path_menu() {
+  $items = array();
+  $items['admin/structure/menu_trail_by_path'] = array(
+    'title' => 'Menu trail by path',
+    'description' => 'Configure menu trail by path module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('menu_trail_by_path_form'),
+    'access arguments' => array('administer menu_trail_by_path'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Form builder; create and display the admin configuration settings form.
+ */
+function menu_trail_by_path_form($form, &$form_state) {
+  $form['menu_trail_by_path_breadcrumb_handling'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable breadcrumb handling'),
+    '#description' => t("If checked, breadcrumb will be set according to url path."),
+		'#default_value' => variable_get('menu_trail_by_path_breadcrumb_handling', TRUE),
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * Return an array of parent candidates
+ * e.g. for path 'foo/bar/zee'
+ * return array of internal drupal paths for 'foo', 'foo/bar', 'foo/bar/zee'
+ */
+function _menu_trail_by_path_get_parent_candidates($path) {
+  $pieces = explode('/', $path);
+  $path = '';
+  $parent_candidates = array();
+  foreach ($pieces as $piece) {
+    $path .= $piece . '/';
+    $parent_candidates[] = drupal_get_normal_path(rtrim($path, '/'));
+  }
+  return $parent_candidates;
+}

@@ -1,0 +1,5 @@
+
+  /* Span 1 column, starting in 5th column from right. */
+  .sidebar-second .region-sidebar-second {
+    float: right;
+    width: 20%;

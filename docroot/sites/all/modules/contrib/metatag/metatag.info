@@ -1,0 +1,24 @@
+name = Metatag
+description = "Adds support and an API to implement meta tags."
+package = SEO
+core = 7.x
+
+; This requires Drupal 7.15 or newer.
+dependencies[] = system (>=7.15)
+
+; CTools and Token are also required.
+dependencies[] = ctools
+dependencies[] = token
+
+configure = admin/config/search/metatags
+
+files[] = metatag.inc
+files[] = metatag.migrate.inc
+files[] = metatag.test
+
+; Information added by drupal.org packaging script on 2013-04-22
+version = "7.x-1.0-beta7"
+core = "7.x"
+project = "metatag"
+datestamp = "1366640119"
+

@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Search Configuration module.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * This provides the two core user roles permissions to search all content.
+ */
+function search_config_install() {
+  // Ensure that this is in scope.
+  module_load_include('module', 'search_config');
+
+  $insert = db_insert('role_permission')->fields(array('rid', 'permission'));
+  foreach (array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID) as $rid) {
+    if (!search_config_get_roles_by_permission($rid, 'search all content')) {
+      $insert->values(array(
+        'rid' => $rid,
+        'permission' => 'search all content',
+      ));
+    }
+  }
+
+  $insert->execute();
+
+  // And prevent warnings.
+  $settings = search_config_node_settings();
+  variable_set('search_config', $settings);
+}
+
+/**
+ * Provides the upgrade from 6.x to 7.x
+ *
+ * Minimal upgrade step. Requires manual reconfiguration.
+ */
+function search_config_update_7000() {
+  // Ensure that these are always in scope.
+  module_load_include('module', 'search_config');
+
+  // Ensure that we do not block search by default.
+  $insert = db_insert('role_permission')->fields(array('rid', 'permission'));
+  foreach (array(DRUPAL_ANONYMOUS_RID, DRUPAL_AUTHENTICATED_RID) as $rid) {
+    if (!search_config_get_roles_by_permission($rid, 'search all content')) {
+      $insert->values(array(
+        'rid' => $rid,
+        'permission' => 'search all content',
+      ));
+    }
+  }
+  $insert->execute();
+
+  // And prevent warnings.
+  $settings = search_config_node_settings();
+  variable_set('search_config', $settings);
+
+  // Remove the old 6.x variables.
+  variable_del('search_config_disable_or');
+  variable_del('search_config_disable_phrase');
+  variable_del('search_config_disable_negative');
+  variable_del('search_config_disable_category_all');
+  variable_del('search_config_disable_category');
+  variable_del('search_config_disable_type');
+  variable_del('search_config_disable_index_type');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function search_config_uninstall() {
+  variable_del('search_config');
+}

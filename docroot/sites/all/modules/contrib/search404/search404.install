@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the search404 module.
+ */
+
+/**
+ * Setup Search 404 by changing Drupal's 404-page to search404.
+ */
+function search404_install() {
+  variable_set('site_404', 'search404');
+}
+
+function search404_uninstall() {
+  if (variable_get('site_404', '') == 'search404') {
+    variable_del('site_404');
+  }
+  variable_del('search404_redirect_301');
+  variable_del('search404_do_google_cse');
+  variable_del('search404_do_search_by_page');
+  variable_del('search404_first');
+  variable_del('search404_jump');
+  variable_del('search404_use_or');
+  variable_del('search404_ignore');
+  variable_del('search404_ignore_query');
+  variable_del('search404_ignore_extensions');
+  variable_del('search404_page_text');
+  variable_del('search404_page_title');
+  variable_del('search404_regex');
+  variable_del('search404_skip_auto_search');
+  variable_del('search404_use_or');
+  variable_del('search404_use_search_engine');
+  variable_del('search404_disable_error_message');
+  variable_del('search404_do_custom_search');
+  variable_del('search404_custom_search_path');
+}

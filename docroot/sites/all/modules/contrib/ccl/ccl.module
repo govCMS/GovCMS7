@@ -1,0 +1,244 @@
+<?php
+/**
+ * @file
+ * Main CCL module file.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function ccl_permission() {
+  return array(
+    'use ccl' => array(
+      'title' => t('Add custom contextual links'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function ccl_menu() {
+  $items['admin/config/user-interface/ccl'] = array(
+    'title' => 'Custom Contextual Links',
+    'description' => 'Add custom contextul links to blocks and nodes',
+    'page callback' => 'ccl_admin',
+    'access arguments' => array('use ccl'),
+    'file' => 'ccl.admin.inc',
+  );
+
+  $items['admin/config/user-interface/ccl/add'] = array(
+    'title' => 'Add new link',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccl_add_form'),
+    'access arguments' => array('use ccl'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'ccl.admin.inc',
+  );
+
+  $items['admin/config/user-interface/ccl/%/delete'] = array(
+    'title' => 'Delete custom link',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccl_delete_confirm', 4),
+    'access arguments' => array('use ccl'),
+    'file' => 'ccl.admin.inc',
+  );
+
+  $items['admin/config/user-interface/ccl/%/edit'] = array(
+    'title' => 'Edit custom link',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccl_add_form', 4),
+    'access arguments' => array('use ccl'),
+    'file' => 'ccl.admin.inc',
+  );
+
+  $items['admin/config/user-interface/ccl/autocomplete'] = array(
+    'title' => 'Node autocomplete',
+    'page callback' => 'ccl_node_autocomplete',
+    'access arguments' => array('use ccl'),
+    'file' => 'ccl.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_features_api().
+ */
+function ccl_features_api() {
+  return array(
+    'ccl' => array(
+      'name' => 'Custom Contextual Links',
+      'file' => drupal_get_path('module', 'ccl') . '/ccl.features.inc',
+      'default_hook' => 'ccl_features_preset',
+      'feature_source' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Retrieve a link based on it's title.
+ */
+function ccl_get_presets($title = NULL) {
+  $presets = array();
+  if ($title) {
+    $results = db_query('SELECT * FROM {ccl} WHERE title = :title;', array(':title' => $title));
+  }
+  else {
+    $results = db_query('SELECT * FROM {ccl};');
+  }
+
+  while ($result = $results->fetchObject()) {
+    $presets[] = $result;
+  }
+  return $presets;
+}
+
+/**
+ * Implements hook_contextual_links_view_alter().
+ *
+ * TODO:
+ * - Make sure all links are work in a multilanguage setup.
+ */
+function ccl_contextual_links_view_alter(&$element, $items) {
+  // Get the destination parameter.
+  $dest = drupal_get_destination();
+
+  // Check if we have a node link to process.
+  if (isset($element['#element']['#node']->nid)) {
+    $node = $element['#element']['#node'];
+    $node_cache = ccl_cache_get('ccl_nodes');
+
+    // Global elements.
+    foreach ($node_cache['global'] as $id => $link) {
+      if ($processed_link = _ccl_prepare_link($link, $dest, $node)) {
+        $element['#links']['ccl-global-node-' . $id] = $processed_link;
+      }
+    }
+
+    // Content Type.
+    if (in_array($node->type, array_keys($node_cache['ct']))) {
+      foreach ($node_cache['ct'][$node->type] as $id => $link) {
+        if ($processed_link = _ccl_prepare_link($link, $dest, $node)) {
+          $element['#links']['ccl-ct-' . $id] = $processed_link;
+        }
+      }
+    }
+
+    // Individual nodes.
+    if (in_array($node->nid, array_keys($node_cache['ids']))) {
+      foreach ($node_cache['ids'][$node->nid] as $id => $link) {
+        if ($processed_link = _ccl_prepare_link($link, $dest, $node)) {
+          $element['#links']['ccl-node-' . $id] = $processed_link;
+        }
+      }
+    }
+  }
+  // Invoke submodules.
+  foreach (module_implements('ccl_add_link') as $module) {
+    $element = module_invoke($module, 'ccl_add_link', $element, $dest);
+  }
+}
+
+/**
+ * Helper function to get ccl settings out of the cache.
+ */
+function ccl_cache_get($type) {
+  $cache = cache_get($type);
+  // If nothing is set in the cache then recreate it.
+  if (!isset($cache->cid)) {
+    _ccl_update_cache();
+    $cache = cache_get($type);
+  }
+  return $cache->data;
+}
+
+/**
+ * Helper function for token replacement, destination and access control.
+ */
+function _ccl_prepare_link($link, $destination, $node = NULL) {
+  // Token replacement for the URL.
+  $link['href'] = $node ? token_replace($link['href'], array('node' => $node)) : token_replace($link['href']);
+
+  // Check the access permission.
+  if (drupal_valid_path($link['href'], TRUE)) {
+    // Token replacement for the title.
+    $link['title'] = $node ? token_replace($link['title'], array('node' => $node)) : token_replace($link['title']);
+
+    // Add classes if available.
+    if (isset($link['advanced']['class'])) {
+      $link['attributes']['class'] = explode(" ", $link['advanced']['class']);
+    }
+
+    // Add link target if set.
+    if (isset($link['advanced']['target'])) {
+      $link['attributes']['target'] = explode(" ", $link['advanced']['target']);
+    }
+
+    // Add query if available and destination.
+    $link['query'] = $destination;
+    if (isset($link['advanced']['query']) && !empty($link['advanced']['query'])) {
+      $query = $node ? token_replace($link['advanced']['query'], array('node' => $node)) : token_replace($link['advanced']['query']);
+      $qparts = explode('&', $query);
+      foreach ($qparts as $value) {
+        $kv = explode('=', $value);
+        $link['query'][$kv[0]] = $kv[1];
+      }
+    }
+    return $link;
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Helper function to write ccl settings into the cache.
+ */
+function _ccl_update_cache() {
+  // Create entry for nodes.
+  $nodes = db_query("SELECT * FROM {ccl} WHERE type = :type", array(':type' => 'node'));
+  $node_cache = array('global' => array(), 'ct' => array(), 'ids' => array());
+  foreach ($nodes as $node) {
+    $node->options = unserialize($node->options);
+    $advanced = array();
+    if (isset($node->options['advanced_css'])) {
+      $advanced['class'] = $node->options['advanced_css'];
+    }
+    if (isset($node->options['advanced_query'])) {
+      $advanced['query'] = $node->options['advanced_query'];
+    }
+    if (isset($node->options['advanced_target']) && $node->options['advanced_target'] != "default") {
+      $advanced['target'] = $node->options['advanced_target'];
+    }
+
+    if ($node->options['node_options'] == 'global') {
+      $node_cache['global'][] = array(
+        'title' => $node->title,
+        'href' => $node->link,
+        'advanced' => $advanced,
+      );
+    }
+    elseif ($node->options['node_options'] == 'node') {
+      $node_cache['ids'][$node->options['node_id']][] = array(
+        'title' => $node->title,
+        'href' => $node->link,
+        'advanced' => $advanced,
+      );
+    }
+    else {
+      $node_cache['ct'][$node->options['node_type']][] = array(
+        'title' => $node->title,
+        'href' => $node->link,
+        'advanced' => $advanced,
+      );
+    }
+  }
+  cache_set('ccl_nodes', $node_cache);
+
+  // Invoke cache_update hook for submodules.
+  foreach (module_implements('ccl_cache_update') as $module) {
+    module_invoke($module, 'ccl_cache_update');
+  }
+}

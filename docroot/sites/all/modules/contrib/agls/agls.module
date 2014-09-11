@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Allows users and system to add AGLS meta tags to Drupal pages.
+ */
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function agls_ctools_plugin_api($owner, $api) {
+  if ($owner == 'metatag' && $api == 'metatag') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function agls_theme() {
+  $info['metatag_agls'] = array(
+    'render element' => 'element',
+  );
+
+  return $info;
+}
+
+/**
+ * Theme callback for a Dublin Core meta tag.
+ */
+function theme_metatag_agls($variables) {
+  $element = &$variables['element'];
+  element_set_attributes($element, array(
+    '#name' => 'name',
+    '#value' => 'content')
+  );
+  unset($element['#value']);
+  return theme('html_tag', $variables);
+}

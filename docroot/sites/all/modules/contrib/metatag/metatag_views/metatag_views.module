@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Provides native meta tag integration with Views.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function metatag_views_views_api() {
+  return array('api' => 3);
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function metatag_views_ctools_plugin_api($owner, $api) {
+  if ($owner == 'metatag' && $api == 'metatag') {
+    return array('version' => 1);
+  }
+}
+
+/**
+ * Implements hook_view_preview_info_alter().
+ */
+function metatag_views_views_preview_info_alter(&$rows, $view) {
+  if (metatag_views_views_display_has_metatags($view->display_handler)) {
+    $instance = 'view:' . $view->name;
+    $metatags = $view->display_handler->get_option('metatags');
+    $metatags = !empty($metatags) ? $metatags : array();
+
+    // Set the page title to be the previewed views title before fetching meta
+    // tag values.
+    $title = drupal_set_title();
+    if ($view_title = $view->get_title()) {
+      drupal_set_title($view_title);
+    }
+
+    $options['token data']['view'] = $view;
+    $values = metatag_metatags_values($instance, $metatags, $options);
+    foreach ($values as $metatag => $value) {
+      $metatag_info = metatag_get_info('tags', $metatag);
+      $values[$metatag] = check_plain($metatag_info['label']) . ': ' . check_plain($value);
+    }
+    $rows['query'][] = array(
+      '<strong>' . t('Meta tags') . '</strong>',
+      implode('<br />', $values),
+    );
+
+    // Restore the page title.
+    drupal_set_title($title);
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function metatag_views_page_alter(&$page) {
+  if ($view = views_get_page_view()) {
+    // The following is taken from views_get_page_view().
+    // If a module is still putting in the display like we used to, catch that.
+    if (is_subclass_of($view, 'views_plugin_display')) {
+      $view = $view->view;
+    }
+
+    // Load the
+    if (metatag_views_views_display_has_metatags($view->display_handler)) {
+      $saved_metatags = $view->display_handler->get_option('metatags');
+      $metatags = array();
+      if (!empty($saved_metatags)) {
+        $metatags[LANGUAGE_NONE] = $saved_metatags;
+      }
+
+      // Build options for meta tag rendering.
+      $instance = 'view:' . $view->name;
+      $options = array();
+      $options['token data']['view'] = $view;
+
+      // Add the metatags.
+      $page['content']['metatags'][$instance] = metatag_metatags_view($instance, $metatags, $options);
+    }
+  }
+}
+
+/**
+ * Determine whether the requested view display has meta tags saved.
+ *
+ * @param $display views_plugin_display
+ *   The view display plugin that will be checked.
+ *
+ * @return
+ *   Simple boolean to indicate whether there are meta tags saved.
+ */
+function metatag_views_views_display_has_metatags(views_plugin_display $display) {
+  if (method_exists($display, 'has_metatags')) {
+    return $display->has_metatags();
+  }
+  else {
+    return $display->has_path() && $display->uses_breadcrumb();
+  }
+}

@@ -1,0 +1,67 @@
+
+div.panels-ipe-handlebar-wrapper ul {
+  float: right;
+  text-align: left;
+}
+
+div.panels-ipe-handlebar-wrapper li {
+  margin: 0 0 0 .5em;
+  float: right;
+}
+
+div.panels-ipe-draghandle span.panels-ipe-draghandle-icon {
+  float: left;
+}
+
+div.panels-ipe-placeholder {
+  text-align: right;
+}
+
+div.panels-ipe-newblock {
+  left: 30px;
+  right: auto;
+}
+
+div.panels-ipe-handlebar-wrapper li a span,
+div.panels-ipe-newblock a span {
+  text-align: right;
+}
+
+div.panels-ipe-newblock a.style {
+  margin-left: .5em;
+  margin-right: auto;
+}
+
+.panels-ipe-editing .panels-ipe-region {
+  float: right;
+}
+
+/** ============================================================================
+ * Controller form markup
+ */
+
+.ipe-throbber {
+  right: 49%;
+  right: auto;
+}
+
+div.panels-ipe-control .form-submit {
+  padding: 0 34px 2px 0.8em;
+}
+
+input#panels-ipe-save,
+input#panels-ipe-cancel {
+  background-position: 86% 0;
+}
+
+div.panels-ipe-pseudobutton-container a.panels-ipe-startedit {
+  padding-right: 34px;
+  padding-left: 10px;
+  background-position: 93% 9px;
+}
+
+div.panels-ipe-pseudobutton-container a.panels-ipe-change-layout {
+  padding-right: 34px;
+  padding-left: 10px;
+  background-position: 93% 9px;
+}

@@ -1,0 +1,81 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Linkit module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function linkit_schema() {
+  $schema = array();
+  $schema['linkit_profiles'] = array(
+    'description' => 'Base table holding Linkit profiles.',
+    'export' => array(
+      'key' => 'name',
+      'key name' => 'Name',
+      'primary key' => 'pid',
+      'object' => 'LinkitProfile',
+      'identifier' => 'linkit_profile',
+      'status' => 'linkit_profiles_status',
+      'load callback' => 'linkit_profile_load',
+      'load all callback' => 'linkit_profile_load_all',
+      'bulk export' => TRUE,
+      'api' => array(
+        'owner' => 'linkit',
+        'api' => 'linkit_profiles',
+        'minimum_version' => 1,
+        'current_version' => 1,
+      ),
+    ),
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'no export' => TRUE,
+        'description' => 'Serial id for this profile.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'Machine-readable name for this profile.',
+      ),
+      'admin_title' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'Administrative title for this profile.',
+      ),
+      'admin_description' => array(
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'medium',
+        'description' => 'Administrative description for this profile.',
+      ),
+      'profile_type' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'The profile type.',
+      ),
+      'data' => array(
+        'type' => 'blob',
+        'size' => 'big',
+        'not null' => TRUE,
+        'serialize' => TRUE,
+        'description' => 'Serialized data containing the profile settings.',
+      ),
+    ),
+    'primary key' => array('pid'),
+    'unique keys' => array(
+      'name' => array('name'),
+    ),
+    'indexes' => array(
+      'pid' => array('pid'),
+      'profile_type' => array('profile_type'),
+    ),
+  );
+  return $schema;
+}

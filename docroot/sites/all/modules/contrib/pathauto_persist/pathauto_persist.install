@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function pathauto_persist_schema() {
+  $schema['pathauto_persist'] = array(
+    'description' => '',
+    'fields' => array(
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'description' => 'An entity type.',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'An entity ID.',
+      ),
+      'pathauto' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The automatic alias status of the entity.',
+      ),
+    ),
+    'primary key' => array('entity_type', 'entity_id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Reduce the entity_type column to 32 characters.
+ */
+function pathauto_persist_update_6000() {
+  db_drop_primary_key('pathauto_persist');
+  db_change_field('pathauto_persist', 'entity_type', 'entity_type', array(
+    'type' => 'varchar',
+    'length' => 32,
+    'not null' => TRUE,
+  ));
+  db_add_primary_key('pathauto_persist', array('entity_type', 'entity_id'));
+}

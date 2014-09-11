@@ -1,0 +1,14 @@
+name = Panels In-Place Editor
+description = Provide a UI for managing some Panels directly on the frontend, instead of having to use the backend.
+package = "Panels"
+dependencies[] = panels
+core = 7.x
+configure = admin/structure/panels
+files[] = panels_ipe.module
+
+; Information added by Drupal.org packaging script on 2014-02-12
+version = "7.x-3.4"
+core = "7.x"
+project = "panels"
+datestamp = "1392221614"
+

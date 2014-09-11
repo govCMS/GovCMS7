@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Provides a stream wrapper and formatters appropriate for accessing and
+ * displaying Vimeo videos.
+ */
+
+// Load all Vimeo file formatters.
+require_once dirname(__FILE__) . '/includes/media_vimeo.formatters.inc';
+
+/**
+ * Implements hook_media_internet_providers().
+ */
+function media_vimeo_media_internet_providers() {
+  return array(
+    'MediaInternetVimeoHandler' => array(
+      'title' => t('Vimeo'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_stream_wrappers().
+ */
+function media_vimeo_stream_wrappers() {
+  return array(
+    'vimeo' => array(
+      'name' => t('Vimeo videos'),
+      'class' => 'MediaVimeoStreamWrapper',
+      'description' => t('Remote videos hosted on the Vimeo video-sharing website.'),
+      'type' => STREAM_WRAPPERS_READ_VISIBLE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function media_vimeo_theme($existing, $type, $theme, $path) {
+  return array(
+    'media_vimeo_video' => array(
+      'variables' => array('uri' => NULL, 'options' => array()),
+      'file' => 'media_vimeo.theme.inc',
+      'path' => $path . '/themes',
+      'template' => 'media-vimeo-video',
+    ),
+  );
+}
+
+/**
+ * Implements hook_media_parse().
+ *
+ * @todo This hook should be deprecated. Refactor Media module to not call it
+ *   any more, since media_internet should be able to automatically route to the
+ *   appropriate handler.
+ */
+function media_vimeo_media_parse($embed_code) {
+  $handler = new MediaInternetVimeoHandler($embed_code);
+  return $handler->parse($embed_code);
+}
+
+ /**
+ * Implements hook_file_mimetype_mapping_alter().
+ */
+function media_vimeo_file_mimetype_mapping_alter(&$mapping) {
+  $mapping['mimetypes'][] = 'video/vimeo';
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function media_vimeo_ctools_plugin_api($module, $api) {
+  if ($module == 'file_entity' && $api == 'file_default_displays') {
+    return array('version' => 1);
+  }
+}

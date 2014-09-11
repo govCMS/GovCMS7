@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * Tests for Twitter Block module.
+ */
+class TwitterBlockTestCase extends DrupalWebTestCase {
+  protected $admin_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Twitter Block functionality',
+      'description' => 'Add, edit and delete custom Twitter block. Configure and move a Twitter block.',
+      'group' => 'Twitter Block',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('block', 'twitter_block');
+
+    // Create and log in an administrative user.
+    $this->admin_user = $this->drupalCreateUser(array(
+      'administer blocks',
+      'access administration pages',
+    ));
+    $this->drupalLogin($this->admin_user);
+
+    // Define the existing regions
+    $this->regions = array();
+    $this->regions[] = 'header';
+    $this->regions[] = 'sidebar_first';
+    $this->regions[] = 'content';
+    $this->regions[] = 'sidebar_second';
+    $this->regions[] = 'footer';
+  }
+
+  /**
+   * Test creating custom Twitter block, moving it to a specific region and then deleting it.
+   */
+  function testTwitterBlock() {
+    // Confirm that the add Twitter block link appears on block overview pages.
+    $this->drupalGet('admin/structure/block');
+    $this->assertRaw(l(t('Add Twitter block'), 'admin/structure/block/add-twitter-block'), 'Add Twitter block link is present on block overview page for default theme.');
+    $this->drupalGet('admin/structure/block/list/seven');
+    $this->assertRaw(l(t('Add Twitter block'), 'admin/structure/block/list/seven/add-twitter-block'), 'Add Twitter block link is present on block overview page for non-default theme.');
+
+    // Add a new custom Twitter block by filling out the input form on the admin/structure/block/add-twitter-block page.
+    $twitter_block = array();
+    $twitter_block['info'] = $this->randomName(8);
+    $twitter_block['title'] = $this->randomName(8);
+    $twitter_block['widget_id'] = $this->randomName(8);
+    $this->drupalPost('admin/structure/block/add-twitter-block', $twitter_block, t('Save block'));
+
+    // Confirm that the custom Twitter block has been created, and then query the created bid.
+    $this->assertText(t('The block has been created.'), 'Custom Twitter block successfully created.');
+    $bid = db_query("SELECT bid FROM {twitter_block} WHERE info = :info", array(':info' => $twitter_block['info']))->fetchField();
+
+    // Check to see if the custom Twitter block was created by checking that it's in the database.
+    $this->assertNotNull($bid, 'Custom Twitter block found in database');
+
+    // Check whether the block can be moved to all available regions.
+    $twitter_block['module'] = 'twitter_block';
+    $twitter_block['delta'] = $bid;
+    foreach ($this->regions as $region) {
+      $this->moveBlockToRegion($twitter_block, $region);
+    }
+
+    // Verify presence of configure and delete links for custom Twitter block.
+    $this->drupalGet('admin/structure/block');
+    $this->assertLinkByHref('admin/structure/block/manage/twitter_block/' . $bid . '/configure', 0, 'Custom Twitter block configure link found.');
+    $this->assertLinkByHref('admin/structure/block/administer/twitter_block/' . $bid . '/delete', 0, 'Custom Twitter block delete link found.');
+
+    // Set visibility only for authenticated users, to verify delete functionality.
+    $edit = array();
+    $edit['roles[' . DRUPAL_AUTHENTICATED_RID . ']'] = TRUE;
+    $this->drupalPost('admin/structure/block/manage/twitter_block/' . $bid . '/configure', $edit, t('Save block'));
+
+    // Delete the created custom Twitter block & verify that it's been deleted and no longer appearing on the page.
+    $this->clickLink(t('delete'));
+    $this->drupalPost('admin/structure/block/administer/twitter_block/' . $bid . '/delete', array(), t('Delete'));
+    $this->assertRaw(t('The block %title has been removed.', array('%title' => $twitter_block['info'])), 'Custom Twitter block successfully deleted.');
+    $this->assertNoText(t($twitter_block['title']), 'Custom Twitter block no longer appears on page.');
+    $count = db_query("SELECT 1 FROM {block_role} WHERE module = :module AND delta = :delta", array(':module' => $twitter_block['module'], ':delta' => $twitter_block['delta']))->fetchField();
+    $this->assertFalse($count, 'Table block_role being cleaned.');
+  }
+
+  function moveBlockToRegion($block, $region) {
+    // Set the created block to a specific region.
+    $edit = array();
+    $edit['blocks[' . $block['module'] . '_' . $block['delta'] . '][region]'] = $region;
+    $this->drupalPost('admin/structure/block', $edit, t('Save blocks'));
+
+    // Confirm that the block was moved to the proper region.
+    $this->assertText(t('The block settings have been updated.'), format_string('Block successfully moved to %region_name region.', array('%region_name' => $region)));
+
+    // Confirm that the block is being displayed.
+    $this->drupalGet('node');
+    $this->assertText(t($block['title']), 'Block successfully being displayed on the page.');
+
+    // Confirm that the custom Twitter block was found at the proper region.
+    $xpath = $this->buildXPathQuery('//div[@class=:region-class]//div[@id=:block-id]/*', array(
+      ':region-class' => 'region region-' . str_replace('_', '-', $region),
+      ':block-id' => 'block-' . drupal_clean_css_identifier($block['module']) . '-' . $block['delta'],
+    ));
+    $this->assertFieldByXPath($xpath, NULL, format_string('Custom Twitter block found in %region_name region.', array('%region_name' => $region)));
+  }
+}

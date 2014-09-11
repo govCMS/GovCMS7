@@ -1,0 +1,1 @@
+.sidebar-first .region-sidebar-first {

@@ -1,0 +1,22 @@
+Upgrading from Panels-6.x-3.x to Panels-7.x-3.x
+
+  - Style and layout plugins may no longer be registered by a central hook.
+    Only the plugin directories method may be used.
+
+  - Layout 'panels function' is now 'regions function'.
+
+  - Layout 'panels' key is now 'regions'.
+
+  - panels_get_pane_title() deprecated.
+
+  - panels_plugin_get_function() deprecated.
+
+  - panels_required_context removed. These were deprecated long ago and 
+    existed only to prevent crashes.
+
+  - panels_optional_context removed.
+
+  - $renderer->plugins['layout']['panels'] changed to $renderer->plugin['layout']['regions']
+
+  - display_renderer class is now in 'renderer', not 'handler'.
+

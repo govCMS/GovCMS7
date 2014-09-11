@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function crumbs_labs_menu() {
+  $items = array();
+  $items['admin/structure/crumbs/weights/tabledrag'] = array(
+    'title' => 'Tabledrag',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items['admin/structure/crumbs/weights/textual'] = array(
+    'title' => 'Textual (Labs)',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('crumbs_admin_weights_form', 'textual'),
+    'access arguments' => array('administer crumbs'),
+    'file' => 'admin/crumbs.admin.inc',
+    'file path' => drupal_get_path('module', 'crumbs'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 0,
+  );
+  $items['admin/structure/crumbs/weights/expansible'] = array(
+    'title' => 'Expansible (Labs)',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('crumbs_admin_weights_form', 'expansible'),
+    'access arguments' => array('administer crumbs'),
+    'file' => 'admin/crumbs.admin.inc',
+    'file path' => drupal_get_path('module', 'crumbs'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+  return $items;
+}

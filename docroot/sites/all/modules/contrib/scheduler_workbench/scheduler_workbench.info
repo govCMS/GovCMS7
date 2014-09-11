@@ -1,0 +1,13 @@
+name = Scheduler Workbench Integration
+description = Integrates the Scheduler module with the Workbench Moderation module.
+package = "Workbench"
+core = 7.x
+dependencies[] = workbench_moderation
+dependencies[] = scheduler (>=7.x-1.1)
+
+; Information added by drupal.org packaging script on 2013-04-23
+version = "7.x-1.2"
+core = "7.x"
+project = "scheduler_workbench"
+datestamp = "1366746011"
+

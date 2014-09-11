@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * Implements hook_install()
+ */
+function bean_all_install() {
+  drupal_load('module', 'bean_all');
+
+  $blocks = array(
+    'main',
+    'powered-by',
+    'help',
+  );
+
+  $name = bean_all_build_variable_name('system');
+  variable_set($name, $blocks);
+
+  $name = bean_all_build_variable_name('bean');
+  variable_set($name, TRUE);
+}
+
+/**
+ * Add black list variables
+ */
+function bean_all_update_7001(&$sand) {
+  drupal_load('module', 'bean_all');
+
+  $blocks = array(
+    'main',
+    'powered-by',
+    'help',
+  );
+
+  $name = bean_all_build_variable_name('system');
+  variable_set($name, $blocks);
+
+  $name = bean_all_build_variable_name('bean');
+  variable_set($name, TRUE);
+}

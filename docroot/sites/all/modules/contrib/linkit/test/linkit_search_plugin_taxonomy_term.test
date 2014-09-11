@@ -1,0 +1,177 @@
+<?php
+/**
+ * @file
+ * Tests for Linkit search plugin taxonomy term.
+ */
+
+/**
+ * Test the the taxonomy term search plugin.
+ */
+class LinkitsearchPluginTaxonomyTermTestCase extends LinkitsearchPluginTestCase {
+
+  /**
+   * Definition.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Linkit Search plugin (Taxonomy term)',
+      'description' => 'Test the the taxonomy term search plugin.',
+      'group' => 'Linkit'
+    );
+  }
+
+  function setUp($extra_modules = array()) {
+    parent::setUp(array('taxonomy'));
+
+    // Create a basic profile.
+    $this->createProfile(array(
+      'data' => array(
+        'search_plugins' => array(
+          'entity:taxonomy_term' => array(
+            'enabled' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'entity:taxonomy_term' => array(
+          'result_description' => '',
+          'bundles' => array(),
+          'group_by_bundle' => 0,
+        ),
+      )
+    ));
+  }
+
+  /**
+   * Create and returns a new vocabulary.
+   */
+  function createVocabulary() {
+    // Create a vocabulary.
+    $vocabulary = new stdClass();
+    $vocabulary->name = $this->randomName();
+    $vocabulary->description = $this->randomName();
+    $vocabulary->machine_name = drupal_strtolower($this->randomName());
+    $vocabulary->help = '';
+    $vocabulary->nodes = array('article' => 'article');
+    $vocabulary->weight = mt_rand(0, 10);
+    taxonomy_vocabulary_save($vocabulary);
+    return $vocabulary;
+  }
+
+  /**
+   * Create and returns a new term in vocabulary $vid.
+   */
+  function createTerm($vocabulary) {
+    $term = new stdClass();
+    $term->name = $this->search_string . $this->randomName();
+    $term->description = $this->randomName();
+    // Use the first available text format.
+    $term->format = 'plain_text';
+    $term->vid = $vocabulary->vid;
+    taxonomy_term_save($term);
+    return $term;
+  }
+
+  /**
+   * Test that we get results back which is valid.
+   */
+  public function testBasicResults() {
+    // Create demo vocabulary.
+    $vocabulary = $this->createVocabulary();
+
+    // Create demo terms.
+    $term_1 = $this->createTerm($vocabulary);
+    $term_2 = $this->createTerm($vocabulary);
+    $term_3 = $this->createTerm($vocabulary);
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Check that the term names appears in the response.
+    $this->assertRaw($term_1->name, 'Term was found in the result array.');
+    $this->assertRaw($term_2->name, 'Term was found in the result array.');
+    $this->assertRaw($term_3->name, 'Term was found in the result array.');
+  }
+
+  /**
+   * Test group by bundle.
+   *
+   * The actual grouping is made by the javascript later on.
+   * We just test that the resons contains group info.
+   */
+  public function testGroupbyBundle() {
+    // Create demo vocabulary.
+    $vocabulary_1 = $this->createVocabulary();
+    $vocabulary_2 = $this->createVocabulary();
+
+    // Create demo terms.
+    $term_1 = $this->createTerm($vocabulary_1);
+    $term_2 = $this->createTerm($vocabulary_1);
+    $term_3 = $this->createTerm($vocabulary_2);
+    $term_4 = $this->createTerm($vocabulary_2);
+
+    // Update the profile to group by bundle.
+    $this->_profile->data['entity:taxonomy_term']['group_by_bundle'] = 1;
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the bundle title appear in the response.
+    $this->assertRaw('"group":"Taxonomy term - ' . $vocabulary_1->name, 'Bundle name in group was found in the result array.');
+    $this->assertRaw('"group":"Taxonomy term - ' . $vocabulary_1->name, 'Bundle name in group was found in the result array.');
+  }
+
+  /**
+   * Test bundle filter.
+   */
+  public function testBundleFilter() {
+    // Create demo vocabulary.
+    $vocabulary_1 = $this->createVocabulary();
+    $vocabulary_2 = $this->createVocabulary();
+
+    // Create demo terms.
+    $term_1 = $this->createTerm($vocabulary_1);
+    $term_2 = $this->createTerm($vocabulary_2);
+
+    // Update the profile to filter by bundle.
+    $this->_profile->data['entity:taxonomy_term']['bundles'] = array(
+      $vocabulary_1->machine_name => $vocabulary_1->machine_name,
+    );
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the term title from the bundle included in the filter appear in the response.
+    $this->assertRaw($term_1->name, 'Term that is included in the filter was found in the result array.');
+
+    // Assert that the term title from the bundle that is not included in the filter doesnät appear in the response.
+    $this->assertNoRaw($term_2->name, 'Term that is not included in the filter was not found in the result array.');
+  }
+
+ /**
+   * Test result description.
+   *
+   * We just test one token.
+   */
+  public function testDescription() {
+     // Create demo vocabulary.
+    $vocabulary_1 = $this->createVocabulary();
+    $vocabulary_2 = $this->createVocabulary();
+
+    // Create demo terms.
+    $term_1 = $this->createTerm($vocabulary_1);
+    $term_2 = $this->createTerm($vocabulary_2);
+
+    // Update the profile with a taxonomy_term result description.
+    $this->_profile->data['entity:taxonomy_term']['result_description'] = 'Term [term:vocabulary]';
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Check that the result description appers in the result.
+    $this->assertRaw('Term ' . $vocabulary_1->name, 'The result description was found in the result array.');
+    $this->assertRaw('Term ' . $vocabulary_2->name, 'The result description was found in the result array.');
+  }
+}

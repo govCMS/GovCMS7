@@ -1,0 +1,3 @@
+
+/* Highlight the form elements that caused a form submission error. */
+.form-item input.error,

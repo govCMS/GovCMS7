@@ -1,0 +1,13 @@
+name = Image Link Formatter
+description = Provides an additional formatter for image core field, to be combined with contributed Link field module, to allow display of custom links with custom properties on the image field.
+core = 7.x
+dependencies[] = link
+dependencies[] = image
+package = Fields
+
+; Information added by drupal.org packaging script on 2012-12-19
+version = "7.x-1.0"
+core = "7.x"
+project = "image_link_formatter"
+datestamp = "1355914053"
+

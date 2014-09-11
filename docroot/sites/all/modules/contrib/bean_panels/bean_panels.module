@@ -1,0 +1,18 @@
+<?php
+/**
+ * @file
+ * Provides core module functions
+ * @copyright Copyright(c) 2012 Previous Next Pty Ltd
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Lee Rowlands larowlan at previousnext dot com dot au
+ *
+ */
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function bean_panels_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'ctools' && !empty($plugin)) {
+    return "plugins/$plugin";
+  }
+}

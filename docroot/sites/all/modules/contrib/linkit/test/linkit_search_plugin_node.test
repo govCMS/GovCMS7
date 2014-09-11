@@ -1,0 +1,171 @@
+<?php
+/**
+ * @file
+ * Tests for Linkit search plugin node.
+ */
+
+/**
+ * Test the the node search plugin.
+ */
+class LinkitsearchPluginNodeTestCase extends LinkitsearchPluginTestCase {
+
+  /**
+   * Definition.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Linkit Search plugin (Node)',
+      'description' => 'Test the the node search plugin.',
+      'group' => 'Linkit'
+    );
+  }
+
+  function setUp($extra_modules = array()) {
+    parent::setUp($extra_modules);
+
+    // Create a basic profile.
+    $this->createProfile(array(
+      'data' => array(
+        'search_plugins' => array(
+          'entity:node' => array(
+            'enabled' => 1,
+            'weight' => 0,
+          ),
+        ),
+        'entity:node' => array(
+          'result_description' => '',
+          'bundles' => array(),
+          'group_by_bundle' => 0,
+          'include_unpublished' => 0,
+        ),
+      )
+    ));
+  }
+
+  /**
+   * Test that we get results back which is valid.
+   */
+  public function testBasicResults() {
+    // Create some nodes.
+    $node_1 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName()));
+    $node_2 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName()));
+    $node_3 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName()));
+    $node_4 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName()));
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the node titles appears in the response.
+    $this->assertRaw($node_1->title, 'Node was found in the result array.');
+    $this->assertRaw($node_2->title, 'Node was found in the result array.');
+    $this->assertRaw($node_3->title, 'Node was found in the result array.');
+    $this->assertRaw($node_4->title, 'Node was found in the result array.');
+  }
+
+  /**
+   * Test how node states are handled.
+   */
+  public function testUnpublishedItems() {
+    // Create some nodes.
+    $node_1 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName(), 'status' => NODE_NOT_PUBLISHED));
+    $node_2 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName(), 'status' => NODE_NOT_PUBLISHED));
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the unpublished node title doesn't appear in the response.
+    $this->assertNoRaw($node_1->title, 'Unpublished node was not found in the result array.');
+    $this->assertNoRaw($node_2->title, 'Unpublished node was not found in the result array.');
+
+    // Tell the profile to include unpublished nodes.
+    $this->_profile->data['entity:node']['include_unpublished'] = 1;
+    $this->updateProfile();
+
+    // In order to see unpublished nodes in the result, the user must also have
+    // permission to see unpublished nodes.
+    // We give the user 'bypass node access' permission as we don't crated the
+    // nodes with this user.
+    $this->account = $this->drupalCreateUser(array('bypass node access'));
+    $this->drupalLogin($this->account);
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the unpublished title appears in the response.
+    $this->assertRaw($node_1->title, 'Unpublished node was found in the result array.');
+    $this->assertRaw($node_2->title, 'Unpublished node was found in the result array.');
+  }
+
+  /**
+   * Test group by bundle.
+   *
+   * The actual grouping is made by the javascript later on.
+   * We just test that the resons contains group info.
+   */
+  public function testGroupbyBundle() {
+    // Create some nodes.
+    $node_1 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName()));
+    $node_2 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName()));
+
+    // Get the bundle names.
+    $node_type_name_1 = node_type_get_name($node_1);
+    $node_type_name_2 = node_type_get_name($node_2);
+
+    // Update the profile to group by bundle.
+    $this->_profile->data['entity:node']['group_by_bundle'] = 1;
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Assert that the bundle title appear in the response.
+    $this->assertRaw('"group":"Node - ' . $node_type_name_1, 'Bundle name in group was found in the result array.');
+    $this->assertRaw('"group":"Node - ' . $node_type_name_2, 'Bundle name in group was found in the result array.');
+  }
+
+  /**
+   * Test bundle filter.
+   */
+  public function testBundleFilter() {
+    // Create some nodes.
+    $node_1 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName()));
+    $node_2 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName()));
+
+    // Update the profile to filter by bundle.
+    $this->_profile->data['entity:node']['bundles'] = array(
+      'article' => 'article',
+    );
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $res = $this->autocompleteCall();
+
+    // Assert that the node title from the bundle included in the filter appear in the response.
+    $this->assertRaw($node_1->title, 'Node that is included in the filter was found in the result array.');
+
+    // Assert that the node title from the bundle that is not included in the filter doesnät appear in the response.
+    $this->assertNoRaw($node_2->title, 'Node that is not included in the filter was not found in the result array.');
+  }
+
+ /**
+   * Test result description.
+   *
+   * We just test one token.
+   */
+  public function testDescription() {
+    // Create some nodes.
+    $node_1 = $this->drupalCreateNode(array('type' => 'article', 'title' => $this->search_string . $this->randomName()));
+    $node_2 = $this->drupalCreateNode(array('type' => 'page', 'title' => $this->search_string . $this->randomName()));
+
+    // Update the profile with a user result description.
+    $this->_profile->data['entity:node']['result_description'] = 'Created [node:created:raw]';
+    $this->updateProfile();
+
+    // Call the autocomplete helper method.
+    $this->autocompleteCall();
+
+    // Check that the result description appers in the result.
+    $this->assertRaw('Created ' . $node_1->created, 'The result description was found in the result array.');
+    $this->assertRaw('Created ' . $node_2->created, 'The result description was found in the result array.');
+  }
+}

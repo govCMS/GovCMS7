@@ -1,0 +1,185 @@
+<?php
+/**
+ * @file
+ * Tests for Linkit module.
+ */
+
+/**
+ * Tests Linkit profile UI CRUD.
+ */
+class LinkitProfileUICRUDTestCase extends LinkitTestCase {
+
+  /**
+   * Default profile values.
+   */
+  protected $profile_defaults = array(
+     'name' => 'test_profile',
+     'admin_title' => 'Test Profile',
+     'admin_description' => 'This is a description for the Test Profile.',
+     'profile_type' => LINKIT_PROFILE_TYPE_EDITOR,
+   );
+
+  /**
+   * Definition.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Linkit Profile',
+      'description' => 'Test that a Linkit profile can be created/read(load)/updated/deleted.',
+      'group' => 'Linkit'
+    );
+  }
+
+  function setUp($extra_modules = array()) {
+    parent::setUp($extra_modules);
+  }
+
+  /**
+   * Create a profile.
+   */
+  public function testCreateProfile() {
+    // Create a user and login.
+    $this->account = $this->drupalCreateUser($this->admin_permissions);
+    $this->drupalLogin($this->account);
+
+    // Save the profile.
+    $this->drupalPost('admin/config/content/linkit/add', $this->profile_defaults, t('Save'));
+
+    $this->assertRaw(t('!title has been created.', array('!title' => $this->profile_defaults['name'])), 'The new profile was created.');
+
+    // Go to the edit page.
+    $this->drupalGet('admin/config/content/linkit/list/' . $this->profile_defaults['name'] . '/edit');
+    $this->assertResponse(200);
+
+     // Test that the given values are saved.
+    foreach ($this->profile_defaults as $form_key => $value) {
+      $this->assertFieldByName($form_key, $value);
+    }
+  }
+
+  /**
+   * Update a profile.
+   */
+  public function testUpdateProfile() {
+    // Create a user and login.
+    $this->account = $this->drupalCreateUser($this->admin_permissions);
+    $this->drupalLogin($this->account);
+
+    // Create a profile.
+    $this->createProfile(array(
+      'data' => array(
+        'autocomplete' => array(
+          'charLimit' => LINKIT_CHAR_LIMIT,
+          'wait' => LINKIT_WAIT,
+          'remoteTimeout' => LINKIT_REMOTE_TIMEOUT,
+        ),
+      ),
+    ));
+
+    // Go to the edit page.
+    $this->drupalGet('admin/config/content/linkit/list/' . $this->_profile->name . '/edit');
+    $this->assertResponse(200);
+
+    $profile_update = array(
+      'admin_title' => 'Test Profile updated',
+      'admin_description' => 'This is a updated description for the Test Profile updated.',
+      'data[autocomplete][charLimit]' => 4,
+      'data[autocomplete][wait]' => 3500,
+      'data[autocomplete][remoteTimeout]' => 1000,
+    );
+    // Set some new values for the profile.
+    $this->drupalPost(NULL, $profile_update, t('Save'));
+
+    // Go to the edit page again.
+    $this->drupalGet('admin/config/content/linkit/list/' . $this->_profile->name . '/edit');
+    $this->assertResponse(200);
+
+    // Test that the given values are saved.
+    foreach ($profile_update as $form_key => $value) {
+      $this->assertFieldByName($form_key, $value);
+    }
+  }
+
+  /**
+   * Delete a profile.
+   */
+  public function testDeleteProfile() {
+    // Create a user and login.
+    $this->account = $this->drupalCreateUser($this->admin_permissions);
+    $this->drupalLogin($this->account);
+
+    // Create a profile that we will delete.
+    $this->createProfile();
+
+    // Delete the created profile.
+    $this->drupalPost('/admin/config/content/linkit/list/' . $this->_profile->name . '/delete', array(), t('Delete'));
+
+    $this->assertRaw(t('The item has been deleted.'), 'The profile was deleted.');
+  }
+
+  /**
+   * Load a profile that doesn't exists.
+   */
+  public function testLoadNonExistingProfile() {
+    // Load a profile that doesn't exists.
+    $loaded_profile = linkit_profile_load('my_none_existing_profile');
+
+    $this->assertFalse($loaded_profile, 'FALSE is returned when loading a non existing profile.');
+  }
+
+  /**
+   * Load a profile that exists.
+   */
+  public function testLoadProfile() {
+    // Create an user account so we can create a profile.
+    $this->account = $this->drupalCreateUser($this->admin_permissions);
+    $this->drupalLogin($this->account);
+
+    // Create a profile that we will load.
+    $this->createProfile();
+
+    // Load the saved profile.
+    $loaded_profile = linkit_profile_load($this->_profile->name);
+
+    $this->assertTrue($loaded_profile, 'Profile was successfully loaded.');
+  }
+
+  /**
+   * Load all profiles when no profiles exists.
+   */
+  public function testLoadProfilesNoProfilesExists() {
+    // We have to clear the static variables here as we have in the
+    // testLoadProfilesNoProfilesExists test function asked for profiles where
+    // there were no profiles.
+    drupal_static_reset('ctools_export_load_object');
+    drupal_static_reset('ctools_export_load_object_all');
+
+    // Load all profiles.
+    $loaded_profile = linkit_profile_load_all();
+    $this->assertIdentical($loaded_profile, array(), 'Empty array is returned when loading all profiles and there are no profiles.');
+  }
+
+  /**
+   * Load all profiles.
+   */
+  public function testLoadAllProfiles() {
+    // Create an user account so we can create profiles.
+    $this->account = $this->drupalCreateUser($this->admin_permissions);
+    $this->drupalLogin($this->account);
+
+    // Create profiles that we will load.
+    $this->createProfile(array('name' => 'test_1'));
+    $this->createProfile(array('name' => 'test_2'));
+    $this->createProfile(array('name' => 'test_3'));
+
+    // We have to clear the static variables here as we have in the
+    // testLoadProfilesNoProfilesExists test function asked for profiles where
+    // there were no profiles.
+    drupal_static_reset('ctools_export_load_object');
+    drupal_static_reset('ctools_export_load_object_all');
+
+    // Load all profiles.
+    $loaded_profiles = linkit_profile_load_all();
+    $this->assertEqual(count($loaded_profiles), 3, 'All profile were successfully loaded.');
+  }
+}

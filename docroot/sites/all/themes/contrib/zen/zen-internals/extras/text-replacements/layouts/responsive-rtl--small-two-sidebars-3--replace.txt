@@ -1,0 +1,5 @@
+
+  /* Start a new row and span all 3 columns. */
+  .two-sidebars .region-sidebar-second {
+    float: right;
+    width: 100%;

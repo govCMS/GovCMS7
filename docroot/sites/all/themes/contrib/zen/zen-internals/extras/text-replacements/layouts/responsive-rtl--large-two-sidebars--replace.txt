@@ -1,0 +1,5 @@
+
+  /* Span 3 columns, starting in 2nd column from right. */
+  .two-sidebars #content {
+    float: right;
+    width: 60%;

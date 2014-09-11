@@ -1,0 +1,15 @@
+/**
+ * CSS for rendering the Workbench information block.
+ */
+
+div.workbench-info-block {
+  background: none repeat scroll 0 0 #FFFBD9;
+  list-style: none outside;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  margin: 0;
+  border-color: #FFEBC5;
+  border-style: solid none;
+  border-width: 1px;
+  color: #666;
+  font-size: 0.95em;
+}

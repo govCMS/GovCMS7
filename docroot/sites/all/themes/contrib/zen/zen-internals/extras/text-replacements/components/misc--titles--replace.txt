@@ -1,0 +1,6 @@
+.page__title,          /* The title of the page. */
+.node__title,          /* Title of a piece of content when it is given in a list of content. */
+.block__title,         /* Block title. */
+.comments__title,      /* Comment section heading. */
+.comments__form-title, /* Comment form heading. */
+.comment__title {      /* Comment title. */

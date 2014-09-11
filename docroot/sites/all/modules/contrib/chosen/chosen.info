@@ -1,0 +1,13 @@
+name = Chosen
+description = Makes select elements more user-friendly using <a href="http://harvesthq.github.com/chosen/">Chosen</a>.
+configure = admin/config/user-interface/chosen
+dependencies[] = libraries (2.x)
+core = 7.x
+
+
+; Information added by drupal.org packaging script on 2013-05-08
+version = "7.x-2.0-alpha2"
+core = "7.x"
+project = "chosen"
+datestamp = "1368039911"
+

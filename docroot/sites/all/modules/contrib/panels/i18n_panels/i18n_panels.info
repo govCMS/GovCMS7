@@ -1,0 +1,15 @@
+name = Panels translation
+description = Supports translatable panels items.
+dependencies[] = i18n
+dependencies[] = panels
+dependencies[] = i18n_string
+dependencies[] = i18n_translation
+package = Multilingual - Internationalization
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2014-02-12
+version = "7.x-3.4"
+core = "7.x"
+project = "panels"
+datestamp = "1392221614"
+

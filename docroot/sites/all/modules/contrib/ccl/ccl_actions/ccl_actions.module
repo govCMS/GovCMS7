@@ -1,0 +1,386 @@
+<?php
+/**
+ * @file
+ * Implementation of core actions for CCL.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ccl_actions_menu() {
+
+  $items['admin/config/user-interface/ccl/action/add'] = array(
+    'title' => 'Add new node action link',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccl_actions_form'),
+    'access arguments' => array('use ccl'),
+    'type' => MENU_LOCAL_ACTION,
+    'weight' => 10,
+  );
+  $items['admin/config/user-interface/ccl/action/%/edit'] = array(
+    'title' => 'Edit custom link',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ccl_actions_form', 5),
+    'access arguments' => array('use ccl'),
+  );
+  $items['admin/config/user-interface/ccl/action-trigger/%node/%/%'] = array(
+    'title' => 'CCL Action Trigger',
+    'page callback' => 'ccl_actions_trigger',
+    'page arguments' => array(5, 6, 7),
+    'access arguments' => array('access contextual links'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Action link add and edit form.
+ *
+ * TODO:
+ * - Add ability to trigger rules.
+ */
+function ccl_actions_form($form, &$form_state, $clid = 0) {
+  // Check if we are in edit mode and load the link values.
+  if ($clid) {
+    $link = db_query('SELECT * FROM {ccl} WHERE clid = :clid', array(':clid' => $clid))->fetchObject();
+    $form_state['clid'] = $clid;
+
+    // Unserialize options.
+    $link->options = unserialize($link->options);
+    $node_options = $link->options['node_options'];
+    if ($node_options == 'node') {
+      $title = db_query('SELECT title FROM {node} WHERE nid = :nid', array(':nid' => $link->options['node_id']))->fetchField();
+      $nid_text = $title . ' [nid:' . $link->options['node_id'] . ']';
+    }
+  }
+
+  $form = array();
+  // Pull in library, js and css for the form.
+  $form['#attached']['library'][] = array('system', 'ui.button');
+  $form['#attached']['js'][] = drupal_get_path('module', 'ccl') . '/ccl.js';
+  $form['#attached']['css'][] = drupal_get_path('module', 'ccl') . '/ccl.css';
+
+  // Add an ID wrapper so that the JS and CSS from the main module take effect.
+  $form['#prefix'] = '<div id="ccl-add-form">';
+  $form['#suffix'] = '</div>';
+
+
+  $form['action_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Node Actions'),
+    '#collapsible' => TRUE,
+  );
+
+  $form['action_group']['actions_select'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Core Actions'),
+    '#description' => t('Select the core actions that should become availabale.'),
+    '#default_value' => $clid ? $link->options['actions_select'] : array(),
+    '#options' => array(
+      'publish' => t('Publish/unpublish content'),
+      'sticky' => t('Make content sticky/unsticky'),
+      'promote' => t('Promote/remove content from front page'),
+    ),
+    '#required' => TRUE,
+  );
+
+  $form['options_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Options'),
+    '#collapsible' => TRUE,
+  );
+
+  $form['options_group']['node_options'] = array(
+    '#type' => 'radios',
+    '#title' => t('Show link for'),
+    '#description' => t('Select if this link should be displayed for all nodes, all nodes of a content type or a specific node.'),
+    '#options' => array(
+      'node' => t('Single node'),
+      'ct' => t('Content type'),
+      'global' => t('All nodes'),
+    ),
+    '#default_value' => isset($node_options) ? $node_options : 'node',
+  );
+
+  // Load the content type names.
+  $types = node_type_get_names();
+  $form['options_group']['node_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Type'),
+    '#description' => t('The content type this link will be displayed for.'),
+    '#options' => $types,
+    '#default_value' => $clid ? $link->options['node_type'] : -1,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="node_options"]' => array('value' => 'ct'),
+      ),
+    ),
+  );
+
+  $form['options_group']['node_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Node ID'),
+    '#description' => t('Enter the title of the node or the id of the node this link should be added to.'),
+    '#size' => 40,
+    '#maxlength' => 128,
+    '#default_value' => isset($nid_text) ? $nid_text : '',
+    '#autocomplete_path' => 'admin/config/user-interface/ccl/autocomplete',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="node_options"]' => array('value' => 'node'),
+      ),
+    ),
+  );
+
+  $form['ccl_save_link'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save Link'),
+  );
+
+  return $form;
+}
+
+/**
+ * Validafion handler for ccl_actions_form().
+ *
+ * @see ccl_actions_form()
+ */
+function ccl_actions_form_validate($form, &$form_state) {
+  $values = $form_state['values'];
+
+  // Check that that we can get the node id and transform it for saving.
+  if ($values['node_options'] == 'node') {
+    if (is_numeric($values['node_id'])) {
+      form_set_value($form['options_group']['node_id'], $values['node_id'], $form_state);
+    }
+    elseif (preg_match('/\[nid:[0-9]*\]/', $values['node_id'], $match)) {
+      form_set_value($form['options_group']['node_id'], substr(rtrim($match[0], ']'), 5), $form_state);
+    }
+    else {
+      form_set_error('nid', t('Enter a node id or use the autocomplete widget to select an existing node.'));
+    }
+  }
+}
+
+/**
+ * Submit handler for ccl_actions_form().
+ *
+ * @see ccl_actions_form()
+ */
+function ccl_actions_form_submit($form, &$form_state) {
+  $form_state['values']['ccl_type'] = 'action';
+  $selected_actions = array_filter($form_state['values']['actions_select']);
+  $form_state['values']['ccl_title'] = format_plural(count($selected_actions), 'Action %actions', ' Actions %actions', array('%actions' => implode(', ', array_keys($selected_actions))));;
+  $form_state['values']['ccl_link'] = '- n/a -';
+
+  module_load_include('inc', 'ccl', 'ccl.admin');
+  ccl_add_form_submit($form, $form_state);
+}
+
+/**
+ * Hook function to process the contextual links element.
+ */
+function ccl_actions_ccl_add_link($element, $dest) {
+  if (isset($element['#element']['#node']->nid)) {
+    $node = $element['#element']['#node'];
+    $action_cache = ccl_cache_get('ccl_actions');
+
+    // Global elements.
+    foreach ($action_cache['global'] as $id => $link) {
+      _ccl_actions_prepare_link($link, $node, $element, $dest);
+    }
+
+    // Content Type.
+    if (in_array($node->type, array_keys($action_cache['ct']))) {
+      foreach ($action_cache['ct'][$node->type] as $id => $link) {
+        _ccl_actions_prepare_link($link, $node, $element, $dest);
+      }
+    }
+
+    // Individual nodes.
+    if (in_array($node->nid, array_keys($action_cache['ids']))) {
+      foreach ($action_cache['ids'][$node->nid] as $id => $link) {
+        _ccl_actions_prepare_link($link, $node, $element, $dest);
+      }
+    }
+  }
+  return $element;
+}
+
+/**
+ * Helper function to create the action link.
+ *
+ * This fuunctions also checks if the current user
+ * has edit rights for this node.
+ */
+function _ccl_actions_prepare_link($actions, $node, &$element, $dest) {
+  if (!node_access('update', $node)) {
+    return FALSE;
+  }
+
+  foreach ($actions as $action) {
+
+    switch ($action) {
+      case 'publish':
+        if ($node->status) {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/status/0',
+            'title' => t('Unpublish content'),
+            'query' => array($dest),
+          );
+        }
+        else {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/status/1',
+            'title' => t('Publish content'),
+            'query' => array($dest),
+          );
+        }
+        $element['#links']['ccl-action-status-' . $node->nid] = $link;
+        break;
+
+      case 'sticky':
+        if ($node->sticky) {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/sticky/0',
+            'title' => t('Make content unsticky'),
+            'query' => array($dest),
+          );
+        }
+        else {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/sticky/1',
+            'title' => t('Make content sticky'),
+            'query' => array($dest),
+          );
+        }
+        $element['#links']['ccl-action-sticky-' . $node->nid] = $link;
+        break;
+
+      case 'promote':
+        if ($node->promote) {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/promote/0',
+            'title' => t('Remove content from front page'),
+            'query' => array($dest),
+          );
+        }
+        else {
+          $link = array(
+            'href' => 'admin/config/user-interface/ccl/action-trigger/' . $node->nid . '/promote/1',
+            'title' => t('Promote content to front page'),
+            'query' => array($dest),
+          );
+        }
+        $element['#links']['ccl-action-promote-' . $node->nid] = $link;
+        break;
+    }
+  }
+}
+
+/**
+ * Trigger function to execute actions.
+ */
+function ccl_actions_trigger($node, $action, $state) {
+  if (!node_access('update', $node)) {
+    drupal_set_message(t('You have no permission to update %node_title.', array('%node_title' => $node->title)), 'error');
+    drupal_goto();
+  }
+  switch ($action) {
+    case 'status':
+      if ($state) {
+        actions_do('node_publish_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been published.', array('%node_title' => $node->title)));
+      }
+      else {
+        $res = actions_do('node_unpublish_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been unpublished.', array('%node_title' => $node->title)));
+      }
+      break;
+
+    case 'sticky':
+      if ($state) {
+        actions_do('node_make_sticky_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been made sticky.', array('%node_title' => $node->title)));
+      }
+      else {
+        $res = actions_do('node_make_unsticky_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been made unsticky.', array('%node_title' => $node->title)));
+      }
+      break;
+
+    case 'promote':
+      if ($state) {
+        actions_do('node_promote_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been promoted to front page.', array('%node_title' => $node->title)));
+      }
+      else {
+        $res = actions_do('node_unpromote_action', $node);
+        node_save($node);
+        drupal_set_message(t('%node_title has been removed from front page.', array('%node_title' => $node->title)));
+      }
+      break;
+  }
+  // Return to set destination parameter.
+  drupal_goto();
+}
+
+/**
+ * Hook function to provide link option information for the link list page.
+ */
+function ccl_actions_ccl_link_info($record) {
+  if ($record->type == 'action') {
+    // Get content type names.
+    $cts = node_type_get_names();
+
+    $options_return['op'] = l(t('Edit'), 'admin/config/user-interface/ccl/action/' . $record->clid . '/edit') . ' | ' . l(t('Delete'), 'admin/config/user-interface/ccl/' . $record->clid . '/delete');
+
+    $options = unserialize($record->options);
+
+    switch ($options['node_options']) {
+      case 'global':
+        $options_return['desc'] = t('Attached to all nodes.');
+        break;
+
+      case 'ct':
+        $options_return['desc'] = t('Attached to all nodes of the content type %ct.', array('%ct' => $cts[$options['node_type']]));
+        break;
+
+      case 'node':
+        $node_title = db_query('SELECT title FROM {node} WHERE nid = :nid', array(':nid' => $options['node_id']))->fetchField();
+        $options_return['desc'] = t('Attached to %node_title [NID: !nid].', array('%node_title' => $node_title, '!nid' => $options['node_id']));
+        break;
+    }
+    return $options_return;
+  }
+  else {
+    return "";
+  }
+}
+
+/**
+ * Hook function triggered by the chache update routine of the main module.
+ */
+function ccl_actions_ccl_cache_update() {
+  $actions = db_query("SELECT * FROM {ccl} WHERE type = :type", array(':type' => 'action'));
+  $actions_cache = array('global' => array(), 'ct' => array(), 'ids' => array());
+  foreach ($actions as $action) {
+    $action->options = unserialize($action->options);
+    $filtered_actions = array_keys(array_filter($action->options['actions_select']));
+    if ($action->options['node_options'] == 'global') {
+      $actions_cache['global'][] = $filtered_actions;
+    }
+    elseif ($action->options['node_options'] == 'node') {
+      $actions_cache['ids'][$action->options['node_id']][] = $filtered_actions;
+    }
+    else {
+      $actions_cache['ct'][$action->options['node_type']][] = $filtered_actions;
+    }
+  }
+  cache_set('ccl_actions', $actions_cache);
+}

@@ -1,0 +1,17 @@
+name = "Custom Contextual Links - Local Actions"
+description = "Add on module for for Custom Contextual Links to enable support for local action links."
+
+core = 7.x
+package = Custom Contextual Links
+
+dependencies[] = contextual
+dependencies[] = ccl
+
+files[] = ccl_local_actions.module
+
+; Information added by drupal.org packaging script on 2012-10-14
+version = "7.x-1.5"
+core = "7.x"
+project = "ccl"
+datestamp = "1350246969"
+

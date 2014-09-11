@@ -1,0 +1,12 @@
+name = Login Security
+description = Enable security options in the login flow of the site.
+files[] = login_security.module
+files[] = login_security.test
+core = 7.x
+configure = admin/config/people/login_security
+; Information added by drupal.org packaging script on 2013-07-02
+version = "7.x-1.4"
+core = "7.x"
+project = "login_security"
+datestamp = "1372794051"
+

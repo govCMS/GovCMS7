@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ *   The Bean Entity cache module.
+ */
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function bean_entitycache_entity_info_alter(&$entity_info) {
+  // Enable Entity Cache support for beans.
+  $entity_info['bean']['entity cache'] = TRUE;
+  // Which means that we don't need to cache the fields.
+  $entity_info['bean']['field cache'] = FALSE;
+}
+
+/**
+ * Implements hook_flush_caches().
+ */
+function bean_entitycache_flush_caches() {
+  return array('cache_entity_bean');
+}

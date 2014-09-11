@@ -1,0 +1,266 @@
+<?php
+
+/**
+ * Implementation of hook_ctools_plugin_directory().
+ */
+function panels_ipe_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'panels' && $plugin == 'display_renderers') {
+    return 'plugins/' . $plugin;
+  }
+}
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ *
+ * Inform CTools about version information for various plugins implemented by
+ * Panels.
+ *
+ * @param string $owner
+ *   The system name of the module owning the API about which information is
+ *   being requested.
+ * @param string $api
+ *   The name of the API about which information is being requested.
+ */
+function panels_ipe_ctools_plugin_api($owner, $api) {
+  if ($owner == 'panels' && $api == 'pipelines') {
+    return array(
+      'version' => 1,
+      'path' => drupal_get_path('module', 'panels_ipe') . '/includes',
+    );
+  }
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function panels_ipe_theme() {
+  return array(
+    'panels_ipe_pane_wrapper' => array(
+      'variables' => array('output' => NULL, 'pane' => NULL, 'display' => NULL, 'renderer' => NULL),
+    ),
+    'panels_ipe_region_wrapper' => array(
+      'variables' => array('output' => NULL, 'region_id' => NULL, 'display' => NULL, 'controls' => NULL, 'renderer' => NULL),
+    ),
+    'panels_ipe_add_pane_button' => array(
+      'variables' => array('region_id' => NULL, 'display' => NULL, 'renderer' => NULL),
+    ),
+    'panels_ipe_placeholder_pane' => array(
+      'variables' => array('region_id' => NULL, 'region_title' => NULL),
+    ),
+    'panels_ipe_dnd_form_container' => array(
+      'variables' => array('link' => NULL, 'cache_key' => NULL, 'display' => NULL),
+    ),
+    'panels_ipe_toolbar' => array(
+      'variables' => array('buttons' => NULL),
+    ),
+  );
+}
+
+/**
+ * Theme the 'placeholder' pane, which is shown on an active IPE when no panes
+ * live in that region.
+ *
+ * @param string $region_id
+ * @param string $region_title
+ */
+function theme_panels_ipe_placeholder_pane($vars) {
+  $region_id = $vars['region_id'];
+  $region_title = $vars['region_title'];
+
+  $output = '<div class="panels-ipe-placeholder-content">';
+  $output .= "<h3>$region_title</h3>";
+  $output .= '</div>';
+  return $output;
+}
+
+function template_preprocess_panels_ipe_pane_wrapper(&$vars) {
+  $pane = $vars['pane'];
+  $display = $vars['display'];
+  $renderer = $vars['renderer'];
+
+  $content_type = ctools_get_content_type($pane->type);
+  $subtype = ctools_content_get_subtype($content_type, $pane->subtype);
+  $vars['links'] = array();
+
+  if (ctools_content_editable($content_type, $subtype, $pane->configuration)) {
+    $vars['links']['edit'] = array(
+      'title' => isset($content_type['edit text']) ? '<span>' . $content_type['edit text'] . '</span>' : '<span>' . t('Settings') . '</span>',
+      'href' => $renderer->get_url('edit-pane', $pane->pid),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array('ctools-use-modal', 'panels-ipe-hide-bar'),
+        'title' => isset($content_type['edit text']) ? $content_type['edit text'] : t('Settings'),
+        // 'id' => "pane-edit-panel-pane-$pane->pid",
+      ),
+    );
+  }
+
+  // Add option to configure style in IPE
+  if (user_access('administer panels styles')) {
+    $vars['links']['style'] = array(
+      'title' => '<span>' . t('Style') . '</span>',
+      'href' => $renderer->get_url('style-type', 'pane', $pane->pid),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array('ctools-use-modal', 'panels-ipe-hide-bar'),
+        'title' => t('Style'),
+      ),
+    );
+  }
+
+  // Deleting is managed entirely in the js; this is just an attachment point
+  // for it
+  $vars['links']['delete'] = array(
+    'title' => '<span>' . t('Delete') . '</span>',
+    'href' => '#',
+    'html' => TRUE,
+    'attributes' => array(
+      'class' => 'pane-delete',
+      'id' => "pane-delete-panel-pane-$pane->pid",
+      'title' => t('Delete'),
+    ),
+  );
+
+  $context = array(
+    'pane' => $pane,
+    'display' => $display,
+    'renderer' => $renderer
+  );
+  drupal_alter('panels_ipe_pane_links', $vars['links'], $context);
+
+}
+
+function theme_panels_ipe_pane_wrapper($vars) {
+  $output = $vars['output'];
+  $pane = $vars['pane'];
+
+  $attributes = array(
+    'class' => 'panels-ipe-linkbar',
+  );
+
+  $links = theme('links', array('links' => $vars['links'], 'attributes' => $attributes));
+
+  if (!empty($pane->locks['type']) && $pane->locks['type'] == 'immovable') {
+    $links = '<div class="panels-ipe-dragbar panels-ipe-nodraghandle clearfix">' . $links . '</div>';
+  }
+  else {
+    $links = '<div class="panels-ipe-dragbar panels-ipe-draghandle clearfix">' . $links . '<span class="panels-ipe-draghandle-icon"><span class="panels-ipe-draghandle-icon-inner"></span></span></div>';
+  }
+
+  $handlebar = '<div class="panels-ipe-handlebar-wrapper panels-ipe-on">' . $links . '</div>';
+
+  return $handlebar . $output;
+}
+
+function theme_panels_ipe_region_wrapper($vars) {
+  return $vars['controls'] . $vars['output'];
+}
+
+function template_preprocess_panels_ipe_add_pane_button(&$vars) {
+  $region_id = $vars['region_id'];
+  $display = $vars['display'];
+  $renderer = $vars['renderer'];
+  $vars['links'] = '';
+
+  // Add option to configure style in IPE
+  if (user_access('administer panels styles')) {
+    $vars['links']['style'] = array(
+      'title' => '<span>' . t('Region style') . '</span>',
+      'href' => $renderer->get_url('style-type', 'region', $region_id),
+      'html' => TRUE,
+      'attributes' => array(
+        'class' => array('ctools-use-modal', 'panels-ipe-hide-bar', 'style'),
+        'title' => t('Region style'),
+      ),
+    );
+  }
+
+  // Add option to add items in the IPE
+  $vars['links']['add-pane'] = array(
+    'title' => '<span>' . t('Add new pane') . '</span>',
+    'href' => $renderer->get_url('select-content', $region_id),
+    'attributes' => array(
+      'class' => array('ctools-use-modal', 'add', 'panels-ipe-hide-bar'),
+      'title' => t('Add new pane'),
+    ),
+    'html' => TRUE,
+  );
+
+  $context = array(
+    'region_id' => $region_id,
+    'display' => $display,
+    'renderer' => $renderer,
+  );
+  drupal_alter('panels_ipe_region_links', $vars['links'], $context);
+
+}
+
+function theme_panels_ipe_add_pane_button($vars) {
+  $attributes = array(
+    'class' => array('panels-ipe-linkbar', 'inline'),
+  );
+
+  $links = theme('links', array('links' => $vars['links'], 'attributes' => $attributes));
+
+  return '<div class="panels-ipe-newblock panels-ipe-on">' . $links . '</div>';
+}
+
+/**
+ * @deprecated
+ */
+function panels_ipe_get_cache_key($key = NULL) {
+  return array();
+}
+
+/**
+ * Add a button to the IPE toolbar.
+ */
+function panels_ipe_toolbar_add_button($cache_key, $id, $button) {
+  $buttons = &drupal_static('panels_ipe_toolbar_buttons', array());
+  $buttons[$cache_key][$id] = $button;
+}
+
+/**
+ * Implementation of hook_footer()
+ *
+ * Adds the IPE control container.
+ *
+ * @param unknown_type $main
+ */
+function panels_ipe_page_alter(&$page) {
+  $buttons = &drupal_static('panels_ipe_toolbar_buttons', array());
+  if (empty($buttons)) {
+    return;
+  }
+
+  $output = theme('panels_ipe_toolbar', array('buttons' => $buttons));
+
+  $page['page_bottom']['panels_ipe'] = array(
+    '#markup' => $output,
+  );
+}
+
+function theme_panels_ipe_toolbar($vars) {
+  $buttons = $vars['buttons'];
+
+  $output = "<div id='panels-ipe-control-container' class='clearfix'>";
+  foreach ($buttons as $key => $ipe_buttons) {
+    $output .= "<div id='panels-ipe-control-$key' class='panels-ipe-control'>";
+
+    // Controls in this container will appear when the IPE is not on.
+    $output .= '<div class="panels-ipe-button-container clearfix">';
+    foreach ($ipe_buttons as $button) {
+      $output .= is_string($button) ? $button : drupal_render($button);
+    }
+    $output .= '</div>';
+
+    // Controls in this container will appear when the IPE is on. It is usually
+    // filled via AJAX.
+    $output .= '<div class="panels-ipe-form-container clearfix"></div>';
+    $output .= '</div>';
+  }
+
+  $output .= "</div>";
+
+  return $output;
+}

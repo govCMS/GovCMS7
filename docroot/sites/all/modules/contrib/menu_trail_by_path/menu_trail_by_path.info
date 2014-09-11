@@ -1,0 +1,15 @@
+name =  "Menu Trail By Path"
+description = "Expand menus and set active-trail according to the current path. <strong>Requires Drupal 7.12+</strong>"
+package = Other
+core = 7.x
+dependencies[] = menu
+dependencies[] = path
+dependencies[] = system (>=7.12)
+configure = admin/structure/menu_trail_by_path
+
+; Information added by drupal.org packaging script on 2012-10-26
+version = "7.x-2.0"
+core = "7.x"
+project = "menu_trail_by_path"
+datestamp = "1351260718"
+

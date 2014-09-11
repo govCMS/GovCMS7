@@ -1,0 +1,441 @@
+<?php
+
+/**
+ * @file
+ * A module to provide simple Twitter blocks using the Twitter Search API.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function twitter_block_help($path, $arg) {
+  switch ($path) {
+    case 'admin/structure/block/add-twitter-block':
+      return '<p>' . t('Use this page to create a new custom Twitter block.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function twitter_block_menu() {
+  // Create an array of block settings
+  $settings = array(
+    'title' => 'Add Twitter block',
+    'description' => 'Add a new Twitter block.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('twitter_block_add_block_form'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'twitter_block.admin.inc',
+  );
+
+  // Add a local action to the block configuration page
+  $items['admin/structure/block/add-twitter-block'] = array(
+    'access arguments' => array('administer blocks'),
+  ) + $settings;
+
+  // Get the default site theme
+  $default_theme = variable_get('theme_default', 'bartik');
+
+  // Add a local action to the per-theme block configuration pages
+  foreach (list_themes() as $key => $theme) {
+    if ($key != $default_theme) {
+      $items['admin/structure/block/list/' . $key . '/add-twitter-block'] = array(
+        'access callback' => '_twitter_block_themes_access',
+        'access arguments' => array($theme),
+      ) + $settings;
+    }
+  }
+
+  $items['admin/structure/block/administer/twitter_block/%/delete'] = array(
+    'title' => 'Delete Twitter block',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('twitter_block_delete', 5),
+    'access arguments' => array('administer blocks'),
+    'type' => MENU_CALLBACK,
+    'file' => 'twitter_block.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Menu item access callback - only admin or enabled themes can be accessed.
+ */
+function _twitter_block_themes_access($theme) {
+  return user_access('administer blocks') && drupal_theme_access($theme);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter();
+ */
+function twitter_block_form_block_admin_display_form_alter(&$form, &$form_state, $form_id) {
+  $result = db_query('SELECT bid FROM {twitter_block}');
+
+  // Add delete links to Twitter Block blocks
+  foreach ($result as $block) {
+    $form['blocks']['twitter_block_' . $block->bid]['delete'] = array(
+      '#type' => 'link',
+      '#title' => t('delete'),
+      '#href' => 'admin/structure/block/administer/twitter_block/' . $block->bid . '/delete',
+    );
+  }
+}
+
+/**
+ * Returns information from database about a user-created (Twitter) block.
+ *
+ * @param $bid
+ *   ID of the block to get information for.
+ *
+ * @return
+ *   Associative array of information stored in the database for this block.
+ *   Array keys:
+ *   - bid: Block ID.
+ *   - info: Block description.
+ *   - widget_id: Widget ID.
+ *   - theme: Theme.
+ *   - link_color: Link color.
+ *   - width: Width.
+ *   - height: Height.
+ *   - chrome: Chrome.
+ *   - border_color: Border color.
+ *   - language: Language.
+ *   - tweet_limit: Tweet limit.
+ *   - related: Related users.
+ *   - polite: ARIA politeness.
+ */
+function twitter_block_block_get($bid) {
+  return db_query("SELECT * FROM {twitter_block} WHERE bid = :bid", array(':bid' => $bid))->fetchAssoc();
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function twitter_block_block_info() {
+  $blocks = array();
+
+  $result = db_query('SELECT bid, info FROM {twitter_block} ORDER BY info');
+  foreach ($result as $block) {
+    $blocks[$block->bid]['info'] = $block->info;
+  }
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function twitter_block_block_configure($delta = 0) {
+  if ($delta) {
+    $config = twitter_block_block_get($delta);
+
+    // Unserialize the timeline settings.
+    $data = unserialize($config['data']);
+
+    // Remove the serialized timeline settings.
+    unset($config['data']);
+
+    // Add the timeline settings to the block settings.
+    $twitter_block = $config + $data;
+  }
+  else {
+    $twitter_block = array();
+  }
+  return twitter_block_custom_block_form($twitter_block);
+}
+
+/**
+ * Form constructor for the Twitter block form.
+ *
+ * @param $edit
+ *   (optional) An associative array of information retrieved by
+ *   twitter_block_block_get() if an existing block is being edited, or an
+ *   empty array otherwise. Defaults to array().
+ *
+ * @ingroup forms
+ */
+function twitter_block_custom_block_form($edit = array()) {
+  $edit += array(
+    'info' => '',
+    'widget_id' => '',
+    'theme' => '',
+    'link_color' => '',
+    'width' => '',
+    'height' => '',
+    'chrome' => array(),
+    'border_color' => '',
+    'language' => '',
+    'tweet_limit' => '',
+    'related' => '',
+    'polite' => array(),
+  );
+
+  $form['info'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Block description'),
+    '#default_value' => $edit['info'],
+    '#maxlength' => 64,
+    '#description' => t('A brief description of your block. Used on the <a href="@overview">Blocks administration page</a>.', array('@overview' => url('admin/structure/block'))),
+    '#required' => TRUE,
+  );
+  $form['widget_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Widget ID'),
+    '#default_value' => $edit['widget_id'],
+    '#required' => TRUE,
+    '#description' => t('Each Twitter Block block requires a unique widget ID which determines, among other things, the source (user timeline, favourites, list or search) of the tweets to display. You can view a list of your existing embedded timeline widgets (and their widget IDs) or create new embedded timeline widgets by visiting the <a href="@widgets_section">widgets section of your settings page</a> (make sure that you\'re logged in). You can determine a widget\'s ID by editing it and inspecting the URL (which should be in the form of twitter.com/settings/widgets/WIDGET_ID/edit) or by looking at the widget\'s embed code (look for data-widget-id="WIDGET_ID").', array('@widgets_section' => 'https://twitter.com/settings/widgets')),
+  );
+  $form['appearance'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Appearance'),
+  );
+  $form['appearance']['theme'] = array(
+    '#type' => 'select',
+    '#title' => t('Theme'),
+    '#default_value' => $edit['theme'],
+    '#options' => array(
+      '' => t('Default'),
+      'dark' => t('Dark'),
+    ),
+    '#description' => t('Select a theme for the widget.'),
+  );
+  $form['appearance']['link_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Link color'),
+    '#default_value' => $edit['link_color'],
+    '#maxlength' => 6,
+    '#size' => 6,
+    '#field_prefix' => '#',
+    '#description' => t('Change the link color used by the widget. Takes an %format hex format color. Note that some icons in the widget will also appear this color.', array('%format' => 'abc123')),
+  );
+  $form['appearance']['border_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Border color'),
+    '#default_value' => $edit['border_color'],
+    '#maxlength' => 6,
+    '#size' => 6,
+    '#field_prefix' => '#',
+    '#description' => t('Change the border color used by the widget. Takes an %format hex format color.', array('%format' => 'abc123')),
+  );
+  $form['appearance']['chrome'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Chrome'),
+    '#default_value' => $edit['chrome'],
+    '#options' => array(
+      'noheader' => t('No header'),
+      'nofooter' => t('No footer'),
+      'noborders' => t('No borders'),
+      'noscrollbar' => t('No scrollbar'),
+      'transparent' => t('Transparent'),
+    ),
+    '#description' => t('Control the widget layout and chrome.'),
+  );
+  $form['functionality'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Functionality'),
+  );
+  $form['functionality']['related'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Related users'),
+    '#default_value' => $edit['related'],
+    '#description' => t('As per the Tweet and follow buttons, you may provide a comma-separated list of user screen names as suggested followers to a user after they reply, Retweet, or favorite a Tweet in the timeline.'),
+  );
+  $form['functionality']['tweet_limit'] = array(
+    '#type' => 'select',
+    '#title' => t('Tweet limit'),
+    '#default_value' => $edit['tweet_limit'],
+    '#options' => array('' => t('Auto')) + drupal_map_assoc(range(1, 20)),
+    '#description' => t('Fix the size of a timeline to a preset number of Tweets between 1 and 20. The timeline will render the specified number of Tweets from the timeline, expanding the height of the widget to display all Tweets without scrolling. Since the widget is of a fixed size, it will not poll for updates when using this option.'),
+  );
+  $form['size'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Size'),
+    '#description' => t('Embedded timelines are flexible and adaptive, functioning at a variety of dimensions ranging from wide to narrow, and short to tall. The default dimensions for a timeline are 520×600px, which can be overridden to fit the dimension requirements of your page. Setting a width is not required, and by default the widget will shrink to the width of its parent element in the page.'),
+  );
+  $form['size']['width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Width'),
+    '#default_value' => $edit['width'],
+    '#size' => 6,
+    '#field_suffix' => 'px',
+    '#description' => t('Change the width of the widget.'),
+  );
+  $form['size']['height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Height'),
+    '#default_value' => $edit['height'],
+    '#size' => 6,
+    '#field_suffix' => 'px',
+    '#description' => t('Change the height of the widget.'),
+  );
+  $form['size']['note'] = array(
+    '#type' => 'markup',
+    '#markup' => '<p>' . t('The minimum width of a timeline is 180px and the maximum is 520px. The minimum height is 200px.') . '</p>',
+  );
+  $form['accessibility'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Accessibility'),
+  );
+  $form['accessibility']['language'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Language'),
+    '#default_value' => $edit['language'],
+    '#maxlength' => 5,
+    '#size' => 5,
+    '#description' => t('The widget language is detected from the page, based on the language of your content. Enter a <a href="@website">language code</a> to manually override the language.', array('@website' => 'http://www.w3.org/TR/html401/struct/dirlang.html#h-8.1.1')),
+  );
+  $form['accessibility']['polite'] = array(
+    '#type' => 'select',
+    '#title' => t('ARIA politeness'),
+    '#options' => array(
+      'polite' => t('Polite'),
+      'assertive' => t('Assertive'),
+    ),
+    '#default_value' => $edit['polite'],
+    '#description' => t('ARIA is an accessibility system that aids people using assistive technology interacting with dynamic web content. <a href="@website">Read more about ARIA on W3C\'s website</a>. By default, the embedded timeline uses the least obtrusive setting: "polite". If you\'re using an embedded timeline as a primary source of content on your page, you may wish to override this to the assertive setting, using "assertive".', array('@website' => 'http://www.w3.org/WAI/intro/aria.php')),
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function twitter_block_block_save($delta = 0, $edit = array()) {
+  twitter_block_custom_block_save($edit, $delta);
+}
+
+/**
+ * Saves a user-created Twitter block in the database.
+ *
+ * @param $edit
+ *   Associative array of fields to save. Array keys:
+ *   - info: Block description.
+ *   - widget_id: Widget ID.
+ *   - theme: Theme.
+ *   - link_color: Link color.
+ *   - width: Width.
+ *   - height: Height.
+ *   - chrome: Chrome.
+ *   - border_color: Border color.
+ *   - language: Language.
+ *   - tweet_limit: Tweet limit.
+ *   - related: Related users.
+ *   - polite: ARIA politeness.
+ * @param $delta
+ *   Block ID of the block to save.
+ *
+ * @return
+ *   Always returns TRUE.
+ */
+function twitter_block_custom_block_save($edit, $delta) {
+  // The serialized 'data' column contains the timeline settings.
+  $data = array(
+    'theme' => $edit['theme'],
+    'link_color' => $edit['link_color'],
+    'width' => $edit['width'],
+    'height' => $edit['height'],
+    'chrome' => $edit['chrome'],
+    'border_color' => $edit['border_color'],
+    'language' => $edit['language'],
+    'tweet_limit' => $edit['tweet_limit'],
+    'related' => $edit['related'],
+    'polite' => $edit['polite'],
+  );
+
+  // Save the block configuration
+  $delta = db_update('twitter_block')
+    ->fields(array(
+      'info' => $edit['info'],
+      'widget_id' => $edit['widget_id'],
+      'data' => serialize($data),
+    ))
+    ->condition('bid', $delta)
+    ->execute();
+
+  return TRUE;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function twitter_block_block_view($delta) {
+  // Load the configuration.
+  $config = twitter_block_block_get($delta);
+
+  // Unserialize the timeline 
+  $data = unserialize($config['data']);
+
+  $block = array();
+  $block['subject'] = check_plain($config['info']);
+  $block['content'] = array(
+    '#theme' => 'link',
+    '#text' => 'Tweets by @twitterapi',
+    '#path' => 'https://twitter.com/twitterapi',
+    '#options' => array(
+      'attributes' => array(
+        'class' => array('twitter-timeline'),
+        'data-widget-id' => $config['widget_id'],
+      ),
+      'html' => FALSE,
+    ),
+    '#attached' => array(
+      'js' => array(
+        'https://platform.twitter.com/widgets.js' => array(
+          'type' => 'external',
+        ),
+      ),
+    ),
+  );
+
+  if (!empty($data['theme'])) {
+    $block['content']['#options']['attributes']['data-theme'] = $data['theme'];
+  }
+
+  if (!empty($data['link_color'])) {
+    $block['content']['#options']['attributes']['data-link-color'] = '#' . $data['link_color'];
+  }
+
+  if (!empty($data['width'])) {
+    $block['content']['#options']['attributes']['width'] = $data['width'];
+  }
+
+  if (!empty($data['height'])) {
+    $block['content']['#options']['attributes']['height'] = $data['height'];
+  }
+
+  if (!empty($data['chrome'])) {
+    $options = array();
+
+    foreach ($data['chrome'] as $option => $status) {
+      if ($status) {
+        $options[] = $option;
+      }
+    }
+
+    if (count($options)) {
+      $block['content']['#options']['attributes']['data-chrome'] = implode(' ', $options);
+    }
+  }
+
+  if (!empty($data['border_color'])) {
+    $block['content']['#options']['attributes']['data-border-color'] = '#' . $data['border_color'];
+  }
+
+  if (!empty($data['language'])) {
+    $block['content']['#options']['attributes']['lang'] = $data['language'];
+  }
+
+  if (!empty($data['tweet_limit'])) {
+    $block['content']['#options']['attributes']['data-tweet-limit'] = $data['tweet_limit'];
+  }
+
+  if (!empty($data['related'])) {
+    $block['content']['#options']['attributes']['data-related'] = $data['related'];
+  }
+
+  if (!empty($data['polite'])) {
+    $block['content']['#options']['attributes']['aria-polite'] = $data['polite'];
+  }
+
+  return $block;
+}

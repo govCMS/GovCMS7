@@ -1,0 +1,229 @@
+<?php
+
+/**
+ * @file
+ * Main functions and hook implementations of the View Unpublished module.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function view_unpublished_permission() {
+  $perms = array(
+    'view any unpublished content' => array(
+      'title' => t('View any unpublished content'),
+    ),
+  );
+  // Generate standard node permissions for all applicable node types.
+  foreach (node_permissions_get_configured_types() as $type) {
+    $info = node_type_get_type($type);
+    $type = check_plain($info->type);
+    $perms["view any unpublished $type content"] = array(
+      'title' => t('%type_name: View any unpublished content', array('%type_name' => $info->name)),
+    );
+  }
+  return $perms;
+}
+
+/**
+ * Implements hook_node_access_records().
+ */
+function view_unpublished_node_access_records($node) {
+  // We only care about the node if is unpublished. If not, it is
+  // treated just like any other node and we completely ignore it.
+  if ($node->status == 0) {
+    $grants = array();
+    // Unpublished nodes should be viewable to all editors.
+    $grants[] = array(
+      'realm' => 'view_unpublished_content',
+      'gid' => 1,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+    $grants[] = array(
+      'realm' => 'view_unpublished_' . $node->type . '_content',
+      'gid' => 1,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+    $grants[] = array(
+      'realm' => 'view_unpublished_author',
+      'gid' => $node->uid,
+      'grant_view' => 1,
+      'grant_update' => 0,
+      'grant_delete' => 0,
+      'priority' => 0,
+    );
+    return $grants;
+  }
+}
+
+/**
+ * Implements hook_node_grants().
+ */
+function view_unpublished_node_grants($account, $op) {
+  $grants = array();
+  if ($op == 'view') {
+    if (user_access('view own unpublished content', $account)) {
+      $grants['view_unpublished_author'] = array($account->uid);
+    }
+    if (user_access('view any unpublished content', $account)) {
+      $grants['view_unpublished_content'] = array(1);
+      return $grants;
+    }
+    foreach(node_permissions_get_configured_types() as $type) {
+      if (user_access("view any unpublished $type content", $account)) {
+        $grants['view_unpublished_' . $type . '_content'] = array(1);
+      }
+    }
+  }
+  return $grants;
+}
+/**
+ * Implements hook_views_data_alter()
+ */
+function view_unpublished_views_data_alter(&$data) {
+  // published status + extra handler is taken over by our handler
+  $data['node']['status_extra']['filter']['handler'] = 'view_unpublished_handler_filter_node_status';
+}
+
+
+/**
+ * Implements hook_views_handlers()
+ */
+function view_unpublished_views_handlers() {
+  return array(
+    'info' => array(
+      'path' => drupal_get_path('module', 'view_unpublished'),
+    ),
+    'handlers' => array(
+      'view_unpublished_handler_filter_node_status' => array(
+        'parent' => 'views_handler_filter_node_status',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_views_query_substitutions().
+ */
+function view_unpublished_views_query_substitutions() {
+  $substitutions = array();
+  foreach (node_type_get_types() as $type => $name) {
+    $substitutions["***VIEWUNPUBLISHED_$type***"] = intval(user_access('view any unpublished ' . $type . ' content'));
+  }
+
+  return $substitutions;
+}
+
+/**
+ * Implements hook_query_TAG_alter();
+ *
+ * Modify the Content Overview page to account for view unpublished permissions.
+ */
+function view_unpublished_query_node_access_alter($query) {
+  global $user;
+
+  $is_admin_content_page = (arg(0) == 'admin' && arg(1) == 'content');
+  $is_tablesort_query = (get_class($query) == 'TableSort');
+  $is_not_admin = ($user->uid !== "1");
+  if ($is_admin_content_page && $is_tablesort_query && $is_not_admin) {
+    $perms = view_unpublished_user_perms();
+    // "any" in this case means at least 1 view unpublished permission is set to
+    // TRUE.
+    if ($perms['any']) {
+      $conditions =& $query->conditions();
+      foreach ($conditions as $key => $condition) {
+        // For some queries $condition['field'] is not a string so we need a
+        // check for that.
+        if (isset($condition['field']) && $condition['field'] === 'n.status') {
+            // This condition is (probably) coming from
+            // modules/node/node.admin.inc,
+            // function node_admin_nodes(): $query->condition('n.status', 1);
+            // We don't want it.
+            unset($conditions[$key]);
+        }
+        elseif (is_object($condition['field'])){
+          $subconditions = $conditions[$key]["field"]->conditions();
+          $new_conditions = db_or();
+          $new_conditions->condition('n.status', 1, '=');
+          $new_conditions->condition('n.status', 0, '=');
+          $conditions[$key]["field"] = $new_conditions;
+        }
+      }
+      // If "view any unpublished content" (aka $perms['full']) is set, then
+      // leave the rest of the query as-is and return all unpublished content.
+      // Otherwise, add a WHERE/OR to the query that specifies content type, as
+      // dictated by the user's permissions, e.g. "view any unpublished page
+      // content"
+      if (!$perms['full']) {
+        $content_perms = array_filter($perms['content_type']);
+        if (count($content_perms) === 1) {
+          $query->condition('n.type', key($content_perms));
+        }
+        else {
+          $db_or = db_or();
+          foreach ($content_perms as $k => $v) {
+            $db_or->condition('n.type', $k);
+          }
+          $query->condition($db_or);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Utility function that returns the user's view_unpublished permissions in the
+ * following format:
+ *
+ *  $perms['any'] = TRUE if any of the below is TRUE, otherwise FALSE.
+ *  $perms['full'] = TRUE if "view any unpublished content" is set.
+ *  $perms['content_type'] = array of content types and the user's
+ *    associated view unpublished permission.
+*/
+function view_unpublished_user_perms() {
+  $perms = FALSE;
+  $perms['full'] = user_access('view any unpublished content') ? TRUE : FALSE;
+  foreach (view_unpublished_content_type_permissions(TRUE) as $machine_type => $perm_type) {
+    $perms['content_type'][$machine_type] = user_access($perm_type) ? TRUE : FALSE;
+  }
+  _vup_in_array_r(TRUE, $perms, TRUE) ? $perms['any'] = TRUE : $perms['any'] = FALSE;
+  return $perms;
+}
+
+/**
+ * Utility function, return a formatted list of content types for use here.
+*/
+function view_unpublished_content_type_permissions($machine_readable = FALSE) {
+  $perms = array();
+  foreach (node_permissions_get_configured_types() as $type) {
+    $info = node_type_get_type($type);
+    $type = check_plain($info->type);
+    if ($machine_readable) {
+      $perms[$type] = "view any unpublished $type content";
+    }
+    else {
+      $perms["view any unpublished $type content"] = array(
+        'title' => t('%type_name: View any unpublished content', array('%type_name' => $info->name)),
+      );
+    }
+  }
+  return $perms;
+}
+
+/**
+ * Utility function, multidimensional in_array().
+*/
+function _vup_in_array_r($needle, $haystack, $strict = TRUE) {
+  foreach ($haystack as $item) {
+    if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && _vup_in_array_r($needle, $item, $strict))) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}

@@ -1,0 +1,687 @@
+<?php
+
+/**
+ * @file
+ * Test file for Google Analytics module.
+ */
+class GoogleAnalyticsBasicTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics basic tests',
+      'description' => 'Test basic functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics');
+
+    $permissions = array(
+      'access administration pages',
+      'administer google analytics',
+      'administer modules',
+      'administer site configuration',
+    );
+
+    // User to set up google_analytics.
+    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->admin_user);
+  }
+
+  function testGoogleAnalyticsConfiguration() {
+    // Check if Configure link is available on 'Extend' page.
+    // Requires 'administer modules' permission.
+    $this->drupalGet('admin/modules');
+    $this->assertRaw('admin/config/system/googleanalytics', '[testGoogleAnalyticsConfiguration]: Configure link from Extend page to Google Analytics Settings page exists.');
+
+    // Check if Configure link is available on 'Status Reports' page. NOTE: Link is only shown without UA code configured.
+    // Requires 'administer site configuration' permission.
+    $this->drupalGet('admin/reports/status');
+    $this->assertRaw('admin/config/system/googleanalytics', '[testGoogleAnalyticsConfiguration]: Configure link from Status Reports page to Google Analytics Settings page exists.');
+
+    // Check for setting page's presence.
+    $this->drupalGet('admin/config/system/googleanalytics');
+    $this->assertRaw(t('Web Property ID'), '[testGoogleAnalyticsConfiguration]: Settings page displayed.');
+
+    // Check for account code validation.
+    $edit['googleanalytics_account'] = $this->randomName(2);
+    $this->drupalPost('admin/config/system/googleanalytics', $edit, t('Save configuration'));
+    $this->assertRaw(t('A valid Google Analytics Web Property ID is case sensitive and formatted like UA-xxxxxxx-yy.'), '[testGoogleAnalyticsConfiguration]: Invalid Web Property ID number validated.');
+  }
+
+  function testGoogleAnalyticsPageVisibility() {
+    // Verify that no tracking code is embedded into the webpage; if there is
+    // only the module installed, but UA code not configured. See #2246991.
+    $this->drupalGet('');
+    $this->assertNoRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPageVisibility]: Tracking code is not displayed without UA code configured.');
+
+    $ua_code = 'UA-123456-1';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Show tracking on "every page except the listed pages".
+    variable_set('googleanalytics_visibility_pages', 0);
+    // Disable tracking one "admin*" pages only.
+    variable_set('googleanalytics_pages', "admin\nadmin/*");
+    // Enable tracking only for authenticated users only.
+    variable_set('googleanalytics_roles', array(DRUPAL_AUTHENTICATED_RID => DRUPAL_AUTHENTICATED_RID));
+
+    // Check tracking code visibility.
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is displayed for authenticated users.');
+
+    // Test whether tracking code is not included on pages to omit.
+    $this->drupalGet('admin');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is not displayed on admin page.');
+    $this->drupalGet('admin/config/system/googleanalytics');
+    // Checking for tracking code URI here, as $ua_code is displayed in the form.
+    $this->assertNoRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPageVisibility]: Tracking code is not displayed on admin subpage.');
+
+    // Test whether tracking code display is properly flipped.
+    variable_set('googleanalytics_visibility_pages', 1);
+    $this->drupalGet('admin');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is displayed on admin page.');
+    $this->drupalGet('admin/config/system/googleanalytics');
+    // Checking for tracking code URI here, as $ua_code is displayed in the form.
+    $this->assertRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPageVisibility]: Tracking code is displayed on admin subpage.');
+    $this->drupalGet('');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is NOT displayed on front page.');
+
+    // Test whether tracking code is not display for anonymous.
+    $this->drupalLogout();
+    $this->drupalGet('');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsPageVisibility]: Tracking code is NOT displayed for anonymous.');
+
+    // Switch back to every page except the listed pages.
+    variable_set('googleanalytics_visibility_pages', 0);
+    // Enable tracking code for all user roles.
+    variable_set('googleanalytics_roles', array());
+
+    // Test whether 403 forbidden tracking code is shown if user has no access.
+    $this->drupalGet('admin');
+    $this->assertRaw('/403.html', '[testGoogleAnalyticsPageVisibility]: 403 Forbidden tracking code shown if user has no access.');
+
+    // Test whether 404 not found tracking code is shown on non-existent pages.
+    $this->drupalGet($this->randomName(64));
+    $this->assertRaw('/404.html', '[testGoogleAnalyticsPageVisibility]: 404 Not Found tracking code shown on non-existent page.');
+
+    // DNT Tests:
+    // Enable system internal page cache for anonymous users.
+    variable_set('cache', 1);
+    // Test whether DNT headers will fail to disable embedding of tracking code.
+    $this->drupalGet('', array(), array('DNT: 1'));
+    $this->assertRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: DNT header send from client, but page caching is enabled and tracker cannot removed.');
+    // DNT works only with system internal page cache for anonymous users disabled.
+    variable_set('cache', 0);
+    $this->drupalGet('');
+    $this->assertRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: Tracking is enabled without DNT header.');
+    // Test whether DNT header is able to remove the tracking code.
+    $this->drupalGet('', array(), array('DNT: 1'));
+    $this->assertNoRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: DNT header received from client. Tracking has been disabled by browser.');
+    // Disable DNT feature and see if tracker is still embedded.
+    variable_set('googleanalytics_privacy_donottrack', 0);
+    $this->drupalGet('', array(), array('DNT: 1'));
+    $this->assertRaw('ga("send", "pageview");', '[testGoogleAnalyticsDNTVisibility]: DNT feature is disabled, DNT header from browser has been ignored.');
+  }
+
+  function testGoogleAnalyticsTrackingCode() {
+    $ua_code = 'UA-123456-2';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Show tracking code on every page except the listed pages.
+    variable_set('googleanalytics_visibility_pages', 0);
+    // Enable tracking code for all user roles.
+    variable_set('googleanalytics_roles', array());
+
+    /* Sample JS code as added to page:
+    <script type="text/javascript" src="/sites/all/modules/google_analytics/googleanalytics.js?w"></script>
+    <script>
+    (function(q,u,i,c,k){window['GoogleAnalyticsObject']=q;
+    window[q]=window[q]||function(){(window[q].q=window[q].q||[]).push(arguments)},
+    window[q].l=1*new Date();c=i.createElement(u),k=i.getElementsByTagName(u)[0];
+    c.async=true;c.src='//www.google-analytics.com/analytics.js';
+    k.parentNode.insertBefore(c,k)})('ga','script',document);
+    ga('create', 'UA-123456-7');
+    ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+    */
+
+    // Test whether tracking code uses latest JS.
+    variable_set('googleanalytics_cache', 0);
+    $this->drupalGet('');
+    $this->assertRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsTrackingCode]: Latest tracking code used.');
+
+    // Test whether anonymize visitors IP address feature has been enabled.
+    variable_set('googleanalytics_tracker_anonymizeip', 0);
+    $this->drupalGet('');
+    $this->assertNoRaw('ga("set", "anonymizeIp", true);', '[testGoogleAnalyticsTrackingCode]: Anonymize visitors IP address not found on frontpage.');
+    // Enable anonymizing of IP addresses.
+    variable_set('googleanalytics_tracker_anonymizeip', 1);
+    $this->drupalGet('');
+    $this->assertRaw('ga("set", "anonymizeIp", true);', '[testGoogleAnalyticsTrackingCode]: Anonymize visitors IP address found on frontpage.');
+
+    // Test if track Enhanced Link Attribution is enabled.
+    variable_set('googleanalytics_tracklinkid', 1);
+    $this->drupalGet('');
+    $this->assertRaw('ga("require", "linkid", "linkid.js");', '[testGoogleAnalyticsTrackingCode]: Tracking code for Enhanced Link Attribution is enabled.');
+
+    // Test if track Enhanced Link Attribution is disabled.
+    variable_set('googleanalytics_tracklinkid', 0);
+    $this->drupalGet('');
+    $this->assertNoRaw('ga("require", "linkid", "linkid.js");', '[testGoogleAnalyticsTrackingCode]: Tracking code for Enhanced Link Attribution is not enabled.');
+
+    // Test if tracking of User ID is enabled.
+    variable_set('googleanalytics_trackuserid', 1);
+    $this->drupalGet('');
+    $this->assertRaw(', {"userId":"', '[testGoogleAnalyticsTrackingCode]: Tracking code for User ID is enabled.');
+
+    // Test if tracking of User ID is disabled.
+    variable_set('googleanalytics_trackuserid', 0);
+    $this->drupalGet('');
+    $this->assertNoRaw(', {"userId":"', '[testGoogleAnalyticsTrackingCode]: Tracking code for User ID is disabled.');
+
+    // Test if tracking of url fragments is enabled.
+    variable_set('googleanalytics_trackurlfragments', 1);
+    $this->drupalGet('');
+    $this->assertRaw('ga("set", "page", location.pathname + location.search + location.hash);', '[testGoogleAnalyticsTrackingCode]: Tracking code for url fragments is enabled.');
+
+    // Test if tracking of url fragments is disabled.
+    variable_set('googleanalytics_trackurlfragments', 0);
+    $this->drupalGet('');
+    $this->assertNoRaw('ga("set", "page", location.pathname + location.search + location.hash);', '[testGoogleAnalyticsTrackingCode]: Tracking code for url fragments is not enabled.');
+
+    // Test if track display features is enabled.
+    variable_set('googleanalytics_trackdoubleclick', 1);
+    $this->drupalGet('');
+    $this->assertRaw('ga("require", "displayfeatures");', '[testGoogleAnalyticsTrackingCode]: Tracking code for display features is enabled.');
+
+    // Test if track display features is disabled.
+    variable_set('googleanalytics_trackdoubleclick', 0);
+    $this->drupalGet('');
+    $this->assertNoRaw('ga("require", "displayfeatures");', '[testGoogleAnalyticsTrackingCode]: Tracking code for display features is not enabled.');
+
+    // Test whether single domain tracking is active.
+    $this->drupalGet('');
+    $this->assertNoRaw('{"cookieDomain":"', '[testGoogleAnalyticsTrackingCode]: Single domain tracking is active.');
+
+    // Enable "One domain with multiple subdomains".
+    variable_set('googleanalytics_domain_mode', 1);
+    $this->drupalGet('');
+
+    // Test may run on localhost, an ipaddress or real domain name.
+    // TODO: Workaround to run tests successfully. This feature cannot tested reliable.
+    global $cookie_domain;
+    if (count(explode('.', $cookie_domain)) > 2 && !is_numeric(str_replace('.', '', $cookie_domain))) {
+      $this->assertRaw('{"cookieDomain":"' . $cookie_domain . '"}', '[testGoogleAnalyticsTrackingCode]: One domain with multiple subdomains is active on real host.');
+    }
+    else {
+      // Special cases, Localhost and IP addresses don't show '_setDomainName'.
+      $this->assertNoRaw('{"cookieDomain":"' . $cookie_domain . '"}', '[testGoogleAnalyticsTrackingCode]: One domain with multiple subdomains may be active on localhost (test result is not reliable).');
+    }
+
+    // Enable "Multiple top-level domains" tracking.
+    variable_set('googleanalytics_domain_mode', 2);
+    variable_set('googleanalytics_cross_domains', "www.example.com\nwww.example.net");
+    $this->drupalGet('');
+    $this->assertRaw('ga("create", "' . $ua_code . '", {"allowLinker":true', '[testGoogleAnalyticsTrackingCode]: "allowLinker" has been found. Cross domain tracking is active.');
+    $this->assertRaw('ga("require", "linker");', '[testGoogleAnalyticsTrackingCode]: Require linker has been found. Cross domain tracking is active.');
+    $this->assertRaw('ga("linker:autoLink", ["www.example.com","www.example.net"]);', '[testGoogleAnalyticsTrackingCode]: "linker:autoLink" has been found. Cross domain tracking is active.');
+    $this->assertRaw('"trackCrossDomains":["www.example.com","www.example.net"]', '[testGoogleAnalyticsTrackingCode]: Cross domain tracking with www.example.com and www.example.net is active.');
+    variable_set('googleanalytics_domain_mode', 0);
+
+    // Test whether debugging script has been enabled.
+    variable_set('googleanalytics_debug', 1);
+    $this->drupalGet('');
+    $this->assertRaw('//www.google-analytics.com/analytics_debug.js', '[testGoogleAnalyticsTrackingCode]: Google debugging script has been enabled.');
+
+    // Check if text and link is shown on 'Status Reports' page.
+    // Requires 'administer site configuration' permission.
+    $this->drupalGet('admin/reports/status');
+    $this->assertRaw(t('Google Analytics module has debugging enabled. Please disable debugging setting in production sites from the <a href="@url">Google Analytics settings page</a>.', array('@url' => url('admin/config/system/googleanalytics'))), '[testGoogleAnalyticsConfiguration]: Debugging enabled is shown on Status Reports page.');
+
+    // Test whether debugging script has been disabled.
+    variable_set('googleanalytics_debug', 0);
+    $this->drupalGet('');
+    $this->assertRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsTrackingCode]: Google debugging script has been disabled.');
+
+    // Test whether the CREATE and BEFORE and AFTER code is added to the tracker.
+    $codesnippet_create = array(
+      'cookieDomain' => 'foo.example.com',
+      'cookieName' => 'myNewName',
+      'cookieExpires' => 20000,
+      'allowAnchor' => TRUE,
+      'sampleRate' => 4.3,
+    );
+    variable_set('googleanalytics_codesnippet_create', $codesnippet_create);
+    variable_set('googleanalytics_codesnippet_before', 'ga("set", "forceSSL", true);');
+    variable_set('googleanalytics_codesnippet_after', 'ga("create", "UA-123456-3", {name: "newTracker"});ga("newTracker.send", "pageview");');
+    $this->drupalGet('');
+    $this->assertRaw('ga("create", "' . $ua_code . '", {"cookieDomain":"foo.example.com","cookieName":"myNewName","cookieExpires":20000,"allowAnchor":true,"sampleRate":4.3});', '[testGoogleAnalyticsTrackingCode]: Create only fields have been found.');
+    $this->assertRaw('ga("set", "forceSSL", true);', '[testGoogleAnalyticsTrackingCode]: Before codesnippet will force http pages to also send all beacons using https.');
+    $this->assertRaw('ga("create", "UA-123456-3", {name: "newTracker"});', '[testGoogleAnalyticsTrackingCode]: After codesnippet with "newTracker" tracker has been found.');
+  }
+}
+
+class GoogleAnalyticsCustomDimensionsAndMetricsTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics custom dimensions and metrics tests',
+      'description' => 'Test custom dimensions and metrics functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+      'dependencies' => array('token'),
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics', 'token');
+
+    $permissions = array(
+      'access administration pages',
+      'administer google analytics',
+    );
+
+    // User to set up google_analytics.
+    $this->admin_user = $this->drupalCreateUser($permissions);
+  }
+
+  function testGoogleAnalyticsCustomDimensions() {
+    $ua_code = 'UA-123456-3';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Basic test if the feature works.
+    $googleanalytics_custom_dimension = array(
+      'indexes' => array(
+        1 => array(
+          'index' => 1,
+          'value' => 'Bar 1',
+        ),
+        2 => array(
+          'index' => 2,
+          'value' => 'Bar 2',
+        ),
+        3 => array(
+          'index' => 3,
+          'value' => 'Bar 3',
+        ),
+        4 => array(
+          'index' => 4,
+          'value' => 'Bar 4',
+        ),
+        5 => array(
+          'index' => 5,
+          'value' => 'Bar 5',
+        ),
+      )
+    );
+    variable_set('googleanalytics_custom_dimension', $googleanalytics_custom_dimension);
+    $this->drupalGet('');
+
+    foreach ($googleanalytics_custom_dimension['indexes'] as $dimension) {
+      $this->assertRaw('ga("set", ' . drupal_json_encode('dimension' . $dimension['index']) . ', ' . drupal_json_encode($dimension['value']) . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Dimension #' . $dimension['index'] . ' is shown.');
+    }
+
+    // Test whether tokens are replaced in custom dimension values.
+    $site_slogan = $this->randomName(16);
+    variable_set('site_slogan', $site_slogan);
+
+    $googleanalytics_custom_dimension = array(
+      'indexes' => array(
+        1 => array(
+          'index' => 1,
+          'value' => 'Value: [site:slogan]',
+        ),
+        2 => array(
+          'index' => 2,
+          'value' => $this->randomName(16),
+        ),
+        3 => array(
+          'index' => 3,
+          'value' => '',
+        ),
+      )
+    );
+    variable_set('googleanalytics_custom_dimension', $googleanalytics_custom_dimension);
+    $this->verbose('<pre>' . print_r($googleanalytics_custom_dimension, TRUE) . '</pre>');
+
+    $this->drupalGet('');
+    $this->assertRaw('ga("set", ' . drupal_json_encode('dimension1') . ', ' . drupal_json_encode("Value: $site_slogan") . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Tokens have been replaced in dimension value.');
+    $this->assertRaw('ga("set", ' . drupal_json_encode('dimension2') . ', ' . drupal_json_encode($googleanalytics_custom_dimension['indexes']['2']['value']) . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Random value is shown.');
+    $this->assertNoRaw('ga("set", ' . drupal_json_encode('dimension3') . ', ' . drupal_json_encode('') . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Empty value is not shown.');
+  }
+
+  function testGoogleAnalyticsCustomMetrics() {
+    $ua_code = 'UA-123456-3';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Basic test if the feature works.
+    $googleanalytics_custom_metric = array(
+      'indexes' => array(
+        1 => array(
+          'index' => 1,
+          'value' => '6',
+          'value_expected' => 6,
+        ),
+        2 => array(
+          'index' => 2,
+          'value' => '8000',
+          'value_expected' => 8000,
+        ),
+        3 => array(
+          'index' => 3,
+          'value' => '7.8654',
+          'value_expected' => 7.8654,
+        ),
+        4 => array(
+          'index' => 4,
+          'value' => '1123.4',
+          'value_expected' => 1123.4,
+        ),
+        5 => array(
+          'index' => 5,
+          'value' => '5,67',
+          'value_expected' => 5,
+        ),
+      )
+    );
+    variable_set('googleanalytics_custom_metric', $googleanalytics_custom_metric);
+    $this->drupalGet('');
+
+    foreach ($googleanalytics_custom_metric['indexes'] as $metric) {
+      $this->assertRaw('ga("set", ' . drupal_json_encode('metric' . $metric['index']) . ', ' . drupal_json_encode($metric['value_expected']) . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Metric #' . $metric['index'] . ' is shown.');
+    }
+
+    // Test whether tokens are replaced in custom metric values.
+    $googleanalytics_custom_metric = array(
+      'indexes' => array(
+        1 => array(
+          'index' => 1,
+          'value' => '[current-user:roles:count]',
+        ),
+        2 => array(
+          'index' => 2,
+          'value' => mt_rand(),
+        ),
+        3 => array(
+          'index' => 3,
+          'value' => '',
+        ),
+      )
+    );
+    variable_set('googleanalytics_custom_metric', $googleanalytics_custom_metric);
+    $this->verbose('<pre>' . print_r($googleanalytics_custom_metric, TRUE) . '</pre>');
+
+    $this->drupalGet('');
+    $this->assertRaw('ga("set", ' . drupal_json_encode('metric1') . ', ', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Tokens have been replaced in metric value.');
+    $this->assertRaw('ga("set", ' . drupal_json_encode('metric2') . ', ' . drupal_json_encode($googleanalytics_custom_metric['indexes']['2']['value']) . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Random value is shown.');
+    $this->assertNoRaw('ga("set", ' . drupal_json_encode('metric3') . ', ' . drupal_json_encode('') . ');', '[testGoogleAnalyticsCustomDimensionsAndMetrics]: Empty value is not shown.');
+  }
+}
+
+class GoogleAnalyticsStatusMessagesTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics status messages tests',
+      'description' => 'Test status messages functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics');
+
+    $permissions = array(
+      'access administration pages',
+      'administer google analytics',
+    );
+
+    // User to set up google_analytics.
+    $this->admin_user = $this->drupalCreateUser($permissions);
+  }
+
+  function testGoogleAnalyticsStatusMessages() {
+    $ua_code = 'UA-123456-4';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Enable logging of errors only.
+    variable_set('googleanalytics_trackmessages', array('error' => 'error'));
+
+    $this->drupalPost('user/login', array(), t('Log in'));
+    $this->assertRaw('ga("send", "event", "Messages", "Error message", "Username field is required.");', '[testGoogleAnalyticsStatusMessages]: Event message "Username field is required." is shown.');
+    $this->assertRaw('ga("send", "event", "Messages", "Error message", "Password field is required.");', '[testGoogleAnalyticsStatusMessages]: Event message "Password field is required." is shown.');
+
+    // @todo: investigate why drupal_set_message() fails.
+    //drupal_set_message('Example status message.', 'status');
+    //drupal_set_message('Example warning message.', 'warning');
+    //drupal_set_message('Example error message.', 'error');
+    //drupal_set_message('Example error <em>message</em> with html tags and <a href="http://example.com/">link</a>.', 'error');
+    //$this->drupalGet('');
+    //$this->assertNoRaw('ga("send", "event", "Messages", "Status message", "Example status message.");', '[testGoogleAnalyticsStatusMessages]: Example status message is not enabled for tracking.');
+    //$this->assertNoRaw('ga("send", "event", "Messages", "Warning message", "Example warning message.");', '[testGoogleAnalyticsStatusMessages]: Example warning message is not enabled for tracking.');
+    //$this->assertRaw('ga("send", "event", "Messages", "Error message", "Example error message.");', '[testGoogleAnalyticsStatusMessages]: Example error message is shown.');
+    //$this->assertRaw('ga("send", "event", "Messages", "Error message", "Example error message with html tags and link.");', '[testGoogleAnalyticsStatusMessages]: HTML has been stripped successful from Example error message with html tags and link.');
+  }
+}
+
+class GoogleAnalyticsRolesTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics role tests',
+      'description' => 'Test roles functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics');
+
+    $permissions = array(
+      'access administration pages',
+      'administer google analytics',
+    );
+
+    // User to set up google_analytics.
+    $this->admin_user = $this->drupalCreateUser($permissions);
+  }
+
+  function testGoogleAnalyticsRolesTracking() {
+    $ua_code = 'UA-123456-4';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Test if the default settings are working as expected.
+
+    // Add to the selected roles only.
+    variable_set('googleanalytics_visibility_roles', 0);
+    // Enable tracking for all users.
+    variable_set('googleanalytics_roles', array());
+
+    // Check tracking code visibility.
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is displayed for anonymous users on frontpage with default settings.');
+    $this->drupalGet('admin');
+    $this->assertRaw('/403.html', '[testGoogleAnalyticsRoleVisibility]: 403 Forbidden tracking code is displayed for anonymous users in admin section with default settings.');
+
+    $this->drupalLogin($this->admin_user);
+
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is displayed for authenticated users on frontpage with default settings.');
+    $this->drupalGet('admin');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is NOT displayed for authenticated users in admin section with default settings.');
+
+    // Test if the non-default settings are working as expected.
+
+    // Enable tracking only for authenticated users.
+    variable_set('googleanalytics_roles', array(DRUPAL_AUTHENTICATED_RID => DRUPAL_AUTHENTICATED_RID));
+
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is displayed for authenticated users only on frontpage.');
+
+    $this->drupalLogout();
+    $this->drupalGet('');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is NOT displayed for anonymous users on frontpage.');
+
+    // Add to every role except the selected ones.
+    variable_set('googleanalytics_visibility_roles', 1);
+    // Enable tracking for all users.
+    variable_set('googleanalytics_roles', array());
+
+    // Check tracking code visibility.
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is added to every role and displayed for anonymous users.');
+    $this->drupalGet('admin');
+    $this->assertRaw('/403.html', '[testGoogleAnalyticsRoleVisibility]: 403 Forbidden tracking code is shown for anonymous users if every role except the selected ones is selected.');
+
+    $this->drupalLogin($this->admin_user);
+
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is added to every role and displayed on frontpage for authenticated users.');
+    $this->drupalGet('admin');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is added to every role and NOT displayed in admin section for authenticated users.');
+
+    // Disable tracking for authenticated users.
+    variable_set('googleanalytics_roles', array(DRUPAL_AUTHENTICATED_RID => DRUPAL_AUTHENTICATED_RID));
+
+    $this->drupalGet('');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is NOT displayed on frontpage for excluded authenticated users.');
+    $this->drupalGet('admin');
+    $this->assertNoRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is NOT displayed in admin section for excluded authenticated users.');
+
+    $this->drupalLogout();
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsRoleVisibility]: Tracking code is displayed on frontpage for included anonymous users.');
+  }
+}
+
+class GoogleAnalyticsSearchTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics search tests',
+      'description' => 'Test search functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics', 'search', 'node');
+
+    $permissions = array(
+      'access administration pages',
+      'administer google analytics',
+      'search content',
+    );
+
+    // User to set up google_analytics.
+    $this->admin_user = $this->drupalCreateUser($permissions);
+    $this->drupalLogin($this->admin_user);
+  }
+
+  function testGoogleAnalyticsSearchTracking() {
+    $ua_code = 'UA-123456-1';
+    variable_set('googleanalytics_account', $ua_code);
+
+    // Check tracking code visibility.
+    $this->drupalGet('');
+    $this->assertRaw($ua_code, '[testGoogleAnalyticsSearch]: Tracking code is displayed for authenticated users.');
+
+    $this->drupalGet('search/node');
+    $this->assertNoRaw('ga("set", "page",', '[testGoogleAnalyticsSearch]: Custom url not set.');
+
+    // Search for random string.
+    $edit = array();
+    $edit['keys'] = $this->randomName(32);
+
+    variable_set('googleanalytics_site_search', 1);
+    $this->drupalPost('search/node', $edit, t('Search'));
+    $this->assertRaw('ga("set", "page", (window.googleanalytics_search_results) ?', '[testGoogleAnalyticsSearch]: Search results tracker is displayed.');
+
+    // Test search results counter.
+    $this->assertRaw('window.googleanalytics_search_results = ', '[testGoogleAnalyticsSearch]: Search results counter is displayed.');
+  }
+
+}
+
+class GoogleAnalyticsPhpFilterTest extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Google Analytics php filter tests',
+      'description' => 'Test php filter functionality of Google Analytics module.',
+      'group' => 'Google Analytics',
+    );
+  }
+
+  function setUp() {
+    parent::setUp('googleanalytics', 'php');
+
+    // Administrator with all permissions.
+    $permissions_admin_user = array(
+      'access administration pages',
+      'administer google analytics',
+      'use PHP for tracking visibility',
+    );
+    $this->admin_user = $this->drupalCreateUser($permissions_admin_user);
+
+    // Administrator who cannot configure tracking visibility with PHP.
+    $permissions_delegated_admin_user = array(
+      'access administration pages',
+      'administer google analytics',
+    );
+    $this->delegated_admin_user = $this->drupalCreateUser($permissions_delegated_admin_user);
+  }
+
+  function testGoogleAnalyticsPhpFilter() {
+    $ua_code = 'UA-123456-1';
+    $this->drupalLogin($this->admin_user);
+
+    $edit = array();
+    $edit['googleanalytics_account'] = $ua_code;
+    $edit['googleanalytics_visibility_pages'] = 2;
+    $edit['googleanalytics_pages'] = '<?php return 0; ?>';
+    $this->drupalPost('admin/config/system/googleanalytics', $edit, t('Save configuration'));
+
+    // Compare saved setting with posted setting.
+    $googleanalytics_pages = variable_get('googleanalytics_pages', $this->randomName(8));
+    $this->assertEqual('<?php return 0; ?>', $googleanalytics_pages, '[testGoogleAnalyticsPhpFilter]: PHP code snippet is intact.');
+
+    // Check tracking code visibility.
+    variable_set('googleanalytics_pages', '<?php return TRUE; ?>');
+    $this->drupalGet('');
+    $this->assertRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPhpFilter]: Tracking is displayed on frontpage page.');
+    $this->drupalGet('admin');
+    $this->assertRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPhpFilter]: Tracking is displayed on admin page.');
+
+    variable_set('googleanalytics_pages', '<?php return FALSE; ?>');
+    $this->drupalGet('');
+    $this->assertNoRaw('//www.google-analytics.com/analytics.js', '[testGoogleAnalyticsPhpFilter]: Tracking is not displayed on frontpage page.');
+
+    // Test administration form.
+    variable_set('googleanalytics_pages', '<?php return TRUE; ?>');
+    $this->drupalGet('admin/config/system/googleanalytics');
+    $this->assertRaw(t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'), '[testGoogleAnalyticsPhpFilter]: Permission to administer PHP for tracking visibility.');
+    $this->assertRaw(check_plain('<?php return TRUE; ?>'), '[testGoogleAnalyticsPhpFilter]: PHP code snippted is displayed.');
+
+    // Login the delegated user and check if fields are visible.
+    $this->drupalLogin($this->delegated_admin_user);
+    $this->drupalGet('admin/config/system/googleanalytics');
+    $this->assertNoRaw(t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'), '[testGoogleAnalyticsPhpFilter]: No permission to administer PHP for tracking visibility.');
+    $this->assertNoRaw(check_plain('<?php return TRUE; ?>'), '[testGoogleAnalyticsPhpFilter]: No permission to view PHP code snippted.');
+
+    // Set a different value and verify that this is still the same after the post.
+    variable_set('googleanalytics_pages', '<?php return 0; ?>');
+
+    $edit = array();
+    $edit['googleanalytics_account'] = $ua_code;
+    $this->drupalPost('admin/config/system/googleanalytics', $edit, t('Save configuration'));
+
+    // Compare saved setting with posted setting.
+    $googleanalytics_visibility_pages = variable_get('googleanalytics_visibility_pages', 0);
+    $googleanalytics_pages = variable_get('googleanalytics_pages', $this->randomName(8));
+    $this->assertEqual(2, $googleanalytics_visibility_pages, '[testGoogleAnalyticsPhpFilter]: Pages on which this PHP code returns TRUE is selected.');
+    $this->assertEqual('<?php return 0; ?>', $googleanalytics_pages, '[testGoogleAnalyticsPhpFilter]: PHP code snippet is intact.');
+  }
+
+}

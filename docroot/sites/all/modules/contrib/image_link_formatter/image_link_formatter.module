@@ -1,0 +1,158 @@
+<?php
+/**
+ * @file
+ * This file is essentially a copy/paste from the core image module:
+ * image.module.
+ * Applied the patch and few changes suggested at:
+ * http://drupal.org/node/1570072
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function image_link_formatter_field_formatter_info() {
+  $formatters = array(
+    'image_link_formatter' => array(
+      'label' => t('Image Link Formatter'),
+      'field types' => array('image'),
+      'settings' => array('image_style' => '', 'image_link' => ''),
+    ),
+  );
+
+  return $formatters;
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function image_link_formatter_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $image_styles = image_style_options(FALSE);
+  $element['image_style'] = array(
+    '#title' => t('Image style'),
+    '#type' => 'select',
+    '#default_value' => $settings['image_style'],
+    '#empty_option' => t('None (original image)'),
+    '#options' => $image_styles,
+  );
+
+  $link_types = image_link_formatter_image_field_link_types($instance);
+  $element['image_link'] = array(
+    '#title' => t('Link image to'),
+    '#type' => 'select',
+    '#default_value' => $settings['image_link'],
+    '#empty_option' => t('Nothing'),
+    '#options' => $link_types,
+  );
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function image_link_formatter_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $summary = array();
+
+  $image_styles = image_style_options(FALSE);
+  // Unset possible 'No defined styles' option.
+  unset($image_styles['']);
+  // Styles could be lost because of enabled/disabled modules that defines
+  // their styles in code.
+  if (isset($image_styles[$settings['image_style']])) {
+    $summary[] = t('Image style: @style', array('@style' => $image_styles[$settings['image_style']]));
+  }
+  else {
+    $summary[] = t('Original image');
+  }
+
+  $link_types = image_link_formatter_image_field_link_types($instance);
+  // Display this setting only if image is linked.
+  if (isset($link_types[$settings['image_link']])) {
+    $summary[] = filter_xss_admin($link_types[$settings['image_link']]);
+  }
+
+  return implode('<br />', $summary);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function image_link_formatter_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  // Check if the formatter involves a link.
+  $image_link = $display['settings']['image_link'];
+  if ($image_link == 'content') {
+    $uri = entity_uri($entity_type, $entity);
+  }
+  elseif ($image_link == 'file') {
+    $link_file = TRUE;
+  }
+  elseif ($image_link) {
+    if (isset($entity->$image_link)) {
+      // Support for field translations.
+      $language = field_language($entity_type, $entity, $field['field_name']);
+      $link_field = $entity->$image_link;
+
+      if (isset($link_field[$language])) {
+        $link_values = $link_field[$language];
+      }
+    }
+  }
+
+  foreach ($items as $delta => $item) {
+    if (isset($link_file)) {
+      $uri = array(
+        'path' => file_create_url($item['uri']),
+        'options' => array(),
+      );
+    }
+    // Handle multiple link with image values.
+    if (isset($link_values)) {
+      if (isset($link_values[$delta]['url'])) {
+        $uri = array(
+          'path' => $link_values[$delta]['url'],
+          'options' => array('attributes' => $link_values[$delta]['attributes']),
+        );
+      }
+      // If there are more image values than link values unset the link.
+      else {
+        unset($uri);
+      }
+    }
+    $element[$delta] = array(
+      '#theme' => 'image_formatter',
+      '#item' => $item,
+      '#image_style' => $display['settings']['image_style'],
+      '#path' => isset($uri) ? $uri : '',
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Helper function to compute the list of possible link types.
+ */
+function image_link_formatter_image_field_link_types($instance) {
+  $link_types = array(
+    'content' => t('Content'),
+    'file' => t('File'),
+  );
+  // If the link module is installed, also allow any link fields to be used.
+  foreach (field_info_fields() as $field_key => $field_info) {
+    if ($field_info['type'] == 'link_field') {
+      $field_instance = field_info_instance($instance['entity_type'], $field_info['field_name'], $instance['bundle']);
+      if ($field_instance) {
+        $link_types[$field_key] = "$field_instance[label] ($field_info[field_name])";
+      }
+    }
+  }
+  return $link_types;
+}
