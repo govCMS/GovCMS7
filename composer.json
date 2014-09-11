@@ -1,7 +1,8 @@
 {
   "name": "previousnext/agov",
   "type": "drupal-profile",
-  "licence": "GPL-2.0+",
+  "description" : "aGov is a free open source Drupal 7 distribution developed specifically for Australian government organisations",
+  "license": "GPL-2.0+",
   "authors": [
     {
       "name": "PreviousNext",
