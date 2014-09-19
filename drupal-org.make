@@ -96,6 +96,8 @@ projects[scheduler_workbench][version] = "1.2"
 
 projects[search404][version] = "1.3"
 
+projects[seckit][version] = "1.9"
+
 projects[site_map][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
 
