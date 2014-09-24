@@ -460,6 +460,9 @@ function _agov_default_variables() {
       'priority' => '0.5',
     ),
 
+    // Set jquery update to use Google CDN.
+    'jquery_update_jquery_cdn' => 'google',
+
   );
 
   // Enable xmlsitemap includes for content types.
