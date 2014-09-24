@@ -1,4 +1,21 @@
 {
+  "name": "previousnext/agov",
+  "type": "drupal-profile",
+  "description" : "aGov is a free open source Drupal 7 distribution developed specifically for Australian government organisations",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "PreviousNext",
+      "email": "info@previousnext.com.au",
+      "homepage": "http://agov.com.au",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "info@previousnext.com.au",
+    "issues": "https://www.drupal.org/project/issues/agov",
+    "source": "https://github.com/previousnext/agov"
+  },
   "repositories": [
     {
       "type": "package",
@@ -24,8 +41,10 @@
         }
       }
     }
-
   ],
+  "require": {
+    "composer/installers": "~1.0"
+  },
   "require-dev": {
     "drupal/drupal-extension": "~1.0",
     "squizlabs/php_codesniffer": "~1.5",
@@ -36,5 +55,11 @@
   "minimum-stability": "dev",
   "config": {
     "bin-dir": "bin/"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-7.x-2.x": "7.2.x-dev",
+      "dev-7.x-1.x": "7.1.x-dev"
+    }
   }
 }

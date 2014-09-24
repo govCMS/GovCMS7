@@ -75,7 +75,7 @@ projects[metatag][version] = "1.0-beta7"
 
 projects[references][version] = "2.1"
 
-projects[panels][version] = "3.3"
+projects[panels][version] = "3.4"
 
 projects[paranoia][version] = "1.3"
 
@@ -108,6 +108,8 @@ projects[superfish][version] = "1.9"
 projects[token][version] = "1.5"
 
 projects[twitter_block][version] = "2.1"
+
+projects[username_enumeration_prevention][version] = "1.0"
 
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
