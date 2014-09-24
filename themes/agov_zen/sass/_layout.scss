@@ -7,11 +7,11 @@
 #page,
 .region-bottom {
   @include adaptivelyCentered;
-	padding: 10px;
+  padding: 10px;
 }
 
-#main, 
-#footer {	clear: both; }
+#main,
+#footer { clear: both; }
 
 .header { @include pie-clearfix; }
 
@@ -21,17 +21,17 @@
 * Column logic.
 */
 #content {
- 	@include bp-nq($medium) {
-	   float: left; 
-	   width: 460px;
-	 }
-	 @include bp-nq($large) { width: 620px; }
+  @include bp-nq($medium) {
+    float: left;
+    width: 460px;
+  }
+  @include bp-nq($large) { width: 620px; }
 }
 
 .region-sidebar-second {
- @include bp-nq($medium) {
-   float: right;
-   width: 220px;
- }
- @include bp-nq($large) { width: 300px; }
+  @include bp-nq($medium) {
+    float: right;
+    width: 220px;
+  }
+  @include bp-nq($large) { width: 300px; }
 }
