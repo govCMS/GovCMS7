@@ -41,10 +41,10 @@ function agov_zen_preprocess_region(&$variables) {
  * Implements hook_preprocess_maintenance_page().
  */
 function agov_zen_preprocess_maintenance_page(&$variables) {
-  $variables['footer'] = t('!aGov is developed by !PreviousNext', array(
+  $variables['footer'] = '<div id="footer">' . t('!aGov is developed by !PreviousNext', array(
     '!aGov' => l(t('aGov'), 'http://agov.com.au'),
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
-  ));
+  )) . '</div>';
 }
 
 /**
