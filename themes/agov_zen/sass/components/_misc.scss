@@ -215,6 +215,7 @@
 }
 .messages__item {
   list-style-image: none;
+  margin-bottom: 1em;
 }
 
 /* Core/module installation error messages. */
@@ -367,61 +368,10 @@ span.field-label {
   margin-left: 30px; /* LTR */
 }
 
-/**
- * Forms.
- */
-
-/* Wrapper for a form element (or group of form elements) and its label. */
-.form-item {
-  margin: rhythm(1) 0;
-
-  /* Pack groups of checkboxes and radio buttons closer together. */
-  .form-checkboxes & ,
-  .form-radios & {
-    /* Drupal core uses "0.4em 0". */
-    margin: 0;
-  }
-
-  /* Form items in a table. */
-  tr.odd &,
-  tr.even & {
-    margin: 0;
-  }
-
-  /* Highlight the form elements that caused a form submission error. */
-  input.error,
-  textarea.error,
-  select.error {
-    border: 1px solid #c00;
-  }
-
-  /* The descriptive help text (separate from the label). */
-  .description {
-    font-size: 0.85em;
-  }
-}
-
-.form-type-radio,
-.form-type-checkbox {
-  .description {
-    margin-left: 2.4em;
-  }
-}
-
-/* The part of the label that indicates a required field. */
-.form-required {
-  color: #c00;
-}
-
-/* Labels for radios and checkboxes. */
-label.option {
-  display: inline;
-  font-weight: normal;
-}
-
 /* Buttons used by contrib modules like Media. */
 a.button {
-  @include appearance(button);
+//  @include appearance(button);
+  color: #fff;
 }
 
 /* Password confirmation. */
@@ -524,35 +474,6 @@ td.menu-disabled {
 #autocomplete .selected {
   background: #0072b9;
   color: #fff;
-}
-
-/**
- * Collapsible fieldsets.
- *
- * @see collapse.js
- */
-.fieldset-legend {
-  html.js .collapsible & {
-    background-image: inline-image("menu-expanded.png");
-    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
-      *background-image: image-url("menu-expanded.png");
-    }
-    background-position: 5px 65%; /* LTR */
-    background-repeat: no-repeat;
-    padding-left: 15px; /* LTR */
-  }
-  html.js .collapsed & {
-    background-image: inline-image("menu-collapsed.png"); /* LTR */
-    @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
-      *background-image: image-url("menu-collapsed.png"); /* LTR */
-    }
-    background-position: 5px 50%; /* LTR */
-  }
-  .summary {
-    color: #999;
-    font-size: 0.9em;
-    margin-left: 0.5em;
-  }
 }
 
 /**
