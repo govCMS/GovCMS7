@@ -94,6 +94,7 @@ dependencies[] = search404
 dependencies[] = scheduler
 dependencies[] = scheduler_workbench
 dependencies[] = r4032login
+dependencies[] = seckit
 dependencies[] = simple_aggregation
 dependencies[] = site_map
 dependencies[] = superfish
