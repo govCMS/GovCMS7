@@ -3,6 +3,8 @@
  * @file
  * Theme implementation for beans.
  *
+ * We only render the content, since Blocks takes care of the title and wrapper.
+ *
  * Available variables:
  * - $content: An array of comment items. Use render($content) to print them
  *   all, or print a subset such as render($content['field_example']). Use
@@ -27,14 +29,5 @@
  * @see template_process()
  */
 ?>
-<div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <?php if (!empty($title)): ?>
-    <h2<?php print $title_attributes; ?>><?php print $title ?></h2>
-  <?php endif;?>
 
-  <div class="content"<?php print $content_attributes; ?>>
-    <?php
-    print render($content);
-    ?>
-  </div>
-</div>
+<?php print render($content); ?>
