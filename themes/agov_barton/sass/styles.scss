@@ -65,12 +65,16 @@ a {
 
   > .menu > li > a:hover,
   > .menu > li.sfHover > a {
-    background: $font-color;
-    color: #FFF;
+    background: $color-tertiary;
   }
 
   > .menu > li > a:before {
     border-left-color: #FFF;
+  }
+
+  > .menu > li.active-trail > a {
+    background: #fff;
+    color: $font-color;
   }
 }
 
@@ -97,10 +101,18 @@ a {
   color: #FFF
 }
 
-#block-menu-block-agov-menu-block-footer {
+#block-views-footer-teaser-block {
+  color: $font-color;
+}
+
+#block-menu-block-agov-menu-block-footer,
+#block-bean-footer-copyright,
+#block-menu-menu-footer-sub-menu {
   background: transparent;
 
   a {
     color: #FFF;
   }
 }
+
+

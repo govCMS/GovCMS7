@@ -45,42 +45,55 @@ a :focus {
 /* line 67, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li > a:hover,
 .region-navigation .block__content > .menu > li.sfHover > a {
-  background: #333333;
-  color: #FFF;
+  background: #dee0e2;
 }
-/* line 72, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li > a:before {
   border-left-color: #FFF;
 }
+/* line 75, ../sass/styles.scss */
+.region-navigation .block__content > .menu > li.active-trail > a {
+  background: #fff;
+  color: #333333;
+}
 
-/* line 77, ../sass/styles.scss */
+/* line 81, ../sass/styles.scss */
 .region-footer .block-menu .menu > li > a:before {
   border-left-color: #FFF;
 }
 
-/* line 83, ../sass/styles.scss */
+/* line 87, ../sass/styles.scss */
 .sidebar .block .block__title {
   background-color: #006893;
   background-image: none;
   color: #FFF;
 }
-/* line 89, ../sass/styles.scss */
+/* line 93, ../sass/styles.scss */
 .sidebar .block .block__content {
   background: #dee0e2;
 }
 
-/* line 94, ../sass/styles.scss */
+/* line 98, ../sass/styles.scss */
 #footer {
   background: #006893;
   border-top: 7px solid #006893;
   color: white;
 }
 
-/* line 100, ../sass/styles.scss */
-#block-menu-block-agov-menu-block-footer {
+/* line 104, ../sass/styles.scss */
+#block-views-footer-teaser-block {
+  color: #333333;
+}
+
+/* line 110, ../sass/styles.scss */
+#block-menu-block-agov-menu-block-footer,
+#block-bean-footer-copyright,
+#block-menu-menu-footer-sub-menu {
   background: transparent;
 }
-/* line 103, ../sass/styles.scss */
-#block-menu-block-agov-menu-block-footer a {
+/* line 113, ../sass/styles.scss */
+#block-menu-block-agov-menu-block-footer a,
+#block-bean-footer-copyright a,
+#block-menu-menu-footer-sub-menu a {
   color: #FFF;
 }

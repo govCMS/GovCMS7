@@ -7,10 +7,6 @@ $borderWidth: 1px;
   min-height: 138px;
 }
 
-//.form-text, textarea {
-//  @include box-shadow(inset 0 0 3px #c9c9c9);
-//}
-
 .form-text {
   height: $inputHeight;
   padding: $inputVPadding 5px;
@@ -34,9 +30,7 @@ button {
 }
 
 #main .form-submit {
-  background: $color-highlight;
-  color: white;
-  @include box-shadow(1px 1px 1px #C9C9C9);
+  @include standard-button;
 }
 
 /* Wrapper for a form element (or group of form elements) and its label. */
@@ -44,8 +38,8 @@ button {
   margin: rhythm(1) 0;
 
   label {
-    @include adjust-font-size-to(13px);
-    margin: rhythm(.5) 0;
+    font-size: 15px;
+    margin: rhythm(.5) 0 rhythm(0.3) 0;
     font-weight: bold;
   }
 
