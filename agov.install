@@ -507,6 +507,7 @@ function _agov_default_variables() {
     '*' => 3,
   );
   variable_set('crumbs_weights', $crumbs_weights);
+  variable_set('crumbs_show_current_page', 1);
 }
 
 /**
