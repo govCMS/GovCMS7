@@ -165,6 +165,7 @@ html {
   /* 2 */
   line-height: 1.4em;
   word-spacing: -0.05em;
+  height: 100%;
 }
 
 /**
@@ -173,6 +174,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
 }
 
 /* ==========================================================================
@@ -389,7 +391,7 @@ figure {
  * Define consistent border, margin, and padding.
  */
 fieldset {
-  border-color: #c0c0c0;
+  border-color: silver;
   margin: 0 2px;
   /* Apply borders and padding that keep the vertical rhythm. */
   border-top-style: solid;
@@ -749,13 +751,6 @@ h4 {
 }
 
 /* Global form elements */
-.form-item label {
-  font-size: 1em;
-  line-height: 1.4em;
-  margin: 0.7em 0;
-  font-weight: bold;
-}
-
 .form-textarea-wrapper textarea {
   min-height: 138px;
 }
@@ -763,7 +758,7 @@ h4 {
 .form-text {
   height: 25px;
   padding: 2px 5px;
-  border: solid 2px #7a797a;
+  border: solid 1px #7a797a;
   background: #FAFAFA;
 }
 
@@ -778,7 +773,8 @@ h4 {
   padding: 4px 0;
 }
 
-.form-submit {
+input .form-submit,
+button {
   text-align: center;
   border: none;
   padding: 0 15px;
@@ -793,8 +789,88 @@ h4 {
   box-shadow: 1px 1px 1px #c9c9c9;
 }
 
+/* Wrapper for a form element (or group of form elements) and its label. */
+.form-item {
+  margin: 1.4em 0;
+  /* Pack groups of checkboxes and radio buttons closer together. */
+  /* Form items in a table. */
+  /* Highlight the form elements that caused a form submission error. */
+  /* The descriptive help text (separate from the label). */
+}
+.form-item label {
+  font-size: 1em;
+  line-height: 1.4em;
+  margin: 0.7em 0;
+  font-weight: bold;
+}
+.form-checkboxes .form-item, .form-radios .form-item {
+  /* Drupal core uses "0.4em 0". */
+  margin: 0.3em 0;
+}
+tr.odd .form-item, tr.even .form-item {
+  margin: 0;
+}
+.form-item input.error,
+.form-item textarea.error,
+.form-item select.error {
+  border: 1px solid #c00;
+}
 .form-item .description {
+  font-size: 0.85em;
   padding: 0.7em 0;
+}
+
+.form-type-radio .description,
+.form-type-checkbox .description {
+  margin-left: 2.4em;
+}
+
+/* The part of the label that indicates a required field. */
+.form-required {
+  color: #c00;
+}
+
+/* Labels for radios and checkboxes. */
+label.option {
+  display: inline;
+  font-weight: normal;
+}
+
+fieldset {
+  margin-bottom: 1em;
+  background: #fdfdfd;
+}
+fieldset legend {
+  background: #fff;
+  color: #4b4b4b;
+  border-radius: 0;
+  border: 1px solid silver;
+  padding: 0 5px;
+}
+
+/**
+ * Collapsible fieldsets.
+ *
+ * @see collapse.js
+ */
+html.js .collapsible .fieldset-legend {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABJJREFUeJxj+MdQw2DBIMAABgAUsAHD3c3BpwAAAABJRU5ErkJggg==');
+  background-position: 5px 65%;
+  /* LTR */
+  background-repeat: no-repeat;
+  padding-left: 15px;
+  /* LTR */
+}
+html.js .collapsed .fieldset-legend {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABFJREFUCB1jVmCGQClmEWYOAAZ8AMy3HPLXAAAAAElFTkSuQmCC');
+  /* LTR */
+  background-position: 5px 50%;
+  /* LTR */
+}
+.fieldset-legend .summary {
+  color: #999;
+  font-size: 0.9em;
+  margin-left: 0.5em;
 }
 
 /* Component (SMACSS module) rules */
@@ -891,7 +967,7 @@ h4 {
 }
 
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
-  background: url('../images/block-li-bg.png?1407129817') no-repeat scroll left 5px;
+  background: url('../images/block-li-bg.png?1408001142') no-repeat scroll left 5px;
   display: block;
   padding-left: 15px;
   padding-bottom: 2px;
@@ -1157,6 +1233,7 @@ h4 {
 
 .messages__item {
   list-style-image: none;
+  margin-bottom: 1em;
 }
 
 /* Core/module installation error messages. */
@@ -1309,54 +1386,9 @@ span.field-label {
   /* LTR */
 }
 
-/**
- * Forms.
- */
-/* Wrapper for a form element (or group of form elements) and its label. */
-.form-item {
-  margin: 1.4em 0;
-  /* Pack groups of checkboxes and radio buttons closer together. */
-  /* Form items in a table. */
-  /* Highlight the form elements that caused a form submission error. */
-  /* The descriptive help text (separate from the label). */
-}
-.form-checkboxes .form-item, .form-radios .form-item {
-  /* Drupal core uses "0.4em 0". */
-  margin: 0;
-}
-tr.odd .form-item, tr.even .form-item {
-  margin: 0;
-}
-.form-item input.error,
-.form-item textarea.error,
-.form-item select.error {
-  border: 1px solid #c00;
-}
-.form-item .description {
-  font-size: 0.85em;
-}
-
-.form-type-radio .description,
-.form-type-checkbox .description {
-  margin-left: 2.4em;
-}
-
-/* The part of the label that indicates a required field. */
-.form-required {
-  color: #c00;
-}
-
-/* Labels for radios and checkboxes. */
-label.option {
-  display: inline;
-  font-weight: normal;
-}
-
 /* Buttons used by contrib modules like Media. */
 a.button {
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  appearance: button;
+  color: #fff;
 }
 
 /* Password confirmation. */
@@ -1456,31 +1488,6 @@ td.menu-disabled {
 }
 
 /**
- * Collapsible fieldsets.
- *
- * @see collapse.js
- */
-html.js .collapsible .fieldset-legend {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABJJREFUeJxj+MdQw2DBIMAABgAUsAHD3c3BpwAAAABJRU5ErkJggg==');
-  background-position: 5px 65%;
-  /* LTR */
-  background-repeat: no-repeat;
-  padding-left: 15px;
-  /* LTR */
-}
-html.js .collapsed .fieldset-legend {
-  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHAQMAAAD+nMWQAAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAABFJREFUCB1jVmCGQClmEWYOAAZ8AMy3HPLXAAAAAElFTkSuQmCC');
-  /* LTR */
-  background-position: 5px 50%;
-  /* LTR */
-}
-.fieldset-legend .summary {
-  color: #999;
-  font-size: 0.9em;
-  margin-left: 0.5em;
-}
-
-/**
  * TableDrag behavior.
  *
  * @see tabledrag.js
@@ -1526,7 +1533,7 @@ tr.selected td {
 }
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1407129817');
+  background-image: url('../images/progress.gif?1408001142');
 }
 
 /**
@@ -1638,7 +1645,7 @@ th a, th img {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-image: url('../images/font-resize-bg.png?1407129817');
+  background-image: url('../images/font-resize-bg.png?1408001142');
   background-repeat: no-repeat;
 }
 .text-resize a.font-large {
@@ -1717,7 +1724,7 @@ body {
   border-top: none;
 }
 #comments .comment {
-  background-image: url('../images/comment-icon.png?1407129817');
+  background-image: url('../images/comment-icon.png?1408001142');
   background-position: 13px 15px;
   background-repeat: no-repeat;
   background-color: #f1efed;
@@ -2052,7 +2059,7 @@ footer .block {
   position: absolute;
   right: 0px;
   text-indent: -100px;
-  background: url('../images/search-btn-mobile.png?1407129817') 50% 50% no-repeat;
+  background: url('../images/search-btn-mobile.png?1408001142') 50% 50% no-repeat;
   background-color: #1b1b1b;
   width: 32px;
   font-weight: bold;
@@ -2099,6 +2106,31 @@ footer .block {
 
 .front .panel-pane {
   border-top: 3px solid #7a797a;
+}
+
+.maintenance-page {
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
+  background: #006893;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.maintenance-page #page {
+  margin-top: 1em;
+  font-size: 110%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.maintenance-page div#content {
+  padding-left: 1.3em;
+  padding-right: 1.3em;
+}
+.maintenance-page #header {
+  background-image: url("../images/bg-header.png");
 }
 
 .region-navigation {
@@ -2463,7 +2495,7 @@ a.tabledrag-handle .handle {
   text-align: left;
   text-indent: -100px;
   padding: 5px 14px;
-  background: url('../images/featured-articles-pause.png?1407129817') no-repeat 0px -27px;
+  background: url('../images/featured-articles-pause.png?1408001142') no-repeat 0px -27px;
 }
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;

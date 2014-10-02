@@ -25,8 +25,6 @@ define('AGOV_ADMIN_ROLE_ID', '3');
  */
 function agov_install() {
 
-  ini_set('max_execution_time', '300');
-
   // Ensure the beans feature is reverted.
   $revert = array('agov_beans');
   _agov_features_revert($revert);
@@ -39,9 +37,6 @@ function agov_install() {
 
   // Set default front-end and admin themes.
   _agov_set_default_themes();
-
-  // Set up default terms.
-  _agov_enable_vocabs();
 
   // Create additional date formats.
   _agov_date_formats();
@@ -154,23 +149,6 @@ function _agov_set_default_themes() {
 
   // Disable the default Bartik & default admin theme.
   theme_disable(array('bartik', AGOV_DEFAULT_ADMIN_THEME));
-}
-
-/**
- * Sets up default vocabularies.
- */
-function _agov_enable_vocabs() {
-
-  // Create a default vocabulary named "Tags"
-  $description = st('Use tags to group articles on similar topics into categories.');
-  $help = st('Enter a comma-separated list of words to describe your content.');
-  $vocabulary = (object) array(
-    'name' => st('Tags'),
-    'description' => $description,
-    'machine_name' => 'tags',
-    'help' => $help,
-  );
-  taxonomy_vocabulary_save($vocabulary);
 }
 
 /**
@@ -491,6 +469,9 @@ function _agov_default_variables() {
       'priority' => '0.5',
     ),
 
+    // Set jquery update to use Google CDN.
+    'jquery_update_jquery_cdn' => 'google',
+
   );
 
   // Enable xmlsitemap includes for content types.
@@ -518,6 +499,14 @@ function _agov_default_variables() {
   foreach ($variables as $key => $value) {
     variable_set($key, $value);
   }
+
+  // Set Crumbs weights.
+  $crumbs_weights = array(
+    'crumbs.home_title' => 1,
+    'path'  => 2,
+    '*' => 3,
+  );
+  variable_set('crumbs_weights', $crumbs_weights);
 }
 
 /**

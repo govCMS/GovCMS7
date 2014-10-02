@@ -94,16 +94,20 @@ function agov_disable_defaultcontent_init() {
   // Check if an install task variable exists so that we do not display this
   // message just after the content has been installed.
   $install_task = variable_get('install_task');
-  if ($install_task == 'done' && user_access('administer site') && current_path() != 'admin/config/content/default-content/disable') {
+  if ($install_task == 'done'
+    && user_access('administer site')
+    && current_path() != 'admin/config/content/default-content/disable'
+    && current_path() != 'media/browser'
+    && !(isset($_REQUEST['js']) && $_REQUEST['js'] == 'true')
+  ) {
     $default_content = agov_disable_defaultcontent_modules();
     if (!empty($default_content) && variable_get('agov_disable_defaultcontent_notice_enabled', 1)) {
       drupal_set_message(
-        t('Default content has been enabled for this site, would you like to !disable_link? (!hide_link).',
-        array(
-          '!disable_link' => l(t('switch it off'), 'admin/config/content/default-content/disable'),
-          '!hide_link' => l(t('hide this notice'), 'admin/config/content/default-content'),
-        )),
-        'status',
+        t('You are viewing the site with example content. You must disable example content before editing the content on the site. !disable_link',
+          array(
+            '!disable_link' => l(t('Disable example content'), 'admin/config/content/default-content/disable'),
+          )),
+        'warning',
         FALSE
       );
     }

@@ -1,6 +1,0 @@
-name = Panel Layouts
-package = aGov core
-description = Provides custom panel layouts for aGov
-dependencies[] = panels
-dependencies[] = ctools
-core = 7.x

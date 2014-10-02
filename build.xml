@@ -1,12 +1,15 @@
 <project name="agov" default="build">
 
   <property name="codestyle.standard.drupal" value="vendor/drupal/coder/coder_sniffer/Drupal" />
+  <property name="codestyle.standard.security" value="vendor/nickschuch/phpcs-security-audit/Security" />
+  <property name="codestyle.standard.security.src" value="vendor/nickschuch/phpcs-security-audit/example_drupal7_ruleset.xml" />
   <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
   <property name="src.profile.dir" value="profiles/agov" />
   <property name="src.custom.modules" value="modules/custom" />
   <property name="src.custom.themes" value="themes/agov_zen" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
+  <property name="build.profile.dir" value="${build.drupal.dir}/profiles/agov" />
   <property name="db.username" value="root" />
   <property name="db.password" value="" />
   <property name="db.name" value="agov_test" />
@@ -14,6 +17,12 @@
   <property file="build.properties" override="true"/>
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all, login" description="Build the project" />
+
+  <target name="build-fast" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make. Good for clean installs without re-downloading components" />
+
+  <target name="build-fast-no-tests" depends="validate:phpcs, validate:phpmd, site-install, login" description="Build the project without make or tests. Good for fast re-installs." />
+
+  <target name="build-no-install" depends="clean:all, prepare:all, validate:all, make" description="Builds the project without running the installer. Good for manual installer testing." />
 
   <target name="clean:all" description="Clean the build environment">
     <phingcall target="fix-perms" />
@@ -46,12 +55,37 @@
   <target name="prepare:composer" description="Prepares the composer dependencies" >
     <!-- Install common packages -->
     <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
+    <copy file="${codestyle.standard.security.src}" tofile="${codestyle.standard.security}/ruleset.xml" overwrite="true" />
   </target>
 
-  <target name="validate:all" depends="validate:phpcs, validate:make" description="Validate the source code" />
+  <target name="validate:all" depends="validate:phpcs, validate:phpsa, validate:make" description="Validate the source code" />
 
   <target name="validate:phpcs" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
-    <exec command="bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+  <target name="validate:phpsa"
+          description="phpcs-security-audit is a set of PHP_CodeSniffer rules that finds flaws or weaknesses related to security in PHP and its popular CMS or frameworks.">
+    <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.security} --extensions=${codestyle.extensions} ${src.custom.modules}"
+          logoutput="true"
+          checkreturn="false" />
+  </target>
+
+  <target name="check:upgrade" description="Checks if we are testing an upgrade and if so, sets a property.">
+    <condition property="is.upgrade">
+      <contains string="${env.UPGRADE}" substring="7.x"/>
+    </condition>
+  </target>
+
+  <target name="prepare:upgrade" depends="check:upgrade" if="is.upgrade" description="Downloads a previous aGov version to be updated.">
+    <exec command="drush dl agov-${env.UPGRADE} --destination=.. --drupal-project-rename=drupal --yes" logoutput="true" passthru="true" checkreturn="true"/>
+  </target>
+
+  <target name="upgrade" depends="check:upgrade" if="is.upgrade" description="Upgrades previous aGov version with the latest.">
+    <copy todir="${build.profile.dir}">
+      <fileset dir="${project.basedir}"/>
+    </copy>
+    <exec dir="${build.drupal.dir}" command="drush updb -y" logoutput="true" passthru="true" />
   </target>
 
   <target name="validate:phpmd" description="Find code complexity issues">

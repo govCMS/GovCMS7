@@ -126,6 +126,7 @@ html {
   @include adjust-leading-to(1);
 
   word-spacing: -0.05em;
+  height: 100%
 }
 
 @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
@@ -149,6 +150,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
 }
 
 /* ==========================================================================
@@ -430,7 +432,7 @@ figure {
  */
 
 fieldset {
-  border-color: #c0c0c0;
+  border-color: $form-border;
   margin: 0 2px;
   /* Apply borders and padding that keep the vertical rhythm. */
   @include apply-side-rhythm-border(top,    $width: 1px, $lines: 0.35);
