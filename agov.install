@@ -461,6 +461,8 @@ function _agov_default_variables() {
     // Set jquery update to use Google CDN.
     'jquery_update_jquery_cdn' => 'google',
 
+    // Turn off theme rebuilds.
+    'theme_agov_zen_settings' => array('zen_rebuild_registry' => 0),
   );
 
   // Enable xmlsitemap includes for content types.
