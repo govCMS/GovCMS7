@@ -123,6 +123,8 @@ projects[views_bulk_operations][version] = "3.1"
 
 projects[webform][version] = "3.20"
 
+projects[webform_clear][version] = "2.0"
+
 projects[workbench][version] = "1.2"
 
 projects[xmlsitemap][version] = "2.0-rc2"
