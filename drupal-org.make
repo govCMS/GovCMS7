@@ -121,7 +121,7 @@ projects[views][version] = "3.8"
 
 projects[views_bulk_operations][version] = "3.1"
 
-projects[webform][version] = "3.20"
+projects[webform][version] = "4.1"
 
 projects[workbench][version] = "1.2"
 
