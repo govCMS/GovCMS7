@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "369a271d88d7a45accd9ef741267b868",
+    "hash": "df096c4b7690f2b4e9ed4955e82aa220",
     "packages": [
         {
             "name": "composer/installers",
@@ -1632,16 +1632,16 @@
         },
         {
             "name": "previousnext/puppet-dev",
-            "version": "4.5.0",
+            "version": "4.5.6",
             "source": {
                 "type": "git",
                 "url": "git@github.com:previousnext/puppet-dev.git",
-                "reference": "b8e1f29084253911a88f23061c9b8b850b514508"
+                "reference": "0af118e52ddb2124311e314c95357c5824a70b60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/previousnext/puppet-dev/zipball/b8e1f29084253911a88f23061c9b8b850b514508",
-                "reference": "b8e1f29084253911a88f23061c9b8b850b514508",
+                "url": "https://api.github.com/repos/previousnext/puppet-dev/zipball/0af118e52ddb2124311e314c95357c5824a70b60",
+                "reference": "0af118e52ddb2124311e314c95357c5824a70b60",
                 "shasum": ""
             },
             "type": "library",
@@ -1659,7 +1659,7 @@
                 "issues": "https://github.com/previousnext/puppet-dev",
                 "source": "https://github.com/previousnext/puppet-dev"
             },
-            "time": "2014-07-07 09:34:23"
+            "time": "2014-09-15 03:42:17"
         },
         {
             "name": "sebastian/finder-facade",
@@ -2565,18 +2565,12 @@
             "time": "2014-02-19 00:20:43"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/coder": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }

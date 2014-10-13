@@ -5,6 +5,14 @@
 -->
 
 <project name="govcms" default="prepare" phingVersion="2.4.11">
+  <property name="app.dir" value="${project.basedir}/docroot" />
+
+  <target name="drupal:install"
+          description="Install Drupal on a clean database">
+    <exec dir="${app.dir}"
+          command="${drush.bin} site-install agov -y --db-url=mysql://drupal:drupal@govcms.dev/drupal_local"
+          logoutput="${test.output}" />
+  </target>
 
   <includepath classpath="vendor/previousnext/scaffold" />
   <includepath classpath="vendor/previousnext/phing-semanticgit" />
@@ -18,10 +26,10 @@
   <!-- ============= -->
 
   <!-- The following override properties provided in imported build files. -->
-  <property name="app.profile" value="${phing.project.name}" />
+  <property name="app.profile" value="agov" />
   <property name="build.logs.dir" value="${project.basedir}/build/logs" />
-  <property name="src.custom.modules" value="${project.basedir}/app/sites/all/modules/custom" />
-  <property name="src.custom.themes" value="${project.basedir}/app/sites/all/themes/custom" />
+  <property name="src.custom.modules" value="${project.basedir}/docroot/profiles/agov/modules/custom" />
+  <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov_zen" />
   <property name="simpletest.group" value="${phing.project.name}" />
   <property name="drush.source" value="@${phing.project.name}.dev" />
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
