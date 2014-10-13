@@ -20,8 +20,8 @@
   <!-- The following override properties provided in imported build files. -->
   <property name="app.profile" value="${phing.project.name}" />
   <property name="build.logs.dir" value="${project.basedir}/build/logs" />
-  <property name="src.custom.modules" value="${project.basedir}/app/sites/all/modules/custom" />
-  <property name="src.custom.themes" value="${project.basedir}/app/sites/all/themes/custom" />
+  <property name="src.custom.modules" value="${project.basedir}/docroot/profiles/agov/modules/custom" />
+  <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov_zen" />
   <property name="simpletest.group" value="${phing.project.name}" />
   <property name="drush.source" value="@${phing.project.name}.dev" />
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
