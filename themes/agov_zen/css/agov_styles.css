@@ -980,7 +980,7 @@ html.js .collapsed .fieldset-legend {
 }
 
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
-  background: url('../images/block-li-bg.png?1408001142') no-repeat scroll left 5px;
+  background: url('../images/block-li-bg.png?1410479934') no-repeat scroll left 5px;
   display: block;
   padding-left: 15px;
   padding-bottom: 2px;
@@ -1563,7 +1563,7 @@ tr.selected td {
 }
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1408001142');
+  background-image: url('../images/progress.gif?1410479934');
 }
 
 /**
@@ -1675,7 +1675,7 @@ th a, th img {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-image: url('../images/font-resize-bg.png?1408001142');
+  background-image: url('../images/font-resize-bg.png?1410479934');
   background-repeat: no-repeat;
 }
 .text-resize a.font-large {
@@ -1757,7 +1757,7 @@ body {
   border-top: none;
 }
 #comments .comment {
-  background-image: url('../images/comment-icon.png?1408001142');
+  background-image: url('../images/comment-icon.png?1410479934');
   background-position: 13px 15px;
   background-repeat: no-repeat;
   background-color: #f3f3f3;
@@ -2087,7 +2087,7 @@ footer .block {
   position: absolute;
   right: 0px;
   text-indent: -100px;
-  background: url('../images/search-btn-mobile.png?1408001142') 50% 50% no-repeat;
+  background: url('../images/search-btn-mobile.png?1410479934') 50% 50% no-repeat;
   background-color: #1b1b1b;
   width: 32px;
   font-weight: bold;
@@ -2523,7 +2523,7 @@ a.tabledrag-handle .handle {
   text-align: left;
   text-indent: -100px;
   padding: 5px 14px;
-  background: url('../images/featured-articles-pause.png?1408001142') no-repeat 0px -27px;
+  background: url('../images/featured-articles-pause.png?1410479934') no-repeat 0px -27px;
 }
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
