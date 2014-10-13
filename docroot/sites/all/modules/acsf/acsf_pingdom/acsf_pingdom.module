@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Handles the pausing and unpausing of Pingdom checks under certain conditions.
+ */
+
+use Acquia\Acsf\AcsfMessageRest;
+
+/**
+ * Implements hook_modules_enabled().
+ */
+function acsf_pingdom_modules_enabled($modules) {
+  if (in_array('shield', $modules)) {
+    acsf_pingdom_pause();
+  }
+}
+
+/**
+ * Implements hook_modules_disabled().
+ */
+function acsf_pingdom_modules_disabled($modules) {
+  if (in_array('shield', $modules)) {
+    acsf_pingdom_pause(FALSE);
+  }
+}
+
+/**
+ * Makes a Factory request to pause/unpause pingdom.
+ *
+ * @param bool $pause_method
+ *   Either TRUE for pause or FALSE for unpause (Optional).
+ */
+function acsf_pingdom_pause($pause_method = TRUE) {
+  $http_method = $pause_method ? 'POST' : 'DELETE';
+  try {
+    $site = acsf_get_acsf_site();
+    $endpoint = sprintf('site-api/v1/pingdom-pause/%s', $site->site_id);
+    $message = new AcsfMessageRest($http_method, $endpoint);
+    $message->send();
+  }
+  catch (Exception $e) {
+    // Swallow the exception.
+  }
+}

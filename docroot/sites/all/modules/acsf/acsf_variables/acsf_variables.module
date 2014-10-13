@@ -1,0 +1,142 @@
+<?php
+
+/**
+ * @file
+ * Provides a centralized storage mechanism for all ACSF sensitive variables.
+ *
+ * The goal is to have a storage for ACSF related variables which are not needed
+ * all the time and can be easily scrubbed.
+ */
+
+/**
+ * Sets a named variable with an optional group.
+ *
+ * @param string $name
+ *   The name of the variable.
+ * @param mixed $value
+ *   The value of the variable.
+ * @param string $group
+ *   The group name of the variable. Optional.
+ */
+function acsf_vset($name, $value, $group = NULL) {
+  $merge = db_merge('acsf_variables')
+    ->key(array('name' => $name))
+    ->fields(array(
+      'group_name' => $group,
+      'value' => serialize($value),
+    ))
+    ->execute();
+
+  return $merge;
+}
+
+/**
+ * Retrieves a named variable.
+ *
+ * @param string $name
+ *   The name of the variable.
+ * @param mixed $default
+ *   The default value of the variable.
+ *
+ * @return mixed
+ *   The value of the variable.
+ */
+function acsf_vget($name, $default = NULL) {
+  $select = db_select('acsf_variables', 'v')
+    ->fields('v', array('value'))
+    ->condition('name', $name, '=')
+    ->execute();
+
+  if ($value = $select->fetchassoc()) {
+    return unserialize($value['value']);
+  }
+  else {
+    return $default;
+  }
+}
+
+/**
+ * Retrieves a group of variables.
+ *
+ * @param string $group
+ *   The group name of the variables.
+ * @param mixed $default
+ *   The default value of the group.
+ *
+ * @return array
+ *   An associative array holding the values of the group of variables, keyed by
+ *   the variable names.
+ */
+function acsf_vget_group($group, $default = array()) {
+  $return = array();
+
+  $select = db_select('acsf_variables', 'v')
+    ->fields('v', array('name', 'value'))
+    ->condition('group_name', $group, '=')
+    ->execute();
+
+  while ($record = $select->fetchAssoc()) {
+    $return[$record['name']] = unserialize($record['value']);
+  }
+
+  if (empty($return)) {
+    return $default;
+  }
+  else {
+    return $return;
+  }
+}
+
+/**
+ * Deletes a named variable.
+ *
+ * @param string $name
+ *   The name of the variables.
+ *
+ * @return int
+ *   The number of deleted rows.
+ */
+function acsf_vdel($name) {
+  $delete = db_delete('acsf_variables')
+    ->condition('name', $name)
+    ->execute();
+
+  return $delete;
+}
+
+/**
+ * Returns the variables that have not changed from their saved defaults.
+ *
+ * For example, if an administrator has visited the settings page on which
+ * these variables are set and has saved the page without actually editing the
+ * variables themselves, this function will still treat the variables as
+ * unchanged, and therefore will return them.
+ *
+ * @param array $original_variables
+ *   An associative array of variables, where the key is the variable name, and
+ *   the value is the original content of that variable. These variables should
+ *   all have been originally stored in the database with these values (e.g.,
+ *   at install time) in order for this function to work correctly.
+ *
+ * @return array
+ *   An array of variable names, containing only those variables from the above
+ *   list that still have their original values stored in the database.
+ */
+function acsf_variables_get_unchanged_site_variables(array $original_variables) {
+  $unchanged_variables = array();
+
+  // Check each of these variables to see if they have been edited.
+  foreach ($original_variables as $variable => $original_content) {
+    $current_content = variable_get($variable, 0);
+
+    // Regularize line endings.
+    $original_content = str_replace("\r", "", $original_content);
+    $current_content = str_replace("\r", "", $current_content);
+
+    if (trim($current_content) == trim($original_content)) {
+      $unchanged_variables[] = $variable;
+    }
+  }
+
+  return $unchanged_variables;
+}
