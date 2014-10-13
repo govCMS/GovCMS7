@@ -1,97 +1,79 @@
-/* line 22, ../sass/styles.scss */
 html {
   font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
   color: #333333;
 }
 
-/* line 27, ../sass/styles.scss */
 h1, h2, h3, h4, h5 {
   font-family: "OpenSansRegular", Arial, sans-serif;
 }
 
-/* line 33, ../sass/styles.scss */
 a :hover,
 a :focus {
   color: #2a6496;
 }
 
-/* line 38, ../sass/styles.scss */
 .header {
   background: #006893;
   font-family: "OpenSansRegular", Arial, sans-serif;
 }
 
-/* line 43, ../sass/styles.scss */
 .region-navigation {
   background: #333333;
   font-family: "OpenSansRegular", Arial, sans-serif;
 }
 
-/* line 49, ../sass/styles.scss */
 .inlineLinks--bordered--double > li > a {
   color: #FFF;
   border-left-color: #FFF;
 }
-/* line 53, ../sass/styles.scss */
 .inlineLinks--bordered--double > li > a :before {
   border-left-color: #FFF;
   border-right-color: #FFF;
 }
 
-/* line 62, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li > a {
   font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
 }
-/* line 67, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li > a:hover,
 .region-navigation .block__content > .menu > li.sfHover > a {
   background: #dee0e2;
 }
-/* line 71, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li > a:before {
   border-left-color: #FFF;
 }
-/* line 75, ../sass/styles.scss */
 .region-navigation .block__content > .menu > li.active-trail > a {
   background: #fff;
   color: #333333;
 }
 
-/* line 81, ../sass/styles.scss */
 .region-footer .block-menu .menu > li > a:before {
   border-left-color: #FFF;
 }
 
-/* line 87, ../sass/styles.scss */
 .sidebar .block .block__title {
   background-color: #006893;
   background-image: none;
   color: #FFF;
 }
-/* line 93, ../sass/styles.scss */
 .sidebar .block .block__content {
   background: #dee0e2;
 }
 
-/* line 98, ../sass/styles.scss */
 #footer {
   background: #006893;
   border-top: 7px solid #006893;
   color: white;
 }
 
-/* line 104, ../sass/styles.scss */
 #block-views-footer-teaser-block {
   color: #333333;
 }
 
-/* line 110, ../sass/styles.scss */
 #block-menu-block-agov-menu-block-footer,
 #block-bean-footer-copyright,
 #block-menu-menu-footer-sub-menu {
   background: transparent;
 }
-/* line 113, ../sass/styles.scss */
 #block-menu-block-agov-menu-block-footer a,
 #block-bean-footer-copyright a,
 #block-menu-menu-footer-sub-menu a {
