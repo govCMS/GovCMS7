@@ -98,6 +98,13 @@ fieldset {
     border-radius: 0;
     border: 1px solid $form-border;
     padding: 0 5px;
+
+    a,
+    a:visited,
+    a:active,
+    a:hover {
+      color: rgb(75, 75, 75);
+    }
   }
 }
 

@@ -854,6 +854,12 @@ fieldset legend {
   border: 1px solid silver;
   padding: 0 5px;
 }
+fieldset legend a,
+fieldset legend a:visited,
+fieldset legend a:active,
+fieldset legend a:hover {
+  color: #4b4b4b;
+}
 
 /**
  * Collapsible fieldsets.
