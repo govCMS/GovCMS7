@@ -18,7 +18,7 @@
   <!-- ============= -->
 
   <!-- The following override properties provided in imported build files. -->
-  <property name="app.profile" value="${phing.project.name}" />
+  <property name="app.profile" value="agov" />
   <property name="build.logs.dir" value="${project.basedir}/build/logs" />
   <property name="src.custom.modules" value="${project.basedir}/docroot/profiles/agov/modules/custom" />
   <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov_zen" />
