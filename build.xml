@@ -5,6 +5,14 @@
 -->
 
 <project name="govcms" default="prepare" phingVersion="2.4.11">
+  <property name="app.dir" value="${project.basedir}/docroot" />
+
+  <target name="drupal:install"
+          description="Install Drupal on a clean database">
+    <exec dir="${app.dir}"
+          command="${drush.bin} site-install agov -y --db-url=mysql://drupal:drupal@govcms.dev/drupal_local"
+          logoutput="${test.output}" />
+  </target>
 
   <includepath classpath="vendor/previousnext/scaffold" />
   <includepath classpath="vendor/previousnext/phing-semanticgit" />
