@@ -69,7 +69,8 @@ projects[menu_block][version] = "2.3"
 
 projects[menu_trail_by_path][version] = "2.0"
 
-projects[metatag][version] = "1.0-beta7"
+projects[metatag][version] = "1.4"
+projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 
 projects[references][version] = "2.1"
 
