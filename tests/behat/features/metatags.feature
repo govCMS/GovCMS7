@@ -11,7 +11,7 @@ Feature:Meta tags
     Then the response status code should be 200
     And I enter "test" for "Title"
     And I enter "When tweetle beetles fight, its called a tweetle beetle battle." for "Body"
-    And I select "Text" from "edit-metatags-und-dctermstype-item-value"
+    And I enter "Text" for "edit-metatags-und-dctermstype-item-value"
     And press "Save"
     Then I should see "Standard page test has been created"
     And the response should contain "<meta name=\"description\" content=\"When tweetle beetles fight, its called a tweetle beetle battle.\" />"
