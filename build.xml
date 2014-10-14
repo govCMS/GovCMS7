@@ -118,7 +118,9 @@
   </target>
 
   <target name="test:behat" depends="behat:init" description="Run behat tests">
+    <exec command="drush -r ${build.drupal.dir} vset -y password_policy_new_login_change 0" />
     <exec command="${project.basedir}/bin/behat --format pretty --ansi" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="drush -r ${build.drupal.dir} vset -y password_policy_new_login_change 1" />
   </target>
 
   <target name="login" description="Login to the site">
