@@ -249,17 +249,6 @@ function agov_core_theme_info() {
  * Implements hook_form_alter().
  */
 function agov_core_form_alter(&$form, &$form_alter, $form_id) {
-  // Check if this is the node_freshness config form.
-  if ($form_id == 'node_freshness_config') {
-    $form['agov_help'] = array(
-      '#markup' => '<p>' . t('Node freshness is a general value available across the site for governing when content is considered "stale" or archiveable.') . '</p>',
-      '#weight' => '-50',
-    );
-    if (module_exists('agov_news')) {
-      $form['agov_help']['#markup'] .= '<p>' . t('Currently, this value determines when News items are moved to the Archived section.') . '</p>';
-    }
-  }
-
   // Install Canberra timezone.
   if ($form_id == 'system_regional_settings') {
     $timezone_form = $form['timezone']['date_default_timezone'];
