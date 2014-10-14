@@ -121,7 +121,6 @@ dependencies[] = search_config
 
 ; Custom
 
-dependencies[] = node_freshness
 dependencies[] = text_summary_options
 dependencies[] = wcag_validate
 dependencies[] = wcag_scheduler

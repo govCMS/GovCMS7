@@ -7,16 +7,6 @@
 include_once 'agov_news.features.inc';
 
 /**
- * Implements hook_views_data_alter().
- */
-function agov_news_views_data_alter(&$data) {
-  if (module_exists('node_freshness')) {
-    // Add the node_freshness handler to the news date field.
-    $data['field_data_field_news_date']['field_news_date_value']['filter']['handler'] = 'node_freshness_handler_filter';
-  }
-}
-
-/**
  * Implements hook_ds_fields_info().
  */
 function agov_news_ds_fields_info($entity_type) {
@@ -31,7 +21,7 @@ function agov_news_ds_fields_info($entity_type) {
   if (isset($fields[$entity_type])) {
     return array($entity_type => $fields[$entity_type]);
   }
-  return;
+  return $fields;
 }
 
 /**

@@ -464,6 +464,8 @@ function _agov_default_variables() {
     // Set webform_clear default time.
     'webform_clear_default_time' => 0,
 
+    // Turn off theme rebuilds.
+    'theme_agov_zen_settings' => array('zen_rebuild_registry' => 0),
   );
 
   // Enable xmlsitemap includes for content types.
@@ -570,7 +572,6 @@ function _agov_default_news_beans() {
   // Add menu links to main menu.
   $menus = array(
     'current-news' => 'news-media/news',
-    'archived-news' => 'news-media/news-archive',
     'media-releases' => 'news-media/media-releases',
     'events' => 'news-media/events',
     'blog' => 'news-media/blog',
@@ -582,7 +583,6 @@ function _agov_default_news_beans() {
   $images = array(
     'news-media-intro' => 'news-media.jpg',
     'current-news' => 'news-archives.jpg',
-    'archived-news' => 'news-archives.jpg',
     'media-releases' => 'media-releases.jpg',
     'events' => 'events.jpg',
     'blog' => 'news-media.jpg',
@@ -626,8 +626,8 @@ function _agov_default_news_beans() {
 
   // Current News block.
     'current-news' => array(
-      'label' => $t('Current News'),
-      'title' => $t('Current News'),
+      'label' => $t('News'),
+      'title' => $t('News'),
       'description' => $t('Provides a "Current News" bean for the News & Media page.'),
       'type' => 'image_and_text',
       'view_mode' => 'default',
@@ -651,40 +651,6 @@ function _agov_default_news_beans() {
         'field_link_to' => array(
           '0' => array(
             'url' => $menus['current-news'],
-            'title' => '',
-            'attributes' => '',
-          ),
-        ),
-      ),
-    ),
-
-  // Archived News block.
-    'archived-news' => array(
-      'label' => $t('Archived News'),
-      'title' => $t('Archived News'),
-      'description' => $t('Provides a "Archived News" bean for the News & Media page.'),
-      'type' => 'image_and_text',
-      'view_mode' => 'default',
-      'fields' => array(
-      // Image field.
-        'field_bean_image' => array(
-          '0' => array(
-            'fid' => $files['archived-news']->fid,
-            'alt' => t('Archived News'),
-            'title' => t('Archived News'),
-          ),
-        ),
-      // Text field.
-        'field_bean_text' => array(
-          '0' => array(
-            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
-            'format' => 'rich_text',
-          ),
-        ),
-      // Link to field.
-        'field_link_to' => array(
-          '0' => array(
-            'url' => $menus['archived-news'],
             'title' => '',
             'attributes' => '',
           ),
