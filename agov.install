@@ -452,7 +452,6 @@ function _agov_default_variables() {
     // Don't disable page caching.
     'honeypot_time_limit' => "0",
 
-
     'xmlsitemap_settings_node_page' => array(
       'status' => '1',
       'priority' => '0.5',
@@ -466,6 +465,9 @@ function _agov_default_variables() {
 
     // Turn off theme rebuilds.
     'theme_agov_zen_settings' => array('zen_rebuild_registry' => 0),
+
+    // Force user to change password on login.
+    'password_policy_new_login_change' => 1,
   );
 
   // Enable xmlsitemap includes for content types.
