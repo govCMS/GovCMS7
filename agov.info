@@ -104,6 +104,7 @@ dependencies[] = views_ui
 dependencies[] = views_bulk_operations
 dependencies[] = view_unpublished
 dependencies[] = webform
+dependencies[] = webform_clear
 dependencies[] = workbench
 dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
