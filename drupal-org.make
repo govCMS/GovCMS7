@@ -165,8 +165,7 @@ projects[login_security][version] = "1.4"
 projects[zen][version] = "5.5"
 
 ; PreviousNext modules
-projects[agls][version] = "1.0-beta1"
-projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.patch"
+projects[agls][version] = "1.0-beta3"
 
 ; Libraries
 
