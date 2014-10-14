@@ -26,7 +26,7 @@ Feature:Meta tags
     Then the response status code should be 200
     And I enter "test" for "Title"
     And I enter "When tweetle beetles fight, its called a tweetle beetle battle." for "Body"
-    And I enter "And when they battle in a puddle, its a tweetle beetle puddle battle" for "edit-metatags-description-value"
+    And I enter "And when they battle in a puddle, its a tweetle beetle puddle battle" for "edit-metatags-und-description-value"
     And I enter "Fox in socks" for "Page title"
     And I enter "Fox in socks" for "Dublin Core Title"
     And press "Save"
