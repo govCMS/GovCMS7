@@ -32,6 +32,17 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: access site in maintenance mode.
+  $permissions['access site in maintenance mode'] = array(
+    'name' => 'access site in maintenance mode',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'system',
+  );
+
   // Exported permission: access content overview.
   $permissions['access content overview'] = array(
     'name' => 'access content overview',
@@ -486,7 +497,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'webform',
   );
-  
+
   // Edit any webform content.
   $permissions['edit any webform content'] = array(
     'name' => 'edit any webform content',
@@ -497,7 +508,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'webform',
   );
-  
+
   // Delete any webform content.
   $permissions['delete any webform content'] = array(
     'name' => 'delete any webform content',
@@ -508,7 +519,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'webform',
   );
-  
+
   // Exported permission: access all webform results.
   $permissions['access all webform results'] = array(
     'name' => 'access all webform results',
@@ -541,7 +552,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'webform',
   );
-  
+
   // Edit meta tags.
   $permissions['edit meta tags'] = array(
     'name' => 'edit meta tags',
@@ -552,7 +563,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'metatag',
   );
-  
+
 
   return $permissions;
 }
