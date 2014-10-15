@@ -1,6 +1,29 @@
 
 aGov Changelog
 
+7.x-2.0-alpha3
+==============
+Features
+- The Security Kit module has been installed, and enabled by default on
+  on installations (https://www.drupal.org/project/seckit)
+- aGov can now be installed as a Composer dependency via Packagist, as an
+  alternative way of managing your distribution.
+
+Fixes
+- Fixed an issue where the installer would throw an error even though installation
+  would complete
+- Fixed some design issues with the installer
+- Fixed an issue where Beans were not rendering properly
+
+Updates
+- Core has been updated to 7.32.
+- Updated Webform to 4.x
+
+Changes
+- Automatic theme rebuilds have been disabled
+- The Node Freshness module has been removed, and News views simplified. There
+  is now only one News view.
+
 7.x-2.0-alpha2
 ===========
 Features
