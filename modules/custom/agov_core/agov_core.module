@@ -303,14 +303,13 @@ function agov_core_entity_info_alter(&$entity_info) {
  * Implements hook_metatag_config_default_alter().
  */
 function agov_metatag_config_default_alter(&$configs) {
-  $configs['global']->config['DCTERMS.creator'] = array('item' => array('value' => '[site:name]'));
-  $configs['global']->config['DCTERMS.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
-  $configs['global']->config['DCTERMS.description'] = array('item' => array('value' => '[site:slogan]'));
-  $configs['global']->config['DCTERMS.language'] = array('item' => array('value' => 'en'));
-  $configs['global']->config['DCTERMS.publisher'] = array('item' => array('value' => '[site:name]'));
-  $configs['global']->config['DCTERMS.subject'] = array('item' => array('value' => '[site:slogan]'));
-  $configs['global']->config['DCTERMS.type'] = array('item' => array('value' => 'other'));
-  $configs['global']->config['DCTERMS.type'] = array('item' => array('value' => 'other'));
+  $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
+  $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.language'] = array('item' => array('value' => 'en'));
+  $configs['global']->config['dcterms.publisher'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.subject'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.type'] = array('item' => array('value' => 'other'));
   $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + aGov (http://agov.com.au)');
-  $configs['node']->config['DCTERMS.language'] = array('item' => array('value' => 'en'));
+  $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
 }
