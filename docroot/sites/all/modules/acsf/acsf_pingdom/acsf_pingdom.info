@@ -1,0 +1,14 @@
+name = ACSF Pingdom
+description = Handles the pausing and unpausing of Pingdom checks under certain conditions.
+core = 7.x
+package = Acquia Cloud Site Factory
+hidden = TRUE
+
+dependencies[] = acsf
+
+; Information added by Drupal.org packaging script on 2014-09-12
+version = "7.x-1.1"
+core = "7.x"
+project = "acsf"
+datestamp = "1410552234"
+

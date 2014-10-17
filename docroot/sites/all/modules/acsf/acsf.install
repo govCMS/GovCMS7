@@ -1,0 +1,121 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Acquia Site Factory module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function acsf_install() {
+  acsf_build_registry();
+  acsf_register_autoloader();
+
+  // Initiate an event to run post-acsf-install tasks.
+  $type = 'acsf_install';
+  $event = \Acquia\Acsf\AcsfEvent::create($type);
+  $event->run();
+}
+
+/**
+ * Enable acsf_openid for everyone.
+ */
+function acsf_update_7001() {
+  module_enable(array('acsf_openid'));
+  variable_set('acsf_local_user_accounts', acsf_vget('acsf_local_user_accounts', FALSE));
+}
+
+/**
+ * Enable acsf_theme for everyone.
+ */
+function acsf_update_7002() {
+  module_enable(array('acsf_theme'));
+}
+
+/**
+ * Get fresh site info from the Factory.
+ */
+function acsf_update_7003() {
+  $site = acsf_get_acsf_site();
+  $site->clean();
+  // Stagger the next refresh so that they are not all calling home at once.
+  // We'll set them to be some random time in the past week so that the next
+  // refresh happens soon.
+  $rand = 86400 * mt_rand(0, 7);
+  $site->last_sf_refresh = time() - $rand;
+  $site->save();
+  watchdog('acsf', 'The next acsf-site-sync will be %date.', array('%date' => format_date($site->last_sf_refresh)));
+}
+
+/**
+ * De-dupe ACSF variables.
+ */
+function acsf_update_7004() {
+  $site = acsf_get_acsf_site();
+  $site->clean();
+  // Stagger the next refresh so that they are not all calling home at once.
+  // We'll set them to be some random time in the past week so that the next
+  // refresh happens soon.
+  $rand = 86400 * mt_rand(0, 7);
+  $site->last_sf_refresh = time() - $rand;
+  $site->save();
+  watchdog('acsf', 'The next acsf-site-sync will be %date.', array('%date' => format_date($site->last_sf_refresh)));
+
+  // Remove unused acsf variables.
+  acsf_vdel('acsf_site_nid');
+  acsf_vdel('factory_url');
+  acsf_vdel('acsf_factory_name');
+  acsf_vdel('acsf_variables_cron_last_run');
+  acsf_vdel('acsf_variables_cron_run_interval');
+
+  // The file_public_path is now set via sites.inc.
+  variable_del('file_public_path');
+
+  // Move the registry to an acsf variable.
+  $registry = variable_get('acsf_registry', NULL);
+  acsf_vset('acsf_registry', $registry);
+}
+
+/**
+ * Migrate site_owner_maintenance_mode variable.
+ */
+function acsf_update_7005() {
+  if ($value = variable_get('site_owner_maintenance_mode', FALSE)) {
+    variable_set('acsf_site_owner_maintenance_mode', $value);
+    variable_del('site_owner_maintenance_mode');
+  }
+}
+
+/**
+ * Add a common temporary directory, within the site's file directory.
+ */
+function acsf_update_7006() {
+  $tmp_dir = 'public://acsf_tmp';
+  file_prepare_directory($tmp_dir, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS);
+  // Don't allow anything to be served from the tmp dir.
+  file_put_contents("$tmp_dir/.htaccess", "Order deny,allow\ndeny from all\n");
+}
+
+/**
+ * Tokenize 'service name' in default email templates.
+ */
+function acsf_update_7007() {
+  $service_name = acsf_factory_name();
+  $factory_url = acsf_factory_url();
+  $factory_account_url = $factory_url . '/user';
+  $original_email_templates = array(
+    'user_mail_register_no_approval_required_body' => "[user:name],\n\nThank you for registering at [site:name] with your $service_name account. You can change your password or edit your profile by visiting $factory_account_url.\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_register_pending_approval_body' => "[user:name],\n\nThank you for registering at [site:name] with your $service_name account. Your application for membership on this site is currently pending approval. We will send another email to let you know when it has been approved.\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_register_admin_created_body' => "You have been invited to be a member of [site:url-brief], a site hosted by $service_name.\n\nPlease complete your registration using the link below and the e-mail address [user:mail]:\n\n[site:register-url]\n",
+  );
+  $current_email_templates = acsf_openid_setup_user_mail_variables();
+
+  // Cycle through emails and make changes if "old" template is used.
+  foreach ($original_email_templates as $name => $value) {
+    $notification = variable_get($name, NULL);
+    if (empty($notification) || $notification == $value) {
+      variable_set($name, $current_email_templates[$name]);
+    }
+  }
+}

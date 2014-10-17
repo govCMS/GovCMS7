@@ -15,7 +15,7 @@
     "phploc/phploc":                   "2.0.0-BETA1",
     "sebastian/phpcpd":                "*",
     "drupal/coder":                    "dev-7.x-2.x",
-    "previousnext/puppet-dev":         "4.5.0",
+    "previousnext/puppet-dev":         "4.5.6",
     "previousnext/phing-semanticgit":  "0.1.0",
     "previousnext/phing-browserstack": "0.1.0"
   },
