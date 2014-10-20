@@ -98,6 +98,7 @@ dependencies[] = simple_aggregation
 dependencies[] = site_map
 dependencies[] = superfish
 dependencies[] = twitter_block
+dependencies[] = toc_filter
 dependencies[] = username_enumeration_prevention
 dependencies[] = views
 dependencies[] = views_ui

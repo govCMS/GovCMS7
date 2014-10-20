@@ -106,6 +106,8 @@ projects[strongarm][version] = "2.0"
 
 projects[superfish][version] = "1.9"
 
+projects[toc_filter][version] = "1.2"
+
 projects[token][version] = "1.5"
 
 projects[twitter_block][version] = "2.1"
