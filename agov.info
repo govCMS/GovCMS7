@@ -69,6 +69,7 @@ dependencies[] = googleanalytics
 dependencies[] = honeypot
 dependencies[] = libraries
 dependencies[] = link
+dependencies[] = linkchecker
 dependencies[] = linkit
 dependencies[] = media
 dependencies[] = media_internet

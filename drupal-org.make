@@ -53,6 +53,8 @@ projects[libraries][version] = "2.1"
 
 projects[link][version] = "1.1"
 
+projects[linkchecker][version] = "1.2"
+
 projects[linkit][version] = "3.1"
 
 projects[media][version] = "2.0-alpha1"
