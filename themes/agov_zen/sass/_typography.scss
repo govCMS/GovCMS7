@@ -2,12 +2,12 @@
 %headings {
   font-family: $header-font-family;
   font-weight: normal;
-  color: $blue;
+  color: $heading-color;
 }
 
 /* Links */
 a {
-  @include link-colors($red, black, $red, $red);
+  @include link-colors($color-highlight, $color-primary, $color-highlight, $color-highlight);
 }
 
 a:hover {

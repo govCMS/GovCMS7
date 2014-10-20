@@ -1,39 +1,40 @@
 .region-navigation {
-	background: black;
-	position: relative;
-	display: inline-block;
-	width: 100%;
+  background: $color-primary;
+  position: relative;
+  display: inline-block;
+  width: 100%;
   padding: 7px;
-  @include bp-nq($medium) { padding: 0px;}
+  @include bp-nq($medium) { padding: 0px; }
   .block {
     @include noSpace;
     @include adaptivelyCentered;
   }
 }
 
-$firstLiPaddingX: 15px; // Used for calculation is sub-menu below.
+// Used for calculation is sub-menu below.
+$firstLiPaddingX: 15px;
 
 /* First-level Menu */
 .region-navigation .block__content > .menu {
   @extend %inlineLinks--bordered;
-	background: black;
+  background: black;
   > li {
     > a {
       padding: 10px $firstLiPaddingX;
       font-family: $open;
       text-decoration: none;
       text-transform: uppercase;
-      color: white;
+      color: $color-highlight-contrast;
     }
     &.active-trail > a {
       &, & a:hover {
-        color: black;
-        background: white;
+        color: $color-tertiary-light;
+        background: $color-tertiary-dark;
       }
     }
     & > a:hover, &.sfHover > a {
-      background: $grey;
-      color: $red;
+      background: $color-tertiary-light;
+      color: $color-highlight;
     }
     // Remove border on hover, sfHover, active link, and first link.
     &.sfHover, &:hover, &.active-trail {
@@ -51,13 +52,13 @@ $subMenuPadding: 3px;
 $subLiPaddingX: $firstLiPaddingX - $subMenuPadding;
 
 .sf-menu > li > ul {
-	background: $grey;
-	padding: $subMenuPadding;
+  background: $color-tertiary-light;
+  padding: $subMenuPadding;
   @extend %linksTabbed;
   // %linksTabbed overrides
   > li {
     display: block !important;
-    border-top-color: white;
+    border-top-color: $color-highlight-contrast;
     > a { padding-left: $subLiPaddingX; }
   }
 }

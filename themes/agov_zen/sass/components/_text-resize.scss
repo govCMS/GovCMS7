@@ -7,7 +7,7 @@
     height: 26px;
     background-image: image-url('font-resize-bg.png');
     background-repeat: no-repeat;
-    &.font-small { background-position: 0; }
+    &.font-small { }
     &.font-large { background-position: 0 -27px; }
     &.reset { background-position: 0 -54px; }
   }

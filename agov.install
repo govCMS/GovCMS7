@@ -14,7 +14,7 @@
  */
 define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_zen');
-define('AGOV_DEFAULT_THEME', 'agov_zen');
+define('AGOV_DEFAULT_THEME', 'agov_barton');
 define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
@@ -70,6 +70,17 @@ function agov_install() {
 
   // Clean up after install.
   agov_cleanup();
+}
+
+
+
+/**
+ * Returns a list of the themes that aGov supports.
+ */
+function agov_supported_themes() {
+  return array(
+    AGOV_DEFAULT_THEME,
+  );
 }
 
 /**
@@ -356,7 +367,7 @@ function _agov_date_formats() {
  */
 function _agov_default_blocks() {
   // Get all the aGov supported themes.
-  $themes = agov_core_theme_info();
+  $themes = agov_supported_themes();
 
   // Set default system block in primary theme.
   agov_core_insert_block('system', 'main', $themes, 'content', -12);
@@ -398,7 +409,7 @@ function _agov_default_blocks() {
  */
 function _agov_twitter_block() {
   // Get all the aGov supported themes.
-  $themes = agov_core_theme_info();
+  $themes = agov_supported_themes();
 
   $data = array(
     "theme" => "",
@@ -510,6 +521,7 @@ function _agov_default_variables() {
     '*' => 3,
   );
   variable_set('crumbs_weights', $crumbs_weights);
+  variable_set('crumbs_show_current_page', 1);
 }
 
 /**
@@ -557,7 +569,7 @@ function _agov_default_beans() {
       ),
     );
     // Get all the aGov supported themes.
-    $themes = agov_core_theme_info();
+    $themes = agov_supported_themes();
     agov_core_save_bean('basic_content', 'Footer copyright', 'The copyright message', '', $fields);
     agov_core_insert_block('bean', 'footer-copyright', $themes, 'footer', 4);
   }

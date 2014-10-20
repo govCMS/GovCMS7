@@ -1,7 +1,7 @@
 .bean-image-and-text.highlight {
   @include pie-clearfix;
-  background: $grey;
-  border: solid $blue;
+  background: $color-tertiary-light;
+  border: solid $color-primary;
   border-width: 3px 0;
   .field {
     @include box-sizing(border-box);
@@ -19,7 +19,7 @@
 }
 
 .bean-image-and-text.default {
-  border-top: solid 1px $grey;
+  border-top: solid 1px $color-tertiary-light;
   padding: 15px 0;
   margin: 0;
   h2 {

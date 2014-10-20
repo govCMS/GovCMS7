@@ -145,4 +145,8 @@
           passthru="true" />
   </target>
 
+  <target name="composer update">
+    <exec command="composer update --prefer-dist" logoutput="true" passthru="true"/>
+  </target>
+
 </project>

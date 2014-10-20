@@ -1,6 +1,5 @@
 .breadcrumb {
-  padding-bottom: 6px;
-  margin-bottom: 10px;
-  border-bottom: solid 3px $blue;
+  padding: rhythm(1);
+  border-bottom: solid 3px $color-primary;
   @include adjust-font-size-to(12px);
 }

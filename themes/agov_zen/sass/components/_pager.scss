@@ -7,8 +7,8 @@
   clear: both;
   padding: rhythm(.5);
   text-align: center;
-  border-top: solid 3px $blue;
-  background: lighten($grey, 3%);
+  border-top: solid 3px $color-primary;
+  background: lighten($color-tertiary-light, 3%);
 }
 %pager__item {
   display: inline-block;
@@ -31,5 +31,5 @@
 .pager-current {
   @extend %pager__item;
   color: white;
-  background: $blue;
+  background: $color-primary;
 }

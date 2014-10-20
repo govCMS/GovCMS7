@@ -370,8 +370,21 @@ span.field-label {
 
 /* Buttons used by contrib modules like Media. */
 a.button {
-//  @include appearance(button);
-  color: #fff;
+  background: $color-highlight;
+  color: $color-highlight-contrast;
+  text-decoration: none;
+  margin-right: 0.5em;
+  font-size: 1.4em;
+  padding: 0.3em 0.5em;
+  @include box-shadow(1px 1px 1px #C9C9C9);
+
+  &:hover {
+    background: lighten($color-highlight, 10%);
+  }
+  &:active {
+    background: lighten($color-highlight, 20%);
+    @include box-shadow(-1px -1px -1px #C9C9C9);
+  }
 }
 
 /* Password confirmation. */
