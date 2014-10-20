@@ -30,21 +30,21 @@
 h1, h2, h3, h4, h5 {
   font-family: "OpenSansSemibold", Arial, sans-serif;
   font-weight: normal;
-  color: #006893;
+  color: #141314;
 }
 
 /* Links */
 a {
-  color: #c53100;
+  color: #464445;
 }
 a:visited {
-  color: #c53100;
+  color: #464445;
 }
 a:hover {
-  color: black;
+  color: #7a797a;
 }
 a:active {
-  color: #c53100;
+  color: #464445;
 }
 
 a:hover {

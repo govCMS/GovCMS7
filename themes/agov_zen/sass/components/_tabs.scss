@@ -5,8 +5,8 @@
 // tab container
 .tabs-primary {
   white-space: normal !important; /* overwrites system.menus.css */
-  background: $grey;
-  border: solid 1px darken($grey,10%);
+  background: $color-tertiary-light;
+  border: solid 1px darken($color-tertiary-light,10%);
   @include box-shadow(0, 5px -10px 10px -15px grey inset, 0, 0);
 }
 
@@ -27,8 +27,8 @@
 .tabs-primary__tab-link.is-active {
   margin-top: -1px;
   background: white;
-  border: solid 1px darken($grey,10%);
-  border-top: solid 2px $blue;
+  border: solid 1px darken($color-tertiary-light,10%);
+  border-top: solid 2px $color-primary;
   border-bottom: none;
   // Adds white pseudo-border for visual presentation.
   position: relative;

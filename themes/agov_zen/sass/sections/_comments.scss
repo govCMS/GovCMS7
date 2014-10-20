@@ -5,7 +5,7 @@
 
 #comments {
   margin-bottom: 20px;
-  border-top: solid 3px $blue;
+  border-top: solid 3px $color-primary;
 
   h2 {
     margin-top: rhythm(.5);
@@ -25,7 +25,7 @@
     background-image: image-url('comment-icon.png');
     background-position: 13px 15px;
     background-repeat: no-repeat;
-    background-color: $grey;
+    background-color: $color-tertiary-light;
     padding: 15px 13px 15px 46px;
     a { text-decoration: none; }
     .links a { font-style: italic; }

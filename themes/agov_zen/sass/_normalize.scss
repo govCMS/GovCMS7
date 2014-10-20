@@ -513,6 +513,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button; /* 2 */
   cursor: pointer; /* 3 */
+  border: none;
   @if $legacy-support-for-ie7 {
     *overflow: visible; /* 4 */
   }
