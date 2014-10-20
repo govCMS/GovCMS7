@@ -6,7 +6,7 @@
 
 From project root, run the following commands in this order:
 
-* ```composer instal --prefer-dist```
+* ```composer install --prefer-dist```
 * ```vagrant up```
 * ```phing drupal:install```
 
