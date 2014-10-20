@@ -638,10 +638,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'administer url aliases' => 'path',
     'create url aliases' => 'path',
     'administer redirects' => 'redirect',
-    'administer modules' => 'system',
-    'administer themes' => 'system',
     'access administration pages' => 'system',
-    'administer site configuration' => 'system',
     'access site reports' => 'system',
     'edit terms in 1' => 'taxonomy',
     'delete terms in 1' => 'taxonomy',
@@ -650,6 +647,8 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'assign Content editor role' => 'role_delegation',
     'assign Content approver role' => 'role_delegation',
     'assign Site editor role' => 'role_delegation',
+    'access broken links report' => 'linkchecker',
+    'access own broken links report' => 'linkchecker',
   );
   foreach ($additional_permissions as $permission => $module) {
     $permissions[$permission] = array(
