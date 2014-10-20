@@ -469,6 +469,15 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'bean',
   );
 
+  // Exported permission: view bean page.
+  $permissions['assign all roles'] = array(
+    'name' => 'assign all roles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'role_delegation',
+  );
+
   // Exported permission: view moderation history.
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
@@ -614,6 +623,44 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'metatag',
   );
 
+  // Additional site-editor permissions.
+  $additional_permissions = array(
+    'access administration menu' => 'admin_menu',
+    'administer blocks' => 'block',
+    'administer contact forms' => 'contact',
+    'access contextual links' => 'contextual',
+    'bypass file access' => 'file_entity',
+    'administer google analytics' => 'googleanalytics',
+    'administer menu' => 'menu',
+    'use panels in place editing' => 'panels',
+    'unblock expired accounts' => 'password_policy',
+    'force password change' => 'password_policy',
+    'administer url aliases' => 'path',
+    'create url aliases' => 'path',
+    'administer redirects' => 'redirect',
+    'administer modules' => 'system',
+    'administer themes' => 'system',
+    'access administration pages' => 'system',
+    'administer site configuration' => 'system',
+    'access site reports' => 'system',
+    'edit terms in 1' => 'taxonomy',
+    'delete terms in 1' => 'taxonomy',
+    'access user profiles' => 'user',
+    'administer users' => 'user',
+    'assign Content editor role' => 'role_delegation',
+    'assign Content approver role' => 'role_delegation',
+    'assign Site editor role' => 'role_delegation',
+  );
+  foreach ($additional_permissions as $permission => $module) {
+    $permissions[$permission] = array(
+      'name' => $permission,
+      'roles' => array(
+        'administrator' => 'administrator',
+        'Site editor' => 'Site editor',
+      ),
+      'module' => $module,
+    );
+  }
 
   return $permissions;
 }
