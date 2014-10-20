@@ -10,6 +10,7 @@
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
   <property name="build.profile.dir" value="${build.drupal.dir}/profiles/agov" />
+  <property name="build.symlink.source" value="${project.basedir}" />
   <property name="db.username" value="root" />
   <property name="db.password" value="" />
   <property name="db.name" value="agov_test" />
@@ -49,7 +50,7 @@
     <mkdir dir="${build.drupal.dir}/sites/default/files/tmp" />
     <mkdir dir="${build.drupal.dir}/sites/default/private" />
     <chmod file="${build.drupal.dir}/sites/default/private" mode="2775" />
-    <symlink link="${build.drupal.dir}/profiles/agov" target="${project.basedir}" />
+    <symlink link="${build.drupal.dir}/profiles/agov" target="${build.symlink.source}" />
   </target>
 
   <target name="prepare:composer" description="Prepares the composer dependencies" >
