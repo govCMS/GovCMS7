@@ -157,6 +157,8 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 
 projects[image_link_formatter][version] = "1.0"
 
+projects[role_delegation][version] = "1.1"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
