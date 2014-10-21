@@ -6,8 +6,6 @@ defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
 
-projects[admin_menu][version] = "3.0-rc4"
-
 projects[admin_views][version] = "1.2"
 
 projects[bean][version] = "1.5"

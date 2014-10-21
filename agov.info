@@ -48,8 +48,6 @@ dependencies[] = update
 
 dependencies[] = agls
 dependencies[] = admin_views
-dependencies[] = admin_menu
-dependencies[] = admin_menu_toolbar
 dependencies[] = bean
 dependencies[] = bean_admin_ui
 dependencies[] = chosen
