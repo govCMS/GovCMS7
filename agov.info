@@ -100,6 +100,7 @@ dependencies[] = site_map
 dependencies[] = superfish
 dependencies[] = twitter_block
 dependencies[] = username_enumeration_prevention
+dependencies[] = video_filter
 dependencies[] = views
 dependencies[] = views_ui
 dependencies[] = views_bulk_operations

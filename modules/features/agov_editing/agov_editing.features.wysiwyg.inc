@@ -34,12 +34,15 @@ function agov_editing_wysiwyg_default_profiles() {
           'PasteFromWord' => 1,
           'RemoveFormat' => 1,
           'Format' => 1,
+          'Table' => 1,
           'SpellChecker' => 1,
           'Scayt' => 1,
-          'Table' => 1,
         ),
         'linkit' => array(
           'linkit' => 1,
+        ),
+        'video_filter' => array(
+          'video_filter' => 1,
         ),
         'drupal' => array(
           'media' => 1,

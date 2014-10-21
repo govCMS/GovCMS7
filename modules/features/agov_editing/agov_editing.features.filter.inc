@@ -46,15 +46,8 @@ function agov_editing_filter_default_formats() {
     'status' => 1,
     'weight' => 0,
     'filters' => array(
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-        'settings' => array(
-          'filter_url_length' => 72,
-        ),
-      ),
       'filter_html' => array(
-        'weight' => 1,
+        'weight' => -49,
         'status' => 1,
         'settings' => array(
           'allowed_html' => '<a> <em> <strong> <cite> <blockquote> <code> <ul> <ol> <li> <dl> <dt> <dd>',
@@ -62,13 +55,31 @@ function agov_editing_filter_default_formats() {
           'filter_html_nofollow' => 0,
         ),
       ),
+      'video_filter' => array(
+        'weight' => -48,
+        'status' => 1,
+        'settings' => array(
+          'video_filter_width' => 400,
+          'video_filter_height' => 400,
+          'video_filter_autoplay' => 1,
+          'video_filter_related' => 1,
+          'video_filter_html5' => 1,
+        ),
+      ),
+      'filter_url' => array(
+        'weight' => -47,
+        'status' => 1,
+        'settings' => array(
+          'filter_url_length' => 72,
+        ),
+      ),
       'filter_autop' => array(
-        'weight' => 2,
+        'weight' => -44,
         'status' => 1,
         'settings' => array(),
       ),
       'filter_htmlcorrector' => array(
-        'weight' => 10,
+        'weight' => -43,
         'status' => 1,
         'settings' => array(),
       ),
