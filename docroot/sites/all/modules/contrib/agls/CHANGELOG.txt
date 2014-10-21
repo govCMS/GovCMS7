@@ -1,0 +1,24 @@
+AGLS CHANGELOG
+
+7.x-1.0-beta3
+-------------
+- Issue #1970372 by xtfer: Added Support for 'scheme' and 'lang' attributes on
+    AGLS properties
+- Issue #1972280 by xtfer: Added non-mandatory elements
+- Issue #1985690 by xtfer: Fixed Data loss when updating to beta2
+- Fixed incorrect DublinCore overrides
+- Minor attribute ordering change on link tag
+- Minor coding standards revisions
+
+7.x-1.0-beta2
+-------------
+- Issue #1972276 by xtfer: Fixed Missing AGLS schema link in head.
+- Issue #1970332 by xtfer: Fixed AGLS term name's are invalid.
+- Issue #1970330 by xtfer: AGLS metatag theme function is redundant.
+- Issue #1817110 by xtfer, gabriel.achille | rooby: Remove Dublin Core meta tags.
+- Better descriptive text for the AGLS group
+
+
+7.x-1.0-beta1
+-------------
+- Issue #1208366 by rooby, nick_schuch | Bevan: Port to Drupal 7.

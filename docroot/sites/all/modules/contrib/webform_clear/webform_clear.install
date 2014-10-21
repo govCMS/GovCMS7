@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function webform_clear_schema() {
+  $schema['webform_clear'] = array(
+    'description' => t('Webform Clear data'),
+    'fields' => array(
+      'nid' => array(
+        'description' => t('The node id'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'clear_time' => array(
+        'description' => t('How many seconds after a webform submission to clear it (0 = clear immediately; -1 or no entry = do not clear).'),
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Set up new webform_clear table.
+ */
+function webform_clear_update_7200() {
+  $schema['webform_clear'] = array(
+    'description' => t('Webform Clear data'),
+    'fields' => array(
+      'nid' => array(
+        'description' => t('The node id'),
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'clear_time' => array(
+        'description' => t('How many seconds after a webform submission to clear it (0 = clear immediately; -1 or no entry = do not clear).'),
+        'type' => 'int',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  db_create_table('webform_clear', $schema['webform_clear']);
+}
+
+/**
+ * Change the default value to "delete immediately" for people upgrading from
+ * version 1.1 in order to maintain backwards compatibility.
+ */
+function webform_clear_update_7201() {
+  variable_set('webform_clear_default_time', WEBFORM_CLEAR_DELETE_IMMEDIATELY);
+}

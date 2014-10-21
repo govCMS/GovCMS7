@@ -1,0 +1,144 @@
+<?php
+/**
+ * @file
+ * Install file for Metatag Dublin Core
+ */
+
+/**
+ * Update the Dublin Core meta tag values to use the new Extended structure.
+ */
+function metatag_dc_update_7001(&$sandbox) {
+  // Process records by groups of 20 (arbitrary value).
+  // When a group is processed, the batch update engine determines whether it
+  // should continue processing in the same request or provide progress
+  // feedback to the user and wait for the next request.
+  $limit = 20;
+
+  // Use the sandbox at your convenience to store the information needed
+  // to track progression between successive calls to the function.
+  if (!isset($sandbox['progress'])) {
+    // The count of records visited so far.
+    $sandbox['progress'] = 0;
+
+    // Update Node values.
+    $nodes = db_select('metatag', 'm')
+      ->fields('m')
+      ->execute()
+      ->fetchAll();
+    $sandbox['records'] = array();
+    foreach ($nodes as $record) {
+      $sandbox['records'][] = $record;
+    }
+
+    // If there's no data, don't bother with the extra work.
+    if (empty($sandbox['records'])) {
+      watchdog('metatag_dc', 'Update 7001: No nodes need the Metatag values fixed.', array(), WATCHDOG_INFO);
+      if (drupal_is_cli()) {
+        drupal_set_message(t('Update 7001: No nodes need the Metatag values fixed.'));
+      }
+
+      return t('No nodes need the Metatag values fixed.');
+    }
+
+    // Total records that must be visited.
+    $sandbox['max'] = count($sandbox['records']);
+
+    // A place to store messages during the run.
+    $sandbox['messages'] = array();
+
+    // An initial record of the number of records to be updated.
+    watchdog('metatag_dc', 'Update 7001: !count records to update.', array('!count' => $sandbox['max']), WATCHDOG_INFO);
+    if (drupal_is_cli()) {
+      drupal_set_message(t('Update 7001: !count records to update.', array(
+        '!count' => $sandbox['max'],
+      )));
+    }
+
+    // Last record processed.
+    $sandbox['current_record'] = -1;
+
+    // Because a lot of other processing happens on the first iteration, just do
+    // one.
+    $limit = 1;
+  }
+
+  // The for loop will run as normal when ran via update.php, but when ran via
+  // Drush it'll just run 'til it's finished.
+  $increment = 1;
+  if (drupal_is_cli()) {
+    $increment = 0;
+  }
+
+  // Set default values.
+  for ($ctr = 0; $ctr < $limit; $ctr += $increment) {
+    $sandbox['current_record']++;
+    if (empty($sandbox['records'][$sandbox['current_record']])) {
+      break;
+    }
+
+    $sandbox['records'][$sandbox['current_record']]->data = unserialize($sandbox['records'][$sandbox['current_record']]->data);
+
+    // Fix the tag name.
+    $sandbox['records'][$sandbox['current_record']] = _metatag_dc_fix_tag_names($sandbox['records'][$sandbox['current_record']]);
+
+    db_update('metatag')
+      ->fields(array('data' => serialize($sandbox['records'][$sandbox['current_record']]->data)))
+      ->condition('entity_type', 'node')
+      ->condition('entity_id', $sandbox['records'][$sandbox['current_record']]->entity_id)
+      ->execute();
+
+    // Update our progress information.
+    $sandbox['progress']++;
+  }
+
+  // Set the "finished" status, to tell batch engine whether this function
+  // needs to run again. If you set a float, this will indicate the progress of
+  // the batch so the progress bar will update.
+  $sandbox['#finished'] = ($sandbox['progress'] >= $sandbox['max']) ? TRUE : ($sandbox['progress'] / $sandbox['max']);
+
+  if ($sandbox['#finished']) {
+    // Clear all caches so the fixed data will be reloaded.
+    cache_clear_all('*', 'cache_metatag', TRUE);
+
+    // A final log of the number of records that were converted.
+    watchdog('metatag_dc', 'Update 7001: !count records were updated in total.', array('!count' => $sandbox['progress']), WATCHDOG_INFO);
+    if (drupal_is_cli()) {
+      drupal_set_message(t('Update 7001: !count records were updated.', array(
+        '!count' => $sandbox['progress'],
+      )));
+    }
+
+    // hook_update_N() may optionally return a string which will be displayed
+    // to the user.
+    return t('Fixed the Metatag values for @count nodes.', array('@count' => $sandbox['progress']));
+  }
+}
+
+/**
+ * Fix tags.
+ */
+function _metatag_dc_fix_tag_names($record) {
+  if (!empty($record->data)) {
+    foreach ($record->data as $tag_name => $tag_data) {
+      // Determine if this tag specifies a schema.
+      if (strpos($tag_name, '.')) {
+        list($schema, $schema_property) = explode('.', $tag_name);
+      }
+      elseif (strpos($tag_name, ':')) {
+        list($schema, $schema_property) = explode(':', $tag_name);
+      }
+      else {
+        continue;
+      }
+
+      // Correct DCTERMS, which changed case when moved to metatag_dc.
+      if ($schema == 'DCTERMS') {
+        unset($record->data[$tag_name]);
+
+        $record->data[strtolower($tag_name)] = $tag_data;
+      }
+    }
+  }
+
+  return $record;
+}
