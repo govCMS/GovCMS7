@@ -76,6 +76,7 @@ dependencies[] = media_youtube
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
+dependencies[] = navbar
 dependencies[] = node_reference
 dependencies[] = panels
 dependencies[] = panels_ipe
