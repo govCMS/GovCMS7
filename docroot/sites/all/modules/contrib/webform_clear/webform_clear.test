@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * @file
+ * Webform Clear module tests.
+ */
+
+include_once(drupal_get_path('module', 'webform') . '/webform.test');
+
+class WebformClearSubmissionTestCase extends WebformTestCase {
+
+  /**
+   * Implements getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Webform Clear - Submission tests'),
+      'description' => t('Submits sample webforms with different clear settings and checks the database integrity.'),
+      'group' => t('Webform Clear'),
+    );
+  }
+
+  /**
+   * Implements setUp().
+   */
+  function setUp() {
+    parent::setUp();
+    module_enable(array('webform_clear'));
+  }
+
+  /**
+   * Implements tearDown().
+   */
+  function tearDown() {
+    parent::tearDown();
+  }
+
+  /**
+   * Test submissions with different webform clear options.
+   */
+  function testWebformClear() {
+    // Log in as admin user.
+    $this->drupalLogin($this->webform_users['admin']);
+
+    // Do not delete. Check that node still exists before and after cron.
+    variable_set('webform_clear_default_time', WEBFORM_CLEAR_DO_NOT_DELETE);
+    $this->webformReset();
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(0);
+    $this->assertTrue($submission_exists_before, 'Submission exists before cron (do not delete)');
+    $this->assertTrue($submission_exists_after, 'Submission exists after cron (do not delete)');
+
+    // Set up immediate clear. Check that node doesn't exist before or after
+    // cron.
+    variable_set('webform_clear_default_time', 0);
+    $this->webformReset();
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(0);
+    $this->assertFalse($submission_exists_before, 'Submission does not exist before cron (delete immediately)');
+    $this->assertFalse($submission_exists_after, 'Submission does not exist after cron (delete immediately)');
+
+    // Override the deletion by editing webform options:
+
+    // Give admin user the right permission to override default clear times.
+    // Reset cached permissions.
+    $this->checkPermissions(array('set up webform_clear times'), TRUE);
+    $role = $this->drupalCreateRole(array('set up webform_clear times'));
+
+    $this->webform_users['admin']->roles[$role] = $role;
+    user_save($this->webform_users['admin']);
+
+    // Override "immediate clear" default value with "Do not delete".
+    $node = $this->testWebformForm();
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(0, WEBFORM_CLEAR_DO_NOT_DELETE);
+    $this->assertTrue($submission_exists_before, 'Submission exists before cron (do not delete overriding default)');
+    $this->assertTrue($submission_exists_after, 'Submission exists after cron (do not delete overriding default');
+
+    // Make sure we keep the custom option upon consequent edit.
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(0);
+    $this->assertTrue($submission_exists_before, 'Submission still exists before cron (do not delete overriding default, second edit)');
+    $this->assertTrue($submission_exists_after, 'Submission still exists before cron (do not delete overriding default, second edit)');
+
+    // Remove clear times permission from the admin user.
+    unset($this->webform_users['admin']->roles[$role]);
+    user_save($this->webform_users['admin']);
+    // Make sure we still have the custom option.
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(0);
+    $this->assertTrue($submission_exists_before, 'Submission still exists before cron (do not delete overriding default, no admin)');
+    $this->assertTrue($submission_exists_after, 'Submission still exists before cron (do not delete overriding default, no admin)');
+
+    // Set up clear after 1 day. Check that node exists upon submission but
+    // not after 1 day.
+    $this->webformReset();
+    variable_set('webform_clear_default_time', 1*24*60*60);
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(1*24*60*60);
+    $this->assertTrue($submission_exists_before, 'Submission exists before cron (1 day)');
+    $this->assertFalse($submission_exists_after, 'Submission does not exist after cron (1 day)');
+
+    // Check that the submission is not deleted before the 1 day has passed.
+    $this->webformReset();
+    variable_set('webform_clear_default_time', 1*24*60*60);
+    list($submission_exists_before, $submission_exists_after) = $this->webformSubmissionExecute(60);
+    $this->assertTrue($submission_exists_before, 'Submission exists before cron (1 day)');
+    $this->assertTrue($submission_exists_after, 'Submission exists after cron (1 day, cron at 1 hour)');
+  }
+
+  /**
+   * Execute the submission test.
+   *
+   * @param int $add_time
+   *   Seconds to add to the current time (used to fake cron running in the
+   *   future).
+   *
+   * @param int $override_clear_time
+   *   Override default clear time.
+   */
+  function webformSubmissionExecute($add_time = 0, $override_clear_time = NULL) {
+    $path = drupal_get_path('module', 'webform');
+    module_load_include('inc', 'webform', 'includes/webform.submissions');
+    $node = $this->testWebformForm();
+
+    // Set up new clear times.
+    $edit = array();
+    if (isset($override_clear_time)) {
+      $edit = array('clear_time' => $override_clear_time);
+    }
+    $this->drupalPost('node/' . $node->nid . '/webform/configure', $edit, 'Save configuration');
+
+    $submission_values = array();
+    // Visit the node page with the "foo=bar" query, to test %get[] default values.
+    $this->drupalGet('node/' . $node->nid, array('query' => array('foo' => 'bar')));
+    // Submit our test data.
+    $this->drupalPost(NULL, $submission_values, 'Submit', array(), array(), 'webform-client-form-' . $node->nid);
+
+    // Get the SID of the new submission.
+    $matches = array();
+    preg_match('/sid=([0-9]+)/', $this->getUrl(), $matches);
+    $sid = $matches[1];
+
+    // Check if submission exists.
+    $submission_exists_before = !empty(webform_get_submission($node->nid, $sid, TRUE));
+    _webform_clear_current_time($add_time);
+    // Run the Webform Clear cron.
+    webform_clear_cron();
+    // Reset the time to add.
+    _webform_clear_current_time(0);
+    $submission_exists_after = !empty(webform_get_submission($node->nid, $sid, TRUE));
+
+    return array($submission_exists_before, $submission_exists_after);
+  }
+}

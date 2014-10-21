@@ -1,0 +1,213 @@
+<?php
+
+/**
+ * @file
+ * Removes Webform submissions from the database after they have been emailed.
+ *
+ * This can happen either never, immediately, or after a specified period. A
+ * default value for the clearing period can be set on a system-wide basis.
+ * This value can be overridden on a per-Webform basis.
+ */
+
+/**
+ * Defines the value of the the "Do not delete" option in the "Clear time"
+ * dropdown.
+ */
+define('WEBFORM_CLEAR_DO_NOT_DELETE', -1);
+define('WEBFORM_CLEAR_DELETE_IMMEDIATELY', 0);
+
+/**
+ * Implements hook_permission().
+ */
+function webform_clear_permission() {
+  return array(
+    'set webform_clear times' => array(
+      'title' => t('Set Webform submission storage periods'),
+      'description' => t('Allows the user to set the Webform submission storage period for any webform the user can edit, overriding the site wide default.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function webform_clear_menu() {
+  $items = array();
+  $items['admin/config/content/webform_clear'] = array(
+    'title' => 'Webform Clear',
+    'description' => 'Set up default Webform submission storage.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('webform_clear_admin_settings'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Form callback for "admin/config/content/webform_clear"
+ */
+function webform_clear_admin_settings($form, &$form_state) {
+  $form = array();
+  $form['webform_clear_default_time'] = array(
+    '#type' => 'select',
+    '#title' => t('Webform submission storage period (default)'),
+    '#description' => t('<p>Select the site wide default for how long to store Webform submissions in the database.</p>
+                         <p>This default value will apply only to any future Webforms, and can be overridden on a per-form basis by users with the permission "Set Webform submission storage periods".</p>
+                         <p>Please note any uploaded files associated to a submission will also be deleted. Email notifications will not be affected.</p>'),
+    '#options' => _webform_clear_get_clear_time_options(),
+    '#default_value' => variable_get('webform_clear_default_time', WEBFORM_CLEAR_DO_NOT_DELETE),
+  );
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function webform_clear_node_delete($node) {
+  db_delete('webform_clear')->condition('nid', $node->nid)->execute();
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function webform_clear_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    // Configuration form for the individual webforms.
+    case 'webform_configure_form':
+      $clear_time = db_query("SELECT clear_time FROM {webform_clear} WHERE nid = :nid", array(':nid' => $form['nid']['#value']))->fetchField();
+      if ($clear_time === FALSE) {
+        $default = variable_get('webform_clear_default_time', WEBFORM_CLEAR_DO_NOT_DELETE);
+      }
+      else {
+        $default = $clear_time;
+      }
+      $form['#submit'][] = 'webform_clear_configure_save';
+      $options = _webform_clear_get_clear_time_options();
+      $form['submission']['clear_time'] = array(
+        '#type' => 'select',
+        '#title' => t('Webform submission storage period'),
+        '#description' => t('Select for how long to store submissions for this Webform in the database. This setting will affect both past and future submissions for this webform. Please note any uploaded files associated to a submission will also be deleted. Email notifications will not be affected.'),
+        '#options' => $options,
+        '#default_value' => $default,
+      );
+      if (!user_access('set webform_clear times')) {
+        $form['submission']['clear_time']['#disabled'] = TRUE;
+        $form['submission']['clear_time']['#value'] = $default;
+      }
+      break;
+
+    case strstr($form_id, 'webform_client_form'):
+      $form['#submit'][] = 'webform_clear_delete_result';
+      break;
+  }
+}
+
+/**
+ * Saves webform configuration.
+ */
+function webform_clear_configure_save($form, &$form_state) {
+  $clear_time = $form_state['values']['clear_time'];
+  $nid = $form_state['values']['nid'];
+
+  // Delete entry from db
+  db_delete('webform_clear')->condition('nid', $nid)->execute();
+
+  // Add if selected
+  db_insert('webform_clear')->fields(array('nid' => $nid, 'clear_time' => $clear_time))->execute();
+}
+
+/**
+ * Deletes the webform submission immediately if selected (including files).
+ */
+function webform_clear_delete_result($form, &$form_state) {
+  $sid = $form_state['values']['details']['sid'];
+  $is_new = $form_state['values']['details']['is_new'];
+  $nid = $form_state['values']['details']['nid'];
+
+  $clear = db_query("SELECT clear_time FROM {webform_clear} WHERE nid = :nid", array(
+    ':nid' => $nid,
+  ))->fetchField();
+
+//  $clear = db_query("SELECT COUNT(nid) FROM {webform_clear} WHERE nid = :nid AND clear_time = :delete_immediately", array(
+//    ':nid' => $nid,
+//    ':delete_immediately' => WEBFORM_CLEAR_DELETE_IMMEDIATELY,
+//  ))->fetchField();
+
+  // If there's no setting for this webform use the site wide default.
+  if ($clear === false) {
+    $clear = variable_get('webform_clear_default_time', WEBFORM_CLEAR_DO_NOT_DELETE);
+  }
+
+  if ($sid && $is_new && $clear == WEBFORM_CLEAR_DELETE_IMMEDIATELY) {
+    _webform_clear_delete($nid, $sid);
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function webform_clear_cron() {
+  $submissions = db_query("SELECT w.submitted, w.sid, w.nid, wc.clear_time FROM {webform_submissions} w INNER JOIN {webform_clear} wc ON wc.nid = w.nid");
+  foreach ($submissions as $submission) {
+    if ($submission->clear_time == WEBFORM_CLEAR_DO_NOT_DELETE) {
+      continue;
+    }
+    $delete_on = $submission->submitted + $submission->clear_time;
+    $time = _webform_clear_current_time();
+    if ($time > $delete_on) {
+      _webform_clear_delete($submission->nid, $submission->sid);
+    }
+  }
+}
+
+/**
+ * Gets the current time.
+ *
+ * If an argument is passed, the defined time will be added to the current time
+ * in subsequent calls to this function. This functionality is only used in
+ * automated tests, normally this function equals time().
+ *
+ * @param int $add_time
+ *   The number of seconds to add to the current time.
+ *
+ * @return int
+ *   The current timestamp.
+ */
+function _webform_clear_current_time($add_time = NULL) {
+  static $saved_add_time = 0;
+  if (isset($add_time)) {
+    $saved_add_time = (int) $add_time;
+  }
+  return time() + $saved_add_time;
+}
+
+/**
+ * Deletes a specific submission.
+ *
+ * @param int $nid Node ID
+ * @param int $sid Webform submission ID
+ */
+function _webform_clear_delete($nid, $sid) {
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $node = node_load($nid);
+  $submission = webform_get_submission($nid, $sid);
+  webform_submission_delete($node, $submission);
+}
+
+/**
+ * Gets the "Clear time" dropdown options.
+ *
+ * @return array
+ *   Options array
+ */
+function _webform_clear_get_clear_time_options() {
+  return array(
+    WEBFORM_CLEAR_DO_NOT_DELETE      => t('Do not delete submissions'),
+    WEBFORM_CLEAR_DELETE_IMMEDIATELY => t('Delete submissions immediately'),
+    1*24*60*60                       => t('Delete submissions after 1 day'),
+    7*24*60*60                       => t('Delete submissions after @count days', array('@count' => 7)),
+    30*24*60*60                      => t('Delete submissions after @count days', array('@count' => 30)),
+  );
+}
