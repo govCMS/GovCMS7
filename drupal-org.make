@@ -99,6 +99,11 @@ projects[scheduler_workbench][version] = "1.2"
 
 projects[search404][version] = "1.3"
 
+projects[search_api][version] = "1.13"
+projects[search_api_db][version] = "1.4"
+projects[search_api_page][version] = "1.1"
+projects[facetapi][version] = "1.5"
+
 projects[seckit][version] = "1.9"
 
 projects[site_map][version] = "1.0"
