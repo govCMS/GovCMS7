@@ -94,8 +94,8 @@
   </target>
 
   <target name="validate:phpmd" description="Find code complexity issues">
-    <exec command="bin/phpmd ${src.custom.modules} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
-    <exec command="bin/phpmd ${src.custom.themes} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="bin/phpmd ${src.custom.modules} text phpmd.xml --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="bin/phpmd ${src.custom.themes} text phpmd.xml --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
   <target name="validate:make" description="Verify the drush makefile is valid for d.o">
