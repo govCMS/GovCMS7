@@ -1,6 +1,0 @@
-name = Node Freshness
-description = Provides a views filter that determines if a views content is fresh.
-core = 7.x
-package = aGov core
-
-files[] = views/includes/node_freshness_handler_filter.inc

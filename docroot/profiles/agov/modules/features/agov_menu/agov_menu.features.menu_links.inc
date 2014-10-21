@@ -44,40 +44,6 @@ function agov_menu_menu_default_menu_links() {
     'weight' => 0,
     'customized' => 0,
   );
-  // Exported menu link: main-menu_news--media:news-media
-  $menu_links['main-menu_news--media:news-media'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'news-media',
-    'router_path' => 'news-media',
-    'link_title' => 'News & Media',
-    'options' => array(
-      'identifier' => 'main-menu_news--media:news-media',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -46,
-    'customized' => 0,
-  );
-  // Exported menu link: main-menu_publications:publications
-  $menu_links['main-menu_publications:publications'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'publications',
-    'router_path' => 'publications',
-    'link_title' => 'Publications',
-    'options' => array(
-      'identifier' => 'main-menu_publications:publications',
-    ),
-    'module' => 'system',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -47,
-    'customized' => 0,
-  );
   // Exported menu link: menu-footer-sub-menu_sitemap-and-feeds:sitemap
   $menu_links['menu-footer-sub-menu_sitemap-and-feeds:sitemap'] = array(
     'menu_name' => 'menu-footer-sub-menu',
@@ -156,8 +122,6 @@ function agov_menu_menu_default_menu_links() {
   t('About Us');
   t('Australia.gov.au');
   t('Contact');
-  t('News & Media');
-  t('Publications');
   t('Site map and Feeds');
   t('Sitemap and Feeds');
   t('Smartraveller');

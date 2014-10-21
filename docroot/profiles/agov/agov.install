@@ -14,7 +14,7 @@
  */
 define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_zen');
-define('AGOV_DEFAULT_THEME', 'agov_zen');
+define('AGOV_DEFAULT_THEME', 'agov_barton');
 define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
@@ -24,8 +24,6 @@ define('AGOV_ADMIN_ROLE_ID', '3');
  * Perform actions to set up the site for this profile.
  */
 function agov_install() {
-
-  ini_set('max_execution_time', '300');
 
   // Ensure the beans feature is reverted.
   $revert = array('agov_beans');
@@ -74,6 +72,17 @@ function agov_install() {
   agov_cleanup();
 }
 
+
+
+/**
+ * Returns a list of the themes that aGov supports.
+ */
+function agov_supported_themes() {
+  return array(
+    AGOV_DEFAULT_THEME,
+  );
+}
+
 /**
  * Create basic roles.
  */
@@ -92,6 +101,13 @@ function _agov_create_basic_roles_perms() {
   // Content approver.
   $roles['Content approver'] = array(
     'name' => 'Content approver',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Site editor.
+  $roles['Site editor'] = array(
+    'name' => 'Site editor',
     'weight' => $weight++,
     'permissions' => $base_permissions,
   );
@@ -351,7 +367,7 @@ function _agov_date_formats() {
  */
 function _agov_default_blocks() {
   // Get all the aGov supported themes.
-  $themes = agov_core_theme_info();
+  $themes = agov_supported_themes();
 
   // Set default system block in primary theme.
   agov_core_insert_block('system', 'main', $themes, 'content', -12);
@@ -393,7 +409,7 @@ function _agov_default_blocks() {
  */
 function _agov_twitter_block() {
   // Get all the aGov supported themes.
-  $themes = agov_core_theme_info();
+  $themes = agov_supported_themes();
 
   $data = array(
     "theme" => "",
@@ -454,12 +470,22 @@ function _agov_default_variables() {
     // Don't disable page caching.
     'honeypot_time_limit' => "0",
 
-
     'xmlsitemap_settings_node_page' => array(
       'status' => '1',
       'priority' => '0.5',
     ),
 
+    // Set jquery update to use Google CDN.
+    'jquery_update_jquery_cdn' => 'google',
+
+    // Set webform_clear default time.
+    'webform_clear_default_time' => 0,
+
+    // Turn off theme rebuilds.
+    'theme_agov_zen_settings' => array('zen_rebuild_registry' => 0),
+
+    // Force user to change password on login.
+    'password_policy_new_login_change' => 1,
   );
 
   // Enable xmlsitemap includes for content types.
@@ -495,6 +521,7 @@ function _agov_default_variables() {
     '*' => 3,
   );
   variable_set('crumbs_weights', $crumbs_weights);
+  variable_set('crumbs_show_current_page', 1);
 }
 
 /**
@@ -542,7 +569,7 @@ function _agov_default_beans() {
       ),
     );
     // Get all the aGov supported themes.
-    $themes = agov_core_theme_info();
+    $themes = agov_supported_themes();
     agov_core_save_bean('basic_content', 'Footer copyright', 'The copyright message', '', $fields);
     agov_core_insert_block('bean', 'footer-copyright', $themes, 'footer', 4);
   }
@@ -566,7 +593,6 @@ function _agov_default_news_beans() {
   // Add menu links to main menu.
   $menus = array(
     'current-news' => 'news-media/news',
-    'archived-news' => 'news-media/news-archive',
     'media-releases' => 'news-media/media-releases',
     'events' => 'news-media/events',
     'blog' => 'news-media/blog',
@@ -578,7 +604,6 @@ function _agov_default_news_beans() {
   $images = array(
     'news-media-intro' => 'news-media.jpg',
     'current-news' => 'news-archives.jpg',
-    'archived-news' => 'news-archives.jpg',
     'media-releases' => 'media-releases.jpg',
     'events' => 'events.jpg',
     'blog' => 'news-media.jpg',
@@ -622,8 +647,8 @@ function _agov_default_news_beans() {
 
   // Current News block.
     'current-news' => array(
-      'label' => $t('Current News'),
-      'title' => $t('Current News'),
+      'label' => $t('News'),
+      'title' => $t('News'),
       'description' => $t('Provides a "Current News" bean for the News & Media page.'),
       'type' => 'image_and_text',
       'view_mode' => 'default',
@@ -647,40 +672,6 @@ function _agov_default_news_beans() {
         'field_link_to' => array(
           '0' => array(
             'url' => $menus['current-news'],
-            'title' => '',
-            'attributes' => '',
-          ),
-        ),
-      ),
-    ),
-
-  // Archived News block.
-    'archived-news' => array(
-      'label' => $t('Archived News'),
-      'title' => $t('Archived News'),
-      'description' => $t('Provides a "Archived News" bean for the News & Media page.'),
-      'type' => 'image_and_text',
-      'view_mode' => 'default',
-      'fields' => array(
-      // Image field.
-        'field_bean_image' => array(
-          '0' => array(
-            'fid' => $files['archived-news']->fid,
-            'alt' => t('Archived News'),
-            'title' => t('Archived News'),
-          ),
-        ),
-      // Text field.
-        'field_bean_text' => array(
-          '0' => array(
-            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
-            'format' => 'rich_text',
-          ),
-        ),
-      // Link to field.
-        'field_link_to' => array(
-          '0' => array(
-            'url' => $menus['archived-news'],
             'title' => '',
             'attributes' => '',
           ),

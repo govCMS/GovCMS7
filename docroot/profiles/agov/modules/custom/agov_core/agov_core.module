@@ -249,17 +249,6 @@ function agov_core_theme_info() {
  * Implements hook_form_alter().
  */
 function agov_core_form_alter(&$form, &$form_alter, $form_id) {
-  // Check if this is the node_freshness config form.
-  if ($form_id == 'node_freshness_config') {
-    $form['agov_help'] = array(
-      '#markup' => '<p>' . t('Node freshness is a general value available across the site for governing when content is considered "stale" or archiveable.') . '</p>',
-      '#weight' => '-50',
-    );
-    if (module_exists('agov_news')) {
-      $form['agov_help']['#markup'] .= '<p>' . t('Currently, this value determines when News items are moved to the Archived section.') . '</p>';
-    }
-  }
-
   // Install Canberra timezone.
   if ($form_id == 'system_regional_settings') {
     $timezone_form = $form['timezone']['date_default_timezone'];
@@ -314,14 +303,13 @@ function agov_core_entity_info_alter(&$entity_info) {
  * Implements hook_metatag_config_default_alter().
  */
 function agov_metatag_config_default_alter(&$configs) {
-  $configs['global']->config['DCTERMS.creator'] = array('value' => '[site:name]');
-  $configs['global']->config['DCTERMS.date'] = array('value' => '[current-date:custom:Y-m-d\TH:iP]');
-  $configs['global']->config['DCTERMS.description'] = array('value' => '[site:slogan]');
-  $configs['global']->config['DCTERMS.language'] = array('value' => 'en');
-  $configs['global']->config['DCTERMS.publisher'] = array('value' => '[site:name]');
-  $configs['global']->config['DCTERMS.subject'] = array('value' => '[site:slogan]');
-  $configs['global']->config['DCTERMS.type'] = array('value' => 'other');
-  $configs['global']->config['DCTERMS.type'] = array('value' => 'other');
+  $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
+  $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.language'] = array('item' => array('value' => 'en'));
+  $configs['global']->config['dcterms.publisher'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.subject'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.type'] = array('item' => array('value' => 'other'));
   $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + aGov (http://agov.com.au)');
-  $configs['node']->config['DCTERMS.language'] = array('value' => 'en');
+  $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
 }

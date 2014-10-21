@@ -36,6 +36,7 @@ function agov_editing_wysiwyg_default_profiles() {
           'Format' => 1,
           'SpellChecker' => 1,
           'Scayt' => 1,
+          'Table' => 1,
         ),
         'linkit' => array(
           'linkit' => 1,
