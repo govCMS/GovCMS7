@@ -74,6 +74,8 @@ projects[menu_trail_by_path][version] = "2.0"
 projects[metatag][version] = "1.4"
 projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 
+projects[navbar][version] = "1.4"
+
 projects[references][version] = "2.1"
 
 projects[panels][version] = "3.4"
@@ -188,3 +190,15 @@ libraries[ckeditor][download][type] = "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
+
+libraries[underscore][download][type] = get
+libraries[underscore][download][url] = https://github.com/jashkenas/underscore/archive/1.5.2.zip
+libraries[underscore][type] = "library"
+
+libraries[backbone][download][type] = get
+libraries[backbone][download][url] = https://github.com/jashkenas/backbone/archive/1.1.0.zip
+libraries[backbone][type] = "library"
+
+libraries[modernizr][download][type] = "get"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
+libraries[modernizr][type] = "library"
