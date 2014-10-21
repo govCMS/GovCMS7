@@ -1,0 +1,20 @@
+.text-resize {
+  @include inline-list;
+  a {
+    @include hide-text;
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    background-image: image-url('font-resize-bg.png');
+    background-repeat: no-repeat;
+    &.font-small { }
+    &.font-large { background-position: 0 -27px; }
+    &.reset { background-position: 0 -54px; }
+  }
+}
+
+/* Text-resize body text */
+body.large-fonts {
+  @include adjust-font-size-to(16px);
+  @include reset-baseline();
+}

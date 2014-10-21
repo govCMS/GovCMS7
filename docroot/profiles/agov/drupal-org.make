@@ -53,6 +53,8 @@ projects[libraries][version] = "2.1"
 
 projects[link][version] = "1.1"
 
+projects[linkchecker][version] = "1.2"
+
 projects[linkit][version] = "3.1"
 
 projects[media][version] = "2.0-alpha1"
@@ -69,7 +71,8 @@ projects[menu_block][version] = "2.3"
 
 projects[menu_trail_by_path][version] = "2.0"
 
-projects[metatag][version] = "1.0-beta7"
+projects[metatag][version] = "1.4"
+projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 
 projects[references][version] = "2.1"
 
@@ -96,6 +99,8 @@ projects[scheduler_workbench][version] = "1.2"
 
 projects[search404][version] = "1.3"
 
+projects[seckit][version] = "1.9"
+
 projects[site_map][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
 
@@ -119,7 +124,9 @@ projects[views][version] = "3.8"
 
 projects[views_bulk_operations][version] = "3.1"
 
-projects[webform][version] = "3.20"
+projects[webform][version] = "4.1"
+
+projects[webform_clear][version] = "2.0"
 
 projects[workbench][version] = "1.2"
 
@@ -150,6 +157,8 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 
 projects[image_link_formatter][version] = "1.0"
 
+projects[role_delegation][version] = "1.1"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
@@ -160,8 +169,7 @@ projects[login_security][version] = "1.4"
 projects[zen][version] = "5.5"
 
 ; PreviousNext modules
-projects[agls][version] = "1.0-beta1"
-projects[agls][patch][] = "https://drupal.org/files/1998728-agls-node-summary-3.patch"
+projects[agls][version] = "1.0-beta3"
 
 ; Libraries
 

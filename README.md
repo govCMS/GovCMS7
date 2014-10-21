@@ -2,9 +2,17 @@
 
 ## Installation
 
-The following are once off setup instuctions. If you have performed these on other projects you will not need to run them again.
+### Project installation
 
+From project root, run the following commands in this order:
 
+* ```composer install --prefer-dist```
+* ```vagrant up```
+* ```phing drupal:install```
+
+### General installation
+
+The following are once off setup instructions. If you have performed these on other projects you will not need to run them again.
 
 ### Composer
 

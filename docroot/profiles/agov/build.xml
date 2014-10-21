@@ -6,10 +6,11 @@
   <property name="codestyle.extensions" value="php,module,inc,install,test,profile,theme" />
   <property name="src.profile.dir" value="profiles/agov" />
   <property name="src.custom.modules" value="modules/custom" />
-  <property name="src.custom.themes" value="themes/agov_zen" />
+  <property name="src.custom.themes" value="themes/agov" />
   <property name="build.dir" value="build" />
   <property name="build.drupal.dir" value="../drupal" />
   <property name="build.profile.dir" value="${build.drupal.dir}/profiles/agov" />
+  <property name="build.symlink.source" value="${project.basedir}" />
   <property name="db.username" value="root" />
   <property name="db.password" value="" />
   <property name="db.name" value="agov_test" />
@@ -18,9 +19,11 @@
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all, login" description="Build the project" />
 
-  <target name="build-fast" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make or tests" />
+  <target name="build-fast" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make. Good for clean installs without re-downloading components" />
 
-  <target name="build-fast-no-tests" depends="validate:phpcs, validate:phpmd, site-install, login" description="Build the project without make or tests" />
+  <target name="build-fast-no-tests" depends="validate:phpcs, validate:phpmd, site-install, login" description="Build the project without make or tests. Good for fast re-installs." />
+
+  <target name="build-no-install" depends="clean:all, prepare:all, validate:all, make" description="Builds the project without running the installer. Good for manual installer testing." />
 
   <target name="clean:all" description="Clean the build environment">
     <phingcall target="fix-perms" />
@@ -47,7 +50,7 @@
     <mkdir dir="${build.drupal.dir}/sites/default/files/tmp" />
     <mkdir dir="${build.drupal.dir}/sites/default/private" />
     <chmod file="${build.drupal.dir}/sites/default/private" mode="2775" />
-    <symlink link="${build.drupal.dir}/profiles/agov" target="${project.basedir}" />
+    <symlink link="${build.drupal.dir}/profiles/agov" target="${build.symlink.source}" />
   </target>
 
   <target name="prepare:composer" description="Prepares the composer dependencies" >
@@ -60,11 +63,15 @@
 
   <target name="validate:phpcs" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server.">
     <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.modules}" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.drupal} --extensions=${codestyle.extensions} ${src.custom.themes}" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
   <target name="validate:phpsa"
           description="phpcs-security-audit is a set of PHP_CodeSniffer rules that finds flaws or weaknesses related to security in PHP and its popular CMS or frameworks.">
     <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.security} --extensions=${codestyle.extensions} ${src.custom.modules}"
+          logoutput="true"
+          checkreturn="false" />
+    <exec command="${project.basedir}/bin/phpcs --standard=${codestyle.standard.security} --extensions=${codestyle.extensions} ${src.custom.themes}"
           logoutput="true"
           checkreturn="false" />
   </target>
@@ -87,7 +94,8 @@
   </target>
 
   <target name="validate:phpmd" description="Find code complexity issues">
-    <exec command="bin/phpmd ${src.custom.modules} text cleancode,codesize,unusedcode,naming --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="bin/phpmd ${src.custom.modules} text phpmd.xml --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="bin/phpmd ${src.custom.themes} text phpmd.xml --exclude '*views.inc'" logoutput="true" passthru="true" checkreturn="true" />
   </target>
 
   <target name="validate:make" description="Verify the drush makefile is valid for d.o">
@@ -116,7 +124,9 @@
   </target>
 
   <target name="test:behat" depends="behat:init" description="Run behat tests">
+    <exec command="drush -r ${build.drupal.dir} vset -y password_policy_new_login_change 0" />
     <exec command="${project.basedir}/bin/behat --format pretty --ansi" logoutput="true" passthru="true" checkreturn="true" />
+    <exec command="drush -r ${build.drupal.dir} vset -y password_policy_new_login_change 1" />
   </target>
 
   <target name="login" description="Login to the site">
@@ -138,6 +148,10 @@
           description="Compile all sass files for production">
     <exec dir="${src.custom.themes}" command="bundle exec compass compile -e production --force"
           passthru="true" />
+  </target>
+
+  <target name="composer update">
+    <exec command="composer update --prefer-dist" logoutput="true" passthru="true"/>
   </target>
 
 </project>

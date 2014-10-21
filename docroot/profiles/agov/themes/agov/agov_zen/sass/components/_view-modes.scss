@@ -1,0 +1,16 @@
+.node-teaser .field-type-image {
+  float: left;
+  margin-right: 10px;
+}
+
+/* Headings */
+.node-teaser h3 {
+  @include adjust-font-size-to(14px);
+  margin: rhythm(1/4) 0 rhythm(1/2);
+  a { color: $color-highlight; }
+
+}
+
+.node-teaser p {
+  margin: 0;
+}
