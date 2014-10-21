@@ -167,6 +167,7 @@ projects[login_security][version] = "1.4"
 
 ; Themes
 projects[zen][version] = "5.5"
+projects[shiny][version] = "1.6"
 
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta3"
