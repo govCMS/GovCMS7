@@ -10,9 +10,9 @@
  */
 
 // When installing, use the white logo.
-if (drupal_installation_attempted() == TRUE) {
+if (drupal_installation_attempted() == TRUE) :
   $logo = '/profiles/agov/themes/agov_zen/logo-alt.png';
-}
+endif;
 
 ?><!DOCTYPE html>
 <!--[if IEMobile 7]><html class="iem7" <?php print $html_attributes; ?>><![endif]-->
