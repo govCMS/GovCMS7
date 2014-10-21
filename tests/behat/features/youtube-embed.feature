@@ -9,5 +9,4 @@ Feature: Embed YouTube videos in content
     And I enter "Test" for "Title"
     And I enter "[video:https://www.youtube.com/watch?v=ktCgVopf7D0]" for "Body"
     And I press "Save"
-    Then show last response
     Then I should see an "iframe.video-filter" element
