@@ -10,7 +10,6 @@
 
 /**
  * Implements hook_event_log_handlers().
- * @return array
  */
 function event_log_node_alt_event_log_handlers() {
   // Node event log handler.
@@ -38,7 +37,7 @@ function event_log_node_alt_insert($node) {
     'operation' => 'insert',
     'description' => t('%type: %title', array(
       '%type' => $node->type,
-      '%title' => $node->title
+      '%title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
@@ -54,7 +53,7 @@ function event_log_node_alt_update($node) {
     'operation' => 'update',
     'description' => t('%type: %title', array(
       '%type' => $node->type,
-      '%title' => $node->title
+      '%title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
@@ -70,7 +69,7 @@ function event_log_node_alt_delete($node) {
     'operation' => 'delete',
     'description' => t('%type: %title', array(
       '%type' => $node->type,
-      '%title' => $node->title
+      '%title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
