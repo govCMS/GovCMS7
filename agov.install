@@ -188,14 +188,14 @@ function _agov_default_formats_and_permissions() {
         'weight' => -50,
         'status' => 1,
         'settings' => array(
-          'valid_elements' => 'a[href|target<_blank|title|style|class|name|id],
-div[style|id|class|align<center?justify?left?right],
+          'valid_elements' => 'a[href|target<_blank|title|class|name|id],
+div[id|class|align<center?justify?left?right],
 br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
-span[style],p[style|class],
-h1[style|class],h2[style|class],h3[style|class],h4[style|class],h5[style|class],h6[style|class],
-img[!src|title|alt|style|width|height|class|hspace|vspace],
+span,p[class],
+h2[class],h3[class],h4[class],h5[class],h6[class],
+img[!src|title|alt|width|height|class|hspace|vspace],
 table,tr,thead,td[colspan|rowspan|headers|class|id],th[colspan|rowspan|class|headers|id],tbody,caption,sup,sub,
-@[style|class]
+@[class]
 video',
           'allow_comments' => 1,
           'nofollow_policy' => 'disabled',
