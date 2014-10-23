@@ -147,8 +147,6 @@ projects[defaultcontent][patch][] = "https://drupal.org/files/1611928-fix-alt.pa
 projects[defaultcontent][patch][] = "https://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "https://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[search_config][version] = "1.0"
-
 projects[securepages][version] = "1.0-beta1"
 
 projects[uuid][version] = "1.0-alpha4"
