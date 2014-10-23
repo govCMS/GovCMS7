@@ -42,7 +42,7 @@ dependencies[] = image
 dependencies[] = list
 dependencies[] = rdf
 dependencies[] = update
-
+dependencies[] = overlay
 
 ; Contrib
 
