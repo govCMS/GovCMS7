@@ -42,14 +42,12 @@ dependencies[] = image
 dependencies[] = list
 dependencies[] = rdf
 dependencies[] = update
-
+dependencies[] = overlay
 
 ; Contrib
 
 dependencies[] = agls
 dependencies[] = admin_views
-dependencies[] = admin_menu
-dependencies[] = admin_menu_toolbar
 dependencies[] = bean
 dependencies[] = bean_admin_ui
 dependencies[] = chosen
@@ -78,6 +76,7 @@ dependencies[] = media_youtube
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
+dependencies[] = navbar
 dependencies[] = node_reference
 dependencies[] = panels
 dependencies[] = panels_ipe

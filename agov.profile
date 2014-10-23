@@ -47,3 +47,12 @@ function agov_block_info_alter(&$blocks, $theme, $code_blocks) {
   $blocks['superfish'][1]['title'] = '<none>';
   $blocks['system']['user-menu']['title'] = '<none>';
 }
+
+/**
+ * Implements hook_system_info_alter().
+ */
+function agov_system_info_alter(&$info, $file, $type) {
+  if (isset($info['project']) && $info['project'] == 'agov' && arg(0) == 'admin' && arg(1) == 'modules') {
+    $info['dependencies'] = array();
+  }
+}

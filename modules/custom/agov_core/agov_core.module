@@ -302,7 +302,7 @@ function agov_core_entity_info_alter(&$entity_info) {
 /**
  * Implements hook_metatag_config_default_alter().
  */
-function agov_metatag_config_default_alter(&$configs) {
+function agov_core_metatag_config_default_alter(&$configs) {
   $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
   $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
   $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));
