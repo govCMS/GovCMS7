@@ -118,8 +118,6 @@ function agov_core_create_bean($bean_type, $label, $description = '', $title = '
  *   The block delta
  * @param string $theme
  *   (optional) The theme to insert into. Defaults to the current theme
- * @param string $title
- *   (optional) The title. Defaults to empty. Specify '<none>' to hide.
  * @param int|string $region
  *   (optional) The region to insert the block into. Defaults to
  *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
@@ -130,12 +128,14 @@ function agov_core_create_bean($bean_type, $label, $description = '', $title = '
  *   (optional) The visibility of the block. Defaults to 0.
  * @param string $pages
  *   (optional) The pages to show the block on. Defaults to all.
+ * @param string $title
+ *   (optional) The title. Defaults to empty. Specify '<none>' to hide.
  *
  * @throws Exception
  * @return bool
  *   TRUE if the block is inserted, or FALSE on an error.
  */
-function agov_core_insert_block($module, $delta, $theme, $title = '', $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '') {
+function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '', $title = '') {
   if (!isset($theme)) {
     $theme = variable_get('theme_default', NULL);
     if (!isset($theme) || is_null($theme)) {
