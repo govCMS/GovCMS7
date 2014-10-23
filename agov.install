@@ -373,29 +373,27 @@ function _agov_default_blocks() {
   $themes = agov_supported_themes();
 
   // Set default system block in primary theme.
-  agov_core_insert_block('system', 'main', $themes, 'content', -12);
-  agov_core_insert_block('system', 'help', $themes, 'content', -14);
-  agov_core_insert_block('superfish', '1', $themes, 'navigation');
-  agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer', 3);
+  agov_core_insert_block('system', 'main', $themes, '', 'content', -12);
+  agov_core_insert_block('system', 'help', $themes, '', 'content', -14);
+  agov_core_insert_block('superfish', '1', $themes, '', 'navigation');
+  agov_core_insert_block('menu', 'menu-footer-sub-menu', $themes, '', 'footer', 3);
 
   // Set aGov blocks.
-  agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header');
-  // @todo: SearchAPI
-  agov_core_insert_block('search', 'form', $themes, 'header');
-  agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
-  agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, 'footer', 2);
-  agov_core_insert_block('views', 'slideshow-block', $themes, 'highlighted', 0, 1, '<front>');
-  agov_core_insert_block('views', 'footer_teaser-block', $themes, 'footer', 1);
+  agov_core_insert_block('agov_text_resize', 'text_resize', $themes, '', 'header');
+  agov_core_insert_block('workbench', 'block', $themes, '', 'content', -14);
+  agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, '', 'footer', 2);
+  agov_core_insert_block('views', 'slideshow-block', $themes, '', 'highlighted', 0, 1, '<front>');
+  agov_core_insert_block('views', 'footer_teaser-block', $themes, '', 'footer', 1);
 
   // Set aGov sidebar blocks.
-  agov_core_insert_block('menu_block', 'agov_menu_block-sidebar', $themes, 'sidebar_second', -50);
-  agov_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar_second', -48);
-  agov_core_insert_block('agov_social_links', 'services', $themes, 'sidebar_second', -47);
+  agov_core_insert_block('menu_block', 'agov_menu_block-sidebar', $themes, '', 'sidebar_second', -50);
+  agov_core_insert_block('menu', 'menu-quick-links', $themes, '', 'sidebar_second', -48);
+  agov_core_insert_block('agov_social_links', 'services', $themes, '', 'sidebar_second', -47);
 
   // Set some blocks in the admin theme.
-  agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, 'content');
-  agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, 'help');
-  agov_core_insert_block('agov_core', 'update_notification', AGOV_DEFAULT_ADMIN_THEME, 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
+  agov_core_insert_block('system', 'main', AGOV_DEFAULT_ADMIN_THEME, '', 'content');
+  agov_core_insert_block('system', 'help', AGOV_DEFAULT_ADMIN_THEME, '', 'help');
+  agov_core_insert_block('agov_core', 'update_notification', AGOV_DEFAULT_ADMIN_THEME, '', 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
 
   // Ensure Wcag validate block only appears on correct pages.
   db_update('block')->fields(array(
@@ -442,7 +440,7 @@ function _agov_twitter_block() {
     ))
     ->execute();
 
-  agov_core_insert_block('twitter_block', $bid, $themes, 'sidebar_second', -49);
+  agov_core_insert_block('twitter_block', $bid, $themes, '', 'sidebar_second', -49);
 
 }
 
@@ -575,7 +573,7 @@ function _agov_default_beans() {
     // Get all the aGov supported themes.
     $themes = agov_supported_themes();
     agov_core_save_bean('basic_content', 'Footer copyright', 'The copyright message', '', $fields);
-    agov_core_insert_block('bean', 'footer-copyright', $themes, 'footer', 4);
+    agov_core_insert_block('bean', 'footer-copyright', $themes, '', 'footer', 4);
   }
   else {
     drupal_set_message('aGov Core was not available. Some of your blocks could not be created.', 'error');
