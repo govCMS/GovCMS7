@@ -1,0 +1,1093 @@
+<?php
+
+/**
+ * @file
+ * Provides OpenID support for Acquia Site Factory.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function acsf_openid_menu() {
+  $items = array();
+
+  $items['acsf-openid-login'] = array(
+    'title' => 'Site login',
+    'page callback' => 'acsf_openid_site_login_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'acsf_openid.pages.inc',
+  );
+  $items['acsf-openid-factory/login'] = array(
+    'title' => 'Factory login',
+    'page callback' => 'acsf_openid_factory_login_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'acsf_openid.pages.inc',
+  );
+  $items['acsf-openid-factory/register'] = array(
+    'title' => 'Factory registration',
+    'page callback' => 'acsf_openid_factory_login_page',
+    'page arguments' => array('register'),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'file' => 'acsf_openid.pages.inc',
+  );
+  $items['acsf-openid-factory/reset'] = array(
+    'title' => 'Factory reset',
+    'page callback' => 'acsf_openid_factory_redirection_page',
+    'page arguments' => array('reset'),
+    'access callback' => 'user_is_anonymous',
+    'type' => MENU_CALLBACK,
+    'file' => 'acsf_openid.pages.inc',
+  );
+  $items['acsf-openid-factory/validate'] = array(
+    'title' => 'Factory validate',
+    'page callback' => 'acsf_openid_factory_redirection_page',
+    'page arguments' => array('validate'),
+    'access callback' => 'user_is_anonymous',
+    'type' => MENU_CALLBACK,
+    'file' => 'acsf_openid.pages.inc',
+  );
+
+  $items['admin/people/invite'] = array(
+    'title' => 'Invite people',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('acsf_openid_admin_invite_people_form'),
+    'access arguments' => array('administer users'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'acsf_openid.admin.inc',
+  );
+
+  $items['admin/config/user-interface/acsf-openid'] = array(
+    'title' => 'Acquia Cloud Site Factory OpenID overlay',
+    'description' => 'Configure OpenID settings, including overlays, global sign out, and registration.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('acsf_openid_admin_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'acsf_openid.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function acsf_openid_menu_alter(&$items) {
+  // OpenID customizations should not be running on a local environment.
+  if (function_exists('is_acquia_host') && !is_acquia_host()) {
+    return;
+  }
+
+  // Replace the final OpenID authentication page so we can provide faster
+  // authentication, ability to register invited users when site registration is
+  // closed and to allow content managers who registered locally to be still
+  // able to log in from the factory.
+  if (isset($items['openid/authenticate']['page callback'])) {
+    $items['openid/authenticate']['page callback'] = 'acsf_openid_authentication_page';
+    $items['openid/authenticate']['file'] = 'acsf_openid.pages.inc';
+    $items['openid/authenticate']['file path'] = drupal_get_path('module', 'acsf_openid');
+  }
+
+  if (variable_get('acsf_openid_global_logout', 1)) {
+    // Alter the logout callback so we can redirect to the factory to log out
+    // there as well.
+    $items['user/logout']['page callback'] = 'acsf_openid_custom_user_logout';
+    $items['user/logout']['file'] = 'acsf_openid.pages.inc';
+    $items['user/logout']['file path'] = drupal_get_path('module', 'acsf_openid');
+  }
+
+  if (variable_get('acsf_openid_registration_handling', 1)) {
+    // The user/register page must be overridden since it is used inside the
+    // OpenID login flow for users who are registering that way.
+    $items['user/register']['page callback'] = 'acsf_openid_user_register_page';
+    $items['user/register']['access callback'] = 'acsf_openid_user_register_access';
+    unset($items['user/register']['page arguments']);
+    $items['user/register']['file'] = 'acsf_openid.pages.inc';
+    $items['user/register']['file path'] = drupal_get_path('module', 'acsf_openid');
+  }
+
+  // Prevent access to the user OpenID setup page as factory is the only
+  // provider.
+  $items['user/%user/openid']['access callback'] = FALSE;
+
+  if (acsf_openid_force_openid()) {
+    // Disallow creation of local users.
+    $items['admin/people/create']['access callback'] = FALSE;
+    // Disallow access to local password reset URLs for non-user-1 requests.
+    $items['user/reset/%/%/%']['access callback'] = 'acsf_openid_user_reset_access';
+
+    foreach (array('user/login', 'user/password', 'user/register') as $key) {
+      // Override to be callbacks instead of tabs. This way the pages will not
+      // be visible, but if links point to them, we still expose the same output
+      // on them with explanation on the centralized login system.
+      $items[$key]['type'] = MENU_CALLBACK;
+
+      // See above; user/register is handled separately.
+      if ($key != 'user/register') {
+        $items[$key]['title'] = 'Log in or sign up';
+        $items[$key]['page callback'] = 'acsf_openid_login_message';
+        unset($items[$key]['page arguments']);
+        $items[$key]['file'] = 'acsf_openid.pages.inc';
+        $items[$key]['file path'] = drupal_get_path('module', 'acsf_openid');
+      }
+    }
+
+    // By default anonymous users will see the login page on the user path, and
+    // since in this case the visitors are forced to log in via OpenID, we can
+    // add our flavour to the login page.
+    $items['user']['page callback'] = 'acsf_openid_user_page';
+    $items['user']['file'] = 'acsf_openid.pages.inc';
+    $items['user']['file path'] = drupal_get_path('module', 'acsf_openid');
+  }
+  else {
+    $access_callbacks['admin/people/invite'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * Hide the tabs on the user registration form if we encounter it in the middle
+ * of an OpenID login.
+ */
+function acsf_openid_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  if (variable_get('acsf_openid_registration_handling', 1) && $root_path == 'user/register' && acsf_openid_user_registration_response() && isset($data['tabs'][0]['output'])) {
+    $data['tabs'][0]['output']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_menu_site_status_alter().
+ *
+ * Allow access to openid/authenticate even if the site is in offline mode.
+ */
+function acsf_openid_menu_site_status_alter(&$menu_site_status, $path) {
+  if ($menu_site_status == MENU_SITE_OFFLINE && user_is_anonymous()) {
+    if (preg_match('!^acsf-openid-login(/|$)!', $path) || preg_match('!^acsf-openid-factory(/|$)!', $path)) {
+      $menu_site_status = MENU_SITE_ONLINE;
+    }
+  }
+}
+
+/**
+ * Determines access to the password reset link when OpenID login is forced.
+ *
+ * When everyone needs to login / register through the factory then noone should
+ * use the site's password reset functionality, with the exception of uid 1.
+ *
+ * @return bool
+ *   TRUE if the current password reset is for user 1, FALSE otherwise.
+ */
+function acsf_openid_user_reset_access() {
+  return arg(2) == '1';
+}
+
+/**
+ * Implements hook_init().
+ */
+function acsf_openid_init() {
+  if (drupal_is_cli()) {
+    return;
+  }
+
+  // Set P3P headers to get IE and Safari make logins for custom domains work.
+  drupal_add_http_header('P3P', 'CP="CURa ADMa OUR UNI INT STA PRE COM NAV NOI COR ONL"');
+
+  if (module_exists('overlay')) {
+    // Add some additional weight so that this loads after overlay.js since we
+    // are overriding one of their functions.
+    drupal_add_js(drupal_get_path('module', 'acsf_openid') . '/acsf_openid.overlay.js', array('weight' => 10));
+
+    // Check for both the direct render value and indirectly to the destination
+    // page. Some page flows, like the password request or initial login make
+    // it extremely hard to pass on the render value reliably in other ways, so
+    // we infer that the destination is about to show in the overlay, we should
+    // show the registartion page too.
+    if ((isset($_GET['render']) && ($_GET['render'] == 'overlay')) || (isset($_GET['destination']) && strpos($_GET['destination'], 'render=overlay'))) {
+      // Force the overlay to open when requested (e.g., within the OpenID
+      // login flow), even in situations where the overlay module would not
+      // open it; this includes users without the 'access overlay' permission
+      // and sites that have configured the overlay to be disabled.
+      if (!user_access('access overlay') || !variable_get('acsf_openid_overlay_for_admin', 1)) {
+        overlay_set_mode('child');
+        // When we turn the overlay on here, we grab complete control of the
+        // overlay initialization process; i.e., the code in overlay_init()
+        // will not run. So we have to duplicate similar steps here (in
+        // particular, redirecting to the parent when the page shouldn't be
+        // rendered inside the overlay).
+        if (!path_is_admin($_GET['q'])) {
+          acsf_openid_close_overlay($_GET['q']);
+        }
+      }
+    }
+    elseif (user_is_anonymous()) {
+      // Only force overlay parent access on anonymous users,otherwise the
+      // 'access overlay' permission handles access.
+      overlay_set_mode('parent');
+    }
+
+    if (!variable_get('acsf_openid_overlay_for_admin', 1) && user_access('access overlay')) {
+      // Disable the overlay for this page view if requested.
+      overlay_set_mode('suppress');
+    }
+
+    // Restore messages we saved earlier for display. We carry over user
+    // rejection messages this way when the overlay is closed, since the page
+    // redirect happening there does not allow for any communication.
+    if (!empty($_SESSION['acsf_openid_messages'])) {
+      foreach ($_SESSION['acsf_openid_messages'] as $type => $messages) {
+        foreach ($messages as $message) {
+          drupal_set_message($message, $type);
+        }
+      }
+      unset($_SESSION['acsf_openid_messages']);
+    }
+  }
+}
+
+/**
+ * Requests to reload the parent page and close the overlay.
+ */
+function acsf_openid_close_overlay($redirect = NULL) {
+  if (module_exists('overlay')) {
+    overlay_request_page_refresh();
+    overlay_close_dialog($redirect);
+  }
+}
+
+/**
+ * Implements hook_page_alter().
+ */
+function acsf_openid_page_alter(&$page) {
+  if (module_exists('overlay') && overlay_get_mode() == 'child' && !user_access('access overlay') && !path_is_admin($_GET['q'])) {
+    // If we forced the overlay on the user but the path is not admin, we need
+    // to close the overlay. We do this so late to be able to save the messages
+    // for output later.
+    if (!empty($_SESSION['messages'])) {
+      $_SESSION['acsf_openid_messages'] = $_SESSION['messages'];
+    }
+    acsf_openid_close_overlay($_GET['q']);
+  }
+}
+
+/**
+ * Implements hook_admin_paths().
+ */
+function acsf_openid_admin_paths() {
+  return array(
+    'acsf-openid-factory/*' => (bool) variable_get('acsf_openid_overlay_for_login', 1),
+    'openid/authenticate' => (bool) variable_get('acsf_openid_overlay_for_login', 1),
+    'acsf-openid-login' => (bool) variable_get('acsf_openid_overlay_for_login', 1),
+    'user/register' => acsf_openid_overlay_for_registration(),
+  );
+}
+
+/**
+ * Decides if the OpenID registration should happen in the overlay.
+ */
+function acsf_openid_overlay_for_registration() {
+  return acsf_openid_user_registration_response() && module_exists('overlay') && variable_get('acsf_openid_overlay_for_registration', 1);
+}
+
+/**
+ * Implements hook_openid().
+ */
+function acsf_openid_openid($op, $request = array()) {
+  if ($op == 'request') {
+    $mapping = acsf_openid_ax_uri_mapping();
+    $short_names = array();
+    // Add the fields we'd like to see returned if available.
+    foreach ($mapping as $ax_uri => $local_ax_field) {
+      $request['openid.ax.type.' . $local_ax_field[0]] = $ax_uri;
+      $short_names[] = $local_ax_field[0];
+    }
+    $request['openid.ax.if_available'] = implode(',', $short_names);
+
+    $site_name = acsf_openid_site_name_get();
+    if (!empty($site_name)) {
+      $request['acsf_openid.sitename'] = $site_name;
+    }
+
+    // Allow other modules to interact with the request data. Unfortunately, a
+    // simple implementation of hook_openid would just rewrite fields in
+    // $request instead of appending to it.
+    drupal_alter('acsf_openid_request', $request);
+  }
+  return $request;
+}
+
+/**
+ * Returns the site's name to be showed on OpenID related pages.
+ */
+function acsf_openid_site_name_get() {
+  $site_name = variable_get('site_name');
+  $theme_name = variable_get('theme_default');
+  if (!theme_get_setting('toggle_name', $theme_name)) {
+    $site_name = '';
+  }
+  drupal_alter('acsf_openid_site_name', $site_name);
+  return $site_name;
+}
+
+/**
+ * Returns the site's name or the domain depending on the visibility settings.
+ */
+function acsf_openid_site_name_or_domain() {
+  $site_name = acsf_openid_site_name_get();
+  if (!$site_name) {
+    $domain = $GLOBALS['base_url'];
+    $colon_position = strpos($domain, '://');
+    if ($colon_position !== FALSE) {
+      $domain = substr($domain, $colon_position + 3);
+    }
+    $site_name = $domain;
+  }
+  return $site_name;
+}
+
+/**
+ * Returns the mapping of Attribute Exchange namespace URIs for profile fields.
+ *
+ * Predefined URIs are documented at http://www.axschema.org/types/
+ */
+function acsf_openid_ax_uri_mapping() {
+  return array(
+    // Remote picture URI of the user. The handling code fetches the image and
+    // saves it as a local user picture.
+    'http://axschema.org/media/image/default' => array('picture', 'account'),
+    // Date of the picture's last modification, so we can avoid downloading it.
+    'http://drupalgardens.com/axschema/picture_time' => array('picture_time'),
+  );
+}
+
+/**
+ * Implements hook_openid_response().
+ */
+function acsf_openid_openid_response($response, $account) {
+  // Update the $account with new data received in OpenID Attribute Exchange.
+  // We do that in this hook because we want it to happen on every successful
+  // OpenID login and user registration. However, for unsuccessful registrations
+  // that are later completed manually, this hook doesn't get called; that case
+  // is handled in acsf_openid_user_register_submit().
+  acsf_openid_update_ax_data($response, $account);
+
+  // Clear our session data if there was an OpenID registration in progress,
+  // since the registration is now complete.
+  acsf_openid_user_registration_response_clear();
+
+  // Close the overlay if it was open and the login has completed.
+  if (module_exists('overlay') && overlay_get_mode() == 'child') {
+    $goto = drupal_get_destination();
+    acsf_openid_close_overlay($goto['destination']);
+  }
+}
+
+/**
+ * Updates a user account with OpenID Attribute Exchange data.
+ *
+ * @param array $response
+ *   The OpenID response array.
+ * @param object $account
+ *   The user account object to be updated.
+ *
+ * @see user_account_form_validate()
+ */
+function acsf_openid_update_ax_data(array $response, $account) {
+  $mapping = acsf_openid_ax_uri_mapping();
+  $edit = array();
+  $picture_uri = '';
+  $picture_time = 0;
+
+  foreach ($mapping as $ax_uri => $local_ax_field) {
+    // The response has values for some fields we requested. We assume the
+    // values are from a trusted source, so we can save them right away. Our
+    // implementation uses the pattern openid.ax.type.{property_name} which then
+    // gets responded with openid.ax.value.{property_name} for single value
+    // responses.
+    if (isset($response['openid.ax.value.' . $local_ax_field[0]])) {
+      // Found the corresponding single value for this item.
+      switch ($local_ax_field[0]) {
+        case 'picture':
+          $picture_uri = $response['openid.ax.value.picture'];
+          break;
+
+        case 'picture_time':
+          $picture_time = $response['openid.ax.value.picture_time'];
+          break;
+
+        default:
+          // Other fields in user categories.
+          $edit[$local_ax_field[1]][$local_ax_field[0]] = $response['openid.ax.value.' . $local_ax_field[0]];
+          break;
+      }
+    }
+  }
+
+  // Carry over nickname and email from OpenID response. Validation is copied
+  // from similar (not reusable) code in user.module.
+  if (!empty($response['openid.sreg.email'])) {
+    if (db_select('users')->fields('users', array('uid'))->condition('uid', $account->uid, '<>')->condition('mail', db_like($response['openid.sreg.email']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
+      drupal_set_message(t('The e-mail address %email is already taken on this site, so your e-mail address was not updated.', array('%email' => $response['openid.sreg.email'])), 'warning');
+    }
+    else {
+      $edit['account']['mail'] = $response['openid.sreg.email'];
+    }
+  }
+  if (!empty($response['openid.sreg.nickname'])) {
+    if (db_select('users')->fields('users', array('uid'))->condition('uid', $account->uid, '<>')->condition('name', db_like($response['openid.sreg.nickname']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
+      drupal_set_message(t('The name %name is already taken on this site, so your username was not updated.', array('%name' => $response['openid.sreg.nickname'])), 'warning');
+    }
+    else {
+      $edit['account']['name'] = $response['openid.sreg.nickname'];
+    }
+  }
+
+  if ((empty($account->picture) && !empty($picture_time)) || (is_object($account->picture) && ($picture_time > $account->picture->timestamp))) {
+    // Either first or updated user profile image. Download remote image, save
+    // locally and set user picture to this image.
+    // @TODO config page or do the image download in cron.
+    $image_response = drupal_http_request($picture_uri, array('timeout' => acsf_vget('acsf_openid_image_sync_timeout', 3)));
+    if ($image_response->code == 200 && !empty($image_response->data)) {
+      $image_file = file_save_data($image_response->data);
+      if (!empty($image_file)) {
+        // Make the file non-permanent, so we can get it moved and renamed as a
+        // proper user picture on the righ path. (which happens inside
+        // user_save()).
+        $image_file->status = 0;
+        $image_file = file_save($image_file);
+        $edit['account']['picture'] = $image_file;
+      }
+    }
+    // Keep the original picture if something went wrong.
+    if (empty($edit['account']['picture'])) {
+      $edit['account']['picture'] = $account->picture;
+    }
+  }
+  elseif (!empty($account->picture) && empty($picture_time)) {
+    // We have a local picture, but picture was removed on server. Delete!
+    $edit['account']['picture'] = new stdClass();
+  }
+  else {
+    // Finally, keep whatever we had so far. If we don't specifically
+    // include this, the picture is removed in user_save(), until the issue in
+    // http://drupal.org/node/935592 is fixed.
+    $edit['account']['picture'] = $account->picture;
+  }
+
+  // Yes, we need to save the fields in each category in an individual
+  // user_save() call. This is how the API supports saving user data.
+  foreach ($edit as $category => $fields) {
+    user_save($account, $fields, $category);
+  }
+}
+
+/**
+ * Returns (and stores) the current OpenID response for a user registration.
+ *
+ * When a new user is being registered via OpenID, the OpenID module stores the
+ * response from the server in a session variable, but deletes it before we are
+ * done with it. This function is therefore used to persist this data for a
+ * longer time, in our own custom session variable.
+ *
+ * @param mixed $response
+ *   (optional) To store the OpenID response, pass it in via this parameter.
+ *
+ * @return array
+ *   The current stored OpenID response, or an empty array if there is none
+ *   (i.e., if we are not currently in an OpenID registration flow).
+ *
+ * @see acsf_openid_user_registration_response_clear()
+ */
+function acsf_openid_user_registration_response($response = NULL) {
+  // We need to use a session variable here, rather than drupal_static(), since
+  // we require access to the response over multiple page requests (e.g., if a
+  // user registering via OpenID is redirected to the site-specific user
+  // registration form in order to fill out profile fields).
+  if (isset($response)) {
+    $_SESSION['acsf_openid_user_registration_response'] = $response;
+  }
+  return isset($_SESSION['acsf_openid_user_registration_response']) ? $_SESSION['acsf_openid_user_registration_response'] : array();
+}
+
+/**
+ * Clears the currently stored OpenID response for user registration.
+ *
+ * @see acsf_openid_user_registration_response()
+ */
+function acsf_openid_user_registration_response_clear() {
+  unset($_SESSION['acsf_openid_user_registration_response']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function acsf_openid_form_user_register_form_alter(&$form, $form_state) {
+  // When a new user is being registered via OpenID, the OpenID module stores
+  // the response from the server in a session variable for use in
+  // hook_form_USER_REGISTER_FORM_alter(), but then deletes it before we are
+  // done with it, therefore, we need to persist the data here.
+  if (isset($_SESSION['openid']['response'])) {
+    acsf_openid_user_registration_response($_SESSION['openid']['response']);
+
+    // Retitle submit button.
+    $form['actions']['submit']['#value'] = t('Finish');
+  }
+
+  $form['#validate'][] = 'acsf_openid_user_register_validate';
+  $form['#submit'][] = 'acsf_openid_user_register_submit';
+}
+
+/**
+ * Form validation handler for user_register_form().
+ *
+ * If an OpenID registration is in progress and this is a programmatic form
+ * submission from openid_authentication(), make sure the registration fails if
+ * there are *any* user profile fields that are supposed to appear on the user
+ * registration form and that the user (who is not logged in yet) has access to
+ * edit. This ensures that the user will be redirected to user/register after
+ * the OpenID process is done and be given a chance to fill these fields out
+ * before their account is created. (Note: The core OpenID module will do this
+ * automatically if there are *required* profile fields without a default value,
+ * because then the programmatic form submission will fail due to the missing
+ * fields. But here, we want it to happen in other cases too, so that the
+ * "Display on user registration form" checkbox on user fields actually has
+ * meaning in the context of the Site Factory OpenID process.)
+ *
+ * @see acsf_openid_form_user_register_form_alter()
+ * @see user_register_form()
+ */
+function acsf_openid_user_register_validate($form, &$form_state) {
+  if (!empty($form_state['programmed']) && acsf_openid_user_registration_response()) {
+    foreach (field_info_instances('user', 'user') as $instance) {
+      if (!empty($instance['settings']['user_register_form'])) {
+        $field_name = $instance['field_name'];
+        $field = field_info_field($field_name);
+        if (field_access('edit', $field, 'user', $form['#user'])) {
+          // We don't need or want a user facing message here, so just set an
+          // error on the entire form to make it fail validation.
+          form_error($form);
+          break;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Form submission handler for user_register_form().
+ *
+ * If the user registration form is submitted via the UI while an OpenID
+ * registration is in process, that can only be because the original,
+ * programmatic form submission in openid_authentication() failed (e.g., due to
+ * the site having user profile fields that needed to be filled out), and the
+ * user has now come back and completed the registration manually. Under this
+ * scenario, we need to do the steps here that we would have done for a normal
+ * OpenID registration in acsf_openid_openid_response(), since the OpenID module
+ * does not invoke hook_openid_response() unless the OpenID login itself was
+ * successful.
+ *
+ * @see acsf_openid_form_user_register_form_alter()
+ * @see user_register_form()
+ */
+function acsf_openid_user_register_submit($form, &$form_state) {
+  if (empty($form_state['programmed']) && ($response = acsf_openid_user_registration_response())) {
+    acsf_openid_update_ax_data($response, $form_state['user']);
+    // The OpenID registration is now complete, so clear our session data.
+    acsf_openid_user_registration_response_clear();
+  }
+}
+
+/**
+ * Access callback: determines access to the user registration page.
+ *
+ * Same as user_register_access(), but when we are in the middle of an OpenID
+ * registration, allow access to user/register to users who have been invited
+ * (even if the site doesn't normally allow user registrations), since they
+ * might need it to fill out profile fields.
+ *
+ * @see user_register_access()
+ * @see acsf_openid_menu_alter()
+ */
+function acsf_openid_user_register_access() {
+  if (user_register_access()) {
+    return TRUE;
+  }
+  elseif ($response = acsf_openid_user_registration_response()) {
+    return user_is_anonymous() && acsf_openid_registration_has_invite($response);
+  }
+  else {
+    return FALSE;
+  }
+}
+
+/**
+ * Determines if a user account is registered with the OpenID system.
+ *
+ * @param object $account
+ *   The user account to check.
+ *
+ * @return bool
+ *   TRUE if the account is registered via OpenID, FALSE otherwise.
+ */
+function acsf_openid_registered_with_openid($account) {
+  return (bool) db_query_range("SELECT 1 FROM {authmap} WHERE module = 'openid' AND uid = :uid", 0, 1, array(':uid' => $account->uid))->fetchField();
+}
+
+/**
+ * Temporarily allows registrations during the OpenID flow for invited users.
+ *
+ * If the site does not allow open registrations, calling this function will
+ * temporarily allow them for the remainder of the current page request if the
+ * user who is trying to register was invited by a site owner.
+ *
+ * @param array $response
+ *   The OpenID response array, e.g. as returned by openid_complete().
+ */
+function acsf_openid_allow_open_user_registrations_if_user_was_invited(array $response) {
+  $user_register_setting = variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+  if ($user_register_setting != USER_REGISTER_VISITORS && acsf_openid_registration_has_invite($response)) {
+    // Allow other modules to modify the user registration setting.
+    $user_registration_setting = USER_REGISTER_VISITORS;
+    drupal_alter('acsf_openid_user_registration_setting', $user_registration_setting);
+    $GLOBALS['conf']['user_register'] = $user_registration_setting;
+  }
+}
+
+/**
+ * Determines if the OpenID registration refers to an admin invited user.
+ *
+ * @param array $response
+ *   The OpenID response array, e.g. as returned by e.g. openid_complete().
+ *
+ * @return bool
+ *   TRUE if the e-mail address associated with the OpenID response has an
+ *   invitation to join the site, FALSE otherwise.
+ */
+function acsf_openid_registration_has_invite(array $response) {
+  module_load_include('inc', 'openid');
+  $sreg_values = openid_extract_namespace($response, OPENID_NS_SREG, 'sreg');
+  return !empty($sreg_values['email']) && acsf_openid_user_invite_exists($sreg_values['email']);
+}
+
+/**
+ * Determines if an email address has been invited to join the site.
+ *
+ * @param string $email
+ *   The email address to check.
+ *
+ * @return bool
+ *   TRUE if the email address has an invitation to join the site, FALSE
+ *   otherwise.
+ */
+function acsf_openid_user_invite_exists($email) {
+  return (bool) db_query_range('SELECT 1 FROM {acsf_openid_invited_users} WHERE mail = :mail', 0, 1, array(':mail' => $email))->fetchField();
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function acsf_openid_user_insert($edit, $account, $category) {
+  // When a user account is created, delete any invitations that exist for
+  // the associated e-mail address, since they are no longer needed.
+  acsf_openid_user_invite_delete($account->mail);
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function acsf_openid_user_delete($account) {
+  // When a user account is deleted, delete any outstanding invitations for
+  // the associated e-mail address. On sites that don't allow open user
+  // registrations, this prevents the user from registering again unless they
+  // are specifically invited again.
+  acsf_openid_user_invite_delete($account->mail);
+}
+
+/**
+ * Deletes an invited email address from the database.
+ *
+ * @param string $email
+ *   The email address to delete.
+ *
+ * @return bool
+ *   TRUE if the e-mail was deleted; FALSE if it did not need to be deleted
+ *   because there was no current invitation for it.
+ */
+function acsf_openid_user_invite_delete($email) {
+  return (bool) db_delete('acsf_openid_invited_users')
+    ->condition('mail', $email)
+    ->execute();
+}
+
+/**
+ * Determines if the visitors are forced to register / login with OpenID.
+ */
+function acsf_openid_force_openid() {
+  return !variable_get('acsf_local_user_accounts', FALSE);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function acsf_openid_form_user_profile_form_alter(&$form, &$form_state) {
+  $factory_name = acsf_factory_name();
+  $factory_url = acsf_factory_url();
+  $account = $form['#user'];
+  if (!empty($form['account']['pass']) && acsf_openid_force_openid()) {
+    $form['account']['gardens_id'] = array(
+      '#title' => t('Username and e-mail address'),
+      '#type' => 'item',
+      '#markup' => check_plain($account->name) . '<br />' . check_plain($account->mail),
+      '#description' => t('Change these values, your password and your avatar on <a href="@url">the !service_name_long server</a>.', array(
+        '@url' => $factory_url . '/user',
+        '!service_name_long' => $factory_name,
+      )),
+      '#weight' => -20,
+    );
+    $form['account']['name']['#access'] = FALSE;
+    $form['account']['mail']['#access'] = FALSE;
+    $form['account']['pass']['#access'] = FALSE;
+    $form['account']['current_pass']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * We want to restrict access to the OpenID parts on the login form since we
+ * are only using the underlying tech, not the form itself. Unfortunately the
+ * parts in question are getting added in a similar hook_form_FORM_ID_alter()
+ * function so we do not necessarily get called after they have been added, so
+ * have to add an #after_build hook to get the job done.
+ */
+function acsf_openid_form_user_login_alter(&$form, &$form_state) {
+  if (!isset($form['#after_build'])) {
+    $form['#after_build'] = array();
+  }
+  $form['#after_build'][] = 'acsf_openid_user_login_after_build';
+}
+
+/**
+ * Hides OpenID additions on the user login form.
+ *
+ * @see acsf_openid_form_user_login_alter()
+ */
+function acsf_openid_user_login_after_build(&$form, $form_state) {
+  if (isset($form['openid_links'])) {
+    $form['openid_links']['#access'] = FALSE;
+    $form['openid_identifier']['#access'] = FALSE;
+    $form['openid.return_to']['#access'] = FALSE;
+  }
+  return $form;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Remove the user login block from sight even if OpenID logins aren't forced
+ * on, since this block has an ugly "Log in using OpenID" link that we don't
+ * want, and our custom login block is used as a replacement for it anyway.
+ */
+function acsf_openid_form_block_admin_display_form_alter(&$form, $form_state) {
+  unset($form['blocks']['user_login']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Remove the user login block from sight even if OpenID logins aren't forced
+ * on, since this block has an ugly "Log in using OpenID" link that we don't
+ * want, and our custom login block is used as a replacement for it anyway.
+ */
+function acsf_openid_form_user_login_block_alter(&$form, $form_state) {
+  $form['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function acsf_openid_block_info() {
+  $factory_name = acsf_factory_name();
+
+  return array(
+    'login' => array(
+      'info' => acsf_openid_force_openid() ? t('!service_name_long login', array('!service_name_long' => $factory_name)) : t('User login'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function acsf_openid_block_view($delta = '') {
+  if ($delta == 'login' && user_is_anonymous()) {
+    // For factory OpenID sites, point users to the acsf-openid-factory/ path.
+    // For local login sites without dialog_user, use regular user/ links.
+    if (acsf_openid_force_openid()) {
+      $login_path = 'acsf-openid-factory/login';
+      $register_path = 'acsf-openid-factory/register';
+    }
+    else {
+      $login_path = 'user/login';
+      $register_path = 'user/register';
+    }
+    return array(
+      'content' => t('<a href="@log-in-url">Log in</a> or <a href="@sign-up-url">Sign up</a>', array(
+        '@log-in-url' => url($login_path, array('query' => user_login_destination())),
+        '@sign-up-url' => url($register_path, array('query' => user_login_destination())),
+      )),
+    );
+  }
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function acsf_openid_url_outbound_alter(&$path, $options, $original_path) {
+  // Alter user login, register and password links to go directly to
+  // gardener/login or gardener/register, thus eliminating an unneeded user
+  // interaction. Don't do this for user/register when a OpenID user
+  // registration is in process, since OpenID needs to redirect to the actual
+  // user registration page if there are profile fields that need to be filled
+  // out.
+  if (acsf_openid_force_openid()) {
+    if ($path == 'user/login' || $path == 'user/password') {
+      $path = 'acsf-openid-factory/login';
+    }
+    elseif ($path == 'user/register' && !acsf_openid_user_registration_response()) {
+      $path = 'acsf-openid-factory/register';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Disallows user from choosing user related forms for Mollom protection on
+ * sites where users are required to log in via OpenID, because the user
+ * registers / requests their password from the factory.
+ */
+function acsf_openid_form_mollom_admin_configure_form_alter(&$form, &$form_state) {
+  if (acsf_openid_force_openid()) {
+    $forbidden_forms = array('user_pass', 'user_register_form');
+    $form['mollom']['form_id']['#options'] = array_diff_key($form['mollom']['form_id']['#options'], array_fill_keys($forbidden_forms, 1));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function acsf_openid_form_user_admin_settings_alter(&$form, &$form_state) {
+  // Do not allow the email verification setting to be changed. (We require it
+  // to be off if the site is forcing OpenID logins and on otherwise.)
+  $form['registration_cancellation']['user_email_verification']['#access'] = FALSE;
+
+  if (acsf_openid_force_openid()) {
+    // When users are forced to use OpenID then password reset happens on the
+    // factory.
+    $form['email_password_reset']['#access'] = FALSE;
+
+    // Admins are not allowed to create accounts directly (only invite users to
+    // create them).
+    $form['email_admin_created']['#title'] = t('Welcome (new user invited by administrator)');
+    $form['email_admin_created']['#description'] = t('Edit the e-mail message sent to users invited to join the site by an administrator.');
+    $form['registration_cancellation']['user_register']['#options'][USER_REGISTER_ADMINISTRATORS_ONLY] = t('Only people invited by an administrator');
+  }
+}
+
+/**
+ * Implements hook_user_cancel_methods_alter().
+ */
+function acsf_openid_user_cancel_methods_alter(&$methods) {
+  $factory_name = acsf_factory_name();
+  $factory_url = acsf_factory_url();
+  // If the site requires all users to log in via OpenID then instead of
+  // deleting the user accounts rather remove them. (In theory for sites where
+  // OpenID is optional we should make this change contextually, since some
+  // user accounts will still have an OpenID account on the factory. However,
+  // there doesn't seem to be any good way to get this contextual information;
+  // plus, we can reasonably assume that people who are using OpenID accounts
+  // on these sites are advanced users such as administrators and therefore
+  // already understand what's going on.)
+  if (acsf_openid_force_openid()) {
+    $methods['user_cancel_delete']['title'] = t("Remove account and the account's content from this site.");
+    $methods['user_cancel_delete']['description'] = t('Your account will be removed from this site and all account information deleted. All of your content on this site will also be deleted. The account is not removed from @service_domain or any other !service_name_long sites.', array(
+      '!service_name_long' => $factory_name,
+      '@service_domain' => str_replace(array('http://', 'https://'), '', $factory_url),
+    ));
+    $methods['user_cancel_reassign']['title'] = t("Remove account from this site. The account's content will be owned by the <em class=\"placeholder\">Anonymous</em> user.");
+    $methods['user_cancel_reassign']['description'] = t('Your account will be removed from this site and all account information deleted. All of your content on this site will be assigned to the <em class="placeholder">Anonymous</em> user. The account is not removed from @service_domain or any other !service_name_long sites.', array(
+      '!service_name_long' => $factory_name,
+      '@service_domain' => str_replace(array('http://', 'https://'), '', $factory_url),
+    ));
+  }
+  // If the site does allow local user logins, at least change the text to say
+  // "from this site" to reduce some of the above confusion.
+  else {
+    $methods['user_cancel_delete']['title'] = t('Delete the account and its content from this site.');
+    $methods['user_cancel_reassign']['title'] = t('Delete the account from this site and make its content belong to the %anonymous-name user.', array('%anonymous-name' => variable_get('anonymous', t('Anonymous'))));
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function acsf_openid_token_info() {
+  $token_info = array();
+
+  $factory_name = acsf_factory_name();
+
+  if (acsf_openid_force_openid()) {
+    $description = t('The URL of a !service_name_long registration overlay window appearing above the front page of the site.', array('!service_name_long' => $factory_name));
+  }
+  else {
+    $description = t("The URL of the site's registration page.");
+  }
+
+  $token_info['tokens']['site']['register-url'] = array(
+    'name' => t('Registration URL'),
+    'description' => $description,
+  );
+
+  $token_info['tokens']['site']['service-name'] = array(
+    'name' => t('Service name'),
+    'description' => t('The name of the Site Factory.'),
+  );
+
+  $token_info['tokens']['site']['factory-account-url'] = array(
+    'name' => t('Site Factory account URL'),
+    'description' => t('The URL of the account page on Site Factory.'),
+  );
+
+  return $token_info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function acsf_openid_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+
+  if ($type == 'site') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'register-url':
+          $url_options = array('absolute' => TRUE);
+          if (isset($options['language'])) {
+            $url_options['language'] = $options['language'];
+          }
+
+          if (acsf_openid_force_openid()) {
+            $register_link = 'acsf-openid-factory/register';
+            if (module_exists('overlay') && variable_get('acsf_openid_overlay_for_login', 1)) {
+              $url_options['fragment'] = 'overlay=' . $register_link;
+              $register_link = '<front>';
+            }
+          }
+          else {
+            $register_link = 'user/register';
+          }
+
+          $replacements[$original] = url($register_link, $url_options);
+          break;
+
+        case 'service-name':
+          $service_name = acsf_factory_name();
+          $replacements[$original] = $service_name;
+          break;
+
+        case 'factory-account-url':
+          $factory_url = acsf_factory_url();
+          $replacements[$original] = $factory_url . '/user';
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Defines the user notification emails for which we want to set defaults.
+ *
+ * Because users are managed on the factory, some of the default Drupal settings
+ * for user notification emails do not apply to the sites. This function defines
+ * which notification emails we wish to override.
+ */
+function acsf_openid_setup_user_mail_variables() {
+  $variables = array(
+    'user_mail_register_no_approval_required_body' => "[user:name],\n\nThank you for registering at [site:name] with your [site:service-name] account. You can change your password or edit your profile by visiting [site:factory-account-url].\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_register_pending_approval_body' => "[user:name],\n\nThank you for registering at [site:name] with your [site:service-name] account. Your application for membership on this site is currently pending approval. We will send another email to let you know when it has been approved.\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_status_activated_body' => "[user:name],\n\nWelcome to [site:name]! Your membership has been activated. You may log in by visiting [site:name] and clicking on the \"Log in\" link. You can also visit [site:factory-account-url] to change your password or add profile information.\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_status_blocked_body' => "[user:name],\n\nYour membership at [site:name] has been revoked.\n\n-- [site:name] team\n[site:url]\n",
+    'user_mail_register_admin_created_subject' => "An administrator invited you to join the site [site:name]",
+    'user_mail_register_admin_created_body' => "You have been invited to be a member of [site:url-brief], a site hosted by [site:service-name].\n\nPlease complete your registration using the link below and the e-mail address [user:mail]:\n\n[site:register-url]\n",
+  );
+  return $variables;
+}
+
+/**
+ * Configures a site to allow local user logins (i.e., makes OpenID optional).
+ */
+function acsf_openid_allow_local_user_logins() {
+  // Force email verification for all new user accounts, for spam protection.
+  variable_set('user_email_verification', TRUE);
+
+  // Reset any user mail texts that the administrator hasn't overridden from
+  // their Drupal Gardens defaults, so that they automatically fall back on the
+  // Drupal core defaults instead. (The Drupal Gardens defaults are specific to
+  // the OpenID login process and therefore not appropriate once the site has
+  // switched to allowing local user accounts.)
+  $mail_variables = acsf_openid_setup_user_mail_variables();
+  foreach (acsf_variables_get_unchanged_site_variables($mail_variables) as $variable) {
+    variable_del($variable);
+  }
+
+  // Delete the mail texts for admin-created user accounts no matter what (even
+  // if they were overridden). For sites with required OpenID logins, these
+  // variables were used to construct e-mails to invite users to join the site,
+  // rather than for admin-created accounts, so there is no way they can still
+  // be relevant.
+  foreach (array('user_mail_register_admin_created_subject', 'user_mail_register_admin_created_body') as $variable) {
+    $current_value = variable_get($variable);
+    if (isset($current_value)) {
+      variable_del($variable);
+    }
+  }
+
+  // Finally, enable the local user accounts setting. This affects menu paths,
+  // so we also need to rebuild the menu for it to take effect (unless we're in
+  // the middle of installing Drupal, since the menu will be rebuilt at the end
+  // of that anyway).
+  variable_set('acsf_local_user_accounts', TRUE);
+  if (!drupal_installation_attempted()) {
+    menu_rebuild();
+  }
+}
+
+/**
+ * Implements MODULE_preprocess_HOOK().
+ */
+function acsf_openid_preprocess_overlay(&$variables) {
+  // During OpenID registration, do not display the page title above the
+  // overlay because we'll display it inside the page instead; see
+  // acsf_openid_preprocess_html().
+  if (acsf_openid_user_registration_response()) {
+    $variables['title'] = '';
+  }
+}
+
+/**
+ * Implements MODULE_preprocess_HOOK().
+ */
+function acsf_openid_preprocess_html(&$variables) {
+  // During OpenID registration inside the overlay, add a class to the page
+  // body so that themes can display the page title inside the overlay in these
+  // situations only (we prevented the page title from displaying above the
+  // overlay in acsf_openid_preprocess_overlay()).
+  if (module_exists('overlay') && acsf_openid_user_registration_response() && overlay_get_mode() == 'child') {
+    $variables['classes_array'][] = 'overlay-login';
+  }
+}

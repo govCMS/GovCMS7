@@ -1,0 +1,16 @@
+/* Override for page styles */
+body.not-front {
+  background: transparent;
+  margin: 0 auto;
+  min-height: 100px;
+  min-width: 750px;
+  position: relative;
+  padding: 60px 0 0 0;
+  width: 750px;
+}
+
+/* Override if page displayed in overlay */
+html.js body.not-front {
+  margin: 0 auto;
+  padding: 60px 0 0 0;
+}
