@@ -31,7 +31,7 @@ function event_log_node_alt_event_log_handlers() {
 /**
  * Implements hook_node_insert().
  */
-function event_log_node_alt_insert($node) {
+function event_log_node_alt_node_insert($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'insert',
@@ -47,7 +47,7 @@ function event_log_node_alt_insert($node) {
 /**
  * Implements hook_node_update().
  */
-function event_log_node_alt_update($node) {
+function event_log_node_alt_node_update($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'update',
@@ -63,7 +63,7 @@ function event_log_node_alt_update($node) {
 /**
  * Implements hook_node_delete().
  */
-function event_log_node_alt_delete($node) {
+function event_log_node_alt_node_delete($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'delete',
