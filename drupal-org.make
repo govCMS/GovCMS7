@@ -84,7 +84,8 @@ projects[password_policy][version] = "1.9"
 
 projects[pathauto][version] = "1.2"
 
-projects[pathauto_persist][version] = "1.3"
+projects[pathauto_persist][version] = "1.x-dev"
+projects[pathauto_persist][patch][] = "https://www.drupal.org/files/issues/pathauto_persist-n2107365-7.patch"
 
 projects[r4032login][version] = "1.5"
 
