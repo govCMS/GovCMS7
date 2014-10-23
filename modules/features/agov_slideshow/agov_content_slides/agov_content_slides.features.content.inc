@@ -88,7 +88,7 @@ function agov_content_slides_content_defaults() {
         0 => array(
           'value' => '<p>Appellatio dolus eligo ideo patria refoveo valde valetudo. Adipiscing aliquip lenis melior minim nisl te valde. Ex illum occuro tego vulputate. Gravis ibidem meus rusticus.&nbsp;</p>',
           'summary' => '',
-          'format' => 'filtered_html',
+          'format' => 'rich_text',
           'safe_value' => '<p>Appellatio dolus eligo ideo patria refoveo valde valetudo. Adipiscing aliquip lenis melior minim nisl te valde. Ex illum occuro tego vulputate. Gravis ibidem meus rusticus. </p>
 ',
           'safe_summary' => '',

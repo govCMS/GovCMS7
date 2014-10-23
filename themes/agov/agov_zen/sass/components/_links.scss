@@ -1,0 +1,62 @@
+%linksDoubleArrow {
+  a {
+    background: image-url("block-li-bg.png") no-repeat scroll left 5px;
+    display: block;
+    padding-left: 15px;
+    padding-bottom: 2px;
+  }
+}
+
+%linksTabbed {
+  > li {
+    border-top: 1px solid $color-tertiary-light;
+    &:first-child { border-top: none; }
+    &:hover { background-color: transparent; }
+    > a {
+      padding: 8px 15px;
+      display: block;
+      font-weight: bold;
+      &:hover { color: $color-primary; }
+    }
+  }
+}
+
+
+%inlineLinks {
+  @include inline-list;
+  > li {
+    float: left;
+    position: relative;
+    display: inline-block;
+  }
+  > li > a { display: block; }
+}
+
+%inlineLinks--bordered {
+  @extend %inlineLinks;
+  > li > a {
+    &:before {
+      @extend %pseudo-block;
+      border-left: solid 1px $color-tertiary-dark;
+      height: 60%;
+      top: 20%;
+      left: 0px;
+      position: absolute;
+    }
+  }
+  // Remove border on first link.
+  li:first-child a:before { border: 0; }
+}
+
+%inlineLinks--bordered--double, .inlineLinks--bordered--double {
+  @extend %inlineLinks--bordered;
+  > li > a {
+
+    padding: 5px 10px;
+    &:before {
+      border-left: solid 1px lighten($color-primary, 10%);
+      border-right: solid 1px darken($color-primary, 10%);
+      left: -3px;
+    }
+  }
+}

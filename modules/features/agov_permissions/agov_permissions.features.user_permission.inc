@@ -15,6 +15,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'access comments',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -26,6 +27,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'access content',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -39,6 +41,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'system',
   );
@@ -50,6 +53,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -59,6 +63,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'access site map',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -72,6 +77,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'toolbar',
   );
@@ -83,6 +89,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench',
   );
@@ -94,6 +101,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'media_internet',
   );
@@ -103,6 +111,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'administer comments',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'comment',
   );
@@ -123,6 +132,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'file_entity',
   );
@@ -132,6 +142,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'administer nodes',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -141,6 +152,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'administer scheduler',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'scheduler',
   );
@@ -150,6 +162,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'administer workbench moderation',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -159,6 +172,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'bypass node access',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -168,6 +182,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'bypass workbench moderation',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -179,6 +194,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -190,6 +206,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -201,6 +218,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -212,6 +230,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -223,6 +242,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -234,6 +254,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'bean',
   );
@@ -243,6 +264,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -256,6 +278,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -267,6 +290,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -277,6 +301,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'roles' => array(
       'Content approver' => 'Content approver',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -288,6 +313,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'scheduler_workbench',
   );
@@ -297,6 +323,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'post comments',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -310,6 +337,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -321,6 +349,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'scheduler',
   );
@@ -330,6 +359,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'search content',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -341,6 +371,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'skip comment approval',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'comment',
   );
@@ -352,6 +383,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'filter',
   );
@@ -363,6 +395,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -374,6 +407,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -385,6 +419,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -394,6 +429,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'view any basic_content bean',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -405,6 +441,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'name' => 'view any image_and_text bean',
     'roles' => array(
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -418,6 +455,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'view_unpublished',
   );
@@ -431,6 +469,15 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'bean',
   );
 
+  // Exported permission: view bean page.
+  $permissions['assign all roles'] = array(
+    'name' => 'assign all roles',
+    'roles' => array(
+      'administrator' => 'administrator',
+    ),
+    'module' => 'role_delegation',
+  );
+
   // Exported permission: view moderation history.
   $permissions['view moderation history'] = array(
     'name' => 'view moderation history',
@@ -438,6 +485,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -449,6 +497,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'workbench_moderation',
   );
@@ -460,6 +509,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -471,6 +521,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'node',
   );
@@ -482,6 +533,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'system',
   );
@@ -494,6 +546,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -505,6 +558,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -516,6 +570,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -527,6 +582,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -538,6 +594,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -549,6 +606,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'webform',
   );
@@ -560,10 +618,48 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
     ),
     'module' => 'metatag',
   );
 
+  // Additional site-editor permissions.
+  $additional_permissions = array(
+    'access administration menu' => 'admin_menu',
+    'administer blocks' => 'block',
+    'administer contact forms' => 'contact',
+    'access contextual links' => 'contextual',
+    'bypass file access' => 'file_entity',
+    'administer google analytics' => 'googleanalytics',
+    'administer menu' => 'menu',
+    'use panels in place editing' => 'panels',
+    'unblock expired accounts' => 'password_policy',
+    'force password change' => 'password_policy',
+    'administer url aliases' => 'path',
+    'create url aliases' => 'path',
+    'administer redirects' => 'redirect',
+    'access administration pages' => 'system',
+    'access site reports' => 'system',
+    'edit terms in 1' => 'taxonomy',
+    'delete terms in 1' => 'taxonomy',
+    'access user profiles' => 'user',
+    'administer users' => 'user',
+    'assign Content editor role' => 'role_delegation',
+    'assign Content approver role' => 'role_delegation',
+    'assign Site editor role' => 'role_delegation',
+    'access broken links report' => 'linkchecker',
+    'access own broken links report' => 'linkchecker',
+  );
+  foreach ($additional_permissions as $permission => $module) {
+    $permissions[$permission] = array(
+      'name' => $permission,
+      'roles' => array(
+        'administrator' => 'administrator',
+        'Site editor' => 'Site editor',
+      ),
+      'module' => $module,
+    );
+  }
 
   return $permissions;
 }

@@ -6,8 +6,6 @@ defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
 
-projects[admin_menu][version] = "3.0-rc4"
-
 projects[admin_views][version] = "1.2"
 
 projects[bean][version] = "1.5"
@@ -53,6 +51,8 @@ projects[libraries][version] = "2.1"
 
 projects[link][version] = "1.1"
 
+projects[linkchecker][version] = "1.2"
+
 projects[linkit][version] = "3.1"
 
 projects[media][version] = "2.0-alpha1"
@@ -71,6 +71,8 @@ projects[menu_trail_by_path][version] = "2.0"
 
 projects[metatag][version] = "1.4"
 projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
+
+projects[navbar][version] = "1.4"
 
 projects[references][version] = "2.1"
 
@@ -157,6 +159,8 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 
 projects[image_link_formatter][version] = "1.0"
 
+projects[role_delegation][version] = "1.1"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
@@ -165,6 +169,7 @@ projects[login_security][version] = "1.4"
 
 ; Themes
 projects[zen][version] = "5.5"
+projects[shiny][version] = "1.6"
 
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta3"
@@ -185,3 +190,15 @@ libraries[ckeditor][download][type] = "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
+
+libraries[underscore][download][type] = get
+libraries[underscore][download][url] = https://github.com/jashkenas/underscore/archive/1.5.2.zip
+libraries[underscore][type] = "library"
+
+libraries[backbone][download][type] = get
+libraries[backbone][download][url] = https://github.com/jashkenas/backbone/archive/1.1.0.zip
+libraries[backbone][type] = "library"
+
+libraries[modernizr][download][type] = "get"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
+libraries[modernizr][type] = "library"
