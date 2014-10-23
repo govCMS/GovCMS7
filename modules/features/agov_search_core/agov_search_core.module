@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Search (Core) feature.
- */
-
-include_once 'agov_search_core.features.inc';

@@ -6,7 +6,3 @@ dependencies[] = entity
 dependencies[] = search_api
 dependencies[] = search_api_db
 dependencies[] = search_api_page
-features[features_api][] = api:2
-features[search_api_index][] = default_node_index
-features[search_api_page][] = default_search
-features[search_api_server][] = core

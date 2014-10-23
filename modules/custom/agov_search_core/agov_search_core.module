@@ -1,8 +1,9 @@
 <?php
 /**
  * @file
- * agov_search_core.features.inc
+ * Code for the Search (Core) feature.
  */
+
 
 /**
  * Implements hook_default_search_api_index().
@@ -249,3 +250,4 @@ function agov_search_core_default_search_api_server() {
   }');
   return $items;
 }
+
