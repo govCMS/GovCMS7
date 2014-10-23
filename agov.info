@@ -31,6 +31,7 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
+dependencies[] = search
 dependencies[] = syslog
 dependencies[] = shortcut
 dependencies[] = field
@@ -161,3 +162,6 @@ dependencies[] = agov_permissions
 
 dependencies[] = agov_menu
 dependencies[] = agov_tags
+
+; Search
+dependencies[] = agov_search_core
