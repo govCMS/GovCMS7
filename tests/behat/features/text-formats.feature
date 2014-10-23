@@ -23,7 +23,7 @@ Feature: Text formats
     And I go to "node/add/page"
     Then I should see "Rich text"
     And I enter "Test node" for "Title"
-    And I enter "<p><h1>Testing</h1></p>" for "Body"
+    And I enter "<p><h2>Testing</h2></p>" for "Body"
     And I select "Rich text" from "Text format"
     And I press "Save"
     Then I should see the heading "Testing"
