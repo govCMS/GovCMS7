@@ -486,6 +486,9 @@ function _agov_default_variables() {
 
     // Force user to change password on login.
     'password_policy_new_login_change' => 1,
+
+    // Session lifetime 0.
+    'session_cookie_lifetime_type' => 'browser_session',
   );
 
   // Enable xmlsitemap includes for content types.
