@@ -532,3 +532,9 @@ tr.selected td {
     background-image: image-url("progress.gif");
   }
 }
+
+// @todo: This is not a good selector.
+#region-content .content ul li {
+  list-style: disc;
+  margin: 0 0 5px 15px;
+}
