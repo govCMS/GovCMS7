@@ -476,18 +476,6 @@ video',
     array(
       'access content',
       $rich_text_permission,
-      'search page content',
-      'search blog_article content',
-      'search event content',
-      'search media_release content',
-      'search news_article content',
-      'search publication content',
-    )
-  );
-  user_role_revoke_permissions(
-    DRUPAL_ANONYMOUS_RID,
-    array(
-      'search all content',
     )
   );
   user_role_grant_permissions(
@@ -498,18 +486,6 @@ video',
       'post comments',
       'skip comment approval',
       $rich_text_permission,
-      'search page content',
-      'search blog_article content',
-      'search event content',
-      'search media_release content',
-      'search news_article content',
-      'search publication content',
-    )
-  );
-  user_role_revoke_permissions(
-    DRUPAL_AUTHENTICATED_RID,
-    array(
-      'search all content',
     )
   );
 
@@ -597,7 +573,6 @@ function _agov_default_blocks() {
 
   // Set aGov blocks.
   agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header');
-  agov_core_insert_block('search', 'form', $themes, 'header');
   agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
   agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, 'footer', 2);
   agov_core_insert_block('views', 'slideshow-block', $themes, 'highlighted', 0, 1, '<front>');
