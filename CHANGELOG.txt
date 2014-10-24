@@ -1,6 +1,48 @@
 
 aGov Changelog
 
+7.x-2.0-alpha4
+==============
+Features
+- The theme has been partly rewritten to accomodate subtheming, and a theme
+  starterkit has been included.
+- Search has been completely overhauled, and is now powered by Search API.
+  Search API Database has been included to replicate existing search, and the
+  Search API Pages and Views modules allow you to create an unlimited number
+  of Search page variations.
+- There is a new Site Editor role between Content authors and Administrators.
+  This role has the ability to manage all site content, without full site
+  configuration permissions.
+- Webform data is now deleted by default after emailing. This can be set on a
+  per-form basis.
+- Tables can now be added to the WYSIWYG
+- Link Checker has been added for broken link checking
+- You can now add Table of Contents and embed a range of video formats directly
+  into the Rich Text format
+- The ability to assign users to roles has been restricted to those with Site
+  Editor and Admin permissions
+- An Event Log has been added which lists User and Content changes. This can be
+  found under reports.
+- Favicons can be properly provided for multisite installations
+
+Fixes
+- It is now possible to disable any aGov module dependency.
+- Promo block titles now have a rollover state
+- Form action buttons now have correct spacing
+
+Changes
+- Multiple CSS changes
+- Users are soft-blocked after 5 failed login attempts
+- Users are now be forced to log in whenever they return to the site (0 life sessions)
+- The last login date and time are displayed when logging in
+- The administration theme is now Shiny and the Overlay (was Seven)
+- Administration Toolbar has been replaced with the Mobile Friendly Navigation
+  Toolbar
+- Filtered and Full text formats have been removed, and the Rich Text format
+  updated
+- Search Config is removed, and Search blocks and pages now use different underlying
+  HTML code.
+
 7.x-2.0-alpha3
 ==============
 Features
