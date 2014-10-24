@@ -21,6 +21,7 @@ after "deploy", "deploy:cleanup"
 namespace :drush do
   desc "Install the GovCMS site."
   task :install do
-    run "cd #{app_path} && drush -y si --site-name='GovCMS' agov --account-name='admin' --account-pass='aisei9du+chiek.oiRah'"
+    run "phing prepare"
+    run "phing drupal:install"
   end
 end

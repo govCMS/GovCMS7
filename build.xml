@@ -20,6 +20,7 @@
   <property name="src.custom.modules" value="${project.basedir}/docroot/profiles/agov/modules/custom" />
   <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov/agov_zen" />
   <property name="simpletest.group" value="${phing.project.name}" />
+  <property name="drush.bin" value="${project.basedir}/bin/drush" />
   <property name="drush.source" value="@${phing.project.name}.dev" />
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
 
@@ -103,7 +104,7 @@
      <!-- We have overriden the drush.cmd command here due to site-install not
           playing nice with the uri option -->
      <exec dir="${app.dir}"
-          command="${drush.cmd} site-install agov_install_additional_options.install=1 ${app.profile} -y --account-name='admin' --account-pass='aisei9du+chiek.oiRah'"
+          command="${drush.cmd} site-install ${app.profile} -y --account-name='admin' --account-pass='aisei9du+chiek.oiRah' agov_install_additional_options.install=1"
           logoutput="${test.output}"
           passthru="false" />
      <chmod file="${app.dir}/sites/default" mode="0775" />
