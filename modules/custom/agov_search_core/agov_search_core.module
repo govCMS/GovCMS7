@@ -250,4 +250,3 @@ function agov_search_core_default_search_api_server() {
   }');
   return $items;
 }
-
