@@ -31,8 +31,8 @@ dependencies[] = number
 dependencies[] = options
 dependencies[] = path
 dependencies[] = taxonomy
-dependencies[] = syslog
 dependencies[] = search
+dependencies[] = syslog
 dependencies[] = shortcut
 dependencies[] = field
 dependencies[] = field_ui
@@ -91,6 +91,9 @@ dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views_content
 dependencies[] = search404
+dependencies[] = search_api
+dependencies[] = search_api_db
+dependencies[] = search_api_page
 dependencies[] = scheduler
 dependencies[] = scheduler_workbench
 dependencies[] = session_cookie_lifetime
@@ -119,7 +122,6 @@ dependencies[] = ccl_actions
 dependencies[] = ccl_blocks
 dependencies[] = ccl_local_actions
 dependencies[] = ccl_views
-dependencies[] = search_config
 
 ; Custom
 
@@ -161,3 +163,6 @@ dependencies[] = agov_permissions
 
 dependencies[] = agov_menu
 dependencies[] = agov_tags
+
+; Search
+dependencies[] = agov_search_core
