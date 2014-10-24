@@ -169,9 +169,15 @@ function _agov_default_formats_and_permissions() {
     'name' => 'Rich text',
     'weight' => 0,
     'filters' => array(
+      // Video filter - Must go before 'Convert URLs into links' per module documentation.
+      'video_filter' => array(
+        'weight' => 0,
+        'status' => 1,
+        'settings' => array(),
+      ),
       // Convert URLs into links.
       'filter_url' => array(
-        'weight' => 0,
+        'weight' => 1,
         'status' => 1,
         'settings' => array(
           'filter_url_length' => 72,
@@ -179,7 +185,7 @@ function _agov_default_formats_and_permissions() {
       ),
       // Convert line breaks into HTML.
       'filter_autop' => array(
-        'weight' => 1,
+        'weight' => 2,
         'status' => 1,
         'settings' => array(),
       ),
@@ -430,7 +436,13 @@ video',
       ),
       // Convert Media tags to markup
       'media_filter' => array(
-        'weight' => 2,
+        'weight' => 3,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Table of contents filter.
+      'toc_filter' => array(
+        'weight' => 4,
         'status' => 1,
         'settings' => array(),
       ),
@@ -692,6 +704,9 @@ function _agov_default_variables() {
     // Display last login time.
     'login_security_last_access_timestamp' => 1,
     'login_security_last_login_timestamp' => 1,
+
+    // TOC settings.
+    'toc_filter_header_tag' => 'h2',
   );
 
   // Enable xmlsitemap includes for content types.

@@ -120,11 +120,16 @@ projects[strongarm][version] = "2.0"
 
 projects[superfish][version] = "1.9"
 
+projects[toc_filter][version] = "1.2"
+
 projects[token][version] = "1.5"
 
 projects[twitter_block][version] = "2.1"
 
 projects[username_enumeration_prevention][version] = "1.0"
+
+projects[video_filter][version] = "3.1"
+projects[video_filter][patch][] = https://www.drupal.org/files/issues/video_filter-fix_modal-2335169-11.patch
 
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"

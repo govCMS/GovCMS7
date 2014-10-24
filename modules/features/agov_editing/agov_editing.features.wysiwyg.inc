@@ -39,6 +39,9 @@ function agov_editing_wysiwyg_default_profiles() {
         'linkit' => array(
           'linkit' => 1,
         ),
+        'video_filter' => array(
+          'video_filter' => 1,
+        ),
         'drupal' => array(
           'media' => 1,
         ),
