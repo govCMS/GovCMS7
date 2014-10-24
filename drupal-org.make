@@ -55,6 +55,8 @@ projects[linkchecker][version] = "1.2"
 
 projects[linkit][version] = "3.1"
 
+projects[login_security][version] = "1.9"
+
 projects[media][version] = "2.0-alpha1"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
@@ -84,7 +86,8 @@ projects[password_policy][version] = "1.9"
 
 projects[pathauto][version] = "1.2"
 
-projects[pathauto_persist][version] = "1.3"
+projects[pathauto_persist][version] = "1.x-dev"
+projects[pathauto_persist][patch][] = "https://www.drupal.org/files/issues/pathauto_persist-n2107365-7.patch"
 
 projects[r4032login][version] = "1.5"
 
@@ -99,7 +102,14 @@ projects[scheduler_workbench][version] = "1.2"
 
 projects[search404][version] = "1.3"
 
+projects[search_api][version] = "1.13"
+projects[search_api_db][version] = "1.4"
+projects[search_api_page][version] = "1.1"
+projects[facetapi][version] = "1.5"
+
 projects[seckit][version] = "1.9"
+
+projects[session_cookie_lifetime] = "1.3"
 
 projects[site_map][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
@@ -146,8 +156,6 @@ projects[defaultcontent][patch][] = "https://drupal.org/files/1611928-fix-alt.pa
 projects[defaultcontent][patch][] = "https://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "https://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[search_config][version] = "1.0"
-
 projects[securepages][version] = "1.0-beta1"
 
 projects[uuid][version] = "1.0-alpha4"
@@ -168,7 +176,9 @@ projects[role_delegation][version] = "1.1"
 
 projects[flood_control][version] = "1.0"
 
-projects[login_security][version] = "1.4"
+
+
+projects[event_log][version] = "1.2"
 
 ; Themes
 projects[zen][version] = "5.5"
