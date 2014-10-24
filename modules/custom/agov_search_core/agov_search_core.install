@@ -23,5 +23,5 @@ function agov_search_core_install() {
   );
 
   $themes = agov_supported_themes();
-  agov_core_insert_block('search_api_page', 'default_search', $themes, 'header', '<none>');
+  agov_core_insert_block('search_api_page', 'default_search', $themes, 'header', 0, 0, '', '<none>');
 }
