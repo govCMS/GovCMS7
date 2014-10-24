@@ -704,6 +704,9 @@ function _agov_default_variables() {
     // Display last login time.
     'login_security_last_access_timestamp' => 1,
     'login_security_last_login_timestamp' => 1,
+
+    // TOC settings.
+    'toc_filter_header_tag' => 'h2',
   );
 
   // Enable xmlsitemap includes for content types.
