@@ -5,4 +5,5 @@ role :app, "#{app_name}.qa.previousnext.com.au"
 set :app_path, "#{release_path}/app"
 set :port, '11063'
 
-after "deploy", "drush:install"
+after "deploy", "drupal:symlink_shared"
+after "deploy", "phing:install"
