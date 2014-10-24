@@ -60,6 +60,7 @@ dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
 dependencies[] = entitycache
+dependencies[] = favicon
 dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = globalredirect
