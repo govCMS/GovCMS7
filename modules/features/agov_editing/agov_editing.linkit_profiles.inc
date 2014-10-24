@@ -20,8 +20,6 @@ function agov_editing_default_linkit_profiles() {
   $linkit_profile->data = array(
     'text_formats' => array(
       'rich_text' => 'rich_text',
-      'filtered_html' => 0,
-      'full_html' => 0,
       'plain_text' => 0,
     ),
     'search_plugins' => array(

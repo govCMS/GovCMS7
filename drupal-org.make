@@ -55,6 +55,8 @@ projects[linkchecker][version] = "1.2"
 
 projects[linkit][version] = "3.1"
 
+projects[login_security][version] = "1.9"
+
 projects[media][version] = "2.0-alpha1"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
@@ -100,6 +102,8 @@ projects[scheduler_workbench][version] = "1.2"
 projects[search404][version] = "1.3"
 
 projects[seckit][version] = "1.9"
+
+projects[session_cookie_lifetime] = "1.3"
 
 projects[site_map][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
@@ -163,7 +167,7 @@ projects[role_delegation][version] = "1.1"
 
 projects[flood_control][version] = "1.0"
 
-projects[login_security][version] = "1.4"
+
 
 projects[event_log][version] = "1.2"
 
