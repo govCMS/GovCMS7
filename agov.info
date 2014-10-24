@@ -120,7 +120,6 @@ dependencies[] = ccl_actions
 dependencies[] = ccl_blocks
 dependencies[] = ccl_local_actions
 dependencies[] = ccl_views
-dependencies[] = search_config
 
 ; Custom
 
