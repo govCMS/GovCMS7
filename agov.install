@@ -434,6 +434,12 @@ video',
         'status' => 1,
         'settings' => array(),
       ),
+      // Table of contents filter.
+      'toc_filter' => array(
+        'weight' => 3,
+        'status' => 1,
+        'settings' => array(),
+      ),
     ),
   );
   $rich_text_format = (object) $rich_text_format;
