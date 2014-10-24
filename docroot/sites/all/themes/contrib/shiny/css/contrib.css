@@ -1,0 +1,1543 @@
+/***
+ * The .seven.css file is intended to contain styles that override declarations
+ * in the Seven admin theme.
+ */
+/* @group Content */
+/* Import Base Styles and Functions */
+.form-item,
+.form-item .form-item {
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.form-actions {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.form-item .form-item {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.form-radios > .form-item {
+  margin-top: 3px;
+}
+
+/* Inline Entity Form */
+.field-type-commerce-product-reference fieldset.form-wrapper {
+  border: 0;
+}
+
+.field-type-commerce-product-reference fieldset .fieldset-legend {
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 0 15px;
+  /* LTR */
+  padding: 5px 0 5px 0;
+  text-transform: none;
+  width: 97%;
+}
+
+.field-widget-inline-entity-form fieldset.collapsible .fieldset-legend {
+  color: #585858;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 15px;
+}
+
+.field-widget-inline-entity-form .fieldset-wrapper {
+  background: transparent;
+  outline: 0;
+  padding: 10px 0 0;
+}
+
+.field-widget-inline-entity-form .ief-form-bottom {
+  padding-top: 40px;
+}
+.field-widget-inline-entity-form .ief-form-bottom > .fieldset-wrapper {
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+.field-widget-inline-entity-form .ief-form-bottom > .fieldset-wrapper .fieldset-legend,
+.field-widget-inline-entity-form .ief-form-bottom > .fieldset-wrapper fieldset > .fieldset-wrapper {
+  margin-left: 5px;
+  /* LTR */
+  padding-left: 0;
+  /* LTR */
+}
+
+.field-type-commerce-product-reference .fieldset-legend {
+  padding-left: 0;
+  /* LTR */
+}
+
+.field-widget-inline-entity-form > div > fieldset > legend .fieldset-legend {
+  border-bottom: 0;
+  margin-left: 0;
+  /* LTR */
+}
+
+.field-widget-inline-entity-form .ief-form {
+  background: transparent;
+}
+
+.field-widget-inline-entity-form .ief-form .fieldset-wrapper {
+  margin-top: 0;
+}
+
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > legend .fieldset-legend {
+  border: 0;
+}
+
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper {
+  border: 1px solid #ccc;
+  padding: 5px 15px;
+}
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper > fieldset .fieldset-wrapper,
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper > fieldset .fieldset-legend {
+  padding-left: 0;
+  /* LTR */
+  margin-left: 0;
+  /* LTR */
+}
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper fieldset.collapsible .fieldset-legend {
+  padding-left: 15px;
+  /* LTR */
+  margin-top: 0;
+}
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper > fieldset .fieldset-wrapper {
+  margin-top: 10px;
+}
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper > fieldset .field-type-image .fieldset-wrapper {
+  margin-top: 0;
+}
+
+.field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit,
+.ief-row-form .ief-entity-submit {
+  background: #2f88cd;
+  background: -moz-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #36a2f6), color-stop(100%, #2f88cd));
+  background: -webkit-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -o-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -ms-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: linear-gradient(to bottom, #36a2f6 0%, #2f88cd 100%);
+  border: 1px solid #2f88cd;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  -webkit-box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  font: normal 500 16px/16px "Open Sans", Arial, sans-serif;
+  margin-left: 1px;
+  margin-top: 1px;
+  padding: 6px 30px;
+  text-decoration: none;
+  color: #fff;
+}
+.field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit:focus,
+.ief-row-form .ief-entity-submit:focus {
+  color: #fff;
+  outline: 0;
+}
+.field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit:hover, .field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit:focus, .field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit:active, .field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit:disabled,
+.ief-row-form .ief-entity-submit:hover,
+.ief-row-form .ief-entity-submit:focus,
+.ief-row-form .ief-entity-submit:active,
+.ief-row-form .ief-entity-submit:disabled {
+  background: #359ff2;
+  box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  color: #fff;
+  text-shadow: 0 -1px 1px #2F88CD;
+}
+
+.field-widget-inline-entity-form fieldset {
+  padding: 1.5em 0 0;
+}
+.field-widget-inline-entity-form fieldset fieldset {
+  padding: 2em 0 0;
+}
+
+.field-widget-inline-entity-form > fieldset {
+  padding: 2em 0 0;
+}
+
+.field-widget-inline-entity-form fieldset .tabledrag-toggle-weight-wrapper {
+  float: right;
+  /* LTR */
+  margin-top: -5px;
+}
+
+.field-widget-inline-entity-form fieldset.ief-entity-fieldset,
+.ief-form-bottom > legend .fieldset-legend,
+.field-widget-inline-entity-form .field-type-image fieldset.form-wrapper {
+  background: transparent;
+  border: 0;
+  margin: 0;
+}
+
+.field-widget-inline-entity-form .field-type-image .form-item label {
+  float: none;
+}
+.field-widget-inline-entity-form .field-type-image .description {
+  padding-bottom: 10px;
+}
+
+.field-widget-inline-entity-form fieldset.ief-entity-fieldset .fieldset-legend {
+  border-bottom: 1px solid #e4e4e4;
+  font-size: 16px;
+  font-weight: 600;
+  width: 98%;
+}
+
+.field-widget-inline-entity-form fieldset.ief-entity-fieldset .fieldset-wrapper {
+  background: transparent;
+  border: 0;
+  display: inline-block;
+  padding: 15px;
+  width: 100%;
+}
+
+.field-widget-inline-entity-form fieldset.ief-product-image .fieldset-wrapper {
+  padding-top: 5px;
+  width: 100%;
+}
+
+.field-widget-inline-entity-form .tabledrag-changed-warning,
+.field-widget-inline-entity-form .ief-entity-table {
+  clear: both;
+}
+
+.field-widget-inline-entity-form .ief-entity-table,
+.field-widget-inline-entity-form .ief-entity-table tr td:last-child {
+  background-color: transparent;
+}
+
+.field-widget-inline-entity-form .ief-entity-table,
+.field-widget-inline-entity-form .ief-entity-table tr.even,
+.field-widget-inline-entity-form .ief-entity-table tr.odd {
+  background: #f1f1f1;
+  border-bottom: 1px solid #BEBFB9;
+}
+
+.field-widget-inline-entity-form .ief-entity-table tr:hover,
+tr.even {
+  background: #f1f1f1;
+}
+
+.field-widget-inline-entity-form .ief-entity-table .ief-row-entity-form {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-width: 0 1px 1px;
+}
+
+.field-widget-inline-entity-form .ief-entity-table tr.ief-row-entity-form {
+  background: #DFF2FB;
+  border: 1px solid #AFDBE9;
+  -moz-box-shadow: 0 0 5px #fff;
+  -webkit-box-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 5px #fff;
+}
+
+.ief-row-entity .ief-entity-operations {
+  position: relative;
+}
+
+.ief-row-entity .ief-entity-operations .ajax-progress {
+  left: 0;
+  /* LTR */
+  position: absolute;
+  top: 100%;
+}
+
+.ief-row-form {
+  background: #fff;
+}
+
+.ief-row-form > td {
+  padding-top: 0;
+}
+
+.field-widget-inline-entity-form tr.ief-row-form .ief-form-row {
+  padding-top: 30px;
+}
+
+.field-widget-inline-entity-form .ief-entity-table tr.ief-row-form:hover {
+  background: #fff;
+}
+
+.field-widget-inline-entity-form .ief-entity-operations input.form-submit,
+.field-widget-inline-entity-form .field-type-image table input.form-submit {
+  background: transparent;
+  border: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #36a2f6;
+  padding: 0;
+}
+
+/* Commerce File Correction */
+.ief-product-details > .fieldset-wrapper > .field-type-commerce-file {
+  float: none;
+  clear: left;
+}
+
+.field-widget-inline-entity-form .fieldset-legend {
+  left: 0;
+  /* LTR */
+  padding: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.field-widget-inline-entity-form .fieldset-wrapper .fieldset-wrapper .fieldset-legend {
+  padding: 3px 0;
+}
+
+.field-widget-inline-entity-form .fieldset-wrapper .collapsible .fieldset-legend {
+  padding-left: 15px;
+  margin-top: 0;
+}
+
+.ief-product-details .fieldset-wrapper {
+  width: 33%;
+}
+
+.ief-product-details .form-item label {
+  float: left;
+  /* LTR */
+  margin-right: 10px;
+  /* LTR */
+}
+
+/* Handle Radios and Checkboxes a bit differently */
+.ief-product-details .form-radios,
+.ief-product-details .form-checkboxes {
+  display: inline-block;
+}
+
+.ief-product-details .form-type-radio,
+.ief-product-details .form-type-checkbox {
+  float: left;
+  /* LTR */
+}
+.ief-product-details .form-type-radio label,
+.ief-product-details .form-type-checkbox label {
+  float: none;
+}
+
+.ief-product-details fieldset .form-type-radio,
+.ief-product-details fieldset .form-type-checkbox {
+  clear: left;
+  /* LTR */
+}
+
+form table .ief-product-details input.form-checkbox,
+form table .ief-product-details input.form-radio {
+  opacity: 0;
+}
+
+#module-filter-squeeze .form-item-module-filter-name {
+  clear: none;
+}
+
+.rules-elements-table {
+  position: relative;
+}
+
+/* Megarow */
+.entity-commerce-order .content-right,
+.entity-commerce-order .content-left {
+  margin: 0 1%;
+}
+
+.entity-commerce-order .field-name-commerce-line-items th,
+.entity-commerce-order .content-right .field-label,
+.entity-commerce-order .content-right .commerce-backoffice-order-status-label {
+  background: #e1e1e1;
+  border: 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  clear: both;
+  color: #000;
+  font-size: 15px;
+  font-weight: normal;
+  margin-top: 10px;
+  padding: 10px 15px;
+}
+
+.entity-commerce-order .content-right .commerce-backoffice-order-status-form {
+  display: inline-block;
+  width: 100%;
+}
+
+.entity-commerce-order .content-right .commerce-backoffice-order-status-label {
+  background: #ffedcb;
+  border: 1px solid #ffcb69;
+  -moz-box-shadow: inset 0 0 5px #fff;
+  -webkit-box-shadow: inset 0 0 5px #fff;
+  box-shadow: inset 0 0 5px #fff;
+  margin-top: 0px;
+}
+
+.entity-commerce-order .commerce-backoffice-order-status-form .form-submit,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit {
+  background: #2f88cd;
+  background: -moz-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #36a2f6), color-stop(100%, #2f88cd));
+  background: -webkit-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -o-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: -ms-linear-gradient(top, #36a2f6 0%, #2f88cd 100%);
+  background: linear-gradient(to bottom, #36a2f6 0%, #2f88cd 100%);
+  border: 1px solid #2f88cd;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  -webkit-box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  font: normal 500 16px/16px "Open Sans", Arial, sans-serif;
+  margin-left: 1px;
+  margin-top: 1px;
+  padding: 6px 30px;
+  text-decoration: none;
+  color: #fff;
+}
+.entity-commerce-order .commerce-backoffice-order-status-form .form-submit:focus,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit:focus {
+  color: #fff;
+  outline: 0;
+}
+.entity-commerce-order .commerce-backoffice-order-status-form .form-submit:hover, .entity-commerce-order .commerce-backoffice-order-status-form .form-submit:focus, .entity-commerce-order .commerce-backoffice-order-status-form .form-submit:active, .entity-commerce-order .commerce-backoffice-order-status-form .form-submit:disabled,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit:hover,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit:focus,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit:active,
+.view-commerce-message-messages #commerce-backoffice-message-form input.form-submit:disabled {
+  background: #359ff2;
+  box-shadow: 0 1px 2px #cccccc, inset 0 1px 1px #7bb8ef;
+  color: #fff;
+  text-shadow: 0 -1px 1px #2F88CD;
+}
+
+.field-name-commerce-customer-billing .name-block,
+.field-name-commerce-customer-shipping .name-block {
+  font-weight: 500;
+}
+
+.content-left .field-name-commerce-order-total {
+  width: 270px !important;
+}
+
+.entity-commerce-order .field-name-commerce-order-total {
+  background: transparent;
+  float: right;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .field-items {
+  background: #DFF2FB;
+  border: 1px solid #AFDBE9;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 8px 15px;
+}
+
+.commerce-order-commerce-order .field-type-commerce-customer-profile-reference {
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .field-items table {
+  width: 100%;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .field-items tr.even,
+.entity-commerce-order .field-name-commerce-order-total .field-items tr.odd {
+  background: transparent;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .field-items td {
+  line-height: 1.5em;
+  padding: 5px 0;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .field-items .component-type-commerce-price-formatted-amount td {
+  border-top: 2px solid #AFDBE9;
+  font-weight: 700;
+}
+
+.entity-commerce-order .field-name-commerce-order-total .component-total {
+  min-width: 85px;
+}
+
+.field-name-commerce-order-total .field-label {
+  font-weight: 300;
+}
+
+.field-name-commerce-order-total .field-items {
+  font-weight: 500;
+}
+
+.entity-commerce-order table,
+.entity-commerce-order tr,
+tr td:last-child {
+  border: 0;
+}
+
+#panes tr td:last-child {
+  border-right: 1px solid #BEBFB9;
+  /* LTR */
+}
+
+#blocks tr td:last-child {
+  border-right: 1px solid #BEBFB9;
+  /* LTR */
+}
+
+.content-right > div.field {
+  border: 0;
+}
+
+.view-commerce-message-messages h2 {
+  border-bottom: 10px solid #d8d8d8;
+  font-weight: 500;
+  padding-bottom: 10px;
+}
+
+.commerce-order-commerce-order .view-commerce-message-messages th {
+  background: transparent url("../images/th-border.gif") repeat-x 0 bottom;
+  border: 1px solid #d8d8d8;
+  border-width: 0 0 1px 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.view-commerce-message-messages tbody {
+  padding-top: 2px;
+}
+
+.view-commerce-message-messages .views-row-first {
+  border-top: 1px solid #d8d8d8;
+}
+
+.commerce-order-commerce-order .view-commerce-message-messages tr.odd,
+.commerce-order-commerce-order .view-commerce-message-messages tr.even {
+  background: transparent;
+  border: 1px solid #d8d8d8;
+  border-width: 0 0 1px 0;
+}
+
+.view-commerce-message-messages .commerce_order_created,
+.view-commerce-message-messages .commerce_order_state,
+.view-commerce-message-messages .commerce_order_admin_comment,
+.view-commerce-message-messages .commerce_order_payment_entered,
+.view-commerce-message-messages .commerce_order_payment_full,
+.view-commerce-message-messages .commerce_order_cart_add {
+  background: #fff;
+  border: 1px solid #d8d8d8;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  padding: 2px 10px;
+}
+
+.view-commerce-message-messages .form-type-textarea .resizable-textarea {
+  margin: 0 2px 30px 0;
+  /* LTR */
+}
+
+.view-commerce-message-messages .form-type-textarea .filter-wrapper {
+  border: 1px solid #eee;
+  padding: 0 15px 10px;
+}
+
+.commerce-backoffice-view tr.views-row-active {
+  background: #DFF2FB !important;
+  border: 1px solid #AFDBE9;
+}
+
+.commerce-backoffice-view tr.views-row-active td {
+  background: transparent;
+}
+
+.view-commerce-message-messages {
+  margin-bottom: 20px;
+}
+
+.view-commerce-message-messages > .view-footer {
+  padding-top: 20px;
+}
+
+.view-commerce-message-messages form > div > fieldset > legend {
+  height: 30px;
+}
+
+.view-commerce-message-messages form > div > fieldset > legend .fieldset-legend {
+  margin: 0 0 10px 0;
+  border: 0;
+}
+
+tr.megarow > td {
+  background: #fff;
+}
+
+div.views-megarow-content {
+  background: transparent;
+}
+
+.commerce-backoffice-view div.views-megarow-content .megarow-header {
+  background-image: url("../images/mega-arrow.png");
+}
+
+.commerce-backoffice-view div.views-megarow-content {
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0;
+}
+
+.field-widget-inline-entity-form tr.ief-row-form .ief-form-row {
+  background: transparent url("../images/mega-arrow.png") no-repeat 50px -1px;
+  display: inline-block;
+  margin-top: -1px;
+  width: 100%;
+}
+
+/* Comments View Fix */
+.view-commerce-backoffice-comments .vbo-views-form {
+  padding-top: 45px;
+}
+
+/* Customizing the View Filters */
+html.js .view-filters fieldset.collapsible,
+html.js .vbo-views-form fieldset,
+html.js .vbo-views-form .fieldset-wrapper,
+html.js .view-commerce-message-messages .view-footer fieldset.collapsible {
+  background: transparent;
+  border: 0;
+  height: auto;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+html.js .view-filters fieldset.collapsible {
+  min-height: 30px;
+}
+
+html.js .view-filters fieldset.collapsible .fieldset-wrapper,
+html.js .vbo-views-form fieldset .fieldset-wrapper {
+  margin-bottom: 30px;
+  padding-top: 30px;
+}
+
+html.js .view-filters fieldset.collapsible .fieldset-legend,
+html.js .vbo-views-form fieldset .fieldset-legend {
+  background: transparent url("../images/filter.png") no-repeat 0 0;
+  color: #36a2f6;
+  margin-top: 0;
+  padding-left: 30px;
+  /* LTR */
+  text-transform: uppercase;
+}
+
+html.js .view-filters fieldset.collapsible .fieldset-legend a,
+html.js .vbo-views-form fieldset .fieldset-legend a {
+  color: #36a2f6;
+}
+
+html.js .view-filters fieldset.collapsible .fieldset-legend {
+  background: transparent url("../images/filter.png") no-repeat 0 0;
+}
+
+html.js .vbo-views-form fieldset .fieldset-legend {
+  background: transparent url("../images/bulk-update.png") no-repeat 0 0;
+}
+
+html.js .view-commerce-message-messages .view-footer fieldset.collapsible .fieldset-legend {
+  background: transparent;
+  padding-left: 0;
+  /* LTR */
+  text-transform: none;
+}
+
+/* Rules Pages */
+/* This fixes a firefox outline bug */
+#rules-ui-edit-element fieldset .fieldset-wrapper {
+  border: 1px solid #ccc;
+  -moz-box-shadow: inset 0 0 1px #fff;
+  -webkit-box-shadow: inset 0 0 1px #fff;
+  box-shadow: inset 0 0 1px #fff;
+  outline: 0;
+}
+
+#rules-ui-edit-element fieldset .fieldset-wrapper .fieldset-wrapper {
+  border: 0;
+}
+
+.rules-autocomplete-button {
+  top: 6px;
+}
+
+.rules-elements-table ul.rules-operations a {
+  padding: 0 10px;
+}
+
+/* Commerce discount. */
+.commerce-discount-form {
+  font-size: 0.95em;
+}
+.commerce-discount-form fieldset .fieldset-legend {
+  font-size: 14px;
+  font-weight: 700;
+}
+.commerce-discount-form div.form-item-commerce-discount-fields-inline-conditions-und-0-condition-settings-products input.form-autocomplete {
+  width: 300px;
+}
+.commerce-discount-form #foo:checked,
+.commerce-discount-form input.form-checkbox + label::before,
+.commerce-discount-form input.form-radio + label::before {
+  top: 7px;
+  left: 5px;
+  /* LTR */
+}
+.commerce-discount-form .form-item-commerce-discount-type.form-item .ajax-progress {
+  display: block;
+}
+.commerce-discount-form .form-item.form-type-radio .ajax-progress-throbber {
+  top: 7px;
+  left: 5px;
+  /* LTR */
+}
+.commerce-discount-form .field-name-commerce-discount-offer .form-type-radios > div .form-item .ajax-progress {
+  display: block;
+}
+.commerce-discount-form .field-name-commerce-discount-offer .form-type-radios > div .form-item .ajax-progress-throbber {
+  top: 7px;
+  left: 5px;
+  /* LTR */
+}
+.commerce-discount-form .inline-conditions-container .condition-wrapper .form-item .ajax-progress {
+  top: 5px;
+  left: 66px;
+  /* LTR */
+}
+.commerce-discount-form .commerce-discount-usage .form-item.form-type-select label {
+  font-weight: 700;
+}
+.commerce-discount-form #commerce-discount-fields-wrapper .start-date-wrapper label,
+.commerce-discount-form #commerce-discount-fields-wrapper .end-date-wrapper label {
+  box-sizing: -moz-box;
+  margin-top: 4px;
+}
+.commerce-discount-form .commerce-discount-usage .field-type-number-integer {
+  margin-top: 10px;
+}
+
+.commerce-discount-form .form-item-label {
+  padding-bottom: 10px;
+}
+
+.commerce-discount-form .field-name-commerce-discount-date .fieldset-wrapper {
+  background: none;
+  border: 0;
+  outline: 0;
+  margin-left: 0;
+  /* LTR */
+}
+
+.commerce-discount-form .field-type-datestamp .fieldset-legend {
+  margin-left: 0;
+  /* LTR */
+}
+
+.commerce-discount-form .field-name-commerce-discount-date .fieldset-wrapper input {
+  background-position: 100px 3px !important;
+  height: 25px;
+  width: 120px !important;
+}
+
+.commerce-discount-form #edit-actions {
+  margin-top: 20px;
+}
+
+td.views-field-operations-dropbutton {
+  position: relative;
+}
+td.views-field-operations-dropbutton .ctools-dropbutton-processed {
+  position: absolute;
+  top: 18px;
+}
+
+.view-commerce-discount-overview td.views-field-enable-disable * {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.commerce-discount-form .form-item-label {
+  padding-bottom: 10px;
+}
+
+.commerce-discount-form .field-name-commerce-discount-date .fieldset-wrapper {
+  background: none;
+  border: 0;
+  outline: 0;
+  margin-left: 0;
+  /* LTR */
+}
+
+.commerce-discount-form .field-type-datestamp .fieldset-legend {
+  margin-left: 0;
+  /* LTR */
+}
+
+.commerce-discount-form .field-name-commerce-discount-date .fieldset-wrapper input {
+  background-position: 100px 3px !important;
+  height: 25px;
+  width: 120px !important;
+}
+
+.commerce-discount-form #edit-actions {
+  margin-top: 20px;
+}
+
+td.views-field-operations-dropbutton {
+  position: relative;
+}
+td.views-field-operations-dropbutton .ctools-dropbutton-processed {
+  position: absolute;
+  top: 18px;
+}
+
+/* Discounts Admin Fixes */
+.view-commerce-discount-overview .views-table td.views-field-operations-dropbutton .ctools-dropbutton {
+  -moz-border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+}
+
+.form-item-commerce-discount-type.form-item #edit-commerce-discount-type,
+.field-name-commerce-discount-offer .form-type-radios > div {
+  background: none;
+}
+
+.form-item-commerce-discount-type.form-item #edit-commerce-discount-type .form-item input,
+.field-name-commerce-discount-offer .form-type-radios > div .form-item input {
+  display: inline;
+}
+
+.form-item-commerce-discount-type.form-item #edit-commerce-discount-type .form-item.selected label,
+.form-item-commerce-discount-type.form-item #edit-commerce-discount-type .form-item label,
+.field-name-commerce-discount-offer .form-type-radios > div .form-item.selected label,
+.field-name-commerce-discount-offer .form-type-radios > div .form-item label {
+  background: none;
+  color: inherit;
+}
+
+.field-name-commerce-discount-date .fieldset-wrapper .container-inline-date .date-padding > .form-item:first-child input.form-text {
+  background: url("../images/calendar.png") left top no-repeat;
+  /* LTR */
+}
+
+.form-item-enabled #edit-enabled .form-item label {
+  margin: 0 !important;
+}
+
+.form-item-enabled #edit-enabled .form-item label:hover {
+  cursor: pointer;
+}
+
+.form-item-enabled #edit-enabled .form-item label[for="edit-enabled-1"] {
+  color: #6D6D6D;
+}
+
+/* Give some radios styles similar to fieldsets */
+.commerce-discount-form .form-item-label label,
+.commerce-discount-form .form-item-commerce-discount-type label,
+.commerce-discount-form .form-item-commerce-discount-fields-commerce-discount-offer-und-form-type label {
+  font-weight: 700;
+}
+
+.commerce-discount-form .form-item-commerce-discount-type label {
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.commerce-discount-form .form-item-commerce-discount-type .form-radios label {
+  border: none;
+}
+
+.commerce-discount-form .form-item-commerce-discount-type .form-radios label,
+.commerce-discount-form .form-item-commerce-discount-type .form-item label,
+.commerce-discount-form .field-name-commerce-discount-offer .form-item-commerce-discount-fields-commerce-discount-offer-und-form-type .form-radios label,
+.commerce-discount-form .field-name-commerce-discount-offer .form-item-commerce-discount-fields-commerce-discount-offer-und-form-type .form-item label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.field-name-commerce-discount-offer .fieldset-wrapper,
+#commerce-discount-fields-wrapper .field-name-commerce-discount-offer .fieldset-wrapper .field-name-commerce-fixed-amount .form-type-text-field,
+#commerce-discount-fields-wrapper .form-wrapper div.form-type-textfield,
+#commerce-discount-fields-wrapper .field-name-commerce-discount-offer .fieldset-wrapper .field-name-commerce-fixed-amount .form-type-text-field,
+.commerce-discount-form .form-wrapper div.form-type-textfield {
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+#commerce-discount-fields-wrapper .form-item-commerce-discount-fields-commerce-discount-offer-und-form-type {
+  margin-bottom: 9px;
+}
+
+.field-name-commerce-discount-offer .form-wrapper {
+  padding-top: 5px;
+}
+
+.field-name-commerce-discount-max-uses {
+  min-height: 51px;
+}
+
+/* Inline form fix */
+#commerce-backoffice-message-form textarea {
+  clear: left;
+  /* LTR */
+}
+
+#ui-datepicker-div {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.ui-datepicker .ui-datepicker-title select {
+  border: 1px solid #ccc;
+}
+
+.field-type-commerce-line-item-reference .add-line-item {
+  padding-top: 11px;
+}
+.field-type-commerce-line-item-reference .add-line-item .form-type-select {
+  padding-top: 2px;
+}
+
+.field-type-commerce-line-item-reference .add-line-item
+.field-name-commerce-discounts input.field-add-more-submit {
+  margin-top: 20px;
+}
+
+.view-commerce-payment-order #commerce-payment-order-transaction-add-form .add-payment {
+  padding-top: 9px;
+  clear: left;
+}
+.view-commerce-payment-order #commerce-payment-order-transaction-add-form .add-payment .form-item-payment-method {
+  padding-top: 1px;
+}
+.view-commerce-payment-order #commerce-payment-order-transaction-add-form .add-payment .form-submit {
+  margin-top: 0;
+}
+
+.view-commerce-discount-overview .views-reset-button input.form-submit {
+  margin-top: 23px;
+}
+
+/* Manage Products */
+.views-exposed-widgets .views-exposed-widget label,
+.views-exposed-widgets .views-exposed-widget .views-widget {
+  display: inline-block;
+}
+.views-exposed-widgets .views-widget-filter-date_filter label {
+  float: left;
+  margin-right: 10px;
+}
+
+.views-exposed-form .views-exposed-widgets {
+  margin-bottom: .5em;
+  width: auto;
+}
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 0;
+}
+
+#views-exposed-form-commerce-discount-overview-default .views-exposed-form .views-reset-button input.form-submit {
+  margin-top: 0;
+}
+
+.views-exposed-form label {
+  font-weight: 500;
+}
+
+/* Making wide enough to fit min and max date fields inline */
+.views-exposed-form .form-item input {
+  border: 1px solid #C8C8C8;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  max-width: 100%;
+  outline: 0;
+  padding: 4px 5px;
+}
+
+html.js .views-exposed-form .form-item input.form-autocomplete {
+  background-position: 100% 6px;
+}
+
+html.js .views-exposed-form .form-item input.throbbing {
+  background-position: 100% -14px;
+}
+
+.commerce-backoffice-view .views-exposed-form .date-padding .form-item {
+  margin-top: 0;
+  max-width: 100%;
+}
+
+.views-exposed-form label,
+.views-exposed-form #edit-date-filter-min-wrapper,
+.views-exposed-form #edit-date-filter-max-wrapper {
+  font-weight: 500 !important;
+  padding-top: 1px;
+}
+
+/* Positioning to be the search box */
+.views-exposed-form .views-widget-filter-combine input {
+  line-height: normal;
+  padding: 3px 20px 3px 5px;
+  /* LTR */
+}
+
+.vbo-views-form #edit-select .fieldset-wrapper {
+  padding: 3px 0 0;
+  /* LTR */
+  width: auto;
+}
+
+.commerce-backoffice-view .vbo-views-form #edit-select .fieldset-wrapper {
+  padding: 3px 0 0 16px;
+  /* LTR */
+}
+
+.vbo-views-form #edit-select .fieldset-wrapper input.form-submit {
+  float: left;
+  /* LTR */
+  margin-top: 10px;
+  padding: 6px 20px;
+}
+
+.commerce-backoffice-view .vbo-views-form select {
+  height: auto;
+  margin: 2px 0 2px 0;
+}
+
+.vbo-select-all-markup .vbo-fieldset-select-all {
+  text-align: left;
+  width: auto;
+}
+.vbo-select-all-markup .vbo-fieldset-select-all input.form-checkbox {
+  opacity: 1;
+}
+
+.vbo-select-all-markup label:before {
+  display: none !important;
+}
+
+/* Adjust Firefox Specific Fixes */
+@-moz-document url-prefix() {
+  form table #edit-select .fieldset-wrapper input.form-submit {
+    padding: 1px 20px;
+  }
+
+  .vbo-views-form #edit-select .fieldset-wrapper input.form-submit {
+    padding: 2px 20px;
+  }
+
+  .vbo-select-all-markup input.form-checkbox {
+    opacity: 1;
+    height: auto;
+    width: auto;
+  }
+  .vbo-select-all-markup input.form-checkbox + label:before,
+  .vbo-select-all-markup input.form-radio + label:before {
+    display: none;
+  }
+
+  td.views-field-operations-dropbutton {
+    display: block;
+  }
+
+  .field-widget-inline-entity-form tr.ief-row-form .ief-form-row {
+    margin-top: -1px;
+  }
+}
+
+/* Edit Checkboxes only in Webkit which will render properly. */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .commerce-backoffice-view .vbo-views-form #edit-select .fieldset-wrapper {
+    padding: 3px 0 0 20px;
+    /* LTR */
+  }
+
+  .vbo-select-all-markup .vbo-fieldset-select-all input.form-checkbox {
+    opacity: 1;
+    -webkit-appearance: none;
+    height: 17px;
+    width: 17px;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px;
+    background: #eaeaea;
+    background: -moz-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eaeaea));
+    background: -webkit-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -o-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -ms-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+  }
+  .vbo-select-all-markup .vbo-fieldset-select-all input.form-checkbox:checked {
+    background-image: url("../images/check.png");
+    background-image: url("../images/check.png"), -moz-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* FF3.6+ */
+    background-image: url("../images/check.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eaeaea));
+    /* Chrome,Safari4+ */
+    background-image: url("../images/check.png"), -webkit-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/check.png"), -o-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Opera 11.10+ */
+    background-image: url("../images/check.png"), -ms-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* IE10+ */
+    background-image: url("../images/check.png"), linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='#eaeaea',GradientType=0 );
+    /* IE6-9 */
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .form-type-taxonomy-manager-tree input.form-checkbox,
+  .form-type-taxonomy-manager-tree input.form-radio {
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 1;
+    outline: 0;
+    height: 17px;
+    width: 17px;
+    border: 1px solid #a1a1a1;
+    border-radius: 3px;
+    background: #eaeaea;
+    background: -moz-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eaeaea));
+    background: -webkit-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -o-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: -ms-linear-gradient(top, white 0%, #eaeaea 100%);
+    background: linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+  }
+  .form-type-taxonomy-manager-tree input.form-checkbox:focus,
+  .form-type-taxonomy-manager-tree input.form-radio:focus {
+    outline: 0;
+    box-shadow: 0 0 3px #36a2f6;
+  }
+  .form-type-taxonomy-manager-tree input.form-checkbox:checked {
+    background-image: url("../images/check.png");
+    background-image: url("../images/check.png"), -moz-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* FF3.6+ */
+    background-image: url("../images/check.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eaeaea));
+    /* Chrome,Safari4+ */
+    background-image: url("../images/check.png"), -webkit-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/check.png"), -o-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Opera 11.10+ */
+    background-image: url("../images/check.png"), -ms-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* IE10+ */
+    background-image: url("../images/check.png"), linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='#eaeaea',GradientType=0 );
+    /* IE6-9 */
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .form-type-taxonomy-manager-tree input.form-radio {
+    height: 14px;
+    width: 14px;
+    border-radius: 14px;
+  }
+  .form-type-taxonomy-manager-tree input.form-radio:checked {
+    background-image: url("../images/radio.png");
+    background-image: url("../images/radio.png"), -moz-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* FF3.6+ */
+    background-image: url("../images/radio.png"), -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #eaeaea));
+    /* Chrome,Safari4+ */
+    background-image: url("../images/radio.png"), -webkit-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Chrome10+,Safari5.1+ */
+    background-image: url("../images/radio.png"), -o-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* Opera 11.10+ */
+    background-image: url("../images/radio.png"), -ms-linear-gradient(top, white 0%, #eaeaea 100%);
+    /* IE10+ */
+    background-image: url("../images/radio.png"), linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$from', endColorstr='#eaeaea',GradientType=0 );
+    /* IE6-9 */
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  .form-type-taxonomy-manager-tree .form-disabled input.form-checkbox {
+    opacity: .4;
+  }
+}
+/* Form Fix for Firefox */
+@-moz-document url-prefix() {
+  .form-type-taxonomy-manager-tree input.form-checkbox,
+  .form-type-taxonomy-manager-tree input.form-radio {
+    opacity: 1;
+  }
+}
+
+/* Bulk Operations Select */
+.vbo-views-form .form-item-operation {
+  float: left;
+  /* LTR */
+  margin-top: 9px;
+  padding: 2px 10px 0 0;
+}
+
+.commerce-backoffice-view .vbo-views-form .form-item-operation {
+  padding: 2px 10px 0 30px;
+  /* LTR */
+}
+
+.vbo-views-form .form-item-operation #edit-operation {
+  margin-top: 0;
+}
+
+.vbo-views-form .form-item-operation .chzn-container {
+  left: 30px;
+  /* LTR */
+}
+
+/* Cancel out some backoffice module styles */
+.commerce-backoffice-view .vbo-views-form #edit-select {
+  background-position: 21px 15px;
+  padding: 0;
+}
+
+.commerce-backoffice-view .views-exposed-form .date-padding .form-item input,
+.commerce-backoffice-view .views-exposed-form .views-widget-filter-combine input {
+  padding: 4px 20px 4px 5px;
+  /* LTR */
+}
+
+html.js .vbo-views-form #edit-select fieldset .fieldset-wrapper {
+  padding: 3px 0 0 10px;
+  /* LTR */
+  margin-bottom: 0;
+}
+
+.ctools-button-processed ul {
+  margin: 0;
+}
+
+/* Override for input elements that are themed like ctools-buttons */
+.ctools-button-processed input.form-submit:hover {
+  background-image: none;
+  color: #0074BD;
+  text-shadow: none;
+}
+
+.ctools-button-processed input.form-submit:active {
+  background: none;
+  border: medium none;
+  color: #0074BD;
+  text-shadow: none;
+}
+
+/* @group CTools */
+/* @group Buttons */
+.ctools-button-processed {
+  background-image: -moz-linear-gradient(180deg, white 0px, #efeded 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(1, #efefef));
+  background-image: -webkit-linear-gradient(180deg, white 0px, #efeded 100%);
+  background-image: linear-gradient(180deg, #ffffff 0px, #efeded 100%);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #C8C8C8;
+  -moz-box-shadow: inset 0 0 1px #fff;
+  -webkit-box-shadow: inset 0 0 1px #fff;
+  box-shadow: inset 0 0 1px #fff;
+  font-size: 14px;
+  line-height: 1em;
+  text-transform: capitalize;
+}
+
+.ctools-button-processed:hover {
+  background: #f6f6f6;
+}
+
+.ctools-dropbutton-processed.open:hover {
+  background: #f6f6f6;
+}
+
+.ctools-dropbutton-processed.open {
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.ctools-button li a,
+.views-ui-display-tab-actions .ctools-button-processed input {
+  border: none;
+}
+
+.ctools-dropbutton-processed .ctools-content {
+  border-right: 1px solid #fff;
+  /* LTR */
+}
+
+.ctools-dropbutton-processed .ctools-link {
+  border-left: 1px solid #eaeaea;
+  /* LTR */
+  width: 27px;
+}
+
+.ctools-dropbutton-processed {
+  padding-right: 27px;
+  /* LTR */
+}
+
+.ctools-twisty {
+  right: 10px;
+  /* LTR */
+}
+
+.ctools-toggle {
+  margin-top: 0.6667em;
+}
+
+.ctools-toggle.ctools-toggle-collapsed {
+  margin-top: 0.5em;
+}
+
+.ctools-dropbutton-processed .ctools-link,
+.ctools-dropbutton-processed .ctools-content {
+  border: 0;
+}
+
+.views-field-operations-dropbutton .quick-edit {
+  padding: 0;
+}
+
+.ctools-dropbutton-processed a {
+  color: #424242;
+}
+
+.vbo-views-form #edit-actions {
+  padding: 0;
+  background: transparent;
+}
+
+/* Chosen Select Style Overrides */
+.chzn-container-multi .chzn-choices,
+.chzn-container-single .chzn-single,
+.chosen-container-multi .chosen-choices,
+.chosen-container-single .chosen-single {
+  color: #737373;
+  padding-right: 26px;
+  /* LTR */
+}
+
+.chzn-container-single .chzn-single,
+.chosen-container-single .chosen-single {
+  overflow: visible;
+}
+
+.chzn-container-multi .chzn-choices .search-field .default,
+.chosen-container-multi .chosen-choices .search-field .default {
+  height: 24px;
+}
+
+.chzn-container-single .chzn-single,
+.chzn-container-single .chzn-drop,
+.chzn-container-multi .chzn-choices,
+.chzn-container-multi .chzn-drop,
+.chosen-container-single .chosen-single,
+.chosen-container-single .chosen-drop,
+.chosen-container-multi .chosen-choices,
+.chosen-container-multi .chosen-drop {
+  background: #fff;
+  border: 1px solid #c8c8c8;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.chzn-container-multi .chzn-choices,
+.chosen-container-multi .chosen-choices {
+  background: white url("../images/drop-filter.png") no-repeat right center;
+  /* LTR */
+}
+
+.chzn-container-single .chzn-single,
+.commerce-backoffice-view .chzn-container-single .chzn-single,
+.chosen-container-single .chosen-single,
+.commerce-backoffice-view .chosen-container-single .chosen-single {
+  height: 28px;
+}
+
+.chzn-container-single .select:focus,
+.chosen-container-single .select:focus {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.chzn-container-single .chzn-single-with-drop,
+.chosen-container-single .chosen-single-with-drop {
+  border-radius: 3px 3px 0 0;
+}
+
+.chzn-container-single .chzn-drop,
+.chzn-container-multi .chzn-drop,
+.chosen-container-single .chosen-drop,
+.chosen-container-multi .chosen-drop {
+  border-radius: 0 0 3px 3px;
+}
+
+.chzn-container-single .chzn-single div,
+.chosen-container-single .chosen-single div {
+  width: 28px;
+}
+
+.chzn-container-multi .chzn-choices li,
+.chosen-container-multi .chosen-choices li {
+  float: left;
+  /* LTR */
+}
+
+.chzn-container-single .chzn-single div b,
+.commerce-backoffice-view .chzn-container-single .chzn-single div b,
+.chosen-container-single .chosen-single div b,
+.commerce-backoffice-view .chosen-container-single .chosen-single div b {
+  background: white url("../images/drop-filter.png") no-repeat right center;
+  /* LTR */
+}
+
+.chzn-container-single .chzn-single-with-drop div b,
+.commerce-backoffice-view .chzn-container-single .chzn-single-with-drop div b
+.chzn-container-active .chzn-choices,
+.chosen-container-single .chosen-single-with-drop div b,
+.commerce-backoffice-view .chosen-container-single .chosen-single-with-drop div b
+.chosen-container-active .chosen-choices {
+  background: white url("../images/drop-filter-up.png") no-repeat right center;
+  /* LTR */
+}
+
+.chzn-container-single .chzn-single span,
+.chosen-container-single .chosen-single span {
+  color: #999;
+  margin-right: 0;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.views-widget-filter-status .chzn-search,
+.commerce-backoffice-view .vbo-views-form .fieldset-wrapper .chzn-drop .chzn-search {
+  display: none;
+}
+
+.commerce-backoffice-view .vbo-views-form #edit-select select {
+  height: auto;
+}
+
+.vbo-views-form .fieldset-wrapper .chzn-drop {
+  top: -1px !important;
+}
+
+#edit-combine-wrapper input.form-text {
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+/* Vertical tabs adds a padding that needs removed on the custom checkboxes/radios */
+#foo:checked::before,
+.vertical-tabs-pane .fieldset-wrapper > div.form-type-checkbox:first-child {
+  padding-top: 0;
+}
+
+/* Admin module link fix */
+div#admin-toolbar * {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* @end */
+/* @end */
+/* Features 1 & 2 Interface Fieldsets */
+html.js #features-export-form fieldset.collapsed {
+  padding: 19px 0;
+}
+html.js #features-export-form fieldset.collapsible .fieldset-wrapper {
+  padding: 0 13px 13px 15px;
+}
+
+/* Menu Block Radio Fix */
+#menu-block-settings #foo:checked,
+#menu-block-settings input.form-checkbox + label.ui-button::before,
+#menu-block-settings input.form-radio + label.ui-button::before {
+  background: transparent;
+}
+
+/* Webform Fixes */
+form table#webform-emails label::before {
+  display: none;
+}
+
+/* Form Builder Fixes */
+.form-builder-wrapper *,
+#form-builder-fields,
+.form-builder-palette-element {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* Path Breadcrumb Fixes */
+.breadcrumb span.inline,
+.breadcrumb span.delimiter {
+  display: inline;
+  background: none;
+}
+
+/* Log Filter Fixes */
+#log-filter-form label::before {
+  display: none;
+}
+#log-filter-form input.form-checkbox {
+  opacity: 1;
+}
+
+/* Customise the color module form layout in the theme settings */
+.color-form {
+  max-width: 100%;
+}
+
+#placeholder {
+  left: 20px;
+  top: 40px;
+}
+
+#palette {
+  float: left;
+  width: 49%;
+  margin-top: 200px;
+}
+
+html.js #preview {
+  clear: none !important;
+  width: 49%;
+  float: right !important;
+}

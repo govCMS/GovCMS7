@@ -1,0 +1,233 @@
+/* Inline Entity Form */
+.field-widget-inline-entity-form .ief-form-bottom {
+
+  > .fieldset-wrapper {
+
+    .fieldset-legend,
+    fieldset > .fieldset-wrapper {
+      margin-left: 0;
+      margin-right: 5px;
+      padding-right: 0;
+    }
+  }
+}
+.field-type-commerce-product-reference .fieldset-legend {
+  padding-right: 0;
+}
+.field-widget-inline-entity-form > div > fieldset > legend .fieldset-legend {
+  margin-right: 0;
+}
+.field-type-commerce-product-reference > div > div.form-wrapper > fieldset > div.fieldset-wrapper {
+
+  > fieldset .fieldset-wrapper,
+  > fieldset .fieldset-legend {
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+.field-widget-inline-entity-form fieldset .tabledrag-toggle-weight-wrapper {
+  float: left; /* LTR */
+}
+.ief-row-entity .ief-entity-operations .ajax-progress {
+  left: auto;
+  right: 0;
+}
+.field-widget-inline-entity-form .fieldset-legend {
+  left: auto;
+  right: 0;
+}
+.ief-product-details .form-item label {
+  float: right;
+  margin-left: 10px;
+}
+#panes tr td:last-child {
+  border-left: 1px solid #BEBFB9;
+}
+#blocks tr td:last-child {
+  border-left: 1px solid #BEBFB9;
+}
+.view-commerce-message-messages .form-type-textarea .resizable-textarea {
+  margin: 0 0 30px 2px;
+}
+html.js .view-filters fieldset.collapsible .fieldset-legend,
+html.js .vbo-views-form fieldset .fieldset-legend {
+  padding-right: 30px;
+}
+html.js .view-commerce-message-messages .view-footer fieldset.collapsible .fieldset-legend {
+  padding-right: 0;
+}
+commerce-discount-form .field-name-commerce-discount-date .fieldset-wrapper {
+  margin-right: 0;
+}
+.commerce-discount-form .field-type-datestamp .fieldset-legend {
+  margin-right: 0;
+}
+.field-name-commerce-discount-date .fieldset-wrapper .container-inline-date .date-padding > .form-item:first-child input.form-text {
+  background: url('../images/calendar.png') right top no-repeat;
+}
+
+/* Inline form fix */
+#commerce-backoffice-message-form textarea {
+  clear: right;
+}
+
+/* Manage Products */
+.views-exposed-form label {
+  float: right !important;
+  margin-left: 10px !important;
+}
+.views-exposed-form .views-widget {
+  float: right;
+}
+.view-commerce-backoffice-orders .views-exposed-form .date-padding {
+  float: right;
+}
+.view-commerce-backoffice-orders .views-exposed-form .date-padding .form-item input {
+  background: #fff url("../images/calendar.png") no-repeat 5% center;
+}
+.view-commerce-backoffice-orders .views-exposed-form #edit-date-filter-min-wrapper,
+.view-commerce-backoffice-orders .views-exposed-form #edit-date-filter-max-wrapper {
+  float: right;
+}
+
+/* Positioning to be the search box */
+.views-exposed-form .views-widget-filter-combine {
+  left: 0;
+  right: auto;
+}
+.views-exposed-form .views-widget-filter-combine input{
+  background: white url("../images/search.png") no-repeat left center;
+  padding: 3px 5px 3px 20px;
+}
+.vbo-views-form #edit-select .fieldset-wrapper {
+  padding: 3px 16px 0 0;
+}
+.vbo-views-form #edit-select .fieldset-wrapper input.form-submit {
+  float: right;
+}
+
+/* Edit Checkboxes only in Webkit which will render properly. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .vbo-views-form {
+    #edit-select .fieldset-wrapper {
+      padding: 3px 20px 0 0;
+    }
+  }
+}
+
+/* Bulk Operations Select */
+.vbo-views-form .form-item-operation {
+  background: transparent url("../images/bg-vbo-rtl.png") no-repeat right top;
+  float: right;
+  padding: 2px 30px 0 10px;
+}
+
+.vbo-views-form .form-item-operation .chzn-container {
+  left: auto;
+  right: 30px;
+}
+.view-commerce-backoffice-orders .views-exposed-form .date-padding .form-item input,
+.view-commerce-backoffice-orders .views-exposed-form .views-widget-filter-combine input,
+.view-commerce-backoffice-products .views-exposed-form .views-widget-filter-combine input {
+  padding: 4px 5px 4px 20px;
+}
+html.js .vbo-views-form #edit-select fieldset .fieldset-wrapper{
+  padding: 3px 10px 0 0;
+}
+
+.view-commerce-backoffice-orders .views-exposed-form label,
+.view-commerce-backoffice-orders .views-exposed-form #edit-date-filter-min-wrapper,
+.view-commerce-backoffice-orders .views-exposed-form #edit-date-filter-max-wrapper {
+  float: right;
+  margin-left: 10px;
+  margin-right: 0;
+}
+.view-commerce-backoffice-products .views-exposed-form .views-widget-filter-combine input,
+.view-commerce-backoffice-orders .views-exposed-form .views-widget-filter-combine input {
+  background-position: 2% center;
+}
+.page-admin-commerce .vbo-views-form .views-field-operations-dropbutton .quick-edit {
+  padding-left: 10px;
+  padding-right: 0;
+}
+.ctools-dropbutton-processed .ctools-link {
+  left: 0;
+  right: auto;
+}
+.ctools-dropbutton-processed .ctools-content {
+  border-left: 1px solid #fff;
+}
+.ctools-dropbutton-processed .ctools-link {
+  border-right: 1px solid #eaeaea;
+}
+.ctools-dropbutton-processed {
+  padding-left: 27px;
+  padding-right: 0;
+}
+.ctools-twisty {
+  left: 10px;
+  right: auto;
+}
+/* Chosen Select Style Overrides */
+.chzn-container-single .chzn-single div {
+  left: 0;
+  right: auto;
+}
+.chzn-container-multi .chzn-choices,
+.chzn-container-single .chzn-single {
+  padding-left: 26px;
+  padding-right: 0;
+}
+.chzn-container-multi .chzn-choices {
+  background: #fff url("../images/drop-filter-rtl.png") no-repeat left center;
+
+  li {
+    float: right;
+  }
+}
+.chzn-container-single .chzn-single div b,
+.view-commerce-backoffice-products .chzn-container-single .chzn-single div b,
+.view-commerce-backoffice-orders .chzn-container-single .chzn-single div b {
+  background: #fff url("../images/drop-filter-rtl.png") no-repeat left center;
+}
+.chzn-container-single .chzn-single-with-drop div b,
+.view-commerce-backoffice-products .chzn-container-single .chzn-single-with-drop div b,
+.view-commerce-backoffice-orders .chzn-container-single .chzn-single-with-drop div b,
+.chzn-container-active .chzn-choices {
+  background: #fff url("../images/drop-filter-up-rtl.png") no-repeat left center;
+}
+.chzn-container-single .chzn-single span {
+  margin-right: 5px;
+}
+
+/* Commerce discount. */
+.commerce-discount-form {
+  #foo:checked,
+  input.form-checkbox + label::before,
+  input.form-radio + label::before {
+    right: 5px;
+    left: 0; /* RTL */
+  }
+  .form-item.form-type-radio .ajax-progress-throbber {
+    right: 5px;
+    left: 0; /* RTL */
+  }
+  .field-name-commerce-discount-offer {
+    .form-type-radios > div {
+      .form-item {
+        .ajax-progress-throbber {
+          right: 5px;
+          left: 0; /* RTL */
+        }
+      }
+    }
+  }
+  .inline-conditions-container .condition-wrapper .form-item .ajax-progress {
+    margin-top: 0 !important; /* RTL */
+    right: 61px;
+    left: 0; /* RTL */
+  }
+  .field-name-commerce-discount-date .fieldset-wrapper .container-inline-date .date-padding > .form-item:first-child input.form-text {
+    background: url('../images/calendar.png') 2px 3px no-repeat !important;
+  }
+}

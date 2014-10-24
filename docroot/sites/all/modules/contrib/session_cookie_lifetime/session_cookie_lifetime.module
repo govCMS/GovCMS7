@@ -1,0 +1,158 @@
+<?php
+/**
+ * @file
+ * Session configuration Drupal module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function session_cookie_lifetime_menu() {
+  $items = array();
+
+  $items['admin/config/system/session_cookie_lifetime'] = array(
+    'title' => 'Session expiration',
+    'description' => 'Manage the amount of time before session cookies used on the site expire.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('session_cookie_lifetime_admin_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+ * Session configure admin form.
+ */
+function session_cookie_lifetime_admin_form($form, &$form_state) {
+  $form = array();
+
+  drupal_add_css(drupal_get_path('module', 'session_cookie_lifetime') . '/css/session_cookie_lifetime.admin.css');
+
+  $default_lifetime = format_interval(session_cookie_lifetime_get_original_lifetime());
+
+  $form['session_cookie_lifetime_type'] = array(
+    '#type' => 'radios',
+    '#title' => t("Set when the user's session expires"),
+    '#options' => array(
+      'default' => t("Default (!default_lifetime)", array('!default_lifetime' => $default_lifetime)),
+      'browser_session' => t('When the browser session is closed'),
+      'time' => t('After a specific period of time'),
+    ),
+    '#default_value' => variable_get('session_cookie_lifetime_type', 'default'),
+  );
+
+  $form['session_cookie_lifetime_container'] = array(
+    '#type' => 'container',
+    '#states' => array(
+      'visible' => array(
+        ':input[name="session_cookie_lifetime_type"]' => array('value' => 'time'),
+      ),
+    ),
+  );
+
+  $form['session_cookie_lifetime_container']['session_cookie_lifetime_amount'] = array(
+    '#title' => 'Expiry time',
+    '#title_display' => 'invisible',
+    '#type' => 'textfield',
+    '#size' => 15,
+    '#default_value' => variable_get('session_cookie_lifetime_amount', ''),
+    '#element_validate' => array('element_validate_integer_positive'),
+  );
+
+  $form['session_cookie_lifetime_container']['session_cookie_lifetime_multiplier'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      60 => t('minutes'),
+      60 * 60 => t('hours'),
+      60 * 60 * 24 => t('days'),
+      60 * 60 * 24 * 7 => t('weeks'),
+      60 * 60 * 24 * 30 => t('months'),
+      60 * 60 * 24 * 365 => t('years'),
+    ),
+    '#default_value' => variable_get('session_cookie_lifetime_multiplier', 60),
+  );
+
+  $form['session_cookie_lifetime_description'] = array(
+    '#markup' => t('Configure when the session cookies used by this site are set to expire. Upon expiring the user will be forced to re-authenticate with the site.'),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Sets the session lifetime based on the module's setting.
+ * Saves the original session cookie lifetime.
+ */
+function session_cookie_lifetime_init() {
+  $original_cookie_params = session_get_cookie_params();
+  session_cookie_lifetime_set_original_lifetime($original_cookie_params['lifetime']);
+
+  $cookie_lifetime = session_cookie_lifetime_get_lifetime();
+  if ($cookie_lifetime !== NULL) {
+    session_set_cookie_params($cookie_lifetime);
+  }
+}
+
+/**
+ * Get the session cookie lifetime.
+ *
+ * @return int|null
+ *   NUll is server default, otherwise it's the expiry time in seconds.
+ */
+function session_cookie_lifetime_get_lifetime() {
+  $type = variable_get('session_cookie_lifetime_type', 'default');
+
+  $lifetime = 0;
+
+  switch ($type) {
+    case 'default':
+      $lifetime = NULL;
+      break;
+
+    case 'browser_session':
+      $lifetime = 0;
+      break;
+
+    case 'time':
+      $amount = variable_get('session_cookie_lifetime_amount', 0);
+      $multiplier = variable_get('session_cookie_lifetime_multiplier', 60);
+
+      $lifetime = $amount * $multiplier;
+      break;
+  }
+
+  return $lifetime;
+}
+
+/**
+ * Sets the original session cookie lifetime.
+ *
+ * @see session_cookie_lifetime_init()
+ *
+ * @param int $lifetime
+ *   Session cookie lifetime in seconds.
+ *
+ * @return null|int
+ *   Session cookie expiry date in seconds.
+ */
+function session_cookie_lifetime_set_original_lifetime($lifetime = NULL) {
+  static $original_lifetime = NULL;
+  if ($lifetime !== NULL) {
+    $original_lifetime = $lifetime;
+  }
+
+  return $original_lifetime;
+}
+
+/**
+ * Gets the original session cookie lifetime.
+ *
+ * @return null|int
+ *   Session cookie expiry date in seconds.
+ */
+function session_cookie_lifetime_get_original_lifetime() {
+  return session_cookie_lifetime_set_original_lifetime();
+}

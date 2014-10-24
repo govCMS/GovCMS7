@@ -1,0 +1,240 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Search pages module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function search_api_page_schema() {
+  $schema['search_api_page'] = array(
+    'description' => '',
+    'fields' => array(
+      'id' => array(
+        'description' => 'The primary identifier for a search page.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'index_id' => array(
+        'description' => 'The {search_api_index}.machine_name this page will search on.',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ),
+      'path' => array(
+        'description' => 'The path at which this search page can be viewed.',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'The displayed name for a search page.',
+        'type' => 'varchar',
+        'length' => 50,
+        'not null' => TRUE,
+      ),
+      'machine_name' => array(
+        'description' => 'The machine name for a search page.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+      ),
+      'description' => array(
+        'description' => 'The displayed description for a search page.',
+        'type' => 'text',
+        'not null' => FALSE,
+      ),
+      'options' => array(
+        'description' => 'The options used to configure the search page.',
+        'type' => 'text',
+        'serialize' => TRUE,
+        'not null' => TRUE,
+      ),
+      'enabled' => array(
+        'description' => 'A flag indicating whether the search page is enabled.',
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'status' => array(
+        'description' => 'The exportable status of the entity.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0x01,
+        'size' => 'tiny',
+      ),
+      'module' => array(
+        'description' => 'The name of the providing module if the entity has been defined in code.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+      ),
+    ),
+    'indexes' => array(
+      'enabled'  => array('enabled'),
+      'index_id' => array('index_id'),
+    ),
+    'unique' => array(
+      'path'  => array('path'),
+      'machine_name' => array('machine_name'),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function search_api_page_update_dependencies() {
+  // This update should run after primary IDs have been changed to machine names in the framework.
+  $dependencies['search_api_page'][7101] = array(
+    'search_api' => 7102,
+  );
+  return $dependencies;
+}
+
+/**
+ * Make {search_api_page}.index_id the index' machine name.
+ */
+function search_api_page_update_7101() {
+  // Update of search_api_page:
+  db_drop_index('search_api_page', 'index_id');
+  $spec = array(
+    'description' => 'The {search_api_index}.machine_name this page will search on.',
+    'type' => 'varchar',
+    'length' => 50,
+    'not null' => TRUE,
+  );
+  db_change_field('search_api_page', 'index_id', 'index_id', $spec);
+  db_add_index('search_api_page', 'index_id', array('index_id'));
+
+  foreach (db_query('SELECT id, machine_name FROM {search_api_index}') as $index) {
+    // We explicitly forbid numeric machine names, therefore we don't have to worry about conflicts here.
+    db_update('search_api_page')
+      ->fields(array(
+        'index_id' => $index->machine_name,
+      ))
+      ->condition('index_id', $index->id)
+      ->execute();
+  }
+}
+
+/**
+ * Add a {search_api_page}.machine_name column.
+ */
+function search_api_page_update_7102() {
+  $tx = db_transaction();
+  try {
+    // Add the machine_name field, along with its unique key index.
+    $spec = array(
+      'description' => 'The machine name for a search page.',
+      'type' => 'varchar',
+      'length' => 50,
+      'not null' => TRUE,
+      'default' => '',
+    );
+    db_add_field('search_api_page', 'machine_name', $spec);
+
+    $names = array();
+    foreach (db_query('SELECT id, name FROM {search_api_page}')->fetchAllKeyed() as $id => $name) {
+      $base = $name = drupal_strtolower(preg_replace('/[^a-z0-9]+/i', '_', $name));
+      $i = 0;
+      while (isset($names[$name])) {
+        $name = $base . '_' . ++$i;
+        if (drupal_strlen($name) > 50) {
+          $suffix_len = drupal_strlen('_' . $i);
+          $base = drupal_substr($base, 0, 50 - $suffix_len);
+          $name = $base . '_' . $i;
+        }
+      }
+      $names[$name] = TRUE;
+      db_update('search_api_page')
+        ->fields(array(
+          'machine_name' => $name,
+        ))
+        ->condition('id', $id)
+        ->execute();
+    }
+
+    db_add_unique_key('search_api_page', 'machine_name', array('machine_name'));
+
+    // Add the status field.
+    $spec = array(
+      'description' => 'The exportable status of the entity.',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => 0x01,
+      'size' => 'tiny',
+    );
+    db_add_field('search_api_page', 'status', $spec);
+
+    // Add the module field.
+    $spec = array(
+      'description' => 'The name of the providing module if the entity has been defined in code.',
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    );
+    db_add_field('search_api_page', 'module', $spec);
+  }
+  catch (Exception $e) {
+    $tx->rollback();
+    try {
+      db_drop_field('search_api_page', 'machine_name');
+      db_drop_field('search_api_page', 'status');
+      db_drop_field('search_api_page', 'module');
+    }
+    catch (Exception $e1) {
+      // Ignore.
+    }
+    throw new DrupalUpdateException(t('An exception occurred during the update: @msg.', array('@msg' => $e->getMessage())));
+  }
+}
+
+/**
+ * Restrict Search API Page machine names to 32 characters.
+ */
+function search_api_page_update_7103() {
+  $tx = db_transaction();
+  try {
+    foreach (db_query('SELECT machine_name FROM {search_api_page} WHERE LENGTH(machine_name) > 32')->fetchCol() as $old_name) {
+      if (!isset($existing)) {
+        $existing = db_query('SELECT machine_name FROM {search_api_page}')->fetchAllAssoc('machine_name');
+      }
+      $base = $name = substr($old_name, 0, 32);
+      $i = 0;
+      while (isset($existing[$name])) {
+        $name = $base . '_' . ++$i;
+        if (strlen($name) > 32) {
+          $suffix_len = strlen('_' . $i);
+          $base = substr($base, 0, 32 - $suffix_len);
+          $name = $base . '_' . $i;
+        }
+      }
+      $existing[$name] = TRUE;
+      db_update('search_api_page')
+        ->fields(array(
+          'machine_name' => $name,
+        ))
+        ->condition('machine_name', $old_name)
+        ->execute();
+    }
+
+    $spec = array(
+      'description' => 'The machine name for a search page.',
+      'type' => 'varchar',
+      'length' => 32,
+      'not null' => TRUE,
+    );
+    db_change_field('search_api_page', 'machine_name', 'machine_name', $spec);
+  }
+  catch (Exception $e) {
+    $tx->rollback();
+    throw new DrupalUpdateException(t('An exception occurred during the update: @msg.', array('@msg' => $e->getMessage())));
+  }
+}

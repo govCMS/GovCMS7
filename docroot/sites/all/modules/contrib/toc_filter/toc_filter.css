@@ -1,0 +1,60 @@
+/**
+ * @file
+ * Table of content module styling
+ */
+
+a.toc-filter-top /* Hide top anchor from page rendering */ {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  display: block;
+}
+
+div.toc-filter,
+div.toc-filter-bullet,
+div.toc-filter-number,
+div.toc-filter-faq {}
+
+div.toc-filter-content {
+  clear: both;
+  margin: 1em 0;
+  border: 1px solid #ccc;
+  padding: 1em;
+  background-color: #eee;
+}
+
+div.toc-filter .item-list > h3 {
+  margin-top: 0;
+}
+
+div.toc-filter-content ul,
+div.toc-filter-content ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+h2 span.toc-filter-number,
+h3 span.toc-filter-number {
+  float: left;
+  display: block;
+  color: #999;
+  width: 1.5em;
+}
+
+/* back to top */
+div.toc-filter-back-to-top {
+  clear: both;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+}
+
+div.toc-filter-back-to-top.first {
+  border-top: none;
+}
+
+div.toc-filter-back-to-top a:link,
+div.toc-filter-back-to-top a:visited {
+  float: right;
+  display: block;
+  font-weight: bold;
+}

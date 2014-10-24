@@ -1,0 +1,203 @@
+<?php
+/**
+ * @file
+ * Converts header tags into a linked table of contents.
+ */
+
+/**
+ * Implements hook_init().
+ */
+function toc_filter_init() {
+  if (variable_get('toc_filter_smooth_scroll', '1')) {
+    drupal_add_js( drupal_get_path('module', 'toc_filter') . '/toc_filter.js', array('type' => 'file', 'every_page' => TRUE));
+    $settings = array(
+      'toc_filter_smooth_scroll_duration' => variable_get('toc_filter_smooth_scroll_duration', ''),
+    );
+    drupal_add_js($settings, 'setting');
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function toc_filter_menu() {
+  $items = array();
+  $items['admin/config/content/toc_filter'] = array(
+    'title' => 'TOC filter',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('toc_filter_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'toc_filter.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_filter_info().
+ */
+function toc_filter_filter_info() {
+  $filters['toc_filter'] = array(
+    'title' => t('Table of contents'),
+    'description' => t("Converts &lt;@header_tag&gt; tags to a linked table of contents with an optional title. (i.e [TOC:(faq|numbered) (title)]", array('@header_tag' => variable_get('toc_filter_header_tag', 'h3')) ),
+    'default settings' => array(),
+    'settings callback' => '_toc_filter_settings_callback',
+    'process callback' => '_toc_filter_process_callback',
+    'tips callback' => '_toc_filter_tips_callback',
+  );
+  return $filters;
+}
+
+/**
+ * TOC filter tips.
+ */
+function _toc_filter_tips_callback($delta, $format, $long = FALSE) {
+  return t("Adding [TOC:(faq|ol|number|ul|bullet) (title)] will generate a table of contents linked to all the &lt;h2&gt; tags with an optional title.");
+}
+
+/**
+ *  TOC filter processor callback: Convert's <h2> to a linked table of contents.
+ */
+function _toc_filter_process_callback($text) {
+  if (stripos($text, '[toc') === FALSE || !preg_match('/(?:<p>)?\s*\[TOC(?::(\w+))?([^\]]+)?\]\s*(?:<\/p>)?/i', $text, $matches) ) {
+    return $text;
+  }
+
+  $match = $matches[0];
+  $type = (!empty($matches[1])) ? drupal_strtolower($matches[1]) : 'ul';
+  $title = (!empty($matches[2])) ? trim($matches[2]) : '';
+  if (empty($title)) {
+    $title = variable_get('toc_filter_'. $type . '_default_title', '');
+  }
+
+  // Convert HTML tag types to readable strings.
+  switch ($type) {
+    case 'ol': $type = 'number'; break;
+    case 'ul': $type = 'bullet'; break;
+  }
+
+  $is_numbered = ($type == 'number' || $type == 'faq') ? TRUE : FALSE;
+
+  $header_tag = variable_get('toc_filter_header_tag', 'h3');
+  preg_match_all('/(<'. $header_tag .'[^>]*>)(.*?)(<\/'. $header_tag .'>)/s', $text, $header_matches);
+
+  $links_items = array();
+  $links = array();
+  for ($i=0, $len=count($header_matches[0]); $i<$len; $i++) {
+    $header_match = $header_matches[0][$i];
+    $open_tag = $header_matches[1][$i];
+    $header_title = $header_matches[2][$i];
+    $close_tag = $header_matches[3][$i];
+    $header_id = preg_replace('/[^-a-z0-9]+/', '-', drupal_strtolower(trim($header_title)));
+
+    // Add header class to open tag
+    $open_tag_attributes = toc_filter_parse_tag_attributes($open_tag) + array('class' => '');
+    $open_tag_attributes['class'] .= ((empty($open_tag_attributes['class'])) ? '' : ' ') . 'toc-header toc-header-' . $type;
+
+    $header_replace = '<' . $header_tag . drupal_attributes($open_tag_attributes) . '>' .
+      '<a name="' . $header_id . '" id="' . $header_id . '" class="toc-bookmark" rel="bookmark" title="' . strip_tags($header_title) . '"></a>' .
+      (($is_numbered) ? '<span class="toc-number">' . ($i+1) . '.  </span> ':'') .
+      $header_title .
+      $close_tag;
+
+    // Must manually build each link item since l() function can't generate just an anchor link (aka #anchor).
+    $links[] = '<a href="#'. $header_id .'">'. strip_tags($header_title, '<i><em><b><strong><br>') .'</a>';
+
+    // Add anchor before header
+    $back_to_top = theme('toc_filter_back_to_top', array('class' => ($i == 0) ? 'first' : ''));
+    $text = str_replace($header_match, $back_to_top . $header_replace, $text);
+  }
+
+  // If no TOC links found then just remove the [toc] tag and return the text.
+  if (empty($links)) {
+    return str_replace($match, '', $text);
+  }
+
+  // Theme list
+  $links_list_type = ($is_numbered) ? 'ol' : 'ul';
+  $links_list_attributes = array('class' => 'toc-filter-links');
+  $links_list = theme('item_list', array('items' => $links, 'title' => check_plain($title), 'type' => $links_list_type, 'attributes' => $links_list_attributes));
+
+  // Theme toc
+  $output = theme('toc_filter', array('type' => $type, 'content' => $links_list));
+  $text = str_replace($match, $output, $text);
+
+  // Add closing back to top.
+  $text .= theme('toc_filter_back_to_top', array('class' => 'last'));
+  return $text;
+}
+
+/**
+ * TOC filter settings callback.
+ */
+function _toc_filter_settings_callback() {
+  $form = array();
+  $form['toc_filter_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('TOC filter'),
+    '#description' => t('To configure this filter, please goto the global <a href="@href">TOC filter site configuration form</a>.', array('@href' => url('admin/config/content/toc_filter'))),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+  return $form;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Utility functions
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Parses an xhtml tag's attributes into an associated array.
+ */
+function toc_filter_parse_tag_attributes($tag) {
+  preg_match_all('/(\w+)\s*=\s*"([^"]+)"/', $tag, $matches);
+  $attributes = array();
+  for ($i=0, $len=count($matches[1]); $i < $len; $i++) {
+    $attributes[ $matches[1][$i] ] = htmlspecialchars_decode($matches[2][$i], ENT_QUOTES);
+  }
+  return $attributes;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Theme functions
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Implements hook_theme().
+ */
+function toc_filter_theme() {
+  return array(
+    'toc_filter' => array(
+      'variables' => array(
+        'type' => 'ul',
+        'content' => '',
+      ),
+    ),
+    'toc_filter_back_to_top' => array(
+      'variables' => array(
+        'class' => '',
+      ),
+    ),
+  );
+}
+
+/**
+ * Format back to top anchor link.
+ */
+function theme_toc_filter_back_to_top($variables) {
+  $class = (($variables['class']) ? ' ' . $variables['class'] : '');
+  return '<div class="toc-filter-back-to-top' . $class . '"><a href="#top">' . t('Back to top') . '</a></div>';
+}
+
+/**
+ * Format TOC filter.
+ */
+function theme_toc_filter($variables) {
+  $output = '<a name="top" class="toc-filter-top"></a>';
+  $output .= '<div class="toc-filter toc-filter-' . $variables['type'] . '">';
+  $output .= '<div class="toc-filter-content">' . $variables['content'] . '</div>';
+  $output .= '</div>';
+  return $output;
+}

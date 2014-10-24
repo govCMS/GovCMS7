@@ -128,11 +128,14 @@ function agov_core_create_bean($bean_type, $label, $description = '', $title = '
  *   (optional) The visibility of the block. Defaults to 0.
  * @param string $pages
  *   (optional) The pages to show the block on. Defaults to all.
+ * @param string $title
+ *   (optional) The title. Defaults to empty. Specify '<none>' to hide.
  *
+ * @throws Exception
  * @return bool
  *   TRUE if the block is inserted, or FALSE on an error.
  */
-function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '') {
+function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '', $title = '') {
   if (!isset($theme)) {
     $theme = variable_get('theme_default', NULL);
     if (!isset($theme) || is_null($theme)) {
@@ -143,6 +146,7 @@ function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_
     'module' => $module,
     'delta' => $delta,
     'theme' => $theme,
+    'title' => $title,
     'status' => (int) ($region != BLOCK_REGION_NONE),
     'weight' => (int) $weight,
     'region' => $region,
@@ -156,6 +160,7 @@ function agov_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_
       'module',
       'delta',
       'theme',
+      'title',
       'status',
       'weight',
       'region',
@@ -249,6 +254,7 @@ function agov_core_theme_info() {
  * Implements hook_form_alter().
  */
 function agov_core_form_alter(&$form, &$form_alter, $form_id) {
+
   // Install Canberra timezone.
   if ($form_id == 'system_regional_settings') {
     $timezone_form = $form['timezone']['date_default_timezone'];
@@ -259,6 +265,18 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
     asort($timezone_form['#options']);
     $form['timezone']['date_default_timezone'] = $timezone_form;
   }
+
+  // Apply search styles to search api pages components.
+  if ($form_id == 'search_api_page_search_form') {
+    $form['#attributes']['class'][] = 'search-form';
+    if (isset($form['text']['#markup'])) {
+      $form['text']['#markup'] = '<div class="search-form-description">' . $form['text']['#markup'] . '</div>';
+    }
+  }
+  elseif (stristr($form_id, 'search_api_page_')) {
+    $form['#attributes']['class'][] = 'search-form-widget';
+  }
+
 }
 
 /**
@@ -302,7 +320,7 @@ function agov_core_entity_info_alter(&$entity_info) {
 /**
  * Implements hook_metatag_config_default_alter().
  */
-function agov_metatag_config_default_alter(&$configs) {
+function agov_core_metatag_config_default_alter(&$configs) {
   $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
   $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
   $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));

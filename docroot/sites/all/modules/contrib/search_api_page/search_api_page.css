@@ -1,0 +1,12 @@
+.search-performance {
+  font-size: 80%;
+}
+
+ol.search-results {
+  display: block;
+  list-style-type: none;
+}
+
+li.search-result {
+  display: block;
+}

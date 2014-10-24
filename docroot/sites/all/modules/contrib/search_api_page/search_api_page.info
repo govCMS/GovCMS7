@@ -1,0 +1,14 @@
+name = Search pages
+description = "Create search pages using Search API indexes."
+dependencies[] = search_api
+core = 7.x
+package = Search
+
+configure = admin/config/search/search_api/page
+
+; Information added by Drupal.org packaging script on 2014-05-24
+version = "7.x-1.1"
+core = "7.x"
+project = "search_api_page"
+datestamp = "1400922229"
+

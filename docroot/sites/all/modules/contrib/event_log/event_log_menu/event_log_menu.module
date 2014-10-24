@@ -1,0 +1,175 @@
+<?php
+
+/**
+ * @file
+ * Logs menu CRUD commands in the event_log module.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_event_log_handlers().
+ * @return array
+ */
+function event_log_menu_event_log_handlers() {
+  // Node event log handler.
+  $handlers = array();
+  $handlers['menu'] = array(
+    'title' => t('Menu'),
+    'form_ids' => array(
+      'menu_edit_item',
+      'menu_item_delete_form',
+      'menu_overview_form'
+    ),
+    'form_submit_callback' => 'event_log_menu_form_submit',
+    'relationships' => array(
+      array(
+        'table' => 'menu_custom',
+        'field' => 'menu_name',
+        'operations' => array('insert', 'update', 'delete'),
+        'numeric' => FALSE,
+      ),
+      array(
+        'table' => 'menu_links',
+        'field' => 'mlid',
+        'operations' => array('link insert', 'link update', 'link delete'),
+        'numeric' => TRUE,
+      ),
+    ),
+  );
+  return $handlers;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function event_log_form_menu_overview_form_alter(&$form, &$form_state) {
+  // Save original tree structure.
+  $menu_name = $form_state['build_info']['args'][0]['menu_name'];
+  $data = menu_tree_all_data($menu_name);
+  $form_state['original_tree'] = $data;
+}
+
+/**
+ * Event log callback for the user authentication event log.
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ * @return array
+ */
+function event_log_menu_form_submit($form, $form_state, $form_id) {
+  global $user;
+  $log = NULL;
+  switch ($form_id) {
+    case 'menu_overview_form':
+      $menu = $form_state['build_info']['args'][0];
+
+      $info = array();
+      $log = array(
+        'operation' => 'overview',
+        'description' => t('%title (%name)', array(
+          '%title' => $menu['title'],
+          '%name' => $menu['menu_name']
+        )),
+        'ref_char' => $menu['menu_name'],
+        'info' => $form_state['original_tree'],
+      );
+      break;
+    case 'menu_edit_item':
+      if ($form_state['triggering_element']['#value'] == t('Save')) {
+        $menu_link = $form_state['build_info']['args'][1];
+        if (empty($menu_link)) {
+          // Insert.
+          $menu_link = menu_link_load($form_state['values']['mlid']);
+          $log = array(
+            'operation' => 'link insert',
+            'description' => t('%title, %path (%mlid)', array(
+              '%title' => $menu_link['link_title'],
+              '%path' => $menu_link['link_path'],
+              '%mlid' => $menu_link['mlid']
+            )),
+            'ref_numeric' => $menu_link['mlid'],
+          );
+        }
+        else {
+          // Update
+          $log = array(
+            'operation' => 'link update',
+            'description' => t('%title, %path (%mlid)', array(
+              '%title' => $menu_link['link_title'],
+              '%path' => $menu_link['link_path'],
+              '%mlid' => $menu_link['mlid']
+            )),
+            'ref_numeric' => $menu_link['mlid'],
+            'info' => $menu_link,
+          );
+        }
+      }
+      break;
+    case 'menu_item_delete_form':
+      // Delete.
+      $menu_link = $form_state['build_info']['args'][0];
+      $log = array(
+        'operation' => 'link delete',
+        'description' => t('%title, %path (%mlid)', array(
+          '%title' => $menu_link['link_title'],
+          '%path' => $menu_link['link_path'],
+          '%mlid' => $menu_link['mlid']
+        )),
+        'ref_numeric' => $menu_link['mlid'],
+        'info' => $menu_link,
+      );
+      break;
+  }
+  return $log;
+}
+
+/**
+ * Implements hook_menu_insert().
+ */
+function event_log_menu_menu_insert($menu) {
+  $log = array(
+    'type' => 'menu',
+    'operation' => 'insert',
+    'description' => t('%title (%name)', array(
+      '%title' => $menu['title'],
+      '%name' => $menu['menu_name']
+    )),
+    'ref_char' => $menu['menu_name'],
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_menu_update().
+ */
+function event_log_menu_menu_update($menu) {
+  $log = array(
+    'type' => 'menu',
+    'operation' => 'insert',
+    'description' => t('%title (%name)', array(
+      '%title' => $menu['title'],
+      '%name' => $menu['menu_name']
+    )),
+    'ref_char' => $menu['menu_name'],
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_menu_delete().
+ */
+function event_log_menu_menu_delete($menu) {
+  $log = array(
+    'type' => 'menu',
+    'operation' => 'insert',
+    'description' => t('%title (%name)', array(
+      '%title' => $menu['title'],
+      '%name' => $menu['menu_name']
+    )),
+    'ref_char' => $menu['menu_name'],
+    'info' => $menu,
+  );
+  event_log_insert($log);
+}

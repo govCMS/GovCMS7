@@ -6,8 +6,6 @@ defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
 
-projects[admin_menu][version] = "3.0-rc4"
-
 projects[admin_views][version] = "1.2"
 
 projects[bean][version] = "1.5"
@@ -39,6 +37,8 @@ projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce87
 projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
+projects[favicon][version] = "1.0-rc2"
+
 projects[features][version] = 2.2
 
 projects[file_entity][version] = "2.0-alpha3"
@@ -57,6 +57,8 @@ projects[linkchecker][version] = "1.2"
 
 projects[linkit][version] = "3.1"
 
+projects[login_security][version] = "1.9"
+
 projects[media][version] = "2.0-alpha1"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"
@@ -74,6 +76,8 @@ projects[menu_trail_by_path][version] = "2.0"
 projects[metatag][version] = "1.4"
 projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 
+projects[navbar][version] = "1.4"
+
 projects[references][version] = "2.1"
 
 projects[panels][version] = "3.4"
@@ -84,7 +88,8 @@ projects[password_policy][version] = "1.9"
 
 projects[pathauto][version] = "1.2"
 
-projects[pathauto_persist][version] = "1.3"
+projects[pathauto_persist][version] = "1.x-dev"
+projects[pathauto_persist][patch][] = "https://www.drupal.org/files/issues/pathauto_persist-n2107365-7.patch"
 
 projects[r4032login][version] = "1.5"
 
@@ -99,7 +104,14 @@ projects[scheduler_workbench][version] = "1.2"
 
 projects[search404][version] = "1.3"
 
+projects[search_api][version] = "1.13"
+projects[search_api_db][version] = "1.4"
+projects[search_api_page][version] = "1.1"
+projects[facetapi][version] = "1.5"
+
 projects[seckit][version] = "1.9"
+
+projects[session_cookie_lifetime] = "1.3"
 
 projects[site_map][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
@@ -108,11 +120,16 @@ projects[strongarm][version] = "2.0"
 
 projects[superfish][version] = "1.9"
 
+projects[toc_filter][version] = "1.2"
+
 projects[token][version] = "1.5"
 
 projects[twitter_block][version] = "2.1"
 
 projects[username_enumeration_prevention][version] = "1.0"
+
+projects[video_filter][version] = "3.1"
+projects[video_filter][patch][] = https://www.drupal.org/files/issues/video_filter-fix_modal-2335169-11.patch
 
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
@@ -141,8 +158,6 @@ projects[defaultcontent][patch][] = "https://drupal.org/files/1611928-fix-alt.pa
 projects[defaultcontent][patch][] = "https://drupal.org/files/1757782-cannot-import-menu-hierarchy-8.patch"
 projects[defaultcontent][patch][] = "https://drupal.org/files/1896232-defaultcontent-nid.patch"
 
-projects[search_config][version] = "1.0"
-
 projects[securepages][version] = "1.0-beta1"
 
 projects[uuid][version] = "1.0-alpha4"
@@ -163,10 +178,13 @@ projects[role_delegation][version] = "1.1"
 
 projects[flood_control][version] = "1.0"
 
-projects[login_security][version] = "1.4"
+
+
+projects[event_log][version] = "1.2"
 
 ; Themes
 projects[zen][version] = "5.5"
+projects[shiny][version] = "1.6"
 
 ; PreviousNext modules
 projects[agls][version] = "1.0-beta3"
@@ -187,3 +205,15 @@ libraries[ckeditor][download][type] = "get"
 libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.6.6.2/ckeditor_3.6.6.2.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
+
+libraries[underscore][download][type] = get
+libraries[underscore][download][url] = https://github.com/jashkenas/underscore/archive/1.5.2.zip
+libraries[underscore][type] = "library"
+
+libraries[backbone][download][type] = get
+libraries[backbone][download][url] = https://github.com/jashkenas/backbone/archive/1.1.0.zip
+libraries[backbone][type] = "library"
+
+libraries[modernizr][download][type] = "get"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
+libraries[modernizr][type] = "library"

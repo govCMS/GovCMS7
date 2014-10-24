@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Logs user authentication (login and logout) in the event_log module.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_event_log_handlers().
+ * @return array
+ */
+function event_log_auth_event_log_handlers() {
+  // Authentication event log handler.
+  $handlers = array();
+  $handlers['authentication'] = array(
+    'title' => t('User authentication'),
+    'form_ids' => array('user_login', 'user_login_block', 'user_pass'),
+    'form_submit_callback' => 'event_log_auth_form_submit',
+    'relationships' => array(
+      array(
+        'table' => 'users',
+        'field' => 'uid',
+        'operations' => array('request password'),
+        'numeric' => TRUE,
+      ),
+    ),
+  );
+  return $handlers;
+}
+
+/**
+ * Event log callback for the user authentication event log.
+ * @param $form
+ * @param $form_state
+ * @param $form_id
+ * @return array
+ */
+function event_log_auth_form_submit($form, $form_state, $form_id) {
+  global $user;
+  $log = NULL;
+  switch ($form_id) {
+    case 'user_login':
+    case 'user_login_block':
+      $log = array(
+        'operation' => 'login',
+        'description' => $user->name,
+      );
+      break;
+    case 'user_pass':
+      $log = array(
+        'operation' => 'request password',
+        'description' => $user->name,
+        'ref_numeric' => $form_state['values']['account']->uid,
+      );
+      break;
+  }
+  return $log;
+}
+
+/**
+ * Implements hook_user_logout().
+ */
+function event_log_auth_user_logout($account) {
+  $log = array(
+    'type' => 'authentication',
+    'operation' => 'logout',
+    'description' => $account->name,
+    'uid' => $account->uid,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function event_log_auth_form_user_login_alter(&$form, &$form_state) {
+  $form['#validate'][] = 'event_log_auth_user_login_validate';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function event_log_auth_form_user_login_block_alter(&$form, &$form_state) {
+  $form['#validate'][] = 'event_log_auth_user_login_validate';
+}
+
+function event_log_auth_user_login_validate($form, &$form_state) {
+  // Check for erros and log them.
+  $errors = form_get_errors();
+  if (!empty($errors)) {
+    $log = array(
+      'type' => 'authentication',
+      'operation' => 'fail',
+      'description' => t("Validation errors: @errors", array('@errors' => implode(", ", $errors))),
+    );
+    if (!empty($form_state['values']['name'])) {
+      $log['ref_char'] = $form_state['values']['name'];
+    }
+    event_log_insert($log);
+  }
+}

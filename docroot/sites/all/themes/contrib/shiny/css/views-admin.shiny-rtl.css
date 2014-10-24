@@ -1,0 +1,14 @@
+/* Overwriting Views Stylesheets that aren't using RTL styles */
+.form-edit .form-actions {
+  float: left;
+}
+
+#edit-displays-preview-controls .form-submit {
+  margin-left: 1em;
+  margin-right: 0;
+}
+
+#ctools-export-ui-list-form .ctools-export-ui-first-row .form-item {
+  margin-left: 5px;
+  margin-right: 0;
+}

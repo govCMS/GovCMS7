@@ -9,8 +9,8 @@
 
 
  /**
- * Build a form body for the configuration settings.
- */
+  * Build a form body for the configuration settings.
+  */
 function login_security_admin_settings() {
   $form = array();
 
@@ -67,7 +67,7 @@ function login_security_admin_settings() {
   $form['login_messages']['login_security_disable_core_login_error'] = array(
     '#type' => 'checkbox',
     '#title' => t('Disable login failure error message'),
-    '#description' => t('Checking this option login error messages will never be shown to the users. They will not be aware if the account exists, an invalid user name or password has been submitted or if the account is blocked. The core message "Sorry, unrecognized username or password. Have you forgotten your password?" is also hidden for the user.'),
+    '#description' => t('Checking this option prevents the display of login error messages. A user attempting to login will not be aware if the account exists, an invalid user name or password has been submitted, or if the account is blocked. The core messages "Sorry, unrecognized username or password. Have you forgotten your password?" and "The username {username} has not been activated or is blocked." are also hidden.'),
     '#default_value' => variable_get('login_security_disable_core_login_error', LOGIN_SECURITY_DISABLE_CORE_LOGIN_ERROR),
   );
   $form['login_messages']['login_security_notice_attempts_available'] = array(
@@ -182,7 +182,7 @@ function login_security_admin_settings() {
     '#description' => t('Enter the message to be sent to the administrator informing about supicious activity.'),
   );
 
-  //Clean event tracking list
+  // Clean event tracking list.
   $form['buttons']['login_security_clean_tracked_events'] = array(
     '#type' => 'submit',
     '#value' => t('Clear event tracking information'),
@@ -193,16 +193,16 @@ function login_security_admin_settings() {
   return system_settings_form($form);
 }
 
-/*
+/**
  * Verify that element is a positive integer value.
  */
 function _login_security_valid_integer($element, &$form_state) {
-  if (!ctype_alnum($element['#value']) || intval($element['#value']) < 0 ) {
+  if (!ctype_alnum($element['#value']) || intval($element['#value']) < 0) {
     form_error($element, t('The @field field should be a positive integer value greater than or equal to 0.', array('@field' => $element['#title'])));
   }
 }
 
-/*
+/**
  * Verify that element is a valid username.
  */
 function _login_security_valid_user($element, &$form_state) {
@@ -218,8 +218,8 @@ function _login_security_valid_user($element, &$form_state) {
   }
 }
 
-/*
- * Clean login_security_track table
+/**
+ * Clean login_security_track table.
  */
 function _login_security_clean_tracked_events($form, &$form_state) {
   drupal_set_message(t('Login Security event track list is now empty.'));

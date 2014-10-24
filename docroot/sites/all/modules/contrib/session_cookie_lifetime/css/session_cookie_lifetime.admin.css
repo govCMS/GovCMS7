@@ -1,0 +1,10 @@
+#edit-session-cookie-lifetime-container {
+  margin-left: 30px;
+  margin-top: -20px;
+}
+
+#edit-session-cookie-lifetime-container div.form-item-session-cookie-lifetime-amount {
+  clear: left;
+  float: left;
+  margin-right: 10px;
+}

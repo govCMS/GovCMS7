@@ -29,7 +29,7 @@ button {
   height: $inputHeight;
 }
 
-#main .form-submit {
+.form-submit {
   @include standard-button;
 }
 

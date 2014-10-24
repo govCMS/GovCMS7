@@ -1,13 +1,19 @@
+/**
+ * @file
+ * Custom admin-side JS for the Metatag module.
+ */
+
 (function ($) {
+  'use strict';
 
 Drupal.behaviors.metatagUIConfigListing = {
   attach: function (context) {
-    // Hide elements to be visible if JavaScript is enabled.
+    // Hidden elements to be visible if JavaScript is enabled.
     $('.js-show').show();
 
     // Make the leaf arrow clickable.
     $('.metatag-config-label').hover(function(){
-      $(this).css({'cursor':'pointer'});
+      $(this).css({'cursor': 'pointer'});
     })
     .click(function(){
       $(this).find('a.toggle-details', context).trigger('click');
@@ -37,6 +43,6 @@ Drupal.behaviors.metatagUIConfigListing = {
       event.stopPropagation();
     });
   }
-}
+};
 
 })(jQuery);

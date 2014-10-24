@@ -18,7 +18,7 @@ function _webform_defaults_time() {
     'pid' => 0,
     'weight' => 0,
     'value' => '',
-    'mandatory' => 0,
+    'required' => 0,
     'extra' => array(
       'timezone' => 'user',
       'hourformat' => '12-hour',
@@ -26,6 +26,7 @@ function _webform_defaults_time() {
       'title_display' => 0,
       'description' => '',
       'private' => FALSE,
+      'analysis' => FALSE,
     ),
   );
 }
@@ -102,15 +103,15 @@ function _webform_render_time($component, $value = NULL, $filter = TRUE) {
 
   $element = array(
     '#type' => 'webform_time',
-    '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title' => $filter ? webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
-    '#required' => $component['mandatory'],
+    '#required' => $component['required'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+    '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#element_validate' => array('webform_validate_time'),
     '#hourformat' => $component['extra']['hourformat'],
     '#minuteincrements' => $component['extra']['minuteincrements'],
-    '#default_value' => $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, FALSE) : $component['value'],
+    '#default_value' => $filter ? webform_replace_tokens($component['value'], $node) : $component['value'],
     '#timezone' => $component['extra']['timezone'],
     '#process' => array('webform_expand_time'),
     '#theme' => 'webform_time',
@@ -296,6 +297,7 @@ function _webform_display_time($component, $value, $format = 'html') {
 
   return array(
     '#title' => $component['name'],
+    '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#weight' => $component['weight'],
     '#theme' => 'webform_display_time',
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
@@ -352,7 +354,10 @@ function _webform_analysis_time($component, $sids = array()) {
   $nonblanks = count($times);
   $rows[0] = array(t('Left Blank'), ($submissions - $nonblanks));
   $rows[1] = array(t('User entered value'), $nonblanks);
-  return $rows;
+
+  return array(
+    'table_rows' => $rows,
+  );
 }
 
 /**
@@ -381,7 +386,7 @@ function _webform_csv_headers_time($component, $export_options) {
   $header = array();
   $header[0] = '';
   $header[1] = '';
-  $header[2] = $component['name'];
+  $header[2] = $export_options['header_keys'] ? $component['form_key'] : $component['name'];
   return $header;
 }
 
@@ -391,7 +396,8 @@ function _webform_csv_headers_time($component, $export_options) {
 function _webform_csv_data_time($component, $export_options, $value) {
   if ($value[0]) {
     $time = webform_date_array($value[0], 'time');
-    if ($component['extra']['hourformat'] == '24-hour') {
+    // An ISO 8601 time is the same as 24-hour time.
+    if (!empty($export_options['iso8601_time']) || $component['extra']['hourformat'] == '24-hour') {
       return sprintf('%02d', $time['hour']) . ':' . sprintf('%02d', $time['minute']);
     }
     else {

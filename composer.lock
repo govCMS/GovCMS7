@@ -104,12 +104,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "dbd9bb29d3288ad09afa87ec5e8025785c01969c"
+                "reference": "4a492223b0dc03d2e74f74e5faa30ed42df512b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/dbd9bb29d3288ad09afa87ec5e8025785c01969c",
-                "reference": "dbd9bb29d3288ad09afa87ec5e8025785c01969c",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/4a492223b0dc03d2e74f74e5faa30ed42df512b6",
+                "reference": "4a492223b0dc03d2e74f74e5faa30ed42df512b6",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
             ],
             "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
             "homepage": "http://www.drush.org",
-            "time": "2014-10-20 23:30:42"
+            "time": "2014-10-23 19:25:57"
         },
         {
             "name": "phing/phing",
@@ -222,12 +222,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/previousnext/agov.git",
-                "reference": "dc91ab7b7da959b375107ee50f1038d6e426293b"
+                "reference": "a8966475c8ef43ccc737788852ab5200ceb3b30e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/previousnext/agov/zipball/dc91ab7b7da959b375107ee50f1038d6e426293b",
-                "reference": "dc91ab7b7da959b375107ee50f1038d6e426293b",
+                "url": "https://api.github.com/repos/previousnext/agov/zipball/a8966475c8ef43ccc737788852ab5200ceb3b30e",
+                "reference": "a8966475c8ef43ccc737788852ab5200ceb3b30e",
                 "shasum": ""
             },
             "require": {
@@ -260,7 +260,7 @@
                 }
             ],
             "description": "aGov is a free open source Drupal 7 distribution developed specifically for Australian government organisations",
-            "time": "2014-10-21 01:40:20"
+            "time": "2014-10-24 03:24:08"
         },
         {
             "name": "previousnext/scaffold",

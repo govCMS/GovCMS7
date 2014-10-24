@@ -56,3 +56,16 @@ function theme_metatag_link_rev($variables) {
   unset($element['#value']);
   return theme('html_tag', $variables);
 }
+
+/**
+ * Theme callback for a proprty meta tag.
+ *
+ * The format is:
+ * <meta property="[name]" content="[value]" />
+ */
+function theme_metatag_property($variables) {
+  $element = &$variables['element'];
+  element_set_attributes($element, array('#name' => 'property', '#value' => 'content'));
+  unset($element['#value']);
+  return theme('html_tag', $variables);
+}

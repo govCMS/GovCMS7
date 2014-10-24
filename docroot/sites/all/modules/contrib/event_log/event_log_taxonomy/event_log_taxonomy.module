@@ -1,0 +1,140 @@
+<?php
+
+/**
+ * @file
+ * Logs menu CRUD commands in the event_log module.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_event_log_handlers().
+ * @return array
+ */
+function event_log_taxonomy_event_log_handlers() {
+  // Node event log handler.
+  $handlers = array();
+  $handlers['taxonomy'] = array(
+    'title' => t('Taxonomy'),
+    'relationships' => array(
+      array(
+        'table' => 'taxonomy_vocabulary',
+        'field' => 'machine_name',
+        'operations' => array(
+          'vocabulary insert',
+          'vocabulary update',
+          'vocabulary delete'
+        ),
+        'numeric' => FALSE,
+      ),
+      array(
+        'table' => 'taxonomy_term',
+        'field' => 'tid',
+        'operations' => array('term insert', 'term update', 'term delete'),
+        'numeric' => TRUE,
+      ),
+    ),
+  );
+  return $handlers;
+}
+
+/**
+ * Implements hook_taxonomy_vocabulary_insert().
+ */
+function event_log_taxonomy_taxonomy_vocabulary_insert($vocabulary) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'vocabulary insert',
+    'description' => t('%title (%name)', array(
+      '%title' => $vocabulary->name,
+      '%name' => $vocabulary->machine_name
+    )),
+    'ref_char' => $vocabulary->machine_name,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_taxonomy_vocabulary_update().
+ */
+function event_log_taxonomy_taxonomy_vocabulary_update($vocabulary) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'vocabulary update',
+    'description' => t('%title (%name)', array(
+      '%title' => $vocabulary->name,
+      '%name' => $vocabulary->machine_name
+    )),
+    'ref_char' => $vocabulary->machine_name,
+    'info' => $vocabulary->original,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_taxonomy_vocabulary_delete().
+ */
+function event_log_taxonomy_taxonomy_vocabulary_delete($vocabulary) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'vocabulary delete',
+    'description' => t('%title (%name)', array(
+      '%title' => $vocabulary->name,
+      '%name' => $vocabulary->machine_name
+    )),
+    'ref_char' => $vocabulary->machine_name,
+    'info' => $vocabulary,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_taxonomy_term_insert().
+ */
+function event_log_taxonomy_taxonomy_term_insert($term) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'term insert',
+    'description' => t('%name (%tid)', array(
+      '%name' => $term->name,
+      '%tid' => $term->tid
+    )),
+    'ref_numeric' => $term->tid,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_taxonomy_term_update().
+ */
+function event_log_taxonomy_taxonomy_term_update($term) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'term update',
+    'description' => t('%name (%tid)', array(
+      '%name' => $term->name,
+      '%tid' => $term->tid
+    )),
+    'ref_numeric' => $term->tid,
+    'info' => $term->original,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_taxonomy_term_delete().
+ */
+function event_log_taxonomy_taxonomy_term_delete($term) {
+  $log = array(
+    'type' => 'taxonomy',
+    'operation' => 'term delete',
+    'description' => t('%name (%tid)', array(
+      '%name' => $term->name,
+      '%tid' => $term->tid
+    )),
+    'ref_numeric' => $term->tid,
+    'info' => $term,
+  );
+  event_log_insert($log);
+}

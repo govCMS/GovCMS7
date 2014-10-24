@@ -1,0 +1,172 @@
+/* Form Overrides */
+
+.form-actions #edit-submit,
+.form-actions #edit-save,
+ul.action-links li,
+html.js .view-commerce-message-messages .view-footer fieldset.collapsible .fieldset-legend a,
+.field-widget-inline-entity-form .container-inline input.form-submit,
+input.ief-entity-submit,
+.field-widget-inline-entity-form fieldset fieldset .fieldset-wrapper .ief-entity-submit,
+.ief-row-form .ief-entity-submit {
+  margin-left: 1em;
+}
+
+fieldset .fieldset-legend {
+  margin: 0 15px 0 0;
+}
+
+.text-format-wrapper fieldset .fieldset-wrapper .form-item {
+  clear: right;
+}
+
+#edit-actions {
+  #edit-delete {
+    float: left;
+  }
+}
+
+input.form-checkbox + label,
+input.form-radio + label {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+#foo:checked,
+input.form-checkbox + label::before,
+input.form-radio + label::before {
+  left: auto;
+  right: 0;
+}
+
+/* Targeting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select.form-select {
+    padding: 5px 5px 5px 35px;
+    background: #fff url("../images/drop-filter-rtl.png") no-repeat left center;
+  }
+}
+
+/* Overlay Styles */
+#overlay-close-wrapper {
+  left: 17px;
+  right: auto;
+
+  #overlay-close {
+    left: 0;
+    right: auto;
+  }
+}
+
+#overlay-tabs-wrapper {
+  float: left;
+}
+
+#overlay-tabs,
+#branding ul.tabs {
+  clear: left;
+  left: 0;
+  right: auto;
+}
+
+#overlay-tabs li a,
+#overlay-tabs li a:active,
+#overlay-tabs li a:visited,
+#overlay-tabs li a:hover,
+#branding ul.tabs li a {
+  float: right;
+  margin: 0 0 1px 5px;
+}
+
+#overlay-tabs li.active a,
+#overlay-tabs li.active a.active,
+#overlay-tabs li.active a:active,
+#overlay-tabs li.active a:visited,
+#branding ul.tabs li.active a {
+  margin: 0 0 0 5px;
+}
+
+.overlay ul.secondary {
+  margin-top: 0;
+
+  li {
+    padding: 0 10px 0 0;
+  }
+}
+#powered_by_drupal_commerce {
+  float: right;
+}
+#credit {
+  float: left;
+
+  .message {
+    clear: left;
+    float: left;
+  }
+
+  /* CG Logo on White */
+  .logo a {
+    clear: left;
+    float: left;
+  }
+}
+
+.breadcrumb {
+  clear: right;
+  float: right;
+  width: auto;
+
+  a, span {
+    margin: 0 0 0 5px;
+  }
+
+  span {
+    background: transparent url("../images/breadcrumb-rtl.png") no-repeat 0 0;
+  }
+}
+
+.form-managed-file input.form-file {
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Action Links Overrides of above */
+ul.action-links li {
+  float: right;
+}
+ul.action-links li a {
+  background: transparent url("../images/add2.png") no-repeat 95% 10px;
+  padding: 4px 30px 4px 10px;
+}
+.rules-elements-table ul.rules-operations-add a {
+  float: right;
+}
+
+table td.views-field-edit-node a {
+  margin-left: 10px;
+  margin-right: 0;
+}
+.form-item-changed-command-example .ajax-progress,
+#commerce-kickstart-inline-help-form-ajax .ajax-progress {
+  float: right;
+  margin-left: 10px;
+  margin-right: 0;
+}
+.item-list ul.pager li {
+  border-left: 1px solid #737373;
+  border-right: 0;
+  margin: 0 0 0 5px;
+  padding: 0 0 0 5px;
+  text-transform: capitalize;
+}
+ul.pager li.pager-next {
+  border-left: 0;
+  border-right: 1px;
+}
+.item-list ul.pager {
+  text-align: left;
+}
+
+fieldset.collapsed {
+  padding-left: 25px;
+  padding-right: 0;
+}

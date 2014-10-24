@@ -1,0 +1,17 @@
+<?php
+/**
+ * @file
+ * Installation information for the 'Table of contents filter' module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function toc_filter_uninstall() {
+  variable_del('toc_filter_header_tag');
+  variable_del('toc_filter_ol_default_title');
+  variable_del('toc_filter_ul_default_title');
+  variable_del('toc_filter_faq_default_title');
+  variable_del('toc_filter_smooth_scroll');
+  variable_del('toc_filter_smooth_scroll_duration');
+}

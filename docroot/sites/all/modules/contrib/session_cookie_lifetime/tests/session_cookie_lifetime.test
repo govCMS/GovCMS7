@@ -1,0 +1,94 @@
+<?php
+
+class sessionCookieLifetimeTestCase extends DrupalWebTestCase {
+
+  protected $adminUser;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Session cookie lifetime',
+      'description' => 'Setting custom session cookie lifetime functionality',
+      'group' => 'Session',
+    );
+  }
+
+  /**
+   * Enable modules and create users with specific permissions.
+   */
+  public function setUp() {
+    parent::setUp('session_cookie_lifetime');
+    $this->adminUser = $this->drupalCreateUser(array('administer site configuration'));
+  }
+
+  /**
+   * Test Browser session lifetime session cookie functionality.
+   */
+  public function testLifetimeBrowserSession() {
+    $this->drupalLogin($this->adminUser);
+    $this->drupalGet('admin/config/system/session_cookie_lifetime');
+
+    $post = array('session_cookie_lifetime_type' => 'browser_session');
+    $this->drupalPost('admin/config/system/session_cookie_lifetime', $post, t('Save configuration'));
+    $this->drupalLogout();
+
+    $this->drupalLogin($this->adminUser);
+    $this->assertSessionExpiry(0, t('Expires tag not found'));
+  }
+
+  /**
+   * Test time based session cookie functionality.
+   */
+  public function testLifetimeTimebased() {
+    $this->drupalLogin($this->adminUser);
+    $number_of_days = rand(10, 1000);
+    $post = array(
+      'session_cookie_lifetime_type' => 'time',
+      'session_cookie_lifetime_amount' => $number_of_days,
+      // Days.
+      'session_cookie_lifetime_multiplier' => 60 * 60 * 24,
+    );
+    $this->drupalPost('admin/config/system/session_cookie_lifetime', $post, t('Save configuration'));
+
+    $this->drupalLogout();
+
+    $this->drupalLogin($this->adminUser);
+    $expiry_time =$number_of_days * 60 * 60 * 24;
+    $this->assertSessionExpiry($expiry_time, t('Expires tag is set to !amount days', array('!amount' => $number_of_days)));
+  }
+
+  /**
+   * Assert session expiry time, based on the previous request.
+   *
+   * @param int $session_lifetime
+   *   Session lifetime in seconds.
+   * @param string $message
+   *   Assert text.
+   */
+  protected function assertSessionExpiry($session_lifetime, $message = '') {
+    $cookie_string = $this->drupalGetHeader('set-cookie', TRUE);
+
+    // If session lifetime is 0, there should be no "expires" tag in the header.
+    if ($session_lifetime == 0) {
+      $found_expires_string = strpos($cookie_string, ' expires=');
+      $this->assertFalse($found_expires_string, $message);
+    }
+    // Otherwise parse the expires tag from set-cookie and assert that it is
+    // approximately valid.
+    else {
+      $matches = array();
+      preg_match('/expires=([^;]*)/', $cookie_string, $matches);
+      $expires_string = $matches[1];
+      $cookie_timestamp = strtotime($expires_string);
+
+      $current_timestamp = time();
+      $php_max_execution_time = ini_get('max_execution_time');
+
+      // Compensate with the maximum php execution time.
+      $maximum_cookie_timestamp = $current_timestamp + $session_lifetime;
+      $minimum_cookie_timestamp = $current_timestamp - $php_max_execution_time + $session_lifetime;
+      $valid_timestamp = ($maximum_cookie_timestamp >= $cookie_timestamp
+        && $minimum_cookie_timestamp <= $cookie_timestamp);
+      $this->assertTrue($valid_timestamp, $message);
+    }
+  }
+}

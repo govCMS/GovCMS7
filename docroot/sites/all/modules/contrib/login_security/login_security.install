@@ -10,7 +10,7 @@
  */
 function login_security_schema() {
   $schema['login_security_track'] = array(
-  'description' => 'Keeps track of failed login attempts, as a pair of the IP address and user name.',
+    'description' => 'Keeps track of failed login attempts, as a pair of the IP address and user name.',
     'fields' => array(
       'id' => array(
         'type' => 'serial',
@@ -43,17 +43,10 @@ function login_security_schema() {
       'host' => array('host'),
       'timestamp' => array('timestamp'),
     ),
-    'primary key' => array('id')
+    'primary key' => array('id'),
   );
 
   return $schema;
-}
-
-/**
- * Implements hook_install().
- */
-function login_security_install() {
-
 }
 
 /**

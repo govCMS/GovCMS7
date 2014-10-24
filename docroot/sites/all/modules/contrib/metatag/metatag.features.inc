@@ -36,6 +36,9 @@ function metatag_features_export_render($module_name, $data, $export = NULL) {
     if ($config = metatag_config_load($name)) {
       $export = new stdClass();
       $export->instance = $config->instance;
+      if (isset($config->disabled)) {
+        $export->disabled = $config->disabled;
+      }
       $export->config = $config->config;
       $export = features_var_export($export, '  ');
       $key = features_var_export($name);

@@ -3,6 +3,12 @@
 /**
  * @file
  * Allows users and system to add AGLS meta tags to Drupal pages.
+ *
+ * @copyright Copyright(c) 2013 Previous Next Pty Ltd
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Kim Pepper kim at previousnext dot com dot au
+ * @author Nick Schuch nick at previousnext dot com dot au
+ * @author Chris Skene chris at previousnext dot com dot au
  */
 
 /**
@@ -15,25 +21,17 @@ function agls_ctools_plugin_api($owner, $api) {
 }
 
 /**
- * Implements hook_theme().
+ * Implements hook_preprocess_html().
  */
-function agls_theme() {
-  $info['metatag_agls'] = array(
-    'render element' => 'element',
+function agls_preprocess_html(&$vars) {
+
+  $element = array(
+    '#tag' => 'link',
+    '#attributes' => array(
+      'rel' => 'schema.AGLSTERMS',
+      'href' => 'http://www.agls.gov.au/agls/terms/',
+    ),
   );
 
-  return $info;
-}
-
-/**
- * Theme callback for a Dublin Core meta tag.
- */
-function theme_metatag_agls($variables) {
-  $element = &$variables['element'];
-  element_set_attributes($element, array(
-    '#name' => 'name',
-    '#value' => 'content')
-  );
-  unset($element['#value']);
-  return theme('html_tag', $variables);
+  drupal_add_html_head($element, 'agls_schema');
 }

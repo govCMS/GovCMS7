@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * @file
+ * The 'Event log' module remembers form submissions or other actions that were
+ * performed on the website.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function event_log_menu() {
+
+  $items['admin/reports/events'] = array(
+    'title' => 'Event log',
+    'description' => 'Shows all logged events.',
+    'page callback' => 'event_log_overview_page',
+    'access arguments' => array('access event log'),
+    'file' => 'event_log.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/reports/events/ajax-get-operations'] = array(
+    'title' => 'AJAX callback for operations',
+    'page callback' => 'event_log_overview_page_form_get_operations',
+    'delivery callback' => 'ajax_deliver',
+    'access arguments' => array('access event log'),
+    'file' => 'event_log.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function event_log_permission() {
+  return array(
+    'access event log' => array(
+      'title' => t('Access event log'),
+      'description' => t('Allows a user to access the logged events.'),
+    ),
+  );
+}
+
+/**
+ * Inserts the log record in the event log. Sets the lid.
+ *
+ * @param array $log
+ *   The log record to be saved. This record contains the following fields:
+ *   - {string} type
+ *     The event type. This is usually the object type that is described by this
+ *     event. Example: 'node' or 'user'. Required.
+ *   - {string} operation
+ *     The operation being performed. Example: 'insert'. Required.
+ *   - {string} form_id
+ *     The form_id of the submitted form. Optional.
+ *   - {string} description
+ *     A textual description of the event. Required.
+ *   - {string} ref_numeric
+ *     Reference to numeric id. Optional.
+ *   - {string} ref_char
+ *     Reference to alphabetical id. Optional.
+ *   - {string} info
+ *     Informative data, for example of the modified object. Optional.
+ */
+function event_log_insert(&$log) {
+  if (php_sapi_name() == 'cli') {
+    // Ignore CLI requests.
+    return;
+  }
+
+  if (empty($log['created'])) {
+    $log['created'] = REQUEST_TIME;
+  }
+
+  if (empty($log['uid'])) {
+    global $user;
+    $log['uid'] = $user->uid;
+  }
+
+  $ip = ip_address();
+  if (empty($log['ip']) && !empty($ip)) {
+    global $user;
+    $log['ip'] = $ip;
+  }
+
+  if (!empty($log['info']) && !is_string($log['info'])) {
+    $log['info'] = drupal_json_encode($log['info']);
+  }
+
+  if (!empty($log['info']) && (strlen($log['info']) > 20000)) {
+    // Limit the amount of data to prevent the database from filling up too
+    // quickly.
+    $log['info'] = substr($log['info'], 0, 20000);
+  }
+
+  if (empty($log['path'])) {
+    // If the menu is currently being rebuilt, menu_get_item will cause an
+    // infinite loop. That's why we will check the cache directly.
+    $router_items = & drupal_static('menu_get_item');
+    if (!empty($router_items[$_GET['q']])) {
+      $item = $router_items[$_GET['q']];
+    }
+
+    if (!empty($item)) {
+      $log['path'] = $item['path'];
+    }
+  }
+
+
+  drupal_write_record('event_log', $log);
+}
+
+/**
+ * Returns all existing event handlers.
+ * @return array
+ *   An array with the event log handlers.
+ */
+function event_log_get_event_handlers() {
+  $handlers = drupal_static(__FUNCTION__);
+  if ($handlers === NULL) {
+    $handlers = module_invoke_all('event_log_handlers');
+    drupal_alter('event_log_handlers', $handlers);
+  }
+  return $handlers;
+}
+
+/**
+ * Form submission callback.
+ */
+function event_log_form_submit(&$form, &$form_state) {
+  if (!empty($form_state['__event_log_logged'])) {
+    // Some forms are submitted twice, for instance the node_form.
+    // We will only call the submit callback once.
+    return;
+  }
+
+  $form_state['__event_log_logged'] = TRUE;
+
+  // Get form id.
+  $form_id = $form['#form_id'];
+
+  // Dispatch the submission to the correct event handler.
+  $handlers = event_log_get_event_handlers();
+  foreach ($handlers as $type => $handler) {
+    $dispatch = FALSE;
+    if (!empty($handler['form_ids']) && in_array($form_id, $handler['form_ids'])) {
+      $dispatch = TRUE;
+    }
+    elseif (!empty($handler['form_ids_regexp'])) {
+      foreach ($handler['form_ids_regexp'] as $regexp) {
+        if (preg_match($regexp, $form_id)) {
+          $dispatch = TRUE;
+          break;
+        }
+      }
+    }
+
+    if ($dispatch) {
+      // Dispatch!
+      $function = $handler['form_submit_callback'];
+      if (function_exists($function)) {
+        $log = $function($form, $form_state, $form_id);
+        if (!empty($log)) {
+          // Log the event.
+          $log['type'] = $type;
+          $log['form_id'] = $form_id;
+          event_log_insert($log);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function event_log_form_alter(&$form, &$form_state, $form_id) {
+  // Add submit callback to ANY form action.
+  event_log_add_submit_handler($form, 'event_log_form_submit');
+}
+
+/**
+ * Adds a submit handler to all submit hooks in the form tree.
+ * @param array &$element
+ *   A form element or the form itself.
+ * @param string $callback
+ *   The callback to be added.
+ */
+function event_log_add_submit_handler(&$element, $callback) {
+  if (array_key_exists("#submit", $element)) {
+    $element["#submit"][] = $callback;
+  }
+  $keys = element_children($element);
+  foreach ($keys as $key) {
+    if (is_array($element[$key])) {
+      event_log_add_submit_handler($element[$key], $callback);
+    }
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function event_log_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function event_log_form_event_log_overview_page_form_alter(&$form, &$form_state) {
+  // No token checking and/or caching.
+  unset($form['#token']);
+  $form_state['no_cache'] = TRUE;
+}

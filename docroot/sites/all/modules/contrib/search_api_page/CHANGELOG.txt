@@ -1,0 +1,50 @@
+Search API Pages 1.1 (05/24/2014):
+----------------------------------
+- #2259109 by DamienMcKenna, drunken monkey: Added a "placeholder" attribute
+  for the search block.
+- #1371482 by rooby, DamienMcKenna: Added per-page permissions.
+- #2189633 by acrazyanimal: Added the search page ID to the query options.
+- #2179399 by mparker17, drunken monkey: Fixed recognition of non-standard
+  entity indexes.
+- #2134731 by drunken monkey: Fixed notices when trying to display the block of
+  a disabled search page.
+
+Search API Pages 1.0 (09/01/2013):
+----------------------------------
+- #2071093 by drunken monkey, quiptime: Fixed logic error in template code.
+- #1442686 by drunken monkey: Documented pager issues.
+
+Search API Pages 1.0, RC 1 (07/10/2013):
+----------------------------------------
+- #1313676 by tomogden, drunken monkey, aaronbauman, guillaumev: Added
+  templates.
+- #2012712 by drunken monkey: Fixed $reset parameter for load functions.
+- #1999102 by drunken monkey: Added contextual links to blocks and pages.
+- #1999106 by drunken monkey: Minor code cleanup.
+- #1993482 by drunken monkey: Fixed overlong block deltas.
+- #1993208 by drunken monkey: Fixed handling of slashes in keywords.
+- #1993952 by drunken monkey: Added language filter option.
+- #1424086 by jasperknops, drunken monkey, aaronbauman: Fixed search form on 404
+  pages.
+- #1512086 by wbressers, drunken monkey: Added option to hide the form on the
+  results page.
+- #1377292 by elliotttf, weri: Fixed search form block for anonymous users.
+- #1411852 by amateescu: Fixed wrong view mode for search pages of non-entities.
+- #1662794 by tomogden: Miscellaneous code cleanup.
+- #1617982 by drunken monkey: Fixed uncaught exceptions when executing search.
+- #1637590 by drunken monkey, elliotttf: Fixed ommission of text format when
+  creating result summaries.
+- #1642274 by welshtzigane: Fixed deleting an index does not remove a disabled
+  search page.
+- #1569608 by Everett Zufelt: Fixed accessibility of search block.
+
+Search API Pages 1.0, Beta 2 (11/10/2011):
+------------------------------------------
+- #1285116 by tomogden, drunken monkey: Added further flexibility for paging.
+- #1330424 by drunken monkey: Adapted to new structure of index fields settings.
+- #1125930 by Ivan Zugec, drunken monkey: Added exporting support for search
+  pages.
+
+Search API Pages 1.0, Beta 1 (09/06/2011):
+------------------------------------------
+First beta release of the Search API Pages project.

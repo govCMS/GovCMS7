@@ -9,6 +9,18 @@ function metatag_opengraph_preprocess_html(&$variables) {
   if (!module_exists('rdf')) {
     $variables['rdf_namespaces'] .= "\n  xmlns:og=\"http://ogp.me/ns#\"";
   }
+
+  // @TODO Would it be worth dynamically identifying whether these should be
+  // added, or just output them all?
+
+  // Need an extra namespace for the "article" tags.
+  $variables['rdf_namespaces'] .= "\n  xmlns:article=\"http://ogp.me/ns/article#\"";
+  // Need an extra namespace for the "book" tags.
+  $variables['rdf_namespaces'] .= "\n  xmlns:book=\"http://ogp.me/ns/book#\"";
+  // Need an extra namespace for the "profile" tags.
+  $variables['rdf_namespaces'] .= "\n  xmlns:profile=\"http://ogp.me/ns/profile#\"";
+  // Need an extra namespace for the "video" tags.
+  $variables['rdf_namespaces'] .= "\n  xmlns:video=\"http://ogp.me/ns/video#\"";
 }
 
 /**
@@ -18,27 +30,6 @@ function metatag_opengraph_ctools_plugin_api($owner, $api) {
   if ($owner == 'metatag' && $api == 'metatag') {
     return array('version' => 1);
   }
-}
-
-/**
- * Implements hook_theme().
- */
-function metatag_opengraph_theme() {
-  $info['metatag_opengraph'] = array(
-    'render element' => 'element',
-  );
-
-  return $info;
-}
-
-/**
- * Theme callback for an OpenGraph meta tag.
- */
-function theme_metatag_opengraph($variables) {
-  $element = &$variables['element'];
-  element_set_attributes($element, array('#name' => 'property', '#value' => 'content'));
-  unset($element['#value']);
-  return theme('html_tag', $variables);
 }
 
 /*
@@ -74,7 +65,4 @@ og:audio:type
 
 og:upc
 og:isbn
-
-fb:admins
-fb:app_id
 */

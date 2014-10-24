@@ -1,0 +1,13 @@
+INSTALL.txt
+===========
+
+In .htaccess, comment out this line:
+ RewriteCond %{REQUEST_URI} !=/favicon.ico
+i.e, prefix the line with a # symbol like this:
+ # RewriteCond %{REQUEST_URI} !=/favicon.ico
+
+Place the favicon folder in your drupal/modules folder (or if multisite and this module is meant to be available to just one site in drupal/sites/www.YOURSITE.com/modules)
+
+Enable the favicon module at administer > modules
+
+You can specify your favicon icon file using Drupal default configuration in Apperance -> Settings -> [themename]

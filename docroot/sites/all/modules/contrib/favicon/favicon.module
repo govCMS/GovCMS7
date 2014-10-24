@@ -1,0 +1,90 @@
+<?php
+
+/**
+ * @file
+ * Module file for favicon module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function favicon_menu() {
+  // Override favicon.ico to forward to the theme's shortcut icon.
+  $items['favicon.ico'] = array(
+    'page callback' => 'favicon_shortcut_icon',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu callback; forwards to the favicon.
+ */
+function favicon_shortcut_icon() {
+  $file_details = _favicon_get_favicon_file();
+
+  if (empty($file_details)) {
+    drupal_not_found();
+  }
+
+  header('Content-Type: ' . $file_details['mime']);
+  header('Expires: 0');
+
+  // The readfile function is disabled on some hosting providers.
+  $handle = fopen($file_details['path'], 'rb');
+  if ($handle !== false) {
+    fpassthru($handle);
+    fclose($handle);
+  }
+
+  drupal_exit();
+}
+
+/**
+ * Get the full path and mime to the favicon.
+ *
+ * @return array|bool
+ *   FALSE if invalid file is set.
+ *   Array with keys:
+ *   'path' string full system path to file.
+ *   'mime' string file mime type.
+ */
+function _favicon_get_favicon_file() {
+  drupal_theme_initialize();
+  $favicon = theme_get_setting('favicon_path');
+
+  // If no theme favicon is supplied, use the Drupal default.
+  $favicon = empty($favicon) ? 'misc' . DIRECTORY_SEPARATOR . 'favicon.ico' : $favicon;
+
+  if (!empty($favicon) && $favicon[0] != DIRECTORY_SEPARATOR) {
+    $favicon = DIRECTORY_SEPARATOR . $favicon;
+  }
+
+  $file_path = getcwd() . $favicon;
+
+  if (!file_exists($file_path)) {
+    return FALSE;
+  }
+
+  $mime = file_get_mimetype($file_path);
+
+  $allowed_favicon_types = array(
+    'image/x-icon',
+    'image/vnd.microsoft.icon',
+  );
+
+  if (!in_array($mime, $allowed_favicon_types)) {
+    watchdog('favicon', 'Invalid mime type @mime for favicon at @path', array(
+      '@type' => $mime,
+      '@path' => $file_path,
+    ), WATCHDOG_ERROR);
+    return FALSE;
+  }
+
+  return array(
+    'path' => $file_path,
+    'mime' => $mime,
+  );
+}

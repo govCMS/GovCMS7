@@ -6,7 +6,7 @@
 function pathauto_persist_entity_load($entities, $type) {
   $states = pathauto_persist_entity_state_load_multiple($type, array_keys($entities));
   foreach ($states as $id => $state) {
-    if (!isset($entities[$id]->path['pathauto'])) {
+    if (!isset($entities[$id]->path) || (is_array($entities[$id]->path) && !isset($entities[$id]->path['pathauto']))) {
       $entities[$id]->path['pathauto'] = $state;
     }
   }

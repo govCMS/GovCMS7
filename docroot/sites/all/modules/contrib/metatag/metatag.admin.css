@@ -80,3 +80,9 @@ div.metatag-config-details ul li {
 div.metatag-config-details > p {
   margin: 0.25em 0;
 }*/
+
+
+/* For the advanced settings page */
+.metatag-bundle-checkbox {
+  margin-left: 2em;
+}

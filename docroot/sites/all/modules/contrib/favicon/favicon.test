@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * Tests for Favicon
+ */
+
+class FaviconTestCase extends DrupalWebTestCase {
+
+  /**
+   * Description of these test cases.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Favicon functionality',
+      'description' => 'Check the favicon module works as expected',
+      'group' => 'Favicon',
+    );
+  }
+
+  /**
+   * The setup function.
+   */
+  public function setUp() {
+    parent::setUp('favicon');
+  }
+
+  /**
+   * Test the return of the hook_menu function.
+   */
+  public function testMenu() {
+    $info = module_invoke('favicon', 'menu');
+    $this->assertEqual(1, count($info), t('Module defines one menu'));
+    $this->assertTrue(isset($info['favicon.ico']), t('Module favicon exists.'));
+    $this->assertEqual(isset($info['favicon.ico']['page callback']), 'favicon_shortcut_icon', t('page callback link correct'));
+    $this->assertTrue($info['favicon.ico']['access callback'], t('All can access callback'));
+    $this->assertEqual($info['favicon.ico']['type'], MENU_CALLBACK, t('callback is menu callback'));
+  }
+
+  /**
+   * Check favicon.ico returns the default favicon if no shortcut icon is specified.
+   */
+  public function testGetFaviconFile() {
+    $this->assertFavicon(getcwd() . '/misc/favicon.ico', t('No shortcut file is specified, the default is expected.'));
+  }
+
+  /**
+   * Check that the correct favicon.ico details are returned if a valid shortcut icon is specified.
+   */
+  public function testPassForGoodMimeType() {
+    $test_favicon_path = drupal_get_path('module', 'favicon') . DIRECTORY_SEPARATOR . 'favicon.ico';
+
+    $theme_settings = variable_get('theme_settings', array());
+    $theme_settings['favicon_path'] = str_replace(DIRECTORY_SEPARATOR, '/', $test_favicon_path);
+    variable_set('theme_settings', $theme_settings);
+
+    $this->assertFavicon(getcwd() . DIRECTORY_SEPARATOR . $test_favicon_path, t('A valid shortcut file is specified.'));
+  }
+
+  /**
+   * Check that nothing is returned if an invalid shortcut icon is specified.
+   */
+  public function testFailForBadMimeType() {
+    $theme_settings = variable_get('theme_settings', array());
+    $theme_settings['favicon_path'] = 'index.php';
+    variable_set('theme_settings', $theme_settings);
+
+    $file_details = _favicon_get_favicon_file();
+    $this->assertEqual($file_details, FALSE, t('Ensure getting a non valid file type for favicon returns nothing'));
+  }
+
+  /**
+   * Assert that the favicon is as expected
+   *
+   * @param string $path
+   *   The expected full path to the favicon file.
+   * @param string $message
+   *   A test message to display.
+   * @return bool
+   */
+  public function assertFavicon($path, $message = '') {
+    $file_details = _favicon_get_favicon_file();
+    $this->assertEqual($file_details['path'], $path, 'Favicon path is as expected.' . $message);
+
+    $allowed_favicon_types = array(
+      'image/x-icon',
+      'image/vnd.microsoft.icon',
+    );
+
+    return $this->assert(in_array($file_details['mime'], $allowed_favicon_types), t('Mime type of the favicon is as expected. ' . $message));
+  }
+}

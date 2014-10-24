@@ -1,0 +1,13 @@
+name = Session cookie lifetime
+description = Configure session cookie expiry date
+core = 7.x
+configure = admin/config/system/session_cookie_lifetime
+
+files[] = tests/session_cookie_lifetime.test
+
+; Information added by drupal.org packaging script on 2013-04-24
+version = "7.x-1.3"
+core = "7.x"
+project = "session_cookie_lifetime"
+datestamp = "1366809912"
+

@@ -15,7 +15,7 @@
 define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
 define('AGOV_INSTALL_DEFAULT_THEME', 'agov_zen');
 define('AGOV_DEFAULT_THEME', 'agov_barton');
-define('AGOV_DEFAULT_ADMIN_THEME', 'seven');
+define('AGOV_DEFAULT_ADMIN_THEME', 'shiny');
 define('AGOV_ADMIN_ROLE_ID', '3');
 
 /**
@@ -164,110 +164,330 @@ function _agov_set_default_themes() {
 function _agov_default_formats_and_permissions() {
 
   // Add text formats.
-  $filtered_html_format = array(
-    'format' => 'filtered_html',
-    'name' => 'Filtered HTML',
-    'weight' => 0,
-    'filters' => array(
-      // URL filter.
-      'filter_url' => array(
-        'weight' => 0,
-        'status' => 1,
-      ),
-      // HTML filter.
-      'filter_html' => array(
-        'weight' => 1,
-        'status' => 1,
-      ),
-      // Line break filter.
-      'filter_autop' => array(
-        'weight' => 2,
-        'status' => 1,
-      ),
-      // HTML corrector filter.
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
-        'status' => 1,
-      ),
-    ),
-  );
-  $filtered_html_format = (object) $filtered_html_format;
-  filter_format_save($filtered_html_format);
-
   $rich_text_format = array(
     'format' => 'rich_text',
-    'name' => 'Rich Text',
+    'name' => 'Rich text',
     'weight' => 0,
     'filters' => array(
-      // URL filter.
-      'filter_url' => array(
+      // Video filter - Must go before 'Convert URLs into links' per module documentation.
+      'video_filter' => array(
         'weight' => 0,
         'status' => 1,
+        'settings' => array(),
       ),
-      // HTML filter.
-      'filter_html' => array(
+      // Convert URLs into links.
+      'filter_url' => array(
         'weight' => 1,
         'status' => 1,
+        'settings' => array(
+          'filter_url_length' => 72,
+        ),
       ),
-      // Line break filter.
+      // Convert line breaks into HTML.
       'filter_autop' => array(
         'weight' => 2,
         'status' => 1,
+        'settings' => array(),
       ),
-      // HTML corrector filter.
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
+      // Wysiwyg filter.
+      'wysiwyg' => array(
+        'weight' => -50,
         'status' => 1,
+        'settings' => array(
+          'valid_elements' => 'a[href|target<_blank|title|class|name|id],
+div[id|class|align<center?justify?left?right],
+br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
+span,p[class],
+h2[class],h3[class],h4[class],h5[class],h6[class],
+img[!src|title|alt|width|height|class|hspace|vspace],
+table,tr,thead,td[colspan|rowspan|headers|class|id],th[colspan|rowspan|class|headers|id],tbody,caption,sup,sub,
+@[class]
+video',
+          'allow_comments' => 1,
+          'nofollow_policy' => 'disabled',
+          'nofollow_domains' => array(),
+          'style_color' => array(
+            'color' => 'color',
+            'background' => 0,
+            'background-color' => 0,
+            'background-image' => 0,
+            'background-repeat' => 0,
+            'background-attachment' => 0,
+            'background-position' => 0,
+          ),
+          'style_font' => array(
+            'font' => 0,
+            'font-family' => 0,
+            'font-size' => 0,
+            'font-size-adjust' => 0,
+            'font-stretch' => 0,
+            'font-style' => 0,
+            'font-variant' => 0,
+            'font-weight' => 0,
+          ),
+          'style_text' => array(
+            'text-align' => 'text-align',
+            'text-decoration' => 'text-decoration',
+            'text-indent' => 0,
+            'text-transform' => 0,
+            'letter-spacing' => 0,
+            'word-spacing' => 0,
+            'white-space' => 0,
+            'direction' => 0,
+            'unicode-bidi' => 0,
+          ),
+          'style_box' => array(
+            'padding-right' => 'padding-right',
+            'padding-left' => 'padding-left',
+            'margin' => 0,
+            'margin-top' => 0,
+            'margin-right' => 0,
+            'margin-bottom' => 0,
+            'margin-left' => 0,
+            'padding' => 0,
+            'padding-top' => 0,
+            'padding-bottom' => 0,
+          ),
+          'style_border-1' => array(
+            'border' => 0,
+            'border-top' => 0,
+            'border-right' => 0,
+            'border-bottom' => 0,
+            'border-left' => 0,
+            'border-width' => 0,
+            'border-top-width' => 0,
+            'border-right-width' => 0,
+            'border-bottom-width' => 0,
+            'border-left-width' => 0,
+          ),
+          'style_border-2' => array(
+            'border-color' => 0,
+            'border-top-color' => 0,
+            'border-right-color' => 0,
+            'border-bottom-color' => 0,
+            'border-left-color' => 0,
+            'border-style' => 0,
+            'border-top-style' => 0,
+            'border-right-style' => 0,
+            'border-bottom-style' => 0,
+            'border-left-style' => 0,
+          ),
+          'style_dimension' => array(
+            'height' => 0,
+            'line-height' => 0,
+            'max-height' => 0,
+            'max-width' => 0,
+            'min-height' => 0,
+            'min-width' => 0,
+            'width' => 0,
+          ),
+          'style_positioning' => array(
+            'bottom' => 0,
+            'clip' => 0,
+            'left' => 0,
+            'overflow' => 0,
+            'right' => 0,
+            'top' => 0,
+            'vertical-align' => 0,
+            'z-index' => 0,
+          ),
+          'style_layout' => array(
+            'float' => 'float',
+            'clear' => 0,
+            'display' => 0,
+            'position' => 0,
+            'visibility' => 0,
+          ),
+          'style_list' => array(
+            'list-style' => 0,
+            'list-style-image' => 0,
+            'list-style-position' => 0,
+            'list-style-type' => 0,
+          ),
+          'style_table' => array(
+            'border-collapse' => 0,
+            'border-spacing' => 0,
+            'caption-side' => 0,
+            'empty-cells' => 0,
+            'table-layout' => 0,
+          ),
+          'style_user' => array(
+            'cursor' => 0,
+            'outline' => 0,
+            'outline-width' => 0,
+            'outline-style' => 0,
+            'outline-color' => 0,
+            'zoom' => 0,
+          ),
+          'rule_valid_classes' => array(
+            0 => 'a*',
+            2 => 'b*',
+            4 => 'c*',
+            6 => 'd*',
+            8 => 'e*',
+            10 => 'f*',
+            12 => 'g*',
+            14 => 'h*',
+            16 => 'i*',
+            18 => 'j*',
+            20 => 'k*',
+            22 => 'l*',
+            24 => 'm*',
+            26 => 'n*',
+            28 => 'o*',
+            30 => 'p*',
+            32 => 'q*',
+            34 => 'r*',
+            36 => 's*',
+            38 => 't*',
+            40 => 'u*',
+            42 => 'v*',
+            44 => 'w*',
+            46 => 'x*',
+            48 => 'y*',
+            50 => 'z*',
+            52 => 'A*',
+            54 => 'B*',
+            56 => 'C*',
+            58 => 'D*',
+            60 => 'E*',
+            62 => 'F*',
+            64 => 'G*',
+            66 => 'H*',
+            68 => 'I*',
+            70 => 'J*',
+            72 => 'K*',
+            74 => 'L*',
+            76 => 'M*',
+            78 => 'N*',
+            80 => 'O*',
+            82 => 'P*',
+            84 => 'Q*',
+            86 => 'R*',
+            88 => 'S*',
+            90 => 'T*',
+            92 => 'U*',
+            94 => 'V*',
+            96 => 'W*',
+            98 => 'X*',
+            100 => 'Y*',
+            102 => 'Z*',
+            104 => 'lower-roman',
+            106 => 'upper-roman',
+            108 => 'lower-alpha',
+            110 => 'upper-alpha',
+          ),
+          'rule_valid_ids' => array(
+            0 => 'a*',
+            2 => 'b*',
+            4 => 'c*',
+            6 => 'd*',
+            8 => 'e*',
+            10 => 'f*',
+            12 => 'g*',
+            14 => 'h*',
+            16 => 'i*',
+            18 => 'j*',
+            20 => 'k*',
+            22 => 'l*',
+            24 => 'm*',
+            26 => 'n*',
+            28 => 'o*',
+            30 => 'p*',
+            32 => 'q*',
+            34 => 'r*',
+            36 => 's*',
+            38 => 't*',
+            40 => 'u*',
+            42 => 'v*',
+            44 => 'w*',
+            46 => 'x*',
+            48 => 'y*',
+            50 => 'z*',
+            52 => 'A*',
+            54 => 'B*',
+            56 => 'C*',
+            58 => 'D*',
+            60 => 'E*',
+            62 => 'F*',
+            64 => 'G*',
+            66 => 'H*',
+            68 => 'I*',
+            70 => 'J*',
+            72 => 'K*',
+            74 => 'L*',
+            76 => 'M*',
+            78 => 'N*',
+            80 => 'O*',
+            82 => 'P*',
+            84 => 'Q*',
+            86 => 'R*',
+            88 => 'S*',
+            90 => 'T*',
+            92 => 'U*',
+            94 => 'V*',
+            96 => 'W*',
+            98 => 'X*',
+            100 => 'Y*',
+            102 => 'Z*',
+          ),
+          'rule_style_urls' => array(),
+        ),
+      ),
+      // Convert Media tags to markup
+      'media_filter' => array(
+        'weight' => 3,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Table of contents filter.
+      'toc_filter' => array(
+        'weight' => 4,
+        'status' => 1,
+        'settings' => array(),
       ),
     ),
   );
   $rich_text_format = (object) $rich_text_format;
   filter_format_save($rich_text_format);
 
-  $full_html_format = array(
-    'format' => 'full_html',
-    'name' => 'Full HTML',
-    'weight' => 1,
+  $plain_text_format = array(
+    'format' => 'plain_text',
+    'name' => 'Plain text',
+    'weight' => 10,
     'filters' => array(
-      // URL filter.
-      'filter_url' => array(
+      // Display any HTML as plain text.
+      'filter_html_escape' => array(
         'weight' => 0,
         'status' => 1,
+        'settings' => array(),
       ),
-      // Line break filter.
-      'filter_autop' => array(
+      // Convert URLs into links.
+      'filter_url' => array(
         'weight' => 1,
         'status' => 1,
+        'settings' => array(
+          'filter_url_length' => 72,
+        ),
       ),
-      // HTML corrector filter.
-      'filter_htmlcorrector' => array(
-        'weight' => 10,
+      // Convert line breaks into HTML.
+      'filter_autop' => array(
+        'weight' => 2,
         'status' => 1,
+        'settings' => array(),
       ),
     ),
   );
-  $full_html_format = (object) $full_html_format;
-  filter_format_save($full_html_format);
+  $plain_text_format = (object) $plain_text_format;
+  filter_format_save($plain_text_format);
 
   // Enable default permissions for system roles.
-  $filtered_html_permission = filter_permission_name($filtered_html_format);
+  $rich_text_permission = filter_permission_name($rich_text_format);
   user_role_grant_permissions(
     DRUPAL_ANONYMOUS_RID,
     array(
       'access content',
-      $filtered_html_permission,
-      'search page content',
-      'search blog_article content',
-      'search event content',
-      'search media_release content',
-      'search news_article content',
-      'search publication content',
-    )
-  );
-  user_role_revoke_permissions(
-    DRUPAL_ANONYMOUS_RID,
-    array(
-      'search all content',
+      $rich_text_permission,
     )
   );
   user_role_grant_permissions(
@@ -277,19 +497,7 @@ function _agov_default_formats_and_permissions() {
       'access comments',
       'post comments',
       'skip comment approval',
-      $filtered_html_permission,
-      'search page content',
-      'search blog_article content',
-      'search event content',
-      'search media_release content',
-      'search news_article content',
-      'search publication content',
-    )
-  );
-  user_role_revoke_permissions(
-    DRUPAL_AUTHENTICATED_RID,
-    array(
-      'search all content',
+      $rich_text_permission,
     )
   );
 
@@ -377,7 +585,6 @@ function _agov_default_blocks() {
 
   // Set aGov blocks.
   agov_core_insert_block('agov_text_resize', 'text_resize', $themes, 'header');
-  agov_core_insert_block('search', 'form', $themes, 'header');
   agov_core_insert_block('workbench', 'block', $themes, 'content', -14);
   agov_core_insert_block('menu_block', 'agov_menu_block-footer', $themes, 'footer', 2);
   agov_core_insert_block('views', 'slideshow-block', $themes, 'highlighted', 0, 1, '<front>');
@@ -486,6 +693,20 @@ function _agov_default_variables() {
 
     // Force user to change password on login.
     'password_policy_new_login_change' => 1,
+
+    // Session lifetime 0.
+    'session_cookie_lifetime_type' => 'browser_session',
+
+    // Soft block users after 5 failed login attempts in 24 hours.
+    'login_security_user_wrong_count' => '5',
+    'login_security_track_time' => '24',
+
+    // Display last login time.
+    'login_security_last_access_timestamp' => 1,
+    'login_security_last_login_timestamp' => 1,
+
+    // TOC settings.
+    'toc_filter_header_tag' => 'h2',
   );
 
   // Enable xmlsitemap includes for content types.

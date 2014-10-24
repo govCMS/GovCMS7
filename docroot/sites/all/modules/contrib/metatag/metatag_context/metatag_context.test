@@ -14,7 +14,7 @@ class MetatagContextTestCase extends DrupalWebTestCase {
     return array(
       'name' => 'Meta tag context tests',
       'description' => 'Test basic meta tag context functionality.',
-      'group' => 'Meta tags',
+      'group' => 'Metatag',
     );
   }
 
@@ -112,10 +112,10 @@ class MetatagContextTestCase extends DrupalWebTestCase {
   function editMetatag($metatag_object) {
     $edit_metatag = array(
       'paths' => $metatag_object->path,
-      'metatags[title][value]' => $metatag_object->title,
-      'metatags[description][value]' => $metatag_object->description,
-      'metatags[abstract][value]' => $metatag_object->abstract,
-      'metatags[keywords][value]' => $metatag_object->keywords,
+      'metatags[und][title][value]' => $metatag_object->title,
+      'metatags[und][description][value]' => $metatag_object->description,
+      'metatags[und][abstract][value]' => $metatag_object->abstract,
+      'metatags[und][keywords][value]' => $metatag_object->keywords,
     );
     $this->drupalPost('admin/config/search/metatags/context/' . $metatag_object->name, $edit_metatag, t('Save'));
   }

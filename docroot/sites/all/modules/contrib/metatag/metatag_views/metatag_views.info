@@ -8,9 +8,9 @@ dependencies[] = views
 
 files[] = metatag_views_plugin_display_extender_metatags.inc
 
-; Information added by drupal.org packaging script on 2013-04-22
-version = "7.x-1.0-beta7"
+; Information added by Drupal.org packaging script on 2014-10-10
+version = "7.x-1.4"
 core = "7.x"
 project = "metatag"
-datestamp = "1366640119"
+datestamp = "1412909330"
 

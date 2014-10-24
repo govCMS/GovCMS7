@@ -103,3 +103,13 @@ function metatag_context_preprocess_html(&$variables) {
     $variables['head_title'] = token_replace($metadata['metadata_title']);
   }
 }
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function metatag_context_ctools_plugin_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "context" && $api == "context") {
+    return array("version" => "3");
+  }
+}

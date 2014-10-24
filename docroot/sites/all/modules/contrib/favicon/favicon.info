@@ -1,0 +1,13 @@
+name = Favicon
+description = Requests to /favicon.ico return the site's actual favicon.
+core = 7.x
+files[] = favicon.module
+files[] = favicon.test
+configure = admin/appearance/settings
+
+; Information added by Drupal.org packaging script on 2014-08-27
+version = "7.x-1.0-rc2"
+core = "7.x"
+project = "favicon"
+datestamp = "1409159330"
+

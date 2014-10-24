@@ -19,8 +19,8 @@ function metatag_context_context_overview() {
     // metatag admin page".
     if (isset($context->reactions['metatag_context_reaction']['metatag_admin']) &&  $context->reactions['metatag_context_reaction']['metatag_admin']) {
       $ops = array(
-        l('Edit', 'admin/config/search/metatags/context/' . $context->name, array('query' => array('destination' => 'admin/config/search/metatags/context'))),
-        l('Delete', 'admin/config/search/metatags/context/' . $context->name . '/delete', array('query' => array('destination' => 'admin/config/search/metatags/context'))),
+        l(t('Edit'), 'admin/config/search/metatags/context/' . $context->name, array('query' => array('destination' => 'admin/config/search/metatags/context'))),
+        l(t('Delete'), 'admin/config/search/metatags/context/' . $context->name . '/delete', array('query' => array('destination' => 'admin/config/search/metatags/context'))),
       );
       $rows[] = array(
         $context->name,
@@ -101,8 +101,15 @@ function metatag_context_config_edit_form($form, &$form_state, $context) {
   $instance = "";
   $options = array();
 
+  $metatags = $context->reactions['metatag_context_reaction']['metatags'];
+  if (!isset($metatags[LANGUAGE_NONE])) {
+    $metatags = array(
+      LANGUAGE_NONE => $metatags,
+    );
+  }
+
   // Load the METATAG form.
-  metatag_metatags_form($form, $instance, $context->reactions['metatag_context_reaction']['metatags'], $options);
+  metatag_metatags_form($form, $instance, $metatags[LANGUAGE_NONE], $options);
 
   $form['paths'] = array(
     '#title' => 'Path',

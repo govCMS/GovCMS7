@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Remove variables used by the module.
+ */
+function session_cookie_lifetime_uninstall() {
+  $variables = array(
+    'session_cookie_lifetime_type',
+    'session_cookie_lifetime_amount',
+    'session_cookie_lifetime_multiplier',
+  );
+
+  foreach ($variables as $variable) {
+    variable_del($variable);
+  }
+}

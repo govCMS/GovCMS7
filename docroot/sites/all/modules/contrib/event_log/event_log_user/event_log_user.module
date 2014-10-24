@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * Logs user CRUD commands in the event_log module.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_event_log_handlers().
+ * @return array
+ */
+function event_log_user_event_log_handlers() {
+  // Node event log handler.
+  $handlers = array();
+  $handlers['user'] = array(
+    'title' => t('User'),
+    'relationships' => array(
+      array(
+        'table' => 'users',
+        'field' => 'uid',
+        'operations' => NULL,
+        'numeric' => TRUE,
+      ),
+    ),
+  );
+  return $handlers;
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function event_log_user_insert($account) {
+  $account_array = (is_array($account) ? $account : get_object_vars($account));
+  $log = array(
+    'type' => 'user',
+    'operation' => 'insert',
+    'description' => t('%name (uid %uid)', array(
+      '%name' => $account_array['name'],
+      '%uid' => $account_array['uid']
+    )),
+    'ref_numeric' => $account_array['uid'],
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_user_update().
+ */
+function event_log_user_update($account) {
+  $account_array = (is_array($account) ? $account : get_object_vars($account));
+  $log = array(
+    'type' => 'user',
+    'operation' => 'update',
+    'description' => t('%name (uid %uid)', array(
+      '%name' => $account_array['original']->name,
+      '%uid' => $account_array['original']->uid
+    )),
+    'ref_numeric' => $account_array['original']->uid,
+    'info' => $account_array['original'],
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_user_delete().
+ */
+function event_log_user_delete($account) {
+  $account_array = (is_array($account) ? $account : get_object_vars($account));
+  $log = array(
+    'type' => 'user',
+    'operation' => 'delete',
+    'description' => t('%name (uid %uid)', array(
+      '%name' => $account_array['name'],
+      '%uid' => $account_array['uid']
+    )),
+    'ref_numeric' => $account_array['uid'],
+    'info' => $account_array,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_init().
+ */
+function event_log_user_init() {
+  if ($account = menu_get_object('user')) {
+    $log = array(
+      'type' => 'user',
+      'operation' => 'view',
+      'description' => t('%name', array('%name' => $account->name)),
+      'ref_numeric' => $account->uid,
+    );
+    event_log_insert($log);
+  }
+}

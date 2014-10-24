@@ -1,0 +1,538 @@
+<?php
+/**
+ * @file
+ * Generate search pages using Search API indexes.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function search_api_page_menu() {
+  $pre = 'admin/config/search/search_api/page';
+  $items[$pre] = array(
+    'title' => 'Search pages',
+    'description' => 'Create and configure search pages.',
+    'page callback' => 'search_api_page_admin_overview',
+    'access arguments' => array('administer search_api'),
+    'file' => 'search_api_page.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items[$pre . '/add'] = array(
+    'title' => 'Add search page',
+    'description' => 'Add a new search page.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('search_api_page_admin_add'),
+    'access arguments' => array('administer search_api'),
+    'file' => 'search_api_page.admin.inc',
+    'type' => MENU_LOCAL_ACTION,
+  );
+  $items[$pre . '/%search_api_page'] = array(
+    'title' => 'Edit search page',
+    'description' => 'Configure or delete a search page.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('search_api_page_admin_edit', 5),
+    'access arguments' => array('administer search_api'),
+    'file' => 'search_api_page.admin.inc',
+  );
+  $items[$pre . '/%search_api_page/edit'] = array(
+    'title' => 'Edit search page',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+  );
+
+  // During uninstallation, this would lead to a fatal error otherwise.
+  if (module_exists('search_api_page')) {
+    foreach (search_api_page_load_multiple(FALSE, array('enabled' => TRUE)) as $page) {
+      $items[$page->path] = array(
+        'title' => $page->name,
+        'description' => $page->description ? $page->description : '',
+        'page callback' => 'search_api_page_view',
+        'page arguments' => array((string) $page->machine_name),
+        'access callback' => 'search_api_page_access',
+        'access arguments' => array((string) $page->machine_name),
+        'file' => 'search_api_page.pages.inc',
+        'type' => MENU_SUGGESTED_ITEM,
+      );
+    }
+  }
+
+  return $items;
+}
+
+/**
+ * Menu access callback for search pages.
+ */
+function search_api_page_access($page_machine_name) {
+  // Check for either individual page access or all pages access.
+  return user_access('access search_api_page') || user_access('access ' . $page_machine_name . ' search_api_page');
+}
+
+/**
+ * Implements hook_theme().
+ */
+function search_api_page_theme() {
+  $themes['search_api_page_results'] = array(
+    'variables' => array(
+      'index' => NULL,
+      'results' => array('result count' => 0),
+      'items' => array(),
+      'view_mode' => 'search_api_page_result',
+      'keys' => NULL,
+      'page' => NULL,
+      'spellcheck' => NULL,
+      'pager' => NULL,
+      'no_results_help'
+    ),
+    'file' => 'search_api_page.pages.inc',
+    'template' => 'search-api-page-results',
+  );
+  $themes['search_api_page_result'] = array(
+    'variables' => array(
+      'index' => NULL,
+      'result' => NULL,
+      'item' => NULL,
+      'keys' => NULL,
+      'list_classes' => '',
+    ),
+    'file' => 'search_api_page.pages.inc',
+    'template' => 'search-api-page-result',
+  );
+  $themes['search_api_page_search_performance'] = array(
+    'render element' => 'element',
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements theme for rendering search-performance
+ */
+function theme_search_api_page_search_performance($variables) {
+  $element = array_shift($variables);
+
+  return $element['#markup'];
+}
+
+/**
+ * Implements hook_permission().
+ */
+function search_api_page_permission() {
+  $perms = array(
+    'access search_api_page' => array(
+      'title' => t('Access all search pages'),
+      'description' => t('Execute searches using any of the search pages.'),
+    ),
+  );
+  // Allow separate permissions for each search page.
+  foreach (search_api_page_load_multiple(FALSE, array('enabled' => TRUE)) as $page) {
+    $perms['access ' . $page->machine_name . ' search_api_page'] = array(
+      'title' => t('Access %name search page', array('%name' => $page->name)),
+      'description' => t('Execute searches using the %name search page.', array('%name' => $page->name)),
+    );
+  }
+  return $perms;
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function search_api_page_block_info() {
+  $blocks = array();
+  foreach (search_api_page_load_multiple(FALSE, array('enabled' => TRUE)) as $page) {
+    $blocks[$page->machine_name] = array(
+      'info' => t('Search block: !name', array('!name' => $page->name)),
+      'cache' => DRUPAL_CACHE_PER_USER,
+    );
+  }
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function search_api_page_block_view($delta) {
+  $page = search_api_page_load($delta);
+  if ($page && $page->enabled) {
+    $block = array();
+    $block['subject'] = t($page->name);
+    $block['content'] = drupal_get_form('search_api_page_search_form_' . $page->machine_name, $page, NULL, TRUE);
+    $block['content']['#contextual_links']['search_api_page'] = array(
+      'admin/config/search/search_api/page',
+      array($page->machine_name),
+    );
+    return $block;
+  }
+}
+
+/**
+ * Implements hook_forms().
+ */
+function search_api_page_forms($form_id, $args) {
+  $forms = array();
+  foreach (search_api_page_load_multiple(FALSE, array('enabled' => TRUE)) as $page) {
+    $forms['search_api_page_search_form_' . $page->machine_name] = array(
+      'callback' => 'search_api_page_search_form',
+      'callback arguments' => array(),
+    );
+  }
+  return $forms;
+}
+
+/**
+ * Implements hook_entity_info().
+ */
+function search_api_page_entity_info() {
+  $info['search_api_page'] = array(
+    'label' => t('Search page'),
+    'controller class' => 'EntityAPIControllerExportable',
+    'metadata controller class' => FALSE,
+    'entity class' => 'Entity',
+    'base table' => 'search_api_page',
+    'uri callback' => 'search_api_page_url',
+    'module' => 'search_api_page',
+    'exportable' => TRUE,
+    'entity keys' => array(
+      'id' => 'id',
+      'label' => 'name',
+      'name' => 'machine_name',
+    ),
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_entity_property_info().
+ */
+function search_api_page_entity_property_info() {
+  $info['search_api_page']['properties'] = array(
+    'id' => array(
+      'label' => t('ID'),
+      'type' => 'integer',
+      'description' => t('The primary identifier for a search page.'),
+      'schema field' => 'id',
+      'validation callback' => 'entity_metadata_validate_integer_positive',
+    ),
+    'index_id' => array(
+      'label' => t('Index ID'),
+      'type' => 'token',
+      'description' => t('The machine name of the index this search page uses.'),
+      'schema field' => 'index_id',
+    ),
+    'index' => array(
+      'label' => t('Index'),
+      'type' => 'search_api_index',
+      'description' => t('The index this search page uses.'),
+      'getter callback' => 'search_api_page_get_index',
+    ),
+    'name' => array(
+      'label' => t('Name'),
+      'type' => 'text',
+      'description' => t('The displayed name for a search page.'),
+      'schema field' => 'name',
+      'required' => TRUE,
+    ),
+    'machine_name' => array(
+      'label' => t('Machine name'),
+      'type' => 'token',
+      'description' => t('The internally used machine name for a search page.'),
+      'schema field' => 'machine_name',
+      'required' => TRUE,
+    ),
+    'description' => array(
+      'label' => t('Description'),
+      'type' => 'text',
+      'description' => t('The displayed description for a search page.'),
+      'schema field' => 'description',
+      'sanitize' => 'filter_xss',
+    ),
+    'enabled' => array(
+      'label' => t('Enabled'),
+      'type' => 'boolean',
+      'description' => t('A flag indicating whether the search page is enabled.'),
+      'schema field' => 'enabled',
+    ),
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_search_api_index_update().
+ */
+function search_api_page_search_api_index_update(SearchApiIndex $index) {
+  if (!$index->enabled && $index->original->enabled) {
+    foreach (search_api_page_load_multiple(FALSE, array('index_id' => $index->machine_name, 'enabled' => 1)) as $page) {
+      search_api_page_edit($page->id, array('enabled' => 0));
+    }
+  }
+}
+
+/**
+ * Implements hook_search_api_index_delete().
+ */
+function search_api_page_search_api_index_delete(SearchApiIndex $index) {
+  // Only react on real delete, not revert.
+  if ($index->hasStatus(ENTITY_IN_CODE)) {
+    return;
+  }
+
+  foreach (search_api_page_load_multiple(FALSE, array('index_id' => $index->machine_name)) as $page) {
+    search_api_page_delete($page->id);
+  }
+}
+
+/**
+ * Implements hook_search_api_page_insert().
+ *
+ * Rebuilds the menu table if a search page is created.
+ */
+function search_api_page_search_api_page_insert(Entity $page) {
+  menu_rebuild();
+}
+
+/**
+ * Implements hook_search_api_page_update().
+ *
+ * Rebuilds the menu table if a search page is edited.
+ */
+function search_api_page_search_api_page_update(Entity $page) {
+  if ($page->enabled != $page->original->enabled || $page->path != $page->original->path) {
+    menu_rebuild();
+  }
+}
+
+/**
+ * Implements hook_search_api_page_delete().
+ *
+ * Rebuilds the menu table if a search page is removed.
+ */
+function search_api_page_search_api_page_delete(Entity $page) {
+  menu_rebuild();
+}
+
+/**
+ * Entity URI callback.
+ */
+function search_api_page_url(Entity $page) {
+  return array('path' => $page->path);
+}
+
+/**
+ * Entity property getter callback.
+ */
+function search_api_page_get_index(Entity $page) {
+  return search_api_index_load($page->index_id);
+}
+
+/**
+ * Loads a search page.
+ *
+ * @param int|string $id
+ *   The page's id or machine name.
+ * @param bool $reset
+ *   Whether to reset the internal cache.
+ *
+ * @return Entity
+ *   A completely loaded page object, or FALSE if no such page exists.
+ */
+function search_api_page_load($id, $reset = FALSE) {
+  $ret = search_api_page_load_multiple(array($id), array(), $reset);
+  return $ret ? reset($ret) : FALSE;
+}
+
+/**
+ * Load multiple search pages at once.
+ *
+ * @see entity_load()
+ *
+ * @param array|false $ids
+ *   An array of page IDs or machine names, or FALSE to load all pages.
+ * @param array $conditions
+ *   An array of conditions on the {search_api_page} table in the form
+ *   'field' => $value.
+ * @param bool $reset
+ *   Whether to reset the internal entity_load cache.
+ *
+ * @return array
+ *   An array of page objects keyed by machine name.
+ */
+function search_api_page_load_multiple($ids = FALSE, array $conditions = array(), $reset = FALSE) {
+  $pages = entity_load('search_api_page', $ids, $conditions, $reset);
+  return entity_key_array_by_property($pages, 'machine_name');
+}
+
+/**
+ * Inserts a new search page into the database.
+ *
+ * @param array $values
+ *   An array containing the values to be inserted.
+ *
+ * @return
+ *   The newly inserted page's id, or FALSE on error.
+ */
+function search_api_page_insert(array $values) {
+  foreach (array('name', 'machine_name', 'index_id', 'path') as $var) {
+    if (!isset($values[$var])) {
+      throw new SearchApiException(t('Property @field has to be set for the new search page.', array('@field' => $var)));
+    }
+  }
+  if (empty($values['description'])) {
+    $values['description'] = NULL;
+  }
+  if (empty($values['options'])) {
+    $values['options'] = array();
+  }
+  $fields = array(
+    'name' => $values['name'],
+    'machine_name' => $values['machine_name'],
+    'description' => $values['description'],
+    'enabled' => empty($values['enabled']) ? 0 : 1,
+    'index_id' => $values['index_id'],
+    'path' => $values['path'],
+    'options' => $values['options'],
+  );
+  if (isset($values['id'])) {
+    $fields['id'] = $values['id'];
+  }
+
+  $page = entity_create('search_api_page', $fields);
+  $page->save();
+
+  return $page->id;
+}
+
+/**
+ * Changes a page's settings.
+ *
+ * @param $id
+ *   The edited page's ID.
+ * @param array $fields
+ *   The new field values to set.
+ *
+ * @return
+ *   1 if fields were changed, 0 if the fields already had the desired values.
+ */
+function search_api_page_edit($id, array $fields) {
+  $page = search_api_page_load($id, TRUE);
+  $changeable = array('name' => 1, 'description' => 1, 'path' => 1, 'options' => 1, 'enabled' => 1);
+  foreach ($fields as $field => $value) {
+    if (isset($changeable[$field]) || $value === $page->$field) {
+      $page->$field = $value;
+      $new_values = TRUE;
+    }
+  }
+  // If there are no new values, just return 0.
+  if (empty($new_values)) {
+    return 0;
+  }
+
+  $page->save();
+
+  return 1;
+}
+
+/**
+ * Deletes a search page.
+ *
+ * @param $id
+ *   The ID of the search page to delete.
+ *
+ * @return
+ *   TRUE on success, FALSE on failure.
+ */
+function search_api_page_delete($id) {
+  $page = search_api_page_load($id, TRUE);
+  if (!$page) {
+    return FALSE;
+  }
+  $page->delete();
+
+  menu_rebuild();
+
+  return TRUE;
+}
+
+/**
+ * Displays a search form.
+ *
+ * @param Entity $page
+ *   The search page for which this form is displayed.
+ * @param string|null $keys
+ *   (optional) The search keys.
+ * @param bool $compact
+ *   (optional) Whether to display a compact form (e.g. for blocks) instead of a
+ *   normal one.
+ *
+ * @see search_api_page_search_form_validate()
+ * @see search_api_page_search_form_submit()
+ *
+ * @ingroup forms
+ */
+function search_api_page_search_form(array $form, array &$form_state, Entity $page, $keys = NULL, $compact = FALSE) {
+  $form['keys_' . $page->id] = array(
+    '#type' => 'textfield',
+    '#title' => t('Enter your keywords'),
+    '#title_display' => $compact ? 'invisible' : 'before',
+    '#default_value' => $keys,
+    '#size' => $compact ? 15 : 30,
+  );
+  if ($compact) {
+    $form['keys_' . $page->id]['#attributes']['placeholder'] = t('Enter your keywords');
+  }
+  $form['base_' . $page->id] = array(
+    '#type' => 'value',
+    '#value' => $page->path,
+  );
+  $form['id'] = array(
+    '#type' => 'hidden',
+    '#value' => $page->id,
+  );
+  $form['submit_' . $page->id] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+  );
+
+  if (!$compact) {
+    $form = array(
+      '#type' => 'fieldset',
+      '#title' => check_plain($page->name),
+      'form' => $form,
+    );
+    if ($page->description) {
+      $form['text']['#markup'] = '<p>' . nl2br(check_plain($page->description)) . '</p>';
+      $form['text']['#weight'] = -5;
+    }
+  }
+
+  return $form;
+}
+
+/**
+ * Form validation handler for search_api_page_search_form().
+ *
+ * @see search_api_page_search_form_submit()
+ */
+function search_api_page_search_form_validate(array $form, array &$form_state) {
+  if (!trim($form_state['values']['keys_' . $form_state['values']['id']])) {
+    form_set_error('keys_' . $form_state['values']['id'], t('Please enter at least one keyword.'));
+  }
+}
+
+/**
+ * Form submission handler for search_api_page_search_form().
+ *
+ * @see user_login_form_validate()
+ */
+function search_api_page_search_form_submit(array $form, array &$form_state) {
+  $keys = trim($form_state['values']['keys_' . $form_state['values']['id']]);
+
+  $keys = strtr($keys, array("\\" => "\\\\", '/' => "\\"));
+
+  $form_state['redirect'] = $form_state['values']['base_' . $form_state['values']['id']] . '/' . $keys;
+
+  // To completely controll the redirect destination, we need to remove the
+  // 'destination' GET parameter, which would override our destination, if
+  // present.
+  unset($_GET['destination']);
+}

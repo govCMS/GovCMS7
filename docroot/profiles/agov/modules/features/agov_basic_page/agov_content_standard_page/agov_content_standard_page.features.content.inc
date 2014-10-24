@@ -219,7 +219,7 @@ Maecenas posuere pharetra dignissim. Lorem ipsum dolor sit amet, consectetur adi
 <h3>Suspendisse</h3>
 <p>Suspendisse massa nibh, fringilla nec scelerisque vel, faucibus id leo. Vivamus feugiat egestas libero, et viverra ante adipiscing vitae. Nullam non magna iaculis nisi lobortis interdum ut non ipsum. Nulla eu interdum est.</p><p>Aenean iaculis tincidunt diam vel ullamcorper. Praesent rutrum blandit vehicula. Nunc vulputate, diam nec sagittis faucibus, turpis quam gravida mi, a laoreet velit purus vel nulla. Morbi a enim diam. Aliquam erat volutpat. Praesent lectus felis, iaculis ac pharetra a, elementum vitae elit. Phasellus sem ipsum, faucibus vel accumsan eget, iaculis sed arcu.</p><p>Duis nisi felis, posuere ullamcorper condimentum quis, malesuada fringilla augue. Ut pulvinar, nibh non mattis feugiat, dui odio tempor magna, a bibendum risus tortor non dui.</p>',
           'summary' => 'Lorem Ipsum',
-          'format' => 'full_html',
+          'format' => 'rich_text',
           'safe_value' => '<h3>Lorem Ipsum</h3>
 <p>Lorem ipsum dolor sit amet, vim at movet sonet sapientem, eum prompta labitur deterruisset in. Ne magna primis virtute ius, pri cu recusabo tractatos.</p>
 <p>Quas luptatum dignissim duo ea, mea ne vide fabulas. Liber error cotidieque ea has, te quidam audiam convenire est, cu integre appareat assentior pro. Quem fierent cu eam.</p>

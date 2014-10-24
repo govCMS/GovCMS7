@@ -32,6 +32,32 @@ function metatag_feeds_set_target($source, $entity, $target, $value) {
   // Strip the prefix that was added above.
   $name = str_replace('meta_', '', $target);
 
+  // Check for any existing data that may not have been loaded already.
+  if (!isset($entity->metatags) && !empty($entity->feeds_item->entity_id) && is_numeric($entity->feeds_item->entity_id)) {
+    $entity->metatags = array();
+    $entity_type = $entity->feeds_item->entity_type;
+    $entity_id = $entity->feeds_item->entity_id;
+
+    // Load the existing entity.
+    $stored_entities = entity_load($entity_type, array($entity_id));
+    if (!empty($stored_entities)) {
+      $stored_entity = reset($stored_entities);
+      if (!empty($stored_entity)) {
+        // This function returns all values for all revisions.
+        $metatags = metatag_metatags_load($entity_type, $entity_id);
+        if (!empty($metatags)) {
+          // Only load meta tags for the current revision.
+          list(, $revision_id) = entity_extract_ids($entity_type, $stored_entity);
+          if (!empty($metatags[$revision_id])) {
+            // Just copy all meta tags for all languages.
+            $entity->metatags = $metatags[$revision_id];
+          }
+        }
+      }
+    }
+  }
+
   // Assign the value.
-  $entity->metatags[$name]['value'] = $value;
+  $langcode = metatag_entity_get_language($entity_type, $entity);
+  $entity->metatags[$langcode][$name]['value'] = $value;
 }
