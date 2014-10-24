@@ -24,7 +24,7 @@
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
 
   <!-- We override this so Drupal install works -->
-  <property name="drush.cmd" value="drush -r ${app.dir}" override="true" />
+  <property name="drush.cmd" value="${drush.bin} -r ${app.dir}" override="true" />
 
   <property file="build.properties" override="true" />
 
@@ -103,7 +103,7 @@
      <!-- We have overriden the drush.cmd command here due to site-install not
           playing nice with the uri option -->
      <exec dir="${app.dir}"
-          command="${drush.cmd} site-install ${app.profile} -y --account-name='admin' --account-pass='aisei9du+chiek.oiRah'"
+          command="${drush.cmd} site-install agov_install_additional_options.install=1 ${app.profile} -y --account-name='admin' --account-pass='aisei9du+chiek.oiRah'"
           logoutput="${test.output}"
           passthru="false" />
      <chmod file="${app.dir}/sites/default" mode="0775" />
