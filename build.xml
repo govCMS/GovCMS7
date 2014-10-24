@@ -5,21 +5,9 @@
 -->
 
 <project name="govcms" default="prepare" phingVersion="2.4.11">
-  <property name="app.dir" value="${project.basedir}/docroot" />
-
-  <target name="drupal:install"
-          description="Install Drupal on a clean database">
-    <exec dir="${app.dir}"
-          command="${drush.bin} site-install agov -y --db-url=mysql://drupal:drupal@govcms.dev/drupal_local"
-          logoutput="${test.output}" />
-  </target>
 
   <includepath classpath="vendor/previousnext/scaffold" />
-  <includepath classpath="vendor/previousnext/phing-semanticgit" />
-
-  <!-- We set this to optional as is managed by composer -->
   <import file="vendor/previousnext/scaffold/build.standard.xml" optional="true" />
-  <import file="vendor/previousnext/phing-semanticgit/build.xml" optional="true" />
 
   <!--               -->
   <!--  Properties   -->
@@ -27,12 +15,16 @@
 
   <!-- The following override properties provided in imported build files. -->
   <property name="app.profile" value="agov" />
+  <property name="app.dir" value="${project.basedir}/docroot" />
   <property name="build.logs.dir" value="${project.basedir}/build/logs" />
   <property name="src.custom.modules" value="${project.basedir}/docroot/profiles/agov/modules/custom" />
-  <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov_zen" />
+  <property name="src.custom.themes" value="${project.basedir}/docroot/profiles/agov/themes/agov/agov_zen" />
   <property name="simpletest.group" value="${phing.project.name}" />
   <property name="drush.source" value="@${phing.project.name}.dev" />
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" />
+
+  <!-- We override this so Drupal install works -->
+  <property name="drush.cmd" value="drush -r ${app.dir}" override="true" />
 
   <property file="build.properties" override="true" />
 
@@ -79,6 +71,42 @@
     <!-- Build GovCMS -->
     <exec command="drush make build-govcms.make docroot" />
 
+  </target>
+
+  <target name="ci:test:pr"
+          description="Run CI test suite for PR (short subset of important tests).">
+    <phingcall target="prepare" />
+    <phingcall target="test" />
+  </target>
+
+  <target name="ci:test:head"
+          description="Run CI test suite for HEAD (all the tests).">
+    <phingcall target="ci:prepare" />
+    <phingcall target="test" />
+  </target>
+
+  <target name="test"
+          description="Common target to run a full test suite on this project.">
+    <!-- Check the code. -->
+    <phingcall target="ci:phpcs" />
+    <phingcall target="ci:phpmd" />
+
+    <!-- Install the site. -->
+    <phingcall target="drupal:install" />
+
+    <!-- Check functionality. -->
+    <phingcall target="ci:behat" />
+  </target>
+
+  <target name="drupal:install"
+          description="Install Drupal on a clean database on vagrant host">
+     <!-- We have overriden the drush.cmd command here due to site-install not
+          playing nice with the uri option -->
+     <exec dir="${app.dir}"
+          command="${drush.cmd} site-install ${app.profile} -y --account-name='admin' --account-pass='aisei9du+chiek.oiRah'"
+          logoutput="${test.output}"
+          passthru="false" />
+     <chmod file="${app.dir}/sites/default" mode="0775" />
   </target>
 
 </project>
