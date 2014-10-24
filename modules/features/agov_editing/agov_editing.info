@@ -12,6 +12,7 @@ dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = strongarm
 dependencies[] = toc_filter
+dependencies[] = video_filter
 dependencies[] = wysiwyg
 dependencies[] = wysiwyg_filter
 datestamp = 1384120168
