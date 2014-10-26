@@ -1,3 +1,0 @@
-  .two-sidebars .region-sidebar-second .block:nth-child(3n) {
-    float: right;
-    width: 33.33333%;

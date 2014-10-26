@@ -1,7 +1,0 @@
-.page__title,
-.node__title,
-.block__title,
-.comments__title,
-.comments__form-title,
-.comment__title {
-  /* Comment title. */

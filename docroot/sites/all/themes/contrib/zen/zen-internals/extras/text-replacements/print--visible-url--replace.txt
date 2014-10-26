@@ -1,3 +1,0 @@
-
-  /* Add visible URL after links. */
-  #content a[href]:after {

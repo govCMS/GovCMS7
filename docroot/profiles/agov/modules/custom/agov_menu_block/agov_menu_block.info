@@ -1,4 +1,0 @@
-name = Menu Block
-description = Provides menu_block implemenation
-core = 7.x
-dependencies[] = menu_block

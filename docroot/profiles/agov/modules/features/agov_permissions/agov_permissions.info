@@ -1,6 +1,0 @@
-name = Permissions
-description = Provides permissions.
-core = 7.x
-package = aGov core
-dependencies[] = role_delegation
-features[features_api][] = api:2
