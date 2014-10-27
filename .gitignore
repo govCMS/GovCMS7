@@ -58,3 +58,4 @@ behat.local.yml
 .bundle
 node_modules
 
+docroot
