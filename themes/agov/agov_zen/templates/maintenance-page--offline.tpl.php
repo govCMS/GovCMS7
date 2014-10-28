@@ -36,9 +36,9 @@ endif;
 </head>
 
 <body>
-<div class="palette-1 inset">
-  asdf
-</div>
+  <div class="palette-1 inset">
+    This web site is currently undergoing some maintenance and is unavailable.
+  </div>
 </body>
 
 </html>
