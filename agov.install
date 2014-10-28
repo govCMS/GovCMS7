@@ -707,6 +707,9 @@ function _agov_default_variables() {
 
     // TOC settings.
     'toc_filter_header_tag' => 'h2',
+
+    // Maintenance Message
+    'maintenance_mode_message' => 'This web site is currently undergoing some maintenance and is unavailable.',
   );
 
   // Enable xmlsitemap includes for content types.
