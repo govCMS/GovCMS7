@@ -14,7 +14,7 @@ function agov_publications_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_publication';
-  $strongarm->value = 0;
+  $strongarm->value = '1';
   $export['comment_anonymous_publication'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -49,7 +49,7 @@ function agov_publications_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_publication';
-  $strongarm->value = '2';
+  $strongarm->value = '1';
   $export['comment_publication'] = $strongarm;
 
   $strongarm = new stdClass();

@@ -487,7 +487,6 @@ video',
     DRUPAL_ANONYMOUS_RID,
     array(
       'access content',
-      $rich_text_permission,
     )
   );
   user_role_grant_permissions(

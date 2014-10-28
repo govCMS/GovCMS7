@@ -14,7 +14,7 @@ function agov_promotion_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_footer_teaser';
-  $strongarm->value = 0;
+  $strongarm->value = '1';
   $export['comment_anonymous_footer_teaser'] = $strongarm;
 
   $strongarm = new stdClass();

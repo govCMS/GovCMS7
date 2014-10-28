@@ -1,9 +1,10 @@
 name = Events
 core = 7.x
 package = aGov
-version = 7.x-1.6
+version = 7.x-1.7
 project = agov_events
 dependencies[] = agov_common_fields
+dependencies[] = agov_events
 dependencies[] = agov_tags
 dependencies[] = ctools
 dependencies[] = date
