@@ -85,8 +85,10 @@
           passthru="true" />
 
     <!-- Symlink custom themes and modules into the project. -->
+    <!-- ../../ ensures these are compatible between the VM and the local -->
     <symlink target="../../../../../modules" link="${app.dir}/sites/all/modules/custom" />
     <symlink target="./../../../../themes" link="${app.dir}/sites/all/themes/custom" />
+    <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
     <copy file="./misc/settings/default.settings.php" todir="${app.dir}/sites/default/"  />
     <copy file="./misc/settings/settings.theme.php" todir="${app.dir}/sites/default/"  />
   </target>
