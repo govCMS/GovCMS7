@@ -1,3 +1,0 @@
-  .sidebar-first .region-sidebar-first {
-    float: right;
-    width: 20%;

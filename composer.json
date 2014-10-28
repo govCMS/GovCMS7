@@ -2,22 +2,19 @@
   "name": "previousnext/govcms",
   "description": "The GovCMS build.",
   "require": {
-    "previousnext/agov":               "7.2.*",
-    "drush/drush":                     "6.*",
-    "phing/phing":                     "2.6.*",
-    "previousnext/scaffold":           "0.3.0"
+    "drush/drush":           "6.*",
+    "phing/phing":           "2.6.*",
+    "previousnext/scaffold": "0.4.1"
   },
   "require-dev": {
-    "drupal/drupal-extension":         "v1.0.2",
-    "phpunit/phpunit":                 "3.7.*",
-    "squizlabs/php_codesniffer":       "1.4.6",
-    "phpmd/phpmd":                     "1.5.0",
-    "phploc/phploc":                   "2.0.0-BETA1",
-    "sebastian/phpcpd":                "*",
-    "drupal/coder":                    "dev-7.x-2.x",
-    "previousnext/puppet-dev":         "4.5.6",
-    "previousnext/phing-semanticgit":  "0.1.0",
-    "previousnext/phing-browserstack": "0.1.0"
+    "drupal/drupal-extension":   "v1.0.2",
+    "phpunit/phpunit":           "3.7.*",
+    "squizlabs/php_codesniffer": "1.4.6",
+    "phpmd/phpmd":               "1.5.0",
+    "phploc/phploc":             "2.0.0-BETA1",
+    "sebastian/phpcpd":          "*",
+    "drupal/coder":              "dev-7.x-2.x",
+    "previousnext/puppet-dev":   "4.5.6"
   },
   "minimum-stability": "dev",
   "config": {
@@ -31,23 +28,6 @@
     {
       "type": "vcs",
       "url":  "git@github.com:previousnext/puppet-dev.git"
-    },
-    {
-      "type": "vcs",
-      "url":  "git@github.com:previousnext/phing-semanticgit.git"
-    },
-    {
-      "type": "vcs",
-      "url":  "git@github.com:previousnext/phing-browserstack.git"
     }
-  ],
-  "extra": {
-    "installer-paths": {
-      "docroot/profiles/{$name}/": ["type:drupal-profile"]
-    }
-  },
-  "scripts": {
-    "post-update-cmd": ["echo Deleting aGov .git dirs", "rm -rf docroot/profiles/agov/.git"],
-    "post-install-cmd": ["echo Deleting aGov .git dirs", "rm -rf docroot/profiles/agov/.git"]
-  }
+  ]
 }

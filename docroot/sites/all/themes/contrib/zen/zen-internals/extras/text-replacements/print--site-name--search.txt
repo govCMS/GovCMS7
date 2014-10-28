@@ -1,4 +1,0 @@
-    text-decoration: underline !important;
-    /* Don't underline header. */
-  }
-  a:link.header__site-link,

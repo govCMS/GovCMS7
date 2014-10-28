@@ -1,3 +1,0 @@
-  .two-sidebars .region-sidebar-second {
-    float: right;
-    width: 100%;

@@ -29,7 +29,7 @@ end
 namespace :phing do
   desc "Install the GovCMS site."
   task :install do
-    run "cd #{release_path} && phing prepare"
+    run "cd #{release_path} && phing build"
     run "cd #{release_path} && phing drupal:install"
   end
 end

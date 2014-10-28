@@ -1,7 +1,0 @@
-/**
- * @file
- * Drupal-specific CSS fixes for the Chosen module
- */
-.chzn-container {
-  display: table !important;
-}

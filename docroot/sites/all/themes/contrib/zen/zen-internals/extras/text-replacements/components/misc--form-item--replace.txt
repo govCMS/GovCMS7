@@ -1,4 +1,0 @@
-}
-
-/* Pack groups of checkboxes and radio buttons closer together. */
-.form-checkboxes .form-item,

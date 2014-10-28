@@ -1,6 +1,0 @@
-name = Event Log Node events (alt)
-description = "Logs node CRUD events performed by the user (without node info)."
-core = 7.x
-package = Statistics
-dependencies[] = event_log
-

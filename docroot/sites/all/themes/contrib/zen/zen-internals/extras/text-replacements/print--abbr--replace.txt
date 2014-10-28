@@ -1,3 +1,0 @@
-
-  /* Add visible title after abbreviations. */
-  #content abbr[title]:after {
