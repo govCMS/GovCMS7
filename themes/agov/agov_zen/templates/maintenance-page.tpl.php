@@ -37,6 +37,18 @@ endif;
 
 <body>
   <div class="palette-1 inset">
+    <?php if (!empty($logo)): ?>
+      <a href="<?php print $base_path; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      </a>
+    <?php endif; ?>
+
+    <?php if (!empty($site_name)): ?>
+      <h1 id="site-name">
+        <a href="<?php print $base_path ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+      </h1>
+    <?php endif; ?>
+
     <?php print $content; ?>
   </div>
 </body>
