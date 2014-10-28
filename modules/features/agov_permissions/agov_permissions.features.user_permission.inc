@@ -649,6 +649,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'assign Site editor role' => 'role_delegation',
     'access broken links report' => 'linkchecker',
     'access own broken links report' => 'linkchecker',
+    'access event log' => 'event_log',
   );
   foreach ($additional_permissions as $permission => $module) {
     $permissions[$permission] = array(
