@@ -15,7 +15,8 @@ projects[drupal][patch][] = https://www.drupal.org/files/issues/drupal-7.x-allow
 projects[drupal][patch][] = https://www.drupal.org/files/issues/drupal-1470656-26.patch
 
 ; aGov profile.
-projects[agov][version] = 2.0-alpha4
+projects[agov][download][url] = "git://github.com/previousnext/agov.git"
+projects[agov][download][branch] = 7.x-2.x
 
 ; Contrib modules.
 projects[acsf][version] = 1.1
