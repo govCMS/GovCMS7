@@ -707,6 +707,9 @@ function _agov_default_variables() {
 
     // TOC settings.
     'toc_filter_header_tag' => 'h2',
+
+    // Shield settings.
+    'shield_enabled' => 0,
   );
 
   // Enable xmlsitemap includes for content types.
