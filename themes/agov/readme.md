@@ -20,6 +20,7 @@ Zen's *STARTERKIT* should be used if the design components of your custom theme 
 
 ## Theme Hierarchy diagram:
 
+<pre>
 +----------+        +--------+
 |          |        |        |
 |   zen    |        | STARTERKIT
@@ -45,7 +46,7 @@ Zen's *STARTERKIT* should be used if the design components of your custom theme 
 |          |
 |          |
 +----------+
-
+</pre>
 
 ## Prerequisite knowledge
 
