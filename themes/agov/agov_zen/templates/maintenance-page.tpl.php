@@ -36,13 +36,13 @@ endif;
 </head>
 
 <body>
-  <div class="palette-1 inset">
+  <div class="palette-1 centered-box">
     <?php if (!empty($logo)): ?>
-      <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+      <img class="centered-box__image" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
     <?php endif; ?>
 
     <?php if (!empty($site_name)): ?>
-      <h1 id="site-name">
+      <h1 class="centered-box__title">
         <?php print $site_name; ?>
       </h1>
     <?php endif; ?>
