@@ -5,5 +5,6 @@ role :app, "#{app_name}.qa.previousnext.com.au"
 set :app_path, "#{release_path}/app"
 set :port, '11063'
 
-after "deploy", "phing:install"
+after "deploy", "govcms:build"
 after "deploy", "drupal:symlink_shared"
+after "deploy", "govcms:install"

@@ -21,15 +21,19 @@ namespace :drupal do
     and sites/default/files directory to be correctly linked to the shared directory on a new deployment."
   task :symlink_shared do
     ["files", "private", "settings.php"].each do |asset|
-      run "rm -rf #{app_path}/#{asset} && ln -nfs #{shared_path}/#{asset} #{app_path}/sites/default/#{asset}"
+      run "rm -rf #{app_path}/sites/default/#{asset} && ln -nfs #{shared_path}/#{asset} #{app_path}/sites/default/#{asset}"
     end
   end
 end
 
-namespace :phing do
-  desc "Install the GovCMS site."
+namespace :govcms do
+  desc "Build the GovCMS site."
   task :install do
     run "cd #{release_path} && phing build"
+  end
+
+  desc "Install the GovCMS site."
+  task :install do
     run "cd #{release_path} && phing drupal:install -Ddrush.install.db_url='mysql://drupal:drupal@localhost/drupal'"
   end
 end
