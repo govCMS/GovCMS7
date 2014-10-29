@@ -28,7 +28,7 @@ end
 
 namespace :govcms do
   desc "Build the GovCMS site."
-  task :install do
+  task :build do
     run "cd #{release_path} && phing build"
   end
 
