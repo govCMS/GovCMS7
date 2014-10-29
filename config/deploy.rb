@@ -30,6 +30,6 @@ namespace :phing do
   desc "Install the GovCMS site."
   task :install do
     run "cd #{release_path} && phing build"
-    run "cd #{release_path} && phing drupal:install"
+    run "cd #{release_path} && phing drupal:install -Ddrush.install.db_url='mysql://drupal:drupal@localhost/drupal'"
   end
 end
