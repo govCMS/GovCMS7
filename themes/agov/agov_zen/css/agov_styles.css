@@ -944,6 +944,23 @@ html.js .collapsed .fieldset-legend {
   margin: 0px;
 }
 
+.centered-box {
+  max-width: 400px;
+  text-align: center;
+  margin: 100px auto 0;
+  font-size: 120%;
+  padding: 40px 10px;
+}
+
+.centered-box__image {
+  margin: 0 auto;
+}
+
+.centered-box__title {
+  margin-top: 1em;
+  font-weight: bold;
+}
+
 .field-label-inline {
   margin: 1.4em 0;
 }
@@ -986,7 +1003,7 @@ html.js .collapsed .fieldset-legend {
 }
 
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
-  background: url('../images/block-li-bg.png?1413868143') no-repeat scroll left 5px;
+  background: url('../images/block-li-bg.png?1414381676') no-repeat scroll left 5px;
   display: block;
   padding-left: 15px;
   padding-bottom: 2px;
@@ -1569,7 +1586,7 @@ tr.selected td {
 }
 .progress .filled {
   background-color: #0072b9;
-  background-image: url('../images/progress.gif?1413868143');
+  background-image: url('../images/progress.gif?1414381676');
 }
 
 #region-content .content ul li {
@@ -1615,6 +1632,11 @@ tr.selected td {
 .pager-current {
   color: white;
   background: #7a797a;
+}
+
+.palette-1 {
+  background: #E2E2E2;
+  color: #4f4f4f;
 }
 
 .search-results {
@@ -1768,7 +1790,7 @@ tr.selected td {
   position: absolute;
   right: 0px;
   text-indent: -100px;
-  background: url('../images/search-btn-mobile.png?1413868143') 50% 50% no-repeat;
+  background: url('../images/search-btn-mobile.png?1414381676') 50% 50% no-repeat;
   background-color: #1b1b1b;
   width: 32px;
   font-weight: bold;
@@ -1849,7 +1871,7 @@ th a, th img {
   display: inline-block;
   width: 26px;
   height: 26px;
-  background-image: url('../images/font-resize-bg.png?1413868143');
+  background-image: url('../images/font-resize-bg.png?1414381676');
   background-repeat: no-repeat;
 }
 .text-resize a.font-large {
@@ -1931,7 +1953,7 @@ body {
   border-top: none;
 }
 #comments .comment {
-  background-image: url('../images/comment-icon.png?1413868143');
+  background-image: url('../images/comment-icon.png?1414381676');
   background-position: 13px 15px;
   background-repeat: no-repeat;
   background-color: #f3f3f3;
@@ -2289,30 +2311,6 @@ footer .block {
   border-top: 3px solid #7a797a;
 }
 
-.maintenance-page {
-  -webkit-background-size: 100%;
-  -moz-background-size: 100%;
-  -o-background-size: 100%;
-  background-size: 100%;
-  background: #006893;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.maintenance-page #page {
-  margin-top: 1em;
-  font-size: 110%;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-}
-.maintenance-page div#content {
-  padding: 0;
-}
-.maintenance-page #header {
-  background-image: url("../images/bg-header.png");
-}
-
 .region-navigation {
   background: #7a797a;
   position: relative;
@@ -2606,7 +2604,7 @@ a.tabledrag-handle .handle {
   text-align: left;
   text-indent: -100px;
   padding: 5px 14px;
-  background: url('../images/featured-articles-pause.png?1413868143') no-repeat 0px -27px;
+  background: url('../images/featured-articles-pause.png?1414381676') no-repeat 0px -27px;
 }
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;
