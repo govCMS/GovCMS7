@@ -10,6 +10,18 @@
 function agov_permissions_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access administration pages.
+  $permissions['access administration pages'] = array(
+    'name' => 'access comments',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'comment',
+  );
+
   // Exported permission: access comments.
   $permissions['access comments'] = array(
     'name' => 'access comments',
@@ -506,6 +518,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
     'roles' => array(
+      'authenticated user' => 'authenticated user',
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
@@ -537,7 +550,6 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'system',
   );
-
 
   // Create webform content.
   $permissions['create webform content'] = array(
@@ -587,6 +599,18 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'webform',
   );
 
+  // Exported permission: access own webform results.
+  $permissions['access own webform results'] = array(
+    'name' => 'access own webform results',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'webform',
+  );
+
   // Exported permission: edit own webform submissions.
   $permissions['edit own webform submissions'] = array(
     'name' => 'edit own webform submissions',
@@ -626,6 +650,9 @@ function agov_permissions_defaultconfig_user_default_permissions() {
   // Additional site-editor permissions.
   $additional_permissions = array(
     'access administration menu' => 'admin_menu',
+    'administer beans' => 'bean',
+    'access bean overview' => 'bean',
+    'view bean revisions' => 'bean',
     'administer blocks' => 'block',
     'administer contact forms' => 'contact',
     'access contextual links' => 'contextual',
@@ -638,7 +665,6 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'administer url aliases' => 'path',
     'create url aliases' => 'path',
     'administer redirects' => 'redirect',
-    'access administration pages' => 'system',
     'access site reports' => 'system',
     'edit terms in 1' => 'taxonomy',
     'delete terms in 1' => 'taxonomy',
@@ -650,7 +676,12 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'access broken links report' => 'linkchecker',
     'access own broken links report' => 'linkchecker',
     'access event log' => 'event_log',
+    'administer search' => 'search',
+    'administer search api' => 'search_api',
     'administer shield' => 'shield',
+    'edit all webform submissions' => 'webform',
+    'delete all webform submissions' => 'webform',
+    'set webform clear times' => 'webform_clear',
   );
   foreach ($additional_permissions as $permission => $module) {
     $permissions[$permission] = array(
