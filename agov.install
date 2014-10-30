@@ -89,7 +89,7 @@ function agov_supported_themes() {
 function _agov_create_basic_roles_perms() {
 
   $weight = 1;
-  $base_permissions = array();
+  $base_permissions = array('access navbar');
 
   // Content editor.
   $roles['Content editor'] = array(
@@ -487,7 +487,6 @@ video',
     DRUPAL_ANONYMOUS_RID,
     array(
       'access content',
-      $rich_text_permission,
     )
   );
   user_role_grant_permissions(
@@ -710,6 +709,9 @@ function _agov_default_variables() {
 
     // Shield settings.
     'shield_enabled' => 0,
+
+    // Maintenance Message.
+    'maintenance_mode_message' => '<p>This web site is currently undergoing some maintenance and is unavailable.</p><p>Thank you for your patience.</p>',
   );
 
   // Enable xmlsitemap includes for content types.

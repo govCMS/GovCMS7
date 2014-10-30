@@ -37,17 +37,7 @@ endif;
 
 <body>
   <div class="palette-1 centered-box">
-    <?php if (!empty($logo)): ?>
-      <img class="centered-box__image" src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-    <?php endif; ?>
-
-    <?php if (!empty($site_name)): ?>
-      <h1 class="centered-box__title">
-        <?php print $site_name; ?>
-      </h1>
-    <?php endif; ?>
-
-    <?php print $content; ?>
+    This web site is currently undergoing some maintenance and is unavailable.
   </div>
 </body>
 
