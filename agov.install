@@ -707,7 +707,10 @@ function _agov_default_variables() {
     // TOC settings.
     'toc_filter_header_tag' => 'h2',
 
-    // Maintenance Message
+    // Shield settings.
+    'shield_enabled' => 0,
+
+    // Maintenance Message.
     'maintenance_mode_message' => '<p>This web site is currently undergoing some maintenance and is unavailable.</p><p>Thank you for your patience.</p>',
   );
 

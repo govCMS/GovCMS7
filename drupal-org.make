@@ -120,6 +120,12 @@ projects[strongarm][version] = "2.0"
 
 projects[superfish][version] = "1.9"
 
+projects[shield][download][type] = "git"
+projects[shield][download][url] = "http://git.drupal.org/project/shield.git"
+projects[shield][download][revision] = 827b09957a1ef71588bb835aa921aec8ffb7e2f9
+projects[shield][download][branch] = "7.x-1.x"
+projects[shield][type] = "module"
+
 projects[toc_filter][version] = "1.2"
 
 projects[token][version] = "1.5"

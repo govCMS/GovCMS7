@@ -650,6 +650,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'access broken links report' => 'linkchecker',
     'access own broken links report' => 'linkchecker',
     'access event log' => 'event_log',
+    'administer shield' => 'shield',
   );
   foreach ($additional_permissions as $permission => $module) {
     $permissions[$permission] = array(
