@@ -14,3 +14,5 @@ Feature: Role delegation
     And I visit the user edit page for "joe"
     Then I "should not" be able to change the "administrator" role
     And I should not be able to block the user
+    And I visit the user list page
+    And I should not be able to cancel the account "bob"
