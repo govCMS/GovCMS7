@@ -134,6 +134,7 @@ projects[username_enumeration_prevention][version] = "1.0"
 
 projects[video_filter][version] = "3.1"
 projects[video_filter][patch][] = https://www.drupal.org/files/issues/video_filter-fix_modal-2335169-11.patch
+projects[video_filter][patch][] = https://www.drupal.org/files/video_filter-autoplay-ckeditor-1430680-8.patch
 
 projects[view_unpublished][download][type] = "git"
 projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
