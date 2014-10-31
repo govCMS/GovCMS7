@@ -20,5 +20,6 @@ features[ctools][] = linkit:linkit_profiles:1
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[linkit_profiles][] = wysiwyg
+features[variable][] = media__wysiwyg_browser_plugins
 features[wysiwyg][] = rich_text
 features_exclude[filter][rich_text] = rich_text
