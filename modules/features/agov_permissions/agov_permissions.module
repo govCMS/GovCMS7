@@ -3,3 +3,13 @@
  * @file
  * Drupal needs this blank file.
  */
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_profile_form().
+ */
+function agov_permissions_form_user_profile_form_alter(&$form, $form_state) {
+  global $user;
+  if (!user_access('assign all roles', $user)) {
+    $form['account']['status']['#access'] = FALSE;
+  }
+}
