@@ -84,6 +84,8 @@ projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-at
 
 projects[navbar][version] = "1.4"
 
+projects[oauth][version] = "3.2"
+
 projects[references][version] = "2.1"
 
 projects[panels][version] = "3.4"
