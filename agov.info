@@ -65,6 +65,7 @@ dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = globalredirect
 dependencies[] = googleanalytics
+dependencies[] = google_analytics_reports
 dependencies[] = honeypot
 dependencies[] = libraries
 dependencies[] = link
