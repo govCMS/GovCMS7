@@ -47,6 +47,12 @@ projects[globalredirect][version] = "1.5"
 
 projects[google_analytics][version] = "2.0"
 
+projects[google_analytics_reports][version] = "1.3"
+projects[google_analytics_reports][patch][] = https://www.drupal.org/files/issues/google_analytics_reports.chart_.patch
+
+projects[google_chart_tools][version] = "1.4"
+projects[google_chart_tools][patch][] = https://www.drupal.org/files/issues/google_chart_tools.ajax_.patch
+
 projects[honeypot][version] = "1.14"
 
 projects[libraries][version] = "2.1"
