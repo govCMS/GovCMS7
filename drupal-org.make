@@ -37,6 +37,8 @@ projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce87
 projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
+projects[escape_admin][version] = "1.1"
+
 projects[favicon][version] = "1.0-rc2"
 
 projects[features][version] = 2.2
@@ -180,11 +182,11 @@ projects[image_link_formatter][version] = "1.0"
 
 projects[role_delegation][version] = "1.1"
 
+projects[sweaver][version] = "1.3"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
-
-
 
 projects[event_log][version] = "1.2"
 

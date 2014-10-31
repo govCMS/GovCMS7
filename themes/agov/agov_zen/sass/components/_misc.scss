@@ -538,3 +538,27 @@ tr.selected td {
   list-style: disc;
   margin: 0 0 5px 15px;
 }
+
+#sweaver {
+  // Sweaver forces its toolbar to the left unnecessarily.
+  left: inherit;
+
+  .close a,
+  .tab a {
+    // Fix button heights.
+    height: auto !important;
+  }
+
+  // Raise it above the IPE when present.
+  .panels-ipe & {
+    bottom:54px;
+  }
+}
+
+form#sweaver-frontend > div {
+
+  // Fix an issue where Sweaver would cover the bottom of the page.
+  position: static;
+  height: 300px;
+}
+
