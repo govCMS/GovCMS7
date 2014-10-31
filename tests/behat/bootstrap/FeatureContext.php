@@ -57,4 +57,11 @@ class FeatureContext extends DrupalContext {
     }
   }
 
+  /**
+   * @Given /^I should not be able to block the user$/
+   */
+  public function iShouldNotBeAbleToBlockTheUser() {
+    $this->assertElementNotOnPage('input[name=status]');
+  }
+
 }
