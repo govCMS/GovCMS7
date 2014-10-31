@@ -180,11 +180,11 @@ projects[image_link_formatter][version] = "1.0"
 
 projects[role_delegation][version] = "1.1"
 
+projects[sweaver][version] = "1.3"
+
 ; Included, but disabled modules
 
 projects[flood_control][version] = "1.0"
-
-
 
 projects[event_log][version] = "1.2"
 

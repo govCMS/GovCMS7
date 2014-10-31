@@ -1594,6 +1594,22 @@ tr.selected td {
   margin: 0 0 5px 15px;
 }
 
+#sweaver {
+  left: inherit;
+}
+#sweaver .close a,
+#sweaver .tab a {
+  height: auto !important;
+}
+.panels-ipe #sweaver {
+  bottom: 54px;
+}
+
+form#sweaver-frontend > div {
+  position: static;
+  height: 300px;
+}
+
 /**
  * Pager.
  */
