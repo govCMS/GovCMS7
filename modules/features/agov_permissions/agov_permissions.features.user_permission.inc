@@ -12,7 +12,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
 
   // Exported permission: access administration pages.
   $permissions['access administration pages'] = array(
-    'name' => 'access comments',
+    'name' => 'access administration pages',
     'roles' => array(
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
