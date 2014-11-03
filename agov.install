@@ -713,6 +713,21 @@ function _agov_default_variables() {
 
     // Maintenance Message.
     'maintenance_mode_message' => '<p>This web site is currently undergoing some maintenance and is unavailable.</p><p>Thank you for your patience.</p>',
+
+    // Linkchecker.
+    'linkchecker_scan_nodetypes' => array(
+      'blog_article' => 'blog_article',
+      'event' => 'event',
+      'media_release' => 'media_release',
+      'news_article' => 'news_article',
+      'footer_teaser' => 'footer_teaser',
+      'publication' => 'publication',
+      'slide' => 'slide',
+      'page' => 'page',
+      'webform' => 'webform',
+    ),
+    'linkchecker_impersonate_user' => 'admin',
+    'linkchecker_scan_blocks' => 1,
   );
 
   // Enable xmlsitemap includes for content types.
