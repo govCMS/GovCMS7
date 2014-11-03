@@ -42,7 +42,6 @@ dependencies[] = image
 dependencies[] = list
 dependencies[] = rdf
 dependencies[] = update
-dependencies[] = overlay
 
 ; Contrib
 
@@ -60,6 +59,7 @@ dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
 dependencies[] = entitycache
+dependencies[] = escape_admin
 dependencies[] = favicon
 dependencies[] = features
 dependencies[] = file_entity
@@ -74,8 +74,6 @@ dependencies[] = linkit
 dependencies[] = login_security
 dependencies[] = media
 dependencies[] = media_internet
-dependencies[] = media_vimeo
-dependencies[] = media_youtube
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag

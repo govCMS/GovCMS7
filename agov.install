@@ -4,7 +4,7 @@
  * @file
  * The install file for the aGov distribution.
  *
- * @copyright Copyright(c) 2012 PreviousNext
+ * @copyright Copyright(c) 2014 PreviousNext
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  * @author Chris Skene chris at previousnext.com.au
  */
@@ -169,7 +169,8 @@ function _agov_default_formats_and_permissions() {
     'name' => 'Rich text',
     'weight' => 0,
     'filters' => array(
-      // Video filter - Must go before 'Convert URLs into links' per module documentation.
+      // Video filter - Must go before 'Convert URLs into links'
+      // per module documentation.
       'video_filter' => array(
         'weight' => 0,
         'status' => 1,
@@ -434,7 +435,7 @@ video',
           'rule_style_urls' => array(),
         ),
       ),
-      // Convert Media tags to markup
+      // Convert Media tags to markup.
       'media_filter' => array(
         'weight' => 3,
         'status' => 1,

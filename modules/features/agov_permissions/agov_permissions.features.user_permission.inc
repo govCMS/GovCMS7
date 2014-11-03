@@ -10,6 +10,18 @@
 function agov_permissions_defaultconfig_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access administration pages.
+  $permissions['access administration pages'] = array(
+    'name' => 'access administration pages',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'system',
+  );
+
   // Exported permission: access comments.
   $permissions['access comments'] = array(
     'name' => 'access comments',
@@ -506,6 +518,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
     'roles' => array(
+      'authenticated user' => 'authenticated user',
       'Content approver' => 'Content approver',
       'Content editor' => 'Content editor',
       'administrator' => 'administrator',
@@ -537,7 +550,6 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     ),
     'module' => 'system',
   );
-
 
   // Create webform content.
   $permissions['create webform content'] = array(
@@ -587,6 +599,18 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'webform',
   );
 
+  // Exported permission: access own webform results.
+  $permissions['access own webform results'] = array(
+    'name' => 'access own webform results',
+    'roles' => array(
+      'Content approver' => 'Content approver',
+      'Content editor' => 'Content editor',
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'webform',
+  );
+
   // Exported permission: edit own webform submissions.
   $permissions['edit own webform submissions'] = array(
     'name' => 'edit own webform submissions',
@@ -625,32 +649,38 @@ function agov_permissions_defaultconfig_user_default_permissions() {
 
   // Additional site-editor permissions.
   $additional_permissions = array(
-    'access administration menu' => 'admin_menu',
+    'access bean overview' => 'bean',
+    'access broken links report' => 'linkchecker',
+    'access contextual links' => 'contextual',
+    'access event log' => 'event_log',
+    'access own broken links report' => 'linkchecker',
+    'access site reports' => 'system',
+    'access user profiles' => 'user',
+    'administer beans' => 'bean',
     'administer blocks' => 'block',
     'administer contact forms' => 'contact',
-    'access contextual links' => 'contextual',
-    'bypass file access' => 'file_entity',
     'administer google analytics' => 'googleanalytics',
     'administer menu' => 'menu',
-    'use panels in place editing' => 'panels',
-    'unblock expired accounts' => 'password_policy',
-    'force password change' => 'password_policy',
-    'administer url aliases' => 'path',
-    'create url aliases' => 'path',
     'administer redirects' => 'redirect',
-    'access administration pages' => 'system',
-    'access site reports' => 'system',
-    'edit terms in 1' => 'taxonomy',
-    'delete terms in 1' => 'taxonomy',
-    'access user profiles' => 'user',
-    'administer users' => 'user',
-    'assign Content editor role' => 'role_delegation',
-    'assign Content approver role' => 'role_delegation',
-    'assign Site editor role' => 'role_delegation',
-    'access broken links report' => 'linkchecker',
-    'access own broken links report' => 'linkchecker',
-    'access event log' => 'event_log',
+    'administer search' => 'search',
+    'administer search_api' => 'search_api',
     'administer shield' => 'shield',
+    'administer url aliases' => 'path',
+    'administer users' => 'user',
+    'assign Content approver role' => 'role_delegation',
+    'assign Content editor role' => 'role_delegation',
+    'assign Site editor role' => 'role_delegation',
+    'bypass file access' => 'file_entity',
+    'create url aliases' => 'path',
+    'delete all webform submissions' => 'webform',
+    'delete terms in 1' => 'taxonomy',
+    'edit all webform submissions' => 'webform',
+    'edit terms in 1' => 'taxonomy',
+    'force password change' => 'password_policy',
+    'set webform_clear times' => 'webform_clear',
+    'unblock expired accounts' => 'password_policy',
+    'use panels in place editing' => 'panels',
+    'view bean revisions' => 'bean',
   );
   foreach ($additional_permissions as $permission => $module) {
     $permissions[$permission] = array(
