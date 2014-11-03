@@ -169,6 +169,16 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'scheduler',
   );
 
+  // Exported permission: 'administer theme settings'.
+  $permissions['administer theme settings'] = array(
+    'name' => 'administer theme settings',
+    'roles' => array(
+      'Site editor' => 'Site editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'agov_appearance',
+  );
+
   // Exported permission: administer workbench moderation.
   $permissions['administer workbench moderation'] = array(
     'name' => 'administer workbench moderation',
