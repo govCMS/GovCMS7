@@ -201,7 +201,7 @@ br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
 span,p[class],
 h2[class],h3[class],h4[class],h5[class],h6[class],
 img[!src|title|alt|width|height|class|hspace|vspace],
-table,tr,thead,td[colspan|rowspan|headers|class|id],th[colspan|rowspan|class|headers|id],tbody,caption,sup,sub,
+table[border|cellpadding|cellspacing|align|dir|summary|style],tr[scope],thead,td[colspan|rowspan|headers|class|id],th[colspan|rowspan|class|headers|id|scope],tbody,caption,sup,sub,
 @[class]
 video',
           'allow_comments' => 1,
@@ -274,13 +274,13 @@ video',
             'border-left-style' => 0,
           ),
           'style_dimension' => array(
-            'height' => 0,
+            'height' => 'height',
             'line-height' => 0,
             'max-height' => 0,
             'max-width' => 0,
             'min-height' => 0,
             'min-width' => 0,
-            'width' => 0,
+            'width' => 'width',
           ),
           'style_positioning' => array(
             'bottom' => 0,
@@ -444,6 +444,12 @@ video',
       // Table of contents filter.
       'toc_filter' => array(
         'weight' => 4,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Clean up HTML
+      'filter_htmlcorrector' => array(
+        'weight' => 5,
         'status' => 1,
         'settings' => array(),
       ),
@@ -713,6 +719,21 @@ function _agov_default_variables() {
 
     // Maintenance Message.
     'maintenance_mode_message' => '<p>This web site is currently undergoing some maintenance and is unavailable.</p><p>Thank you for your patience.</p>',
+
+    // Linkchecker.
+    'linkchecker_scan_nodetypes' => array(
+      'blog_article' => 'blog_article',
+      'event' => 'event',
+      'media_release' => 'media_release',
+      'news_article' => 'news_article',
+      'footer_teaser' => 'footer_teaser',
+      'publication' => 'publication',
+      'slide' => 'slide',
+      'page' => 'page',
+      'webform' => 'webform',
+    ),
+    'linkchecker_impersonate_user' => 'admin',
+    'linkchecker_scan_blocks' => 1,
   );
 
   // Enable xmlsitemap includes for content types.
