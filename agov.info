@@ -70,6 +70,7 @@ dependencies[] = libraries
 dependencies[] = link
 dependencies[] = linkchecker
 dependencies[] = linkit
+dependencies[] = login_destination
 dependencies[] = login_security
 dependencies[] = media
 dependencies[] = media_internet

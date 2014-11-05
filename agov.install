@@ -59,6 +59,9 @@ function agov_install() {
   // Set default tags.
   _agov_default_tags();
 
+  // Setup login destination.
+  _agov_setup_login_destination();
+
   // Set the password policy.
   _agov_password_policy();
 
@@ -1452,6 +1455,24 @@ function agov_rebuild_sitemap() {
     // Run the batch process.
     xmlsitemap_run_unprogressive_batch('xmlsitemap_rebuild_batch', $rebuild_types, TRUE);
   }
+}
+
+/**
+ * Setup login_destination settings.
+ */
+function _agov_setup_login_destination() {
+  $role = user_role_load_by_name('Site editor');
+  $rid = $role->rid;
+  $record = array(
+    'triggers' => serialize(array('login' => 'login')),
+    'roles' => serialize(array($rid => $rid)),
+    'page_types' => 0,
+    'pages' => '',
+    'destination_type' => 0,
+    'destination' => 'admin/workbench',
+    'weight' => 0,
+  );
+  drupal_write_record('login_destination', $record);
 }
 
 /**

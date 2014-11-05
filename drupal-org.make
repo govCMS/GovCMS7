@@ -59,6 +59,8 @@ projects[linkchecker][version] = "1.2"
 
 projects[linkit][version] = "3.1"
 
+projects[login_destination][version] = "1.1"
+
 projects[login_security][version] = "1.9"
 
 projects[media][version] = "2.0-alpha1"
