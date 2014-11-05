@@ -47,7 +47,7 @@ function agov_install() {
   // Set up twitter block.
   _agov_twitter_block();
 
-  // Set some PathAuto settings.
+  // Set some default variable values.
   _agov_default_variables();
 
   // Enable full image display mode.
@@ -656,7 +656,7 @@ function _agov_twitter_block() {
 }
 
 /**
- * Set default variables.
+ * Set default variable values.
  */
 function _agov_default_variables() {
 
@@ -734,6 +734,9 @@ function _agov_default_variables() {
     ),
     'linkchecker_impersonate_user' => 'admin',
     'linkchecker_scan_blocks' => 1,
+
+    // Oauth
+    'oauth_common_enable_provider' => FALSE,
   );
 
   // Enable xmlsitemap includes for content types.
