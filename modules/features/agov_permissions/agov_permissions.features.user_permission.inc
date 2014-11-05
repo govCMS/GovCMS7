@@ -647,6 +647,16 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'metatag',
   );
 
+  // Exported permission: view user actions.
+  $permissions['view user actions'] = array(
+    'name' => 'view user actions',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'user_action_report',
+  );
+
   // Additional site-editor permissions.
   $additional_permissions = array(
     'access bean overview' => 'bean',
