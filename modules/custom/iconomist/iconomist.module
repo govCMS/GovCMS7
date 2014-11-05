@@ -326,6 +326,10 @@ function _iconomist_settings_submit($form, &$form_state) {
     if (isset($icon['fid']) && empty($icon['usage_id'])) {
       $file = file_load($icon['fid']);
       if ($file) {
+        // Mark file as permanent.
+        $file->status = FILE_STATUS_PERMANENT;
+        file_save($file);
+        // Add file usage.
         $icon['usage_id'] = _iconomist_get_usage_id();
         $added_usages[$icon['usage_id']] = $file->fid;
         file_usage_add($file, 'iconomist', 'theme', $icon['usage_id']);
