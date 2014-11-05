@@ -343,7 +343,7 @@ function iconomist_preprocess_html(&$vars) {
     // Do nothing if iconomist is toggled off.
     return;
   }
-  
+
   foreach ($icons as $icon) {
     $icon_path = file_create_url($icon['path']);
     $attributes = array(
