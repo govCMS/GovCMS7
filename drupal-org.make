@@ -61,6 +61,8 @@ projects[linkit][version] = "3.1"
 
 projects[login_security][version] = "1.9"
 
+projects[maintenance_mode_permissions][version] = "1.0"
+
 projects[media][version] = "2.0-alpha1"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
 projects[media][patch][] = "https://drupal.org/files/media.code_.1701914-2.patch"

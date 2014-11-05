@@ -149,6 +149,16 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: administer maintenance mode.
+  $permissions['administer maintenance mode'] = array(
+    'name' => 'administer maintenance mode',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'maintenance_mode_permissions',
+  );
+
   // Exported permission: administer nodes.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
