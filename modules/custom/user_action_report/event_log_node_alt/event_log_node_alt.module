@@ -35,9 +35,9 @@ function event_log_node_alt_node_insert($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'insert',
-    'description' => t('%type: %title', array(
-      '%type' => $node->type,
-      '%title' => $node->title,
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
@@ -51,9 +51,9 @@ function event_log_node_alt_node_update($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'update',
-    'description' => t('%type: %title', array(
-      '%type' => $node->type,
-      '%title' => $node->title,
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
@@ -67,9 +67,9 @@ function event_log_node_alt_node_delete($node) {
   $log = array(
     'type' => 'node',
     'operation' => 'delete',
-    'description' => t('%type: %title', array(
-      '%type' => $node->type,
-      '%title' => $node->title,
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
     )),
     'ref_numeric' => $node->nid,
   );
