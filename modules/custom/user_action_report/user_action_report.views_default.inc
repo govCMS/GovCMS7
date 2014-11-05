@@ -57,11 +57,17 @@ function user_action_report_views_default_views() {
   $handler->display->display_options['fields']['operation']['id'] = 'operation';
   $handler->display->display_options['fields']['operation']['table'] = 'event_log';
   $handler->display->display_options['fields']['operation']['field'] = 'operation';
+  /* Field: Event log: Description */
+  $handler->display->display_options['fields']['description']['id'] = 'description';
+  $handler->display->display_options['fields']['description']['table'] = 'event_log';
+  $handler->display->display_options['fields']['description']['field'] = 'description';
+  $handler->display->display_options['fields']['description']['exclude'] = TRUE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['relationship'] = 'ref_numeric_node_nid';
+  $handler->display->display_options['fields']['title']['empty'] = '[description]';
   /* Sort criterion: Event log: Event timestamp */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'event_log';
@@ -128,6 +134,11 @@ function user_action_report_views_default_views() {
     6 => 0,
     3 => 0,
   );
+  /* Filter criterion: Event log: Type */
+  $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
+  $handler->display->display_options['filters']['type_2']['table'] = 'event_log';
+  $handler->display->display_options['filters']['type_2']['field'] = 'type';
+  $handler->display->display_options['filters']['type_2']['value'] = 'user';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
