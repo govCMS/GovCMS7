@@ -128,6 +128,7 @@ dependencies[] = ccl_views
 
 ; Custom
 
+dependencies[] = iconomist
 dependencies[] = text_summary_options
 dependencies[] = wcag_validate
 dependencies[] = wcag_scheduler
@@ -136,6 +137,7 @@ dependencies[] = user_action_report
 
 ; aGov
 
+dependencies[] = agov_appearance
 dependencies[] = agov_core
 dependencies[] = agov_common_fields
 dependencies[] = agov_beans
