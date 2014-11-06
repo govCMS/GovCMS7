@@ -38,6 +38,7 @@ projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
 projects[entityreference][version] = "1.1"
+projects[entityreference][patch][] = "https://www.drupal.org/files/issues/entityreference-url-formatter-2370029-1-7.x-1.1.patch"
 
 projects[escape_admin][version] = "1.1"
 
