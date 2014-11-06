@@ -126,7 +126,10 @@
           command="${drush.cmd} site-install ${app.profile} -y --db-url=${drush.install.db_url} --account-name='${drush.install.user}' --account-pass='${drush.install.pass}' agov_install_additional_options.install=1"
           logoutput="${test.output}"
           passthru="false" />
-     <chmod file="${app.dir}/sites/default" mode="0775" />
+      <exec dir="${app.dir}"
+            command="chmod -R 775 sites/default"
+            logoutput="true"
+            passthru="true" />
   </target>
 
 </project>
