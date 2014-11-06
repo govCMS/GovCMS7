@@ -647,6 +647,36 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'metatag',
   );
 
+  // Exported permission: administer google analytics.
+  $permission['administer google analytics'] = array(
+    'name' => 'administer google analytics',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'googleanalytics',
+  );
+
+  // Exported permission: administer google analytics reports.
+  $permission['administer google analytics reports'] = array(
+    'name' => 'administer google analytics reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'google_analytics_report',
+  );
+
+  // Exported permission: access google analytics reports.
+  $permission['access google analytics reports'] = array(
+    'name' => 'access google analytics reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'google_analytics_report',
+  );
+
   // Additional site-editor permissions.
   $additional_permissions = array(
     'access bean overview' => 'bean',
