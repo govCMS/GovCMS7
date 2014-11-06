@@ -37,6 +37,8 @@ projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce87
 projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
+projects[entityreference][version] = "1.1"
+
 projects[escape_admin][version] = "1.1"
 
 projects[favicon][version] = "1.0-rc2"

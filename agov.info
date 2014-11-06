@@ -59,6 +59,7 @@ dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
 dependencies[] = entitycache
+dependencies[] = entityreference
 dependencies[] = escape_admin
 dependencies[] = favicon
 dependencies[] = features
