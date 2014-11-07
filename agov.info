@@ -65,12 +65,14 @@ dependencies[] = features
 dependencies[] = file_entity
 dependencies[] = globalredirect
 dependencies[] = googleanalytics
+dependencies[] = google_analytics_reports
 dependencies[] = honeypot
 dependencies[] = libraries
 dependencies[] = link
 dependencies[] = linkchecker
 dependencies[] = linkit
 dependencies[] = login_security
+dependencies[] = maintenance_mode_permissions
 dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = menu_block
@@ -127,6 +129,7 @@ dependencies[] = ccl_views
 
 ; Custom
 
+dependencies[] = iconomist
 dependencies[] = text_summary_options
 dependencies[] = wcag_validate
 dependencies[] = wcag_scheduler
@@ -135,6 +138,7 @@ dependencies[] = user_action_report
 
 ; aGov
 
+dependencies[] = agov_appearance
 dependencies[] = agov_core
 dependencies[] = agov_common_fields
 dependencies[] = agov_beans

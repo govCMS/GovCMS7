@@ -49,6 +49,12 @@ projects[globalredirect][version] = "1.5"
 
 projects[google_analytics][version] = "2.0"
 
+projects[google_analytics_reports][version] = "1.3"
+projects[google_analytics_reports][patch][] = https://www.drupal.org/files/issues/google-analytics-reports-google-chart-tools-2169159-9-7.x-1.3.patch
+
+projects[google_chart_tools][version] = "1.4"
+projects[google_chart_tools][patch][] = https://www.drupal.org/files/issues/google-chart-tools-ajax-1613258-11-7.x-1.4.patch
+
 projects[honeypot][version] = "1.14"
 
 projects[libraries][version] = "2.1"
@@ -60,6 +66,8 @@ projects[linkchecker][version] = "1.2"
 projects[linkit][version] = "3.1"
 
 projects[login_security][version] = "1.9"
+
+projects[maintenance_mode_permissions][version] = "1.0"
 
 projects[media][version] = "2.0-alpha1"
 projects[media][patch][] = "https://drupal.org/files/media.media-browser.1956620-10.patch"
@@ -75,6 +83,8 @@ projects[metatag][version] = "1.4"
 projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 
 projects[navbar][version] = "1.4"
+
+projects[oauth][version] = "3.2"
 
 projects[references][version] = "2.1"
 

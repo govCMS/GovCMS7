@@ -149,6 +149,16 @@ function agov_permissions_defaultconfig_user_default_permissions() {
     'module' => 'file_entity',
   );
 
+  // Exported permission: administer maintenance mode.
+  $permissions['administer maintenance mode'] = array(
+    'name' => 'administer maintenance mode',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'maintenance_mode_permissions',
+  );
+
   // Exported permission: administer nodes.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -167,6 +177,16 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Site editor' => 'Site editor',
     ),
     'module' => 'scheduler',
+  );
+
+  // Exported permission: 'administer theme settings'.
+  $permissions['administer theme settings'] = array(
+    'name' => 'administer theme settings',
+    'roles' => array(
+      'Site editor' => 'Site editor',
+      'administrator' => 'administrator',
+    ),
+    'module' => 'agov_appearance',
   );
 
   // Exported permission: administer workbench moderation.
@@ -655,6 +675,36 @@ function agov_permissions_defaultconfig_user_default_permissions() {
       'Site editor' => 'Site editor',
     ),
     'module' => 'user_action_report',
+  );
+  
+  // Exported permission: administer google analytics.
+  $permission['administer google analytics'] = array(
+    'name' => 'administer google analytics',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'googleanalytics',
+  );
+
+  // Exported permission: administer google analytics reports.
+  $permission['administer google analytics reports'] = array(
+    'name' => 'administer google analytics reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'google_analytics_report',
+  );
+
+  // Exported permission: access google analytics reports.
+  $permission['access google analytics reports'] = array(
+    'name' => 'access google analytics reports',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'Site editor' => 'Site editor',
+    ),
+    'module' => 'google_analytics_report',
   );
 
   // Additional site-editor permissions.
