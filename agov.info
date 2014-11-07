@@ -71,6 +71,7 @@ dependencies[] = libraries
 dependencies[] = link
 dependencies[] = linkchecker
 dependencies[] = linkit
+dependencies[] = login_destination
 dependencies[] = login_security
 dependencies[] = maintenance_mode_permissions
 dependencies[] = media
