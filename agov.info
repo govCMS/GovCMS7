@@ -128,6 +128,7 @@ dependencies[] = ccl_views
 
 ; Custom
 
+dependencies[] = options_flatten
 dependencies[] = iconomist
 dependencies[] = text_summary_options
 dependencies[] = wcag_validate

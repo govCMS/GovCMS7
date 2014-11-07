@@ -177,6 +177,8 @@ function agov_promotion_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => 1,
+        'flatten_options' => 1,
+        'flatten_sort' => 1,
       ),
       'type' => 'options_select',
       'weight' => 1,
@@ -223,6 +225,8 @@ function agov_promotion_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => 0,
+        'flatten_options' => 0,
+        'flatten_sort' => 1,
       ),
       'type' => 'options_select',
       'weight' => 2,
