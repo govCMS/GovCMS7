@@ -41,7 +41,7 @@ function agov_promotion_views_default_views() {
   $handler->display->display_options['fields']['field_reference']['label'] = '';
   $handler->display->display_options['fields']['field_reference']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_reference']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_reference']['type'] = 'node_reference_path';
+  $handler->display->display_options['fields']['field_reference']['type'] = 'entityreference_path';
   $handler->display->display_options['fields']['field_reference']['settings'] = array(
     'alias' => 1,
     'absolute' => 0,
@@ -86,14 +86,14 @@ function agov_promotion_views_default_views() {
   $handler->display->display_options['sorts']['random']['table'] = 'views';
   $handler->display->display_options['sorts']['random']['field'] = 'random';
   /* Contextual filter: Content: Reference (field_reference) */
-  $handler->display->display_options['arguments']['field_reference_nid']['id'] = 'field_reference_nid';
-  $handler->display->display_options['arguments']['field_reference_nid']['table'] = 'field_data_field_reference';
-  $handler->display->display_options['arguments']['field_reference_nid']['field'] = 'field_reference_nid';
-  $handler->display->display_options['arguments']['field_reference_nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['field_reference_nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_reference_nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_reference_nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['field_reference_nid']['not'] = TRUE;
+  $handler->display->display_options['arguments']['field_reference_target_id']['id'] = 'field_reference_target_id';
+  $handler->display->display_options['arguments']['field_reference_target_id']['table'] = 'field_data_field_reference';
+  $handler->display->display_options['arguments']['field_reference_target_id']['field'] = 'field_reference_target_id';
+  $handler->display->display_options['arguments']['field_reference_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_reference_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_reference_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_reference_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_reference_target_id']['not'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
