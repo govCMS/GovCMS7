@@ -1,0 +1,6 @@
+name = Event Log User events (alt)
+description = "Logs user CRUD events (without user info)."
+core = 7.x
+package = Statistics
+dependencies[] = event_log
+
