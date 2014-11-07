@@ -37,8 +37,8 @@ function event_log_user_alt_user_insert($account) {
     'type' => 'user',
     'operation' => 'insert',
     'description' => t('User: @name (uid @uid)', array(
-      '%name' => $account_array['name'],
-      '%uid' => $account_array['uid'],
+      '@name' => $account_array['name'],
+      '@uid' => $account_array['uid'],
     )),
     'ref_numeric' => $account_array['uid'],
   );
