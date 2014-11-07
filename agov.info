@@ -59,6 +59,7 @@ dependencies[] = draggableviews
 dependencies[] = ds
 dependencies[] = entity
 dependencies[] = entitycache
+dependencies[] = entityreference
 dependencies[] = escape_admin
 dependencies[] = favicon
 dependencies[] = features
@@ -80,14 +81,12 @@ dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
 dependencies[] = navbar
-dependencies[] = node_reference
 dependencies[] = panels
 dependencies[] = panels_ipe
 dependencies[] = password_policy
 dependencies[] = paranoia
 dependencies[] = pathauto
 dependencies[] = pathauto_persist
-dependencies[] = references
 dependencies[] = redirect
 dependencies[] = strongarm
 dependencies[] = token
@@ -130,6 +129,7 @@ dependencies[] = ccl_views
 
 ; Custom
 
+dependencies[] = options_flatten
 dependencies[] = iconomist
 dependencies[] = text_summary_options
 dependencies[] = wcag_validate

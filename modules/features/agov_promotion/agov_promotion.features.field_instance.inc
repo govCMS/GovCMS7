@@ -151,10 +151,12 @@ function agov_promotion_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'above',
-        'module' => 'node_reference',
-        'settings' => array(),
-        'type' => 'node_reference_default',
-        'weight' => 4,
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -163,7 +165,6 @@ function agov_promotion_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
-    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_reference',
     'label' => 'Reference',
@@ -175,7 +176,9 @@ function agov_promotion_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => 0,
+        'apply_chosen' => 1,
+        'flatten_options' => 1,
+        'flatten_sort' => 1,
       ),
       'type' => 'options_select',
       'weight' => 1,
@@ -222,6 +225,8 @@ function agov_promotion_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => 0,
+        'flatten_options' => 0,
+        'flatten_sort' => 1,
       ),
       'type' => 'options_select',
       'weight' => 2,

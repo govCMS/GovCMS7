@@ -101,6 +101,9 @@ function agov_promotion_strongarm() {
         'xmlsitemap' => array(
           'weight' => '30',
         ),
+        'redirect' => array(
+          'weight' => '30',
+        ),
       ),
       'display' => array(),
     ),

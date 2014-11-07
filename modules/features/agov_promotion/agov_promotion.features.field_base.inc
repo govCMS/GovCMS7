@@ -45,38 +45,47 @@ function agov_promotion_field_default_field_bases() {
     'entity_types' => array(),
     'field_name' => 'field_reference',
     'foreign keys' => array(
-      'nid' => array(
+      'node' => array(
         'columns' => array(
-          'nid' => 'nid',
+          'target_id' => 'nid',
         ),
         'table' => 'node',
       ),
     ),
     'indexes' => array(
-      'nid' => array(
-        0 => 'nid',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'node_reference',
+    'module' => 'entityreference',
     'settings' => array(
-      'referenceable_types' => array(
-        'blog_article' => 'blog_article',
-        'event' => 'event',
-        'footer_teaser' => 'footer_teaser',
-        'media_release' => 'media_release',
-        'news_article' => 'news_article',
-        'page' => 'page',
-        'publication' => 'publication',
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'direction' => 'ASC',
+          'property' => 'title',
+          'type' => 'property',
+        ),
+        'target_bundles' => array(
+          'blog_article' => 'blog_article',
+          'event' => 'event',
+          'footer_teaser' => 'footer_teaser',
+          'media_release' => 'media_release',
+          'news_article' => 'news_article',
+          'page' => 'page',
+          'publication' => 'publication',
+        ),
       ),
-      'view' => array(
-        'args' => array(),
-        'display_name' => '',
-        'view_name' => '',
-      ),
+      'target_type' => 'node',
     ),
     'translatable' => 0,
-    'type' => 'node_reference',
+    'type' => 'entityreference',
   );
 
   return $field_bases;

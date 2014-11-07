@@ -37,6 +37,9 @@ projects[entitycache][download][revision] = 7e390b5d4112b581ac2885d8bd0f2cb5ce87
 projects[entitycache][download][branch] = 7.x-1.x
 projects[entitycache][type] = "module"
 
+projects[entityreference][version] = "1.1"
+projects[entityreference][patch][] = "https://www.drupal.org/files/issues/entityreference-url-formatter-2370029-1-7.x-1.1.patch"
+
 projects[escape_admin][version] = "1.1"
 
 projects[favicon][version] = "1.0-rc2"
@@ -87,8 +90,6 @@ projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-at
 projects[navbar][version] = "1.4"
 
 projects[oauth][version] = "3.2"
-
-projects[references][version] = "2.1"
 
 projects[panels][version] = "3.4"
 
