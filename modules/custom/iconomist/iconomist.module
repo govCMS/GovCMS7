@@ -12,7 +12,7 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function iconomist_form_system_theme_settings_alter(&$form, &$form_state) {
-  $theme = $form_state['build_info']['args'][0];
+  $theme = empty($form_state['build_info']['args']) ? NULL : $form_state['build_info']['args'][0];
   if (!isset($form_state['triggering_element'])) {
     // Load existing settings.
     $form_state['values']['iconomist_icons'] = theme_get_setting('iconomist_icons', $theme) ?: array();
@@ -294,7 +294,7 @@ function _iconomist_icons_validate($element, &$form_state) {
  * Custom theme settings submit handler.
  */
 function _iconomist_settings_submit($form, &$form_state) {
-  $theme = $form_state['build_info']['args'][0];
+  $theme = empty($form_state['build_info']['args']) ? NULL : $form_state['build_info']['args'][0];
   $existing_icons = theme_get_setting('iconomist_icons', $theme) ?: array();
   $existing_file_usages = array();
   foreach ($existing_icons as $icon) {
