@@ -45,6 +45,13 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
     '!aGov' => l(t('aGov'), 'http://agov.com.au'),
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
   )) . '</div>';
+
+  if ($variables['install_page'] = drupal_installation_attempted()) {
+    $variables['logo'] = base_path() . drupal_get_path('theme', 'agov_zen') . '/logo-alt.png';
+    if (empty($variables['content'])) {
+      $variables['content'] = t('This web site is currently undergoing some maintenance and is unavailable.');
+    }
+  }
 }
 
 /**
