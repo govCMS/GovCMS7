@@ -61,6 +61,7 @@ function agov_system_info_alter(&$info, $file, $type) {
  * Convert node reference to entity reference.
  */
 function agov_update_7100() {
+  module_enable(array('entityreference'));
   $field = field_info_field('field_reference');
   if (!$field) {
     throw new DrupalUpdateException('field_reference not found');
