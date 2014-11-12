@@ -2,7 +2,6 @@ name = Beans
 description = Provides common Bean types.
 core = 7.x
 package = aGov
-version = 7.x-1.1
 project = agov_beans
 dependencies[] = bean_admin_ui
 dependencies[] = ctools

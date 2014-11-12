@@ -2,4 +2,3 @@ name = Appearance
 package = aGov core
 description = Provides functionality related to Appearance
 core = 7.x
-version = 7.x-1.0

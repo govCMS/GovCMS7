@@ -2,7 +2,6 @@ name = Slides Content
 description = Slides for aGov Slideshow
 core = 7.x
 package = aGov content
-version = 7.x-1.0-beta1
 project = agov_content_slides
 dependencies[] = defaultcontent
 features[content][] = slide_1

@@ -2,7 +2,6 @@ name = Tags
 description = Provides tags for default content.
 core = 7.x
 package = aGov content
-version = 7.x-1.0
 project = agov_tags
 dependencies[] = features
 dependencies[] = taxonomy

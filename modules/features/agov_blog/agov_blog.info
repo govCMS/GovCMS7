@@ -2,7 +2,6 @@ name = Blog
 description = Provides a Blog feature.
 core = 7.x
 package = aGov
-version = 7.x-1.4
 project = agov_blog
 dependencies[] = agov_common_fields
 dependencies[] = agov_tags
