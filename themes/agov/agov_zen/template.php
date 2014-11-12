@@ -42,7 +42,7 @@ function agov_zen_preprocess_region(&$variables) {
  */
 function agov_zen_preprocess_maintenance_page(&$variables) {
 
-  $t = get_t();
+  $t_function = get_t();
 
   $variables['footer'] = '<div id="footer">' . t('!aGov is developed by !PreviousNext', array(
     '!aGov' => l(t('aGov'), 'http://agov.com.au'),
@@ -53,13 +53,13 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
     $variables['logo'] = base_path() . drupal_get_path('theme', 'agov_zen') . '/logo-alt.png';
     // Override the site name, which will be "Drupal".
     // @todo: Dynamically rename "aGov" using $conf.
-    $variables['site_name'] = $t('Install aGov');
+    $variables['site_name'] = $t_function('Install aGov');
     // @todo: Use this to style the installer appropriately.
     $variables['classes_array'][] = 'installer';
   }
   else {
     if (empty($variables['content'])) {
-      $variables['content'] = $t('This web site is currently undergoing some maintenance and is unavailable.');
+      $variables['content'] = $t_function('This web site is currently undergoing some maintenance and is unavailable.');
     }
   }
 }
@@ -121,10 +121,10 @@ function agov_zen_status_messages($variables) {
  */
 function agov_zen_form_required_marker($variables) {
   // This is also used in the installer, pre-database setup.
-  $t = get_t();
+  $t_function = get_t();
   $attributes = array(
     'class' => 'form-required',
-    'title' => $t('This field is required.'),
+    'title' => $t_function('This field is required.'),
   );
   return '<span' . drupal_attributes($attributes) . '>(required)</span>';
 }
