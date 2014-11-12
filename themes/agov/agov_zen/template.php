@@ -41,15 +41,25 @@ function agov_zen_preprocess_region(&$variables) {
  * Implements hook_preprocess_maintenance_page().
  */
 function agov_zen_preprocess_maintenance_page(&$variables) {
+
+  $t = get_t();
+
   $variables['footer'] = '<div id="footer">' . t('!aGov is developed by !PreviousNext', array(
     '!aGov' => l(t('aGov'), 'http://agov.com.au'),
     '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
   )) . '</div>';
 
-  if ($variables['install_page'] = drupal_installation_attempted()) {
+  if (drupal_installation_attempted()) {
     $variables['logo'] = base_path() . drupal_get_path('theme', 'agov_zen') . '/logo-alt.png';
+    // Override the site name, which will be "Drupal".
+    // @todo: Dynamically rename "aGov" using $conf.
+    $variables['site_name'] = $t('Install aGov');
+    // @todo: Use this to style the installer appropriately.
+    $variables['classes_array'][] = 'installer';
+  }
+  else {
     if (empty($variables['content'])) {
-      $variables['content'] = t('This web site is currently undergoing some maintenance and is unavailable.');
+      $variables['content'] = $t('This web site is currently undergoing some maintenance and is unavailable.');
     }
   }
 }
