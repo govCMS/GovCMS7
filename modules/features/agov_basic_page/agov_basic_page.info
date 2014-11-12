@@ -2,7 +2,6 @@ name = Basic Page
 description = Provides a Basic Page feature.
 core = 7.x
 package = aGov
-version = 7.x-1.2
 project = agov_basic_page
 dependencies[] = agov_common_fields
 dependencies[] = agov_tags
