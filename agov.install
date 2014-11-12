@@ -108,6 +108,13 @@ function _agov_create_basic_roles_perms() {
     'permissions' => $base_permissions,
   );
 
+  // Site builder.
+  $roles['Site builder'] = array(
+    'name' => 'Site builder',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
   // Site editor.
   $roles['Site editor'] = array(
     'name' => 'Site editor',
