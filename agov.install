@@ -92,7 +92,7 @@ function agov_supported_themes() {
 function _agov_create_basic_roles_perms() {
 
   $weight = 1;
-  $base_permissions = array('access navbar');
+  $base_permissions = array();
 
   // Content editor.
   $roles['Content editor'] = array(
@@ -108,18 +108,24 @@ function _agov_create_basic_roles_perms() {
     'permissions' => $base_permissions,
   );
 
+  $extra_perms = array(
+    'administer google analytics reports',
+    'access google analytics reports',
+  );
+  $extended_permissions = $base_permissions + $extra_perms;
+
   // Site builder.
   $roles['Site builder'] = array(
     'name' => 'Site builder',
     'weight' => $weight++,
-    'permissions' => $base_permissions,
+    'permissions' => $extended_permissions,
   );
 
   // Site editor.
   $roles['Site editor'] = array(
     'name' => 'Site editor',
     'weight' => $weight++,
-    'permissions' => $base_permissions,
+    'permissions' => $extended_permissions,
   );
 
   // Create the roles.
@@ -132,7 +138,9 @@ function _agov_create_basic_roles_perms() {
     user_role_save($role_object);
 
     // Grant permissions.
-    user_role_grant_permissions($role_object->rid, $role['permissions']);
+    if (!empty($role['permissions'])) {
+      user_role_grant_permissions($role_object->rid, $role['permissions']);
+    }
   }
 
   // Update the weight of the administrator role so its last.
