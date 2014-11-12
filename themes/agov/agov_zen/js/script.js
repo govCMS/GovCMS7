@@ -36,7 +36,7 @@ Drupal.behaviors.responsiveSlides = {
     attach: function(context, settings) {
 
         $(".view-slideshow ul:not(.contextual-links)").responsiveSlides({
-            "auto": true,
+            "auto": false,
             "pager": true,           // Boolean: Show pager, true or false
             "pauseButton": true,   // Boolean: Create Pause Button
         });
