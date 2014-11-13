@@ -92,7 +92,7 @@ function agov_supported_themes() {
 function _agov_create_basic_roles_perms() {
 
   $weight = 1;
-  $base_permissions = array();
+  $base_permissions = array('access navbar');
 
   // Content editor.
   $roles['Content editor'] = array(
