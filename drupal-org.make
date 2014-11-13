@@ -60,6 +60,8 @@ projects[google_chart_tools][patch][] = https://www.drupal.org/files/issues/goog
 
 projects[honeypot][version] = "1.14"
 
+projects[legal][version] = "1.5"
+
 projects[libraries][version] = "2.1"
 
 projects[link][version] = "1.1"
