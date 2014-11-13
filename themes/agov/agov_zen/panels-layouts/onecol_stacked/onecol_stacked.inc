@@ -1,9 +1,14 @@
 <?php
 
 /**
- * implementation of hook_panels_layouts()
+ * @file
+ * One column stacked panel layout.
  */
-// Plugin definition
+
+/**
+ * Implements hook_panels_layouts().
+ */
+// Plugin definition.
 $plugin = array(
   'title' => t('Single column stacked'),
   'category' => t('Columns: 1'),
