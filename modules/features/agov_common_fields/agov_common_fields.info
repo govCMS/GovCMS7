@@ -2,7 +2,6 @@ name = aGov Common Fields
 description = Common fields used in content types.
 core = 7.x
 package = aGov
-version = 7.x-1.0
 project = agov_common_fields
 dependencies[] = agov_tags
 dependencies[] = ctools

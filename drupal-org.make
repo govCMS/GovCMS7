@@ -109,7 +109,7 @@ projects[redirect][patch][] = "https://www.drupal.org/files/issues/redirect.circ
 
 projects[simple_aggregation][version] = "1.0"
 
-projects[scheduler][version] = "1.1"
+projects[scheduler][version] = "1.3"
 
 projects[scheduler_workbench][version] = "1.2"
 

@@ -51,6 +51,7 @@
 
     <div id="content" class="column" role="main">
 
+      <a href="#skip-link" id="skip-content" class="element-invisible">Go to top of page</a>
 
       <a id="main-content"></a>
       <?php print render($title_prefix); ?>
