@@ -152,21 +152,18 @@ function agov_social_links_theme($existing, $type, $theme, $path) {
  * Default theme implementation for agov_social_link.
  */
 function theme_agov_social_link($variables) {
-  $service_image = array(
-    '#theme' => 'image',
-    '#path' => $variables['icon'],
-    '#alt' => '',
-    '#title' => $variables['title'],
-  );
+  $service_image = theme('image', array(
+    'path' => $variables['icon'],
+    'title' => $variables['title'],
+    'alt' => $variables['title'],
+  ));
 
-  $element = array(
-    '#theme' => 'link',
-    '#text' => drupal_render($service_image),
-    '#path' => $variables['url'],
-    '#options' => array(
+  return theme('link', array(
+    'text' => $service_image,
+    'path' => $variables['url'],
+    'options' => array(
       'html' => TRUE,
       'attributes' => array(),
     ),
-  );
-  return drupal_render($element);
+  ));
 }
