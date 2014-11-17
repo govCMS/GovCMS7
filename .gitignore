@@ -35,6 +35,10 @@
 ehthumbs.db
 Thumbs.db
 
+# IDE Generated Folders #
+#######################
+.idea
+
 # Ignore Drupal stuff #
 ########################
 app/sites/*
