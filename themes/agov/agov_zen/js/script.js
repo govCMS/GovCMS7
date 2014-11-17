@@ -22,13 +22,13 @@ Drupal.behaviors.mainMenuTinyNav = {
 
 Drupal.behaviors.mainMenuSuperfish = {
   attach: function(context, settings) {
-	  
-	  var superfish_menu = $(".region-navigation .block__content > .menu");
-	  
-		superfish_menu.addClass('sf-menu');
-    superfish_menu.superfish({ 
-			autoArrows:  false                           
-		});
+
+    var superfish_menu = $(".region-navigation .block__content > .menu");
+
+    superfish_menu.addClass('sf-menu');
+    superfish_menu.superfish({
+      autoArrows:  false
+    });
   }
 };
 
@@ -37,8 +37,8 @@ Drupal.behaviors.responsiveSlides = {
 
         $(".view-slideshow ul:not(.contextual-links)").responsiveSlides({
             "auto": false,
-            "pager": true,           // Boolean: Show pager, true or false
-            "pauseButton": true,   // Boolean: Create Pause Button
+            "pager": true,         // Boolean: Show pager, true or false
+            "pauseButton": false   // Boolean: Create Pause Button
         });
 
     }
