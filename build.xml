@@ -6,9 +6,6 @@
 
 <project name="govcms" default="build" phingVersion="2.4.11">
 
-  <includepath classpath="vendor/previousnext/scaffold" />
-  <import file="vendor/previousnext/scaffold/build.standard.xml" optional="true" />
-
   <!--               -->
   <!--  Properties   -->
   <!-- ============= -->
@@ -29,11 +26,13 @@
   <!-- Drush -->
   <property name="drush.bin" value="${project.basedir}/bin/drush" override="true" />
   <property name="drush.source" value="@${phing.project.name}.dev" override="true" />
-  <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" override="true" />
+  <!-- <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" override="true" /> -->
   <property name="drush.make" value="${phing.project.name}.make" override="true" />
+  <!-- 
   <property name="drush.install.db_url" value="mysql://drupal:drupal@localhost/drupal_local" override="true" />
   <property name="drush.install.user" value="admin" override="true" />
   <property name="drush.install.pass" value="aisei9du+chiek.oiRah" override="true" />
+  -->
 
   <!-- We override this so Drupal install works -->
   <property name="drush.cmd" value="${drush.bin} -r ${app.dir}" override="true" />
