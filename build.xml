@@ -1,0 +1,143 @@
+<!--
+  name: build.xml
+  description: The main project build file for phing operations. This file can
+               be overridden with project specific configuration.
+-->
+
+<project name="govcms" default="build" phingVersion="2.4.11">
+
+  <includepath classpath="vendor/previousnext/scaffold" />
+  <import file="vendor/previousnext/scaffold/build.standard.xml" optional="true" />
+
+  <!--               -->
+  <!--  Properties   -->
+  <!-- ============= -->
+
+  <!-- The following override properties provided in imported build files. -->
+
+
+  <!-- Application -->
+  <property name="app.profile" value="agov" override="true" />
+  <property name="app.dir" value="${project.basedir}/docroot" override="true" />
+
+  <!-- CI -->
+  <property name="build.logs.dir" value="${project.basedir}/build/logs" override="true" />
+  <property name="src.custom.modules" value="${project.basedir}/modules" override="true" />
+  <property name="src.custom.themes" value="${project.basedir}/themes" override="true" />
+  <property name="simpletest.group" value="${phing.project.name}" override="true" />
+
+  <!-- Drush -->
+  <property name="drush.bin" value="${project.basedir}/bin/drush" override="true" />
+  <property name="drush.source" value="@${phing.project.name}.dev" override="true" />
+  <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" override="true" />
+  <property name="drush.make" value="${phing.project.name}.make" override="true" />
+  <property name="drush.install.db_url" value="mysql://drupal:drupal@localhost/drupal_local" override="true" />
+  <property name="drush.install.user" value="admin" override="true" />
+  <property name="drush.install.pass" value="aisei9du+chiek.oiRah" override="true" />
+
+  <!-- We override this so Drupal install works -->
+  <property name="drush.cmd" value="${drush.bin} -r ${app.dir}" override="true" />
+
+  <property file="build.properties" override="true" />
+
+  <!--               -->
+  <!-- Basic targets -->
+  <!-- ============= -->
+
+  <target name="build"
+          description="Build the project."
+          depends="clean, prepare, make" />
+
+  <target name="clean"
+          description="Cleanup build artifacts">
+    <delete dir="${app.dir}"/>
+    <delete dir="${build.logs.dir}"/>
+  </target>
+
+  <target name="prepare"
+          depends="clean"
+          description="Prepare for build">
+    <!-- Create log directory structure -->
+    <mkdir dir="${build.logs.dir}/phpunit"/>
+    <mkdir dir="${build.logs.dir}/checkstyle"/>
+    <mkdir dir="${build.logs.dir}/simpletest"/>
+    <mkdir dir="${build.logs.dir}/behat"/>
+
+    <!-- Install common packages -->
+    <exec command="composer install --prefer-dist --dev --no-progress" logoutput="true" />
+
+    <!-- add node modules -->
+    <!-- <exec command="npm install" logoutput="true"/> -->
+
+    <!-- Ensure compass gems -->
+    <exec command="bundle install --path vendor/bundle" />
+  </target>
+
+  <!--                -->
+  <!-- Custom targets -->
+  <!-- ============== -->
+
+  <!-- Drush make the build -->
+  <target name="make"
+          description="Run drush make">
+    <exec command="drush make ${drush.make} ${app.dir}"
+          logoutput="true"
+          passthru="true" />
+
+    <!-- Symlink custom themes and modules into the project. -->
+    <!-- ../../ ensures these are compatible between the VM and the local -->
+    <exec dir="${app.dir}"
+          command="mkdir -p sites/all/modules/custom"
+          logoutput="true"
+          passthru="true" />
+    <symlink target="../../../../../modules" link="${app.dir}/sites/all/modules/custom/govcms" />
+    <exec dir="${app.dir}"
+          command="mkdir -p sites/all/themes/custom"
+          logoutput="true"
+          passthru="true" />
+    <symlink target="./../../../../themes" link="${app.dir}/sites/all/themes/custom/govcms" />
+    <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
+    <copy file="./misc/settings/default.settings.php" todir="${app.dir}/sites/default/"  />
+    <copy file="./misc/settings/settings.theme.php" todir="${app.dir}/sites/default/"  />
+    <copy file="./misc/settings/settings.ga.php" todir="${app.dir}/sites/default/"  />
+  </target>
+
+  <target name="ci:test:pr"
+          description="Run CI test suite for PR (short subset of important tests).">
+    <phingcall target="test" />
+  </target>
+
+  <target name="ci:test:head"
+          description="Run CI test suite for HEAD (all the tests).">
+    <phingcall target="test" />
+  </target>
+
+  <target name="test"
+          description="Common target to run a full test suite on this project.">
+    <!-- Check the code. -->
+    <phingcall target="ci:phpcs" />
+    <phingcall target="ci:phpmd" />
+
+    <!-- Install the site. -->
+    <phingcall target="make" />
+    <phingcall target="drupal:install" />
+
+    <!-- Check functionality. -->
+    <phingcall target="ci:behat" />
+  </target>
+
+  <target name="drupal:install"
+          description="Install Drupal on a clean database on vagrant host">
+     <!-- We have overriden the drush.cmd command here due to site-install not
+          playing nice with the uri option -->
+     <exec dir="${app.dir}"
+          command="${drush.cmd} site-install ${app.profile} -y --db-url=${drush.install.db_url} --account-name='${drush.install.user}' --account-pass='${drush.install.pass}' agov_install_additional_options.install=1"
+          logoutput="${test.output}"
+          passthru="false" />
+      <exec dir="${app.dir}"
+            command="chmod -R 775 sites/default"
+            logoutput="true"
+            passthru="true" />
+  </target>
+
+</project>

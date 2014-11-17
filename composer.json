@@ -1,0 +1,33 @@
+{
+  "name": "previousnext/govcms",
+  "description": "The GovCMS build.",
+  "require": {
+    "drush/drush":           "6.*",
+    "phing/phing":           "2.6.*",
+    "previousnext/scaffold": "0.4.1"
+  },
+  "require-dev": {
+    "drupal/drupal-extension":   "v1.0.2",
+    "phpunit/phpunit":           "3.7.*",
+    "squizlabs/php_codesniffer": "1.4.6",
+    "phpmd/phpmd":               "1.5.0",
+    "phploc/phploc":             "2.0.0-BETA1",
+    "sebastian/phpcpd":          "*",
+    "drupal/coder":              "dev-7.x-2.x",
+    "previousnext/puppet-dev":   "4.5.6"
+  },
+  "minimum-stability": "dev",
+  "config": {
+    "bin-dir": "bin/"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "git@github.com:previousnext/scaffold.git"
+    },
+    {
+      "type": "vcs",
+      "url":  "git@github.com:previousnext/puppet-dev.git"
+    }
+  ]
+}

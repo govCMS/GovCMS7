@@ -1,0 +1,23 @@
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: ${app.uri}
+      goutte:
+        guzzle_parameters:
+          curl.options:
+            CURLOPT_PORT: ${app.port}
+      # zombie:
+      #   node_modules_path: ${project.basedir}/node_modules/
+    Drupal\DrupalExtension\Extension:
+      drush:
+        root: ${app.dir}
+      drupal:
+        drupal_root: ${app.dir}
+
+drupal7:
+  extensions:
+    Drupal\DrupalExtension\Extension:
+      drupal:
+        drupal_root: ${app.dir}
+      drush:
+        root: ${app.dir}
