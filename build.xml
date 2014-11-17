@@ -19,8 +19,10 @@
 
   <!-- CI -->
   <property name="build.logs.dir" value="${project.basedir}/build/logs" override="true" />
+  <!-- 
   <property name="src.custom.modules" value="${project.basedir}/modules" override="true" />
   <property name="src.custom.themes" value="${project.basedir}/themes" override="true" />
+  -->
   <property name="simpletest.group" value="${phing.project.name}" override="true" />
 
   <!-- Drush -->
