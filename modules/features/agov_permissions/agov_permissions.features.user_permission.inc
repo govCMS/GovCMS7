@@ -769,6 +769,7 @@ function agov_permissions_defaultconfig_user_default_permissions() {
 
   // Additional site-editor permissions.
   $additional_permissions = array(
+    'administer quicktabs' => 'quicktabs',
     'access bean overview' => 'bean',
     'access broken links report' => 'linkchecker',
     'access draggableviews' => 'draggableviews',
