@@ -1,0 +1,3 @@
+name = govCMS Tweaks
+description = A helper module for small tweaks required for govCMS
+core = 7.x
