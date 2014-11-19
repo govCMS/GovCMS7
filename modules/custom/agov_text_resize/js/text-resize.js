@@ -13,12 +13,11 @@
 Drupal.behaviors.govAccessibilityTextSize = {
   attach: function (context, settings) {
 
-      $('#resize-buttons .font-large a').click(function() {
+      $('.font-large').click(function() {
         $('body').addClass('large-fonts');
         return false;
       });
-
-      $('#resize-buttons .font-small a, #resize-buttons .reset a').click(function() {
+      $('.font-small, .reset a').click(function() {
         $('body').removeClass('large-fonts');
         return false;
       });
