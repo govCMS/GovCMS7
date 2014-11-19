@@ -1,0 +1,12 @@
+name = Inactive Account
+description = "Suspend inactive accounts after a specified number of days."
+core = 7.x
+package = aGov
+version = 7.x-1.0
+project = agov_inactive_account
+dependencies[] = entity
+dependencies[] = rules
+dependencies[] = rules_scheduler
+features[features_api][] = api:2
+features[rules_config][] = rules_suspend_account
+features[rules_config][] = rules_suspend_account_after_inactivity

@@ -150,6 +150,7 @@ dependencies[] = agov_common_fields
 dependencies[] = agov_beans
 dependencies[] = agov_text_resize
 dependencies[] = agov_image_styles
+dependencies[] = agov_inactive_account
 dependencies[] = agov_editing
 dependencies[] = agov_chosen
 dependencies[] = agov_contact
