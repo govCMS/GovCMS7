@@ -65,7 +65,7 @@
     <mkdir dir="${build.logs.dir}/behat"/>
 
     <!-- Install common packages -->
-
+	<exec command="composer install --prefer-dist --dev --no-progress" logoutput="true" />
     <!-- add node modules -->
     <!-- <exec command="npm install" logoutput="true"/> -->
 
