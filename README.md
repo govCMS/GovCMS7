@@ -11,6 +11,9 @@ From project root, run the following commands in this order:
 * ```vagrant up```
 * ```phing drupal:install```
 
+If you are running it on your local machine just run:
+* ```phing build```
+
 ### General installation
 
 The following are once off setup instructions. If you have performed these on other projects you will not need to run them again.

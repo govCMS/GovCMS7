@@ -17,6 +17,7 @@ projects[drupal][patch][] = https://www.drupal.org/files/issues/drupal-1470656-2
 ; aGov profile.
 projects[agov][download][url] = "git://github.com/previousnext/agov.git"
 projects[agov][download][branch] = 7.x-2.x
+projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
 
 ; Contrib modules.
 projects[acsf][version] = 1.1
