@@ -16,7 +16,10 @@
 // To understand behaviors, see https://drupal.org/node/756722#behaviors
 Drupal.behaviors.mainMenuTinyNav = {
   attach: function(context, settings) {
-    $(".region-navigation .block__content > .menu").tinyNav();
+    $(".region-navigation .block__content > .menu").tinyNav({
+      active: 'active-trail:last'
+    });
+    $('select.tinynav').prepend('<option value="#">Menu</option>');
   }
 };
 
