@@ -12,6 +12,9 @@
 /**
  * Return base agov permissions.
  *
+ * PHPMD things this function is too long...
+ * @SuppressWarnings(PHPMD)
+ *
  * @return array
  *   An array of permissions.
  */
