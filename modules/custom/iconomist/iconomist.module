@@ -356,7 +356,7 @@ function iconomist_preprocess_html(&$vars) {
       'type' => file_get_mimetype($icon_path),
     );
     if (!empty($icon['width']) && !empty($icon['height'])) {
-      $attributes['sizes'] = $icon['icon_width'] . 'x' . $icon['height'];
+      $attributes['sizes'] = $icon['width'] . 'x' . $icon['height'];
     }
     drupal_add_html_head_link($attributes);
   }
