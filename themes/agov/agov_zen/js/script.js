@@ -17,7 +17,7 @@
 Drupal.behaviors.mainMenuTinyNav = {
   attach: function(context, settings) {
     $(".region-navigation .block__content > .menu").tinyNav({
-      active: 'active-trail:has(a.active)'
+      active: 'active-trail:has(> a.active)'
     });
     $('select.tinynav').prepend('<option value="#">Menu</option>');
   }
