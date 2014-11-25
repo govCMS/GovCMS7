@@ -2558,6 +2558,7 @@ a.tabledrag-handle .handle {
 }
 
 #block-views-slideshow-block .field-name-field-slide-image {
+  margin: 0;
   position: relative;
 }
 #block-views-slideshow-block .field-name-field-slide-image img {
