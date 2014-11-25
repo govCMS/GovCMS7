@@ -55,4 +55,5 @@ features[variable][] = scheduler_unpublish_moderation_state_publication
 features[variable][] = scheduler_unpublish_required_publication
 features[variable][] = scheduler_unpublish_revision_publication
 features[views_view][] = publications
+mtime = 1416881418
 wname = Publications
