@@ -68,7 +68,7 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function agov_zen_preprocess_node(&$variables) {
-  if ('slide' == $variables['type']) {
+  if ($variables['type'] == 'slide') {
     if (!empty($variables['field_read_more'][0]['url'])) {
       $variables['title_link'] = l($variables['title'], $variables['field_read_more'][0]['url']);
     }
