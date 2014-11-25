@@ -98,6 +98,12 @@ function agov_media_releases_strongarm() {
         'metatags' => array(
           'weight' => '7',
         ),
+        'redirect' => array(
+          'weight' => '8',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '9',
+        ),
       ),
       'display' => array(),
     ),

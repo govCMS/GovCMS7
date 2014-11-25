@@ -17,6 +17,7 @@ features[field_base][] = field_slide_image
 features[field_instance][] = node-slide-body
 features[field_instance][] = node-slide-field_read_more
 features[field_instance][] = node-slide-field_slide_image
+features[image][] = feature_article
 features[image][] = slideshow_reorder
 features[node][] = slide
 features[variable][] = comment_anonymous_slide

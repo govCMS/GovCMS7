@@ -23,11 +23,11 @@ function agov_publications_field_default_field_bases() {
     'module' => 'date',
     'settings' => array(
       'cache_count' => 4,
-      'cache_enabled' => 0,
+      'cache_enabled' => 1,
       'granularity' => array(
         'day' => 'day',
-        'hour' => 'hour',
-        'minute' => 'minute',
+        'hour' => 0,
+        'minute' => 0,
         'month' => 'month',
         'second' => 0,
         'year' => 'year',
