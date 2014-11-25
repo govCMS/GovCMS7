@@ -68,4 +68,4 @@ features[variable][] = scheduler_unpublish_moderation_state_news_article
 features[variable][] = scheduler_unpublish_required_news_article
 features[variable][] = scheduler_unpublish_revision_news_article
 features[views_view][] = latest_news
-mtime = 1416881418
+mtime = 1416882040
