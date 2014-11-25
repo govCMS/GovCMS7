@@ -753,8 +753,13 @@ function _agov_default_variables() {
     'linkchecker_impersonate_user' => 'admin',
     'linkchecker_scan_blocks' => 1,
 
-    // Oauth
+    // OAuth.
+    // Prevent the site from being an OAuth provider by default.
     'oauth_common_enable_provider' => FALSE,
+
+    // File Lock.
+    // Lock all files.
+    'file_lock_mode' => 'all',
   );
 
   // Enable xmlsitemap includes for content types.

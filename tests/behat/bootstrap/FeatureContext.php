@@ -121,4 +121,73 @@ class FeatureContext extends DrupalContext {
     }
   }
 
+  /**
+   * @Then /^I should be logged out$/
+   */
+  public function assertLoggedOut() {
+    if ($this->loggedIn()) {
+      throw new \Exception('Logged in.');
+    }
+  }
+
+  protected function getSuspendAccountTime() {
+    $id = 'Suspend Account ' . $this->user->uid;
+    $result = db_select('rules_scheduler', 'r')
+      ->fields('r', array('tid', 'date'))
+      ->condition('identifier', $id, '=')
+      ->execute()
+      ->fetchAssoc();
+    return $result['date'];
+  }
+
+  /**
+   * @Then /^account should be scheduled to be blocked$/
+   */
+  public function accountShouldBeScheduledToBeBlocked() {
+    $now = time();
+    if ($this->getSuspendAccountTime() <= $now) {
+      throw new \Exception('Account not scheduled to be blocked.');
+    }
+  }
+
+  /**
+   * @Then /^adjust scheduled suspend date to now$/
+   */
+  public function adjustScheduledSuspendDateToNow() {
+    $now = time();
+    $id = 'Suspend Account ' . $this->user->uid;
+    db_update('rules_scheduler')
+      ->fields(array(
+        'date' => $now,
+      ))
+      ->condition('identifier', $id, '=')
+      ->execute();
+  }
+
+  /**
+   * @Then /^account should be blocked$/
+   */
+  public function accountShouldBeBlocked() {
+    $user = user_load($this->user->uid, TRUE);
+    if ($user->status) {
+      throw new \Exception('User is not blocked.');
+    }
+  }
+
+  /**
+   * @Then /^relogin adjust suspend account to later$/
+   */
+  public function reloginAdjustSuspendAccountToLater() {
+    if (!isset($this->user)) {
+      return FALSE;
+    }
+    $initial = $this->getSuspendAccountTime();
+    $this->logout();
+    $this->login();
+    $later = $this->getSuspendAccountTime();
+    if ($later <= $initial) {
+      throw new \Exception('Scheduled suspend not changed to later.');
+    }
+  }
+
 }
