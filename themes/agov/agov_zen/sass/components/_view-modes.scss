@@ -1,16 +1,23 @@
-.node-teaser .field-type-image {
-  float: left;
-  margin-right: 10px;
+.node-teaser {
+  .field-type-image {
+
+    @include bp-nq($minor) {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  h3 {
+    @include adjust-font-size-to(14px);
+    margin: rhythm(1/4) 0 rhythm(1/2);
+  }
+
+  h3 a {
+    color: $color-highlight;
+  }
+
+  p {
+    margin: 0;
+  }
 }
 
-/* Headings */
-.node-teaser h3 {
-  @include adjust-font-size-to(14px);
-  margin: rhythm(1/4) 0 rhythm(1/2);
-  a { color: $color-highlight; }
-
-}
-
-.node-teaser p {
-  margin: 0;
-}
