@@ -40,6 +40,7 @@ projects[facetapi][version] = "1.5"
 projects[favicon][version] = "1.0-rc2"
 projects[features][version] = 2.2
 projects[file_entity][version] = "2.0-alpha3"
+projects[file_lock][version] = "2.0"
 projects[flood_control][version] = "1.0"
 projects[globalredirect][version] = "1.5"
 projects[google_analytics][version] = "2.0"

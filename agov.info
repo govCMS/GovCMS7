@@ -65,6 +65,7 @@ dependencies[] = escape_admin
 dependencies[] = favicon
 dependencies[] = features
 dependencies[] = file_entity
+dependencies[] = file_lock
 dependencies[] = globalredirect
 dependencies[] = googleanalytics
 dependencies[] = google_analytics_reports
