@@ -20,4 +20,4 @@ projects[agov][download][branch] = 7.x-2.x
 projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
 
 ; Contrib modules.
-projects[acsf][version] = 1.4
+projects[acsf][version] = 2.1
