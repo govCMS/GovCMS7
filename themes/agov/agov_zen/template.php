@@ -102,33 +102,54 @@ function agov_zen_process_node(&$variables) {
 
       // Compact view modes are intended to be embedded in views.
       if ($variables['view_mode'] == 'compact') {
-        // Compact items are wrapped in an h3, as there is usually an h2
-        // preceding them (the view or pane title).
-        $variables['title_tag'] = 'h3';
+        _agov_zen_process_node_compact($variables);
       }
 
       // Limit image fields to 1 item only in teaser and compact modes.
       if ($variables['view_mode'] == 'compact' || $variables['view_mode'] == 'teaser') {
-        $fields = field_read_fields(array('entity_type' => 'node', 'bundle' => $variables['type']));
-        foreach ($fields as $field_name => $field_settings) {
-          if ($field_settings['type'] == 'image') {
-            if (isset($variables['content'][$field_name])) {
-              $children = element_children($variables['content'][$field_name]);
-              if (!empty($children)) {
-                $limited = $variables['content'][$field_name][0];
-                foreach ($children as $child_index) {
-                  unset ($variables['content'][$field_name][$child_index]);
-                }
-                $variables['content'][$field_name][0] = $limited;
-              }
-            }
-          }
-        }
-
+        _agov_zen_process_node_compact_teaser($variables);
       }
     }
   }
 }
+
+/**
+ * Private callback to process compact node view modes.
+ *
+ * @param array $variables
+ *   Standard variables array
+ */
+function _agov_zen_process_node_compact(&$variables) {
+  // Compact items are wrapped in an h3, as there is usually an h2
+  // preceding them (the view or pane title).
+  $variables['title_tag'] = 'h3';
+}
+
+/**
+ * Private callback to process compact and teaser node view modes.
+ *
+ * @param array $variables
+ *   Standard variables array
+ */
+function _agov_zen_process_node_compact_teaser(&$variables) {
+  $fields = field_read_fields(array('entity_type' => 'node', 'bundle' => $variables['type']));
+  foreach ($fields as $field_name => $field_settings) {
+    if ($field_settings['type'] == 'image') {
+      if (isset($variables['content'][$field_name])) {
+        $children = element_children($variables['content'][$field_name]);
+        if (!empty($children)) {
+          $limited = $variables['content'][$field_name][0];
+          foreach ($children as $child_index) {
+            unset ($variables['content'][$field_name][$child_index]);
+          }
+          $variables['content'][$field_name][0] = $limited;
+        }
+      }
+    }
+  }
+
+}
+
 
 /**
  * Overrides zen_status_messages to fix a small bug with output.
