@@ -87,13 +87,25 @@ function agov_front_default_page_manager_pages() {
     $display->content['new-20703086-0ad1-4929-a48f-447b1028a827'] = $pane;
     $display->panels['header'][0] = 'new-20703086-0ad1-4929-a48f-447b1028a827';
     $pane = new stdClass();
-    $pane->pid = 'new-1c599db6-3c59-4444-b865-d7f4ab1efa72';
+    $pane->pid = 'new-0597f166-20f3-4190-a3c4-8a27fa0fff5e';
     $pane->panel = 'left';
-    $pane->type = 'block';
-    $pane->subtype = 'views-latest_news-block';
+    $pane->type = 'views';
+    $pane->subtype = 'latest_news';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '5',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_1',
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -105,9 +117,9 @@ function agov_front_default_page_manager_pages() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '1c599db6-3c59-4444-b865-d7f4ab1efa72';
-    $display->content['new-1c599db6-3c59-4444-b865-d7f4ab1efa72'] = $pane;
-    $display->panels['left'][0] = 'new-1c599db6-3c59-4444-b865-d7f4ab1efa72';
+    $pane->uuid = '0597f166-20f3-4190-a3c4-8a27fa0fff5e';
+    $display->content['new-0597f166-20f3-4190-a3c4-8a27fa0fff5e'] = $pane;
+    $display->panels['left'][0] = 'new-0597f166-20f3-4190-a3c4-8a27fa0fff5e';
     $pane = new stdClass();
     $pane->pid = 'new-5cbb73df-cce4-4826-9a8e-c9fd0fb2f08d';
     $pane->panel = 'main';
@@ -156,7 +168,9 @@ function agov_front_default_page_manager_pages() {
       'override_title_text' => '',
     );
     $pane->cache = array();
-    $pane->style = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
