@@ -36,6 +36,7 @@ projects[entity][patch][2307807] = https://www.drupal.org/files/issues/2307807-e
 projects[entity][version] = "1.5"
 projects[escape_admin][version] = "1.1"
 projects[event_log][version] = "1.2"
+projects[event_log][patch][] = "https://www.drupal.org/files/issues/event-log-request-password-2365895-1-7.x-1.2.patch"
 projects[facetapi][version] = "1.5"
 projects[favicon][version] = "1.0-rc2"
 projects[features][version] = 2.2
