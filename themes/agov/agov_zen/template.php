@@ -68,12 +68,64 @@ function agov_zen_preprocess_maintenance_page(&$variables) {
  * Implements hook_preprocess_node().
  */
 function agov_zen_preprocess_node(&$variables) {
+
+  // Slides get a special read more link.
   if ($variables['type'] == 'slide') {
     if (!empty($variables['field_read_more'][0]['url'])) {
       $variables['title_link'] = l($variables['title'], $variables['field_read_more'][0]['url']);
     }
     else {
       $variables['title_link'] = check_plain($variables['title']);
+    }
+  }
+}
+
+/**
+ * Implements hook_process_node().
+ */
+function agov_zen_process_node(&$variables) {
+
+  // We only want to set these if Display Suite HASN'T already been used.
+  // This allows us to control the defaults but let end-users override with
+  // DS wherever necessary.
+  // This happens in _process_node(), as DS doesn't do its thing till AFTER
+  // _preprocess_node() has run.
+  if (!isset($variables['rendered_by_ds']) || $variables['rendered_by_ds'] != TRUE) {
+
+    // The aGov node template includes a dynamic title tag. This defaults to
+    // h2, if not set elsewhere.
+    if (!isset($variables['title_tag']) || empty($variables['title_tag'])) {
+      $variables['title_tag'] = 'h2';
+    }
+
+    if (isset($variables['view_mode'])) {
+
+      // Compact view modes are intended to be embedded in views.
+      if ($variables['view_mode'] == 'compact') {
+        // Compact items are wrapped in an h3, as there is usually an h2
+        // preceding them (the view or pane title).
+        $variables['title_tag'] = 'h3';
+      }
+
+      // Limit image fields to 1 item only in teaser and compact modes.
+      if ($variables['view_mode'] == 'compact' || $variables['view_mode'] == 'teaser') {
+        $fields = field_read_fields(array('entity_type' => 'node', 'bundle' => $variables['type']));
+        foreach ($fields as $field_name => $field_settings) {
+          if ($field_settings['type'] == 'image') {
+            if (isset($variables['content'][$field_name])) {
+              $children = element_children($variables['content'][$field_name]);
+              if (!empty($children)) {
+                $limited = $variables['content'][$field_name][0];
+                foreach ($children as $child_index) {
+                  unset ($variables['content'][$field_name][$child_index]);
+                }
+                $variables['content'][$field_name][0] = $limited;
+              }
+            }
+          }
+        }
+
+      }
     }
   }
 }
