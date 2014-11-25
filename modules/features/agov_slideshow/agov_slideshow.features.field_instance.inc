@@ -32,8 +32,10 @@ function agov_slideshow_field_default_field_instances() {
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
+        'settings' => array(
+          'trim_length' => 350,
+        ),
+        'type' => 'text_summary_or_trimmed',
         'weight' => 2,
       ),
       'feature' => array(
