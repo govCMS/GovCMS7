@@ -95,6 +95,7 @@ projects[shield][download][branch] = "7.x-1.x"
 projects[shield][download][revision] = 827b09957a1ef71588bb835aa921aec8ffb7e2f9
 projects[shield][download][type] = "git"
 projects[shield][download][url] = "http://git.drupal.org/project/shield.git"
+projects[shield][patch][] = "https://www.drupal.org/files/issues/2382243-1.patch"
 projects[shield][type] = "module"
 projects[simple_aggregation][version] = "1.0"
 projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancements-1920722-2.patch"
