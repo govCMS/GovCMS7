@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * ipc_share_links.features.inc
+ * agov_share_links.features.inc
  */
 
 /**

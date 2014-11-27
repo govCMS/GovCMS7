@@ -1,5 +1,5 @@
 name = aGov Share Links
-description = Service links configuration for IPC
+description = Service links configuration for aGov
 core = 7.x
 package = aGov
 version = 7.x-1.0
