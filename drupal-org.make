@@ -91,6 +91,7 @@ projects[search_api_db][version] = "1.4"
 projects[search_api_page][version] = "1.1"
 projects[seckit][version] = "1.9"
 projects[securepages][version] = "1.0-beta1"
+projects[service_links][version] = "2.2"
 projects[session_cookie_lifetime] = "1.3"
 projects[shield][download][branch] = "7.x-1.x"
 projects[shield][download][revision] = 827b09957a1ef71588bb835aa921aec8ffb7e2f9

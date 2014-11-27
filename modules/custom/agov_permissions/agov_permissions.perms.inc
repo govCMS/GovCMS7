@@ -1009,5 +1009,13 @@ function agov_permissions_base_permissions() {
         ),
       ),
     ),
+    'service_links' => array(
+      'access service links' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site builder',
+        ),
+      ),
+    ),
   );
 }
