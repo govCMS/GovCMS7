@@ -1,35 +1,38 @@
-# Project overview
+# govCMS
+***
 
 ## Installation
 
-### Project installation
+### Packaged installation
 
-From project root, run the following commands in this order:
+govCMS exists as packaged versions on both the [Github](https://github.com/govCMS/govCMS) and [Drupal.org](https://www.drupal.org/project/govcms) project pages. These compressed archives are available in both zip and tar.gz format to download and use as needed.
 
-* ```composer install --prefer-dist```
-* ```phing``` or ```phing build```
-* ```vagrant up```
-* ```phing drupal:install```
 
-If you are running it on your local machine just run:
-* ```phing build```
+### Installation from source
 
-### General installation
+**Dependencies**
 
-The following are once off setup instructions. If you have performed these on other projects you will not need to run them again.
+- [git](http://git-scm.com/)
+- [composer](https://getcomposer.org/)
 
-### Composer
+To develop on or patch against govCMS, the source files should be downloaded and the project built.
 
-See https://redmine.previousnext.com.au/projects/all-in/wiki/Installing_local_dev_tools_with_composer
+govCMS source may be downloaded using git
 
 ```
-brew install composer
-echo "~/.composer/vendor/bin" | sudo tee -a /etc/paths.d/composer
+git clone git@github.com:govCMS/govCMS-Core.git
 ```
 
-### Phing
+Enter the project root, and run the following commands in order:
 
-composer global require phing/phing:~2.7
+```
+cd govCMS-Core
+composer install --prefer-dist
+phing -f build.xml build
+```
+
+This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
+
 
 ## Setup project
 
@@ -66,11 +69,11 @@ phing -l
 
 ### General
 
-*app* - The Drupal root. This can be either a directory or a symlink (eg. symlink to "pressflow" dir).
+*docroot* - The Drupal root. This can be either a directory or a symlink.
 *README.md* - Project documentation written in markdown.
 *composer.json* - Project specific vendor packages and repositories.
 *composer.lock* - Locked in version of vendor packages. To ensure consistency across the project.
-*.gitignore* - A list of files to be ignored by git. This is typically used for excluding local development modules.
+*.gitignore* - A list of files to be ignored by git. This is typically used for excluding local development modules and may create files to ignore that an IDE creates.
 
 ### Behat 
 
@@ -86,23 +89,12 @@ phing -l
 **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will only assign the url of the current environment.
 **build/logs** - Where CI tasks store task logs.
 
-### Capistrano
 
-**Capfile** - Instructions for capistrano deployments.
-**config/deploy.rb** - Global capistrano configuration.
-**config/deploy** - Environment specific capistrano configuration. You will see files like "dev.rb", "staging.rb" or "prod.rb". These are a good indication of what environments require capistrano deployments.
+## Patching govCMS
 
-### Skipfish
+@TODO
 
-You can run basic vulnerability tests against the project using the skipfish tool. The phing targets require you to install a few tools first, though:
 
-```
-brew install skipfish
-brew install coreutils
-```
+## Contributing to govCMS
 
-And now you can run the scans. Note this may take over an hour, depending on the size of the site!
-
-```
-phing skipfish
-```
+@TODO
