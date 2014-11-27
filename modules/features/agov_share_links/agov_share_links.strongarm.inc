@@ -166,7 +166,7 @@ function agov_share_links_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_path_icons';
-  $strongarm->value = 'profiles/agov/modules/features_default/agov_share_links/images';
+  $strongarm->value = 'profiles/agov/modules/features/agov_share_links/images';
   $export['service_links_path_icons'] = $strongarm;
 
   $strongarm = new stdClass();
