@@ -29,10 +29,13 @@ The <em>body</em> field is used for the main article content.
         'weight' => 3,
       ),
       'compact' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 200,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 1,
       ),
       'default' => array(
         'label' => 'hidden',
@@ -112,7 +115,7 @@ The <em>body</em> field is used for the main article content.
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'default' => array(
         'label' => 'above',
@@ -178,9 +181,13 @@ The <em>body</em> field is used for the main article content.
         'weight' => 0,
       ),
       'compact' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'thumbnail',
+        ),
+        'type' => 'image',
         'weight' => 0,
       ),
       'default' => array(

@@ -26,8 +26,11 @@ The <em>body</em> field is used for the main article content.',
       ),
       'compact' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 200,
+        ),
+        'type' => 'text_summary_or_trimmed',
         'weight' => 1,
       ),
       'default' => array(
