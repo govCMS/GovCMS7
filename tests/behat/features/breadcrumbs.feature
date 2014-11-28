@@ -15,4 +15,4 @@ Feature: Breadcrumbs
     Then I should see "News article test has been created"
     And the response should contain "<a href=\"/\">Home</a>"
     And the response should contain "<a href=\"/news-media\">News &amp; Media</a>"
-    And the response should contain "<a href=\"/news-media/news\">Current News</a>"
+    And the response should contain "<a href=\"/news-media/news\">News</a>"

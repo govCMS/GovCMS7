@@ -311,8 +311,8 @@ function agov_core_block_view($delta = '') {
  * Implements hook_entity_info_alter().
  */
 function agov_core_entity_info_alter(&$entity_info) {
-  $entity_info['node']['view modes']['blog_teaser'] = array(
-    'label' => t('Blog Teaser'),
+  $entity_info['node']['view modes']['compact'] = array(
+    'label' => t('Compact'),
     'custom settings' => TRUE,
   );
 }

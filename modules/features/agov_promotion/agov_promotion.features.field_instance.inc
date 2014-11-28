@@ -23,6 +23,12 @@ function agov_promotion_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -66,6 +72,12 @@ function agov_promotion_field_default_field_instances() {
     'description' => 'Provides a image to be associated with this <em>Promotion</em>.',
     'display' => array(
       'blog_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'compact' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
@@ -149,6 +161,12 @@ function agov_promotion_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
@@ -193,6 +211,12 @@ function agov_promotion_field_default_field_instances() {
     'description' => 'Provides grouping and single word descriptions for this content.',
     'display' => array(
       'blog_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'compact' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

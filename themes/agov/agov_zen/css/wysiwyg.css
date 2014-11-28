@@ -56,28 +56,28 @@ a:hover {
    ========================================================================== */
 h1 {
   font-size: 2.4em;
-  line-height: 1.16667em;
+  line-height: 0.81667em;
   margin-top: 0.29167em;
   margin-bottom: 0.29167em;
 }
 
 h2 {
   font-size: 1.68em;
-  line-height: 1.66667em;
+  line-height: 1.16667em;
   margin-top: 0.41667em;
   margin-bottom: 0.41667em;
 }
 
 h3 {
   font-size: 1.44em;
-  line-height: 1.94444em;
+  line-height: 1.36111em;
   margin-top: 0.48611em;
   margin-bottom: 0.48611em;
 }
 
 h4 {
   font-size: 1.2em;
-  line-height: 2.33333em;
+  line-height: 1.63333em;
   margin-top: 0.58333em;
   margin-bottom: 0.58333em;
 }

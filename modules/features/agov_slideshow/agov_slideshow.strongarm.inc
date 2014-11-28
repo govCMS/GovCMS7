@@ -92,6 +92,9 @@ function agov_slideshow_strongarm() {
       'blog_teaser' => array(
         'custom_settings' => FALSE,
       ),
+      'compact' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(

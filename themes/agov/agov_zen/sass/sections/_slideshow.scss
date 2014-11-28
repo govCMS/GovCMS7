@@ -59,6 +59,7 @@
 #block-views-slideshow-block {
   .block-title { @extend %element-invisible; }
   .field-name-field-slide-image {
+    margin: 0;
     img {
       width: 100%;
       @include bp-nq($large) { width: auto; }

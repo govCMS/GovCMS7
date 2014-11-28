@@ -12,3 +12,4 @@ dependencies[] = panels_ipe
 features[ctools][] = page_manager:pages_default:1
 features[features_api][] = api:2
 features[page_manager_pages][] = front_page
+mtime = 1416882071

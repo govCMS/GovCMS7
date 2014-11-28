@@ -28,6 +28,15 @@ The <em>body</em> field is used for the main article content.
         'type' => 'text_summary_or_trimmed',
         'weight' => 3,
       ),
+      'compact' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'trim_length' => 200,
+        ),
+        'type' => 'text_summary_or_trimmed',
+        'weight' => 1,
+      ),
       'default' => array(
         'label' => 'hidden',
         'module' => 'text',
@@ -55,7 +64,7 @@ The <em>body</em> field is used for the main article content.
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'trim_length' => 130,
+          'trim_length' => 200,
         ),
         'type' => 'text_summary_or_trimmed',
         'weight' => 3,
@@ -102,6 +111,12 @@ The <em>body</em> field is used for the main article content.
         'type' => 'hidden',
         'weight' => 12,
       ),
+      'compact' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
+      ),
       'default' => array(
         'label' => 'above',
         'settings' => array(),
@@ -141,6 +156,8 @@ The <em>body</em> field is used for the main article content.
       'module' => 'options',
       'settings' => array(
         'apply_chosen' => 0,
+        'flatten_options' => 0,
+        'flatten_sort' => 1,
       ),
       'type' => 'options_select',
       'weight' => 3,
@@ -159,6 +176,16 @@ The <em>body</em> field is used for the main article content.
         'settings' => array(
           'image_link' => '',
           'image_style' => 'blog_teaser_thumbnail',
+        ),
+        'type' => 'image',
+        'weight' => 0,
+      ),
+      'compact' => array(
+        'label' => 'hidden',
+        'module' => 'image',
+        'settings' => array(
+          'image_link' => 'content',
+          'image_style' => 'thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -197,8 +224,8 @@ The <em>body</em> field is used for the main article content.
         'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => 'blog_teaser_thumbnail',
+          'image_link' => 'content',
+          'image_style' => 'medium',
         ),
         'type' => 'image',
         'weight' => 0,

@@ -21,9 +21,9 @@
 
   <target name="build-no-tests" depends="clean:all, prepare:all, validate:all, make, site-install, login" description="Build the project" />
 
-  <target name="build-fast" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make. Good for clean installs without re-downloading components" />
+  <target name="build-no-make" depends="validate:phpcs, validate:phpmd, site-install, test:all, login" description="Build the project without make. Good for clean installs without re-downloading components" />
 
-  <target name="build-fast-no-tests" depends="validate:phpcs, validate:phpmd, site-install, login" description="Build the project without make or tests. Good for fast re-installs." />
+  <target name="build-no-make-no-tests" depends="validate:phpcs, validate:phpmd, site-install, login" description="Build the project without make or tests. Good for fast re-installs." />
 
   <target name="build-no-install" depends="clean:all, prepare:all, validate:all, make" description="Builds the project without running the installer. Good for manual installer testing." />
 
@@ -156,4 +156,7 @@
     <exec command="composer update --prefer-dist" logoutput="true" passthru="true"/>
   </target>
 
+  <target name="composer install">
+    <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
+  </target>
 </project>
