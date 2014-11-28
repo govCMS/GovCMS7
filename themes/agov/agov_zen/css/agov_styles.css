@@ -705,28 +705,28 @@ a:hover {
    ========================================================================== */
 h1 {
   font-size: 2.4em;
-  line-height: 1.16667em;
+  line-height: 0.81667em;
   margin-top: 0.29167em;
   margin-bottom: 0.29167em;
 }
 
 h2 {
   font-size: 1.68em;
-  line-height: 1.66667em;
+  line-height: 1.16667em;
   margin-top: 0.41667em;
   margin-bottom: 0.41667em;
 }
 
 h3 {
   font-size: 1.44em;
-  line-height: 1.94444em;
+  line-height: 1.36111em;
   margin-top: 0.48611em;
   margin-bottom: 0.48611em;
 }
 
 h4 {
   font-size: 1.2em;
-  line-height: 2.33333em;
+  line-height: 1.63333em;
   margin-top: 0.58333em;
   margin-bottom: 0.58333em;
 }
@@ -961,15 +961,15 @@ html.js .collapsed .fieldset-legend {
   font-weight: bold;
 }
 
+.field {
+  margin: 0.7em 0;
+}
+
 .field-label-inline {
   margin: 1.4em 0;
 }
 .field-label-inline .field-label {
   width: 100px;
-}
-
-.field-name-post-date {
-  font-style: italic;
 }
 
 .field-name-field-tags {
@@ -1003,7 +1003,7 @@ html.js .collapsed .fieldset-legend {
 }
 
 #block-menu-menu-quick-links ul a, .menu-block-agov_menu_block-sidebar .menu a {
-  background: url('../images/block-li-bg.png?1415751576') no-repeat scroll left 5px;
+  background: url('../images/block-li-bg.png?1416352646') no-repeat scroll left 5px;
   display: block;
   padding-left: 15px;
   padding-bottom: 2px;
@@ -1064,20 +1064,20 @@ html.js .collapsed .fieldset-legend {
   left: -3px;
 }
 
-.pane-block .views-row, .search-results li, .page-views .views-row {
+.pane-block .views-row, .search-results li, #content .views-row {
   margin: 0 0 0.7em 0;
   padding: 0.35em 0 0.7em;
-  border-bottom: solid 1px #f3f3f3;
+  border-top: solid 1px #f3f3f3;
 }
-.pane-block .views-row:last-child, .search-results li:last-child, .page-views .views-row:last-child {
+.pane-block .views-row:last-child, .search-results li:last-child, #content .views-row:last-child {
   border-bottom: none;
 }
-.pane-block .views-row p, .search-results li p, .page-views .views-row p {
+.pane-block .views-row p, .search-results li p, #content .views-row p {
   margin: 0;
   padding: 0;
 }
 
-.search-results h3.title, .page-views h2 {
+.search-results h3.title {
   font-size: 1.07692em;
   line-height: 1.3em;
   padding-bottom: 0.35em;
@@ -1904,23 +1904,55 @@ body.large-fonts {
   line-height: 1.4em;
 }
 
+.view-mode-teaser h3,
+.node-teaser h3 {
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  line-height: 1.2;
+  margin: 0.35em 0 0.7em;
+}
+.view-mode-teaser h3 a,
+.node-teaser h3 a {
+  color: #464445;
+}
+.view-mode-teaser p,
+.node-teaser p {
+  margin: 0;
+}
+@media (min-width: 420px) {
+  .view-mode-teaser .field-type-image,
+  .node-teaser .field-type-image {
+    float: left;
+    margin-right: 10px;
+  }
+}
+.lt-ie9 .view-mode-teaser .field-type-image, .lt-ie9
 .node-teaser .field-type-image {
   float: left;
   margin-right: 10px;
 }
 
-/* Headings */
-.node-teaser h3 {
-  font-size: 1.07692em;
-  line-height: 1.3em;
+.view-mode-compact h3 {
+  font-size: 1.23077em;
+  line-height: 2.275em;
+  line-height: 1.2;
   margin: 0.35em 0 0.7em;
 }
-.node-teaser h3 a {
+.view-mode-compact h3 a {
   color: #464445;
 }
-
-.node-teaser p {
+.view-mode-compact p {
   margin: 0;
+}
+@media (min-width: 420px) {
+  .view-mode-compact .field-type-image {
+    float: left;
+    margin-right: 10px;
+  }
+}
+.lt-ie9 .view-mode-compact .field-type-image {
+  float: left;
+  margin-right: 10px;
 }
 
 div.workbench-info-block {
@@ -2434,25 +2466,6 @@ footer .block {
   margin-bottom: 0.7em;
 }
 
-.page-views .field-name-field-thumbnail {
-  float: left;
-  margin-right: 10px;
-}
-
-.page-views h3 {
-  font-size: 1.15385em;
-  line-height: 2.42667em;
-  line-height: 1.4em;
-  margin-bottom: 0.35em;
-  padding-bottom: 0.35em;
-  border-bottom: solid 3px #616161;
-  color: black;
-}
-
-.page-views .date {
-  font-style: italic;
-}
-
 .sidebar .block .block__title {
   background: #7a797a;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #878687), color-stop(100%, #7a797a));
@@ -2574,6 +2587,7 @@ a.tabledrag-handle .handle {
 }
 
 #block-views-slideshow-block .field-name-field-slide-image {
+  margin: 0;
   position: relative;
 }
 #block-views-slideshow-block .field-name-field-slide-image img {
@@ -2625,7 +2639,7 @@ a.tabledrag-handle .handle {
   text-align: left;
   text-indent: -100px;
   padding: 5px 14px;
-  background: url('../images/featured-articles-pause.png?1415751576') no-repeat 0px -27px;
+  background: url('../images/featured-articles-pause.png?1416352646') no-repeat 0px -27px;
 }
 .rslides_tabs li a.pause.paused {
   background-position: 0px 0px;

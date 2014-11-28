@@ -86,6 +86,12 @@ function agov_publications_strongarm() {
       'feature' => array(
         'custom_settings' => FALSE,
       ),
+      'compact' => array(
+        'custom_settings' => TRUE,
+      ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -93,13 +99,16 @@ function agov_publications_strongarm() {
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '6',
-        ),
-        'metatags' => array(
           'weight' => '7',
         ),
-        'xmlsitemap' => array(
+        'metatags' => array(
           'weight' => '8',
+        ),
+        'xmlsitemap' => array(
+          'weight' => '9',
+        ),
+        'redirect' => array(
+          'weight' => '10',
         ),
       ),
       'display' => array(),
