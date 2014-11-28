@@ -156,4 +156,7 @@
     <exec command="composer update --prefer-dist" logoutput="true" passthru="true"/>
   </target>
 
+  <target name="composer install">
+    <exec command="composer install --prefer-dist" logoutput="true" passthru="true"/>
+  </target>
 </project>
