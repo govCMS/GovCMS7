@@ -69,6 +69,7 @@ projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-at
 projects[metatag][version] = "1.4"
 projects[navbar][version] = "1.4"
 projects[navbar][patch][] = "https://www.drupal.org/files/issues/navbar-fix-table-header-1937754-30.patch"
+projects[node_clone][version] = "1.0-rc2"
 projects[oauth][version] = "3.2"
 projects[panels][version] = "3.4"
 projects[paranoia][version] = "1.3"
