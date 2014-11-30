@@ -1009,5 +1009,18 @@ function agov_permissions_base_permissions() {
         ),
       ),
     ),
+    'service_links' => array(
+      'access service links' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site builder',
+          2 => 'Site editor',
+          3 => 'Content approver',
+          4 => 'Content editor',
+          5 => 'authenticated user',
+          6 => 'anonymous user',
+        ),
+      ),
+    ),
   );
 }
