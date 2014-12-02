@@ -156,10 +156,12 @@ libraries[ckeditor][type] = "library"
 libraries[underscore][download][type] = get
 libraries[underscore][download][url] = https://github.com/jashkenas/underscore/archive/1.5.2.zip
 libraries[underscore][type] = "library"
+libraries[underscore][patch][] = "https://www.drupal.org/files/issues/2235299-12.patch"
 
 libraries[backbone][download][type] = get
 libraries[backbone][download][url] = https://github.com/jashkenas/backbone/archive/1.1.0.zip
 libraries[backbone][type] = "library"
+libraries[backbone][patch][] = "https://www.drupal.org/files/issues/2235299-11.patch"
 
 libraries[modernizr][download][type] = "get"
 libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
