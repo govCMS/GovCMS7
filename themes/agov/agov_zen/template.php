@@ -202,6 +202,9 @@ function agov_zen_form_required_marker($variables) {
   return '<span' . drupal_attributes($attributes) . '>(required)</span>';
 }
 
+/**
+ * Adds accessibility attributes.
+ */
 function _agov_zen_accessibility(&$element) {
   if (!empty($element['#required'])) {
     $element['#attributes']['required'] = 'true';
