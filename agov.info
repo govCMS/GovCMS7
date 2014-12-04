@@ -112,6 +112,7 @@ dependencies[] = superfish
 dependencies[] = twitter_block
 dependencies[] = toc_filter
 dependencies[] = username_enumeration_prevention
+dependencies[] = userprotect
 dependencies[] = video_filter
 dependencies[] = views
 dependencies[] = views_ui

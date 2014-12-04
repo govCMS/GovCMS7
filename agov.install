@@ -760,6 +760,70 @@ function _agov_default_variables() {
     // File Lock.
     // Lock all files.
     'file_lock_mode' => 'all',
+
+    // Role protections.
+    'userprotect_role_protections' => array (
+      2 => array (
+          'up_name' => 0,
+          'up_mail' => 0,
+          'up_pass' => 0,
+          'up_status' => 0,
+          'up_roles' => 0,
+          'up_openid' => 0,
+          'up_cancel' => 0,
+          'up_edit' => 0,
+        ),
+      4 => array (
+          'up_name' => 0,
+          'up_mail' => 0,
+          'up_pass' => 0,
+          'up_status' => 0,
+          'up_roles' => 0,
+          'up_openid' => 0,
+          'up_cancel' => 0,
+          'up_edit' => 0,
+        ),
+      5 => array (
+          'up_name' => 0,
+          'up_mail' => 0,
+          'up_pass' => 0,
+          'up_status' => 0,
+          'up_roles' => 0,
+          'up_openid' => 0,
+          'up_cancel' => 0,
+          'up_edit' => 0,
+        ),
+      6 => array (
+          'up_name' => 0,
+          'up_mail' => 0,
+          'up_pass' => 0,
+          'up_status' => 0,
+          'up_roles' => 0,
+          'up_openid' => 0,
+          'up_cancel' => 0,
+          'up_edit' => 0,
+        ),
+      7 => array (
+          'up_name' => 0,
+          'up_mail' => 0,
+          'up_pass' => 0,
+          'up_status' => 0,
+          'up_roles' => 0,
+          'up_openid' => 0,
+          'up_cancel' => 0,
+          'up_edit' => 0,
+        ),
+      3 => array (
+          'up_name' => 1,
+          'up_mail' => 1,
+          'up_pass' => 1,
+          'up_status' => 1,
+          'up_roles' => 1,
+          'up_openid' => 1,
+          'up_cancel' => 1,
+          'up_edit' => 1,
+        ),
+    ),
   );
 
   // Enable xmlsitemap includes for content types.
