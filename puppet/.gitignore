@@ -1,0 +1,5 @@
+vendor
+modules
+.tmp
+.librarian
+.bundle
