@@ -1,5 +1,6 @@
 <project name="agov" default="build">
 
+  <property name="app.uri" value="http://agov.dev" />
   <property name="codestyle.standard.drupal" value="vendor/drupal/coder/coder_sniffer/Drupal" />
   <property name="codestyle.standard.security" value="vendor/nickschuch/phpcs-security-audit/Security" />
   <property name="codestyle.standard.security.src" value="vendor/nickschuch/phpcs-security-audit/example_drupal7_ruleset.xml" />
@@ -8,13 +9,13 @@
   <property name="src.custom.modules" value="modules/custom" />
   <property name="src.custom.themes" value="themes/agov" />
   <property name="build.dir" value="build" />
-  <property name="build.drupal.dir" value="../drupal" />
+  <property name="build.drupal.dir" value="${project.basedir}/../agov-build" />
   <property name="build.profile.dir" value="${build.drupal.dir}/profiles/agov" />
   <property name="build.symlink.source" value="${project.basedir}" />
-  <property name="db.username" value="root" />
-  <property name="db.password" value="" />
-  <property name="db.name" value="agov_test" />
-  <property name="db.host" value="localhost" />
+  <property name="db.username" value="agov" />
+  <property name="db.password" value="agov" />
+  <property name="db.name" value="agov" />
+  <property name="db.host" value="agov.dev" />
   <property file="build.properties" override="true"/>
 
   <target name="build" depends="clean:all, prepare:all, validate:all, make, site-install, test:all, login" description="Build the project" />
