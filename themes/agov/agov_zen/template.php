@@ -218,8 +218,25 @@ function agov_zen_preprocess_aria_invalid(&$variables) {
  * Implements hook_theme_registry_alter().
  */
 function agov_zen_theme_registry_alter(&$theme_registry) {
+
   // Add our accessibility preprocess to several theme functions.
-  foreach(array('textfield', 'password', 'file', 'textarea', 'checkbox', 'radio', 'select', 'emailfield', 'numberfield', 'rangefield', 'searchfield', 'telfield', 'urlfield') as $hook) {
+  $theme_functions = array(
+    'textfield',
+    'password',
+    'file',
+    'textarea',
+    'checkbox',
+    'radio',
+    'select',
+    'emailfield',
+    'numberfield',
+    'rangefield',
+    'searchfield',
+    'telfield',
+    'urlfield',
+  );
+
+  foreach ($theme_functions as $hook) {
     $theme_registry[$hook]['preprocess functions'][] = 'agov_zen_preprocess_aria_invalid';
   }
 }
