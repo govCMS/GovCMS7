@@ -56,7 +56,7 @@ before_script:
   - phing upgrade
 
   # Start the server.
-  - cd ../drupal && drush runserver 8888 &
+  - cd ../agov-build && drush runserver 8888 &
   - until netstat -an 2>/dev/null | grep '8888.*LISTEN'; do true; done
 
 script:

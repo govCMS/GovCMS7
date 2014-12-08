@@ -5,7 +5,7 @@ Feature: Role delegation
   except for users that have the administrator role
 
   @api @role_delegation
-  Scenario: Meta-tags are auto set
+  Scenario: Account alteration protection
     Given an "administrator" user named "joe"
     Given an "Content editor" user named "bob"
     And I am logged in as a user with the "Site editor" role
