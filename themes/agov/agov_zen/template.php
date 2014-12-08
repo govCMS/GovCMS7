@@ -205,128 +205,21 @@ function agov_zen_form_required_marker($variables) {
 /**
  * Adds accessibility attributes.
  */
-function _agov_zen_accessibility(&$element) {
-  if (!empty($element['#required'])) {
-    $element['#attributes']['required'] = 'true';
+function agov_zen_preprocess_aria_invalid(&$variables) {
+  if (!empty($variables['element']['#required'])) {
+    $variables['element']['#attributes']['required'] = 'true';
   }
-  if (isset($element['#parents']) && form_get_error($element) !== NULL && !empty($element['#validated'])) {
-    $element['#attributes']['aria-invalid'] = 'true';
+  if (isset($variables['element']['#parents']) && form_get_error($variables['element']) !== NULL && !empty($variables['element']['#validated'])) {
+    $variables['element']['#attributes']['aria-invalid'] = 'true';
   }
 }
 
 /**
- * Implements theme_textfield().
+ * Implements hook_theme_registry_alter().
  */
-function agov_zen_textfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_textfield($variables);
-}
-
-/**
- * Implements theme_password().
- */
-function agov_zen_password($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_password($variables);
-}
-
-/**
- * Implements theme_file().
- */
-function agov_zen_file($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_file($variables);
-}
-
-/**
- * Implements theme_textarea().
- */
-function agov_zen_textarea($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_textarea($variables);
-}
-
-/**
- * Implements theme_checkbox().
- */
-function agov_zen_checkbox($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_checkbox($variables);
-}
-
-/**
- * Implements theme_radio().
- */
-function agov_zen_radio($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_radio($variables);
-}
-
-/**
- * Implements theme_select().
- */
-function agov_zen_select($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_select($variables);
-}
-
-/**
- * Implements theme_emailfield().
- */
-function agov_zen_emailfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_emailfield($variables);
-}
-
-/**
- * Implements theme_numberfield().
- */
-function agov_zen_numberfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_numberfield($variables);
-}
-
-/**
- * Implements theme_rangefield().
- */
-function agov_zen_rangefield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_rangefield($variables);
-}
-
-/**
- * Implements theme_searchfield().
- */
-function agov_zen_searchfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_rangefield($variables);
-}
-
-/**
- * Implements theme_telfield().
- */
-function agov_zen_telfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_telfield($variables);
-}
-
-/**
- * Implements theme_urlfield().
- */
-function agov_zen_urlfield($variables) {
-  $element = &$variables['element'];
-  _agov_zen_accessibility($element);
-  return theme_telfield($variables);
+function agov_zen_theme_registry_alter(&$theme_registry) {
+  // Add our accessibility preprocess to several theme functions.
+  foreach(array('textfield', 'password', 'file', 'textarea', 'checkbox', 'radio', 'select', 'emailfield', 'numberfield', 'rangefield', 'searchfield', 'telfield', 'urlfield') as $hook) {
+    $theme_registry[$hook]['preprocess functions'][] = 'agov_zen_preprocess_aria_invalid';
+  }
 }
