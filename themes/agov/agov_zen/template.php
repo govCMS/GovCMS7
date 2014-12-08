@@ -199,7 +199,7 @@ function agov_zen_form_required_marker($variables) {
     'class' => 'form-required',
     'title' => $t_function('This field is required.'),
   );
-  return '<span' . drupal_attributes($attributes) . '>(required)</span>';
+  return '<span' . drupal_attributes($attributes) . '>(' . $t_function('mandatory') . ')</span>';
 }
 
 /**
