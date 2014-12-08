@@ -104,7 +104,6 @@ projects[site_map][patch][] = "https://drupal.org/files/accessibility_enhancemen
 projects[site_map][version] = "1.0"
 projects[strongarm][version] = "2.0"
 projects[superfish][version] = "1.9"
-projects[sweaver][version] = "1.3"
 projects[toc_filter][version] = "1.2"
 projects[token][version] = "1.5"
 projects[twitter_block][version] = "2.1"
