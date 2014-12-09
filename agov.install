@@ -94,6 +94,7 @@ function agov_install() {
 function agov_supported_themes() {
   return array(
     AGOV_DEFAULT_THEME,
+    AGOV_INSTALL_DEFAULT_THEME,
   );
 }
 
