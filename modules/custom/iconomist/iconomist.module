@@ -2,7 +2,9 @@
 
 /**
  * @file
- * Iconomist is module that allows you to add icons to your drupal site,
+ * The main Iconomist module file.
+ *
+ * Iconomist is module that allows you to add icons to your drupal site
  * for example adding Apple touch icons for iPhone, iPad etc. Each device
  * supports a different size icon so the module allows you to upload multiple
  * icons and set the dimension for that icon.
@@ -12,6 +14,7 @@
  * Implements hook_form_system_theme_settings_alter().
  */
 function iconomist_form_system_theme_settings_alter(&$form, &$form_state) {
+
   $theme = empty($form_state['build_info']['args']) ? NULL : $form_state['build_info']['args'][0];
   if (!isset($form_state['triggering_element'])) {
     // Load existing settings.

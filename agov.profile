@@ -1,9 +1,9 @@
 <?php
 /**
  * @file
- * The aGov install profile modules file.
+ * The aGov install profile file.
  *
- * @copyright Copyright(c) 2012 PreviousNext
+ * @copyright Copyright(c) 2014 PreviousNext
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  * @author Chris Skene chris at previousnext.com.au
  */
@@ -26,7 +26,6 @@ function agov_form_install_configure_form_alter(&$form, &$form_state) {
   $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
   asort($timezone_form['#options']);
   $form['server_settings']['date_default_timezone'] = $timezone_form;
-
 
   // As a workaround to core issue #1017020 (http://drupal.org/node/1017020),
   // we override the timezone javascript behaviour by setting it to null in the
