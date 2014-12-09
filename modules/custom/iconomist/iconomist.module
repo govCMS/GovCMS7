@@ -32,11 +32,11 @@ function iconomist_form_system_theme_settings_alter(&$form, &$form_state) {
 
   // Default number of icons.
   if (!isset($form_state['storage']['iconomist_num_icons'])) {
-    $form_state['storage']['iconomist_num_icons'] = 1;
+    $form_state['storage']['iconomist_num_icons'] = 0;
   }
 
   // Always show at least one icon on the form.
-  $form_state['storage']['iconomist_num_icons'] = max($form_state['storage']['iconomist_num_icons'], 1);
+  $form_state['storage']['iconomist_num_icons'] = max($form_state['storage']['iconomist_num_icons'], 0);
 
   // Display toggles.
   $form['theme_settings']['toggle_iconomist'] = array(
@@ -91,13 +91,6 @@ function iconomist_form_system_theme_settings_alter(&$form, &$form_state) {
       '#value' => isset($icon['usage_id']) ? $icon['usage_id'] : '',
     );
 
-    $form['iconomist']['iconomist_icons'][$delta]['path'] = array(
-      '#type' => 'textfield',
-      '#default_value' => isset($icon['path']) ? $icon['path'] : '',
-      '#title' => t('Path to custom icon'),
-      '#description' => t('The path to the file you would like to use as your icon.'),
-    );
-
     $form['iconomist']['iconomist_icons'][$delta]['upload'] = array(
       '#type' => 'managed_file',
       '#title' => t('Upload icon image'),
@@ -106,20 +99,29 @@ function iconomist_form_system_theme_settings_alter(&$form, &$form_state) {
       '#upload_location' => 'public://iconomist',
     );
 
+    $form['iconomist']['iconomist_icons'][$delta]['path'] = array(
+      '#type' => 'textfield',
+      '#default_value' => isset($icon['path']) ? check_plain($icon['path']) : '',
+      '#title' => t('Path to custom icon'),
+      '#description' => t('The path to the file you would like to use as your icon.'),
+    );
+
     $form['iconomist']['iconomist_icons'][$delta]['width'] = array(
       '#type' => 'textfield',
-      '#default_value' => isset($icon['width']) ? $icon['width'] : '',
+      '#default_value' => isset($icon['width']) ? check_plain($icon['width']) : '',
       '#title' => t('Icon width'),
       '#description' => t('Width of icon in pixels.'),
       '#element_validate' => array('element_validate_integer_positive'),
+      '#size' => 10,
     );
 
     $form['iconomist']['iconomist_icons'][$delta]['height'] = array(
       '#type' => 'textfield',
-      '#default_value' => isset($icon['height']) ? $icon['height'] : '',
+      '#default_value' => isset($icon['height']) ? check_plain($icon['height']) : '',
       '#title' => t('Icon height'),
       '#description' => t('Height of icon in pixels.'),
       '#element_validate' => array('element_validate_integer_positive'),
+      '#size' => 10,
     );
 
     $form['iconomist']['iconomist_icons'][$delta]['rel'] = array(
