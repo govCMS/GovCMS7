@@ -1,6 +1,78 @@
 
 aGov Changelog
 
+7.x-2.0-alpha5
+==============
+Features
+- Content type displays, view modes and field settings have had a major overhaul
+  and normalisation. Any Display Suite overrides have been removed. They should
+  now behave much more predictably, and be easier to theme.
+- A new "Compact" view mode has been added for all content types.
+- Views of Content Types previously using Fields now use Teaser or Compact view
+  modes.
+- A basic style for maintenance mode has been added which can be used without
+  extra branding.
+- Forms have better accessibility for required and invalid fields
+- Administration users are protected from edits by lower roles and cannot be
+  deleted
+- The Legal module has been added, but not enabled. This allows you to request
+  that users agree to a terms-of-use statement when signing in
+- Phone number fields have been added for Webforms and Content Types
+- It is now possible to add custom tab sets using the Quicktabs module
+- Context now provides a Menu Trail
+- aGov now checks inactive user accounts and disables them
+- All files are now automatically locked to prevent deletion. A suitably
+  permissioned user can unlock them manually
+- Service links for popular sharing services like Facebook and Twitter have been
+  added and are available in a block
+- The Node Clone module has been added
+- The Shield module has been added, which allows you to block access to all or
+  part of the site using a password
+- There is a new Event Log which tracks content and user authentication actions
+- On login, some roles will be automatically directed to My Workbench rather than
+  their user page
+- The Site Editor can now put the site in Maintenance Mode
+- It is possible to add Apple Touch and other icons via the Appearance menu
+- A new Site Builder role is present for site building tasks
+- Google Analytics stats for the active account are available under Reports
+- A Table of Content can be added to any node
+
+Fixes
+- Comment settings have been checked and rationalised in a way appropriate
+  for public sector sites
+- The installer was dysfunctional in alpha4 due to the way maintenance.tpl
+  was configured. That has been fixed.
+- Fixed an issue where not having a "read more" link on a slide would trigger
+  a warning.
+- aGov submodules previously had hardcoded version numbers. These have been
+  removed.
+- The "skip to content" link has been fixed.
+- Fixed an issue where focus was lost when the slideshow slide changed.
+- Fixed an issue where rebuilding the Default Config permissions would throw an
+  error if one of the modules providing permissions was disabled.
+- The Text Resize widget was broken and has been fixed
+- The Home link now works on the mobile select list
+- Fixed an issue where some Navbar components would fail or interfere with Views
+- Site Editors have some additional permissions
+- Media embed doesn't autoplay when autoplay is disabled
+- Tables should now retain the correct settings
+- LinkChecker is properly configured
+- Fixed an issue where users may not be able to request a new password
+
+Changes
+- The "blog teaser" view mode has been removed.
+- Node and User Reference fields have been replaced with Entity Reference
+- The slideshow now longer autoscrolls, and has no pause button
+- Site mail now uses a fixed "From:" mail header, and user entered "Reply-to:"
+- Secure Pages has been removed. We recommend all public sector sites use 100%
+  SSL/HTTPS for security and SEO.
+- Sweaver has been removed
+- The overlay has been disabled again
+
+Updates
+- Core has been updated to the latest version
+- Scheduler has had an update
+
 7.x-2.0-alpha4
 ==============
 Features
