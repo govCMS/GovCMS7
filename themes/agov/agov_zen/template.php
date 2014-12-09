@@ -199,5 +199,44 @@ function agov_zen_form_required_marker($variables) {
     'class' => 'form-required',
     'title' => $t_function('This field is required.'),
   );
-  return '<span' . drupal_attributes($attributes) . '>(required)</span>';
+  return '<span' . drupal_attributes($attributes) . '>(' . $t_function('mandatory') . ')</span>';
+}
+
+/**
+ * Adds accessibility attributes.
+ */
+function agov_zen_preprocess_aria_invalid(&$variables) {
+  if (!empty($variables['element']['#required'])) {
+    $variables['element']['#attributes']['required'] = 'true';
+  }
+  if (isset($variables['element']['#parents']) && form_get_error($variables['element']) !== NULL && !empty($variables['element']['#validated'])) {
+    $variables['element']['#attributes']['aria-invalid'] = 'true';
+  }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function agov_zen_theme_registry_alter(&$theme_registry) {
+
+  // Add our accessibility preprocess to several theme functions.
+  $theme_functions = array(
+    'textfield',
+    'password',
+    'file',
+    'textarea',
+    'checkbox',
+    'radio',
+    'select',
+    'emailfield',
+    'numberfield',
+    'rangefield',
+    'searchfield',
+    'telfield',
+    'urlfield',
+  );
+
+  foreach ($theme_functions as $hook) {
+    $theme_registry[$hook]['preprocess functions'][] = 'agov_zen_preprocess_aria_invalid';
+  }
 }
