@@ -3,7 +3,7 @@
  * @file
  * Common functionality used across aGov.
  *
- * @copyright Copyright(c) 2012 PreviousNext
+ * @copyright Copyright(c) 2014 PreviousNext
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  * @author Chris Skene chris at previousnext dot com dot au
  */
@@ -265,18 +265,6 @@ function agov_core_form_alter(&$form, &$form_alter, $form_id) {
     asort($timezone_form['#options']);
     $form['timezone']['date_default_timezone'] = $timezone_form;
   }
-
-  // Apply search styles to search api pages components.
-  if ($form_id == 'search_api_page_search_form') {
-    $form['#attributes']['class'][] = 'search-form';
-    if (isset($form['text']['#markup'])) {
-      $form['text']['#markup'] = '<div class="search-form-description">' . $form['text']['#markup'] . '</div>';
-    }
-  }
-  elseif (stristr($form_id, 'search_api_page_')) {
-    $form['#attributes']['class'][] = 'search-form-widget';
-  }
-
 }
 
 /**

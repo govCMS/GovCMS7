@@ -12,10 +12,26 @@
 /**
  * Define a default theme constant
  */
-define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
-define('AGOV_INSTALL_DEFAULT_THEME', 'agov_zen');
 define('AGOV_DEFAULT_THEME', 'agov_barton');
+
+/**
+ * Define the install theme.
+ */
+define('AGOV_INSTALL_DEFAULT_THEME', 'agov_zen');
+
+/**
+ * Define the admin theme.
+ */
 define('AGOV_DEFAULT_ADMIN_THEME', 'shiny');
+
+/**
+ * Set the twitter widget ID.
+ */
+define('AGOV_TWITTER_WIDGET_ID', '360632154172030979');
+
+/**
+ * Define the role to be used as the admin role.
+ */
 define('AGOV_ADMIN_ROLE_ID', '3');
 
 /**
@@ -62,9 +78,6 @@ function agov_install() {
   // Setup login destination.
   _agov_setup_login_destination();
 
-  // Set the password policy.
-  _agov_password_policy();
-
   // Set defaults for the contact form.
   _agov_contact_form_defaults();
 
@@ -75,14 +88,13 @@ function agov_install() {
   agov_cleanup();
 }
 
-
-
 /**
  * Returns a list of the themes that aGov supports.
  */
 function agov_supported_themes() {
   return array(
     AGOV_DEFAULT_THEME,
+    AGOV_INSTALL_DEFAULT_THEME,
   );
 }
 
@@ -465,7 +477,7 @@ video',
         'status' => 1,
         'settings' => array(),
       ),
-      // Clean up HTML
+      // Clean up HTML.
       'filter_htmlcorrector' => array(
         'weight' => 5,
         'status' => 1,
@@ -550,7 +562,7 @@ video',
  * 3) Using variable set we then associate the format and type.
  */
 function _agov_date_formats() {
-  $t = get_t();
+  $t_function = get_t();
 
   // Variables.
   $date_formats = array(
@@ -563,7 +575,7 @@ function _agov_date_formats() {
       ),
       'type' => array(
         'type' => 'agov_month_year',
-        'title' => $t('Month Year Format'),
+        'title' => $t_function('Month Year Format'),
         'locked' => TRUE,
         'is_new' => TRUE,
       ),
@@ -577,7 +589,7 @@ function _agov_date_formats() {
       ),
       'type' => array(
         'type' => 'agov_month_day_year',
-        'title' => $t('Month Day Year Format'),
+        'title' => $t_function('Month Day Year Format'),
         'locked' => TRUE,
         'is_new' => TRUE,
       ),
@@ -762,67 +774,67 @@ function _agov_default_variables() {
     'file_lock_mode' => 'all',
 
     // Role protections.
-    'userprotect_role_protections' => array (
-      2 => array (
-          'up_name' => 0,
-          'up_mail' => 0,
-          'up_pass' => 0,
-          'up_status' => 0,
-          'up_roles' => 0,
-          'up_openid' => 0,
-          'up_cancel' => 0,
-          'up_edit' => 0,
-        ),
-      4 => array (
-          'up_name' => 0,
-          'up_mail' => 0,
-          'up_pass' => 0,
-          'up_status' => 0,
-          'up_roles' => 0,
-          'up_openid' => 0,
-          'up_cancel' => 0,
-          'up_edit' => 0,
-        ),
-      5 => array (
-          'up_name' => 0,
-          'up_mail' => 0,
-          'up_pass' => 0,
-          'up_status' => 0,
-          'up_roles' => 0,
-          'up_openid' => 0,
-          'up_cancel' => 0,
-          'up_edit' => 0,
-        ),
-      6 => array (
-          'up_name' => 0,
-          'up_mail' => 0,
-          'up_pass' => 0,
-          'up_status' => 0,
-          'up_roles' => 0,
-          'up_openid' => 0,
-          'up_cancel' => 0,
-          'up_edit' => 0,
-        ),
-      7 => array (
-          'up_name' => 0,
-          'up_mail' => 0,
-          'up_pass' => 0,
-          'up_status' => 0,
-          'up_roles' => 0,
-          'up_openid' => 0,
-          'up_cancel' => 0,
-          'up_edit' => 0,
-        ),
-      3 => array (
-          'up_name' => 1,
-          'up_mail' => 1,
-          'up_pass' => 1,
-          'up_status' => 1,
-          'up_roles' => 1,
-          'up_openid' => 1,
-          'up_cancel' => 1,
-          'up_edit' => 1,
-        ),
+    'userprotect_role_protections' => array(
+      2 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      4 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      5 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      6 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      7 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      3 => array(
+        'up_name' => 1,
+        'up_mail' => 1,
+        'up_pass' => 1,
+        'up_status' => 1,
+        'up_roles' => 1,
+        'up_openid' => 1,
+        'up_cancel' => 1,
+        'up_edit' => 1,
+      ),
     ),
   );
 
@@ -1172,7 +1184,7 @@ function _agov_default_tags() {
   $vid = $vocabs['tags']->vid;
   $tids = array();
 
-  foreach ($terms as $delta => $name) {
+  foreach ($terms as $name) {
     $term = new stdClass();
     $term->name = $name;
     $term->vid = $vid;
@@ -1560,15 +1572,6 @@ function _agov_setup_login_destination() {
     'weight' => 0,
   );
   drupal_write_record('login_destination', $record);
-}
-
-/**
- * Sets up default password policy.
- *
- * @deprecated This now happens in agov_password_policy.
- */
-function _agov_password_policy() {
-
 }
 
 /**

@@ -24,16 +24,17 @@ function agov_register_menu() {
  */
 function agov_register_form($form, &$form_state) {
   $form = array();
-  $agov_register_information = variable_get('agov_register_information', array());
 
-  $form['registration'] = agov_register_form_elements($agov_register_information);
+  $information = variable_get('agov_register_information', array());
+
+  $form['registration'] = agov_register_form_elements($information);
 
   $form['#submit'][] = 'agov_register_submit';
   $form['#validate'][] = 'agov_register_validate';
 
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => empty($agov_register_information) ? 'Register' : 'Update',
+    '#value' => empty($information) ? 'Register' : 'Update',
   );
 
   return $form;
@@ -46,12 +47,12 @@ function agov_register_form($form, &$form_state) {
  */
 function agov_register_form_elements($data = FALSE, $install = FALSE) {
   $form = array();
-  $t = get_t();
+  $t_function = get_t();
 
   if (!$install) {
     $form['agov_register_status'] = array(
       '#type' => 'item',
-      '#title' => $t('Status'),
+      '#title' => $t_function('Status'),
       '#markup' => agov_register_status($data),
     );
   }
@@ -60,35 +61,35 @@ function agov_register_form_elements($data = FALSE, $install = FALSE) {
 
     $form['agov_register_display_id'] = array(
       '#type' => 'item',
-      '#title' => $t('Registration ID'),
+      '#title' => $t_function('Registration ID'),
       '#markup' => $data['agov_register_id'],
     );
 
     $form['agov_register_date'] = array(
       '#type' => 'item',
-      '#title' => $t('Registration date'),
+      '#title' => $t_function('Registration date'),
       '#markup' => format_date($data['agov_register_last_attempt'], 'agov_month_day_year'),
     );
   }
 
   $form['agov_register_agency'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Department/Agency/Company'),
+    '#title' => $t_function('Department/Agency/Company'),
     '#default_value' => isset($data['agov_register_agency']) ? $data['agov_register_agency'] : '',
   );
   $form['agov_register_contact'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Contact Name or Position'),
+    '#title' => $t_function('Contact Name or Position'),
     '#default_value' => isset($data['agov_register_contact']) ? $data['agov_register_contact'] : '',
   );
   $form['agov_register_email'] = array(
     '#type' => 'textfield',
-    '#title' => $t('Contact Email'),
+    '#title' => $t_function('Contact Email'),
     '#default_value' => isset($data['agov_register_email']) ? $data['agov_register_email'] : '',
   );
   $form['agov_register_notification'] = array(
     '#type' => 'checkbox',
-    '#title' => $t('Do not send aGov news or product update information to the registered address'),
+    '#title' => $t_function('Do not send aGov news or product update information to the registered address'),
     '#default_value' => isset($data['agov_register_notification']) ? $data['agov_register_notification'] : '',
   );
   $form['agov_register_id'] = array(

@@ -5,12 +5,39 @@
  * Provides core functionality for agov_social_links.
  */
 
+/**
+ * Define the facebook default.
+ */
 define('AGOV_SOCIAL_LINKS_FACEBOOK_DEFAULT', 'http://www.facebook.com/pages/PreviousNext/170975076260877');
+
+/**
+ * Define the twitter default.
+ */
 define('AGOV_SOCIAL_LINKS_TWITTER_DEFAULT', 'http://www.twitter.com/PreviousNext');
+
+/**
+ * Define the youtube default.
+ */
 define('AGOV_SOCIAL_LINKS_YOUTUBE_DEFAULT', 'http://www.youtube.com');
+
+/**
+ * Define the Vimeo default.
+ */
 define('AGOV_SOCIAL_LINKS_VIMEO_DEFAULT', 'http://www.vimeo.com');
+
+/**
+ * Define the flickr default.
+ */
 define('AGOV_SOCIAL_LINKS_FLICKR_DEFAULT', 'http://www.flickr.com');
+
+/**
+ * Define the RSS default.
+ */
 define('AGOV_SOCIAL_LINKS_RSS_DEFAULT', 'rss.xml');
+
+/**
+ * Define the contact default.
+ */
 define('AGOV_SOCIAL_LINKS_EMAIL_DEFAULT', 'contact');
 
 /**
@@ -75,6 +102,7 @@ function agov_social_links_block_configure($delta = '') {
       );
     }
   }
+
   return $form;
 }
 
