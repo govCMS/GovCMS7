@@ -4,7 +4,7 @@
   text-align: center;
   margin: 100px auto 0;
   font-size: 120%;
-  padding: 40px 10px;
+  padding: 40px;
 }
 
 %centered-box__image,
@@ -16,5 +16,7 @@
 .centered-box__title {
   margin-top: 1em;
   font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 1em;
 }
 
