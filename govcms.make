@@ -20,3 +20,4 @@ projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
 
 ; Contrib modules.
 projects[acsf][version] = 1.4
+projects[acquia_connector][version] = 2.15
