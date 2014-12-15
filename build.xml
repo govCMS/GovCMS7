@@ -71,8 +71,13 @@
           logoutput="true"
           passthru="true" />
     <symlink target="./../../../../themes" link="${app.dir}/sites/all/themes/custom/govcms" />
+
+    <!-- Use govCMS favicon -->
     <delete file="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
     <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
+    <delete file="${app.dir}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
+    <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
+
     <copy file="./misc/settings/default.settings.php" todir="${app.dir}/sites/default/"  />
     <copy file="./misc/settings/settings.theme.php" todir="${app.dir}/sites/default/"  />
     <copy file="./misc/settings/settings.ga.php" todir="${app.dir}/sites/default/"  />
