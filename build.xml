@@ -39,13 +39,13 @@
 
   <target name="clean"
           description="Cleanup build artifacts">
-    <delete dir="${app.dir}"/>
     <exec command="git reset --hard" 
         logoutput="true"
         passthru="true" />
     <exec command="git clean -fd" 
         logoutput="true"
         passthru="true" />
+    <delete dir="${app.dir}"/>
   </target>
 
   <!--                -->
