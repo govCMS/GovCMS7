@@ -1,3 +1,7 @@
+1.2.0-alpha5-2
+==============
+
+- Replace favicon for agov_barton theme
 1.2.0-alpha5-1
 ==============
 - Initial release with aGov 2.0-alpha5.
