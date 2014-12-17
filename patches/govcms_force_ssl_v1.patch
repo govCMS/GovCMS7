@@ -1,0 +1,29 @@
+From d3f97c194166004d2bfedec6a44a77815fe67960 Mon Sep 17 00:00:00 2001
+From: Paul <pkil@2327222.no-reply.drupal.org>
+Date: Thu, 18 Dec 2014 10:38:20 +1100
+Subject: [PATCH 1/1] manual patch
+
+---
+ .htaccess | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/.htaccess b/.htaccess
+index 7ccb6a2..971c888 100644
+--- a/.htaccess
++++ b/.htaccess
+@@ -56,6 +56,12 @@ DirectoryIndex index.php index.html index.htm
+ <IfModule mod_rewrite.c>
+   RewriteEngine on
+
++  # Redirect HTTP to HTTPS
++  RewriteCond %{HTTPS} off
++  RewriteCond %{HTTP:X-Forwarded-Proto} !https
++  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} 01test [OR]
++  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} 01live
++  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
++
+   # Set "protossl" to "s" if we were accessed via https://.  This is used later
+   # if you enable "www." stripping or enforcement, in order to ensure that
+   # you don't bounce between http and https.
+--
+1.9.1
