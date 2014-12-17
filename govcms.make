@@ -21,3 +21,5 @@ projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
 ; Contrib modules.
 projects[acsf][version] = 1.4
 projects[acquia_connector][version] = 2.15
+projects[clamav][version] = 1.0-alpha2
+projects[clamav][patch][] = https://www.drupal.org/files/issues/clamav-scan_all_files-1630604-13.patch
