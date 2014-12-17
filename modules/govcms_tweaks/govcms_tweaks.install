@@ -9,12 +9,12 @@
  * Implements hook_install().
  */
 function govcms_tweaks_install() {
-    variable_set('acsf_local_user_accounts', TRUE);
-    acsf_openid_allow_local_user_logins();
-    variable_set('clamav_mode', 1);
+  variable_set('acsf_local_user_accounts', TRUE);
+  acsf_openid_allow_local_user_logins();
+  variable_set('clamav_mode', 1);
 }
 
 function govcms_tweaks_update_7001() {
-    module_enable(array('clamav'));
-    variable_set('clamav_mode', 1);
+  module_enable(array('clamav'));
+  variable_set('clamav_mode', 1);
 }
