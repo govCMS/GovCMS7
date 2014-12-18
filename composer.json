@@ -3,7 +3,7 @@
   "description": "The GovCMS build.",
   "require": {
     "drush/drush":           "6.*",
-    "phing/phing":           "2.6.*"
+    "phing/phing":           "2.8.2"
   },
   "require-dev": {
     "drupal/drupal-extension":   "v1.0.2",
