@@ -4,7 +4,7 @@
                be overridden with project specific configuration.
 -->
 
-<project name="govcms" default="build" phingVersion="2.4.11">
+<project name="govcms" default="build" phingVersion="2.8.2">
 
   <!--               -->
   <!--  Properties   -->
