@@ -11,7 +11,7 @@ index 7ccb6a2..fa16812 100644
 +  RewriteCond %{HTTP:X-Forwarded-Proto} !https
 +  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} 01test [OR]
 +  RewriteCond %{ENV:AH_SITE_ENVIRONMENT} 01live
-+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
++  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,NE,R=301]
 +
    # Set "protossl" to "s" if we were accessed via https://.  This is used later
    # if you enable "www." stripping or enforcement, in order to ensure that
