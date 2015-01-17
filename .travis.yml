@@ -39,7 +39,9 @@ before_script:
 - sudo service apache2 restart
 # Create Database
 - mysql -e 'CREATE DATABASE travis_ci_govcms_drupal;'
+# Build the codebase
+- phing -f build.xml build
 
 script:
-# Run the make and install
-- phing -f build.xml build
+# Run the install
+- phing -f build.xml install
