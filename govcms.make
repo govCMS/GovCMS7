@@ -23,7 +23,7 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/b20a0f17a9
 ; Linkit Security patch
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch
 ; Google Analytics Security Patch
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/de167d1bad010cfa910eb16de8b74f3da52f3c73.patch
+projects[agov][patch][] = patches/google_analytics_version-2.1.patch
 
 
 ; Contrib modules.
