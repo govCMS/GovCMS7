@@ -1,3 +1,29 @@
+1.2.0-alpha5-5
+==============
+
+- Merge pull request #21 from fiasco/GOVCMS-36
+
+- Merge pull request #20 from fiasco/GOVCMS-8
+
+- Security Update for Google Analytics
+
+- Applied patches from aGov for security patching.
+
+- Added Search API Solr
+
+- Merge pull request #18 from typhonius/travis
+
+- Added first pass of for travis integration
+
+- Merge pull request #16 from paulkilla/comment_fix
+
+- Merge pull request #14 from typhonius/pin-phing
+
+- Merge pull request #15 from fiasco/master
+
+- Fix as per Drupal rules
+
+- Pinned phing to 2.8.2.
 1.2.0-alpha5-2
 ==============
 
