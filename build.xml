@@ -12,35 +12,33 @@
 
   <!-- The following override properties provided in imported build files. -->
 
-
   <!-- Application -->
-  <property name="app.profile" value="agov" override="true" />
-  <property name="app.dir" value="${project.basedir}/docroot" override="true" />
-
-  <property name="src.custom.modules" value="${project.basedir}/modules" override="true" />
-  <property name="src.custom.themes" value="${project.basedir}/themes" override="true" />
-
-  <property name="site.name" value="govCMS" />
-  <property name="site.mail" value="root@[127.0.0.1]" />
+  <property name="docroot"             value="${project.basedir}/docroot" override="true" />
+  <property name="src.custom.modules"  value="${project.basedir}/modules" override="true" />
+  <property name="src.custom.themes"   value="${project.basedir}/themes" override="true" />
+  <property name="site.name"           value="govCMS" />
+  <property name="site.mail"           value="root@[127.0.0.1]" />
+  <property name="drupal.profile"      value="agov" override="true" />
+  <property name="drupal.makefile"     value="${phing.project.name}.make" override="true" />
+  <property name="drupal.base_url"     value="http://localhost" />
 
   <!-- Credentials -->
-  <property name="db.username" value="root" />
-  <property name="db.password" value="" />
-  <property name="db.name" value="travis_ci_govcms_drupal" />
-  <property name="db.host" value="localhost" />
+  <property name="db.username"         value="root" />
+  <property name="db.password"         value="" />
+  <property name="db.name"             value="travis_ci_govcms_drupal" />
+  <property name="db.host"             value="localhost" />
+  <property name="account.name"        value="admin" />
+  <property name="account.password"    value="password" />
+  <property name="account.mail"        value="root@[127.0.0.1]" />
 
-  <property name="account.name" value="admin" />
-  <property name="account.password" value="password" />
-  <property name="account.mail" value="root@[127.0.0.1]" />
-
-  <!-- Drush -->
-  <property name="drush.bin" value="${project.basedir}/bin/drush" override="true" />
-  <property name="drush.source" value="@${phing.project.name}.dev" override="true" />
-  <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" override="true" />
-  <property name="drush.make" value="${phing.project.name}.make" override="true" />
+  <!-- Drush & Composer-->
+  <property name="composer.bin"        value="${project.basedir}/bin"/>
+  <property name="drush.bin"           value="${project.basedir}/bin/drush" override="true" />
+  <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
+  <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
 
   <!-- We override this so Drupal install works -->
-  <property name="drush.cmd" value="${drush.bin} -r ${app.dir}" override="true" />
+  <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
 
   <!--               -->
   <!-- Basic targets -->
@@ -48,17 +46,26 @@
 
   <target name="build"
           description="Build the project."
-          depends="clean, make" />
+          depends="clean, make, lint, phpcs" />
 
   <target name="clean"
           description="Cleanup build artifacts">
     <exec command="git reset --hard"
-        logoutput="true"
-        passthru="true" />
+          logoutput="true"
+          passthru="true" />
     <exec command="git clean -fd"
-        logoutput="true"
-        passthru="true" />
-    <delete dir="${app.dir}"/>
+          logoutput="true"
+          passthru="true" />
+    <if><available file="${docroot}" type="dir" />
+    <then>
+      <if><available file="${docroot}/sites/default" type="dir" />
+      <then>
+        <chmod file="${docroot}/sites/default" mode="2775" />
+      </then>
+      </if>
+      <delete dir="${docroot}"/>
+    </then>
+    </if>
   </target>
 
   <!--                -->
@@ -68,53 +75,76 @@
   <!-- Drush make the build -->
   <target name="make"
           description="Run drush make">
-    <exec command="drush make ${drush.make} ${app.dir}"
-          logoutput="true"
-          passthru="true" />
+    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+      <arg value="make"/>
+      <arg value="-y"/>
+      <arg value="-v"/>
+      <arg value="--nocolor"/>
+      <arg value="--concurrency=5"/>
+      <arg value="${project.basedir}/${drupal.makefile}"/>
+      <arg value="${docroot}"/>
+    </exec>
 
     <!-- Symlink custom themes and modules into the project. -->
     <!-- ../../ ensures these are compatible between the VM and the local -->
-    <exec dir="${app.dir}"
-          command="mkdir -p sites/all/modules/custom"
-          logoutput="true"
-          passthru="true" />
-    <symlink target="../../../../../modules" link="${app.dir}/sites/all/modules/custom/govcms" />
-    <exec dir="${app.dir}"
-          command="mkdir -p sites/all/themes/custom"
-          logoutput="true"
-          passthru="true" />
-    <symlink target="./../../../../themes" link="${app.dir}/sites/all/themes/custom/govcms" />
+    <exec dir="${docroot}" command="mkdir -p sites/all/modules/custom" logoutput="true" passthru="true" />
+    <symlink target="../../../../../modules" link="${docroot}/sites/all/modules/custom/govcms" />
+    <exec dir="${docroot}" command="mkdir -p sites/all/themes/custom" logoutput="true" passthru="true" />
+    <symlink target="./../../../../themes" link="${docroot}/sites/all/themes/custom/govcms" />
 
     <!-- Use govCMS favicon -->
-    <delete file="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
-    <delete file="${app.dir}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${app.dir}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
+    <delete file="${docroot}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
+    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
+    <delete file="${docroot}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
+    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
 
-    <copy file="./misc/settings/default.settings.php" todir="${app.dir}/sites/default/"  />
-    <copy file="./misc/settings/settings.theme.php" todir="${app.dir}/sites/default/"  />
-    <copy file="./misc/settings/settings.ga.php" todir="${app.dir}/sites/default/"  />
+    <copy file="./misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
+    <copy file="./misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="./misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
-  <target name="install"
-          description="Installs govCMS and any ACSF dependencies."
-          depends="acsf, site-install" />
+  <target name="lint">
+    <exec executable="bash" checkreturn="true" taskname="lint" passthru="true" >
+      <arg value="-c" />
+      <!-- @TODO Remove the UUID exception following resolution of https://github.com/previousnext/agov/issues/381 -->
+      <arg value="find ${docroot} -type f -name '*.inc' -o -name '*.install' -o -name '*.php' -name '*.module' -name '*.php' -name '*.profile' -name '*.test' -name '*.theme' ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' | xargs -P 6 -n 1 php -l" />
+  </exec>
+ </target>
+
+  <target name="phpcs" description="Sniffs custom code to ensure it meets standards." >
+    <exec executable="${composer.bin}/phpcs" logoutput="true" checkreturn="true" passthru="true" taskname="phpcs">
+      <arg value="--standard=vendor/drupal/coder/coder_sniffer/Drupal/" />
+      <arg value="--extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'" />
+      <arg value="${docroot}/sites/all/modules/custom/*" />
+    </exec>
+  </target>
+
+  <target name="install" description="Installs govCMS and any ACSF dependencies." depends="acsf, site-install" />
 
     <!-- Run the acsf-init command to set the docroot up as Site Factory -->
     <!-- would be. -->
-  <target name="acsf"
-          description="Runs ACSF specific steps">
-    <exec dir="${app.dir}"
-          command="drush --include=sites/all/modules/acsf/acsf_init acsf-init -y" logoutput="true" passthru="true" checkreturn="true" />
+  <target name="acsf" description="Runs ACSF specific steps">
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush"/>
+      <arg value="-y" />
+      <arg value="--include=sites/all/modules/acsf/acsf_init" />
+      <arg value="acsf-init" />
   </target>
 
     <!-- Install Drupal with the agov profile (govCMS implements overrides) -->
   <target name="site-install"
           description="Installs Drupal using the aGov profile" >
-    <exec dir="${app.dir}"
-          command="drush site-install agov install_configure_form.update_status_mod --db-url=mysql://${db.username}:${db.password}@${db.host}/${db.name} --account-name=${account.name} --account-pass=${account.password} --account-mail=${account.mail} --site-mail=${site.mail} --site-name=${site.name} -y"
-          logoutput="true"
-          passthru="true"
-          checkreturn="true" />
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" taskname="drush">
+      <arg value="site-install"/>
+      <arg value="-y"/>
+      <arg value="-v"/>
+      <arg value="--nocolor"/>
+      <arg value="--db-url=mysql://${db.username}:${db.password}@${db.host}/${db.name}"/>
+      <arg value="--site-name=${site.name}"/>
+      <arg value="--site-mail=${site.mail}"/>
+      <arg value="--account-name=${account.name}"/>
+      <arg value="--account-pass=${account.password}"/>
+      <arg value="--account-mail=${account.mail}"/>
+      <arg value="${drupal.profile}"/>
+    </exec>
   </target>
 </project>
