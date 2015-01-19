@@ -20,6 +20,19 @@
   <property name="src.custom.modules" value="${project.basedir}/modules" override="true" />
   <property name="src.custom.themes" value="${project.basedir}/themes" override="true" />
 
+  <property name="site.name" value="govCMS" />
+  <property name="site.mail" value="root@[127.0.0.1]" />
+
+  <!-- Credentials -->
+  <property name="db.username" value="root" />
+  <property name="db.password" value="" />
+  <property name="db.name" value="travis_ci_govcms_drupal" />
+  <property name="db.host" value="localhost" />
+
+  <property name="account.name" value="admin" />
+  <property name="account.password" value="password" />
+  <property name="account.mail" value="root@[127.0.0.1]" />
+
   <!-- Drush -->
   <property name="drush.bin" value="${project.basedir}/bin/drush" override="true" />
   <property name="drush.source" value="@${phing.project.name}.dev" override="true" />
@@ -39,10 +52,10 @@
 
   <target name="clean"
           description="Cleanup build artifacts">
-    <exec command="git reset --hard" 
+    <exec command="git reset --hard"
         logoutput="true"
         passthru="true" />
-    <exec command="git clean -fd" 
+    <exec command="git clean -fd"
         logoutput="true"
         passthru="true" />
     <delete dir="${app.dir}"/>
@@ -81,5 +94,27 @@
     <copy file="./misc/settings/default.settings.php" todir="${app.dir}/sites/default/"  />
     <copy file="./misc/settings/settings.theme.php" todir="${app.dir}/sites/default/"  />
     <copy file="./misc/settings/settings.ga.php" todir="${app.dir}/sites/default/"  />
+  </target>
+
+  <target name="install"
+          description="Installs govCMS and any ACSF dependencies."
+          depends="acsf, site-install" />
+
+    <!-- Run the acsf-init command to set the docroot up as Site Factory -->
+    <!-- would be. -->
+  <target name="acsf"
+          description="Runs ACSF specific steps">
+    <exec dir="${app.dir}"
+          command="drush --include=sites/all/modules/acsf/acsf_init acsf-init -y" logoutput="true" passthru="true" checkreturn="true" />
+  </target>
+
+    <!-- Install Drupal with the agov profile (govCMS implements overrides) -->
+  <target name="site-install"
+          description="Installs Drupal using the aGov profile" >
+    <exec dir="${app.dir}"
+          command="drush site-install agov install_configure_form.update_status_mod --db-url=mysql://${db.username}:${db.password}@${db.host}/${db.name} --account-name=${account.name} --account-pass=${account.password} --account-mail=${account.mail} --site-mail=${site.mail} --site-name=${site.name} -y"
+          logoutput="true"
+          passthru="true"
+          checkreturn="true" />
   </target>
 </project>
