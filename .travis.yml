@@ -19,7 +19,8 @@ notifications:
     secure: jflE/Zs73rGpsnhN7qXqYDaVKyuwlNyQByMZrcwq2Cj7O84N3yp5x7fDbDTsJ4qYExBj3cnUXGzuS/SEtDWVdpwpjS4rcfL1uQvU4ZCuI6U9mI/KTWVGgD5+DkdS8/jZxsIfDtM8OYBwukqyaUCgGRzV609HR0NPiUofKnMxAPo=
 
 before_install:
-- sudo apt-get update > /dev/null
+- sudo apt-get update -qq
+- sudo apt-get install -y -qq postfix
 - composer selfupdate
 
 install:
@@ -27,6 +28,11 @@ install:
 - export PATH=$PATH:$TRAVIS_BUILD_DIR/bin
 
 before_script:
+# Create a mock mail system so Drupal install can send email somewhere.
+- sudo service postfix stop
+- smtp-sink -d "%d.%H.%M.%S" localhost:2500 1000 &
+- echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
+- echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -r 'echo PHP_VERSION;'`/etc/php.ini"
 # Install Apache
 - sudo apt-get install -y apache2 libapache2-mod-fastcgi
 - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv
