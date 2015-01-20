@@ -1,14 +1,20 @@
 default:
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+      paths:
+        - %paths.base%/tests/behat
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       goutte: ~
-    Drupal\DrupalExtension\Extension:
-      api_driver: "drupal"
+      base_url: http://localhost/  # Replace with your site's URL
+    Drupal\DrupalExtension:
       blackbox: ~
       drupal:
         drupal_root: docroot
       drush:
         root: docroot
-  paths:
-    features:  tests/behat
-    bootstrap: %behat.paths.features%/bootstrap

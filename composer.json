@@ -6,7 +6,7 @@
     "phing/phing":           "2.8.2"
   },
   "require-dev": {
-    "drupal/drupal-extension":   "v1.0.2",
+    "drupal/drupal-extension":   "~3.0",
     "phpunit/phpunit":           "3.7.*",
     "squizlabs/php_codesniffer": "1.4.6",
     "phpmd/phpmd":               "1.5.0",
