@@ -81,7 +81,7 @@
       <arg value="-y"/>
       <arg value="-v"/>
       <arg value="--nocolor"/>
-      <arg value="--concurrency=5"/>
+      <arg value="--concurrency=8"/>
       <arg value="${project.basedir}/${drupal.makefile}"/>
       <arg value="${docroot}"/>
     </exec>
@@ -108,7 +108,7 @@
     <exec executable="bash" checkreturn="true" taskname="lint" passthru="true" >
       <arg value="-c" />
       <!-- @TODO Remove the UUID exception following resolution of https://github.com/previousnext/agov/issues/381 -->
-      <arg value="find ${docroot} -type f -name '*.inc' -o -name '*.install' -o -name '*.php' -name '*.module' -name '*.php' -name '*.profile' -name '*.test' -name '*.theme' ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' | xargs -P 6 -n 1 php -l" />
+      <arg value="find ${docroot} -type f -name '*.inc' -o -name '*.install' -o -name '*.php' -name '*.module' -name '*.php' -name '*.profile' -name '*.test' -name '*.theme' ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' | xargs -P8 -n 1 php -l" />
   </exec>
  </target>
 
@@ -137,7 +137,7 @@
     <!-- Install Drupal with the agov profile (govCMS implements overrides) -->
   <target name="site-install"
           description="Installs Drupal using the aGov profile" >
-    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" taskname="drush">
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush">
       <arg value="site-install"/>
       <arg value="-y"/>
       <arg value="-v"/>
@@ -153,7 +153,7 @@
   </target>
 
   <target name="behat" description="Behat testing for govCMS" >
-    <exec command="export BEHAT_PARAMS='${behat.params}' ; ${composer.bin}/behat --colors -v"
+    <exec command="${composer.bin}/behat --colors -v"
           taskname="behat"
           passthru="true"
           checkreturn="true" >

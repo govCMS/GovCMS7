@@ -11,7 +11,7 @@ default:
   extensions:
     Behat\MinkExtension:
       goutte: ~
-      base_url: http://localhost/  # Replace with your site's URL
+      base_url: http://localhost/
     Drupal\DrupalExtension:
       blackbox: ~
       drupal:
