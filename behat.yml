@@ -1,31 +1,14 @@
-annotations:
-  paths:
-    features: %behat.paths.features%/annotations
-
-closures:
-  paths:
-    features: %behat.paths.features%/closures
-
 default:
-  paths:
-    features:  tests/behat
-    bootstrap: %behat.paths.features%/bootstrap
   extensions:
     Behat\MinkExtension\Extension:
       goutte: ~
-      # zombie:
-      #   auto_server: false
-      # javascript_session: zombie
     Drupal\DrupalExtension\Extension:
       api_driver: "drupal"
       blackbox: ~
-
-drupal7:
-  filters:
-    tags: "@api"
-  extensions:
-    Drupal\DrupalExtension\Extension:
-      api_driver: "drupal"
-
-imports:
-  - behat.local.yml
+      drupal:
+        drupal_root: docroot
+      drush:
+        root: docroot
+  paths:
+    features:  tests/behat
+    bootstrap: %behat.paths.features%/bootstrap

@@ -31,11 +31,12 @@
   <property name="account.password"    value="password" />
   <property name="account.mail"        value="root@[127.0.0.1]" />
 
-  <!-- Drush & Composer-->
+  <!-- Drush, Composer & Behat -->
   <property name="composer.bin"        value="${project.basedir}/bin"/>
   <property name="drush.bin"           value="${project.basedir}/bin/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
+  <property name="behat.params"        value="extensions[Behat\\MinkExtension\\Extension][base_url]=${drupal.base_url}" />
 
   <!-- We override this so Drupal install works -->
   <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
@@ -120,14 +121,17 @@
   </target>
 
   <target name="install" description="Installs govCMS and any ACSF dependencies." depends="acsf, site-install" />
+  <target name="run-tests" description="Runs tests on an installed codebase." depends="install, behat" />
 
     <!-- Run the acsf-init command to set the docroot up as Site Factory -->
     <!-- would be. -->
   <target name="acsf" description="Runs ACSF specific steps">
-    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush"/>
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush" >
       <arg value="-y" />
+      <arg value="--nocolor" />
       <arg value="--include=sites/all/modules/acsf/acsf_init" />
       <arg value="acsf-init" />
+    </exec>
   </target>
 
     <!-- Install Drupal with the agov profile (govCMS implements overrides) -->
@@ -145,6 +149,14 @@
       <arg value="--account-pass=${account.password}"/>
       <arg value="--account-mail=${account.mail}"/>
       <arg value="${drupal.profile}"/>
+    </exec>
+  </target>
+
+  <target name="behat" description="Behat testing for govCMS" >
+    <exec command="export BEHAT_PARAMS=${behat.params} ; ${composer.bin}/behat --ansi -v"
+          taskname="behat"
+          passthru="true"
+          checkreturn="true" >
     </exec>
   </target>
 </project>
