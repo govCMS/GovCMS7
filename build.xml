@@ -36,7 +36,7 @@
   <property name="drush.bin"           value="${project.basedir}/bin/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
-  <property name="behat.params"        value="extensions[Behat\\MinkExtension\\Extension][base_url]=${drupal.base_url}" />
+  <property name="behat.params"        value="{&quot;extensions&quot;: {&quot;Behat\\MinkExtension&quot;: {&quot;base_url&quot;: &quot;${drupal.base_url}&quot; }}}" />
 
   <!-- We override this so Drupal install works -->
   <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
@@ -153,7 +153,7 @@
   </target>
 
   <target name="behat" description="Behat testing for govCMS" >
-    <exec command="export BEHAT_PARAMS=${behat.params} ; ${composer.bin}/behat --ansi -v"
+    <exec command="export BEHAT_PARAMS='${behat.params}' ; ${composer.bin}/behat --colors -v"
           taskname="behat"
           passthru="true"
           checkreturn="true" >

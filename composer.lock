@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc1efc4e025b26023bb282ca9cd858e5",
+    "hash": "838bc3642949afa48523a193e2779a95",
     "packages": [
         {
             "name": "drush/drush",

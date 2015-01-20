@@ -51,4 +51,4 @@ before_script:
 
 script:
 # Run the install
-- phing -f build.xml install
+- phing -f build.xml run-tests

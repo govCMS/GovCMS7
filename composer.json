@@ -1,6 +1,12 @@
 {
   "name": "govCMS/govCMS",
   "description": "The GovCMS build.",
+  "authors": [
+      {
+          "name": "Adam Malone",
+          "email": "adam@adammalone.net"
+      }
+  ],
   "require": {
     "drush/drush":           "6.*",
     "phing/phing":           "2.8.2"
