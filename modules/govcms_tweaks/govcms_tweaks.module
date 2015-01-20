@@ -17,15 +17,15 @@ function govcms_tweaks_openid_response($response, $account) {
   if (module_exists('acsf_openid') && module_exists('password_policy') && db_table_exists('password_policy_force_change')) {
     $openid_uid = $account->uid;
 
-    //  Make sure to remove the force change password.
+    // Make sure to remove the force change password.
     db_update('password_policy_force_change')
         ->fields(array('force_change' => '0'))
         ->condition('uid', $openid_uid)
         ->execute();
 
-    //  Check password_policy_expiration to delete.
+    // Check password_policy_expiration to delete.
     db_delete('password_policy_expiration')
         ->condition('uid', $openid_uid)
         ->execute();
-    }
+  }
 }
