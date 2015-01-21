@@ -107,8 +107,9 @@
   <target name="lint">
     <exec executable="bash" checkreturn="true" taskname="lint" passthru="true" >
       <arg value="-c" />
-      <!-- @TODO Remove the UUID exception following resolution of https://github.com/previousnext/agov/issues/381 -->
-      <arg value="find ${docroot} -type f -name '*.inc' -o -name '*.install' -o -name '*.php' -name '*.module' -name '*.php' -name '*.profile' -name '*.test' -name '*.theme' ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' | xargs -P8 -n 1 php -l" />
+      <!-- @TODO Remove the exceptions when we move to the next tagged release
+      of aGov that fixes previousnext/agov#382 and previousnext/agov#385 -->
+      <arg value="find ${docroot} -type f \( -name '*.inc' -o -name '*.install' -o -name '*.module' -o -name '*.php' -o -name '*.profile' -o -name '*.test' -o -name '*.theme' \) ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' ! -path '*profiles/agov/modules/contrib/webform_clear/webform_clear.test' | xargs -P8 -n 1 php -l" />
   </exec>
  </target>
 
