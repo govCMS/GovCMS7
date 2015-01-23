@@ -11,6 +11,7 @@
   <!-- ============= -->
 
   <!-- The following override properties provided in imported build files. -->
+  <property file="./build.properties" override="true" />
 
   <!-- Application -->
   <property name="docroot"             value="${project.basedir}/docroot" override="true" />
@@ -20,7 +21,7 @@
   <property name="site.mail"           value="root@[127.0.0.1]" />
   <property name="drupal.profile"      value="agov" override="true" />
   <property name="drupal.makefile"     value="${phing.project.name}.make" override="true" />
-  <property name="drupal.base_url"     value="http://localhost" />
+  <property name="drupal.base_url"     value="http://localhost/" />
 
   <!-- Credentials -->
   <property name="db.username"         value="root" />
@@ -104,11 +105,12 @@
     <copy file="./misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
-  <target name="lint">
+  <target name="lint" description="Runs a php lint against the codebase." >
     <exec executable="bash" checkreturn="true" taskname="lint" passthru="true" >
       <arg value="-c" />
-      <!-- @TODO Remove the UUID exception following resolution of https://github.com/previousnext/agov/issues/381 -->
-      <arg value="find ${docroot} -type f -name '*.inc' -o -name '*.install' -o -name '*.php' -name '*.module' -name '*.php' -name '*.profile' -name '*.test' -name '*.theme' ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' | xargs -P8 -n 1 php -l" />
+      <!-- @TODO Remove the exceptions when we move to the next tagged release
+      of aGov that fixes previousnext/agov#382 and previousnext/agov#385 -->
+      <arg value="find ${docroot} -type f \( -name '*.inc' -o -name '*.install' -o -name '*.module' -o -name '*.php' -o -name '*.profile' -o -name '*.test' -o -name '*.theme' \) ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' ! -path '*profiles/agov/modules/contrib/webform_clear/webform_clear.test' | xargs -P8 -n 1 php -l" />
   </exec>
  </target>
 
@@ -153,7 +155,7 @@
   </target>
 
   <target name="behat" description="Behat testing for govCMS" >
-    <exec command="${composer.bin}/behat --colors -v"
+    <exec command="export BEHAT_PARAMS='${behat.params}' ; ${composer.bin}/behat --colors -v"
           taskname="behat"
           passthru="true"
           checkreturn="true" >

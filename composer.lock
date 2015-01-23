@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "838bc3642949afa48523a193e2779a95",
+    "hash": "055ae70259a3b017c7bc70a3995e121a",
     "packages": [
         {
             "name": "drush/drush",
@@ -633,16 +633,16 @@
         },
         {
             "name": "drupal/drupal-driver",
-            "version": "1.0.x-dev",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jhedstrom/DrupalDriver.git",
-                "reference": "37e12fe59e03edf2c82710d09d17e79468f71cb9"
+                "reference": "377912efed52b946e454ca0182026850d6a934b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/37e12fe59e03edf2c82710d09d17e79468f71cb9",
-                "reference": "37e12fe59e03edf2c82710d09d17e79468f71cb9",
+                "url": "https://api.github.com/repos/jhedstrom/DrupalDriver/zipball/377912efed52b946e454ca0182026850d6a934b4",
+                "reference": "377912efed52b946e454ca0182026850d6a934b4",
                 "shasum": ""
             },
             "require": {
@@ -676,7 +676,7 @@
                 "test",
                 "web"
             ],
-            "time": "2014-12-23 21:58:07"
+            "time": "2014-12-23 21:58:20"
         },
         {
             "name": "drupal/drupal-extension",

@@ -13,6 +13,7 @@
   },
   "require-dev": {
     "drupal/drupal-extension":   "~3.0",
+    "drupal/drupal-driver":      "v1.0.3",
     "fabpot/goutte":             "1.0.x-dev",
     "phpunit/phpunit":           "3.7.*",
     "squizlabs/php_codesniffer": "1.4.6",

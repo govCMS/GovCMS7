@@ -1,4 +1,6 @@
 default:
+  autoload:
+    '': %paths.base%/tests/behat/bootstrap
   suites:
     default:
       contexts:
@@ -6,15 +8,17 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
+        - FeaturesContext
       paths:
-        - %paths.base%/tests/behat
+        features: %paths.base%/tests/behat/features
   extensions:
     Behat\MinkExtension:
       goutte: ~
-      base_url: http://localhost/
     Drupal\DrupalExtension:
       blackbox: ~
       drupal:
         drupal_root: docroot
       drush:
         root: docroot
+imports:
+  - behat.local.yml
