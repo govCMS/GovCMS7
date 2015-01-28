@@ -8,7 +8,7 @@ default:
         - Drupal\DrupalExtension\Context\MinkContext
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
-        - FeaturesContext
+        - FeatureContext
       paths:
         features: %paths.base%/tests/behat/features
   extensions:
