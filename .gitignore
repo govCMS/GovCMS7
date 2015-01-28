@@ -41,12 +41,8 @@ Thumbs.db
 
 # Ignore Drupal stuff #
 ########################
-app/sites/*
-!app/sites/all
-!app/sites/default
+docroot
 drushrc.php
-app/files
-app/sites/all/modules/local
 
 # Continuous Integration #
 #########################
@@ -55,6 +51,7 @@ build.properties
 build
 vendor
 behat.local.yml
+.php-version
 
 # Local dev tools #
 ###################
@@ -62,4 +59,3 @@ behat.local.yml
 .bundle
 node_modules
 
-docroot

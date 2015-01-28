@@ -10,9 +10,6 @@
   <!--  Properties   -->
   <!-- ============= -->
 
-  <!-- The following override properties provided in imported build files. -->
-  <property file="./build.properties" override="true" />
-
   <!-- Application -->
   <property name="docroot"             value="${project.basedir}/docroot" override="true" />
   <property name="src.custom.modules"  value="${project.basedir}/modules" override="true" />
@@ -37,10 +34,13 @@
   <property name="drush.bin"           value="${project.basedir}/bin/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
-  <property name="behat.params"        value="{&quot;extensions&quot;: {&quot;Behat\\MinkExtension&quot;: {&quot;base_url&quot;: &quot;${drupal.base_url}&quot; }}}" />
+  <property name="behat.local"         value="${project.basedir}/behat.local.yml" />
 
   <!-- We override this so Drupal install works -->
   <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
+
+  <!-- The following allows local overrides. -->
+  <property file="${project.basedir}/build.properties" override="true" />
 
   <!--               -->
   <!-- Basic targets -->
@@ -155,10 +155,21 @@
   </target>
 
   <target name="behat" description="Behat testing for govCMS" >
-    <exec command="export BEHAT_PARAMS='${behat.params}' ; ${composer.bin}/behat --colors -v"
-          taskname="behat"
-          passthru="true"
-          checkreturn="true" >
+    <!-- Check to see if behat.local.yml exists already. -->
+    <available file="${behat.local}" property="behat_local_exists" value="exists"/>
+    <if>
+      <not>
+        <equals arg1="${behat_local_exists}" arg2="exists"/>
+      </not>
+      <then>
+        <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
+        <echo message="# Local behat settings." file="${behat.local}" append="false" />
+      </then>
+    </if>
+    <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
+    <exec dir="${project.basedir}" executable="${composer.bin}/behat" logoutput="true" passthru="true" checkreturn="true" taskname="behat">
+      <arg value="--colors" />
+      <arg value="-v" />
     </exec>
   </target>
 </project>
