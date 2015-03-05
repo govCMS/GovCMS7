@@ -25,9 +25,6 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/b20a0f17a9
 ; Linkit Security patch
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch
 
-; Webform Security patch
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/4171239e4cef9bd38208e996502c7012504cc39c.patch
-
 ; Google Analytics Security Patch
 projects[agov][patch][] = patches/google_analytics_version-2.1.patch
 
@@ -36,6 +33,9 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/1d2e89f6ea
 
 ; Views security update
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch
+
+; Webform Security patch
+projects[agov][patch][] = https://github.com/previousnext/agov/commit/4171239e4cef9bd38208e996502c7012504cc39c.patch
 
 ; Contrib modules.
 projects[acsf][version] = 1.4
