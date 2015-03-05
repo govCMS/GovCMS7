@@ -4,10 +4,10 @@ Date:   Fri Mar 6 10:19:51 2015 +1300
 
     Updated webform
 
-diff --git a/docroot/profiles/agov/drupal-org.make b/docroot/profiles/agov/drupal-org.make
+diff --git a/drupal-org.make b/drupal-org.make
 index 43e223a..ee9f82a 100644
---- a/docroot/profiles/agov/drupal-org.make
-+++ b/docroot/profiles/agov/drupal-org.make
+--- a/drupal-org.make
++++ b/drupal-org.make
 @@ -120,7 +120,7 @@ projects[view_unpublished][download][revision] = e9df1d3f33b93410bb62e65f7098128
  projects[view_unpublished][download][type] = "git"
  projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
