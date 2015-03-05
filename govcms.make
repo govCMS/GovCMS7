@@ -35,7 +35,7 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/1d2e89f6ea
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch
 
 ; Webform Security patch
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/4171239e4cef9bd38208e996502c7012504cc39c.patch
+projects[agov][patch][] = patches/agov-webform1.4.patch
 
 ; Contrib modules.
 projects[acsf][version] = 1.4
