@@ -18,8 +18,10 @@ projects[drupal][patch][] = patches/govcms_force_ssl_v1.patch
 ; aGov profile.
 projects[agov][version] = 2.0-alpha5
 projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
+
 ; Context Security patch
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/b20a0f17a9a90365479bd73b5a78288a76e5b726.patch
+
 ; Linkit Security patch
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch
 
