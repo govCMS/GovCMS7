@@ -29,7 +29,7 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513d
 projects[agov][patch][] = patches/google_analytics_version-2.1.patch
 
 ; Update entity api to 7.x-1.6
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/1d2e89f6ea0a6b65c95cc2086baafc274671862a.patch
+projects[agov][patch][] = patches/agov-entity1.6.patch
 
 ; Views security update
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch
