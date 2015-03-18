@@ -25,6 +25,9 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/b20a0f17a9
 ; Linkit Security patch
 projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch
 
+; Avoid mix mode for video URLs
+projects[agov][patch][] = https://github.com/previousnext/agov/commit/dd2d245d70c78db4fe3d778a4a79ae4add9f6e34.patch
+
 ; Google Analytics Security Patch
 projects[agov][patch][] = patches/google_analytics_version-2.1.patch
 
