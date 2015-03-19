@@ -13,7 +13,7 @@ index 43e223a..ee9f82a 100644
  projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_unpublished.git"
  projects[view_unpublished][type] = "module"
 -projects[webform][version] = "4.1"
-+projects[webform][version] = "4.4"
++projects[webform][version] = "4.5"
  projects[webform_clear][version] = "2.0"
  projects[webform_phone][version] = "1.19"
  projects[workbench][version] = "1.2"
