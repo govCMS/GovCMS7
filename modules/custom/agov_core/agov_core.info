@@ -1,0 +1,4 @@
+name = Common functionality for aGov
+package = aGov core
+description = Provides common functionality required by other aGov modules
+core = 7.x

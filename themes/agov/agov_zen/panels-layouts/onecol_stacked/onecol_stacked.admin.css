@@ -1,0 +1,8 @@
+
+.panel-1col-stacked {
+  width: 100%;
+}
+
+.panel-1col-stacked .panel-panel {
+  margin: 0 0 1em 0;
+}

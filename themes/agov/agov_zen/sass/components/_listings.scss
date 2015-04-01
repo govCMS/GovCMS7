@@ -1,0 +1,14 @@
+%listing {
+  margin: 0 0 rhythm(.5) 0;
+  padding: rhythm(.25) 0 rhythm(.5);
+  border-top: solid 1px $color-tertiary-light;
+  &:last-child {  border-bottom: none; }
+  p {
+    @include noSpace;
+  }
+}
+
+%listing--header {
+  @include adjust-font-size-to(14px);
+  padding-bottom: rhythm(.25);
+}

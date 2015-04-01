@@ -1,0 +1,239 @@
+<?php
+/**
+ * @file
+ * Functionality for registration of site.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function agov_register_menu() {
+  $items = array();
+  $items['admin/config/system/register'] = array(
+    'title' => 'aGov Registration',
+    'description' => 'Manage site registration.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('agov_register_form'),
+    'access arguments' => array('administer site'),
+  );
+  return $items;
+}
+
+/**
+ * Form builder.
+ */
+function agov_register_form($form, &$form_state) {
+  $form = array();
+
+  $information = variable_get('agov_register_information', array());
+
+  $form['registration'] = agov_register_form_elements($information);
+
+  $form['#submit'][] = 'agov_register_submit';
+  $form['#validate'][] = 'agov_register_validate';
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => empty($information) ? 'Register' : 'Update',
+  );
+
+  return $form;
+}
+
+/**
+ * Form builder.
+ *
+ * @ingroup forms
+ */
+function agov_register_form_elements($data = FALSE, $install = FALSE) {
+  $form = array();
+  $t_function = get_t();
+
+  if (!$install) {
+    $form['agov_register_status'] = array(
+      '#type' => 'item',
+      '#title' => $t_function('Status'),
+      '#markup' => agov_register_status($data),
+    );
+  }
+
+  if (isset($data['registered']) && $data['registered']) {
+
+    $form['agov_register_display_id'] = array(
+      '#type' => 'item',
+      '#title' => $t_function('Registration ID'),
+      '#markup' => $data['agov_register_id'],
+    );
+
+    $form['agov_register_date'] = array(
+      '#type' => 'item',
+      '#title' => $t_function('Registration date'),
+      '#markup' => format_date($data['agov_register_last_attempt'], 'agov_month_day_year'),
+    );
+  }
+
+  $form['agov_register_agency'] = array(
+    '#type' => 'textfield',
+    '#title' => $t_function('Department/Agency/Company'),
+    '#default_value' => isset($data['agov_register_agency']) ? $data['agov_register_agency'] : '',
+  );
+  $form['agov_register_contact'] = array(
+    '#type' => 'textfield',
+    '#title' => $t_function('Contact Name or Position'),
+    '#default_value' => isset($data['agov_register_contact']) ? $data['agov_register_contact'] : '',
+  );
+  $form['agov_register_email'] = array(
+    '#type' => 'textfield',
+    '#title' => $t_function('Contact Email'),
+    '#default_value' => isset($data['agov_register_email']) ? $data['agov_register_email'] : '',
+  );
+  $form['agov_register_notification'] = array(
+    '#type' => 'checkbox',
+    '#title' => $t_function('Do not send aGov news or product update information to the registered address'),
+    '#default_value' => isset($data['agov_register_notification']) ? $data['agov_register_notification'] : '',
+  );
+  $form['agov_register_id'] = array(
+    '#type' => 'hidden',
+    '#value' => isset($data['agov_register_id']) ? $data['agov_register_id'] : '',
+  );
+
+  return $form;
+}
+
+/**
+ * Validate handler.
+ *
+ * @ingroup forms
+ */
+function agov_register_validate(&$form, &$form_state) {
+  if (!valid_email_address($form_state['values']['agov_register_email'])) {
+    form_set_error('agov_register_email', 'Please enter a valid email address.');
+  }
+}
+
+/**
+ * Submit handler.
+ *
+ * @ingroup forms
+ */
+function agov_register_submit(&$form, &$form_state) {
+  $data = variable_get('agov_register_information', array());
+
+  $data['agov_register_agency'] = check_plain($form_state['values']['agov_register_agency']);
+  $data['agov_register_contact'] = check_plain($form_state['values']['agov_register_contact']);
+  $data['agov_register_email'] = check_plain($form_state['values']['agov_register_email']);
+  $data['agov_register_notification'] = check_plain($form_state['values']['agov_register_notification']);
+
+  if (empty($form_state['values']['agov_register_id'])) {
+    // Generate a site id.
+    $data['agov_register_id'] = agov_register_generate_id();
+  }
+
+  // Store the data.
+  variable_set('agov_register_information', $data);
+
+  // Post it to the web service.
+  $response = agov_register_post($data);
+
+  // Reload the variable data as it may have been modified.
+  $data = variable_get('agov_register_information', array());
+
+  if ($response->code == 200) {
+    drupal_set_message('Thank you, your registration was successful');
+    $data['registered'] = TRUE;
+  }
+  else {
+    drupal_set_message('Sorry, your registration failed at this time. We will try again later to register your site. If the problem persists, please contact us.', 'error');
+    $data['registered'] = FALSE;
+  }
+
+  // Save the data.
+  variable_set('agov_register_information', $data);
+
+}
+
+/**
+ * Posts's registration data to web server.
+ */
+function agov_register_post($data) {
+  $update_site = variable_get('agov_update_site', 'https://updates.agov.com.au/agov-register');
+
+  if (!isset($data['agov_register_id'])) {
+    $data['agov_register_id'] = agov_register_generate_id();
+  }
+  $query = drupal_http_build_query($data);
+
+  $options = array(
+    'method' => 'POST',
+    'data' => $query,
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+  );
+  $response = drupal_http_request($update_site, $options);
+  if ($response->code == 200) {
+    $data['registered'] = TRUE;
+  }
+  else {
+    $data['registered'] = FALSE;
+  }
+  $data['agov_register_last_attempt'] = time();
+  variable_set('agov_register_information', $data);
+  return $response;
+}
+
+/**
+ * Implements hook_cron().
+ */
+function agov_register_cron() {
+  $data = variable_get('agov_register_information', FALSE);
+
+  if ($data) {
+    if (empty($data['registered']) || $data['registered'] == FALSE) {
+      agov_register_post($data);
+    }
+  }
+}
+
+/**
+ * Generates a unique id.
+ * @return string
+ *   unique id
+ */
+function agov_register_generate_id() {
+
+  if (function_exists('uuid_generate')) {
+    return uuid_generate();
+  }
+  else {
+    $site_name = variable_get('site_name');
+    $random = rand(0, 10000);
+    $string = $site_name . '_' . time() . '_' . $random;
+    return md5($string);
+  }
+
+}
+
+/**
+ * Returns status of registration.
+ *
+ * @param array $data
+ *   The registration data for the site.
+ *
+ * @return string
+ *   The status of the registration.
+ */
+function agov_register_status($data = NULL) {
+  if (is_null($data)) {
+    $status = 'Not registered.';
+  }
+
+  if (isset($data['registered']) && $data['registered']) {
+    $status = 'Registered';
+  }
+  elseif (isset($data['agov_register_last_attempt'])) {
+    $status = 'Last registration attempt failed, retrying';
+  }
+  else {
+    $status = 'Not registered';
+  }
+  return $status;
+}

@@ -1,0 +1,18 @@
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: ${app.uri}
+      show_cmd: 'open %s'
+    Drupal\DrupalExtension\Extension:
+      drush:
+        root: ${build.drupal.dir}
+      drupal:
+        drupal_root: ${build.drupal.dir}
+
+drupal7:
+  extensions:
+    Drupal\DrupalExtension\Extension:
+      drupal:
+        drupal_root: ${build.drupal.dir}
+      drush:
+        root: ${build.drupal.dir}

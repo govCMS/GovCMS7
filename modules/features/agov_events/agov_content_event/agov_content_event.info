@@ -1,0 +1,15 @@
+name = Event Content
+description = Provides default content for event content type.
+core = 7.x
+package = aGov content
+project = agov_content_event
+dependencies[] = agov_events
+dependencies[] = defaultcontent
+features[content][] = agov_2_event_1
+features[content][] = agov_2_event_2
+features[content][] = agov_2_event_3
+features[content][] = agov_2_event_4
+features[content][] = agov_2_event_5
+features[content][] = agov_2_event_6
+features[features_api][] = api:2
+mtime = 1416885642

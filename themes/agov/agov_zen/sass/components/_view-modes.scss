@@ -1,0 +1,36 @@
+@mixin view-mode-teaser {
+
+  h3 {
+    @include adjust-font-size-to(16px);
+    line-height: 1.2;
+    margin: rhythm(1/4) 0 rhythm(1/2);
+  }
+
+  h3 a {
+    color: $color-highlight;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .field-type-image {
+
+    @include bp-nq($minor) {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+}
+
+.view-mode-teaser,
+.node-teaser {
+  @include view-mode-teaser();
+}
+
+.view-mode-compact {
+  @include view-mode-teaser();
+}
+
+
+

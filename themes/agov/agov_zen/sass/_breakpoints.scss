@@ -1,0 +1,26 @@
+$breakpoint-no-queries: false;
+$breakpoint-no-query-fallbacks: true;
+
+$minor: 420px;
+$medium: 720px;
+$large: 980px;
+
+@mixin bp-nq($breakpoint) {
+  @include breakpoint($breakpoint, $no-query: '.lt-ie9') {
+    @content
+  }
+}
+
+@mixin show-at($breakpoint, $display:'block') {
+  display: none;
+  @include bp-nq($breakpoint) {
+    display: $display;
+    @content
+  }
+}
+
+@mixin small-screens() {
+  @include breakpoint(($medium - 1px) max-width) { // subtract 1px to max-width consistent with 1px
+    @content
+  }
+}

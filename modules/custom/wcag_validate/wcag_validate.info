@@ -1,0 +1,3 @@
+name = WCAG Validate
+description = WCAG Validate allows developers and editors to validate individual pages against the PreviousNext WCAG service
+core = 7.x

@@ -1,0 +1,6 @@
+name = "Iconomist"
+description = "Provides additional theme settings for adding additional icons."
+core = 7.x
+package = "Theme settings"
+
+files[] = iconomist.module

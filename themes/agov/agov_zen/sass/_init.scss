@@ -1,0 +1,46 @@
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: false;
+$legacy-support-for-ie8: true;
+
+
+$arial:             Arial, sans-serif;
+$base-font-family:  $arial; // The font family set on the html element.
+
+$open:            'OpenSansRegular', $base-font-family;
+$open-semibold:   'OpenSansSemibold', $base-font-family;
+
+$header-font-family:  $open-semibold;
+$font-body:           $arial;
+$font-monospace:      sans-serif;
+
+$line-height-ratio: 1.4;
+$base-font-size:    13px; // The font size set on the root html element.
+$base-line-height:  $base-font-size * $line-height-ratio; // This line-height determines the basic unit of vertical rhythm.
+$heading-line-height: $line-height-ratio;
+
+$h1-font-size:      $base-font-size * 2.4;
+$h2-font-size:      $h1-font-size * 0.7;
+$h3-font-size:      $h1-font-size * 0.6;
+$h4-font-size:      $h1-font-size * 0.5;
+
+
+
+// Tab styling.
+$tabs-container-bg: #fff;
+$tabs-border: #bbb;
+
+// =============================================================================
+// Partials to be shared with all .scss files.
+// =============================================================================
+
+// Add Compass.
+@import "compass";
+
+// Add Breakpoint.
+@import "breakpoint";
+
+// Add the Zen Grids responsive layout mixins.
+@import "zen";
+
+// Now we add our custom helper mixins.
+@import "mixins";

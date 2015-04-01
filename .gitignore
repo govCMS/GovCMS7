@@ -58,4 +58,4 @@ behat.local.yml
 .vagrant
 .bundle
 node_modules
-
+.sass-cache

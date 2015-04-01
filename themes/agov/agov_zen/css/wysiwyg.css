@@ -1,0 +1,149 @@
+/**
+ * @file
+ * Font declarations
+ */
+@font-face {
+  font-family: 'OpenSansRegular';
+  src: url('../fonts/opensans-regular-webfont.eot');
+  src: url('../fonts/opensans-regular-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-regular-webfont.woff') format("woff"), url('../fonts/opensans-regular-webfont.ttf') format("truetype"), url('../fonts/opensans-regular-webfont.svg#OpenSansRegular') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url('../fonts/opensans-bold-webfont.eot');
+  src: url('../fonts/opensans-bold-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-bold-webfont.woff') format("woff"), url('../fonts/opensans-bold-webfont.ttf') format("truetype"), url('../fonts/opensans-bold-webfont.svg#OpenSansBold') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSansSemibold';
+  src: url('../fonts/opensans-semibold-webfont.eot');
+  src: url('../fonts/opensans-semibold-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/opensans-semibold-webfont.woff') format("woff"), url('../fonts/opensans-semibold-webfont.ttf') format("truetype"), url('../fonts/opensans-semibold-webfont.svg#OpenSansSemibold') format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+  font-family: "OpenSansSemibold", Arial, sans-serif;
+  font-weight: normal;
+  color: #141314;
+}
+
+/* Links */
+a {
+  color: #464445;
+}
+a:visited {
+  color: #464445;
+}
+a:hover {
+  color: #7a797a;
+}
+a:active {
+  color: #464445;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+h1 {
+  font-size: 2.4em;
+  line-height: 0.81667em;
+  margin-top: 0.29167em;
+  margin-bottom: 0.29167em;
+}
+
+h2 {
+  font-size: 1.68em;
+  line-height: 1.16667em;
+  margin-top: 0.41667em;
+  margin-bottom: 0.41667em;
+}
+
+h3 {
+  font-size: 1.44em;
+  line-height: 1.36111em;
+  margin-top: 0.48611em;
+  margin-bottom: 0.48611em;
+}
+
+h4 {
+  font-size: 1.2em;
+  line-height: 1.63333em;
+  margin-top: 0.58333em;
+  margin-bottom: 0.58333em;
+}
+
+.field-name-body {
+  /* Content List Styles */
+  /* Display image inline to the right */
+  /* Display image inline to the left */
+}
+.field-name-body ol {
+  list-style-type: decimal;
+  margin-left: 19px;
+}
+.field-name-body ul {
+  list-style-type: square;
+  margin-left: 15px;
+}
+.field-name-body p.img-float-right,
+.field-name-body img.img-float-right {
+  float: right;
+  margin: 5px 0 5px 5px;
+}
+.field-name-body p.img-float-left,
+.field-name-body img.img-float-left {
+  float: left;
+  margin: 0 5px 5px 5px;
+}
+
+/* Content List Styles */
+ol {
+  list-style-type: decimal;
+  margin-left: 19px;
+}
+
+ul {
+  list-style-type: square;
+  margin-left: 15px;
+}
+
+/* Display image inline to the right */
+p.img-float-right,
+img.img-float-right {
+  float: right;
+  margin: 5px 0 5px 5px;
+}
+
+/* Display image inline to the left */
+p.img-float-left,
+img.img-float-left {
+  float: left;
+  margin: 0 5px 5px 5px;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  /* 1 */
+  font-size: 81.25%;
+  /* 3 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  line-height: 1.4em;
+  word-spacing: -0.05em;
+}
+
+ul, ol {
+  margin: 1.4em 0;
+}

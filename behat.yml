@@ -20,5 +20,6 @@ default:
         drupal_root: docroot
       drush:
         root: docroot
+
 imports:
   - behat.local.yml

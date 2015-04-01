@@ -1,0 +1,78 @@
+/* Headings */
+%headings {
+  font-family: $header-font-family;
+  font-weight: normal;
+  color: $heading-color;
+}
+
+/* Links */
+a {
+  @include link-colors($color-highlight, $color-primary, $color-highlight, $color-highlight);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Headings
+   ========================================================================== */
+
+h1 {
+  @include adjust-font-size-to( $h1-font-size, $heading-line-height );
+  @include leader(.5, $h1-font-size);
+  @include trailer(.5, $h1-font-size);
+}
+h2 {
+  @include adjust-font-size-to( $h2-font-size, $heading-line-height );
+  @include leader(.5, $h2-font-size);
+  @include trailer(.5, $h2-font-size);
+}
+h3 {
+  @include adjust-font-size-to( $h3-font-size, $heading-line-height );
+  @include leader(.5, $h3-font-size);
+  @include trailer(.5, $h3-font-size);
+}
+h4 {
+  @include adjust-font-size-to($h4-font-size, $heading-line-height);
+  @include leader(.5, $h4-font-size);
+  @include trailer(.5, $h4-font-size);
+}
+
+// Declare heading styles globally.
+h1, h2, h3, h4, h5 {
+  @extend %headings;
+}
+
+// Mixin to include body styles into wysiwyg but only inside body fields in default theme.
+@mixin body-text-syles {
+  /* Content List Styles */
+  ol {
+    list-style-type: decimal;
+    margin-left: 19px;
+  }
+
+  ul {
+    list-style-type: square;
+    margin-left: 15px;
+  }
+
+  /* Display image inline to the right */
+  p.img-float-right,
+  img.img-float-right {
+    float: right;
+    margin: 5px 0 5px 5px;
+  }
+
+  /* Display image inline to the left */
+  p.img-float-left,
+  img.img-float-left {
+    float: left;
+    margin: 0 5px 5px 5px;
+  }
+}
+
+// On default theme only implement these styles inside field-name-body.
+.field-name-body {
+  @include body-text-syles;
+}

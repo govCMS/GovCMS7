@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Flatten select options.
+ */
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function options_flatten_field_widget_info_alter(&$info) {
+  if (module_exists('options')) {
+    $settings = array(
+      'flatten_options' => 0,
+      'flatten_sort' => 1,
+    );
+    $info['options_select']['settings'] += $settings;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function options_flatten_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  if (isset($form['instance']['widget']['type']['#value'])) {
+    $type = $form['instance']['widget']['type']['#value'];
+    if ($type === 'options_select') {
+      $field = $form['#field'];
+      $instance = field_info_instance($form['instance']['entity_type']['#value'], $form['instance']['field_name']['#value'], $form['instance']['bundle']['#value']);
+      $form['instance'] += options_flatten_field_widget_settings_form($field, $instance);
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_settings_form().
+ */
+function options_flatten_field_widget_settings_form($field, $instance) {
+  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+
+  $form['options_flatten'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Options Flatten'),
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#parents' => array('instance', 'widget', 'settings'),
+  );
+
+  $form['options_flatten']['flatten_options'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Flatten select options'),
+    '#default_value' => $settings['flatten_options'],
+  );
+
+  $form['options_flatten']['flatten_sort'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Sort the flatten options by label'),
+    '#default_value' => $settings['flatten_sort'],
+  );
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function options_flatten_field_widget_form_alter(&$element, &$form_state, $context) {
+  $instance = $context['instance'];
+  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+  if ($widget['type'] === 'options_select' && $settings['flatten_options']) {
+    $options = $element['#options'];
+    $none = array_key_exists('_none', $options) ? $options['_none'] : FALSE;
+    unset($options['_none']);
+    // Flatten options list.
+    $options = options_array_flatten($options);
+    if ($settings['flatten_sort']) {
+      uasort($options, 'strnatcasecmp');
+    }
+    if ($none) {
+      $options = array('_none' => $none) + $options;
+    }
+    $element['#options'] = $options;
+  }
+}

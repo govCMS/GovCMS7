@@ -1,0 +1,4 @@
+name = Options Flatten
+description = Provide additional options for "select" widget.
+core = 7.x
+package = Fields
