@@ -1,0 +1,110 @@
+<?php
+/**
+ * @file
+ * Code for the Events feature.
+ */
+
+include_once 'govcms_events.features.inc';
+
+/**
+ * Implements hook_ds_fields_info().
+ */
+function govcms_events_ds_fields_info($entity_type) {
+  $fields = array();
+
+  $fields['govcms_event_date'] = array(
+    'title' => t('Time'),
+    'field_type' => DS_FIELD_TYPE_FUNCTION,
+    'function' => 'govcms_events_event_date_field',
+  );
+
+  $fields['govcms_event_details_title'] = array(
+    'title' => t('Event details'),
+    'field_type' => DS_FIELD_TYPE_FUNCTION,
+    'function' => 'govcms_events_event_details_title_field',
+  );
+
+  return array('node' => $fields);
+}
+
+/**
+ * Functions to return field content.
+ */
+function govcms_events_event_date_field($field, $title = NULL) {
+  return govcms_events_format_date_no_time($field['entity']->field_event_date[LANGUAGE_NONE][0]['value'], $field['entity']->field_event_date[LANGUAGE_NONE][0]['value2'], $field['entity']->field_event_date[LANGUAGE_NONE][0]['timezone_db'], $field['entity']->field_event_date[LANGUAGE_NONE][0]['timezone']);
+}
+
+/**
+ * Sets the title of the field.
+ */
+function govcms_events_event_details_title_field($field, $title = NULL) {
+  return '<h2>' . t('Event details') . '</h2>';
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function govcms_events_field_formatter_info() {
+  return array(
+    'date_no_time' => array(
+      'label' => 'Date with no time (If time is set to 00:00)',
+      'field types' => array('date','datetime'),
+      'settings' => array(),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function govcms_events_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  foreach ($items as $delta => $item) {
+    $value2 = isset($item['value2']) ? $item['value2'] : '';
+    $element[$delta]['#markup'] = govcms_events_format_date_no_time($item['value'], $value2, $item['timezone_db'], $item['timezone']);
+  }
+
+  return $element;
+}
+
+/**
+ * Returns date string formatted without time if time value is set to 00:00.
+ */
+function govcms_events_format_date_no_time($date, $date2, $timezone_db, $timezone) {
+
+  $date_data = govcms_events_date_string($date, $timezone_db, $timezone);
+  $date2_data = govcms_events_date_string($date2, $timezone_db, $timezone);
+
+  // If there is end date value, add this to the string.
+  if ($date_data['string'] == $date2_data['string'] || empty($date2)) {
+    $output = date_format_date($date_data['object'], 'custom', $date_data['format']);
+  }
+  elseif ($date2) {
+    $output = date_format_date($date_data['object'], 'custom', $date_data['format']) . ' - ' . date_format_date($date2_data['object'], 'custom', $date2_data['format']);
+  }
+
+  return $output;
+}
+
+/**
+ * Returns date object and formatted string from Y-m-d H:i:s date string.
+ */
+function govcms_events_date_string($date, $timezone_db, $timezone) {
+  $date_object = new DateObject($date, new DateTimeZone($timezone_db));
+  $date_object->setTimezone(new DateTimeZone($timezone));
+  $date_string = date('Y-m-d H:i:s', $date_object->getTimestamp());
+
+  if (substr($date_string, 11, strlen($date_string)) == '00:00:00') {
+    $format = 'l jS F';
+  }
+  else {
+    $format = 'l jS F \a\t g:ia';
+  }
+
+  return array(
+    'object' => $date_object,
+    'string' => $date_string,
+    'format' => $format,
+  );
+}

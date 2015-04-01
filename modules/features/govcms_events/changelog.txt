@@ -1,0 +1,6 @@
+govCMS Events feature changelog
+
+7.x-1.3
+-------
+- by xtfer: Move Events context and pathauto pattern into feature
+

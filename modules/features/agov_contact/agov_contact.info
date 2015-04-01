@@ -1,8 +1,0 @@
-name = Contact
-description = Provides Contact Us functionality.
-core = 7.x
-package = aGov
-php = 5.2.4
-project = agov_contact
-dependencies[] = contact
-files[] = agov_contact.admin.inc

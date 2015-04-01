@@ -1,0 +1,12 @@
+name = Blog Content
+description = Provides default content for blog content type.
+core = 7.x
+package = govCMS content
+project = govcms_content_blog
+dependencies[] = govcms_blog
+dependencies[] = defaultcontent
+features[content][] = govcms_2_blog_1
+features[content][] = govcms_2_blog_2
+features[content][] = govcms_2_blog_3
+features[features_api][] = api:2
+mtime = 1416885635

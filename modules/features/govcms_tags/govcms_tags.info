@@ -1,0 +1,12 @@
+name = Tags
+description = Provides tags for default content.
+core = 7.x
+package = govCMS content
+project = govcms_tags
+dependencies[] = features
+dependencies[] = taxonomy
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:2
+features[taxonomy][] = tags
+features[views_view][] = govcms_taxonomy_term_page

@@ -1,7 +1,0 @@
-name = Permissions
-description = Provides permissions.
-core = 7.x
-package = aGov core
-dependencies[] = agov_appearance
-dependencies[] = defaultconfig
-dependencies[] = role_delegation

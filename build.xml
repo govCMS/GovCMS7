@@ -16,7 +16,7 @@
   <property name="src.custom.themes"   value="${project.basedir}/themes" override="true" />
   <property name="site.name"           value="govCMS" />
   <property name="site.mail"           value="root@[127.0.0.1]" />
-  <property name="drupal.profile"      value="agov" override="true" />
+  <property name="drupal.profile"      value="govcms" override="true" />
   <property name="drupal.makefile"     value="${phing.project.name}.make" override="true" />
   <property name="drupal.base_url"     value="http://localhost/" />
 
@@ -95,10 +95,10 @@
     <symlink target="./../../../../themes" link="${docroot}/sites/all/themes/custom/govcms" />
 
     <!-- Use govCMS favicon -->
-    <delete file="${docroot}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/agov/themes/agov/agov_zen/favicon.ico" />
-    <delete file="${docroot}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/agov/themes/agov/agov_barton/favicon.ico" />
+    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
+    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
+    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
+    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
 
     <copy file="./misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
     <copy file="./misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
@@ -109,8 +109,8 @@
     <exec executable="bash" checkreturn="true" taskname="lint" passthru="true" >
       <arg value="-c" />
       <!-- @TODO Remove the exceptions when we move to the next tagged release
-      of aGov that fixes previousnext/agov#382 and previousnext/agov#385 -->
-      <arg value="find ${docroot} -type f \( -name '*.inc' -o -name '*.install' -o -name '*.module' -o -name '*.php' -o -name '*.profile' -o -name '*.test' -o -name '*.theme' \) ! -path '*profiles/agov/modules/contrib/uuid/uuid.api.php' ! -path '*profiles/agov/modules/contrib/webform_clear/webform_clear.test' | xargs -P8 -n 1 php -l" />
+      of govCMS that fixes previousnext/govcms#382 and previousnext/govcms#385 -->
+      <arg value="find ${docroot} -type f \( -name '*.inc' -o -name '*.install' -o -name '*.module' -o -name '*.php' -o -name '*.profile' -o -name '*.test' -o -name '*.theme' \) ! -path '*profiles/govcms/modules/contrib/uuid/uuid.api.php' ! -path '*profiles/govcms/modules/contrib/webform_clear/webform_clear.test' | xargs -P8 -n 1 php -l" />
   </exec>
  </target>
 
@@ -136,9 +136,9 @@
     </exec>
   </target>
 
-    <!-- Install Drupal with the agov profile (govCMS implements overrides) -->
+    <!-- Install Drupal with the govcms profile (govCMS implements overrides) -->
   <target name="site-install"
-          description="Installs Drupal using the aGov profile" >
+          description="Installs Drupal using the govCMS profile" >
     <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush">
       <arg value="site-install"/>
       <arg value="-y"/>

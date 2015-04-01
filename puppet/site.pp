@@ -6,7 +6,7 @@ node default {
   include drupal
 
   # Advanced includes.
-  drupal::site { 'agov':
+  drupal::site { 'govcms':
     mysql_host => '%',
   }
 

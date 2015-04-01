@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Install hooks.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function govcms_menu_install() {
+  $t = get_t();
+
+  $item = array(
+    'link_path' => 'sitemap',
+    'link_title' => $t('Sitemap and Feeds'),
+    'menu_name' => 'menu-footer-sub-menu',
+    'weight' => -39,
+  );
+
+  menu_link_save($item);
+
+  // Rebuild the menu's now that we have added links.
+  menu_rebuild();
+}

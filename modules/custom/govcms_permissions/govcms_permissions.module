@@ -1,0 +1,81 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_profile_form().
+ */
+function govcms_permissions_form_user_profile_form_alter(&$form, $form_state) {
+  if (in_array((int) variable_get('user_admin_role', 3), array_keys($form['#user']->roles), TRUE) && !user_access('assign all roles')) {
+    $form['account']['status']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govcms_permissions_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'views_form_admin_views_user_system_1' && $form_state['step'] == 'views_bulk_operations_confirm_form' &&
+    $form_state['operation']->operationId == 'action::views_bulk_operations_delete_item') {
+    foreach (user_load_multiple($form_state['selection']) as $account) {
+      if (in_array((int) variable_get('user_admin_role', 3), array_keys($account->roles), TRUE) && !user_access('assign all roles')) {
+        drupal_set_message('You do not have permission to cancel this account.');
+        $form['actions']['#access'] = FALSE;
+        $form['description']['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_defaultconfig_user_default_permissions().
+ */
+function govcms_permissions_defaultconfig_user_default_permissions() {
+  $permissions = array();
+
+  $base_permissions = govcms_permissions_get_permissions();
+  foreach ($base_permissions as $module => $module_permissions) {
+    foreach ($module_permissions as $permission_key => $permission) {
+      $permissions[$permission_key] = array(
+        'name' => $permission_key,
+        'roles' => $permission['roles'],
+        'module' => $module,
+      );
+    }
+  }
+
+  return $permissions;
+}
+
+/**
+ * Returns a list of permissions keyed by module.
+ *
+ * This function checks any provided permissions against the currently available
+ * module list to prevent PDO exceptions.
+ *
+ * @return array
+ *   An array of permissions.
+ */
+function govcms_permissions_get_permissions() {
+
+  module_load_include('inc', 'govcms_permissions', 'govcms_permissions.perms');
+
+  $permissions = govcms_permissions_base_permissions();
+
+  // Check the permissions list against the list of installed modules and
+  // their available permissions. If a permission is missing, this will
+  // throw a PDO Exception, which is possible if the permissions are rebuilt
+  // and the module list is different from that expected.
+  $defined_permissions = user_permission_get_modules();
+  foreach ($permissions as $module => $module_permissions) {
+    foreach (array_keys($module_permissions) as $permission_key) {
+      if (!isset($defined_permissions[$permission_key])) {
+        unset($permissions[$module][$permission_key]);
+      }
+    }
+  }
+
+  return $permissions;
+}

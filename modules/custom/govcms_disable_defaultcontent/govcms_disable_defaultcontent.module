@@ -1,0 +1,154 @@
+<?php
+
+/**
+ * @file
+ * Provides core functionality
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function govcms_disable_defaultcontent_menu() {
+  $items = array();
+  $items['admin/config/content/default-content'] = array(
+    'title' => 'Default Content Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('govcms_disable_defaultcontent_admin_form'),
+    'access arguments' => array('administer site'),
+  );
+  $items['admin/config/content/default-content/disable'] = array(
+    'title' => 'Disable Default Content',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('govcms_disable_defaultcontent_disable_modules'),
+    'access arguments' => array('administer site'),
+  );
+  return $items;
+}
+
+/**
+ * Form builder for default content admin form.
+ */
+function govcms_disable_defaultcontent_admin_form() {
+  $form = array();
+
+  $form['govcms_disable_defaultcontent_notice_enabled'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display a notice about default content'),
+    '#default_value' => variable_get('govcms_disable_defaultcontent_notice_enabled', 1),
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Form builder for disable default content form.
+ *
+ * To avoid CSRF we setup a confirm form first.
+ */
+function govcms_disable_defaultcontent_disable_modules($form, &$form_state) {
+  return confirm_form(
+    $form,
+    'Disable govCMS default content?',
+    '',
+    'Once you disable default content it cannot be re-enabled.'
+  );
+}
+
+/**
+ * Handles disabling all content modules.
+ */
+function govcms_disable_defaultcontent_disable_modules_submit($form, &$form_state) {
+  $default_content = govcms_disable_defaultcontent_modules();
+  if (!empty($default_content)) {
+    // Enabled, switch if off.
+    module_disable($default_content);
+    drupal_set_message(t('Default content has been turned off.'), 'status', FALSE);
+
+    // Remove the tags.
+    $tids = variable_get('govcms_tags_saved', FALSE);
+
+    // Ensure we have values to delete.
+    if (!empty($tids)) {
+      // Delete the taxonomies.
+      foreach ($tids as $tid) {
+        taxonomy_term_delete($tid);
+      }
+
+      // Clean up the variables.
+      variable_del('govcms_tags_saved');
+
+      // Delete About us bean on homepage.
+      $bean = bean_load_delta('about-us');
+      bean_delete($bean);
+    }
+  }
+
+  drupal_flush_all_caches();
+  drupal_goto();
+}
+
+/**
+ * Implements hook_init().
+ */
+function govcms_disable_defaultcontent_init() {
+  // Check if an install task variable exists so that we do not display this
+  // message just after the content has been installed.
+  $install_task = variable_get('install_task');
+  if ($install_task == 'done'
+    && user_access('administer site')
+    && current_path() != 'admin/config/content/default-content/disable'
+    && current_path() != 'media/browser'
+    && !(isset($_REQUEST['js']) && $_REQUEST['js'] == 'true')
+  ) {
+    $default_content = govcms_disable_defaultcontent_modules();
+    if (!empty($default_content) && variable_get('govcms_disable_defaultcontent_notice_enabled', 1)) {
+      drupal_set_message(
+        t('You are viewing the site with example content. You must disable example content before editing the content on the site. !disable_link',
+          array(
+            '!disable_link' => l(t('Disable example content'), 'admin/config/content/default-content/disable'),
+          )),
+        'warning',
+        FALSE
+      );
+    }
+  }
+}
+
+/**
+ * Returns an array of enabled content modules if any.
+ */
+function govcms_disable_defaultcontent_modules() {
+  // Variables.
+  $enabled_content = array();
+
+  // Get a list of enabled modules.
+  $enabled_modules = array_values(module_list());
+
+  // Get our list of modules.
+  $govcms_modules = _govcms_disable_defaultcontent_list();
+
+  // We now run a comparison to see if any are enabled.
+  foreach ($govcms_modules as $govcms_module) {
+    if (in_array($govcms_module, $enabled_modules)) {
+      $enabled_content[] = $govcms_module;
+    }
+  }
+
+  return $enabled_content;
+}
+
+/**
+ * Provides modules to be controlled by this module.
+ */
+function _govcms_disable_defaultcontent_list() {
+  return array(
+    'govcms_content_event',
+    'govcms_content_publication',
+    'govcms_content_blog',
+    'govcms_content_media_release',
+    'govcms_content_news_article',
+    'govcms_content_promotion',
+    'govcms_content_standard_page',
+    'govcms_content_slides',
+  );
+}

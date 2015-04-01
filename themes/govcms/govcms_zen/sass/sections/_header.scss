@@ -1,0 +1,49 @@
+.header {
+  background: $color-header;
+}
+
+.header__logo {
+  margin: rhythm(1) 0;
+  max-width: 50%;
+}
+
+.header__secondary-menu {
+  margin: rhythm(.5) 0;
+  max-width: 50%;
+}
+
+.header__region {
+  margin: rhythm(1) 0;
+  clear: right;
+  float: right;
+}
+
+.header {
+  position: relative; // Fences block-search
+  .block-govcms-text-resize, .block-search {
+    margin: 0 10px;
+    display: inline-block;
+  }
+  .block-search,
+  .block-search-api-page {
+    @include small-screens {
+      max-width: 50%;
+      position: absolute;
+      right: 0px;
+      bottom: -34px;
+      z-index: 100;
+    }
+    @include bp-nq($medium) {
+      position: relative;
+      float: right;
+      width: 215px; // Bigger on larger screens.
+    }
+  }
+  .block-govcms-text-resize {
+    @include show-at($medium, inline-block) {
+      float: left;
+    }
+  }
+}
+
+

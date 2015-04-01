@@ -85,10 +85,10 @@ GIT
 PATH
   remote: ./custom/drupal
   specs:
-    agov/drupal (0.0.1)
+    govcms/drupal (0.0.1)
 
 DEPENDENCIES
-  agov/drupal (>= 0)
+  govcms/drupal (>= 0)
   puppetlabs/apache (>= 0)
   puppetlabs/apt (>= 0)
   puppetlabs/concat (>= 0)

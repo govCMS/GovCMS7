@@ -7,11 +7,11 @@
 
 box      = 'precise64'
 url      = 'http://files.vagrantup.com/' + box + '.box'
-hostname = ENV['AGOV_HOSTNAME'] || 'agov'
-domain   = ENV['AGOV_DOMAIN'] || 'dev'
-cpus     = ENV['AGOV_CPUS'] || '1'
-ram      = ENV['AGOV_RAM'] || '768'
-ip_fall  = ENV['AGOV_FALLBACK_IP'] || '192.168.50.10'
+hostname = ENV['GOVCMS_HOSTNAME'] || 'govcms'
+domain   = ENV['GOVCMS_DOMAIN'] || 'dev'
+cpus     = ENV['GOVCMS_CPUS'] || '1'
+ram      = ENV['GOVCMS_RAM'] || '768'
+ip_fall  = ENV['GOVCMS_FALLBACK_IP'] || '192.168.50.10'
 
 # These allow for puppet facts to be set. We use these for
 # assigning roles.
@@ -19,8 +19,8 @@ ip_fall  = ENV['AGOV_FALLBACK_IP'] || '192.168.50.10'
 facts = {
   'fqdn'          => hostname + '.' + domain,
   # We set these so we can marry up permissions.
-  'vagrant_uid'   => ENV['AGOV_UID'] || Process.uid,
-  'vagrant_group' => ENV['AGOV_GROUP'] || 'dialout',
+  'vagrant_uid'   => ENV['GOVCMS_UID'] || Process.uid,
+  'vagrant_group' => ENV['GOVCMS_GROUP'] || 'dialout',
 }
 
 ##
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
       :map_gid => 0,
      )
   else
-    config.vm.synced_folder "./../agov-build", "/vagrant"
+    config.vm.synced_folder "./../govcms-build", "/vagrant"
   end
 
   # Virtualbox provider configuration.

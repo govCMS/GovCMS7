@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Code for the Promotion feature.
+ */
+
+include_once 'govcms_promotion.features.inc';
+
+/**
+ * Implements hook_views_pre_view().
+ */
+function govcms_promotion_views_pre_view(&$view) {
+  // Ensure we have the correct view.
+  if ($view->name == 'footer_teaser') {
+    // Ensure this is excluded.
+    $node = menu_get_object();
+
+    if (!empty($node->nid)) {
+      $view->args[] = $node->nid;
+    }
+  }
+}

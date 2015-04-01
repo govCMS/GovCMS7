@@ -1,0 +1,81 @@
+html {
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+  color: #333333;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "OpenSansRegular", Arial, sans-serif;
+}
+
+a :hover,
+a :focus {
+  color: #2a6496;
+}
+
+.header {
+  background: #006893;
+  font-family: "OpenSansRegular", Arial, sans-serif;
+}
+
+.region-navigation {
+  background: #333333;
+  font-family: "OpenSansRegular", Arial, sans-serif;
+}
+
+.inlineLinks--bordered--double > li > a {
+  color: #FFF;
+  border-left-color: #FFF;
+}
+.inlineLinks--bordered--double > li > a :before {
+  border-left-color: #FFF;
+  border-right-color: #FFF;
+}
+
+.region-navigation .block__content > .menu > li > a {
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+}
+.region-navigation .block__content > .menu > li > a:hover,
+.region-navigation .block__content > .menu > li.sfHover > a {
+  background: #dee0e2;
+}
+.region-navigation .block__content > .menu > li > a:before {
+  border-left-color: #FFF;
+}
+.region-navigation .block__content > .menu > li.active-trail > a {
+  background: #fff;
+  color: #333333;
+}
+
+.region-footer .block-menu .menu > li > a:before {
+  border-left-color: #FFF;
+}
+
+.sidebar .block .block__title {
+  background-color: #006893;
+  background-image: none;
+  color: #FFF;
+}
+.sidebar .block .block__content {
+  background: #dee0e2;
+}
+
+#footer {
+  background: #006893;
+  border-top: 7px solid #006893;
+  color: white;
+}
+
+#block-views-footer-teaser-block {
+  color: #333333;
+}
+
+#block-menu-block-govcms-menu-block-footer,
+#block-bean-footer-copyright,
+#block-menu-menu-footer-sub-menu {
+  background: transparent;
+}
+#block-menu-block-govcms-menu-block-footer a,
+#block-bean-footer-copyright a,
+#block-menu-menu-footer-sub-menu a {
+  color: #FFF;
+}

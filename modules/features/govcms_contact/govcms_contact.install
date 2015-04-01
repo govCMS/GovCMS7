@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install tasks for the government contact feature.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function govcms_contact_install() {
+  $t = get_t();
+
+  // Add the menu link to the main menu and footer.
+  $menus = array(
+    'main' => array(
+      'link_path' => 'contact',
+      'link_title' => $t('Contact'),
+      'menu_name' => 'main-menu',
+    ),
+    'footer' => array(
+      'link_path' => 'contact',
+      'link_title' => $t('Feedback'),
+      'menu_name' => 'menu-footer-sub-menu',
+      'weight' => -40,
+    ),
+  );
+  foreach ($menus as $menu) {
+    menu_link_save($menu);
+  }
+
+  // Rebuild the menu.
+  menu_rebuild();
+
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array("access site-wide contact form"));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array("access site-wide contact form"));
+
+}
+
+/**
+ * Assign access contact form permission.
+ */
+function govcms_contact_update_7001() {
+  user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array("access site-wide contact form"));
+  user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array("access site-wide contact form"));
+}

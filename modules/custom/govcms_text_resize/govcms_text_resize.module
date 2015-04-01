@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Provides core functionality for govcms_text_resize module.
+ */
+
+/**
+ * Implements hook_preprocess_text_resize().
+ */
+function govcms_text_resize_preprocess_text_resize($vars) {
+  drupal_add_js(drupal_get_path('module', 'govcms_text_resize') . '/js/text-resize.js');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function govcms_text_resize_block_info() {
+  $blocks = array();
+
+  $blocks['text_resize'] = array(
+    'info' => t('Text Resize'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function govcms_text_resize_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'text_resize':
+      $block['content'] = theme('text_resize');
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function govcms_text_resize_theme() {
+  return array(
+    'text_resize' => array(
+      'template' => 'theme/text-resize',
+    ),
+  );
+}

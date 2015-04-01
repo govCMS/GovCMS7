@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Publications feature.
+ */
+
+include_once 'govcms_publications.features.inc';

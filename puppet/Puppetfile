@@ -14,4 +14,4 @@ mod 'saz/locales',          :git => 'git://github.com/saz/puppet-locales.git'
 mod "treehouseagency/pear", :git => "git://github.com/treehouseagency/puppet-pear.git"
 
 # Custom.
-mod 'agov/drupal',          :path => './custom/drupal'
+mod 'govcms/drupal',          :path => './custom/drupal'

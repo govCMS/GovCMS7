@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Chosen feature.
+ */
+
+include_once 'govcms_chosen.features.inc';

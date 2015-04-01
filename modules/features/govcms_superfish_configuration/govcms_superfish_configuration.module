@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Superfish menu configuration feature.
+ */
+
+include_once 'govcms_superfish_configuration.features.inc';

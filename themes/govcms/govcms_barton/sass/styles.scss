@@ -1,0 +1,118 @@
+$color-primary: #006893;
+$color-secondary: #333;
+$color-tertiary: #dee0e2;
+
+$font-color: #333;
+$font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
+
+$link-color: #428bca;
+$link-color-hover: #2a6496;
+
+$arial: Arial, sans-serif;
+$base-font-family: $arial;
+// The font family set on the html element.
+
+$open: 'OpenSansRegular', $base-font-family;
+$open-semibold: 'OpenSansSemibold', $base-font-family;
+
+$header-font-family: $open-semibold;
+$font-body: $arial;
+$font-monospace: sans-serif;
+
+html {
+  font-family: $font-family;
+  color: $font-color;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $open;
+}
+
+a {
+  :hover,
+  :focus {
+    color: $link-color-hover;
+  }
+}
+
+.header {
+  background: $color-primary;
+  font-family: $open;
+}
+
+.region-navigation {
+  background: $color-secondary;
+  font-family: $open;
+}
+
+.inlineLinks--bordered--double {
+  > li > a {
+    color: #FFF;
+    border-left-color: #FFF;
+
+    :before {
+      border-left-color: #FFF;
+      border-right-color: #FFF;
+    }
+  }
+}
+
+.region-navigation .block__content {
+
+  > .menu > li > a {
+    font-family: $font-family;
+  }
+
+  > .menu > li > a:hover,
+  > .menu > li.sfHover > a {
+    background: $color-tertiary;
+  }
+
+  > .menu > li > a:before {
+    border-left-color: #FFF;
+  }
+
+  > .menu > li.active-trail > a {
+    background: #fff;
+    color: $font-color;
+  }
+}
+
+.region-footer .block-menu .menu > li > a:before{
+  border-left-color: #FFF;
+}
+
+.sidebar .block {
+
+  .block__title {
+    background-color: $color-primary;
+    background-image: none;
+    color: #FFF;
+  }
+
+  .block__content {
+    background: $color-tertiary;
+  }
+}
+
+#footer {
+  background: $color-primary;
+  border-top: 7px solid $color-primary;
+  color: #FFF
+}
+
+#block-views-footer-teaser-block {
+  color: $font-color;
+}
+
+#block-menu-block-govcms-menu-block-footer,
+#block-bean-footer-copyright,
+#block-menu-menu-footer-sub-menu {
+  background: transparent;
+
+  a {
+    color: #FFF;
+  }
+}
+
+

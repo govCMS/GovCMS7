@@ -15,7 +15,7 @@ Feature:Meta tags
     And press "Save"
     Then I should see "Standard page test has been created"
     And the response should contain "<meta name=\"description\" content=\"When tweetle beetles fight, its called a tweetle beetle battle.\" />"
-    And the response should contain "<title>test | aGov</title>"
+    And the response should contain "<title>test | govCMS</title>"
     And the response should contain "<meta name=\"dcterms.type\" content=\"Text\" />"
     And the response should contain "<meta name=\"dcterms.title\" content=\"test\" />"
 
