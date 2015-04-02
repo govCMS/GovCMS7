@@ -9,24 +9,27 @@ Commits:
 --------
 
 - Only make commits of logical units of code. This could mean rebasing several
-  commits into one to remove additional commits.
+  commits into one to remove additional commits;
 - Check for unnecessary whitespace with `git diff --check` before
-  committing.
+  committing;
 - Ensure all files committed are using Unix line endings (check the settings
-  around "crlf" in git-config(1)).
-- Do not commit any commented out code or unneeded files.
-- Use a terse commit message under roughly 50 characters.
+  around "crlf" in git-config(1));
+- Do not commit any commented out code or unneeded files;
+- Remove all debug code e.g. dpm() functions;
+- Use a terse commit message under roughly 50 characters;
 - Associate any ticket/issue numbers in the message. The first line should
-  include the issue number in the form "(#XXXX) Commit message".
-- Add new tests (behat, simpletest or otherwise) for each new feature addition.
+  include the issue number in the form "(#XXXX) Commit message";
+- Add new tests (behat, simpletest or otherwise) for each new feature addition;
   Check out what currently exists for an understanding of the tests. This is
-  important so we don't break future versions of govCMS unintentionally;
-- Document any changes you've made in the `README.md`;
+  important so we don't break future versions of govCMS unintentionally; and
+- Document any new functionality you've introduced in the `README.md`.
 
 
 Submitting a pull request:
 -------------------------
 
+- [Fork the govCMS repository on github](https://help.github.com/articles/using-pull-requests/)
+  and clone your repository to your development environment;
 - Make your feature addition or bug fix;
 - __Always__ base your changes on the `master` branch on github (all new
   development happens here);
@@ -34,7 +37,8 @@ Submitting a pull request:
   each point release.
 - Add new modules or features to the make file rather than directly to the
   govCMS repository; and
-- __Remember__: when you create Pull Request, always select `master` branch as
+- __Remember__: when you create [Pull Request](https://help.github.com/articles/using-pull-requests/),
+  always select `master` branch as
   target, otherwise it will be closed (this is selected by default).
 
 
@@ -74,8 +78,8 @@ suite locally:
 
 ```bash
 composer install --prefer-dist
-phing build
-phing run-tests
+./bin/phing build
+./bin/phing run-tests
 ```
 
 
