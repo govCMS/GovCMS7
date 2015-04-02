@@ -43,6 +43,12 @@ projects[agov][patch][] = https://github.com/previousnext/agov/commit/cfb38c35f9
 ; Webform Security patch
 projects[agov][patch][] = patches/agov-webform1.5.patch
 
+; Crumbs security patch
+projects[agov][patch][] = patches/agov-crumbs2.3.patch
+
+; Password policy security patch
+projects[agov][patch][] = patches/agov-password-policy1.11.patch
+
 ; Contrib modules.
 projects[acsf][version] = 1.4
 projects[acquia_connector][version] = 2.15

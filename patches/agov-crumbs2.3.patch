@@ -1,0 +1,13 @@
+diff --git a/drupal-org.make b/drupal-org.make
+index b3237c8..7f3122c 100644
+--- a/drupal-org.make
++++ b/drupal-org.make
+@@ -130,6 +130,8 @@ projects[wysiwyg][patch][] = "https://drupal.org/files/wysiwyg-857362-selection-
+ projects[wysiwyg][version] = "2.2"
+ projects[wysiwyg_filter][version] = "1.6-rc2"
+ projects[xmlsitemap][version] = "2.0-rc2"
++; @TODO overwrite crumbs above when we have pulled in the latest codebase.
++projects[crumbs][version] = "2.3"
+ 
+ ; Themes
+ projects[zen][version] = "5.5"
