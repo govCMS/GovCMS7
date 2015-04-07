@@ -1,6 +1,6 @@
 default:
   autoload:
-    '': %paths.base%/tests/behat/bootstrap
+    '': %paths.base%/bootstrap
   suites:
     default:
       contexts:
@@ -10,7 +10,7 @@ default:
         - Drupal\DrupalExtension\Context\DrushContext
         - FeatureContext
       paths:
-        features: %paths.base%/tests/behat/features
+        features: %paths.base%/features
   extensions:
     Behat\MinkExtension:
       goutte: ~
