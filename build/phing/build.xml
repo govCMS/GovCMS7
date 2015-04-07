@@ -49,13 +49,13 @@
 
   <target name="build"
           description="Build the project."
-          depends="make, lint, phpcs" />
+          depends="clean, make, lint, phpcs" />
 
   <target name="clean"
           description="Cleanup build artifacts">
-    <exec command="git reset --hard"
+    <!--exec command="git reset - -hard"
           logoutput="true"
-          passthru="true" />
+          passthru="true" /-->
     <exec command="git clean -fd"
           logoutput="true"
           passthru="true" />
