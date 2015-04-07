@@ -12,12 +12,13 @@
 
   <!-- Application -->
   <property name="docroot"             value="${project.basedir}/../../docroot" override="true" />
+  <property name="repo.root"           value="${project.basedir}/../.." />
   <property name="src.custom.modules"  value="${project.basedir}/../../modules" override="true" />
   <property name="src.custom.themes"   value="${project.basedir}/../../themes" override="true" />
   <property name="site.name"           value="govCMS" />
   <property name="site.mail"           value="root@[127.0.0.1]" />
   <property name="drupal.profile"      value="govcms" override="true" />
-  <property name="drupal.makefile"     value="build-${phing.project.name}.make" override="true" />
+  <property name="drupal.makefile"     value="${repo.root}/build-${phing.project.name}.make" override="true" />
   <property name="drupal.base_url"     value="http://localhost/" />
 
   <!-- Credentials -->
@@ -30,17 +31,17 @@
   <property name="account.mail"        value="root@[127.0.0.1]" />
 
   <!-- Drush, Composer & Behat -->
-  <property name="composer.bin"        value="${project.basedir}/build/bin"/>
-  <property name="drush.bin"           value="${project.basedir}/build/bin/drush" override="true" />
+  <property name="composer.bin"        value="${repo.root}/build/bin"/>
+  <property name="drush.bin"           value="${composer.bin}/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
-  <property name="behat.local"         value="${project.basedir}/build/tests/behat/behat.local.yml" />
+  <property name="behat.local"         value="${repo.root}/build/tests/behat/behat.local.yml" />
 
   <!-- We override this so Drupal install works -->
   <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
 
   <!-- The following allows local overrides. -->
-  <property file="${project.basedir}/build/phing/build.properties" override="true" />
+  <property file="${project.basedir}/build.properties" override="true" />
 
   <!--               -->
   <!-- Basic targets -->
@@ -48,7 +49,7 @@
 
   <target name="build"
           description="Build the project."
-          depends="clean, make, lint, phpcs" />
+          depends="make, lint, phpcs" />
 
   <target name="clean"
           description="Cleanup build artifacts">
