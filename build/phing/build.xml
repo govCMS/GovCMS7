@@ -35,6 +35,7 @@
   <property name="drush.bin"           value="${composer.bin}/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
+  <property name="behat.config"        value="${repo.root}/build/tests/behat/behat.yml" />
   <property name="behat.local"         value="${repo.root}/build/tests/behat/behat.local.yml" />
 
   <!-- We override this so Drupal install works -->
@@ -79,46 +80,48 @@
   <target name="make"
           description="Run drush make">
 
-    <mkdir dir="${repo.root}/profiles" />
-    <symlink target="${repo.root}"
-             link="${repo.root}/profiles/govcms"
-             overwrite="true" />
+    <mkdir dir="${docroot}/profiles" />
+    <copy todir="${docroot}/profiles/govcms"
+          overwrite="true"
+          includeemptydirs="true"
+          haltonerror="true">
+      <fileset dir="${repo.root}/govcms">
+        <include name="**" />
+      </fileset>
+    </copy>
 
-    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
       <arg value="make"/>
       <arg value="-y"/>
       <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/../../drupal-org.make"/>
-      <arg value="--no-core"/>
-      <arg value="--contrib-destination=${project.basedir}/profiles/govcms"/>
-      <arg value="${docroot}"/>
-    </exec>
-
-    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
-      <arg value="make"/>
-      <arg value="-y"/>
-      <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/../../drupal-org-core.make"/>
+      <arg value="${repo.root}/drupal-org-core.make"/>
       <arg value="--prepare-install"/>
-      <arg value="${docroot}"/>
     </exec>
 
-    <!-- Symlink custom themes and modules into the project. -->
-    <!-- ../../ ensures these are compatible between the VM and the local -->
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+      <arg value="make"/>
+      <arg value="-y"/>
+      <arg value="--concurrency=8"/>
+      <arg value="${repo.root}/drupal-org.make"/>
+      <arg value="--no-core"/>
+      <arg value="--contrib-destination=profiles/govcms" />
+    </exec>
+
+    <!-- Symlink custom profile, themes and modules into the project. -->
     <exec dir="${docroot}" command="mkdir -p sites/all/modules/custom" logoutput="true" passthru="true" />
-    <symlink target="../../../../../modules" link="${docroot}/sites/all/modules/custom/govcms" />
+    <symlink target="${repo.root}/modules" link="${docroot}/sites/all/modules/custom/govcms" />
     <exec dir="${docroot}" command="mkdir -p sites/all/themes/custom" logoutput="true" passthru="true" />
-    <symlink target="./../../../../themes" link="${docroot}/sites/all/themes/custom/govcms" />
+    <symlink target="${repo.root}/themes" link="${docroot}/sites/all/themes/custom/govcms" />
 
     <!-- Use govCMS favicon -->
-    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
-    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
-    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
-    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
+    <!-- <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" /> -->
+    <!-- <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" /> -->
+    <!-- <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" /> -->
+    <!-- <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" /> -->
 
-    <copy file="../../../misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
-    <copy file="../../../misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
-    <copy file="../../../misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
+    <copy file="${repo.root}/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
   <target name="lint" description="Runs a php lint against the codebase." >
@@ -147,7 +150,7 @@
     <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush" >
       <arg value="-y" />
       <arg value="--nocolor" />
-      <arg value="--include=sites/all/modules/acsf/acsf_init" />
+      <arg value="--include=${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init" />
       <arg value="acsf-init" />
     </exec>
   </target>
@@ -183,7 +186,8 @@
       </then>
     </if>
     <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
-    <exec dir="${project.basedir}" executable="${composer.bin}/behat" logoutput="true" passthru="true" checkreturn="true" taskname="behat">
+    <exec dir="${repo.root}" executable="${composer.bin}/behat" logoutput="true" passthru="true" checkreturn="true" taskname="behat">
+      <arg value="--config=${behat.config}" />
       <arg value="--colors" />
       <arg value="-v" />
     </exec>
