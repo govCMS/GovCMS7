@@ -3,6 +3,13 @@ api = 2
 
 defaults[projects][subdir] = "contrib"
 
+projects[govcms][type] = "profile"
+projects[govcms][version] = "merge"
+projects[govcms][download][type] = "git"
+projects[govcms][download][branch] = "merge"
+projects[govcms][download][url] = "git@bitbucket.org:gollyg/govcms_merge.git"
+projects[govcms][patch][] = "patches/govcms_govcms_govcms_tweak_enable_v1.patch
+
 ; Contrib modules
 
 projects[acsf][version] = "1.4"
@@ -174,25 +181,25 @@ libraries[modernizr][type] = "library"
 ; Patches
 
 ; Context Security patch
-projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/b20a0f17a9a90365479bd73b5a78288a76e5b726.patch"
+;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/b20a0f17a9a90365479bd73b5a78288a76e5b726.patch"
 
 ; Ctools Security patch
-projects[govcms][patch][] = "patches/govcms-ctools1.7.patch"
+;projects[govcms][patch][] = "patches/govcms-ctools1.7.patch"
 
 ; Linkit Security patch
-projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch"
+;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch"
 
 ; Avoid mix mode for video URLs
-projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/dd2d245d70c78db4fe3d778a4a79ae4add9f6e34.patch"
+;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/dd2d245d70c78db4fe3d778a4a79ae4add9f6e34.patch"
 
 ; Google Analytics Security Patch
-projects[govcms][patch][] = "patches/google_analytics_version-2.1.patch"
+;projects[govcms][patch][] = "patches/google_analytics_version-2.1.patch"
 
 ; Update entity api to 7.x-1.6
-projects[govcms][patch][] = "patches/govcms-entity1.6.patch"
+;projects[govcms][patch][] = "patches/govcms-entity1.6.patch"
 
 ; Views security update
-projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch"
+;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch"
 
 ; Webform Security patch
-projects[govcms][patch][] = "patches/govcms-webform1.5.patch"
+;projects[govcms][patch][] = "patches/govcms-webform1.5.patch"

@@ -11,10 +11,10 @@
   <!-- ============= -->
 
   <!-- Application -->
-  <property name="docroot"             value="${project.basedir}/../../docroot" override="true" />
   <property name="repo.root"           value="${project.basedir}/../.." />
-  <property name="src.custom.modules"  value="${project.basedir}/../../modules" override="true" />
-  <property name="src.custom.themes"   value="${project.basedir}/../../themes" override="true" />
+  <property name="docroot"             value="${repo.root}/docroot" override="true" />
+  <property name="src.custom.modules"  value="${repo.root}/modules" override="true" />
+  <property name="src.custom.themes"   value="${repo.root}themes" override="true" />
   <property name="site.name"           value="govCMS" />
   <property name="site.mail"           value="root@[127.0.0.1]" />
   <property name="drupal.profile"      value="govcms" override="true" />
@@ -78,13 +78,28 @@
   <!-- Drush make the build -->
   <target name="make"
           description="Run drush make">
+
+    <mkdir dir="${repo.root}/profiles" />
+    <symlink target="${repo.root}"
+             link="${repo.root}/profiles/govcms"
+             overwrite="true" />
+
     <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
       <arg value="make"/>
       <arg value="-y"/>
-      <arg value="-v"/>
-      <arg value="--nocolor"/>
       <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/${drupal.makefile}"/>
+      <arg value="${project.basedir}/../../drupal-org.make"/>
+      <arg value="--no-core"/>
+      <arg value="--contrib-destination=${project.basedir}/profiles/govcms"/>
+      <arg value="${docroot}"/>
+    </exec>
+
+    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+      <arg value="make"/>
+      <arg value="-y"/>
+      <arg value="--concurrency=8"/>
+      <arg value="${project.basedir}/../../drupal-org-core.make"/>
+      <arg value="--prepare-install"/>
       <arg value="${docroot}"/>
     </exec>
 
