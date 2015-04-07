@@ -35,6 +35,7 @@
   <property name="drush.bin"           value="${composer.bin}/drush" override="true" />
   <property name="drush.source"        value="@${phing.project.name}.dev" override="true" />
   <property name="drush.file"          value="${phing.project.name}.aliases.drushrc.php" override="true" />
+  <property name="behat.config"        value="${repo.root}/build/tests/behat/behat.yml" />
   <property name="behat.local"         value="${repo.root}/build/tests/behat/behat.local.yml" />
 
   <!-- We override this so Drupal install works -->
@@ -86,16 +87,14 @@
       <arg value="${drupal.makefile}"/>
       <arg value="--contrib-destination=${docroot}/profiles/govcms"/>
       <arg value="${docroot}"/>
+
     </exec>
 
-    <!-- Symlink custom themes and modules into the project. -->
-    <!-- ../../ ensures these are compatible between the VM and the local -->
-    <exec dir="${docroot}" command="mkdir -p sites/all/modules/custom" logoutput="true" passthru="true" />
-    <symlink target="../../../../../modules" link="${docroot}/sites/all/modules/custom/govcms" />
-    <exec dir="${docroot}" command="mkdir -p sites/all/themes/custom" logoutput="true" passthru="true" />
-    <symlink target="./../../../../themes" link="${docroot}/sites/all/themes/custom/govcms" />
+    <!-- Symlink custom profile, themes and modules into the project. -->
+    <exec dir="${docroot}" command="mkdir -p sites/all/modules" logoutput="true" passthru="true" />
+    <symlink target="${repo.root}/acsf/govcms_tweaks" link="${docroot}/sites/all/modules/govcms" />
 
-    <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
     <copy file="${repo.root}/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
     <copy file="${repo.root}/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
@@ -111,7 +110,7 @@
 
   <target name="phpcs" description="Sniffs custom code to ensure it meets standards." >
     <exec executable="${composer.bin}/phpcs" logoutput="true" checkreturn="true" passthru="true" taskname="phpcs">
-      <arg value="--standard=vendor/drupal/coder/coder_sniffer/Drupal/" />
+      <arg value="--standard=${repo.root}/build/vendor/drupal/coder/coder_sniffer/Drupal/" />
       <arg value="--extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'" />
       <arg value="${docroot}/sites/all/modules/custom/*" />
     </exec>
@@ -126,7 +125,7 @@
     <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush" >
       <arg value="-y" />
       <arg value="--nocolor" />
-      <arg value="--include=sites/all/modules/acsf/acsf_init" />
+      <arg value="--include=${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init" />
       <arg value="acsf-init" />
     </exec>
   </target>
@@ -162,7 +161,8 @@
       </then>
     </if>
     <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
-    <exec dir="${project.basedir}" executable="${composer.bin}/behat" logoutput="true" passthru="true" checkreturn="true" taskname="behat">
+    <exec dir="${repo.root}" executable="${composer.bin}/behat" logoutput="true" passthru="true" checkreturn="true" taskname="behat">
+      <arg value="--config=${behat.config}" />
       <arg value="--colors" />
       <arg value="-v" />
     </exec>

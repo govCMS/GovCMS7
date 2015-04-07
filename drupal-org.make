@@ -3,7 +3,6 @@ api = 2
 
 defaults[projects][subdir] = "contrib"
 
-
 ; Contrib modules
 
 projects[acsf][version] = "1.4"
