@@ -108,10 +108,8 @@
     </exec>
 
     <!-- Symlink custom profile, themes and modules into the project. -->
-    <exec dir="${docroot}" command="mkdir -p sites/all/modules/custom" logoutput="true" passthru="true" />
-    <symlink target="${repo.root}/modules" link="${docroot}/sites/all/modules/custom/govcms" />
-    <exec dir="${docroot}" command="mkdir -p sites/all/themes/custom" logoutput="true" passthru="true" />
-    <symlink target="${repo.root}/themes" link="${docroot}/sites/all/themes/custom/govcms" />
+    <exec dir="${docroot}" command="mkdir -p sites/all/modules" logoutput="true" passthru="true" />
+    <symlink target="${repo.root}/acsf/govcms_tweaks" link="${docroot}/sites/all/modules/govcms" />
 
     <!-- Use govCMS favicon -->
     <!-- <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" /> -->
