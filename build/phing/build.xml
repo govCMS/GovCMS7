@@ -79,27 +79,12 @@
   <target name="make"
           description="Run drush make">
 
-    <mkdir dir="${repo.root}/profiles" />
-    <symlink target="${repo.root}"
-             link="${repo.root}/profiles/govcms"
-             overwrite="true" />
-
     <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
       <arg value="make"/>
       <arg value="-y"/>
       <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/../../drupal-org.make"/>
-      <arg value="--no-core"/>
-      <arg value="--contrib-destination=${project.basedir}/profiles/govcms"/>
-      <arg value="${docroot}"/>
-    </exec>
-
-    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
-      <arg value="make"/>
-      <arg value="-y"/>
-      <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/../../drupal-org-core.make"/>
-      <arg value="--prepare-install"/>
+      <arg value="${drupal.makefile}"/>
+      <arg value="--contrib-destination=${docroot}/profiles/govcms"/>
       <arg value="${docroot}"/>
     </exec>
 
@@ -110,15 +95,9 @@
     <exec dir="${docroot}" command="mkdir -p sites/all/themes/custom" logoutput="true" passthru="true" />
     <symlink target="./../../../../themes" link="${docroot}/sites/all/themes/custom/govcms" />
 
-    <!-- Use govCMS favicon -->
-    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
-    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
-    <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
-    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
-
-    <copy file="../../../misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
-    <copy file="../../../misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
-    <copy file="../../../misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
   <target name="lint" description="Runs a php lint against the codebase." >
