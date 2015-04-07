@@ -84,7 +84,7 @@
       <arg value="-v"/>
       <arg value="--nocolor"/>
       <arg value="--concurrency=8"/>
-      <arg value="${project.basedir}/${drupal.makefile}"/>
+      <arg value="${drupal.makefile}"/>
       <arg value="${docroot}"/>
     </exec>
 
