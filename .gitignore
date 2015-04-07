@@ -48,7 +48,6 @@ drushrc.php
 #########################
 bin
 build.properties
-build
 vendor
 behat.local.yml
 .php-version

@@ -96,13 +96,13 @@
 
     <!-- Use govCMS favicon -->
     <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
+    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_zen/favicon.ico" />
     <delete file="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
-    <copy file="./misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
+    <copy file="../../../misc/favicon.ico" tofile="${docroot}/profiles/govcms/themes/govcms/govcms_barton/favicon.ico" />
 
-    <copy file="./misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
-    <copy file="./misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
-    <copy file="./misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+    <copy file="../../../misc/settings/default.settings.php" todir="${docroot}/sites/default/"  />
+    <copy file="../../../misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="../../../misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
   <target name="lint" description="Runs a php lint against the codebase." >
