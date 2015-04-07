@@ -10,7 +10,7 @@ cache:
   apt: true
 
 env:
-  - COMPOSER_BIN_DIR=bin
+  - COMPOSER_BIN_DIR=build/bin
 
 notifications:
   email:
@@ -25,8 +25,8 @@ before_install:
   - composer selfupdate
 
 install:
-  - composer install --prefer-source
-  - export PATH=$PATH:$TRAVIS_BUILD_DIR/bin
+  - composer install --working-dir=build --prefer-source
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/build/bin
 
 before_script:
 
@@ -42,7 +42,7 @@ before_script:
   - sudo a2enmod rewrite actions fastcgi alias
   - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-  - sudo cp -f tests/travis/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo cp -f build/tests/travis/travis-ci-apache /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
   - sudo service apache2 restart
 
@@ -50,7 +50,7 @@ before_script:
   - mysql -e 'CREATE DATABASE travis_ci_govcms_drupal;'
 
   # Build the codebase
-  - phing -f build.xml build
+  - phing -f build/phing/build.xml build
 
 after_script:
 
@@ -60,4 +60,4 @@ after_script:
 script:
 
   # Run the install
-  - phing -f build.xml run-tests
+  - phing -f build/phing/build.xml run-tests
