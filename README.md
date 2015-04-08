@@ -26,9 +26,9 @@ git clone git@github.com:govCMS/govCMS-Core.git
 Enter the project root, and run the following commands in order:
 
 ```
-cd govCMS-Core
-composer install --prefer-dist
-phing -f build.xml build
+cd <project_directory>
+composer install --prefer-dist --working-dir=build
+build/bin/phing -f build/phing/build.xml build 
 ```
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
