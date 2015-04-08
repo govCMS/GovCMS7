@@ -155,7 +155,7 @@
             description="Sniffs custom code to ensure it meets standards.">
 
         <phpcodesniffer
-                standard="${project.basedir}/vendor/drupal/coder/coder_sniffer/Drupal/"
+                standard="${repo.root}/build/vendor/drupal/coder/coder_sniffer/Drupal/"
                 showSniffs="true"
                 showWarnings="true"
                 haltonerror="true"
@@ -183,9 +183,7 @@
     <!-- would be. -->
     <target name="acsf" description="Runs ACSF specific steps">
         <drush command="acsf-init" assume="yes">
-            <option name="include">
-                "${docroot}/sites/all/modules/acsf/acsf_init"
-            </option>
+            <option name="include">"${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init"</option>
         </drush>
     </target>
 
@@ -194,9 +192,7 @@
             description="Installs Drupal using the govCMS profile">
 
         <drush command="site-install" assume="yes" verbose="TRUE">
-            <option name="db-url">
-                "mysql://${db.username}:${db.password}@${db.host}/${db.name}"
-            </option>
+            <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}/${db.name}"</option>
             <option name="site-name">"${site.name}"</option>
             <option name="site-mail">"${site.mail}"</option>
             <option name="account-name">"${account.name}"</option>
