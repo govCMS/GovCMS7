@@ -7,6 +7,8 @@
 
 /**
  * Implements hook_openid_response().
+ *
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
  */
 function govcms_tweaks_openid_response($response, $account) {
   // If the password policy module (1.x) is enabled it will force
