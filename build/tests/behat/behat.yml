@@ -17,9 +17,9 @@ default:
     Drupal\DrupalExtension:
       blackbox: ~
       drupal:
-        drupal_root: docroot
+        drupal_root: ../../docroot
       drush:
-        root: docroot
+        root: ../../docroot
 
 imports:
   - behat.local.yml
