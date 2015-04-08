@@ -139,7 +139,7 @@
     <exec executable="${composer.bin}/phpcs" logoutput="true" checkreturn="true" passthru="true" taskname="phpcs">
       <arg value="--standard=${repo.root}/build/vendor/drupal/coder/coder_sniffer/Drupal/" />
       <arg value="--extensions='php,module,inc,install,test,profile,theme,js,css,info,txt'" />
-      <arg value="${docroot}/sites/all/modules/custom/*" />
+      <arg value="${docroot}/sites/all/modules/*" />
     </exec>
   </target>
 
