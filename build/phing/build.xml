@@ -7,9 +7,9 @@
 <project name="govcms" default="build" phingVersion="2.8.2">
 
     <!-- Additional task classes -->
-    <includepath classpath="${project.basedir}"/>
-    <taskdef name="behat" classname="BehatTask"/>
-    <taskdef name="drush" classname="DrushTask"/>
+    <includepath classpath="${project.basedir}/phingcludes"/>
+    <taskdef name="behat" classname="phingcludes.BehatTask"/>
+    <taskdef name="drush" classname="phingcludes.DrushTask"/>
 
     <!--               -->
     <!--  Properties   -->
@@ -66,7 +66,15 @@
 
     <target name="build"
             description="Build the project."
-            depends="clean, make, lint, phpcs, phpmd"/>
+            depends="clean, make, lint, phpcs, phpmd, install"/>
+
+    <target name="build:no-clean"
+            description="Build the project without removing uncommitted changes."
+            depends="make, lint, phpcs, phpmd, install"/>
+
+    <target name="build:no-syntax"
+            description="Build the project without running lint and sniff tests."
+            depends="clean, make, install"/>
 
     <target name="clean"
             description="Cleanup build artifacts">
@@ -77,10 +85,10 @@
               logoutput="true"
               passthru="true"/>
         <if>
-            <available file="${docroot}" type="dir"/>
+            <available property="docroot.exists" file="${docroot}" type="dir"/>
             <then>
                 <if>
-                    <available file="${docroot}/sites/default" type="dir"/>
+                    <available property="docroot.sites.exists" file="${docroot}/sites/default" type="dir"/>
                     <then>
                         <chmod file="${docroot}/sites/default" mode="2775"/>
                     </then>
@@ -98,31 +106,16 @@
     <target name="make"
             description="Run drush make">
 
-        <exec dir="${repo.root}" executable="${composer.bin}/drush"
-              logoutput="true" checkreturn="true" passthru="true"
-              taskname="drush">
-            <arg value="make"/>
-            <arg value="-y"/>
-            <arg value="--concurrency=8"/>
-            <arg value="${drupal.makefile}"/>
-            <arg value="${docroot}"/>
-        </exec>
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
 
-        <!-- Run Acquia specific build tasks -->
+        <!-- Run Acquia Cloud Site Factory specific post make tasks -->
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml"
                 optional="true"/>
     </target>
-
-    <target name="lint" description="Runs a php lint against the codebase.">
-        <exec executable="bash" checkreturn="true" taskname="lint"
-              passthru="true">
-            <arg value="-c"/>
-            <!-- @TODO Remove the exceptions when we move to the next tagged release
-            of govCMS that fixes previousnext/govcms#382 and previousnext/govcms#385 -->
-            <arg value="find ${docroot} -type f \( -name '*.inc' -o -name '*.install' -o -name '*.module' -o -name '*.php' -o -name '*.profile' -o -name '*.test' -o -name '*.theme' \) ! -path '*profiles/govcms/modules/contrib/uuid/uuid.api.php' ! -path '*profiles/govcms/modules/contrib/webform_clear/webform_clear.test' | xargs -P8 -n 1 php -l"/>
-        </exec>
-    </target>
-
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
     <!-- previousnext/agov#382 and previousnext/agov#385 -->
@@ -148,7 +141,7 @@
     <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
         <!--    <include name="profiles/agov/modules/custom/**" />-->
         <!--    <include name="profiles/agov/modules/features/**" />-->
-        <include name="sites/all/modules/custom/**"/>
+        <include name="sites/all/modules/**"/>
     </fileset>
 
     <target name="phpcs"
@@ -169,23 +162,16 @@
     <target name="phpmd" description="Checks custom code for complexity.">
         <phpmd rulesets="codesize,unusedcode,cleancode">
             <fileset refid="custom.files"/>
-            <formatter type="text" usefile="false"/>
+            <formatter type="text" outfile="false" usefile="false"/>
         </phpmd>
     </target>
 
     <target name="install"
-            description="Installs govCMS and any ACSF dependencies."
-            depends="acsf, site-install"/>
+            description="Installs govCMS."
+            depends="site-install"/>
+
     <target name="run-tests" description="Runs tests on an installed codebase."
             depends="install, security-check, behat"/>
-
-    <!-- Run the acsf-init command to set the docroot up as Site Factory -->
-    <!-- would be. -->
-    <target name="acsf" description="Runs ACSF specific steps">
-        <drush command="acsf-init" assume="yes">
-            <option name="include">"${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init"</option>
-        </drush>
-    </target>
 
     <!-- Install govCMS. -->
     <target name="site-install"
@@ -199,6 +185,9 @@
             <option name="account-mail">"${account.mail}"</option>
             <param>"${drupal.profile}"</param>
         </drush>
+
+        <!-- Run Acquia Cloud Site Factory specific post install tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
     </target>
 
     <!-- Ensure govCMS doesn't have any modules requiring security updates. -->
@@ -212,21 +201,20 @@
     </target>
 
     <target name="behat" description="Behat testing for govCMS">
-        <!-- Check to see if behat.local.yml exists already. -->
-        <available file="${behat.local}" property="behat_local_exists"
-                   value="exists"/>
+        <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
         <if>
             <not>
-                <equals arg1="${behat_local_exists}" arg2="exists"/>
+                <available file="${behat.local}" property="behat_local_exists" value="exists"/>
             </not>
             <then>
-                <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
                 <echo message="# Local behat settings." file="${behat.local}"
                       append="false"/>
             </then>
         </if>
+
         <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
-        <behat executable="${project.basedir}/bin/behat"
+        <behat executable="${composer.bin}/behat"
+               config="${behat.config}"
                verbose="true"
                strict="true"
                haltonerror="true"
