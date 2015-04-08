@@ -79,8 +79,18 @@
   <!-- Drush make the build -->
   <target name="make"
           description="Run drush make">
+    <!-- Copy in the govCMS installation profile. -->
+    <mkdir dir="${docroot}/profiles" />
+    <copy todir="${docroot}/profiles/govcms"
+          overwrite="true"
+          includeemptydirs="true"
+          haltonerror="true">
+      <fileset dir="${repo.root}">
+        <include name="govcms.*" />
+      </fileset>
+    </copy>
 
-    <exec executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
       <arg value="make"/>
       <arg value="-y"/>
       <arg value="--concurrency=8"/>
@@ -93,6 +103,9 @@
     <!-- Symlink custom profile, themes and modules into the project. -->
     <exec dir="${docroot}" command="mkdir -p sites/all/modules" logoutput="true" passthru="true" />
     <symlink target="${repo.root}/acsf/govcms_tweaks" link="${docroot}/sites/all/modules/govcms" />
+    <symlink target="${repo.root}/modules/custom" link="${docroot}/profiles/govcms/modules/custom" />
+    <symlink target="${repo.root}/modules/features" link="${docroot}/profiles/govcms/modules/features" />
+    <symlink target="${repo.root}/themes/govcms" link="${docroot}/profiles/govcms/themes/govcms" />
 
     <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
     <copy file="${repo.root}/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
