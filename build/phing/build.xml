@@ -89,9 +89,9 @@
     </exec>
 
     <!-- copy govCMS specific files across -->
-    <copy file="${repo.root}/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
-    <copy file="${repo.root}/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
-    <copy file="${repo.root}/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/build/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
   </target>
 
   <target name="lint" description="Runs a php lint against the codebase." >
