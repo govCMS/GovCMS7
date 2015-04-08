@@ -232,5 +232,4 @@
                haltonerror="true"
                returnProperty="behatPass"/>
     </target>
-    >>>>>>> Further updates
 </project>
