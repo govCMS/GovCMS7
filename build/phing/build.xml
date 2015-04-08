@@ -61,20 +61,47 @@
     <property file="${project.basedir}/build.properties" override="true"/>
 
     <!--               -->
-    <!-- Basic targets -->
+    <!-- Filesets      -->
+    <!-- ============= -->
+    <!-- @TODO uncomment these inclusions when errors have been fixed. -->
+    <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
+        <!--    <include name="profiles/agov/modules/custom/**" />-->
+        <!--    <include name="profiles/agov/modules/features/**" />-->
+        <include name="sites/all/modules/**"/>
+    </fileset>
+
+    <!--               -->
+    <!-- Targets       -->
     <!-- ============= -->
 
     <target name="build"
-            description="Build the project."
-            depends="clean, make, lint, phpcs, phpmd, install"/>
+            description="Build the project and install govCMS."
+            depends="clean, make, install"/>
 
     <target name="build:no-clean"
             description="Build the project without removing uncommitted changes."
-            depends="make, lint, phpcs, phpmd, install"/>
+            depends="make, install"/>
 
-    <target name="build:no-syntax"
-            description="Build the project without running lint and sniff tests."
-            depends="clean, make, install"/>
+    <target name="build:with-validation"
+            description="Build the project, install, then run code validation."
+            depends="clean, make, install, validate:all"/>
+
+    <target name="build:with-tests"
+            description="Build the project, install, then run tests."
+            depends="clean, make, install, test:all"/>
+
+    <target name="build:full"
+            description="Build the project, install govCMS, run validation and tests."
+            depends="clean, make, install, run-tests"/>
+
+    <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
+            depends="validate:all, test:all"/>
+
+    <target name="validate:all" description="Runs code validation on govCMS."
+            depends="validate:lint, validate:phpcs, validate:phpmd"/>
+
+    <target name="test:all" description="Runs all tests against govCMS."
+            depends="test:security-updates, test:behat"/>
 
     <target name="clean"
             description="Cleanup build artifacts">
@@ -98,11 +125,7 @@
         </if>
     </target>
 
-    <!--                -->
-    <!-- Custom targets -->
-    <!-- ============== -->
-
-    <!-- Drush make the build -->
+    <!-- Drush make govCMS -->
     <target name="make"
             description="Run drush make">
 
@@ -119,7 +142,7 @@
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
     <!-- previousnext/agov#382 and previousnext/agov#385 -->
-    <target name="lint" description="Runs a php lint against the codebase.">
+    <target name="validate:lint" description="Runs a php lint against the codebase.">
         <phplint>
             <fileset dir="${docroot}">
                 <include name="**/*.inc"/>
@@ -137,14 +160,7 @@
         </phplint>
     </target>
 
-    <!-- @TODO uncomment these inclusions when errors have been fixed. -->
-    <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
-        <!--    <include name="profiles/agov/modules/custom/**" />-->
-        <!--    <include name="profiles/agov/modules/features/**" />-->
-        <include name="sites/all/modules/**"/>
-    </fileset>
-
-    <target name="phpcs"
+    <target name="validate:phpcs"
             description="Sniffs custom code to ensure it meets standards.">
 
         <phpcodesniffer
@@ -159,22 +175,15 @@
     </target>
 
     <!-- Run code complexity and cleanliness checks on custom code. -->
-    <target name="phpmd" description="Checks custom code for complexity.">
+    <target name="validate:phpmd" description="Checks custom code for complexity.">
         <phpmd rulesets="codesize,unusedcode,cleancode">
             <fileset refid="custom.files"/>
             <formatter type="text" outfile="false" usefile="false"/>
         </phpmd>
     </target>
 
-    <target name="install"
-            description="Installs govCMS."
-            depends="site-install"/>
-
-    <target name="run-tests" description="Runs tests on an installed codebase."
-            depends="install, security-check, behat"/>
-
     <!-- Install govCMS. -->
-    <target name="site-install"
+    <target name="install"
             description="Installs Drupal using the govCMS profile">
 
         <drush command="site-install" assume="yes" verbose="TRUE">
@@ -186,12 +195,12 @@
             <param>"${drupal.profile}"</param>
         </drush>
 
-        <!-- Run Acquia Cloud Site Factory specific post install tasks -->
+        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
         <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
     </target>
 
     <!-- Ensure govCMS doesn't have any modules requiring security updates. -->
-    <target name="security-check"
+    <target name="test:security-updates"
             description="Checks an installed site for security updates on modules">
         <exec dir="${docroot}"
               command="! ${drush.bin} -n ups --check-disabled --security-only 2>/dev/null | grep 'SECURITY UPDATE'"
@@ -200,7 +209,7 @@
               passthru="true"/>
     </target>
 
-    <target name="behat" description="Behat testing for govCMS">
+    <target name="test:behat" description="Behat testing for govCMS">
         <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
         <if>
             <not>
