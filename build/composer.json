@@ -8,7 +8,7 @@
       }
   ],
   "require": {
-    "drush/drush":           "6.*",
+    "drush/drush":           "7.*",
     "phing/phing":           "2.8.2"
   },
   "require-dev": {
@@ -23,6 +23,7 @@
     "drupal/coder":              "dev-7.x-2.x"
   },
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
     "bin-dir": "bin"
   }

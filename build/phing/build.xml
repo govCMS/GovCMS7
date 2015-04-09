@@ -42,7 +42,7 @@
   <property name="drush.cmd"           value="${drush.bin} -r ${docroot}" override="true" />
 
   <!-- The following allows local overrides. -->
-  <property file="${project.basedir}/build.properties" override="true" />
+  <property file="${phing.dir}/build.properties" override="true" />
 
   <!--               -->
   <!-- Basic targets -->
@@ -79,12 +79,52 @@
   <!-- Drush make the build -->
   <target name="make"
           description="Run drush make">
+    <if>
+      <isset property="make.development" />
+      <then>
+        <phingcall target="make_development" />
+      </then>
+      <else>
+        <phingcall target="make_production" />
+      </else>
+    </if>
+  </target>
 
+  <!-- Use the normal drush make process -->
+  <target name="make_production">
     <exec dir="${repo.root}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
       <arg value="make"/>
       <arg value="-y"/>
       <arg value="--concurrency=8"/>
       <arg value="${drupal.makefile}" />
+      <arg value="${docroot}" />
+    </exec>
+
+    <!-- Run Acquia specific build tasks -->
+    <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+  </target>
+
+  <!-- Use the local make files rather than checking out from the repository -->
+  <target name="make_development"
+          description="Run drush make in a development context">
+
+    <exec dir="${repo.root}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+      <arg value="make"/>
+      <arg value="-y"/>
+      <arg value="--no-recursion"/>
+      <arg value="--concurrency=8"/>
+      <arg value="${drupal.makefile}" />
+      <arg value="${docroot}" />
+    </exec>
+
+    <exec dir="${repo.root}" executable="${composer.bin}/drush" logoutput="true" checkreturn="true" passthru="true" taskname="drush">
+      <arg value="make"/>
+      <arg value="-y"/>
+      <arg value="--no-recursion" />
+      <arg value="--no-core" />
+      <arg value="--concurrency=8"/>
+      <arg value="--contrib-destination=profiles/govcms" />
+      <arg value="drupal-org.make" />
       <arg value="${docroot}" />
     </exec>
 

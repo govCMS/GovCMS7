@@ -70,7 +70,7 @@ export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "ht
 ### Phing
 
 - **build.xml** - Contains project specific configuration and tasks that can be executed across this projects team.
-- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will only assign the url of the current environment.
+- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will assign the url of the current environment. 
 
 The variables that Phing uses are configured at the top of build.xml. If there are alterations to these parameters to allow Phing to run locally, these may be placed in the *build.properties* file. This file is ignored from git so local modifications will not be committed. To alter the base URL for the Drupal site the following may be added to *build.properties*.
 
@@ -79,6 +79,13 @@ The variables that Phing uses are configured at the top of build.xml. If there a
 
 ; The uri of the site.
 drupal.base_url='http://govcms.local/'
+```
+
+If you are developing the make file, you can set the make.development variable to 'true'. This prevents the make process from downloading the git repository.
+ 
+```
+; Set the build process to development mode
+make.development = true
 ```
 
 ## Testing govCMS
