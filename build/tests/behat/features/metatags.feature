@@ -6,7 +6,7 @@ Feature:Meta tags
 
   @api
   Scenario: Meta-tags are auto set
-    Given I am logged in as a user named "editor" with the "Content editor" role that doesn't force password change
+    Given I am logged in as a user named "peter" with the "Content editor" role that doesn't force password change
     When I go to "/node/add/page"
     Then the response status code should be 200
     And I enter "test" for "Title"
@@ -21,7 +21,7 @@ Feature:Meta tags
 
   @api
   Scenario: Meta-tags can be edited
-    Given I am logged in as a user named "second.editor" with the "Content editor" role that doesn't force password change
+    Given I am logged in as a user named "paul" with the "Content editor" role that doesn't force password change
     When I go to "/node/add/page"
     Then the response status code should be 200
     And I enter "test" for "Title"
