@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the govCMS tweaks module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function govcms_tweaks_install() {
+  variable_set('acsf_local_user_accounts', TRUE);
+  acsf_openid_allow_local_user_logins();
+  // Sets the mode to CLAMAV_USE_EXECUTABLE as recommended on
+  // https://docs.acquia.com/cloud/configure/antivirus
+  variable_set('clamav_mode', 1);
+}
+
+/**
+ * Implements hook_update().
+ */
+function govcms_tweaks_update_7001() {
+  module_enable(array('clamav'));
+  // Sets the mode to CLAMAV_USE_EXECUTABLE as recommended on
+  // https://docs.acquia.com/cloud/configure/antivirus
+  variable_set('clamav_mode', 1);
+}
