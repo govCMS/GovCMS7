@@ -1,10 +1,9 @@
 <project name="acsf_post_install" default="build" phingVersion="2.8.2">
-    <target name="acsf" description="Runs ACSF specific steps">
-        <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush" >
-            <arg value="-y" />
-            <arg value="--nocolor" />
-            <arg value="--include=${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init" />
-            <arg value="acsf-init" />
-        </exec>
-    </target>
+    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true"
+          passthru="true" checkreturn="true" taskname="drush">
+        <arg value="-y"/>
+        <arg value="--nocolor"/>
+        <arg value="--include=${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init"/>
+        <arg value="acsf-init"/>
+    </exec>
 </project>
