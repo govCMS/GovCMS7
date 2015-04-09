@@ -52,6 +52,10 @@ vendor
 behat.local.yml
 .php-version
 
+# Generated files #
+###################
+hooks
+
 # Local dev tools #
 ###################
 .vagrant
