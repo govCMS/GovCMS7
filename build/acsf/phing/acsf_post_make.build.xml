@@ -1,0 +1,6 @@
+<project name="acsf_post_make" default="build" phingVersion="2.8.2">
+    <!-- copy govCMS specific files across -->
+    <copy file="${repo.root}/build/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+</project>

@@ -88,10 +88,8 @@
       <arg value="${docroot}" />
     </exec>
 
-    <!-- copy govCMS specific files across -->
-    <copy file="${repo.root}/build/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
-    <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/"  />
-    <copy file="${repo.root}/build/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/"  />
+    <!-- Run Acquia specific build tasks -->
+    <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
   </target>
 
   <target name="lint" description="Runs a php lint against the codebase." >
@@ -111,19 +109,8 @@
     </exec>
   </target>
 
-  <target name="install" description="Installs govCMS and any ACSF dependencies." depends="acsf, site-install" />
+  <target name="install" description="Installs govCMS and any ACSF dependencies." depends="site-install" />
   <target name="run-tests" description="Runs tests on an installed codebase." depends="install, behat" />
-
-    <!-- Run the acsf-init command to set the docroot up as Site Factory -->
-    <!-- would be. -->
-  <target name="acsf" description="Runs ACSF specific steps">
-    <exec dir="${docroot}" executable="${composer.bin}/drush" logoutput="true" passthru="true" checkreturn="true" taskname="drush" >
-      <arg value="-y" />
-      <arg value="--nocolor" />
-      <arg value="--include=${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init" />
-      <arg value="acsf-init" />
-    </exec>
-  </target>
 
     <!-- Install Drupal with the govcms profile (govCMS implements overrides) -->
   <target name="site-install"
@@ -141,6 +128,9 @@
       <arg value="--account-mail=${account.mail}"/>
       <arg value="${drupal.profile}"/>
     </exec>
+
+    <!-- Run post installation acsf scripts -->
+    <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
   </target>
 
   <target name="behat" description="Behat testing for govCMS" >
