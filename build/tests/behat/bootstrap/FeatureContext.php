@@ -55,6 +55,13 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
+   * @Then /^I logout$/
+   */
+  public function assertLogout() {
+    $this->logout();
+  }
+
+  /**
    * @Given /^a user named "(?P<username>[^"]*)" with role "(?P<role>[^"]*)" exists$/
    */
   public function assertAccountCreated($username, $role) {
@@ -136,7 +143,6 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     $account = user_load_by_name($username);
     return new Given('I visit "/user/' + $account->uid + '/cancel"', function () {
     });
-    //return new Given('I should see "is protected from cancellation, and was not cancelled."');
   }
 
   /**
@@ -168,11 +174,6 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     } else {
       throw new \InvalidArgumentException(sprintf('No such username %s', $username));
     }
-  }
-
-  // An example callback function
-  function my_callback_function() {
-    echo '';
   }
 
 }

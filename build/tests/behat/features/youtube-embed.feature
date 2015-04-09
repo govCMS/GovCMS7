@@ -4,7 +4,7 @@ Feature: Embed YouTube videos in content
 
   @api
   Scenario: Embed YouTube video
-    Given I am logged in as a user with the "Content editor" role
+    Given I am logged in as a user named "bob" with the "Content editor" role that doesn't force password change
     And I go to "node/add/page"
     And I enter "Test" for "Title"
     And I enter "[video:https://www.youtube.com/watch?v=ktCgVopf7D0]" for "Body"
