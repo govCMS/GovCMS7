@@ -105,9 +105,9 @@
 
     <target name="clean"
             description="Cleanup build artifacts">
-        <!--exec command="git reset - -hard"
+        <exec command="git reset --hard"
               logoutput="true"
-              passthru="true" /-->
+              passthru="true" />
         <exec command="git clean -fd"
               logoutput="true"
               passthru="true"/>
@@ -140,6 +140,55 @@
                 optional="true"/>
     </target>
 
+    <!-- Drush make the build -->
+    <target name="make"
+            description="Run drush make">
+        <if>
+            <isset property="make.development" />
+            <then>
+                <phingcall target="make_development" />
+            </then>
+            <else>
+                <phingcall target="make_production" />
+            </else>
+        </if>
+    </target>
+
+    <!-- Use the normal drush make process -->
+    <target name="make_production">
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <!-- Run Acquia specific build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+    </target>
+
+    <!-- Use the local make files rather than checking out from the repository -->
+    <target name="make_development"
+            description="Run drush make in a development context">
+
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <option name="--no-recursion" />
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <option name="--no-recursion" />
+            <option name="--no-core" />
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <!-- Run Acquia specific build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+    </target>
+
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
     <!-- previousnext/agov#382 and previousnext/agov#385 -->
     <target name="validate:lint" description="Runs a php lint against the codebase.">
@@ -152,10 +201,8 @@
                 <include name="**/*.profile"/>
                 <include name="**/*.test"/>
                 <include name="**/*.theme"/>
-                <exclude
-                        name="profiles/agov/modules/contrib/uuid/uuid.api.php"/>
-                <exclude
-                        name="profiles/agov/modules/contrib/webform_clear/webform_clear.test"/>
+                <exclude name="profiles/govcms/modules/contrib/uuid/uuid.api.php"/>
+                <exclude name="profiles/govcms/modules/contrib/webform_clear/webform_clear.test"/>
             </fileset>
         </phplint>
     </target>

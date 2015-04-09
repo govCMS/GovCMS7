@@ -5,6 +5,10 @@
         {
             "name": "Adam Malone",
             "email": "adam@adammalone.net"
+        },
+        {
+            "name": "James Gollan",
+            "email": "james@swamphen.com"
         }
     ],
     "require-dev": {
