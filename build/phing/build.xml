@@ -83,7 +83,7 @@
 
     <target name="build:no-clean"
             description="Build the project without removing uncommitted changes."
-            depends="make, install"/>
+            depends="make:development, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
@@ -135,19 +135,7 @@
     <!-- Drush make the build -->
     <target name="make"
             description="Run drush make">
-        <if>
-            <isset property="make.development" />
-            <then>
-                <phingcall target="make_development" />
-            </then>
-            <else>
-                <phingcall target="make_production" />
-            </else>
-        </if>
-    </target>
 
-    <!-- Use the normal drush make process -->
-    <target name="make_production">
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
             <param>"${drupal.makefile}"</param>
@@ -159,7 +147,7 @@
     </target>
 
     <!-- Use the local make files rather than checking out from the repository -->
-    <target name="make_development"
+    <target name="make:development"
             description="Run drush make in a development context">
 
         <drush command="make" assume="yes" verbose="TRUE">

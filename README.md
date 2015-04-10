@@ -81,11 +81,12 @@ The variables that Phing uses are configured at the top of build.xml. If there a
 drupal.base_url='http://govcms.local/'
 ```
 
-If you are developing the make file, you can set the make.development variable to 'true'. This prevents the make process from downloading the git repository.
+If you are making changes to the make file, you can tell the build process to build from your local make file, instead of the one in the profile repository.
+ 
+From the build/phing folder:
  
 ```
-; Set the build process to development mode
-make.development = true
+../bin/phing build:no-clean
 ```
 
 ## Testing govCMS
