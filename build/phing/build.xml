@@ -65,8 +65,8 @@
     <!-- ============= -->
     <!-- @TODO uncomment these inclusions when errors have been fixed. -->
     <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
-        <!--    <include name="profiles/agov/modules/custom/**" />-->
-        <!--    <include name="profiles/agov/modules/features/**" />-->
+        <!--    <include name="profiles/govcms/modules/custom/**" />-->
+        <!--    <include name="profiles/govcms/modules/features/**" />-->
         <include name="sites/all/modules/**"/>
     </fileset>
 
