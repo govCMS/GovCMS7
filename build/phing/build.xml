@@ -28,6 +28,9 @@
     <property name="drupal.makefile"
               value="${repo.root}/build-${phing.project.name}.make"
               override="true"/>
+    <property name="drupal.contrib_makefile"
+              value="${repo.root}/drupal-org.make"
+              override="true"/>
     <property name="drupal.base_url" value="http://localhost/"/>
 
     <!-- Credentials -->
@@ -94,6 +97,10 @@
             description="Build the project, install govCMS, run validation and tests."
             depends="clean, make, install, run-tests"/>
 
+    <target name="build:full:no-clean"
+            description="Build the project without removing uncommitted changes, install govCMS, run validation and tests."
+            depends="make, install, run-tests"/>
+
     <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
             depends="validate:all, test:all"/>
 
@@ -123,21 +130,6 @@
                 <delete dir="${docroot}"/>
             </then>
         </if>
-    </target>
-
-    <!-- Drush make govCMS -->
-    <target name="make"
-            description="Run drush make">
-
-        <drush command="make" assume="yes" verbose="TRUE">
-            <option name="concurrency">8</option>
-            <param>"${drupal.makefile}"</param>
-            <param>"${docroot}"</param>
-        </drush>
-
-        <!-- Run Acquia Cloud Site Factory specific post make tasks -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml"
-                optional="true"/>
     </target>
 
     <!-- Drush make the build -->
@@ -172,16 +164,17 @@
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
-            <option name="--no-recursion" />
+            <option name="no-recursion" />
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
-            <option name="--no-recursion" />
-            <option name="--no-core" />
-            <param>"${drupal.makefile}"</param>
+            <option name="no-recursion" />
+            <option name="no-core" />
+            <option name="contrib-destination">profiles/${drupal.profile}</option>
+            <param>"${drupal.contrib_makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
 
