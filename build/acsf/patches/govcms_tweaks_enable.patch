@@ -1,0 +1,10 @@
+--- docroot/profiles/govcms/govcms.info	2015-04-11 16:59:40.000000000 +1000
++++ docroot/profiles/govcms/govcms.info	2015-04-11 16:59:14.000000000 +1000
+@@ -164,6 +164,7 @@
+ dependencies[] = govcms_sitemap
+ dependencies[] = govcms_social_links
+ dependencies[] = govcms_share_links
++dependencies[] = govcms_tweaks
+ 
+ ; Content types
+ 
