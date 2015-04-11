@@ -79,7 +79,7 @@
 
     <target name="build"
             description="Build the project and install govCMS."
-            depends="clean, make, install"/>
+            depends="git-reset, make, install"/>
 
     <target name="build:no-clean"
             description="Build the project without removing uncommitted changes."
@@ -87,15 +87,15 @@
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
-            depends="clean, make, install, validate:all"/>
+            depends="git-reset, make, install, validate:all"/>
 
     <target name="build:with-tests"
             description="Build the project, install, then run tests."
-            depends="clean, make, install, test:all"/>
+            depends="git-reset, make, install, test:all"/>
 
     <target name="build:full"
             description="Build the project, install govCMS, run validation and tests."
-            depends="clean, make, install, run-tests"/>
+            depends="git-reset, make, install, run-tests"/>
 
     <target name="build:full:no-clean"
             description="Build the project without removing uncommitted changes, install govCMS, run validation and tests."
@@ -110,11 +110,15 @@
     <target name="test:all" description="Runs all tests against govCMS."
             depends="test:security-updates, test:behat"/>
 
-    <target name="clean"
+    <target name="git-reset"
             description="Cleanup build artifacts">
         <exec command="git reset --hard"
               logoutput="true"
               passthru="true" />
+    </target>
+
+    <target name="rm-docroot"
+            description="Remove the docroot folder">
         <exec command="git clean -fd"
               logoutput="true"
               passthru="true"/>
@@ -134,7 +138,8 @@
 
     <!-- Drush make the build -->
     <target name="make"
-            description="Run drush make">
+            description="Run drush make"
+            depends="rm-docroot">
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -148,7 +153,8 @@
 
     <!-- Use the local make files rather than checking out from the repository -->
     <target name="make:development"
-            description="Run drush make in a development context">
+            description="Run drush make in a development context"
+            depends="rm-docroot">
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
