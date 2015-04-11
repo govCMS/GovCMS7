@@ -78,7 +78,7 @@
     <!-- ============= -->
 
     <target name="build"
-            description="Build the project and install govCMS from GitHub."
+            description="Build the project and install govCMS from the remote repo."
             depends="clean, make, install"/>
 
     <target name="build:no-clean"
