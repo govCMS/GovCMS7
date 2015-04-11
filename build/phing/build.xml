@@ -78,11 +78,11 @@
     <!-- ============= -->
 
     <target name="build"
-            description="Build the project and install govCMS."
+            description="Build the project and install govCMS from GitHub."
             depends="clean, make, install"/>
 
     <target name="build:no-clean"
-            description="Build the project without removing uncommitted changes."
+            description="Build the project and install govCMS, observing local development changes."
             depends="make:development, install"/>
 
     <target name="build:with-validation"
@@ -98,8 +98,8 @@
             depends="clean, make, install, run-tests"/>
 
     <target name="build:full:no-clean"
-            description="Build the project without removing uncommitted changes, install govCMS, run validation and tests."
-            depends="make, install, run-tests"/>
+            description="Build the project without removing local changes, install govCMS, run validation and tests."
+            depends="make:development, install, run-tests"/>
 
     <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
             depends="validate:all, test:all"/>
