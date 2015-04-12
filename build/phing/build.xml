@@ -81,7 +81,7 @@
             description="Build the project and install govCMS."
             depends="git-reset, make, install"/>
 
-    <target name="build:no-clean"
+    <target name="build:local"
             description="Build the project without removing uncommitted changes."
             depends="make:development, install"/>
 
