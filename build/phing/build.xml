@@ -98,14 +98,14 @@
             depends="git-reset, make, install, run-tests"/>
 
     <target name="build:full:no-clean"
-            description="Build the project without removing uncommitted changes, install govCMS, run validation and tests."
-            depends="make, install, run-tests"/>
+            description="Build the project without removing local changes, install govCMS, run validation and tests."
+            depends="make:development, install, run-tests"/>
 
     <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
             depends="validate:all, test:all"/>
 
     <target name="validate:all" description="Runs code validation on govCMS."
-            depends="validate:lint, validate:phpcs, validate:phpmd"/>
+            depends="validate:lint, validate:phpcs, validate:phpmd, validate:makefile"/>
 
     <target name="test:all" description="Runs all tests against govCMS."
             depends="test:security-updates, test:behat"/>
@@ -214,6 +214,26 @@
             <fileset refid="custom.files"/>
             <formatter type="text" outfile="false" usefile="false"/>
         </phpmd>
+    </target>
+
+    <!-- Ensure the Drush make files will compile on Drupal.org. -->
+    <target name="validate:makefile"
+            description="Ensures Drush make will run."
+            depends="prepare:drupalorg-drush">
+
+        <!-- @TODO implement this upon deployment to d.o -->
+        <!-- <drush command="verify-makefile" assume="yes" verbose="TRUE">
+            <param>"${drupal.makefile}"</param>
+        </drush> -->
+    </target>
+
+    <target name="prepare:drupalorg-drush">
+        <drush command="pm-download" assume="yes" verbose="TRUE">
+            <option name="destination">"${user.home}/.drush"</option>
+            <option name="default-major">"7"</option>
+            <option name="dev" />
+            <param>"drupalorg_drush"</param>
+        </drush>
     </target>
 
     <!-- Install govCMS. -->

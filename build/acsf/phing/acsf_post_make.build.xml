@@ -4,10 +4,21 @@
     <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/" />
     <copy file="${repo.root}/build/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/" />
 
-    <!-- Copy govCMS specific modules across. -->
-    <copy todir="${docroot}/sites/all/modules/custom" overwrite="true">
-        <fileset dir="${repo.root}/build/acsf">
-            <include name="govcms_tweaks" />
-        </fileset>
-    </copy>
+    <!-- Sync govCMS specific modules across. -->
+    <filesync
+        sourcedir="${repo.root}/build/acsf/govcms_tweaks"
+        destinationdir="${docroot}/sites/all/modules/custom"
+        itemizechanges="true"
+        verbose="true"
+        checksum="true" />
+
+    <!-- Patch Drupal core for ACSF with patches unsuitable for non-govCMS core. -->
+    <patch patchfile="${repo.root}/build/acsf/patches/govcms_force_ssl.patch"
+           dir="${docroot}"
+           strip="1"
+           haltonfailure="true" />
+    <patch patchfile="${repo.root}/build/acsf/patches/govcms_tweaks_enable.patch"
+           dir="${docroot}"
+           strip="1"
+           haltonfailure="true" />
 </project>
