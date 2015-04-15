@@ -16,22 +16,41 @@
     <!-- ============= -->
 
     <!-- Application -->
-    <property name="repo.root" value="${project.basedir}/../.."/>
-    <property name="docroot" value="${repo.root}/docroot" override="true"/>
-    <property name="src.custom.modules" value="${repo.root}/modules"
+    <property name="repo.root"
+              value="${project.basedir}/../.."/>
+    <property name="docroot"
+              value="${repo.root}/docroot"
               override="true"/>
-    <property name="src.custom.themes" value="${repo.root}themes"
+    <property name="drupal.profile"
+              value="govcms"
               override="true"/>
-    <property name="site.name" value="govCMS"/>
-    <property name="site.mail" value="root@[127.0.0.1]"/>
-    <property name="drupal.profile" value="govcms" override="true"/>
+    <property name="profile.root"
+              value="${docroot}/profiles/${drupal.profile}"/>
+
+    <property name="site.name"
+              value="govCMS"/>
+    <property name="site.mail"
+              value="root@[127.0.0.1]"/>
     <property name="drupal.makefile"
               value="${repo.root}/build-${phing.project.name}.make"
               override="true"/>
     <property name="drupal.contrib_makefile"
               value="${repo.root}/drupal-org.make"
               override="true"/>
-    <property name="drupal.base_url" value="http://localhost/"/>
+    <property name="drupal.base_url"
+              value="http://localhost/"/>
+
+    <property name="src.custom.modules"
+              value="${repo.root}/modules"
+              override="true"/>
+    <property name="src.custom.themes"
+              value="${repo.root}themes"
+              override="true"/>
+    <property name="dest.modules"
+              value="${docroot}/profiles/${drupal.profile}/modules"/>
+    <property name="dest.themes"
+              value="${docroot}/profiles/${drupal.profile}/themes"/>
+
 
     <!-- Credentials -->
     <property name="db.username" value="root"/>
@@ -73,6 +92,23 @@
         <include name="sites/all/modules/**"/>
     </fileset>
 
+    <fileset dir="${repo.root}/modules" id="govcms.modules">
+        <include name="custom/**"/>
+        <include name="features/**"/>
+    </fileset>
+
+    <fileset dir="${repo.root}" id="govcms.profile">
+        <include name="govcms.*"/>
+        <include name="js/**"/>
+        <include name="images/**"/>
+        <include name="css"/>
+    </fileset>
+
+    <fileset dir="${repo.root}/themes" id="govcms.themes">
+        <include name="**"/>
+    </fileset>
+
+
     <!--               -->
     <!-- Targets       -->
     <!-- ============= -->
@@ -83,7 +119,7 @@
 
     <target name="build:local"
             description="Build the project without removing uncommitted changes."
-            depends="make:development, install"/>
+            depends="make:development, copy:legacy-files, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
@@ -175,6 +211,34 @@
         <!-- Run Acquia specific build tasks -->
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
     </target>
+
+    <target name="copy:legacy-files">
+
+        <delete>
+            <fileset dir="${profile.root}">
+                <include name="govcms.*"/>
+                <include name="js/**"/>
+                <include name="images/**"/>
+                <include name="css"/>
+            </fileset>
+        </delete>
+        <copy todir="${profile.root}">
+            <fileset refid="govcms.profile"/>
+        </copy>
+
+        <delete dir="${dest.modules}/custom"/>
+        <delete dir="${dest.modules}/features"/>
+        <copy todir="${dest.modules}">
+            <fileset refid="govcms.modules"/>
+        </copy>
+
+
+        <delete dir="${dest.themes}/govcms"/>
+        <copy todir="${dest.themes}">
+            <fileset refid="govcms.themes"/>
+        </copy>
+    </target>
+
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
     <!-- previousnext/agov#382 and previousnext/agov#385 -->
