@@ -44,10 +44,7 @@ function govcms_zen_preprocess_maintenance_page(&$variables) {
 
   $t_function = get_t();
 
-  $variables['footer'] = '<div id="footer">' . t('!govCMS is developed by !PreviousNext', array(
-    '!govCMS' => l(t('govCMS'), 'http://govcms.com.au'),
-    '!PreviousNext' => l(t('PreviousNext'), 'http://previousnext.com.au'),
-  )) . '</div>';
+  $variables['footer'] = '';
 
   if (drupal_installation_attempted()) {
     $variables['logo'] = base_path() . drupal_get_path('theme', 'govcms_zen') . '/logo-alt.png';
