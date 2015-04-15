@@ -176,18 +176,4 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     }
   }
 
-  /**
-   * @Given /^I access the reset password link for "([^"]*)"$/
-   */
-  public function iAccessTheResetPasswordLinkFor($username) {
-    $account = user_load_by_name($username);
-    $url = user_pass_reset_url($account);
-    if (!empty($url)) {
-      $url = strstr($url, "/user");
-      $this->getSession()->visit($this->locatePath($url));
-    } else {
-      throw new \Exception('No such user');
-    }
-  }
-
 }
