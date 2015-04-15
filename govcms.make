@@ -10,44 +10,18 @@ core = 7.x
 api = 2
 
 ; Drupal core.
-projects[drupal][version] = 7.35
+projects[drupal][version] = 7.36
 projects[drupal][patch][] = https://www.drupal.org/files/issues/drupal-7.x-allow_profile_change_sys_req-1772316-28.patch
 projects[drupal][patch][] = https://www.drupal.org/files/issues/drupal-1470656-26.patch
+projects[drupal][patch][] = https://www.drupal.org/files/issues/core-111702-99-use_replyto.patch
 projects[drupal][patch][] = patches/govcms_force_ssl_v1.patch
 
 ; aGov profile.
 projects[agov][version] = 2.0-alpha5
 projects[agov][patch][] = patches/govcms_agov_govcms_tweak_enable_v1.patch
 
-; Context Security patch
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/b20a0f17a9a90365479bd73b5a78288a76e5b726.patch
-
-; Ctools Security patch
-projects[agov][patch][] = patches/agov-ctools1.7.patch
-
-; Linkit Security patch
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch
-
-; Avoid mix mode for video URLs
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/dd2d245d70c78db4fe3d778a4a79ae4add9f6e34.patch
-
-; Google Analytics Security Patch
-projects[agov][patch][] = patches/google_analytics_version-2.1.patch
-
-; Update entity api to 7.x-1.6
-projects[agov][patch][] = patches/agov-entity1.6.patch
-
-; Views security update
-projects[agov][patch][] = https://github.com/previousnext/agov/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch
-
-; Webform Security patch
-projects[agov][patch][] = patches/agov-webform1.5.patch
-
-; Crumbs security patch
-projects[agov][patch][] = patches/agov-crumbs2.3.patch
-
-; Password policy security patch
-projects[agov][patch][] = patches/agov-password-policy1.11.patch
+; Combined security updates
+projects[agov][patch][] = patches/govcms_combined_security.patch
 
 ; Contrib modules.
 projects[acsf][version] = 1.4
