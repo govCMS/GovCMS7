@@ -27,7 +27,7 @@ define('GOVCMS_DEFAULT_ADMIN_THEME', 'shiny');
 /**
  * Set the twitter widget ID.
  */
-define('GOVCMS_TWITTER_WIDGET_ID', '360632154172030979');
+define('GOVCMS_TWITTER_WIDGET_ID', '588361881569529857');
 
 /**
  * Define the role to be used as the admin role.
