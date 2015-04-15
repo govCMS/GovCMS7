@@ -188,8 +188,6 @@
                 <include name="**/*.profile"/>
                 <include name="**/*.test"/>
                 <include name="**/*.theme"/>
-                <exclude name="profiles/govcms/modules/contrib/uuid/uuid.api.php"/>
-                <exclude name="profiles/govcms/modules/contrib/webform_clear/webform_clear.test"/>
             </fileset>
         </phplint>
     </target>

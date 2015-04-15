@@ -114,9 +114,10 @@ projects[token][version] = "1.5"
 projects[twitter_block][version] = "2.1"
 projects[username_enumeration_prevention][version] = "1.0"
 projects[userprotect][version] = "1.1"
-projects[uuid][version] = "1.0-alpha4"
+projects[uuid][version] = "1.0-alpha6"
 projects[video_filter][patch][] = "https://www.drupal.org/files/issues/video_filter-fix_modal-2335169-11.patch"
 projects[video_filter][patch][] = "https://www.drupal.org/files/video_filter-autoplay-ckeditor-1430680-8.patch"
+projects[video_filter][patch][] = https://www.drupal.org/files/issues/2438439-video-filter-protocol-fix.patch
 projects[video_filter][version] = "3.1"
 projects[views][version] = "3.10"
 projects[views_bulk_operations][version] = "3.1"
@@ -127,6 +128,7 @@ projects[view_unpublished][download][url] = "http://git.drupal.org/project/view_
 projects[view_unpublished][type] = "module"
 projects[webform][version] = "4.7"
 projects[webform_clear][version] = "2.0"
+projects[webform_clear][patch][] = "https://www.drupal.org/files/issues/webform_clear-2250027-testfix-2.patch"
 projects[webform_phone][version] = "1.19"
 projects[workbench][version] = "1.2"
 projects[workbench_moderation][version] = "1.4"
@@ -171,28 +173,3 @@ libraries[modernizr][download][type] = "get"
 libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
 libraries[modernizr][type] = "library"
 
-; Patches
-
-; Context Security patch
-;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/b20a0f17a9a90365479bd73b5a78288a76e5b726.patch"
-
-; Ctools Security patch
-;projects[govcms][patch][] = "patches/govcms-ctools1.7.patch"
-
-; Linkit Security patch
-;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/d5e970513dc92c1d8a671599970effda34008ba0.patch"
-
-; Avoid mix mode for video URLs
-;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/dd2d245d70c78db4fe3d778a4a79ae4add9f6e34.patch"
-
-; Google Analytics Security Patch
-;projects[govcms][patch][] = "patches/google_analytics_version-2.1.patch"
-
-; Update entity api to 7.x-1.6
-;projects[govcms][patch][] = "patches/govcms-entity1.6.patch"
-
-; Views security update
-;projects[govcms][patch][] = "https://github.com/previousnext/govcms/commit/cfb38c35f98fcaf0505d98046f79faf6962ae738.patch"
-
-; Webform Security patch
-;projects[govcms][patch][] = "patches/govcms-webform1.5.patch"
