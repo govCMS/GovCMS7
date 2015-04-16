@@ -44,8 +44,6 @@ function govcms_zen_preprocess_maintenance_page(&$variables) {
 
   $t_function = get_t();
 
-  $variables['footer'] = '';
-
   if (drupal_installation_attempted()) {
     $variables['logo'] = base_path() . drupal_get_path('theme', 'govcms_zen') . '/logo-alt.png';
     // Override the site name, which will be "Drupal".
