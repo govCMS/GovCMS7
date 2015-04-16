@@ -1,3 +1,19 @@
+1.2.0-alpha5-7
+==============
+
+- Merge pull request #49 from seanhamlin/master
+
+- Squash all security updates into 1 patch, also update Drupal Core to 7.36 and DS to 2.8.
+
+- Merge pull request #47 from typhonius/contributing-guidelines
+
+- Merge pull request #48 from typhonius/security/password-policy-crumbs
+
+- Changes recommended by @gollyg
+
+- Patches password policy and crumbs security vulnerabilities.
+
+- Adds CONTRUBUTING.md guidelines to the project.
 1.2.0-alpha5-6
 ==============
 
