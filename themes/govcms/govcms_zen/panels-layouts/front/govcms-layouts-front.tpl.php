@@ -1,10 +1,12 @@
 <?php
 /**
  * @file
- * Provides themed representation of the front layout.
- * @copyright Copyright(c) 2012 Previous Next Pty Ltd
+ *
+ * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
+ *
+ * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
- * @author Nick Schuch nick at previousnext dot com dot au
+ * @author Department of Finance
  *
  * Available variables
  * -------------------

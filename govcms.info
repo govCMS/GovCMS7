@@ -139,8 +139,6 @@ dependencies[] = ccl_views
 dependencies[] = options_flatten
 dependencies[] = iconomist
 dependencies[] = text_summary_options
-dependencies[] = wcag_validate
-dependencies[] = wcag_scheduler
 dependencies[] = govcms_disable_defaultcontent
 dependencies[] = user_action_report
 
