@@ -120,7 +120,7 @@
 
     <target name="build:local"
             description="Build the project without removing uncommitted changes."
-            depends="make:development, copy:profile-files, install"/>
+            depends="make:development, overwrite:profile-files, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
@@ -213,7 +213,7 @@
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
     </target>
 
-    <target name="copy:profile-files">
+    <target name="overwrite:profile-files">
 
         <delete>
             <fileset dir="${profile.root}">
