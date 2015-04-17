@@ -1,5 +1,0 @@
-govCMS Basic Page feature changelog
-
-7.x-1.0
-=======
-- Move Pathauto settings into Feature (#8388, by xtfer)

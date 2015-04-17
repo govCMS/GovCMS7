@@ -1,5 +1,0 @@
-govCMS News Article feature changelog
-
-7.x-1.0
-=======
-- Move Context and Pathauto settings into Feature (#8388, by xtfer)
