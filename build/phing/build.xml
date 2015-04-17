@@ -78,24 +78,24 @@
     <!-- ============= -->
 
     <target name="build"
-            description="Build the project and install govCMS from the remote repo."
-            depends="clean, make, install"/>
+            description="Build the project and install govCMS."
+            depends="git-reset, make, install"/>
 
-    <target name="build:no-clean"
-            description="Build the project and install govCMS, observing local development changes."
+    <target name="build:local"
+            description="Build the project without removing uncommitted changes."
             depends="make:development, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
-            depends="clean, make, install, validate:all"/>
+            depends="git-reset, make, install, validate:all"/>
 
     <target name="build:with-tests"
             description="Build the project, install, then run tests."
-            depends="clean, make, install, test:all"/>
+            depends="git-reset, make, install, test:all"/>
 
     <target name="build:full"
             description="Build the project, install govCMS, run validation and tests."
-            depends="clean, make, install, run-tests"/>
+            depends="git-reset, make, install, run-tests"/>
 
     <target name="build:full:no-clean"
             description="Build the project without removing local changes, install govCMS, run validation and tests."
@@ -105,16 +105,20 @@
             depends="validate:all, test:all"/>
 
     <target name="validate:all" description="Runs code validation on govCMS."
-            depends="validate:lint, validate:phpcs, validate:phpmd"/>
+            depends="validate:lint, validate:phpcs, validate:phpmd, validate:makefile"/>
 
     <target name="test:all" description="Runs all tests against govCMS."
             depends="test:security-updates, test:behat"/>
 
-    <target name="clean"
+    <target name="git-reset"
             description="Cleanup build artifacts">
         <exec command="git reset --hard"
               logoutput="true"
               passthru="true" />
+    </target>
+
+    <target name="rm-docroot"
+            description="Remove the docroot folder">
         <exec command="git clean -fd"
               logoutput="true"
               passthru="true"/>
@@ -134,7 +138,8 @@
 
     <!-- Drush make the build -->
     <target name="make"
-            description="Run drush make">
+            description="Run drush make"
+            depends="rm-docroot">
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -148,7 +153,8 @@
 
     <!-- Use the local make files rather than checking out from the repository -->
     <target name="make:development"
-            description="Run drush make in a development context">
+            description="Run drush make in a development context"
+            depends="rm-docroot">
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -182,8 +188,6 @@
                 <include name="**/*.profile"/>
                 <include name="**/*.test"/>
                 <include name="**/*.theme"/>
-                <exclude name="profiles/govcms/modules/contrib/uuid/uuid.api.php"/>
-                <exclude name="profiles/govcms/modules/contrib/webform_clear/webform_clear.test"/>
             </fileset>
         </phplint>
     </target>
@@ -208,6 +212,26 @@
             <fileset refid="custom.files"/>
             <formatter type="text" outfile="false" usefile="false"/>
         </phpmd>
+    </target>
+
+    <!-- Ensure the Drush make files will compile on Drupal.org. -->
+    <target name="validate:makefile"
+            description="Ensures Drush make will run."
+            depends="prepare:drupalorg-drush">
+
+        <!-- @TODO implement this upon deployment to d.o -->
+        <!-- <drush command="verify-makefile" assume="yes" verbose="TRUE">
+            <param>"${drupal.makefile}"</param>
+        </drush> -->
+    </target>
+
+    <target name="prepare:drupalorg-drush">
+        <drush command="pm-download" assume="yes" verbose="TRUE">
+            <option name="destination">"${user.home}/.drush"</option>
+            <option name="default-major">"7"</option>
+            <option name="dev" />
+            <param>"drupalorg_drush"</param>
+        </drush>
     </target>
 
     <!-- Install govCMS. -->
