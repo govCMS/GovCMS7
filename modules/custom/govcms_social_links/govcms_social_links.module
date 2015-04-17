@@ -8,17 +8,17 @@
 /**
  * Define the facebook default.
  */
-define('GOVCMS_SOCIAL_LINKS_FACEBOOK_DEFAULT', 'https://www.facebook.com/abc');
+define('GOVCMS_SOCIAL_LINKS_FACEBOOK_DEFAULT', 'https://www.facebook.com/');
 
 /**
  * Define the twitter default.
  */
-define('GOVCMS_SOCIAL_LINKS_TWITTER_DEFAULT', 'https://twitter.com/ausgovcms');
+define('GOVCMS_SOCIAL_LINKS_TWITTER_DEFAULT', 'https://twitter.com/');
 
 /**
  * Define the youtube default.
  */
-define('GOVCMS_SOCIAL_LINKS_YOUTUBE_DEFAULT', 'https://www.youtube.com/user/AustralianHRC');
+define('GOVCMS_SOCIAL_LINKS_YOUTUBE_DEFAULT', 'https://www.youtube.com/user/');
 
 /**
  * Define the Vimeo default.
@@ -28,7 +28,7 @@ define('GOVCMS_SOCIAL_LINKS_VIMEO_DEFAULT', 'http://www.vimeo.com');
 /**
  * Define the flickr default.
  */
-define('GOVCMS_SOCIAL_LINKS_FLICKR_DEFAULT', 'https://www.flickr.com/photos/nationalgalleryofaustralia');
+define('GOVCMS_SOCIAL_LINKS_FLICKR_DEFAULT', 'https://www.flickr.com/');
 
 /**
  * Define the RSS default.
