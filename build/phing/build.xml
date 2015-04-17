@@ -41,15 +41,15 @@
     <property name="drupal.base_url"
               value="http://localhost/"/>
 
-    <property name="src.custom.modules"
+    <property name="profile.modules.custom.path"
               value="${repo.root}/modules"
               override="true"/>
-    <property name="src.custom.themes"
+    <property name="profile.themes.path"
               value="${repo.root}themes"
               override="true"/>
-    <property name="dest.modules"
+    <property name="docroot.profile.modules.path"
               value="${docroot}/profiles/${drupal.profile}/modules"/>
-    <property name="dest.themes"
+    <property name="docroot.profile.themes.path"
               value="${docroot}/profiles/${drupal.profile}/themes"/>
 
 
@@ -120,7 +120,7 @@
 
     <target name="build:local"
             description="Build the project without removing uncommitted changes."
-            depends="make:development, copy:legacy-files, install"/>
+            depends="make:development, copy:profile-files, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
@@ -213,29 +213,29 @@
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
     </target>
 
-    <target name="copy:legacy-files">
+    <target name="copy:profile-files">
 
         <delete>
             <fileset dir="${profile.root}">
                 <include name="govcms.*"/>
                 <include name="js/**"/>
                 <include name="images/**"/>
-                <include name="css"/>
+                <include name="css/**"/>
             </fileset>
         </delete>
         <copy todir="${profile.root}">
             <fileset refid="govcms.profile"/>
         </copy>
 
-        <delete dir="${dest.modules}/custom"/>
-        <delete dir="${dest.modules}/features"/>
-        <copy todir="${dest.modules}">
+        <delete dir="${docroot.profile.modules.path}/custom"/>
+        <delete dir="${docroot.profile.modules.path}/features"/>
+        <copy todir="${docroot.profile.modules.path}">
             <fileset refid="govcms.modules"/>
         </copy>
 
 
-        <delete dir="${dest.themes}/govcms"/>
-        <copy todir="${dest.themes}">
+        <delete dir="${docroot.profile.themes.path}/govcms"/>
+        <copy todir="${docroot.profile.themes.path}">
             <fileset refid="govcms.themes"/>
         </copy>
     </target>
