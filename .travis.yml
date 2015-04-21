@@ -11,7 +11,7 @@ cache:
   apt: true
 
 env:
-  - COMPOSER_BIN_DIR=build/bin
+  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin
 
 notifications:
   email:
@@ -42,7 +42,7 @@ before_script:
   - sudo a2enmod rewrite actions fastcgi alias
   - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-  - sudo cp -f build/tests/travis/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo cp -f build/travis/travis-ci-apache /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
   - sudo service apache2 restart
 
@@ -53,9 +53,9 @@ before_script:
   - phing -f build/phing/build.xml build
 
 script:
-  # Run the install
+  # Run tests
   - phing -f build/phing/build.xml run-tests
 
-after_script:
-  # Stop the webserver so that it's not still running when MySQL is stopped.
-  - kill $SERVER_PID
+after_success:
+  - phing -f build/phing/build.xml post-commit
+
