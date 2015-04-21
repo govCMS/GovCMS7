@@ -305,6 +305,7 @@
         <drush command="site-install" assume="yes" verbose="TRUE">
             <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}/${db.name}"</option>
             <option name="site-name">"${site.name}"</option>
+            <option name="debug" />
             <option name="site-mail">"${site.mail}"</option>
             <option name="account-name">"${account.name}"</option>
             <option name="account-mail">"${account.mail}"</option>
