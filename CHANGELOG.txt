@@ -1,0 +1,123 @@
+1.2.0-alpha5-7
+==============
+
+- Merge pull request #49 from seanhamlin/master
+
+- Squash all security updates into 1 patch, also update Drupal Core to 7.36 and DS to 2.8.
+
+- Merge pull request #47 from typhonius/contributing-guidelines
+
+- Merge pull request #48 from typhonius/security/password-policy-crumbs
+
+- Changes recommended by @gollyg
+
+- Patches password policy and crumbs security vulnerabilities.
+
+- Adds CONTRUBUTING.md guidelines to the project.
+1.2.0-alpha5-6
+==============
+
+- Merge pull request #40 from seanhamlin/master
+
+- Security patching around Drupal core, webform, and ctools.
+
+- Merge pull request #39 from seanhamlin/master
+
+- Support protocol-less Youtube video embeds with the video_filter module
+
+- Merge pull request #36 from fiasco/master
+
+- Updates Entity API to 1.6 without using agov patches.
+
+- Reformatted patch to localize it to agov
+
+- Tracking local update to webform 1.4
+
+- Moving order of webform in hopes the patch works
+
+- Adding spacing for formatting
+
+- Views security update
+
+- Update entity api to 7.x-1.6
+
+- Webform Security patch
+
+- Merge pull request #26 from typhonius/travis
+
+- Alter example names to make more sense.
+
+- Changing FeaturesContext to FeatureContext
+
+- Set up local overrides and alter gitignore.
+
+- Merge pull request #24 from typhonius/travis
+
+- Merge pull request #25 from typhonius/docs
+
+- Added more words to the README
+
+- Added some of the aGov behat tests, fixed behat bootstrap and added local files.
+
+- Lint check more file extensions.
+
+- Merge pull request #22 from typhonius/travis
+
+- Alterations to try and get behat working on travis.
+
+- Fixed usage of BEHAT_PARAMS and started testing behat.
+
+- Lock to a lower version of fabpot/goutte to allow for PHP 5.3
+
+- Updated behat and drupal-extension
+
+- Adds in first pass with behat.
+
+- Indent updates to build.xml and phpcs addition.
+
+- Fixes #23 coding standards fixes for custom modules.
+
+- GOVCMS issue #23 fixes for Travis CI
+
+- Merge pull request #19 from typhonius/travis
+
+- Add PHP 5.6 to our tests.
+
+- Create a fake email system using smtp-sink (from PHPMailer/PHPMailer)
+
+- Added check for Drush exit code.
+
+- Added in Drupal installation steps to Phing.
+1.2.0-alpha5-5
+==============
+
+- Merge pull request #21 from fiasco/GOVCMS-36
+
+- Merge pull request #20 from fiasco/GOVCMS-8
+
+- Security Update for Google Analytics
+
+- Applied patches from aGov for security patching.
+
+- Added Search API Solr
+
+- Merge pull request #18 from typhonius/travis
+
+- Added first pass of for travis integration
+
+- Merge pull request #16 from paulkilla/comment_fix
+
+- Merge pull request #14 from typhonius/pin-phing
+
+- Merge pull request #15 from fiasco/master
+
+- Fix as per Drupal rules
+
+- Pinned phing to 2.8.2.
+1.2.0-alpha5-2
+==============
+
+- Replace favicon for agov_barton theme
+1.2.0-alpha5-1
+==============
+- Initial release with aGov 2.0-alpha5.
