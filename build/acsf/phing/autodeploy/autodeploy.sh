@@ -6,7 +6,7 @@ DEPLOY='/tmp/deploy'
 
 # Git sources
 # @TODO fix this repo when we go to the main dev repo.
-GITHUB_SOURCE_SLUG='govCMS/govcms-merge'
+GITHUB_SOURCE_SLUG='govCMS/govCMS-Core'
 GITHUB_SOURCE="git@github.com:${GITHUB_SOURCE_SLUG}.git"
 BRANCH='master'
 
