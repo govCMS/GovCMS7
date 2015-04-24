@@ -5,7 +5,6 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DEPLOY='/tmp/deploy'
 
 # Git sources
-# @TODO fix this repo when we go to the main dev repo.
 GITHUB_SOURCE_SLUG='govCMS/govCMS-Core'
 GITHUB_SOURCE="git@github.com:${GITHUB_SOURCE_SLUG}.git"
 BRANCH='master'
@@ -18,7 +17,7 @@ MIRRORS+=('git@github.com:govCMS/govCMS.git')
 
 add_key() {
   # Decrypt the key we've stored in the repo and add it to our friendly ssh agent.
-  openssl aes-256-cbc -K "$encrypted_16038e47068b_key" -iv "$encrypted_16038e47068b_iv" -in "${DIR}/govcms_rsa.enc" -out "${DIR}/govcms_rsa" -d
+  openssl aes-256-cbc -K "$encrypted_a306a1087d72_key" -iv "$encrypted_a306a1087d72_iv" -in "${DIR}/govcms_rsa.enc" -out "${DIR}/govcms_rsa" -d
   chmod "600 ${DIR}/govcms_rsa"
   eval "$(ssh-agent -s)"
   ssh-add "${DIR}/govcms_rsa"
