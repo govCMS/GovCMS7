@@ -45,7 +45,7 @@ function govcms_zen_preprocess_maintenance_page(&$variables) {
   $t_function = get_t();
 
   if (drupal_installation_attempted()) {
-    $variables['logo'] = base_path() . drupal_get_path('theme', 'govcms_zen') . '/logo-alt.png';
+    $variables['logo'] = base_path() . drupal_get_path('theme', 'govcms_zen') . '/logo.png';
     // Override the site name, which will be "Drupal".
     // @todo: Dynamically rename "govCMS" using $conf.
     $variables['site_name'] = $t_function('Install govCMS');
