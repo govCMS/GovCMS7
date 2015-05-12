@@ -1298,26 +1298,6 @@ function govcms_install_additional_options() {
     '#type' => 'checkbox',
     '#title' => st('Install example content'),
   );
-  $form['register'] = array(
-    '#type' => 'fieldset',
-    '#title' => st('Register govCMS'),
-  );
-  $form['register']['govcms_register_confirm'] = array(
-    '#type' => 'checkbox',
-    '#title' => st('Register your govCMS site'),
-  );
-
-  $form['register']['fields'] = array(
-    '#prefix' => '<div id="govcms-install-register-fields">',
-    '#suffix' => '</div>',
-  );
-
-  // Default registration data.
-  $default_data = array(
-    'govcms_register_agency' => variable_get('site_name'),
-    'govcms_register_email' => variable_get('site_mail'),
-  );
-  $form['register']['fields'][] = govcms_register_form_elements($default_data, TRUE);
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -1326,18 +1306,6 @@ function govcms_install_additional_options() {
   return $form;
 }
 
-/**
- * Validate handler.
- *
- * @ingroup forms
- */
-function govcms_install_additional_options_validate(&$form, &$form_state) {
-  if ($form_state['values']['govcms_register_confirm']) {
-    if (!valid_email_address($form_state['values']['govcms_register_email'])) {
-      form_set_error('govcms_register_email', 'Please enter a valid email address.');
-    }
-  }
-}
 
 /**
  * Submit handler.
@@ -1349,24 +1317,6 @@ function govcms_install_additional_options_submit(&$form, &$form_state) {
   // If user selects to install default content. Set var.
   if ($form_state['values']['install']) {
     variable_set('govcms_example_content_batch', TRUE);
-  }
-
-  // If the user selects to register the site, post the data.
-  if ($form_state['values']['govcms_register_confirm']) {
-    $data = array(
-      'govcms_register_agency' => check_plain($form_state['values']['govcms_register_agency']),
-      'govcms_register_contact' => check_plain($form_state['values']['govcms_register_contact']),
-      'govcms_register_email' => check_plain($form_state['values']['govcms_register_email']),
-      'govcms_register_notification' => check_plain($form_state['values']['govcms_register_notification']),
-    );
-    $registration = govcms_register_post($data);
-    if ($registration->code == 200) {
-      drupal_set_message('Thank you, your registration was successful');
-    }
-    else {
-      drupal_set_message('Sorry, your registration failed at this time. We will try again later to register your site. Visit `Configuration > govCMS Registration` after installation to check the status.', 'warning');
-    }
-
   }
   return FALSE;
 }
