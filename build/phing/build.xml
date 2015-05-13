@@ -52,7 +52,6 @@
     <property name="docroot.profile.themes.path"
               value="${docroot}/profiles/${drupal.profile}/themes"/>
 
-
     <!-- Credentials -->
     <property name="db.username" value="root"/>
     <property name="db.password" value=""/>
@@ -79,6 +78,30 @@
     <!-- We override this so Drupal install works -->
     <property name="drush.cmd" value="${drush.bin} -r ${docroot}"
               override="true"/>
+
+    <!-- Set git properties -->
+    <property name="git.branch.default" value="master" />
+
+    <!-- Conditional properties -->
+    <!-- Check for a travis branch variable -->
+    <exec command="echo $TRAVIS_BRANCH"
+          outputProperty="git.branch.current"
+          dir="${repo.root}"
+          logoutput="true"
+          checkreturn="true" />
+
+    <!-- If the variable was not set grab it from git -->
+    <!-- This does not work for travis as it uses a detached head -->
+    <if>
+        <isfalse value="${git.branch.current}" />
+        <then>
+            <exec command="git rev-parse --abbrev-ref HEAD"
+                  outputProperty="git.branch.current"
+                  dir="${repo.root}"
+                  logoutput="true"
+                  checkreturn="true" />
+        </then>
+    </if>
 
     <!-- The following allows local overrides. -->
     <property file="${project.basedir}/build.properties" override="true"/>
@@ -109,7 +132,6 @@
         <include name="**"/>
     </fileset>
 
-
     <!--               -->
     <!-- Targets       -->
     <!-- ============= -->
@@ -120,7 +142,9 @@
 
     <target name="build:local"
             description="Build the project without removing uncommitted changes."
-            depends="make:development, overwrite:profile-files, install"/>
+            depends="make:local, overwrite:profile-files, install">
+        <property name="build.local" value="1" />
+    </target>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
@@ -136,7 +160,7 @@
 
     <target name="build:full:no-clean"
             description="Build the project without removing local changes, install govCMS, run validation and tests."
-            depends="make:development, install, run-tests"/>
+            depends="make:local, install, run-tests"/>
 
     <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
             depends="validate:all, test:all"/>
@@ -173,10 +197,28 @@
         </if>
     </target>
 
-    <!-- Drush make the build -->
-    <target name="make"
+    <!-- Check if we are building master and call the appropriate make strategy -->
+    <!-- If we are on the master branch, we want to test that directly against the repo -->
+    <!-- If we are on any other branch, we want to avoid building recursively as we will pull in the master profile. -->
+    <target name="make">
+        <if>
+            <equals arg1="${git.branch.default}" arg2="${git.branch.current}" />
+            <then>
+                <phingcall target="make:remote" />
+            </then>
+            <else>
+                <phingcall target="make:local" />
+            </else>
+        </if>
+    </target>
+
+    <!-- Drush make the build using a recursive strategy -->
+    <target name="make:remote"
             description="Run drush make"
             depends="rm-docroot">
+
+        <!-- Run Acquia specific pre-make build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -184,14 +226,18 @@
             <param>"${docroot}"</param>
         </drush>
 
-        <!-- Run Acquia specific build tasks -->
+        <!-- Run Acquia specific post-make build tasks -->
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
     </target>
 
     <!-- Use the local make files rather than checking out from the repository -->
-    <target name="make:development"
+    <!-- This avoids us overwriting the local make file with the master -->
+    <target name="make:local"
             description="Run drush make in a development context"
             depends="rm-docroot">
+
+        <!-- Run Acquia specific pre-make build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -213,6 +259,7 @@
         <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
     </target>
 
+    <!-- When building locally, we clean out all the profile files and copy across, rather than relying on make. -->
     <target name="overwrite:profile-files">
 
         <delete>
@@ -239,7 +286,6 @@
             <fileset refid="govcms.themes"/>
         </copy>
     </target>
-
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
     <!-- previousnext/agov#382 and previousnext/agov#385 -->

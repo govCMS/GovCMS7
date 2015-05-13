@@ -1,4 +1,5 @@
 <project name="acsf_post_make" default="build" phingVersion="2.8.2">
+
     <!-- Copy govCMS specific files across. -->
     <copy file="${repo.root}/build/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
     <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/" />
@@ -21,4 +22,9 @@
            dir="${docroot}"
            strip="1"
            haltonfailure="true" />
+
+    <!-- Clean up changes we made to the codebase by resetting the build make file. -->
+    <exec command="git checkout ${drupal.makefile}"
+          logoutput="true"
+          passthru="true" />
 </project>

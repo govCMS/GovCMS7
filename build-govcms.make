@@ -8,7 +8,7 @@ includes[] = drupal-org-core.make
 projects[govcms][type] = profile
 projects[govcms][version] = master
 projects[govcms][download][type] = git
-projects[govcms][download][branch] = merge
+projects[govcms][download][branch] = master
 ; @TODO fix this repo when we move to d.o
 projects[govcms][download][url] = git@github.com:govCMS/govCMS-Core.git
 

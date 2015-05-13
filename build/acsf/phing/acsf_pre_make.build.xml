@@ -1,0 +1,22 @@
+<project name="acsf_pre_make" default="build" phingVersion="2.8.2">
+    <echo message="Current git branch is ${git.branch.current}" />
+
+    <!-- Update the make file with the current branch -->
+    <if>
+        <not>
+            <isset property="build.local" />
+        </not>
+        <then>
+            <reflexive>
+                <fileset dir="${repo.root}">
+                    <include name="build-govcms.make" />
+                </fileset>
+                <filterchain>
+                    <replaceregexp>
+                        <regexp pattern=" = ${git.branch.default}" replace=" = ${git.branch.current}"/>
+                    </replaceregexp>
+                </filterchain>
+            </reflexive>
+        </then>
+    </if>
+</project>
