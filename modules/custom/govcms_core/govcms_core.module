@@ -32,7 +32,7 @@ function govcms_core_about_govcms_page() {
   $output = array(
     'about' => array(
       '#type' => 'markup',
-      '#markup' => "<p>" . l(t('govCMS'), 'http://govcms.com.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
+      '#markup' => "<p>" . l(t('govCMS'), 'http://govcms.gov.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
     ),
   );
   return $output;
@@ -314,6 +314,6 @@ function govcms_core_metatag_config_default_alter(&$configs) {
   $configs['global']->config['dcterms.publisher'] = array('item' => array('value' => '[site:name]'));
   $configs['global']->config['dcterms.subject'] = array('item' => array('value' => '[site:slogan]'));
   $configs['global']->config['dcterms.type'] = array('item' => array('value' => 'other'));
-  $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.com.au)');
+  $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.gov.au)');
   $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
 }
