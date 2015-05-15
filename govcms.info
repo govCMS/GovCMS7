@@ -82,6 +82,7 @@ dependencies[] = media_internet
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
+dependencies[] = module_filter
 dependencies[] = navbar
 dependencies[] = panels
 dependencies[] = panels_ipe
