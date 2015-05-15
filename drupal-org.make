@@ -122,6 +122,7 @@ projects[video_filter][patch][] = "https://www.drupal.org/files/issues/video_fil
 projects[video_filter][patch][] = "https://www.drupal.org/files/video_filter-autoplay-ckeditor-1430680-8.patch"
 projects[video_filter][patch][] = https://www.drupal.org/files/issues/2438439-video-filter-protocol-fix.patch
 projects[video_filter][version] = "3.1"
+projects[viewfield][version] = "2.0"
 projects[views][version] = "3.11"
 projects[views_bulk_operations][version] = "3.2"
 projects[view_unpublished] = "1.2"
