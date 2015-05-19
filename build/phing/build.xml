@@ -74,6 +74,9 @@
               value="${repo.root}/build/tests/behat/behat.yml"/>
     <property name="behat.local"
               value="${repo.root}/build/tests/behat/behat.local.yml"/>
+    <property name="phantomjs.bin"
+              value="${composer.bin}/phantomjs" />
+    <property name="phantomjs.webdriver" value="4444" />
 
     <!-- We override this so Drupal install works -->
     <property name="drush.cmd" value="${drush.bin} -r ${docroot}"
@@ -195,6 +198,14 @@
                 <delete dir="${docroot}"/>
             </then>
         </if>
+    </target>
+
+    <target name="phantomjs:launch"
+          description="Launches a GhostDriver.">
+      <exec command="${phantomjs.bin} --webdriver=${phantomjs.webdriver}"
+          passthru="true"
+          spawn="true"
+          checkreturn="true" />
     </target>
 
     <!-- Check if we are building master and call the appropriate make strategy -->
@@ -373,7 +384,7 @@
               passthru="true"/>
     </target>
 
-    <target name="test:behat" description="Behat testing for govCMS">
+    <target name="test:behat" description="Behat testing for govCMS" depends="phantomjs:launch">
         <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
         <if>
             <not>

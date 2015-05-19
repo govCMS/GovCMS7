@@ -11,7 +11,7 @@ cache:
   apt: true
 
 env:
-  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin
+  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost/"}}}'
 
 notifications:
   email:
