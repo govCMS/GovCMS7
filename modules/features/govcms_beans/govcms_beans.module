@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file
+ * Code for the Beans feature.
+ */
+
+include_once 'govcms_beans.features.inc';
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function govcms_beans_entity_info_alter(&$entity_info) {
+  // Provides a small image display for bean.
+  $entity_info['bean']['view modes']['highlight'] = array(
+    'label' => t('Highlight'),
+    'custom settings' => TRUE,
+  );
+}
+
+/**
+ * Implements hook_preprocess_entity().
+ */
+function govcms_beans_preprocess_entity(&$variables) {
+  // Ensure we have a bean.
+  if ($variables['elements']['#entity_type'] == 'bean') {
+    // Add the appropriate view_mode as a class.
+    $variables['classes_array'][] = $variables['view_mode'];
+  }
+
+  // Ensure we have the correct bean.
+  if ($variables['elements']['#bundle'] == 'image_and_text') {
+    // Ensure we have the link field and link the title.
+    if (!empty($variables['field_link_to'][0]['url'])) {
+      // We create a url wrapped in the title.
+      $variables['title'] = l($variables['bean']->title, $variables['field_link_to'][0]['url']);
+    }
+    else {
+      $variables['title'] = check_plain($variables['bean']->title);
+    }
+  }
+}

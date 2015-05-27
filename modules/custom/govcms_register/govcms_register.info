@@ -1,0 +1,6 @@
+name = govCMS Registration
+description = Register this site.
+core = 7.x
+package = govCMS
+
+dependencies[] = uuid

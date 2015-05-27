@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Media Releases feature.
+ */
+
+include_once 'govcms_media_releases.features.inc';

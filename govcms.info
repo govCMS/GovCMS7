@@ -1,0 +1,184 @@
+name = govCMS
+project = govcms
+package = govCMS Profile
+distribution_name = govCMS
+description = A distribution for government and the public sector in Australia
+core = 7.x
+exclusive = TRUE
+hidden = FALSE
+php = 5.3
+
+; System Requirements.
+php_memory_limit = 128M
+
+files[] = govcms.profile
+files[] = tests/govcms_test_base.inc
+files[] = tests/govcms.test
+files[] = tests/govcms_metadata.test
+
+; Core
+
+dependencies[] = block
+dependencies[] = contact
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = taxonomy
+dependencies[] = search
+dependencies[] = syslog
+dependencies[] = shortcut
+dependencies[] = field
+dependencies[] = field_ui
+dependencies[] = text
+dependencies[] = file
+dependencies[] = image
+dependencies[] = list
+dependencies[] = rdf
+dependencies[] = update
+
+; Contrib
+
+dependencies[] = agls
+dependencies[] = admin_views
+dependencies[] = bean
+dependencies[] = bean_admin_ui
+dependencies[] = chosen
+dependencies[] = ctools
+dependencies[] = crumbs
+dependencies[] = date
+dependencies[] = defaultconfig
+dependencies[] = defaultcontent
+dependencies[] = draggableviews
+dependencies[] = ds
+dependencies[] = elements
+dependencies[] = entity
+dependencies[] = entitycache
+dependencies[] = entityreference
+dependencies[] = escape_admin
+dependencies[] = favicon
+dependencies[] = features
+dependencies[] = file_entity
+dependencies[] = file_lock
+dependencies[] = globalredirect
+dependencies[] = googleanalytics
+dependencies[] = google_analytics_reports
+dependencies[] = honeypot
+dependencies[] = libraries
+dependencies[] = link
+dependencies[] = linkchecker
+dependencies[] = linkit
+dependencies[] = login_destination
+dependencies[] = login_security
+dependencies[] = maintenance_mode_permissions
+dependencies[] = media
+dependencies[] = media_internet
+dependencies[] = menu_block
+dependencies[] = menu_block_export
+dependencies[] = metatag
+dependencies[] = module_filter
+dependencies[] = navbar
+dependencies[] = panels
+dependencies[] = panels_ipe
+dependencies[] = password_policy
+dependencies[] = paranoia
+dependencies[] = pathauto
+dependencies[] = pathauto_persist
+dependencies[] = phone
+dependencies[] = quicktabs
+dependencies[] = quicktabs_tabstyles
+dependencies[] = redirect
+dependencies[] = strongarm
+dependencies[] = token
+dependencies[] = views_content
+dependencies[] = search404
+dependencies[] = search_api
+dependencies[] = search_api_db
+dependencies[] = search_api_page
+dependencies[] = scheduler
+dependencies[] = scheduler_workbench
+dependencies[] = session_cookie_lifetime
+dependencies[] = shield
+dependencies[] = r4032login
+dependencies[] = seckit
+dependencies[] = simple_aggregation
+dependencies[] = site_map
+dependencies[] = superfish
+dependencies[] = twitter_block
+dependencies[] = toc_filter
+dependencies[] = username_enumeration_prevention
+dependencies[] = userprotect
+dependencies[] = video_filter
+dependencies[] = views
+dependencies[] = views_ui
+dependencies[] = views_bulk_operations
+dependencies[] = view_unpublished
+dependencies[] = webform
+dependencies[] = webform_clear
+dependencies[] = webform_phone
+dependencies[] = workbench
+dependencies[] = workbench_moderation
+dependencies[] = wysiwyg
+dependencies[] = wysiwyg_filter
+dependencies[] = xmlsitemap
+dependencies[] = xmlsitemap_menu
+dependencies[] = xmlsitemap_node
+dependencies[] = ccl
+dependencies[] = ccl_actions
+dependencies[] = ccl_blocks
+dependencies[] = ccl_local_actions
+dependencies[] = ccl_views
+
+; Custom
+
+dependencies[] = options_flatten
+dependencies[] = iconomist
+dependencies[] = text_summary_options
+dependencies[] = govcms_disable_defaultcontent
+dependencies[] = user_action_report
+
+; govCMS
+
+dependencies[] = govcms_appearance
+dependencies[] = govcms_core
+dependencies[] = govcms_common_fields
+dependencies[] = govcms_beans
+dependencies[] = govcms_text_resize
+dependencies[] = govcms_image_styles
+dependencies[] = govcms_inactive_account
+dependencies[] = govcms_editing
+dependencies[] = govcms_chosen
+dependencies[] = govcms_contact
+dependencies[] = govcms_front
+dependencies[] = govcms_menu_block
+dependencies[] = govcms_register
+dependencies[] = govcms_slideshow
+dependencies[] = govcms_superfish_configuration
+dependencies[] = govcms_sitemap
+dependencies[] = govcms_social_links
+dependencies[] = govcms_share_links
+
+; Content types
+
+dependencies[] = govcms_basic_page
+dependencies[] = govcms_blog
+dependencies[] = govcms_events
+dependencies[] = govcms_media_releases
+dependencies[] = govcms_news
+dependencies[] = govcms_publications
+dependencies[] = govcms_promotion
+dependencies[] = govcms_permissions
+
+; Content
+
+dependencies[] = govcms_menu
+dependencies[] = govcms_tags
+
+; Search
+dependencies[] = govcms_search_core

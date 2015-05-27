@@ -1,0 +1,319 @@
+<?php
+/**
+ * @file
+ * Common functionality used across govCMS.
+ *
+ * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
+ *
+ * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Department of Finance
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function govcms_core_menu() {
+  $items['about-govcms'] = array(
+    'title' => 'About govCMS',
+    'page callback' => 'govcms_core_about_govcms_page',
+    'access arguments' => array('access content'),
+  );
+  return $items;
+}
+
+/**
+ * Page callback for about govCMS page.
+ *
+ * @return array
+ *   A render array for the page callback.
+ */
+function govcms_core_about_govcms_page() {
+  $output = array(
+    'about' => array(
+      '#type' => 'markup',
+      '#markup' => "<p>" . l(t('govCMS'), 'http://govcms.gov.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
+    ),
+  );
+  return $output;
+}
+
+/**
+ * Helper to manufacture a new Bean of a given type.
+ *
+ * @param string $bean_type
+ *   The type of bean to create
+ * @param string $label
+ *   Admin label for the bean
+ * @param string $description
+ *   (optional) Admin description for the bean
+ * @param string $title
+ *   (optional) Block title for the bean
+ * @param array $fields
+ *   (optional) An array of fields to assign. This should resemble the ACTUAL
+ *   field array, as it is literally transposed onto the bean, with the
+ *   exception that the language key should be omitted.
+ * @param string $view_mode
+ *   (optional) The view mode. Defaults to 'default'.
+ */
+function govcms_core_save_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
+
+  $bean = govcms_core_create_bean($bean_type, $label, $description, $title, $fields, $view_mode);
+  $bean->save();
+
+  drupal_set_message('Created a new bean "' . $label . '" of type <em>' . $bean_type . '</em>');
+}
+
+/**
+ * Create a bean from configuration.
+ *
+ * Normally, you can use govcms_core_save_bean(), however this is useful if
+ * you need to manipulate the bean before saving.
+ *
+ * @param string $bean_type
+ *   The type of bean to create
+ * @param string $label
+ *   Admin label for the bean
+ * @param string $description
+ *   (optional) Admin description for the bean
+ * @param string $title
+ *   (optional) Block title for the bean
+ * @param array $fields
+ *   (optional) An array of fields to assign. This should resemble the ACTUAL
+ *   field array, as it is literally transposed onto the bean, with the
+ *   exception that the language key should be omitted.
+ * @param string $view_mode
+ *   (optional) The view mode. Defaults to 'default'.
+ *
+ * @return Bean
+ *   a Bean entity
+ */
+function govcms_core_create_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
+  $config = array(
+    'label' => $label,
+    'description' => $description,
+    'title' => $title,
+    'type' => $bean_type,
+    'view_mode' => $view_mode,
+    'is_new' => TRUE,
+  );
+  foreach ($fields as $field_key => $field_value) {
+    $config[$field_key] = array();
+    $config[$field_key]['und'] = $field_value;
+  }
+  $bean = bean_create($config);
+  return $bean;
+}
+
+/**
+ * Create initial block placement for a block which hasn't been used before.
+ *
+ * @todo There is better logic in block_add_block_form_submit()
+ *
+ * @param string $module
+ *   The module providing the block
+ * @param string $delta
+ *   The block delta
+ * @param string $theme
+ *   (optional) The theme to insert into. Defaults to the current theme
+ * @param int|string $region
+ *   (optional) The region to insert the block into. Defaults to
+ *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
+ *   this blank.
+ * @param int $weight
+ *   (optional) The weight of the block. Defaults to 0.
+ * @param int $visibility
+ *   (optional) The visibility of the block. Defaults to 0.
+ * @param string $pages
+ *   (optional) The pages to show the block on. Defaults to all.
+ * @param string $title
+ *   (optional) The title. Defaults to empty. Specify '<none>' to hide.
+ *
+ * @throws Exception
+ * @return bool
+ *   TRUE if the block is inserted, or FALSE on an error.
+ */
+function govcms_core_insert_block($module, $delta, $theme, $region = BLOCK_REGION_NONE, $weight = 0, $visibility = 0, $pages = '', $title = '') {
+  if (!isset($theme)) {
+    $theme = variable_get('theme_default', NULL);
+    if (!isset($theme) || is_null($theme)) {
+      return FALSE;
+    }
+  }
+  $block = array(
+    'module' => $module,
+    'delta' => $delta,
+    'theme' => $theme,
+    'title' => $title,
+    'status' => (int) ($region != BLOCK_REGION_NONE),
+    'weight' => (int) $weight,
+    'region' => $region,
+    'visibility' => $visibility,
+    'pages' => $pages,
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  $query = db_insert('block')->fields(
+    array(
+      'module',
+      'delta',
+      'theme',
+      'title',
+      'status',
+      'weight',
+      'region',
+      'visibility',
+      'pages',
+      'cache',
+    )
+  );
+
+  // If a theme was specified execute the single value.
+  if (is_array($theme)) {
+    // Get a list of themes that this block is already assigned to.
+    $assigned_themes = db_query('SELECT theme FROM {block} b WHERE b.module = :module AND b.delta = :delta', array(':module' => $module, ':delta' => $delta))->fetchCol();
+
+    // Get a list of the themes govCMS supports.
+    foreach ($theme as $theme_id) {
+      $record = $block;
+
+      // We need to check if the block already exists for this theme.
+      if (in_array($theme_id, $assigned_themes)) {
+        continue;
+      }
+
+      $record['theme'] = $theme_id;
+      $query->values($record);
+    }
+  }
+  else {
+    $query->values($block);
+  }
+
+  $query->execute();
+
+  return TRUE;
+}
+
+/**
+ * Update block placement for an existing block.
+ *
+ * @param string $module
+ *   The module providing the block
+ * @param string $delta
+ *   The block delta
+ * @param string $theme
+ *   (optional) The theme to insert into. Defaults to the current theme
+ * @param int|string $region
+ *   (optional) The region to insert the block into. Defaults to
+ *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
+ *   this blank.
+ * @param int $weight
+ *   (optional) The weight of the block. Defaults to 0
+ *
+ * This is based on block_admin_display_form_submit()
+ *
+ * @throws Exception
+ */
+function govcms_core_update_block($module, $delta, $theme = '', $region = BLOCK_REGION_NONE, $weight = 0) {
+  $transaction = db_transaction();
+  try {
+    $status = (int) ($region != BLOCK_REGION_NONE);
+    $region = $status ? $region : '';
+    db_update('block')
+      ->fields(array(
+      'status' => $status,
+      'weight' => $weight,
+      'region' => $region,
+    ))
+      ->condition('module', $module)
+      ->condition('delta', $delta)
+      ->condition('theme', $theme)
+      ->execute();
+  }
+  catch (Exception $e) {
+    $transaction->rollback();
+    watchdog_exception('block', $e);
+    throw $e;
+  }
+  cache_clear_all();
+}
+
+/**
+ * Returns a list of the themes that govCMS supports.
+ */
+function govcms_core_theme_info() {
+  return array(
+    GOVCMS_DEFAULT_THEME,
+  );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
+
+  // Install Canberra timezone.
+  if ($form_id == 'system_regional_settings') {
+    $timezone_form = $form['timezone']['date_default_timezone'];
+    $sydney_tz = $timezone_form['#options']['Australia/Sydney'];
+    $sydney_re = '/Sydney/';
+    $canberra_tz = preg_replace($sydney_re, 'Canberra', $sydney_tz, 1);
+    $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
+    asort($timezone_form['#options']);
+    $form['timezone']['date_default_timezone'] = $timezone_form;
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function govcms_core_block_info() {
+  $blocks = array();
+
+  $blocks['update_notification'] = array(
+    'info' => t('govCMS Update Notification'),
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function govcms_core_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'update_notification':
+      $block['content'] = "<div class=\"messages warning\">This site is running on the govCMS distribution. govCMS ships with a number of patched and development status modules that have been tested to work together. Avoid updating modules included with govCMS independently. See the <a href=\"http://drupal.org/project/govcms\">govCMS project page</a> on drupal.org for further information about releases.</div>";
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function govcms_core_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['compact'] = array(
+    'label' => t('Compact'),
+    'custom settings' => TRUE,
+  );
+}
+
+/**
+ * Implements hook_metatag_config_default_alter().
+ */
+function govcms_core_metatag_config_default_alter(&$configs) {
+  $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
+  $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.language'] = array('item' => array('value' => 'en'));
+  $configs['global']->config['dcterms.publisher'] = array('item' => array('value' => '[site:name]'));
+  $configs['global']->config['dcterms.subject'] = array('item' => array('value' => '[site:slogan]'));
+  $configs['global']->config['dcterms.type'] = array('item' => array('value' => 'other'));
+  $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.gov.au)');
+  $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
+}

@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Provides install functionality for govcms_front.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function govcms_front_install() {
+  // Set the sites front page.
+  variable_set('site_frontpage', 'front');
+}

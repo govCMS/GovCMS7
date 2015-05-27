@@ -1,0 +1,29 @@
+
+// Primary branding colour.
+$color-primary: #7A797A;
+$color-primary-contrast: #FFF;
+
+// Highlight colour.
+$color-highlight: #464445;
+$color-highlight-contrast: #FFF;
+
+// Tertiary colours are used for borders and highlights requiring a neutral
+// colour.
+$color-tertiary-light: #f3f3f3;
+$color-tertiary-dark: #616161;
+
+// Colours of header and footer areas.
+$color-header: #FFF;
+$color-footer: $color-primary;
+
+// Text colours.
+$heading-color: darken($color-primary, 40%);
+$body-text: #5f5f5f;
+$body-text2: #444444;
+
+// Form colours.
+$form-border: #c0c0c0;
+$form-background: #FDFDFD;
+
+// Maintenance colours.
+$maintenance_primary: #006893;

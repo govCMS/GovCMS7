@@ -1,0 +1,71 @@
+<?php
+/**
+ * @file
+ * Code for the Contact feature.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function govcms_contact_menu() {
+  $items = array();
+
+  $items['admin/structure/contact/print'] = array(
+    'title' => 'Add printable version',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('govcms_contact_printable'),
+    'access arguments' => array('administer content types'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'govcms_contact.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govcms_contact_form_alter(&$form, &$form_state, $form_id) {
+  // Ensure we have the site contact form.
+  if ($form_id == 'contact_site_form' && $fid = _govcms_contact_get_fid()) {
+    $file = file_load($fid);
+
+    // Determine our file extension.
+    $ext = pathinfo($file->filename);
+    $ext = $ext['extension'];
+
+    // Append our extension and the filesize to our link.
+    $extension_append = '';
+    if (!empty($ext)) {
+      $extension_append = ' [' . drupal_strtoupper($ext);
+      $extension_append .= ' ' . format_size($file->filesize) . ']';
+
+    }
+
+    $link = l(t('here'), file_create_url($file->uri));
+    $form['printable'] = array(
+      '#weight' => -10,
+      '#markup' => t('Get a printable version of the Contact form !link!extension.', array('!link' => $link, '!extension' => $extension_append)),
+      '#prefix' => '<div class="messages download">',
+      '#suffix' => '</div>',
+    );
+  }
+}
+
+/**
+ * Returns the fid of the printable form.
+ */
+function _govcms_contact_get_fid() {
+  return variable_get('govcms_contact_printable_upload', FALSE);
+}
+
+/**
+ * Implements hook_help().
+ */
+function govcms_contact_help($path, $arg) {
+  switch ($path) {
+    case 'contact':
+      return '<p class="form-help-text">Fields marked <span class="form-required">*</span> are required.</p>';
+  }
+  return NULL;
+}

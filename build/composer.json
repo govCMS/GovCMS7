@@ -1,0 +1,42 @@
+{
+    "name": "govCMS/govCMS",
+    "description": "The GovCMS build.",
+    "authors": [
+        {
+            "name": "Adam Malone",
+            "email": "adam@adammalone.net"
+        },
+        {
+            "name": "James Gollan",
+            "email": "james@swamphen.com"
+        }
+    ],
+    "require-dev": {
+        "drush/drush":               "7.*",
+        "phing/phing":               "2.8.*",
+        "jakoch/phantomjs-installer": "1.9.8",
+        "drupal/drupal-extension":   "3.0.7",
+        "drupal/drupal-driver":      "v1.0.6",
+        "fabpot/goutte":             "1.0.x-dev",
+        "guzzle/guzzle":             "v3.9.2",
+        "squizlabs/php_codesniffer": "1.5.*",
+        "phpmd/phpmd":               "1.5.*",
+        "pdepend/pdepend":           "1.1.*",
+        "phploc/phploc":             "2.0.0-BETA1",
+        "sebastian/phpcpd":          "2.0.*",
+        "drupal/coder":              "7.2.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+      "post-install-cmd": [
+        "PhantomInstaller\\Installer::installPhantomJS"
+      ],
+      "post-update-cmd": [
+        "PhantomInstaller\\Installer::installPhantomJS"
+      ]
+    }
+}

@@ -1,0 +1,35 @@
+/**
+ * Pager.
+ */
+
+/* A list of page numbers when more than 1 page of content is available. */
+.pager {
+  clear: both;
+  padding: rhythm(.5);
+  text-align: center;
+  border-top: solid 3px $color-primary;
+  background: lighten($color-tertiary-light, 3%);
+}
+%pager__item {
+  display: inline-block;
+  padding: 0 rhythm(.25);
+  list-style-type: none;
+  background-image: none;
+  font-weight: bold;
+}
+
+.pager-item,      /* A list item containing a page number in the list of pages. */
+.pager-first,     /* The first page's list item. */
+.pager-previous,  /* The previous page's list item. */
+.pager-next,      /* The next page's list item. */
+.pager-last,      /* The last page's list item. */
+.pager-ellipsis { /* A concatenation of several list items using an ellipsis. */
+  @extend %pager__item;
+}
+
+/* The current page's list item. */
+.pager-current {
+  @extend %pager__item;
+  color: white;
+  background: $color-primary;
+}

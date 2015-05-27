@@ -1,0 +1,8 @@
+name = Contact
+description = Provides Contact Us functionality.
+core = 7.x
+package = govCMS
+php = 5.2.4
+project = govcms_contact
+dependencies[] = contact
+files[] = govcms_contact.admin.inc

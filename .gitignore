@@ -48,14 +48,17 @@ drushrc.php
 #########################
 bin
 build.properties
-build
 vendor
 behat.local.yml
 .php-version
+
+# Generated files #
+###################
+hooks
 
 # Local dev tools #
 ###################
 .vagrant
 .bundle
 node_modules
-
+.sass-cache

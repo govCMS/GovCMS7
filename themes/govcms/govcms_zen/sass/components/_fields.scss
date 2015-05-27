@@ -1,0 +1,31 @@
+.field {
+  margin: rhythm(0.5) 0;
+}
+
+.field-label-inline {
+  .field-label { width: 100px; }
+  margin: rhythm(1) 0;
+}
+
+.field-name-field-tags {
+  width: 100%;
+  border-top: solid 1px darken($color-tertiary-light, 10%);
+  border-bottom: solid 1px darken($color-tertiary-light, 10%);
+  padding: rhythm(.5) 0;
+  margin: rhythm(.5) 0;
+  display: block;
+  div { display: inline; }
+  .field-item {
+    &:before { content: ", "; }
+    &:first-child:before { content: "";}
+  }
+}
+
+.field-type-file {
+  img, a { display: inline-block; }
+}
+
+// Publications
+.field-name-field-subtitle { font-weight: bold; }
+
+.field-name-field-date.field-label-inline .field-label { width: auto; }

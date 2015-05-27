@@ -26,9 +26,9 @@ git clone git@github.com:govCMS/govCMS-Core.git
 Enter the project root, and run the following commands in order:
 
 ```
-cd govCMS-Core
-composer install --prefer-dist
-phing -f build.xml build
+cd <project_directory>
+composer install --prefer-dist --working-dir=build
+build/bin/phing -f build/phing/build.xml build
 ```
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
@@ -41,6 +41,7 @@ This will construct a copy of the govCMS Drupal codebase in the `docroot` direct
 
 - **docroot** - The Drupal root. This can be either a directory or a symlink.
 - **README.md** - Project documentation written in markdown.
+- **build** - Project specific files for building and testing govCMS.
 - **composer.json** - Project specific vendor packages and repositories.
 - **composer.lock** - Locked in version of vendor packages. To ensure consistency across the project.
 - **.gitignore** - A list of files to be ignored by git. This is typically used for excluding local development modules and may create files to ignore that an IDE creates.
@@ -70,7 +71,7 @@ export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "ht
 ### Phing
 
 - **build.xml** - Contains project specific configuration and tasks that can be executed across this projects team.
-- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will only assign the url of the current environment.
+- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will assign the url of the current environment. 
 
 The variables that Phing uses are configured at the top of build.xml. If there are alterations to these parameters to allow Phing to run locally, these may be placed in the *build.properties* file. This file is ignored from git so local modifications will not be committed. To alter the base URL for the Drupal site the following may be added to *build.properties*.
 
@@ -81,24 +82,32 @@ The variables that Phing uses are configured at the top of build.xml. If there a
 drupal.base_url='http://govcms.local/'
 ```
 
+If you are making changes to the make file, you can tell the build process to build from your local make file, instead of the one in the profile repository.
+
+From the build/phing folder:
+
+```
+../bin/phing build:no-clean
+```
+
 ## Testing govCMS
 The ability to test a govCMS build is built into the repository with all tests run by [Travis CI](https://travis-ci.com/) able to be run locally. Any changes made should be added and committed to your local repository and the following commands run:
 
 ```
-phing -f build.xml build
-phing -f build.xml run-tests
+phing -f build/phing/build.xml build
+phing -f build/phing/build.xml run-tests
 ```
 
 Individual tests may be run by specifying the target for Phing. If just the behat tests need to be run, the target can be changed:
 
 ```
-phing -f build.xml behat
+phing -f build/phing/build.xml test:behat
 ```
 
 All tasks in this project can be listed via the command:
 
 ```
-phing -l
+phing -f build/phing/build.xml -l
 ```
 
 
@@ -116,3 +125,5 @@ To submit a patch, the govCMS project should be forked and changes applied to a 
 ## Contributing to govCMS
 
 All contributions to govCMS are welcome. Issues and pull requests may be submitted against the govCMS project on github where they will be addressed by the govCMS team.
+
+More information may be found in CONTRIBUTING.md.

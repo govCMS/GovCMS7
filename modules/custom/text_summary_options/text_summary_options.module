@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Provides options for 'Long Text With Summary' widget.
+ */
+
+/**
+ * Implements hook_field_info_alter().
+ */
+function text_summary_options_field_info_alter(&$info) {
+  $info['text']['settings'] += array(
+    'show_summary' => '0',
+    'required_summary' => '0',
+  );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function text_summary_options_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'field_ui_field_edit_form':
+      // Field settings form.
+      if ($form['#field']['type'] == 'text_with_summary') {
+        $settings = $form['#instance']['settings'];
+        $form['instance']['settings']['show_summary'][] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Show summary'),
+          '#description' => t('Display the summary field by default.'),
+          '#default_value' => !empty($settings['show_summary'][0]) ? TRUE : FALSE,
+        );
+        $form['instance']['settings']['required_summary'][] = array(
+          '#type' => 'checkbox',
+          '#title' => t('Mark Summary as required'),
+          '#description' => t('Should the Summary field be required.'),
+          '#default_value' => !empty($settings['required_summary'][0]) ? TRUE : FALSE,
+        );
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function text_summary_options_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($form_state['node'])) {
+    if (isset($element['summary'])) {
+      // Process show summary.
+      if (isset($context['instance']['settings']['show_summary']) && $context['instance']['settings']['show_summary'][0]) {
+        unset($element['summary']['#attached']);
+      }
+      // Process required.
+      if (isset($context['instance']['settings']['required_summary']) && $context['instance']['settings']['required_summary'][0]) {
+        $element['summary']['#required'] = TRUE;
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+name = Permissions
+description = Provides permissions.
+core = 7.x
+package = govCMS core
+dependencies[] = govcms_appearance
+dependencies[] = defaultconfig
+dependencies[] = role_delegation

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Sitemap Configuration feature.
+ */
+
+include_once 'govcms_sitemap.features.inc';

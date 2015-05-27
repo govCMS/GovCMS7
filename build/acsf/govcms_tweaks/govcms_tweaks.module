@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * @file
+ * Module file for the govCMS tweaks module.
+ */
+
+/**
+ * Implements hook_openid_response().
+ *
+ * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+ */
+function govcms_tweaks_openid_response($response, $account) {
+  // If the password policy module (1.x) is enabled it will force
+  // ACSF admins to change a password they can't set. This is a work
+  // around to prevent that from happening.
+  // Check db table exists as proof that we're
+  // using version 1.x of Password Policy.
+  if (module_exists('acsf_openid') && module_exists('password_policy') && db_table_exists('password_policy_force_change')) {
+    $openid_uid = $account->uid;
+
+    // Make sure to remove the force change password.
+    db_update('password_policy_force_change')
+        ->fields(array('force_change' => '0'))
+        ->condition('uid', $openid_uid)
+        ->execute();
+
+    // Check password_policy_expiration to delete.
+    db_delete('password_policy_expiration')
+        ->condition('uid', $openid_uid)
+        ->execute();
+  }
+}

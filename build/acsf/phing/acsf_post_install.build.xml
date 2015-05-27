@@ -1,0 +1,7 @@
+<project name="acsf_post_install" default="build" phingVersion="2.8.2">
+
+    <!-- Run drush acsf-init to copy hooks into the repo root. -->
+    <drush command="acsf-init" assume="yes">
+        <option name="include">"${docroot}/profiles/govcms/modules/contrib/acsf/acsf_init"</option>
+    </drush>
+</project>

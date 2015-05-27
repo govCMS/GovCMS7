@@ -1,0 +1,1572 @@
+<?php
+
+/**
+ * @file
+ * The install file for the govCMS distribution.
+ *
+ * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
+ *
+ * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
+ * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ * @author Department of Finance
+ **/
+
+/**
+ * Define a default theme constant
+ */
+define('GOVCMS_DEFAULT_THEME', 'govcms_barton');
+
+/**
+ * Define the install theme.
+ */
+define('GOVCMS_INSTALL_DEFAULT_THEME', 'govcms_zen');
+
+/**
+ * Define the admin theme.
+ */
+define('GOVCMS_DEFAULT_ADMIN_THEME', 'shiny');
+
+/**
+ * Set the twitter widget ID.
+ */
+define('GOVCMS_TWITTER_WIDGET_ID', '588502522433646593');
+
+/**
+ * Define the role to be used as the admin role.
+ */
+define('GOVCMS_ADMIN_ROLE_ID', '3');
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ */
+function govcms_install() {
+
+  // Ensure the beans feature is reverted.
+  $revert = array('govcms_beans');
+  _govcms_features_revert($revert);
+
+  // Configure default text formats and basic permissions.
+  _govcms_default_formats_and_permissions();
+
+  // Configure basic roles.
+  _govcms_create_basic_roles_perms();
+
+  // Set default front-end and admin themes.
+  _govcms_set_default_themes();
+
+  // Create additional date formats.
+  _govcms_date_formats();
+
+  // Setup some default blocks.
+  _govcms_default_blocks();
+
+  // Set up twitter block.
+  _govcms_twitter_block();
+
+  // Set some default variable values.
+  _govcms_default_variables();
+
+  // Enable full image display mode.
+  _govcms_install_full_image_display();
+
+  // Set default menu items.
+  _govcms_set_menu();
+
+  // Set default tags.
+  _govcms_default_tags();
+
+  // Setup login destination.
+  _govcms_setup_login_destination();
+
+  // Set defaults for the contact form.
+  _govcms_contact_form_defaults();
+
+  // Final modules.
+  module_enable(array('govcms_password_policy'));
+
+  // Clean up after install.
+  govcms_cleanup();
+}
+
+/**
+ * Returns a list of the themes that govCMS supports.
+ */
+function govcms_supported_themes() {
+  return array(
+    GOVCMS_DEFAULT_THEME,
+    GOVCMS_INSTALL_DEFAULT_THEME,
+  );
+}
+
+/**
+ * Create basic roles.
+ */
+function _govcms_create_basic_roles_perms() {
+
+  $weight = 1;
+  $base_permissions = array('access navbar');
+
+  // Content editor.
+  $roles['Content editor'] = array(
+    'name' => 'Content editor',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  // Content approver.
+  $roles['Content approver'] = array(
+    'name' => 'Content approver',
+    'weight' => $weight++,
+    'permissions' => $base_permissions,
+  );
+
+  $extra_perms = array(
+    'administer google analytics reports',
+    'access google analytics reports',
+  );
+  $extended_permissions = $base_permissions + $extra_perms;
+
+  // Site builder.
+  $roles['Site builder'] = array(
+    'name' => 'Site builder',
+    'weight' => $weight++,
+    'permissions' => $extended_permissions,
+  );
+
+  // Site editor.
+  $roles['Site editor'] = array(
+    'name' => 'Site editor',
+    'weight' => $weight++,
+    'permissions' => $extended_permissions,
+  );
+
+  // Create the roles.
+  foreach ($roles as $role) {
+    $role_object = new stdClass();
+    $role_object->name = $role['name'];
+    $role_object->weight = $role['weight'];
+
+    // Save the role.
+    user_role_save($role_object);
+
+    // Grant permissions.
+    if (!empty($role['permissions'])) {
+      user_role_grant_permissions($role_object->rid, $role['permissions']);
+    }
+  }
+
+  // Update the weight of the administrator role so its last.
+  $admin_role = user_role_load(GOVCMS_ADMIN_ROLE_ID);
+  $admin_role->weight = $weight++;
+  user_role_save($admin_role);
+}
+
+/**
+ * Set default themes.
+ */
+function _govcms_set_default_themes() {
+  // Any themes without keys here will get numeric keys and so will be enabled,
+  // but not placed into variables.
+  //
+  // The install_state data is discarded after the last core install task, so
+  // we set install_profile specifically to ensure that drupal_get_profile()
+  // returns the correct profile name and finds the profile themes.
+  $enable = array(
+    'theme_default' => GOVCMS_DEFAULT_THEME,
+    'admin_theme' => GOVCMS_DEFAULT_ADMIN_THEME,
+    'install_profile' => 'govcms',
+  );
+  theme_enable($enable);
+
+  foreach ($enable as $var => $theme) {
+    if (!is_numeric($var)) {
+      variable_set($var, $theme);
+    }
+  }
+
+  // Disable the default Bartik & default admin theme.
+  theme_disable(array('bartik', GOVCMS_DEFAULT_ADMIN_THEME));
+}
+
+/**
+ * Add default text formats and create a default role for administrators.
+ */
+function _govcms_default_formats_and_permissions() {
+
+  // Add text formats.
+  $rich_text_format = array(
+    'format' => 'rich_text',
+    'name' => 'Rich text',
+    'weight' => 0,
+    'filters' => array(
+      // Video filter - Must go before 'Convert URLs into links'
+      // per module documentation.
+      'video_filter' => array(
+        'weight' => 0,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Convert URLs into links.
+      'filter_url' => array(
+        'weight' => 1,
+        'status' => 1,
+        'settings' => array(
+          'filter_url_length' => 72,
+        ),
+      ),
+      // Convert line breaks into HTML.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Wysiwyg filter.
+      'wysiwyg' => array(
+        'weight' => -50,
+        'status' => 1,
+        'settings' => array(
+          'valid_elements' => 'a[href|target<_blank|title|class|name|id],
+div[id|class|align<center?justify?left?right],
+br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
+span,p[class],
+h2[class],h3[class],h4[class],h5[class],h6[class],
+img[!src|title|alt|width|height|class|hspace|vspace],
+table[border|cellpadding|cellspacing|align|dir|summary|style],tr[scope],thead,td[colspan|rowspan|headers|class|id],th[colspan|rowspan|class|headers|id|scope],tbody,caption,sup,sub,
+@[class]
+video',
+          'allow_comments' => 1,
+          'nofollow_policy' => 'disabled',
+          'nofollow_domains' => array(),
+          'style_color' => array(
+            'color' => 'color',
+            'background' => 0,
+            'background-color' => 0,
+            'background-image' => 0,
+            'background-repeat' => 0,
+            'background-attachment' => 0,
+            'background-position' => 0,
+          ),
+          'style_font' => array(
+            'font' => 0,
+            'font-family' => 0,
+            'font-size' => 0,
+            'font-size-adjust' => 0,
+            'font-stretch' => 0,
+            'font-style' => 0,
+            'font-variant' => 0,
+            'font-weight' => 0,
+          ),
+          'style_text' => array(
+            'text-align' => 'text-align',
+            'text-decoration' => 'text-decoration',
+            'text-indent' => 0,
+            'text-transform' => 0,
+            'letter-spacing' => 0,
+            'word-spacing' => 0,
+            'white-space' => 0,
+            'direction' => 0,
+            'unicode-bidi' => 0,
+          ),
+          'style_box' => array(
+            'padding-right' => 'padding-right',
+            'padding-left' => 'padding-left',
+            'margin' => 0,
+            'margin-top' => 0,
+            'margin-right' => 0,
+            'margin-bottom' => 0,
+            'margin-left' => 0,
+            'padding' => 0,
+            'padding-top' => 0,
+            'padding-bottom' => 0,
+          ),
+          'style_border-1' => array(
+            'border' => 0,
+            'border-top' => 0,
+            'border-right' => 0,
+            'border-bottom' => 0,
+            'border-left' => 0,
+            'border-width' => 0,
+            'border-top-width' => 0,
+            'border-right-width' => 0,
+            'border-bottom-width' => 0,
+            'border-left-width' => 0,
+          ),
+          'style_border-2' => array(
+            'border-color' => 0,
+            'border-top-color' => 0,
+            'border-right-color' => 0,
+            'border-bottom-color' => 0,
+            'border-left-color' => 0,
+            'border-style' => 0,
+            'border-top-style' => 0,
+            'border-right-style' => 0,
+            'border-bottom-style' => 0,
+            'border-left-style' => 0,
+          ),
+          'style_dimension' => array(
+            'height' => 'height',
+            'line-height' => 0,
+            'max-height' => 0,
+            'max-width' => 0,
+            'min-height' => 0,
+            'min-width' => 0,
+            'width' => 'width',
+          ),
+          'style_positioning' => array(
+            'bottom' => 0,
+            'clip' => 0,
+            'left' => 0,
+            'overflow' => 0,
+            'right' => 0,
+            'top' => 0,
+            'vertical-align' => 0,
+            'z-index' => 0,
+          ),
+          'style_layout' => array(
+            'float' => 'float',
+            'clear' => 0,
+            'display' => 0,
+            'position' => 0,
+            'visibility' => 0,
+          ),
+          'style_list' => array(
+            'list-style' => 0,
+            'list-style-image' => 0,
+            'list-style-position' => 0,
+            'list-style-type' => 0,
+          ),
+          'style_table' => array(
+            'border-collapse' => 0,
+            'border-spacing' => 0,
+            'caption-side' => 0,
+            'empty-cells' => 0,
+            'table-layout' => 0,
+          ),
+          'style_user' => array(
+            'cursor' => 0,
+            'outline' => 0,
+            'outline-width' => 0,
+            'outline-style' => 0,
+            'outline-color' => 0,
+            'zoom' => 0,
+          ),
+          'rule_valid_classes' => array(
+            0 => 'a*',
+            2 => 'b*',
+            4 => 'c*',
+            6 => 'd*',
+            8 => 'e*',
+            10 => 'f*',
+            12 => 'g*',
+            14 => 'h*',
+            16 => 'i*',
+            18 => 'j*',
+            20 => 'k*',
+            22 => 'l*',
+            24 => 'm*',
+            26 => 'n*',
+            28 => 'o*',
+            30 => 'p*',
+            32 => 'q*',
+            34 => 'r*',
+            36 => 's*',
+            38 => 't*',
+            40 => 'u*',
+            42 => 'v*',
+            44 => 'w*',
+            46 => 'x*',
+            48 => 'y*',
+            50 => 'z*',
+            52 => 'A*',
+            54 => 'B*',
+            56 => 'C*',
+            58 => 'D*',
+            60 => 'E*',
+            62 => 'F*',
+            64 => 'G*',
+            66 => 'H*',
+            68 => 'I*',
+            70 => 'J*',
+            72 => 'K*',
+            74 => 'L*',
+            76 => 'M*',
+            78 => 'N*',
+            80 => 'O*',
+            82 => 'P*',
+            84 => 'Q*',
+            86 => 'R*',
+            88 => 'S*',
+            90 => 'T*',
+            92 => 'U*',
+            94 => 'V*',
+            96 => 'W*',
+            98 => 'X*',
+            100 => 'Y*',
+            102 => 'Z*',
+            104 => 'lower-roman',
+            106 => 'upper-roman',
+            108 => 'lower-alpha',
+            110 => 'upper-alpha',
+          ),
+          'rule_valid_ids' => array(
+            0 => 'a*',
+            2 => 'b*',
+            4 => 'c*',
+            6 => 'd*',
+            8 => 'e*',
+            10 => 'f*',
+            12 => 'g*',
+            14 => 'h*',
+            16 => 'i*',
+            18 => 'j*',
+            20 => 'k*',
+            22 => 'l*',
+            24 => 'm*',
+            26 => 'n*',
+            28 => 'o*',
+            30 => 'p*',
+            32 => 'q*',
+            34 => 'r*',
+            36 => 's*',
+            38 => 't*',
+            40 => 'u*',
+            42 => 'v*',
+            44 => 'w*',
+            46 => 'x*',
+            48 => 'y*',
+            50 => 'z*',
+            52 => 'A*',
+            54 => 'B*',
+            56 => 'C*',
+            58 => 'D*',
+            60 => 'E*',
+            62 => 'F*',
+            64 => 'G*',
+            66 => 'H*',
+            68 => 'I*',
+            70 => 'J*',
+            72 => 'K*',
+            74 => 'L*',
+            76 => 'M*',
+            78 => 'N*',
+            80 => 'O*',
+            82 => 'P*',
+            84 => 'Q*',
+            86 => 'R*',
+            88 => 'S*',
+            90 => 'T*',
+            92 => 'U*',
+            94 => 'V*',
+            96 => 'W*',
+            98 => 'X*',
+            100 => 'Y*',
+            102 => 'Z*',
+          ),
+          'rule_style_urls' => array(),
+        ),
+      ),
+      // Convert Media tags to markup.
+      'media_filter' => array(
+        'weight' => 3,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Table of contents filter.
+      'toc_filter' => array(
+        'weight' => 4,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Clean up HTML.
+      'filter_htmlcorrector' => array(
+        'weight' => 5,
+        'status' => 1,
+        'settings' => array(),
+      ),
+    ),
+  );
+  $rich_text_format = (object) $rich_text_format;
+  filter_format_save($rich_text_format);
+
+  $plain_text_format = array(
+    'format' => 'plain_text',
+    'name' => 'Plain text',
+    'weight' => 10,
+    'filters' => array(
+      // Display any HTML as plain text.
+      'filter_html_escape' => array(
+        'weight' => 0,
+        'status' => 1,
+        'settings' => array(),
+      ),
+      // Convert URLs into links.
+      'filter_url' => array(
+        'weight' => 1,
+        'status' => 1,
+        'settings' => array(
+          'filter_url_length' => 72,
+        ),
+      ),
+      // Convert line breaks into HTML.
+      'filter_autop' => array(
+        'weight' => 2,
+        'status' => 1,
+        'settings' => array(),
+      ),
+    ),
+  );
+  $plain_text_format = (object) $plain_text_format;
+  filter_format_save($plain_text_format);
+
+  // Enable default permissions for system roles.
+  $rich_text_permission = filter_permission_name($rich_text_format);
+  user_role_grant_permissions(
+    DRUPAL_ANONYMOUS_RID,
+    array(
+      'access content',
+    )
+  );
+  user_role_grant_permissions(
+    DRUPAL_AUTHENTICATED_RID,
+    array(
+      'access content',
+      'access comments',
+      'post comments',
+      'skip comment approval',
+      $rich_text_permission,
+    )
+  );
+
+  // Create a default role for site administrators, with all available
+  // permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+}
+
+/**
+ * Sets a custom date format.
+ *
+ * This install function works in 3 steps:
+ * 1) Install the date type - Month Year format ("F Y").
+ * 2) Setup a date type of Publications.
+ * 3) Using variable set we then associate the format and type.
+ */
+function _govcms_date_formats() {
+  $t_function = get_t();
+
+  // Variables.
+  $date_formats = array(
+    'govcms_month_year' => array(
+      'format' => array(
+        'type' => 'govcms_month_year',
+        'format' => 'F Y',
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'govcms_month_year',
+        'title' => $t_function('Month Year Format'),
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+    ),
+    'govcms_month_day_year' => array(
+      'format' => array(
+        'type' => 'govcms_month_day_year',
+        'format' => 'j F Y',
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+      'type' => array(
+        'type' => 'govcms_month_day_year',
+        'title' => $t_function('Month Day Year Format'),
+        'locked' => TRUE,
+        'is_new' => TRUE,
+      ),
+    ),
+  );
+
+  // Save the data.
+  foreach ($date_formats as $type_string => $data) {
+    system_date_format_save($data['format']);
+    system_date_format_type_save($data['type']);
+    variable_set('date_format_' . $type_string, $data['format']['format']);
+  }
+
+  variable_set('date_format_short', "d/m/Y - g:ia");
+}
+
+/**
+ * Setup some default blocks.
+ */
+function _govcms_default_blocks() {
+  // Get all the govCMS supported themes.
+  $themes = govcms_supported_themes();
+
+  // Set default system block in primary theme.
+  govcms_core_insert_block('system', 'main', $themes, 'content', -12);
+  govcms_core_insert_block('system', 'help', $themes, 'content', -14);
+  govcms_core_insert_block('superfish', '1', $themes, 'navigation');
+  govcms_core_insert_block('menu', 'menu-footer-sub-menu', $themes, 'footer', 3);
+
+  // Set govCMS blocks.
+  govcms_core_insert_block('govcms_text_resize', 'text_resize', $themes, 'header');
+  govcms_core_insert_block('workbench', 'block', $themes, 'content', -14);
+  govcms_core_insert_block('menu_block', 'govcms_menu_block-footer', $themes, 'footer', 2);
+  govcms_core_insert_block('views', 'slideshow-block', $themes, 'highlighted', 0, 1, '<front>');
+  govcms_core_insert_block('views', 'footer_teaser-block', $themes, 'footer', 1);
+
+  // Set govCMS sidebar blocks.
+  govcms_core_insert_block('menu_block', 'govcms_menu_block-sidebar', $themes, 'sidebar_second', -50);
+  govcms_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar_second', -48);
+  govcms_core_insert_block('govcms_social_links', 'services', $themes, 'sidebar_second', -47);
+
+  // Set some blocks in the admin theme.
+  govcms_core_insert_block('system', 'main', GOVCMS_DEFAULT_ADMIN_THEME, 'content');
+  govcms_core_insert_block('system', 'help', GOVCMS_DEFAULT_ADMIN_THEME, 'help');
+  govcms_core_insert_block('govcms_core', 'update_notification', GOVCMS_DEFAULT_ADMIN_THEME, 'help', 24, BLOCK_VISIBILITY_LISTED, "admin/reports/updates*");
+
+  // Ensure Wcag validate block only appears on correct pages.
+  db_update('block')->fields(array(
+    'visibility' => BLOCK_VISIBILITY_LISTED,
+    'pages' => "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*",
+  ))
+  ->condition('module', 'wcag_validate')
+  ->condition('delta', 'wcag_validate')
+  ->execute();
+
+}
+
+/**
+ * Insert the twitter block.
+ */
+function _govcms_twitter_block() {
+  // Get all the govCMS supported themes.
+  $themes = govcms_supported_themes();
+
+  $data = array(
+    "theme" => "",
+    "link_color" => "",
+    "width" => "",
+    "height" => "",
+    "chrome" => array(
+      "noheader" => "noheader",
+      "nofooter" => "nofooter",
+      "noborders" => "noborders",
+      "noscrollbar" => "noscrollbar",
+      "transparent" => "transparent",
+    ),
+    "border_color" => "",
+    "language" => "",
+    "tweet_limit" => "",
+    "related" => "",
+    "polite" => "polite",
+  );
+
+  $bid = db_insert('twitter_block')
+    ->fields(array(
+      'info' => 'Twitter Feed',
+      'widget_id' => GOVCMS_TWITTER_WIDGET_ID,
+      'data' => serialize($data),
+    ))
+    ->execute();
+
+  govcms_core_insert_block('twitter_block', $bid, $themes, 'sidebar_second', -49);
+
+}
+
+/**
+ * Set default variable values.
+ */
+function _govcms_default_variables() {
+
+  $variables = array(
+
+    // Pathauto default.
+    'pathauto_node_pattern' => '[node:title]',
+    'pathauto_punctuation_hyphen' => 1,
+    'pathauto_taxonomy_term_pattern' => '[term:vocabulary]/[term:name]',
+    'pathauto_user_pattern' => 'users/[user:name]',
+    'path_alias_whitelist' => array(
+      'node' => TRUE,
+      'taxonomy' => TRUE,
+      'user' => TRUE,
+    ),
+
+    // User registration.
+    'user_register' => USER_REGISTER_ADMINISTRATORS_ONLY,
+    'admin_theme' => GOVCMS_DEFAULT_ADMIN_THEME,
+    'node_admin_theme' => GOVCMS_DEFAULT_ADMIN_THEME,
+
+    // Turn on honeypot protection for all forms.
+    'honeypot_protect_all_forms' => 1,
+    // Don't disable page caching.
+    'honeypot_time_limit' => "0",
+
+    'xmlsitemap_settings_node_page' => array(
+      'status' => '1',
+      'priority' => '0.5',
+    ),
+
+    // Set jquery update to use Google CDN.
+    'jquery_update_jquery_cdn' => 'google',
+
+    // Set webform_clear default time.
+    'webform_clear_default_time' => 0,
+
+    // Turn off theme rebuilds.
+    'theme_govcms_zen_settings' => array('zen_rebuild_registry' => 0),
+
+    // Force user to change password on login.
+    'password_policy_new_login_change' => 1,
+
+    // Session lifetime 0.
+    'session_cookie_lifetime_type' => 'browser_session',
+
+    // Soft block users after 5 failed login attempts in 24 hours.
+    'login_security_user_wrong_count' => '5',
+    'login_security_track_time' => '24',
+
+    // Display last login time.
+    'login_security_last_access_timestamp' => 1,
+    'login_security_last_login_timestamp' => 1,
+
+    // TOC settings.
+    'toc_filter_header_tag' => 'h2',
+
+    // Shield settings.
+    'shield_enabled' => 0,
+
+    // Maintenance Message.
+    'maintenance_mode_message' => '<p>This web site is currently undergoing some maintenance and is unavailable.</p><p>Thank you for your patience.</p>',
+
+    // Linkchecker.
+    'linkchecker_scan_nodetypes' => array(
+      'blog_article' => 'blog_article',
+      'event' => 'event',
+      'media_release' => 'media_release',
+      'news_article' => 'news_article',
+      'footer_teaser' => 'footer_teaser',
+      'publication' => 'publication',
+      'slide' => 'slide',
+      'page' => 'page',
+      'webform' => 'webform',
+    ),
+    'linkchecker_impersonate_user' => 'admin',
+    'linkchecker_scan_blocks' => 1,
+
+    // OAuth.
+    // Prevent the site from being an OAuth provider by default.
+    'oauth_common_enable_provider' => FALSE,
+
+    // File Lock.
+    // Lock all files.
+    'file_lock_mode' => 'all',
+
+    // Role protections.
+    'userprotect_role_protections' => array(
+      2 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      4 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      5 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      6 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      7 => array(
+        'up_name' => 0,
+        'up_mail' => 0,
+        'up_pass' => 0,
+        'up_status' => 0,
+        'up_roles' => 0,
+        'up_openid' => 0,
+        'up_cancel' => 0,
+        'up_edit' => 0,
+      ),
+      3 => array(
+        'up_name' => 1,
+        'up_mail' => 1,
+        'up_pass' => 1,
+        'up_status' => 1,
+        'up_roles' => 1,
+        'up_openid' => 1,
+        'up_cancel' => 1,
+        'up_edit' => 1,
+      ),
+    ),
+  );
+
+  // Enable xmlsitemap includes for content types.
+  $xmlsitemap_settings = array(
+    'status' => '1',
+    'priority' => '0.5',
+  );
+
+  $types = array(
+    'node_page',
+    'node_blog_article',
+    'node_event',
+    'node_footer_teaser',
+    'node_media_release',
+    'node_news_article',
+    'node_page',
+    'node_publication',
+    'node_webform',
+  );
+
+  foreach ($types as $type) {
+    $variables['xmlsitemap_settings_' . $type] = $xmlsitemap_settings;
+  }
+
+  foreach ($variables as $key => $value) {
+    variable_set($key, $value);
+  }
+
+  // Set Crumbs weights.
+  $crumbs_weights = array(
+    'crumbs.home_title' => 1,
+    'path'  => 2,
+    '*' => 3,
+  );
+  variable_set('crumbs_weights', $crumbs_weights);
+  variable_set('crumbs_show_current_page', 1);
+}
+
+/**
+ * Set default menu items.
+ */
+function _govcms_set_menu() {
+
+  // Create a Home link in the main menu.
+  $item = array(
+    'link_title' => st('Home'),
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+    'weight' => -50,
+  );
+  menu_link_save($item);
+
+  menu_rebuild();
+}
+
+/**
+ * Setup beans.
+ */
+function _govcms_default_beans() {
+  // If functionality available. Create some blocks.
+  if (function_exists('govcms_core_save_bean')) {
+    // Create the front page block.
+    $fields = array(
+      'field_bean_body' => array(
+        '0' => array(
+          'value' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque non faucibus massa. Maecenas ac dui turpis. Vivamus eu arcu tellus. Nunc sit amet tellus nunc. Quisque ac lacus nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer consectetur, urna vitae posuere varius, sem enim blandit augue, non condimentum dolor tortor id quam. Quisque venenatis dolor neque. Nunc suscipit sem id neque lobortis ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.<br/><a href="about-us">Learn more about us &raquo;</a>',
+          'format' => 'rich_text',
+        ),
+      ),
+    );
+    govcms_core_save_bean('basic_content', 'About Us', 'Provides "About Us" block for the from page.', 'About Us', $fields);
+
+    // Create the footer block.
+    $this_year = date('Y');
+    $fields = array(
+      'field_bean_body' => array(
+        '0' => array(
+          'value' => '&#169; ' . $this_year . ' Government | Powered by <a href="http://govcms.com.au">govCMS</a>',
+          'format' => 'rich_text',
+        ),
+      ),
+    );
+    // Get all the govCMS supported themes.
+    $themes = govcms_supported_themes();
+    govcms_core_save_bean('basic_content', 'Footer copyright', 'The copyright message', '', $fields);
+    govcms_core_insert_block('bean', 'footer-copyright', $themes, 'footer', 4);
+  }
+  else {
+    drupal_set_message('govCMS Core was not available. Some of your blocks could not be created.', 'error');
+  }
+}
+
+/**
+ * Sets up news related beans.
+ */
+function _govcms_default_news_beans() {
+  $t = get_t();
+
+  // Ensure the bean save function is available.
+  if (!function_exists('govcms_core_save_bean')) {
+    error_log('Function not available');
+    return;
+  }
+
+  // Add menu links to main menu.
+  $menus = array(
+    'current-news' => 'news-media/news',
+    'media-releases' => 'news-media/media-releases',
+    'events' => 'news-media/events',
+    'blog' => 'news-media/blog',
+  );
+
+  // @todo - Save these menu items below the news-media item.
+  // Save the images required for these block.
+  $files = array();
+  $images = array(
+    'news-media-intro' => 'news-media.jpg',
+    'current-news' => 'news-archives.jpg',
+    'media-releases' => 'media-releases.jpg',
+    'events' => 'events.jpg',
+    'blog' => 'news-media.jpg',
+  );
+  foreach ($images as $delta => $image) {
+    // Load the files contents.
+    $handle = fopen(dirname(__FILE__) . '/images/' . $image, 'r');
+    // Returns the new file object.
+    $files[$delta] = file_save_data($handle, 'public://' . $image, FILE_EXISTS_RENAME);
+    fclose($handle);
+  }
+
+  // Install the required blocks.
+  // Beans to be installed.
+  $beans = array(
+    // News and Media Intro block for the News & Media page.
+    'news-media-intro' => array(
+      'label' => $t('News and Media Intro'),
+      'title' => '',
+      'description' => $t('Provides a "News and Media Intro" bean that gives overview for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'hightlight',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['news-media-intro']->fid,
+            'alt' => t('News and Media Intro'),
+            'title' => t('News and Media Intro'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Optional intro block with image Est porttitor hac ultricies nec integer enim scelerisque proin sagittis porttitor, sit! Magnis sit egestas turpis parturient aliquam. Mauris duis nascetur vel porttitor scelerisque cursus nec, in dis sit sagittis, lacus lacus?',
+            'format' => 'rich_text',
+          ),
+        ),
+      ),
+    ),
+
+  // Current News block.
+    'current-news' => array(
+      'label' => $t('News'),
+      'title' => $t('News'),
+      'description' => $t('Provides a "Current News" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+      // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['current-news']->fid,
+            'alt' => t('Current News'),
+            'title' => t('Current News'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+      // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['current-news'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+  // Media releases.
+    'media-releases' => array(
+      'label' => $t('Media Releases'),
+      'title' => $t('Media Releases'),
+      'description' => $t('Provides a "Media Releases" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['media-releases']->fid,
+            'alt' => t('Media Releases'),
+            'title' => t('Media Releases'),
+          ),
+        ),
+      // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+      // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['media-releases'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+  // Events.
+    'events' => array(
+      'label' => $t('Events'),
+      'title' => $t('Events'),
+      'description' => $t('Provides a "Events" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['events']->fid,
+            'alt' => t('Events'),
+            'title' => t('Events'),
+          ),
+        ),
+        // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+        // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['events'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+
+   // Blog.
+    'blog' => array(
+      'label' => $t('Blog'),
+      'title' => $t('Blog'),
+      'description' => $t('Provides a "Blog" bean for the News & Media page.'),
+      'type' => 'image_and_text',
+      'view_mode' => 'default',
+      'fields' => array(
+        // Image field.
+        'field_bean_image' => array(
+          '0' => array(
+            'fid' => $files['blog']->fid,
+            'alt' => t('Blog'),
+            'title' => t('Blog'),
+          ),
+        ),
+        // Text field.
+        'field_bean_text' => array(
+          '0' => array(
+            'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
+            'format' => 'rich_text',
+          ),
+        ),
+        // Link to field.
+        'field_link_to' => array(
+          '0' => array(
+            'url' => $menus['blog'],
+            'title' => '',
+            'attributes' => '',
+          ),
+        ),
+      ),
+    ),
+  );
+
+  // Programattically create the beans using core govCMS functionality.
+  foreach ($beans as $bean) {
+    govcms_core_save_bean($bean['type'], $bean['label'], $bean['description'], $bean['title'], $bean['fields'], $bean['view_mode']);
+  }
+}
+
+/**
+ * Reverts a list of features.
+ */
+function _govcms_features_revert($modules) {
+  module_load_include('inc', 'features', 'features.export');
+  features_include();
+  foreach ($modules as $module) {
+    if (($feature = feature_load($module, TRUE)) && module_exists($module)) {
+      $components = array();
+      // Forcefully revert all components of a feature.
+      foreach (array_keys($feature->info['features']) as $component) {
+        if (features_hook($component, 'features_revert')) {
+          $components[] = $component;
+        }
+      }
+    }
+    foreach ($components as $component) {
+      features_revert(array($module => array($component)));
+    }
+  }
+}
+
+/**
+ * Created default tags.
+ */
+function _govcms_default_tags() {
+  // List of terms for insert.
+  $terms = array(
+    t('consequat'),
+    t('fuisset'),
+    t('maluisset'),
+    t('ponderum'),
+    t('prodesset'),
+    t('rationibus'),
+    t('voluptatibus'),
+  );
+
+  $vocabs = taxonomy_vocabulary_get_names();
+  if (empty($vocabs['tags'])) {
+    return;
+  }
+
+  // Save taxonomy terms.
+  $vid = $vocabs['tags']->vid;
+  $tids = array();
+
+  foreach ($terms as $name) {
+    $term = new stdClass();
+    $term->name = $name;
+    $term->vid = $vid;
+    $term->vocabulary_machine_name = 'tags';
+    taxonomy_term_save($term);
+    $tids[] = $term->tid;
+  }
+
+  // Save the tids.
+  variable_set('govcms_tags_saved', $tids);
+}
+
+/**
+ * Implements hook_install_tasks().
+ */
+function govcms_install_tasks($install_state) {
+  $task = array();
+
+  $govcms_example_content_batch = variable_get('govcms_example_content_batch', FALSE);
+
+  $task['govcms_install_additional_options'] = array(
+    'display_name' => st('Additional options'),
+    'display' => TRUE,
+    'type' => 'form',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+  );
+  $task['govcms_example_content_install'] = array(
+    'display_name' => st('Example content'),
+    'display' => FALSE,
+    'type' => 'batch',
+    'run' => $govcms_example_content_batch ? INSTALL_TASK_RUN_IF_NOT_COMPLETED : INSTALL_TASK_SKIP,
+  );
+  $task['govcms_cleanup'] = array(
+    'display_name' => st('Finish'),
+    'display' => FALSE,
+    'type' => 'normal',
+    'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
+  );
+  return $task;
+}
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function govcms_install_tasks_alter(&$tasks, $install_state) {
+
+  $tasks['govcms_finished'] = $tasks['install_finished'];
+  unset($tasks['install_finished']);
+
+  _govcms_set_theme(GOVCMS_INSTALL_DEFAULT_THEME);
+  drupal_add_css('profiles/govcms/css/install.css');
+  drupal_add_js('profiles/govcms/js/install.js');
+}
+
+/**
+ * Overrides the core install_finished.
+ */
+function govcms_finished() {
+  drupal_set_title(st('@drupal installation complete', array('@drupal' => drupal_install_profile_distribution_name())), PASS_THROUGH);
+  $messages = drupal_set_message();
+  $output = '<p>' . st('Congratulations, you installed @drupal!', array('@drupal' => drupal_install_profile_distribution_name())) . '</p>';
+  $output .= '<p>' . (isset($messages['error']) ? st('Review the messages above before visiting <a href="@url">your new site</a>.', array('@url' => url(''))) : st('<a href="@url" class="button">Visit your new site</a>', array('@url' => url('')))) . '</p>';
+
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the installation profile are registered correctly.
+
+  variable_set('features_rebuild_on_flush', FALSE);
+  drupal_flush_all_caches();
+
+  // Remember the profile which was used.
+  variable_set('install_profile', drupal_get_profile());
+
+  // Installation profiles are always loaded last.
+  db_update('system')
+    ->fields(array('weight' => 1000))
+    ->condition('type', 'module')
+    ->condition('name', drupal_get_profile())
+    ->execute();
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+  variable_set('features_rebuild_on_flush', TRUE);
+
+  return $output;
+}
+
+/**
+ * Form callback for additional options install task.
+ */
+function govcms_install_additional_options() {
+
+  set_time_limit(0);
+
+  $form = array();
+  drupal_set_title('Additional options');
+
+  $form['default_content'] = array(
+    '#type' => 'fieldset',
+    '#title' => st('Example content'),
+  );
+
+  $form['default_content']['install'] = array(
+    '#type' => 'checkbox',
+    '#title' => st('Install example content'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => st('Continue'),
+  );
+  return $form;
+}
+
+
+/**
+ * Submit handler.
+ *
+ * @ingroup forms
+ */
+function govcms_install_additional_options_submit(&$form, &$form_state) {
+
+  // If user selects to install default content. Set var.
+  if ($form_state['values']['install']) {
+    variable_set('govcms_example_content_batch', TRUE);
+  }
+  return FALSE;
+}
+
+/**
+ * Returns modules and functions to install default/example content.
+ */
+function govcms_default_content() {
+
+  return array(
+    0 => array(
+      'title' => st('Events'),
+      'type' => 'module',
+      'key' => 'govcms_content_event',
+    ),
+    1 => array(
+      'title' => st('Publications'),
+      'type' => 'module',
+      'key' => 'govcms_content_publication',
+    ),
+    2 => array(
+      'title' => st('Blog'),
+      'type' => 'module',
+      'key' => 'govcms_content_blog',
+    ),
+    3 => array(
+      'title' => st('Media Releases'),
+      'type' => 'module',
+      'key' => 'govcms_content_media_release',
+    ),
+    4 => array(
+      'title' => st('News Articles'),
+      'type' => 'module',
+      'key' => 'govcms_content_news_article',
+    ),
+    5 => array(
+      'title' => st('Promotions'),
+      'type' => 'module',
+      'key' => 'govcms_content_promotion',
+    ),
+    6 => array(
+      'title' => st('Standard pages'),
+      'type' => 'module',
+      'key' => 'govcms_content_standard_page',
+    ),
+    7 => array(
+      'title' => st('Default Beans'),
+      'type' => 'function',
+      'key' => '_govcms_default_beans',
+      'message' => st('Enabled Default Beans'),
+    ),
+    8 => array(
+      'title' => st('Default News Beans'),
+      'type' => 'function',
+      'key' => '_govcms_default_news_beans',
+      'message' => st('Enabled Default News Beans'),
+    ),
+    9 => array(
+      'title' => st('Default slides'),
+      'type' => 'module',
+      'key' => 'govcms_content_slides',
+    ),
+  );
+
+}
+
+/**
+ * Sets the Batch API array for batch processing.
+ */
+function govcms_example_content_install() {
+
+  $operations = array();
+
+  $steps = govcms_default_content();
+  foreach ($steps as $content) {
+    $operations[] = array(
+      'govcms_example_content_install_batch',
+      array(
+        $content['type'],
+        $content['key'],
+        $content['title'],
+        isset($content['message']) ? $content['message'] : '',
+      ),
+    );
+  }
+
+  $batch = array(
+    'operations' => $operations,
+    'title' => st('Processing example content'),
+    'init_message' => st('Initializing'),
+    'error_message' => st('Error'),
+    'finished' => 'govcms_example_content_install_finished',
+  );
+  return $batch;
+}
+
+/**
+ * Either enable module or run function for Example content batch install.
+ *
+ * @param string $type
+ *   Type of content either 'module' or 'function'.
+ * @param string $key
+ *   Name of module or function to enable/run.
+ * @param string $name
+ *   Title/name of the module or function.
+ * @param string $message
+ *   Optional message to be output with function.
+ * @param array $context
+ *   Batch context data.
+ */
+function govcms_example_content_install_batch($type, $key, $name, $message, &$context) {
+  if ($type == 'module') {
+    module_enable(array($key), FALSE);
+    $context['results'][] = $key;
+    $context['message'] = st('Enabled %module content.', array('%module' => $name));
+  }
+  elseif ($type == 'function') {
+    call_user_func($key);
+    $context['results'][] = $key;
+    if ($message) {
+      $context['message'] = $message;
+    }
+  }
+}
+
+/**
+ * Performs any cleanup and output on completion of example content batch.
+ */
+function govcms_example_content_install_finished(&$context) {
+
+  drupal_set_message('Example content installed.');
+  drupal_set_message('Sitemap has been rebuilt.');
+}
+
+/**
+ * Run any cleanup or other functions required after install is finished.
+ */
+function govcms_cleanup() {
+
+  govcms_rebuild_sitemap();
+
+  // Rebuild default config (permissions).
+  defaultconfig_rebuild_all();
+
+  // Required by view_unpublished module.
+  node_access_rebuild();
+
+  cache_clear_all();
+
+  // @todo Image styles not being applied to beans on install.
+  features_revert(array('govcms_beans' => array('field')));
+
+  // @todo Wysiwyg profiles not being applied on install.
+  features_revert(array('govcms_editing' => array('wysiwyg')));
+
+}
+
+/**
+ * Force-set a theme at any point during the execution of the request.
+ *
+ * Drupal doesn't give us the option to set the theme during the installation
+ * process and forces enable the maintenance theme too early in the request
+ * for us to modify it in a clean way.
+ *
+ * This function was helpfully taken from Commerce Kickstart.
+ */
+function _govcms_set_theme($target_theme) {
+  if ($GLOBALS['theme'] != $target_theme) {
+    unset($GLOBALS['theme']);
+
+    drupal_static_reset();
+    $GLOBALS['conf']['maintenance_theme'] = $target_theme;
+    _drupal_maintenance_theme();
+  }
+}
+
+/**
+ * Rebuilds the sitemap.xml.
+ */
+function govcms_rebuild_sitemap() {
+  if (module_exists('xmlsitemap')) {
+    module_load_include('generate.inc', 'xmlsitemap');
+
+    // Build a list of rebuildable link types.
+    $rebuild_types = xmlsitemap_get_rebuildable_link_types();
+
+    // Run the batch process.
+    xmlsitemap_run_unprogressive_batch('xmlsitemap_rebuild_batch', $rebuild_types, TRUE);
+  }
+}
+
+/**
+ * Setup login_destination settings.
+ */
+function _govcms_setup_login_destination() {
+  $role = user_role_load_by_name('Site editor');
+  $rid = $role->rid;
+  $record = array(
+    'triggers' => serialize(array('login' => 'login')),
+    'roles' => serialize(array($rid => $rid)),
+    'page_types' => 0,
+    'pages' => '',
+    'destination_type' => 0,
+    'destination' => 'admin/workbench',
+    'weight' => 0,
+  );
+  drupal_write_record('login_destination', $record);
+}
+
+/**
+ * Set defaults for contact form.
+ */
+function _govcms_contact_form_defaults() {
+
+  // Set default recipient for contact form.
+  db_update('contact')->fields(
+    array('recipients' => variable_get('site_mail', 'admin@example.com'))
+  )
+    ->condition('cid', 1)
+    ->execute();
+}
+
+/**
+ * Set up full display mode for media wysiwyg image display.
+ */
+function _govcms_install_full_image_display() {
+  variable_set('field_bundle_settings_file__image', array(
+    'view_modes' => array(
+      'teaser' => array('custom_settings' => TRUE),
+      'full' => array('custom_settings' => TRUE),
+      'preview' => array('custom_settings' => TRUE),
+      'rss' => array('custom_settings' => FALSE),
+      'search_index' => array('custom_settings' => FALSE),
+      'search_result' => array('custom_settings' => FALSE),
+      'token' => array('custom_settings' => FALSE),
+    ),
+    'extra_fields' => array(
+      'form' => array(),
+      'display' => array(
+        'file' => array(
+          'default' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+          'full' => array(
+            'weight' => '0',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
+    ),
+  ));
+}

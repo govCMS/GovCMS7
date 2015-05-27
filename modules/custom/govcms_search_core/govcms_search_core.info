@@ -1,0 +1,8 @@
+name = Search (Core)
+description = Search API configuration and pages for core search
+core = 7.x
+package = govCMS core
+dependencies[] = entity
+dependencies[] = search_api
+dependencies[] = search_api_db
+dependencies[] = search_api_page

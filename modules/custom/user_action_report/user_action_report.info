@@ -1,0 +1,9 @@
+name = User Action Report
+description = Provides a report of user actions.
+core = 7.x
+package = govCMS
+project = user_action_report
+dependencies[] = event_log
+dependencies[] = event_log_auth
+dependencies[] = event_log_node_alt
+dependencies[] = event_log_user_alt

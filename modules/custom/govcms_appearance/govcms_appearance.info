@@ -1,0 +1,4 @@
+name = Appearance
+package = govCMS core
+description = Provides functionality related to Appearance
+core = 7.x

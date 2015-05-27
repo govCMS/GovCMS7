@@ -1,0 +1,42 @@
+.sidebar {
+  .block {
+    .block__title {
+      background: $color-primary;
+      @include background-image(linear-gradient(lighten($color-primary, 5%), $color-primary));
+      @include adjust-font-size-to(16px);
+      color: white;
+      padding: 0 0 0 20px;
+    }
+    .block__content {
+      background: $color-tertiary-light;
+      padding: 15px;
+    }
+    .menu, p {
+      @include noSpace;
+    }
+  }
+}
+
+.block-govcms-social-links {
+  a {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+#block-menu-menu-quick-links ul {
+  @extend %linksDoubleArrow;
+}
+
+/* Sidebar Menus */
+
+.sidebar .block // Extra selectors added to override reset via cascade.
+.menu-block-govcms_menu_block-sidebar .menu {
+  margin: -15px; //ignore parent spacing
+}
+
+.menu-block-govcms_menu_block-sidebar .menu {
+  @extend %linksDoubleArrow;
+  a { background-position: 15px center; }
+  @extend %linksTabbed;
+}

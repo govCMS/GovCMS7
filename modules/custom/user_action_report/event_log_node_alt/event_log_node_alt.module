@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Logs node CRUD commands in the event_log module.
+ *
+ * @author Bas van Meurs
+ * @copyright Cipix Internet
+ */
+
+/**
+ * Implements hook_event_log_handlers().
+ */
+function event_log_node_alt_event_log_handlers() {
+  // Node event log handler.
+  $handlers = array();
+  $handlers['node'] = array(
+    'title' => t('Node'),
+    'relationships' => array(
+      array(
+        'table' => 'node',
+        'field' => 'nid',
+        'operations' => NULL,
+        'numeric' => TRUE,
+      ),
+    ),
+  );
+  return $handlers;
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function event_log_node_alt_node_insert($node) {
+  $log = array(
+    'type' => 'node',
+    'operation' => 'insert',
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
+    )),
+    'ref_numeric' => $node->nid,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function event_log_node_alt_node_update($node) {
+  $log = array(
+    'type' => 'node',
+    'operation' => 'update',
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
+    )),
+    'ref_numeric' => $node->nid,
+  );
+  event_log_insert($log);
+}
+
+/**
+ * Implements hook_node_delete().
+ */
+function event_log_node_alt_node_delete($node) {
+  $log = array(
+    'type' => 'node',
+    'operation' => 'delete',
+    'description' => t('@type: @title', array(
+      '@type' => $node->type,
+      '@title' => $node->title,
+    )),
+    'ref_numeric' => $node->nid,
+  );
+  event_log_insert($log);
+}

@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the govCMS Share Links feature.
+ */
+
+include_once 'govcms_share_links.features.inc';
+
+/**
+ * Implements hook_service_links().
+ */
+function govcms_share_links_service_links() {
+  $links = array();
+  $links['email'] = array(
+    'name' => 'email',
+    'description' => t('Share via email'),
+    'link' => 'mailto:?subject=<encoded-title>&body=<encoded-url>',
+  );
+  return $links;
+}

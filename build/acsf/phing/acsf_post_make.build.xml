@@ -1,0 +1,30 @@
+<project name="acsf_post_make" default="build" phingVersion="2.8.2">
+
+    <!-- Copy govCMS specific files across. -->
+    <copy file="${repo.root}/build/acsf/misc/settings/default.settings.php" todir="${docroot}/sites/default/" overwrite="true" />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.theme.php" todir="${docroot}/sites/default/" />
+    <copy file="${repo.root}/build/acsf/misc/settings/settings.ga.php" todir="${docroot}/sites/default/" />
+
+    <!-- Sync govCMS specific modules across. -->
+    <filesync
+        sourcedir="${repo.root}/build/acsf/govcms_tweaks"
+        destinationdir="${docroot}/sites/all/modules/custom"
+        itemizechanges="true"
+        verbose="true"
+        checksum="true" />
+
+    <!-- Patch Drupal core for ACSF with patches unsuitable for non-govCMS core. -->
+    <patch patchfile="${repo.root}/build/acsf/patches/govcms_force_ssl.patch"
+           dir="${docroot}"
+           strip="1"
+           haltonfailure="true" />
+    <patch patchfile="${repo.root}/build/acsf/patches/govcms_tweaks_enable.patch"
+           dir="${docroot}"
+           strip="1"
+           haltonfailure="true" />
+
+    <!-- Clean up changes we made to the codebase by resetting the build make file. -->
+    <exec command="git checkout ${drupal.makefile}"
+          logoutput="true"
+          passthru="true" />
+</project>

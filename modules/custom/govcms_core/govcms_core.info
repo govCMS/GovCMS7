@@ -1,0 +1,4 @@
+name = Common functionality for govCMS
+package = govCMS core
+description = Provides common functionality required by other govCMS modules
+core = 7.x

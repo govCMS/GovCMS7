@@ -1,0 +1,412 @@
+<!--
+  name: build.xml
+  description: The main project build file for phing operations. This file can
+               be overridden with project specific configuration.
+-->
+
+<project name="govcms" default="build" phingVersion="2.8.2">
+
+    <!-- Additional task classes -->
+    <includepath classpath="${project.basedir}/phingcludes"/>
+    <taskdef name="behat" classname="phingcludes.BehatTask"/>
+    <taskdef name="drush" classname="phingcludes.DrushTask"/>
+
+    <!--               -->
+    <!--  Properties   -->
+    <!-- ============= -->
+
+    <!-- Application -->
+    <property name="repo.root.relative" value="${project.basedir}/../.."/>
+    <resolvepath propertyName="repo.root" file="${repo.root.relative}"/>
+
+    <property name="docroot"
+              value="${repo.root}/docroot"
+              override="true"/>
+    <property name="drupal.profile"
+              value="govcms"
+              override="true"/>
+    <property name="profile.root"
+              value="${docroot}/profiles/${drupal.profile}"/>
+
+    <property name="site.name"
+              value="govCMS"/>
+    <property name="site.mail"
+              value="root@[127.0.0.1]"/>
+    <property name="drupal.makefile"
+              value="${repo.root}/build-${phing.project.name}.make"
+              override="true"/>
+    <property name="drupal.contrib_makefile"
+              value="${repo.root}/drupal-org.make"
+              override="true"/>
+    <property name="drupal.base_url"
+              value="http://localhost/"/>
+
+    <property name="profile.modules.custom.path"
+              value="${repo.root}/modules"
+              override="true"/>
+    <property name="profile.themes.path"
+              value="${repo.root}themes"
+              override="true"/>
+    <property name="docroot.profile.modules.path"
+              value="${docroot}/profiles/${drupal.profile}/modules"/>
+    <property name="docroot.profile.themes.path"
+              value="${docroot}/profiles/${drupal.profile}/themes"/>
+
+    <!-- Credentials -->
+    <property name="db.username" value="root"/>
+    <property name="db.password" value=""/>
+    <property name="db.name" value="travis_ci_govcms_drupal"/>
+    <property name="db.host" value="localhost"/>
+    <property name="account.name" value="admin"/>
+    <property name="account.password" value="password"/>
+    <property name="account.mail" value="root@[127.0.0.1]"/>
+
+    <!-- Drush, Composer & Behat -->
+    <property name="composer.bin" value="${repo.root}/build/bin"/>
+    <property name="drush.bin" value="${composer.bin}/drush" override="true"/>
+    <property name="drush.root" value="${docroot}"/>
+    <property name="drush.source" value="@${phing.project.name}.dev"
+              override="true"/>
+    <property name="drush.file"
+              value="${phing.project.name}.aliases.drushrc.php"
+              override="true"/>
+    <property name="behat.config"
+              value="${repo.root}/build/tests/behat/behat.yml"/>
+    <property name="behat.local"
+              value="${repo.root}/build/tests/behat/behat.local.yml"/>
+    <property name="phantomjs.bin"
+              value="${composer.bin}/phantomjs" />
+    <property name="phantomjs.webdriver" value="4444" />
+
+    <!-- We override this so Drupal install works -->
+    <property name="drush.cmd" value="${drush.bin} -r ${docroot}"
+              override="true"/>
+
+    <!-- Set git properties -->
+    <property name="git.branch.default" value="master" />
+
+    <!-- Conditional properties -->
+    <!-- Check for a travis branch variable -->
+    <exec command="echo $TRAVIS_BRANCH"
+          outputProperty="git.branch.current"
+          dir="${repo.root}"
+          logoutput="true"
+          checkreturn="true" />
+
+    <!-- If the variable was not set grab it from git -->
+    <!-- This does not work for travis as it uses a detached head -->
+    <if>
+        <isfalse value="${git.branch.current}" />
+        <then>
+            <exec command="git rev-parse --abbrev-ref HEAD"
+                  outputProperty="git.branch.current"
+                  dir="${repo.root}"
+                  logoutput="true"
+                  checkreturn="true" />
+        </then>
+    </if>
+
+    <!-- The following allows local overrides. -->
+    <property file="${project.basedir}/build.properties" override="true"/>
+
+    <!--               -->
+    <!-- Filesets      -->
+    <!-- ============= -->
+    <!-- @TODO uncomment these inclusions when errors have been fixed. -->
+    <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
+        <!--    <include name="profiles/govcms/modules/custom/**" />-->
+        <!--    <include name="profiles/govcms/modules/features/**" />-->
+        <include name="sites/all/modules/**"/>
+    </fileset>
+
+    <fileset dir="${repo.root}/modules" id="govcms.modules">
+        <include name="custom/**"/>
+        <include name="features/**"/>
+    </fileset>
+
+    <fileset dir="${repo.root}" id="govcms.profile">
+        <include name="govcms.*"/>
+        <include name="js/**"/>
+        <include name="images/**"/>
+        <include name="css"/>
+    </fileset>
+
+    <fileset dir="${repo.root}/themes" id="govcms.themes">
+        <include name="**"/>
+    </fileset>
+
+    <!--               -->
+    <!-- Targets       -->
+    <!-- ============= -->
+
+    <target name="build"
+            description="Build the project and install govCMS."
+            depends="git-reset, make, install"/>
+
+    <target name="build:local"
+            description="Build the project without removing uncommitted changes."
+            depends="make:local, overwrite:profile-files, install">
+        <property name="build.local" value="1" />
+    </target>
+
+    <target name="build:with-validation"
+            description="Build the project, install, then run code validation."
+            depends="git-reset, make, install, validate:all"/>
+
+    <target name="build:with-tests"
+            description="Build the project, install, then run tests."
+            depends="git-reset, make, install, test:all"/>
+
+    <target name="build:full"
+            description="Build the project, install govCMS, run validation and tests."
+            depends="git-reset, make, install, run-tests"/>
+
+    <target name="build:full:no-clean"
+            description="Build the project without removing local changes, install govCMS, run validation and tests."
+            depends="make:local, install, run-tests"/>
+
+    <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
+            depends="validate:all, test:all"/>
+
+    <target name="validate:all" description="Runs code validation on govCMS."
+            depends="validate:lint, validate:phpcs, validate:phpmd, validate:makefile"/>
+
+    <target name="test:all" description="Runs all tests against govCMS."
+            depends="test:security-updates, test:behat"/>
+
+    <target name="git-reset"
+            description="Cleanup build artifacts">
+        <exec command="git reset --hard"
+              logoutput="true"
+              passthru="true" />
+    </target>
+
+    <target name="rm-docroot"
+            description="Remove the docroot folder">
+        <exec command="git clean -fd"
+              logoutput="true"
+              passthru="true"/>
+        <if>
+            <available property="docroot.exists" file="${docroot}" type="dir"/>
+            <then>
+                <if>
+                    <available property="docroot.sites.exists" file="${docroot}/sites/default" type="dir"/>
+                    <then>
+                        <chmod file="${docroot}/sites/default" mode="2775"/>
+                    </then>
+                </if>
+                <delete dir="${docroot}"/>
+            </then>
+        </if>
+    </target>
+
+    <target name="phantomjs:launch"
+          description="Launches a GhostDriver.">
+      <exec command="${phantomjs.bin} --webdriver=${phantomjs.webdriver}"
+          passthru="true"
+          spawn="true"
+          checkreturn="true" />
+    </target>
+
+    <!-- Check if we are building master and call the appropriate make strategy -->
+    <!-- If we are on the master branch, we want to test that directly against the repo -->
+    <!-- If we are on any other branch, we want to avoid building recursively as we will pull in the master profile. -->
+    <target name="make">
+        <if>
+            <equals arg1="${git.branch.default}" arg2="${git.branch.current}" />
+            <then>
+                <phingcall target="make:remote" />
+            </then>
+            <else>
+                <phingcall target="make:local" />
+            </else>
+        </if>
+    </target>
+
+    <!-- Drush make the build using a recursive strategy -->
+    <target name="make:remote"
+            description="Run drush make"
+            depends="rm-docroot">
+
+        <!-- Run Acquia specific pre-make build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
+
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <!-- Run Acquia specific post-make build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+    </target>
+
+    <!-- Use the local make files rather than checking out from the repository -->
+    <!-- This avoids us overwriting the local make file with the master -->
+    <target name="make:local"
+            description="Run drush make in a development context"
+            depends="rm-docroot">
+
+        <!-- Run Acquia specific pre-make build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
+
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <option name="no-recursion" />
+            <param>"${drupal.makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <drush command="make" assume="yes" verbose="TRUE">
+            <option name="concurrency">8</option>
+            <option name="no-recursion" />
+            <option name="no-core" />
+            <option name="contrib-destination">profiles/${drupal.profile}</option>
+            <param>"${drupal.contrib_makefile}"</param>
+            <param>"${docroot}"</param>
+        </drush>
+
+        <!-- Run Acquia specific build tasks -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+    </target>
+
+    <!-- When building locally, we clean out all the profile files and copy across, rather than relying on make. -->
+    <target name="overwrite:profile-files">
+
+        <delete>
+            <fileset dir="${profile.root}">
+                <include name="govcms.*"/>
+                <include name="js/**"/>
+                <include name="images/**"/>
+                <include name="css/**"/>
+            </fileset>
+        </delete>
+        <copy todir="${profile.root}">
+            <fileset refid="govcms.profile"/>
+        </copy>
+
+        <delete dir="${docroot.profile.modules.path}/custom"/>
+        <delete dir="${docroot.profile.modules.path}/features"/>
+        <copy todir="${docroot.profile.modules.path}">
+            <fileset refid="govcms.modules"/>
+        </copy>
+
+
+        <delete dir="${docroot.profile.themes.path}/govcms"/>
+        <copy todir="${docroot.profile.themes.path}">
+            <fileset refid="govcms.themes"/>
+        </copy>
+    </target>
+
+    <!-- @TODO Remove the exceptions when we incorporate the patches in -->
+    <!-- previousnext/agov#382 and previousnext/agov#385 -->
+    <target name="validate:lint" description="Runs a php lint against the codebase.">
+        <phplint>
+            <fileset dir="${docroot}">
+                <include name="**/*.inc"/>
+                <include name="**/*.php"/>
+                <include name="**/*.module"/>
+                <include name="**/*.install"/>
+                <include name="**/*.profile"/>
+                <include name="**/*.test"/>
+                <include name="**/*.theme"/>
+            </fileset>
+        </phplint>
+    </target>
+
+    <target name="validate:phpcs"
+            description="Sniffs custom code to ensure it meets standards.">
+
+        <phpcodesniffer
+                standard="${repo.root}/build/vendor/drupal/coder/coder_sniffer/Drupal/"
+                showSniffs="true"
+                showWarnings="true"
+                haltonerror="true"
+                haltonwarning="true">
+            <fileset refid="custom.files"/>
+            <formatter type="full" usefile="false"/>
+        </phpcodesniffer>
+    </target>
+
+    <!-- Run code complexity and cleanliness checks on custom code. -->
+    <target name="validate:phpmd" description="Checks custom code for complexity.">
+        <phpmd rulesets="codesize,unusedcode,cleancode">
+            <fileset refid="custom.files"/>
+            <formatter type="text" outfile="false" usefile="false"/>
+        </phpmd>
+    </target>
+
+    <!-- Ensure the Drush make files will compile on Drupal.org. -->
+    <target name="validate:makefile"
+            description="Ensures Drush make will run."
+            depends="prepare:drupalorg-drush">
+
+        <!-- @TODO implement this upon deployment to d.o -->
+        <!-- <drush command="verify-makefile" assume="yes" verbose="TRUE">
+            <param>"${drupal.makefile}"</param>
+        </drush> -->
+    </target>
+
+    <target name="prepare:drupalorg-drush">
+        <drush command="pm-download" assume="yes" verbose="TRUE">
+            <option name="destination">"${user.home}/.drush"</option>
+            <option name="default-major">"7"</option>
+            <option name="dev" />
+            <param>"drupalorg_drush"</param>
+        </drush>
+    </target>
+
+    <!-- Install govCMS. -->
+    <target name="install"
+            description="Installs Drupal using the govCMS profile">
+
+        <drush command="site-install" assume="yes" verbose="TRUE">
+            <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}/${db.name}"</option>
+            <option name="site-name">"${site.name}"</option>
+            <option name="debug" />
+            <option name="site-mail">"${site.mail}"</option>
+            <option name="account-name">"${account.name}"</option>
+            <option name="account-mail">"${account.mail}"</option>
+            <param>"${drupal.profile}"</param>
+        </drush>
+
+        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
+    </target>
+
+    <!-- Ensure govCMS doesn't have any modules requiring security updates. -->
+    <target name="test:security-updates"
+            description="Checks an installed site for security updates on modules">
+        <exec dir="${docroot}"
+              command="! ${drush.bin} -n ups --check-disabled --security-only 2>/dev/null | grep 'SECURITY UPDATE'"
+              logoutput="true"
+              checkreturn="true"
+              passthru="true"/>
+    </target>
+
+    <target name="test:behat" description="Behat testing for govCMS" depends="phantomjs:launch">
+        <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
+        <if>
+            <not>
+                <available file="${behat.local}" property="behat_local_exists" value="exists"/>
+            </not>
+            <then>
+                <echo message="# Local behat settings." file="${behat.local}"
+                      append="false"/>
+            </then>
+        </if>
+
+        <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
+        <behat executable="${composer.bin}/behat"
+               config="${behat.config}"
+               verbose="true"
+               strict="true"
+               haltonerror="true"
+               returnProperty="behatPass"/>
+    </target>
+
+    <target name="post-commit" description="Runs tasks on travis after a commit.">
+        <!-- Run travis specific tasks after successful commits. -->
+        <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
+    </target>
+</project>

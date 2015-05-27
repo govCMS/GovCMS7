@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Image Styles feature.
+ */
+
+include_once 'govcms_image_styles.features.inc';

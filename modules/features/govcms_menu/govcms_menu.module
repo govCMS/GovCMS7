@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+include_once 'govcms_menu.features.inc';

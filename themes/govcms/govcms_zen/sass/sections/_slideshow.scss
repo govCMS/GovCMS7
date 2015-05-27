@@ -1,0 +1,110 @@
+// Functional
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.rslides li {
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+}
+
+.view-slideshow .views-row { display: none; }
+.view-slideshow .views-row-first { display: block; }
+
+
+// Layout
+#block-views-slideshow-block {
+  position: relative;
+  overflow: hidden;
+  background: #f1efed;
+
+  .view-slideshow ul { margin: 0px; }
+  .group-left, .group-right {
+    float: left;
+    width: 100%;
+  }
+  .group-left {
+    @include bp-nq($large) { width: inherit; }
+  }
+  .group-right {
+    padding: 15px;
+    @include bp-nq($large) { width: 30%; }
+  }
+  .views-row { width: 100%; }
+}
+
+// Theme
+#block-views-slideshow-block {
+  .block-title { @extend %element-invisible; }
+  .field-name-field-slide-image {
+    margin: 0;
+    img {
+      width: 100%;
+      @include bp-nq($large) { width: auto; }
+    }
+    position: relative;
+  }
+  .field-name-title h2 {
+    @include noSpace;
+  }
+  .field-name-body {
+    p { margin: rhythm(.5) 0; }
+  }
+}
+
+// Pager
+.rslides_tabs {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 15px !important;
+  li {
+    float: left;
+    margin-right: 2px;
+    background: white;
+    background: rgba(255,255,255, .9);
+    &.rslides_here {
+      background: black;
+      a { color: white; }
+    }
+    a {
+      display: block;
+      padding: 5px 10px;
+      text-decoration: none;
+      font-weight: bold;
+      &.pause {
+        @include hide-text;
+        text-indent: -100px;
+        padding: 5px 14px;
+        background: image-url('featured-articles-pause.png') no-repeat 0px -27px;
+        &.paused {
+          background-position: 0px 0px;
+          background-color: black;
+        }
+        &.playing { background-position: 0px -27px; }
+      }
+    }
+  }
+}

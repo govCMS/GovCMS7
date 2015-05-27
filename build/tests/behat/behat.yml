@@ -1,0 +1,28 @@
+default:
+  autoload:
+    '': %paths.base%/bootstrap
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - FeatureContext
+      paths:
+        features: %paths.base%/features
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      selenium2:
+        wd_host: "http://localhost:4444/wd/hub"
+      javascript_session: selenium2
+    Drupal\DrupalExtension:
+      blackbox: ~
+      drupal:
+        drupal_root: ../../docroot
+      drush:
+        root: ../../docroot
+
+imports:
+  - behat.local.yml

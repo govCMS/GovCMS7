@@ -1,0 +1,7 @@
+<project name="acsf_post_commit" default="build" phingVersion="2.8.2">
+
+    <exec command="/bin/bash ${repo.root}/build/acsf/phing/autodeploy/autodeploy.sh"
+          logoutput="true"
+          checkreturn="true"
+          passthru="true" />
+</project>

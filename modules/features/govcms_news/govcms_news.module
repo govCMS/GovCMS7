@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Code for the News feature.
+ */
+
+include_once 'govcms_news.features.inc';
+
+/**
+ * Implements hook_ds_fields_info().
+ */
+function govcms_news_ds_fields_info($entity_type) {
+  $fields = array();
+
+  $fields['node']['read_more_link'] = array(
+    'title' => t('Read more link'),
+    'field_type' => DS_FIELD_TYPE_FUNCTION,
+    'function' => 'govcms_news_ds_field_news_read_more_link',
+  );
+
+  if (isset($fields[$entity_type])) {
+    return array($entity_type => $fields[$entity_type]);
+  }
+  return $fields;
+}
+
+/**
+ * Render the read more link field.
+ */
+function govcms_news_ds_field_news_read_more_link($field) {
+  $title   = $field['entity']->title;
+  $path    = $field['entity']->path['alias'];
+
+  $attributes = array(
+    'title' => t('Read more about @title', array('@title' => $title)),
+  );
+  $content = l(t('Read featured article'), $path, array('attributes' => $attributes));
+
+  return $content;
+}

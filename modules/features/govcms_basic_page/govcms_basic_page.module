@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Basic Page feature.
+ */
+
+include_once 'govcms_basic_page.features.inc';

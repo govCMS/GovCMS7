@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Appearance related functionality.
+ *
+ * Splits up the permissions for appearance so they are finer grained.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function govcms_appearance_permission() {
+  return array(
+    'administer theme settings' => array(
+      'title' => t('Administer theme settings'),
+      'description' => t('Perform administration on theme settings'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function govcms_appearance_menu_alter(&$items) {
+  $items['admin/appearance/settings']['access arguments'] = array('administer theme settings');
+
+  // Modify access check for theme settings.
+  foreach (list_themes() as $theme) {
+    $items['admin/appearance/settings/' . $theme->name]['access callback'] = '_govcms_appearance_themes_access';
+  }
+}
+
+/**
+ * Callback to check if user has access to administer theme settings.
+ *
+ * @param string $theme
+ *   Theme to check access for.
+ *
+ * @return bool
+ *   TRUE if user has access to theme settings.
+ */
+function _govcms_appearance_themes_access($theme) {
+  return user_access('administer theme settings') && drupal_theme_access($theme);
+}
