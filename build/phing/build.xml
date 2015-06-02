@@ -57,6 +57,7 @@
     <property name="db.password" value=""/>
     <property name="db.name" value="travis_ci_govcms_drupal"/>
     <property name="db.host" value="localhost"/>
+    <property name="db.port" value="3306"/>
     <property name="account.name" value="admin"/>
     <property name="account.password" value="password"/>
     <property name="account.mail" value="root@[127.0.0.1]"/>
@@ -361,7 +362,7 @@
             description="Installs Drupal using the govCMS profile">
 
         <drush command="site-install" assume="yes" verbose="TRUE">
-            <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}/${db.name}"</option>
+            <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}:${db.port}/${db.name}"</option>
             <option name="site-name">"${site.name}"</option>
             <option name="debug" />
             <option name="site-mail">"${site.mail}"</option>
