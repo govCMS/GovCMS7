@@ -79,6 +79,7 @@ dependencies[] = login_security
 dependencies[] = maintenance_mode_permissions
 dependencies[] = media
 dependencies[] = media_internet
+dependencies[] = media_wysiwyg
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
