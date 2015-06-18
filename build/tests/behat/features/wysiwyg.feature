@@ -21,3 +21,4 @@ Feature: Use ckeditor4 WYSIWYG editor
     And I should see an "a.cke_button__scayt" element
     And I should see an "a.cke_button__linkit" element
     And I should see an "a.cke_button__scayt" element
+    And I should see an "a.cke_button__media" element

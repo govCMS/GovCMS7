@@ -9,6 +9,7 @@ dependencies[] = filter
 dependencies[] = linkit
 dependencies[] = media
 dependencies[] = media_internet
+dependencies[] = media_wysiwyg
 dependencies[] = strongarm
 dependencies[] = toc_filter
 dependencies[] = video_filter
