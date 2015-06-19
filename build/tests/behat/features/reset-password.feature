@@ -4,7 +4,7 @@ Feature: Reset Password
 
   @api
   Scenario: Reset my password
-    Given I am logged in as a user named "paul" with the "Content editor" role that doesn't force password change
+    Given I am logged in as a user named "peskypaul" with the "Content editor" role that doesn't force password change
     Then I logout
     Given I am on "/user"
     Then I should see the link "Request new password"

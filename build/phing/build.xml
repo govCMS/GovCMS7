@@ -150,6 +150,14 @@
         <property name="build.local" value="1" />
     </target>
 
+    <target name="build:acsf"
+            description="Build the project with ACSF specific code additions.">
+        <property name="build.acsf" value="1" />
+
+        <phingcall target="git-reset" />
+        <phingcall target="make" />
+    </target>
+
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
             depends="git-reset, make, install, validate:all"/>
@@ -177,6 +185,7 @@
 
     <target name="git-reset"
             description="Cleanup build artifacts">
+
         <exec command="git reset --hard"
               logoutput="true"
               passthru="true" />
@@ -230,8 +239,13 @@
             depends="rm-docroot">
 
         <!-- Run Acquia specific pre-make build tasks -->
-        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
-
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
+          </then>
+        </if>
+    
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
             <param>"${drupal.makefile}"</param>
@@ -239,7 +253,21 @@
         </drush>
 
         <!-- Run Acquia specific post-make build tasks -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+          </then>
+        </if>
+
+        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
+          </then>
+        </if>
+
     </target>
 
     <!-- Use the local make files rather than checking out from the repository -->
@@ -249,7 +277,12 @@
             depends="rm-docroot">
 
         <!-- Run Acquia specific pre-make build tasks -->
-        <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
+          </then>
+        </if>
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -267,8 +300,22 @@
             <param>"${docroot}"</param>
         </drush>
 
-        <!-- Run Acquia specific build tasks -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+        <!-- Run Acquia specific post-make build tasks -->
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
+          </then>
+        </if>
+
+        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
+          </then>
+        </if>
+
     </target>
 
     <!-- When building locally, we clean out all the profile files and copy across, rather than relying on make. -->
@@ -360,7 +407,6 @@
     <!-- Install govCMS. -->
     <target name="install"
             description="Installs Drupal using the govCMS profile">
-
         <drush command="site-install" assume="yes" verbose="TRUE">
             <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}:${db.port}/${db.name}"</option>
             <option name="site-name">"${site.name}"</option>
@@ -370,9 +416,13 @@
             <option name="account-mail">"${account.mail}"</option>
             <param>"${drupal.profile}"</param>
         </drush>
-
         <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
+          </then>
+        </if>
     </target>
 
     <!-- Ensure govCMS doesn't have any modules requiring security updates. -->
@@ -408,6 +458,11 @@
 
     <target name="post-commit" description="Runs tasks on travis after a commit.">
         <!-- Run travis specific tasks after successful commits. -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
+        <if>
+          <equals arg1="${build.acsf}" arg2="1" />
+          <then>
+            <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
+          </then>
+        </if>
     </target>
 </project>
