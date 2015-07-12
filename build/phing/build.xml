@@ -458,11 +458,6 @@
 
     <target name="post-commit" description="Runs tasks on travis after a commit.">
         <!-- Run travis specific tasks after successful commits. -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
-          </then>
-        </if>
+        <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
     </target>
 </project>
