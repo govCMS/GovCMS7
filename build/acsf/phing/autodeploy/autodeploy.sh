@@ -5,7 +5,7 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 DEPLOY='/tmp/deploy'
 
 # Git sources
-GITHUB_SOURCE_SLUG='govCMS/govCMS-Core'
+GITHUB_SOURCE_SLUG='govCMS/govCMS'
 GITHUB_SOURCE="git@github.com:${GITHUB_SOURCE_SLUG}.git"
 BRANCH='master'
 

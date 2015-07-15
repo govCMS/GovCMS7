@@ -1,7 +1,7 @@
 # govCMS
 ***
 
-[![Build Status](https://magnum.travis-ci.com/govCMS/govCMS-Core.svg?token=XoBpuCzXXpYEvYjjWogr&branch=master)](https://magnum.travis-ci.com/govCMS/govCMS-Core)
+[![Build Status](https://api.travis-ci.org/govCMS/govCMS.svg?branch=master)](https://travis-ci.org/govCMS/govCMS)
 
 ## Installation
 
@@ -22,7 +22,7 @@ To develop on or patch against govCMS, the source files should be downloaded and
 govCMS source may be downloaded using git
 
 ```
-git clone git@github.com:govCMS/govCMS-Core.git
+git clone git@github.com:govCMS/govCMS.git
 ```
 
 Enter the project root, and run the following commands in order:
