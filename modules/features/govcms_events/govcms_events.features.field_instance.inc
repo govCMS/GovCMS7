@@ -483,7 +483,7 @@ The <em>body</em> field is used for the main article content.',
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => 0,
+        'apply_chosen' => 1,
         'flatten_options' => 0,
         'flatten_sort' => 1,
       ),

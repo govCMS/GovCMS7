@@ -154,6 +154,11 @@ projects[shiny][version] = "1.6"
 
 ; Libraries
 
+libraries[chosen][download][type] = "get"
+libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases/download/1.4.2/chosen_v1.4.2.zip"
+libraries[chosen][directory_name] = "chosen"
+libraries[chosen][type] = "library"
+
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"

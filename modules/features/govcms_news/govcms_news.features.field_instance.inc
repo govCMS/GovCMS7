@@ -249,7 +249,7 @@ The <em>body</em> field is used for the main article content.',
     'widget' => array(
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => 0,
+        'apply_chosen' => 1,
         'autocomplete_path' => 'taxonomy/autocomplete',
         'flatten_options' => 0,
         'flatten_sort' => 1,
