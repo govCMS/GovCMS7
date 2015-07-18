@@ -389,10 +389,9 @@
             description="Ensures Drush make will run."
             depends="prepare:drupalorg-drush">
 
-        <!-- @TODO implement this upon deployment to d.o -->
-        <!-- <drush command="verify-makefile" assume="yes" verbose="TRUE">
-            <param>"${drupal.makefile}"</param>
-        </drush> -->
+        <drush command="verify-makefile" assume="yes" verbose="TRUE">
+            <param>"${repo.root}/drupal-org.make"</param>
+        </drush>
     </target>
 
     <target name="prepare:drupalorg-drush">
@@ -401,6 +400,10 @@
             <option name="default-major">"7"</option>
             <option name="dev" />
             <param>"drupalorg_drush"</param>
+        </drush>
+
+        <drush command="cache-clear" assume="yes" verbose="TRUE">
+            <param>"drush"</param>
         </drush>
     </target>
 
