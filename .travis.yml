@@ -6,6 +6,8 @@ php:
 
 sudo: false
 
+sudo: false
+
 cache:
   bundler: true
   apt: true
