@@ -60,6 +60,7 @@ projects[google_analytics_reports][patch][] = "https://www.drupal.org/files/issu
 projects[google_analytics_reports][version] = "1.3"
 projects[google_chart_tools][patch][] = "https://www.drupal.org/files/issues/google-chart-tools-ajax-1613258-11-7.x-1.4.patch"
 projects[google_chart_tools][version] = "1.4"
+projects[govcms_dlm][version] = "1.0"
 projects[honeypot][version] = "1.17"
 projects[image_link_formatter][version] = "1.0"
 projects[job_scheduler][version] = "2.0-alpha3"
