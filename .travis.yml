@@ -17,6 +17,7 @@ addons:
   artifacts:
     paths:
     - $TRAVIS_BUILD_DIR/build/phing/screenshot-fail.png
+    debug: true
 
 notifications:
   email:
