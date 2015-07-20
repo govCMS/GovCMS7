@@ -13,6 +13,11 @@ cache:
 env:
   - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost/"}}}'
 
+addons:
+  artifacts:
+    paths:
+    - $TRAVIS_BUILD_DIR/build/phing/screenshot-fail.png
+
 notifications:
   email:
   - adam.malone@acquia.com

@@ -5,6 +5,8 @@ use Behat\Behat\Definition\Call\Given;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
+use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Behat\Hook\Scope\AfterStepScope;
 
 /**
  * Defines application features from the specific context.
@@ -107,6 +109,20 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
+   * @Then the :arg1 select list should be set to :arg2;
+   */
+  public function theSelectListShouldBeSetTo($arg1, $arg2) {
+    try {
+      $select = $this->getSession()->getPage()->find('css', '#' . $arg1);
+    } catch (Exception $e) {
+      throw new \Exception(sprintf("No select list with id '%s' found on the page '%s'.", $arg1, $this->getSession()->getCurrentUrl()));
+    }
+    if ($select->getValue() != $arg2) {
+      throw new \Exception(sprintf("Select list with id '%s' was found but not set to value '%s'.", $arg1, $arg2));
+    }
+  }
+
+  /**
    * Fills in WYSIWYG editor with specified id.
    *
    * @Given /^(?:|I )enter "(?P<text>[^"]*)" for WYSIWYG "(?P<iframe>[^"]*)"$/
@@ -154,6 +170,20 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
     $this->getSession()->getPage()->pressButton('edit-submit--2');
     $this->assertSession()->elementExists('css', 'input[value=Next][type=submit]');
     return new Given('I should not see "is protected from cancellation, and was not cancelled."');
+  }
+
+  /**
+   * @AfterStep
+   */
+  public function takeScreenShotAfterFailedStep(afterStepScope $scope)
+  {
+    if (99 === $scope->getTestResult()->getResultCode()) {
+      $driver = $this->getSession()->getDriver();
+      if (!($driver instanceof Selenium2Driver)) {
+        return;
+      }
+      file_put_contents('./screenshot-fail.png', $this->getSession()->getDriver()->getScreenshot());
+    }
   }
 
   /**

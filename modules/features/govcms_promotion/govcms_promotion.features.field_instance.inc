@@ -248,7 +248,7 @@ function govcms_promotion_field_default_field_instances() {
       'active' => 1,
       'module' => 'options',
       'settings' => array(
-        'apply_chosen' => 0,
+        'apply_chosen' => 1,
         'flatten_options' => 0,
         'flatten_sort' => 1,
       ),
