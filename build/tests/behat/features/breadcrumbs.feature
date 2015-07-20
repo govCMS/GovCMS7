@@ -12,6 +12,7 @@ Feature: Breadcrumbs
     And I enter "test" for "Title"
     Given the iframe in element "cke_edit-body-und-0-value" has id "body-wysiwyg"
     And I fill in "Body text" in WYSIWYG editor "body-wysiwyg"
+    Then I should see "FALSE FAIL"
     And press "Save"
     Then I should see "News Article test has been created"
     Then the response should contain "<a href=\"/\">Home</a>"
