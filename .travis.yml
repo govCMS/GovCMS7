@@ -58,7 +58,7 @@ before_script:
   - mysql -e 'CREATE DATABASE travis_ci_govcms_drupal;'
 
   # Build the codebase
-  - phing -f build/phing/build.xml build
+  - phing -f build/phing/build.xml build:local
 
 script:
   # Run tests
