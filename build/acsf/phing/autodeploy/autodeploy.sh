@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Define the script directory and our temporary directory.
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -7,13 +7,11 @@ DEPLOY='/tmp/deploy'
 # Git sources
 GITHUB_SOURCE_SLUG='govCMS/govCMS'
 GITHUB_SOURCE="git@github.com:${GITHUB_SOURCE_SLUG}.git"
-BRANCH='master'
+GITHUB_BRANCH='master'
 
 # Mirrors
-MIRRORS=()
-MIRRORS+=('git@github.com:govCMS/govCMS.git')
-# @TODO uncomment this to push to d.o.
-#MIRRORS+=('pkil@git.drupal.org:project/govcms.git')
+declare -A MIRRORS
+MIRRORS['pkil@git.drupal.org:project/govcms.git']='7.x-2.x'
 
 add_key() {
   # Decrypt the key we've stored in the repo and add it to our friendly ssh agent.
@@ -25,16 +23,18 @@ add_key() {
 
 mirror_push() {
   # Clone HEAD of master branch from govCMS source.
-  git clone --branch=${BRANCH} ${GITHUB_SOURCE} ${DEPLOY}
+  git clone --branch=${GITHUB_BRANCH} ${GITHUB_SOURCE} ${DEPLOY}
 
-  # Use git filter-branch to remove ACSF specifics.
+  # Change to the repo location and iterate over remotes.
   cd ${DEPLOY}
-  git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch acsf build/acsf' --prune-empty --tag-name-filter cat -- --all
-
-  # Add our remotes & PUSH.HIM
-  for key in "${!MIRRORS[@]}"; do
-    git remote add "${key}" "${MIRRORS[$key]}"
-    git push --tags -f "${key}" "${BRANCH}"
+  for REMOTE in "${!MIRRORS[@]}"; do
+    # Add each remote and push our master branch to the correct remote branch.
+    git remote set-url origin ${REMOTE}
+    git push origin "${GITHUB_BRANCH}:${MIRRORS[$REMOTE]}"
+    if [ ! -z "${TRAVIS_TAG}" ]; then
+      git push origin --tags
+    fi
+    # Remove the remote in case we have further remotes.
   done
 }
 
@@ -50,3 +50,4 @@ if ([ "${TRAVIS_BRANCH}" == "${BRANCH}" ] || [ ! -z "${TRAVIS_TAG}" ]) &&
   add_key
   mirror_push
 fi
+
