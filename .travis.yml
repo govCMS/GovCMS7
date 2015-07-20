@@ -15,6 +15,7 @@ env:
 
 addons:
   artifacts:
+    bucket: travis-ci-fails
     paths:
     - $TRAVIS_BUILD_DIR/build/phing/screenshot-fail.png
     debug: true
