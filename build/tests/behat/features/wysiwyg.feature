@@ -6,6 +6,9 @@ Feature: Use ckeditor4 WYSIWYG editor
   Scenario: WYSIWYG editor is operational
     Given I am logged in as a user named "steve" with the "Content editor" role that doesn't force password change
     And I go to "node/add/page"
+    Then I should see "Create Standard page"
+    And I enter "test" for "Title"
+    Given the iframe in element "cke_edit-body-und-0-value" has id "body-wysiwyg"
     Then I should see a "div.cke" element
     And I should see an "a.cke_button__bold" element
     And I should see an "a.cke_button__italic" element
