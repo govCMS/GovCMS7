@@ -11,7 +11,12 @@ cache:
   apt: true
 
 env:
-  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost/"}}}'
+  global:
+  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin
+  - BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost/"}}}'
+  - ARTIFACTS_BUCKET=travis-ci-fails
+  - secure: xMmMEQUhk8ugxJkUZnoHbQe9OXmRV4I80Uq/HU296hXB+hRmEFaH3jpE6A8Hm4k9OIaFJD2h7Ti16d93sQ7q9evUnx4JDBj5oi/8G3kCqqTHOKLiZId0nKZ+qLIUCdmXT2CASxMrYSgtIWWuJ4gkfFLfmoFvqiT/bMs/F7sDEoaZPGAjvyjMRBzysYm0utyhkEzdgW6ZwBRZvtLIpqnD9gNLJ1TaD7erisspKJA7PYHvF0L1GSqSC7EX2yNAZzZpU7BuuHxcEDGvYOK8nRZidubTQmkYhRt1nzTvCWLLwezdgpHlGRRABczWVIITYXlmQeXTji+mVd1p2b4Tk2GLJiDpOIszpxltNs65JMWH98uytfakN7wcA4dhVstiaXGJlnM6AxKWONql6IMTXaPrfz2X2Dwh+rfj9OkVjTzPAhVJRfQm4nq2XiyBtpTdYBL0Xm7gahWP1tIBMlKlSO5pyBVN2+AeBEdz69Nv21rleE/OZtve8r2GlEAT/xcXAQa13gAvquS8BfKztXQ1S/2H7Ev/CdIQ6UbxCKnjDwanEyOuJ+n0ZD83lfuVt5Rfg/7oip+I6BbGA8PFd5zWuluhKBsRDuLL+3MCnIZYGQK2QCGkpbL1U6A/p2wORoxBWuh7LrrgD5nSfu5blAFVtC7ThIAJFIZdXEkBZCNURy/f6zE=
+  - secure: glt7dcWQNJqsTcFTK+/mbmjtptK836RWw/xDYCFtbNI/Z17vNpppzmch6goQrc1XUC48hGxOoHh+MERIusiGCEQzJR1qO14sZrsj0HSMt7sWlwBBQU6nTH1rm8GOgmqElA26ao5b26bm63izhznN3oQsclmvT1o0J/+HpVHXu0XMiKD0e3UG2DCkna5SvZbwQophcy64of147R6HVSaWwypTFlcJMEva3jHDPyKiKH0as3S80HGMaFCpfJBV9FjepzqjU81AEsoVmHThlDUt0hG0QGmewQYy7sZKhzQf/oz8Gf7aCE3DwFzcoRfd2QzQ1/AuFzIIUrkEOjYrqmgEVberlyeTCx7y/P40mr9yV1J/3VGtIXIxyac3SqiNeUmfFJAM6MMPfrdumcFlf0BdRSieoVuASTs7Q8Q6y1jFE/P50kKfpR8E873nJ4OrliUQ1FFusHfa8Siv2vsAucBIkzdetn9TVHzjmtWRkHg07KS+IVSt6QztPrTkx6dPqL+i9RFj+H1p+72lZXyZRYusAx8kk9FfnYICh03qsmM1qa/jyqiYv+GxOXcpXZONcKiXM/DDaLNey7nlOW9A2Hrx1zVPFIIdyJB7RMqkogJH4UBRfKnXW7QptxoSPP9F37gJ+r3Jh7hADRYralfA1nMbaqCODzxIE4oUTA0WiGboIw0=
 
 addons:
   artifacts:
