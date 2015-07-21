@@ -1,7 +1,7 @@
 Feature: Role delegation
   So user management can be delegated to site editors   As a site editor I can alter user roles   except for users that have the administrator role
 
-  @api @role_delegation
+  @api @role_delegation @javascript
   Scenario: Account alteration protection
     Given a user named "joe" with role "administrator" exists
     Given a user named "bob" with role "Content editor" exists

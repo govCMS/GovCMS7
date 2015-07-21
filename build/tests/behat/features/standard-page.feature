@@ -2,13 +2,14 @@ Feature: Standard Page
 
   Ensure the standard page content displayed correctly
 
-  @api
+  @api @javascript
   Scenario: View the about us page
     Given I am logged in as a user named "dean" with the "Content editor" role that doesn't force password change
     When I go to "/node/add/page"
-    Then the response status code should be 200
+    Then I should see "Create Standard page"
     And I enter "About Us" for "Title"
-    And I enter "govCMS is the best!" for "Body"
+    Given the iframe in element "cke_edit-body-und-0-value" has id "body-wysiwyg"
+    And I fill in "govCMS is the best!" in WYSIWYG editor "body-wysiwyg"
     And press "Save"
     Then I should see "Standard Page About Us has been created"
     Then I logout
@@ -24,5 +25,5 @@ Feature: Standard Page
     And press "Apply"
     Then I logout
     Given I am on "about-us"
-    Then the response status code should be 200
+    Then I should see "About Us"
     And I should see an "nav.breadcrumb:contains(About Us)" element
