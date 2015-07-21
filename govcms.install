@@ -227,7 +227,7 @@ function _govcms_default_formats_and_permissions() {
         'weight' => -50,
         'status' => 1,
         'settings' => array(
-          'valid_elements' => 'a[href|target<_blank|title|class|name|id],
+          'valid_elements' => 'a[href|rel|target<_blank|title|class|name|id],
 div[id|class|align<center?justify?left?right],
 br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
 span,p[class],
@@ -484,6 +484,20 @@ video',
         'weight' => 5,
         'status' => 1,
         'settings' => array(),
+      ),
+      //Pathologic Setting.
+      'pathologic' => array(
+        'weight' => 50,
+        'status' => 1,
+        'settings' => array(
+          'settings_source' => 'global',
+          'local_paths' => '',
+          'protocol_style' => 'full',
+          'local_settings' => array(
+            'protocol_style' => 'full',
+            'local_paths' => '',
+          ),
+        ),
       ),
     ),
   );
