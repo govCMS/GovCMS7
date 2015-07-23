@@ -11,7 +11,7 @@ GITHUB_BRANCH='master'
 
 # Mirrors
 declare -A MIRRORS
-MIRRORS['pkil@git.drupal.org:project/govcms.git']='7.x-2.x'
+MIRRORS['govcms@git.drupal.org:project/govcms.git']='7.x-2.x'
 
 add_key() {
   # Decrypt the key we've stored in the repo and add it to our friendly ssh agent.
