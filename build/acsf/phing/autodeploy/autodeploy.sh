@@ -15,8 +15,8 @@ MIRRORS['pkil@git.drupal.org:project/govcms.git']='7.x-2.x'
 
 add_key() {
   # Decrypt the key we've stored in the repo and add it to our friendly ssh agent.
-  openssl aes-256-cbc -K "$encrypted_a306a1087d72_key" -iv "$encrypted_a306a1087d72_iv" -in "${DIR}/govcms_rsa.enc" -out "${DIR}/govcms_rsa" -d
-  chmod "600 ${DIR}/govcms_rsa"
+  openssl aes-256-cbc -K "$encrypted_16038e47068b_key" -iv "$encrypted_16038e47068b_iv" -in "${DIR}/govcms_rsa.enc" -out "${DIR}/govcms_rsa" -d
+  chmod 600 "${DIR}/govcms_rsa"
   eval "$(ssh-agent -s)"
   ssh-add "${DIR}/govcms_rsa"
 }
