@@ -17,7 +17,7 @@ addons:
   artifacts:
     paths:
     - $TRAVIS_BUILD_DIR/build/phing/screenshot-fail.png
-  ssh_known_hosts: git.drupal.com
+  ssh_known_hosts: git.drupal.org
 
 notifications:
   email:
