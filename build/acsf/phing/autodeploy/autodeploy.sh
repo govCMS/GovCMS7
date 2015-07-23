@@ -44,7 +44,7 @@ echo "Tag:    ${TRAVIS_TAG}"
 echo "PR:     ${TRAVIS_PULL_REQUEST}"
 echo "Slug:   ${TRAVIS_REPO_SLUG}"
 
-if ([ "${TRAVIS_BRANCH}" == "${BRANCH}" ] || [ ! -z "${TRAVIS_TAG}" ]) &&
+if ([ "${TRAVIS_BRANCH}" == "${GITHUB_BRANCH}" ] || [ ! -z "${TRAVIS_TAG}" ]) &&
   [ "${TRAVIS_PULL_REQUEST}" == "false" ] &&
   [ "${TRAVIS_REPO_SLUG}" == "${GITHUB_SOURCE_SLUG}" ]; then
   add_key
