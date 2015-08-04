@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file
+ * Install file for govcms editing.
+ */
+
+
+/**
+ * Add pathologic module as this is now a new dependency for Rich Text Filter
+ */
+function govcms_editing_update_7001() {
+  module_enable(array('pathologic'));
+}
