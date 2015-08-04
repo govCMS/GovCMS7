@@ -235,3 +235,40 @@ function govcms_zen_theme_registry_alter(&$theme_registry) {
     $theme_registry[$hook]['preprocess functions'][] = 'govcms_zen_preprocess_aria_invalid';
   }
 }
+
+/**
+ * Implements hook_file_link().
+ *
+ * We override core's file link theming to append a query parameter which
+ * changes when the file entity changes. This is for caching reasons and
+ * reverse proxies.
+ */
+function govcms_zen_file_link($variables) {
+  $file = $variables ['file'];
+  $icon_directory = $variables ['icon_directory'];
+
+  $url = file_create_url($file->uri);
+  $icon = theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
+
+  // Set options as per anchor format described at
+  // http://microformats.org/wiki/file-format-examples
+  $options = array(
+    'attributes' => array(
+      'type' => $file->filemime . '; length=' . $file->filesize,
+    ),
+    'query' => array(
+      'v' => $file->timestamp,
+    ),
+  );
+
+  // Use the description as the link text if available.
+  if (empty($file->description)) {
+    $link_text = $file->filename;
+  }
+  else {
+    $link_text = $file->description;
+    $options ['attributes']['title'] = check_plain($file->filename);
+  }
+
+  return '<span class="file">' . $icon . ' ' . l($link_text, $url, $options) . '</span>';
+}
