@@ -11,3 +11,10 @@
 function govcms_editing_update_7001() {
   module_enable(array('pathologic'));
 }
+
+/**
+ * Configure pathologic for existing sites
+ */
+function govcms_editing_update_7002() {
+  variable_set('pathologic_protocol_style', 'path');
+}
