@@ -17,7 +17,7 @@ Drupal.behaviors.govAccessibilityTextSize = {
         $('body').addClass('large-fonts');
         return false;
       });
-      $('.font-small, .reset a').click(function() {
+      $('.font-small, a.reset').click(function() {
         $('body').removeClass('large-fonts');
         return false;
       });
