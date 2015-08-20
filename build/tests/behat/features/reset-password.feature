@@ -2,7 +2,7 @@ Feature: Reset Password
 
   Ensure the reset password functionality works
 
-  @api
+  @api @javascript
   Scenario: Reset my password
     Given I am logged in as a user named "peskypaul" with the "Content editor" role that doesn't force password change
     Then I logout
