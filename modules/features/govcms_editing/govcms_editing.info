@@ -12,6 +12,7 @@ dependencies[] = media
 dependencies[] = media_internet
 dependencies[] = media_wysiwyg
 dependencies[] = pathologic
+dependencies[] = spamspan
 dependencies[] = strongarm
 dependencies[] = toc_filter
 dependencies[] = video_filter
