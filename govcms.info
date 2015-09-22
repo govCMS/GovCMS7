@@ -141,6 +141,7 @@ dependencies[] = ccl_views
 ; Custom
 
 dependencies[] = options_flatten
+; @TODO remove this after responsive_favicons has been added.
 dependencies[] = iconomist
 dependencies[] = text_summary_options
 dependencies[] = govcms_disable_defaultcontent

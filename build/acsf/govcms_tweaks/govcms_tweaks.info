@@ -5,3 +5,4 @@ core = 7.x
 dependencies[] = acsf
 dependencies[] = acsf_openid
 dependencies[] = clamav
+dependencies[] = paranoia
