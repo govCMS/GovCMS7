@@ -727,6 +727,7 @@ function _govcms_default_variables() {
     'pathauto_node_pattern' => '[node:title]',
     'pathauto_punctuation_hyphen' => 1,
     'pathauto_taxonomy_term_pattern' => '[term:vocabulary]/[term:name]',
+    'pathauto_transliterate' => 1,
     'pathauto_user_pattern' => 'users/[user:name]',
     'path_alias_whitelist' => array(
       'node' => TRUE,
