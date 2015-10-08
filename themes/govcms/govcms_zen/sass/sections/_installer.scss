@@ -1,6 +1,14 @@
 .installer {
   .centered-box {
-    text-align: left;
+    text-align: center;
     padding-left: 20px;
+    max-width: 70%;
+    input, fieldset {
+      max-width: 100%;
+    }
+    .form-type-password-confirm .form-item,
+    .form-type-password-confirm .password-suggestions {
+      margin: 0.7em auto;
+    }
   }
 }

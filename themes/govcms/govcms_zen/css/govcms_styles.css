@@ -2369,9 +2369,17 @@ footer .block {
 }
 
 .installer .centered-box {
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
+  max-width: 70%;
 }
+.installer .centered-box input, .installer .centered-box fieldset {
+  max-width: 100%;
+}
+.installer .centered-box .form-type-password-confirm .form-item,
+.installer .centered-box .form-type-password-confirm .password-suggestions {
+  margin: 0.7em auto;
+ }
 
 .region-navigation {
   background: #7a797a;
