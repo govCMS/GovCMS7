@@ -20,3 +20,87 @@ function govcms_editing_wysiwyg_editor_settings_alter(&$settings, $context) {
     $settings['wsc_lang'] = 'en_GB';
   }
 }
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function govcms_editing_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'element_info_alter') {
+    $group = $implementations['govcms_editing'];
+    unset($implementations['govcms_editing']);
+    $implementations['govcms_editing'] = $group;
+  }
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function govcms_editing_element_info_alter(&$types) {
+  // Replace linkit_pre_render_editor_element() due to incompatibility with
+  // Paragraphs module.
+  // @see https://www.drupal.org/node/2550845#comment-10355269
+  if (isset($types['text_format']['#process']) && is_array($types['text_format']['#process'])) {
+    $key = array_search('linkit_pre_render_editor_element', $types['text_format']['#process']);
+    if ($key !== FALSE) {
+      $types['text_format']['#process'][$key] = 'govcms_editing_pre_render_editor_element';
+    }
+  }
+}
+
+/**
+ * Override linkit_pre_render_editor_element().
+ * @see https://www.drupal.org/node/2550845#comment-10355269
+ */
+function govcms_editing_pre_render_editor_element($element) {
+  static $processed = array();
+
+  if (!isset($processed[$element['#id']])) {
+    // Load the first profile that is assign to this text format.
+    $profile = linkit_profile_load_by_format($element['#format']);
+
+    // If we dont have any profile, lets just return the element.
+    if (!$profile) {
+      return $element;
+    }
+    // Set the field ID.
+    if (isset($element['value']['#id'])) {
+      $field_id = $element['value']['#id'];
+    }
+    else {
+      $field_id = $element['#id'] . '-value';
+    }
+
+    $field_js = array(
+      'data' => array(
+        'linkit' => array(
+          'fields' => array(
+            $field_id => array(
+              'profile' => $profile->name,
+            ),
+          ),
+        ),
+      ),
+      'type' => 'setting',
+    );
+
+    // Configure Linkit to have an IMCE selector.
+    if (module_invoke('imce', 'access') && isset($profile->data['imce']) && $profile->data['imce'] == 1) {
+      $field_js['data']['linkit']['IMCEurl'] = url('imce', array('query' => array(
+        'app' => 'Linkit|sendto@Drupal.linkit.IMCECallback',
+        'absolute' => TRUE,
+       )));
+      // We will only serv public files with IMCE.
+      $field_js['data']['linkit']['publicFilesDirectory'] = variable_get('file_public_path', conf_path() . '/files');
+    }
+
+    $processed[$element['#id']] = $field_js;
+  }
+
+  if (isset($processed[$element['#id']])) {
+    // Attach the linkit_base librar
+    $element['#attached']['library'][] = array('linkit', 'base');
+    $element['#attached']['js'][] = $processed[$element['#id']];
+  }
+
+  return $element;
+}
