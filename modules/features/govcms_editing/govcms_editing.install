@@ -34,6 +34,6 @@ function _govcms_editing_update_system_weight() {
   // hook_module_implements_alter().
   db_update('system')
     ->condition('name', 'govcms_editing')
-    ->fields(array('weight' => 1))
+    ->fields(array('weight' => 10))
     ->execute();
 }
