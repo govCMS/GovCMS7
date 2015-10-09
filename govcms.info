@@ -95,6 +95,7 @@ dependencies[] = phone
 dependencies[] = quicktabs
 dependencies[] = quicktabs_tabstyles
 dependencies[] = redirect
+dependencies[] = robotstxt
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = views_content
