@@ -191,6 +191,13 @@
               passthru="true" />
     </target>
 
+    <target name="rm-robotstxt"
+            description="Remove the robots.txt file">
+        <exec command="rm ${docroot}/robots.txt"
+              logoutput="true"
+              passthru="true"/>
+    </target>
+
     <target name="rm-docroot"
             description="Remove the docroot folder">
         <exec command="git clean -fd"
@@ -252,6 +259,9 @@
             <param>"${docroot}"</param>
         </drush>
 
+        <!-- Remove robots.txt file -->
+        <phingcall target="rm-robotstxt" />
+
         <!-- Run Acquia specific post-make build tasks -->
         <if>
           <equals arg1="${build.acsf}" arg2="1" />
@@ -299,6 +309,9 @@
             <param>"${drupal.contrib_makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
+
+        <!-- Remove robots.txt file -->
+        <phingcall target="rm-robotstxt" />
 
         <!-- Run Acquia specific post-make build tasks -->
         <if>

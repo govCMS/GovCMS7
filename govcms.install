@@ -1599,3 +1599,10 @@ function _govcms_install_full_image_display() {
     ),
   ));
 }
+
+/**
+ * Enables robotstxt module in place of removed robots.txt file.
+ */
+function govcms_update_7200() {
+  module_enable(array('robotstxt'));
+}
