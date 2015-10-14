@@ -1,17 +1,20 @@
 language: php
 
 php:
-  - 5.3
   - 5.5
-  # @TODO test 5.6 when we move to 5.5
-  #- 5.6
+  - 5.6
+
+sudo: false
 
 cache:
   bundler: true
   apt: true
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.drush/cache
 
 env:
-  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://localhost/"}}}'
+  - COMPOSER_BIN_DIR=$TRAVIS_BUILD_DIR/build/bin BEHAT_PARAMS='{"extensions":{"Behat\\MinkExtension":{"base_url":"http://127.0.0.1:8888/"}}}'
 
 addons:
   artifacts:
@@ -30,8 +33,6 @@ notifications:
     secure: jflE/Zs73rGpsnhN7qXqYDaVKyuwlNyQByMZrcwq2Cj7O84N3yp5x7fDbDTsJ4qYExBj3cnUXGzuS/SEtDWVdpwpjS4rcfL1uQvU4ZCuI6U9mI/KTWVGgD5+DkdS8/jZxsIfDtM8OYBwukqyaUCgGRzV609HR0NPiUofKnMxAPo=
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq postfix
   - composer selfupdate
 
 install:
@@ -39,27 +40,19 @@ install:
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/build/bin
 
 before_script:
-  # Create a mock mail system so Drupal install can send email somewhere.
-  - sudo service postfix stop
-  - smtp-sink -d "%d.%H.%M.%S" localhost:2500 1000 &
-  - echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
-  - echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -r 'echo PHP_VERSION;'`/etc/php.ini"
-
-  # Install Apache
-  - sudo apt-get install -y apache2 libapache2-mod-fastcgi
-  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
-  - sudo a2enmod rewrite actions fastcgi alias
-  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
-  - sudo cp -f build/travis/travis-ci-apache /etc/apache2/sites-available/default
-  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
-  - sudo service apache2 restart
+  # Make PHP think sendmail exists
+  - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
   # Create Database
   - mysql -e 'CREATE DATABASE travis_ci_govcms_drupal;'
 
   # Build the codebase
   - phing -f build/phing/build.xml build:local
+
+  # Run the Drush server
+  - cd "${TRAVIS_BUILD_DIR}/docroot"
+  - $TRAVIS_BUILD_DIR/build/bin/drush runserver :8888 &>/dev/null &
+  - cd "${TRAVIS_BUILD_DIR}"
 
 script:
   # Run tests
