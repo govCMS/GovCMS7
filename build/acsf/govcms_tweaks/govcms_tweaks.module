@@ -41,6 +41,6 @@ function govcms_tweaks_openid_response($response, $account) {
 function govcms_tweaks_paranoia_hide_modules() {
   return array(
     'favicon' => 'Other',
-    'iconomist' => 'Other',
+    'iconomist' => 'Theme settings',
   );
 }
