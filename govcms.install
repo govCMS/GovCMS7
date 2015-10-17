@@ -1611,7 +1611,7 @@ function govcms_update_7200() {
 /**
  * Replaces favicon and Iconomist with Responsive Favicons.
  */
-function govcms_tweaks_update_7201() {
+function govcms_update_7201() {
   // Take any settings from favicon and add it to responsive favicons
   if (module_exists('favicon')) {
     module_enable(array("responsive_favicons"));

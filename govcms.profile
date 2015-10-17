@@ -64,7 +64,7 @@ function govcms_system_info_alter(&$info, $file, $type) {
  * Prevents Iconomist and Favicon modules from appearing before they are
  * removed from the codebase.
  */
-function govcms_tweaks_paranoia_hide_modules() {
+function govcms_paranoia_hide_modules() {
   return array(
     'favicon' => 'Other',
     'iconomist' => 'Theme settings',
