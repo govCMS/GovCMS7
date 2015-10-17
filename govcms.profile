@@ -57,3 +57,16 @@ function govcms_system_info_alter(&$info, $file, $type) {
     $info['dependencies'] = array();
   }
 }
+
+/**
+ * Implements hook_paranoia_hide_modules().
+ *
+ * Prevents Iconomist and Favicon modules from appearing before they are
+ * removed from the codebase.
+ */
+function govcms_tweaks_paranoia_hide_modules() {
+  return array(
+    'favicon' => 'Other',
+    'iconomist' => 'Theme settings',
+  );
+}
