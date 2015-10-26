@@ -49,9 +49,9 @@ before_script:
   # Build the codebase
   - phing -f build/phing/build.xml build:local
 
-  # Run the Drush server
+  # Run the inbuilt PHP server
   - cd "${TRAVIS_BUILD_DIR}/docroot"
-  - $TRAVIS_BUILD_DIR/build/bin/drush runserver :8888 &>/dev/null &
+  - php -S 127.0.0.1:8888 "${TRAVIS_BUILD_DIR}/build/tests/drush/router.php" &> $TRAVIS_BUILD_DIR/php.log &
   - cd "${TRAVIS_BUILD_DIR}"
 
 script:
@@ -61,3 +61,5 @@ script:
 after_success:
   - phing -f build/phing/build.xml post-commit
 
+after_failure:
+  - cat $TRAVIS_BUILD_DIR/php.log
