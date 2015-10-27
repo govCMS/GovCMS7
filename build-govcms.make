@@ -5,4 +5,5 @@ api = 2
 includes[] = drupal-org-core.make
 
 ; Download the govCMS install profile and recursively build all its dependencies:
+projects[govcms][type] = profile
 projects[govcms][version] = 2.x-dev
