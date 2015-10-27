@@ -82,6 +82,13 @@ The variables that Phing uses are configured at the top of build.xml. If there a
 
 ; The uri of the site.
 drupal.base_url='http://govcms.local/'
+
+; The database settings.
+; db.host=DB_HOST
+; db.name=DB_NAME
+; db.username=DB_USER
+; db.password=DB_PASS
+; db.port=DB_PORT
 ```
 
 If you are making changes to the make file, you can tell the build process to build from your local make file, instead of the one in the profile repository.
