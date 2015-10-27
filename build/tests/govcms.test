@@ -237,6 +237,20 @@ class GovCMSTest extends GovCMSTestBase {
       'workbench_moderation_state_new' => 'published',
     ), t('Save'));
 
+    // Create a draft page.
+    $this->drupalGet('node/add/page');
+    $this->drupalPost(NULL, array(
+      'title' => 'Gold Halo - Draft',
+      'workbench_moderation_state_new' => 'draft',
+    ), t('Save'));
+
+    // Create a needs review page.
+    $this->drupalGet('node/add/page');
+    $this->drupalPost(NULL, array(
+      'title' => 'Gold Halo - needs_review',
+      'workbench_moderation_state_new' => 'needs_review',
+    ), t('Save'));
+
     // Index content.
     $this->cronRun();
     $this->cronRun();
@@ -246,6 +260,8 @@ class GovCMSTest extends GovCMSTestBase {
     $this->assertText('Gods Are Bored');
     $this->drupalGet('search/node/gold');
     $this->assertText('Gold Halo');
+    $this->assertNoText('Gold Halo - Draft');
+    $this->assertNoText('Gold Halo - needs_review');
 
     // Search as anonymous.
     $this->drupalLogout();
@@ -253,6 +269,8 @@ class GovCMSTest extends GovCMSTestBase {
     $this->assertNoText('Gods Are Bored');
     $this->drupalGet('search/node/gold');
     $this->assertText('Gold Halo');
+    $this->assertNoText('Gold Halo - Draft');
+    $this->assertNoText('Gold Halo - needs_review');
 
     // Search as logged in user.
     $user = $this->drupalCreateUser();
@@ -261,6 +279,8 @@ class GovCMSTest extends GovCMSTestBase {
     $this->assertNoText('Gods Are Bored');
     $this->drupalGet('search/node/gold');
     $this->assertText('Gold Halo');
+    $this->assertNoText('Gold Halo - Draft');
+    $this->assertNoText('Gold Halo - needs_review');
   }
 
   /**
