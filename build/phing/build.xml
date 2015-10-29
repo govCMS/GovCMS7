@@ -221,6 +221,13 @@
         </if>
     </target>
 
+    <target name="mk-favicon"
+            description="Place the govCMS favicon in the docroot directory.">
+        <exec command="cp ${repo.root}/themes/govcms/GOVCMS_STARTERKIT/favicon.ico ${docroot}/"
+              logoutput="true"
+              passthru="true"/>
+    </target>
+
     <target name="phantomjs:launch"
           description="Launches a GhostDriver.">
       <exec command="${phantomjs.bin} --webdriver=${phantomjs.webdriver}"
@@ -288,6 +295,9 @@
         <!-- Remove robots.txt file -->
         <phingcall target="rm-robotstxt" />
 
+        <!-- Place favicon.ico in the docroot -->
+        <phingcall target="mk-favicon" />
+
         <!-- Run Acquia specific post-make build tasks -->
         <if>
           <equals arg1="${build.acsf}" arg2="1" />
@@ -338,6 +348,9 @@
 
         <!-- Remove robots.txt file -->
         <phingcall target="rm-robotstxt" />
+
+        <!-- Place favicon.ico in the docroot -->
+        <phingcall target="mk-favicon" />
 
         <!-- Run Acquia specific post-make build tasks -->
         <if>
