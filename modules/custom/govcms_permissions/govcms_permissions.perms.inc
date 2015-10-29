@@ -790,8 +790,6 @@ function govcms_permissions_base_permissions() {
       'administer search_api' => array(
         'roles' => array(
           0 => 'administrator',
-          1 => 'Site editor',
-          2 => 'Site builder',
         ),
       ),
     ),
