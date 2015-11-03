@@ -6,7 +6,7 @@ defaults[projects][subdir] = "contrib"
 ; Contrib modules
 
 projects[accessible_forms][version] = "1.0-alpha1"
-projects[acsf][version] = "1.14"
+projects[acsf][version] = "1.18"
 projects[acquia_connector][version] = "2.15"
 projects[addressfield][version] = "1.1"
 projects[admin_views][version] = "1.5"
