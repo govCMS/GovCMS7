@@ -53,6 +53,8 @@
               value="${docroot}/profiles/${drupal.profile}/themes"/>
     <property name="docroot.sites"
               value="${docroot}/sites"/>
+    <property name="govcms.sites"
+              value="${repo.root}/sites"/>
 
     <!-- Credentials -->
     <property name="db.username" value="root"/>
@@ -135,9 +137,6 @@
     </fileset>
 
     <fileset dir="${repo.root}/themes" id="govcms.themes">
-        <include name="**"/>
-    </fileset>
-    <fileset dir="${repo.root}/sites" id="govcms.sites">
         <include name="**"/>
     </fileset>
 
@@ -243,17 +242,28 @@
                 <phingcall target="make:local" />
             </else>
         </if>
+        <phingcall target="make:sites" />
+    </target>
 
-        <available file="${docroot.sites}" property="sites.available" type="dir" />
-        <if>
-          <istrue value="${sites.available}"/>
-          <then>
-            <delete dir="${docroot.sites}" />
-            <copy todir="${docroot.sites}">
-              <fileset refid="govcms.sites"/>
-            </copy>
-          </then>
-        </if>
+    <target name="make:sites">
+      <!-- Setup the sites directory outside of docroot so that future compilations
+           don't remove customisations make to the sites directory -->
+      <property name="sites.available" value="false" />
+      <available file="${govcms.sites}" property="sites.available" type="dir" />
+      <if>
+        <isfalse value="${sites.available}"/>
+        <then>
+          <copy todir="${govcms.sites}">
+            <fileset dir="${docroot.sites}">
+                <include name="**"/>
+            </fileset>
+          </copy>
+        </then>
+      </if>
+
+      <!-- Must remote both directory (1st time attempt) and symlink (every other attempt) -->
+      <delete dir="${docroot.sites}" file="${docroot.sites}" />
+      <symlink link="${docroot.sites}" target="../sites"/>
     </target>
 
     <!-- Drush make the build using a recursive strategy -->
