@@ -51,6 +51,8 @@
               value="${docroot}/profiles/${drupal.profile}/modules"/>
     <property name="docroot.profile.themes.path"
               value="${docroot}/profiles/${drupal.profile}/themes"/>
+    <property name="docroot.sites"
+              value="${docroot}/sites"/>
 
     <!-- Credentials -->
     <property name="db.username" value="root"/>
@@ -133,6 +135,9 @@
     </fileset>
 
     <fileset dir="${repo.root}/themes" id="govcms.themes">
+        <include name="**"/>
+    </fileset>
+    <fileset dir="${repo.root}/sites" id="govcms.sites">
         <include name="**"/>
     </fileset>
 
@@ -248,6 +253,15 @@
             <else>
                 <phingcall target="make:local" />
             </else>
+        </if>
+        <if>
+          <available file="${govcms.sites}" property="sites.available" type="dir" />
+          <then>
+            <delete dir="${docroot.sites}" />
+            <copy todir="${docroot.sites}">
+              <fileset refid="govcms.sites"/>
+            </copy>
+          </then>
         </if>
     </target>
 
