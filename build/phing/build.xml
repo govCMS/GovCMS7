@@ -139,6 +139,9 @@
     <fileset dir="${repo.root}/themes" id="govcms.themes">
         <include name="**"/>
     </fileset>
+    <fileset dir="${repo.root}/sites" id="govcms.sites">
+        <include name="**"/>
+    </fileset>
 
     <!--               -->
     <!-- Targets       -->
