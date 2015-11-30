@@ -1502,6 +1502,9 @@ function govcms_cleanup() {
   // @todo Wysiwyg profiles not being applied on install.
   features_revert(array('govcms_editing' => array('wysiwyg')));
 
+  // Enable OpenAccess buttons.
+  govcms_enable_openaccess_buttons();
+
 }
 
 /**
@@ -1599,6 +1602,32 @@ function _govcms_install_full_image_display() {
       ),
     ),
   ));
+}
+
+/*
+ * Enable OpenAccess buttons in Rich Text profile.
+ */
+function govcms_enable_openaccess_buttons() {
+  $profile = wysiwyg_profile_load('rich_text');
+  if ($profile) {
+    $settings = $profile->settings;
+    if (!isset($settings['buttons']['performx'])) {
+      $settings['buttons']['performx'] = array(
+        'pxTable' => 1,
+        'pxAccessibility' => 1,
+      );
+
+      // Update settings in the database.
+      $update = db_update('wysiwyg')
+        ->fields(array('settings' => serialize($settings)))
+        ->condition('format', 'rich_text')
+        ->condition('editor', 'ckeditor')
+        ->execute();
+
+      // Clear wysiwyg profile cache to see the changes.
+      wysiwyg_profile_cache_clear();
+    }
+  }
 }
 
 /**
