@@ -1475,7 +1475,7 @@ function govcms_example_content_install_batch($type, $key, $name, $message, &$co
 /**
  * Performs any cleanup and output on completion of example content batch.
  */
-function govcms_example_content_install_finished(&$context) {
+function govcms_example_content_install_finished($context) {
 
   drupal_set_message('Example content installed.');
   drupal_set_message('Sitemap has been rebuilt.');
