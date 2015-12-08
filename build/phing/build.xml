@@ -141,6 +141,10 @@
     <!-- ============= -->
 
     <target name="build"
+            description="Build the govCMS project."
+            depends="git-reset, make"/>
+
+    <target name="build:install"
             description="Build the project and install govCMS."
             depends="git-reset, make, install"/>
 
