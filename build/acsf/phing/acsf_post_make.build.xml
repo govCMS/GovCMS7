@@ -14,7 +14,7 @@
         checksum="true" />
 
     <!-- Patch Drupal core for ACSF with patches unsuitable for non-govCMS core. -->
-    <patch patchfile="${repo.root}/build/acsf/patches/govcms_force_ssl.patch"
+    <patch patchfile="${repo.root}/build/acsf/patches/govcms_htaccess.patch"
            dir="${docroot}"
            strip="1"
            haltonfailure="true" />

@@ -1,11 +1,23 @@
 diff --git a/.htaccess b/.htaccess
-index 7ccb6a2..fa16812 100644
+index 151239c..7807d81 100644
 --- a/.htaccess
 +++ b/.htaccess
-@@ -56,6 +56,13 @@ DirectoryIndex index.php index.html index.htm
+@@ -50,12 +50,25 @@ DirectoryIndex index.php index.html index.htm
+     # problems if a non-Drupal PHP file is installed in a subdirectory.
+     ExpiresActive Off
+   </FilesMatch>
++  <FilesMatch "\.(pdf|doc|docx|txt|xls|xlsx|ppt|pptx|pps|ppsx|odt|ods|odp|mp3|mov|mp4|m4a|m4v|mpeg|avi|ogg|oga|ogv|weba|webp|webm)$">
++    # Only cache binary files of type listed above
++    # for 30 minutes.
++    # These are the default allowed file extensions uploads that are not images.
++    ExpiresDefault A1800
++  </FilesMatch>
+ </IfModule>
+ 
+ # Various rewrite rules.
  <IfModule mod_rewrite.c>
    RewriteEngine on
-
+ 
 +  # Redirect HTTP to HTTPS on Acquia hosted sites.
 +  RewriteCond %{HTTPS} off
 +  RewriteCond %{HTTP:X-Forwarded-Proto} !https
