@@ -265,19 +265,19 @@
       <property name="sites.available" value="false" />
       <available file="${govcms.sites}" property="sites.available" type="dir" />
       <if>
-        <isfalse value="${sites.available}"/>
+        <isfalse value="${sites.available}" />
         <then>
           <copy todir="${govcms.sites}">
             <fileset dir="${docroot.sites}">
-                <include name="**"/>
+                <include name="**" />
             </fileset>
           </copy>
         </then>
       </if>
 
-      <!-- Must remote both directory (1st time attempt) and symlink (every other attempt) -->
+      <!-- Must remove both directory (1st time attempt) and symlink (every other attempt) -->
       <delete dir="${docroot.sites}" file="${docroot.sites}" />
-      <symlink link="${docroot.sites}" target="../sites"/>
+      <symlink link="${docroot.sites}" target="../sites" />
     </target>
 
     <!-- Drush make the build using a recursive strategy -->
