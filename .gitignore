@@ -39,11 +39,6 @@ Thumbs.db
 #######################
 .idea
 
-# Ignore Drupal stuff #
-########################
-docroot
-drushrc.php
-
 # Continuous Integration #
 #########################
 bin
