@@ -220,6 +220,7 @@
                         <chmod file="${docroot}/sites/default" mode="2775"/>
                     </then>
                 </if>
+                <phingcall target="make:sites" />
                 <delete dir="${docroot}"/>
             </then>
         </if>
