@@ -105,6 +105,20 @@ function govcms_events_views_default_views() {
   $handler->display->display_options['sorts']['field_event_date_value']['id'] = 'field_event_date_value';
   $handler->display->display_options['sorts']['field_event_date_value']['table'] = 'field_data_field_event_date';
   $handler->display->display_options['sorts']['field_event_date_value']['field'] = 'field_event_date_value';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'event' => 'event',
+  );
+  $handler->display->display_options['arguments']['nid']['validate_options']['access'] = TRUE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -186,15 +200,18 @@ function govcms_events_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['path'] = 'news-media/events';
 
   /* Display: Events Block */
   $handler = $view->new_display('block', 'Events Block', 'block_1');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
 
   /* Display: Frontpage Events Block */
   $handler = $view->new_display('block', 'Frontpage Events Block', 'block_2');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -223,6 +240,74 @@ function govcms_events_views_default_views() {
   $handler->display->display_options['filters']['promote']['table'] = 'node';
   $handler->display->display_options['filters']['promote']['field'] = 'promote';
   $handler->display->display_options['filters']['promote']['value'] = '1';
+
+  /* Display: iCal export (all) */
+  $handler = $view->new_display('feed', 'iCal export (all)', 'feed_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'date_ical';
+  $handler->display->display_options['style_options']['cal_name'] = '';
+  $handler->display->display_options['row_plugin'] = 'date_ical';
+  $handler->display->display_options['row_options']['date_field'] = 'field_data_field_event_date.field_event_date_value';
+  $handler->display->display_options['row_options']['summary_field'] = 'default_title';
+  $handler->display->display_options['row_options']['location_field'] = 'field_data_field_location.field_location';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'event' => 'event',
+  );
+  $handler->display->display_options['arguments']['nid']['validate_options']['access'] = TRUE;
+  $handler->display->display_options['path'] = 'news-media/events/calendar.ics';
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+    'block_1' => 0,
+    'block_2' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
+
+  /* Display: iCal export (contextual) */
+  $handler = $view->new_display('feed', 'iCal export (contextual)', 'feed_2');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'date_ical';
+  $handler->display->display_options['style_options']['cal_name'] = '';
+  $handler->display->display_options['style_options']['disable_webcal'] = TRUE;
+  $handler->display->display_options['row_plugin'] = 'date_ical';
+  $handler->display->display_options['row_options']['date_field'] = 'field_data_field_event_date.field_event_date_value';
+  $handler->display->display_options['row_options']['summary_field'] = 'default_title';
+  $handler->display->display_options['row_options']['location_field'] = 'field_data_field_location.field_location';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
+    'event' => 'event',
+  );
+  $handler->display->display_options['arguments']['nid']['validate_options']['access'] = TRUE;
+  $handler->display->display_options['path'] = 'news-media/events/%/calendar.ics';
+  $handler->display->display_options['displays'] = array(
+    'default' => 0,
+    'page' => 0,
+    'block_1' => 0,
+    'block_2' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
   $export['events'] = $view;
 
   return $export;
