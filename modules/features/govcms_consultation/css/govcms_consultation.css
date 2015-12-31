@@ -1,0 +1,193 @@
+.hide_short_comments .webform-component--step-1-your-submission--short-comments {
+  display: none;
+}
+
+.hide_files .webform-component--step-1-your-submission--hys-formal-uploads {
+  display: none;
+}
+
+.formal-submission-webform {
+  height: auto;
+}
+
+.progress-bar {
+  position: relative;
+  clear: both;
+  overflow: hidden;
+}
+
+
+.progress-bar__text {
+  color: #12293a;
+  padding: 0.25rem 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+.progress-bar__start-date,
+.progress-bar__text-left {
+  width: 50%;
+  float: left;
+}
+
+
+.progress-bar__end-date,
+.progress-bar__text-right {
+  width: 50%;
+  float: left;
+  text-align: right;
+}
+
+
+.progress-bar__label {
+  color: #12293a;
+  display: block;
+}
+
+
+.progress-bar__percentage {
+  color: #616161;
+  float: right;
+}
+
+
+.progress-bar--collapsed .progress-bar__percentage,
+.progress-bar__percentage--brackets {
+  color: #12293a;
+  float: none;
+}
+
+
+.progress-bar--collapsed .progress-bar__percentage:before,
+.progress-bar__percentage--brackets:before {
+  content: '(';
+}
+
+
+.progress-bar--collapsed .progress-bar__percentage:after,
+.progress-bar__percentage--brackets:after {
+  content: ')';
+}
+
+
+.progress-bar__bar {
+  background: #e4e4e4;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+
+.progress-bar--collapsed .progress-bar:nth-child(2) .progress-bar__progress,
+.progress-bar__progress--grey,
+.progress-bar__progress {
+  background-color: #55c7e3;
+  background-image: url("../images/progress-bar-bg.jpg");
+  background-position: 50% 100%;
+}
+
+
+.progress-bar--collapsed .progress-bar:nth-child(2) .progress-bar__progress,
+.progress-bar__progress--grey {
+  background: #b9b9b9;
+}
+
+
+.progress-bar__bar,
+.progress-bar--collapsed .progress-bar:nth-child(2) .progress-bar__progress,
+.progress-bar__progress--grey,
+.progress-bar__progress,
+.progress-bar__progress-thin {
+  height: 1rem;
+}
+
+
+.progress-bar--thick .progress-bar__bar,
+.progress-bar--thick .progress-bar__progress,
+.progress-bar--collapsed .progress-bar__bar,
+.progress-bar--collapsed .progress-bar__progress,
+.progress-bar--collapsed .progress-bar:nth-child(2) .progress-bar__progress,
+.progress-bar__progress-thick {
+  height: 2rem;
+}
+
+
+.progress-bar__start-date {
+  color: #616161;
+}
+
+
+.progress-bar__days-remain {
+  float: right;
+  text-align: right;
+  color: #616161;
+}
+
+
+.progress-bar__end-date {
+  color: #616161;
+}
+
+
+.progress-bar__completion {
+  float: right;
+  color: #616161;
+}
+
+.progress-bar__highlighted {
+  color: #007abb;
+  font-weight: bold;
+}
+
+
+.progress-bar--complete .progress-bar__progress {
+  background: #cd4d02;
+}
+
+
+.progress-bar--complete .progress-bar__highlighted {
+  color: #cd4d02;
+  font-weight: bold;
+}
+
+
+.progress-bar--collapsed {
+  position: relative;
+}
+
+
+.progress-bar--collapsed .progress-bar__text {
+  padding: 0.25rem 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+}
+
+.update {
+  overflow: hidden;
+}
+
+.update__icon {
+  float: left;
+  margin-right: 1rem;
+  width: 6rem;
+  text-align: center;
+  padding-top: 1rem;
+  min-height: 5rem;
+}
+
+.update__title {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  margin-top: .25rem;
+  font-weight: 500;
+  margin: 1rem 0 0;
+}
+
+.update__date {
+  font-size: 1.25rem;
+  line-height: 2.1875rem;
+  color: #616161;
+  margin-bottom: 0;
+}
