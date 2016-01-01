@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Code for the Consultation feature.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function govcms_consultation_enable() {
+  variable_set('ds_extras_fields_extra', TRUE);
+}
