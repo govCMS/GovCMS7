@@ -51,6 +51,10 @@
               value="${docroot}/profiles/${drupal.profile}/modules"/>
     <property name="docroot.profile.themes.path"
               value="${docroot}/profiles/${drupal.profile}/themes"/>
+    <property name="docroot.sites"
+              value="${docroot}/sites"/>
+    <property name="govcms.sites"
+              value="${repo.root}/sites"/>
 
     <!-- Credentials -->
     <property name="db.username" value="root"/>
@@ -216,6 +220,7 @@
                         <chmod file="${docroot}/sites/default" mode="2775"/>
                     </then>
                 </if>
+                <phingcall target="make:sites" />
                 <delete dir="${docroot}"/>
             </then>
         </if>
@@ -249,6 +254,28 @@
                 <phingcall target="make:local" />
             </else>
         </if>
+        <phingcall target="make:sites" />
+    </target>
+
+    <target name="make:sites">
+      <!-- Setup the sites directory outside of docroot so that future compilations
+           don't remove customisations make to the sites directory -->
+      <property name="sites.available" value="false" />
+      <available file="${govcms.sites}" property="sites.available" type="dir" />
+      <if>
+        <isfalse value="${sites.available}" />
+        <then>
+          <copy todir="${govcms.sites}">
+            <fileset dir="${docroot.sites}">
+                <include name="**" />
+            </fileset>
+          </copy>
+        </then>
+      </if>
+
+      <!-- Must remove both directory (1st time attempt) and symlink (every other attempt) -->
+      <delete dir="${docroot.sites}" file="${docroot.sites}" />
+      <symlink link="${docroot.sites}" target="../sites" />
     </target>
 
     <!-- Drush make the build using a recursive strategy -->
