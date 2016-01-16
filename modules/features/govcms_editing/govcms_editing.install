@@ -4,6 +4,12 @@
  * Install file for govcms editing.
  */
 
+/**
+ * Implements hook_install().
+ */
+function govcms_editing_install() {
+  _govcms_editing_update_system_weight();
+}
 
 /**
  * Add pathologic module as this is now a new dependency for Rich Text Filter
@@ -17,4 +23,17 @@ function govcms_editing_update_7001() {
  */
 function govcms_editing_update_7002() {
   variable_set('pathologic_protocol_style', 'path');
+}
+
+/**
+ * Updates the module's system weight.
+ */
+function _govcms_editing_update_system_weight() {
+  // This needs to be heavier than linkit as linkit already tries to move its
+  // element_info_alter implementation down the stack via
+  // hook_module_implements_alter().
+  db_update('system')
+    ->condition('name', 'govcms_editing')
+    ->fields(array('weight' => 10))
+    ->execute();
 }
