@@ -59,7 +59,7 @@ before_script:
 
 script:
   # Run tests
-  - phing -f build/phing/build.xml run-tests
+  - travis_wait phing -f build/phing/build.xml run-tests
 
 after_success:
   - phing -f build/phing/build.xml post-commit
