@@ -2,9 +2,8 @@
 
 /**
  * @file
- * Contains admin paths for govCMS Account
+ * Contains admin paths for govCMS Account Security
  *
- * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
  *
  * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
@@ -12,7 +11,7 @@
  */
 
 /**
- * Settings form for govcms password policy.
+ * Settings form for govcms account security.
  */
 function govcms_account_security_admin_settings() {
 

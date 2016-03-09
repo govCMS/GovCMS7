@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Install file for account lockout.
+ * Install file for govcms account security.
  */
 
 /**
