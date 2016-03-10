@@ -8,7 +8,7 @@
 /**
  * Implements hook_menu_alter().
  */
-function govcms_account_security_menu(&$items) {
+function govcms_account_security_menu() {
   // We want to create a review settings link visiable under admin/config/people
   $items['admin/config/people/account_security'] = array(
     'title' => 'Review account security settings',
@@ -19,7 +19,7 @@ function govcms_account_security_menu(&$items) {
     'file' => drupal_get_path('module', 'govcms_account_security') . '/govcms_account_security.admin.inc',
     'description' => 'Review govCMS account security settings.',
   );
-
+  return $items;
 }
 
 /**
