@@ -15,7 +15,7 @@ function govcms_account_security_install() {
   // Register flood events based on the uid only, see user.module
   variable_set('user_failed_login_identifier_uid_only', TRUE);
   // Set HTTP status code returned to anonymous visits on user profile pages
-  variable_set('user_profile_page_code_anonymous_visit', '403');
+  variable_set('govcms_account_security_user_profile_page_code_anonymous_visit', '403');
   // An accounts with expired password will be forced to change their password upon the next login
   variable_set('password_policy_block', 1);
 
@@ -67,6 +67,6 @@ function govcms_account_security_uninstall() {
   // Drupal's default value is 21600
   variable_del('user_failed_login_user_window');
   // Delete account security specific var
-  variable_del('user_profile_page_code_anonymous_visit');
+  variable_del('govcms_account_security_user_profile_page_code_anonymous_visit');
 
 }

@@ -53,9 +53,9 @@ function govcms_account_security_admin_settings() {
     '#type' => 'select',
     '#title' => t('HTTP code return to anonymous visits on user profile pages:'),
     '#options' => array(
-      '0' => t(variable_get('user_profile_page_code_anonymous_visit')),
+      '0' => t(variable_get('govcms_account_security_user_profile_page_code_anonymous_visit')),
     ),
-    '#default_value' => variable_get('user_profile_page_code_anonymous_visit'),
+    '#default_value' => variable_get('govcms_account_security_user_profile_page_code_anonymous_visit'),
     '#disabled' => TRUE,
   );
 
