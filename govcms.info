@@ -98,6 +98,7 @@ dependencies[] = redirect
 dependencies[] = robotstxt
 dependencies[] = strongarm
 dependencies[] = token
+dependencies[] = token_tweaks
 dependencies[] = transliteration
 dependencies[] = views_content
 dependencies[] = search404
