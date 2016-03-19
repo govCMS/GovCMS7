@@ -1607,3 +1607,12 @@ function _govcms_install_full_image_display() {
 function govcms_update_7200() {
   module_enable(array('robotstxt'));
 }
+
+/**
+ * Enable token_tweaks module.
+ */
+function govcms_update_7201() {
+  if (!module_exists('token_tweaks')) {
+    module_enable(array('token_tweaks'));
+  }
+}
