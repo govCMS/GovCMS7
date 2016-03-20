@@ -84,6 +84,7 @@ dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
 dependencies[] = module_filter
+dependencies[] = mpac
 dependencies[] = navbar
 dependencies[] = panels
 dependencies[] = panels_ipe
