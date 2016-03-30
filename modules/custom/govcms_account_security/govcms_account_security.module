@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_menu_alter().
+ * Implements hook_menu().
  */
 function govcms_account_security_menu() {
   // We want to create a review settings link visiable under admin/config/people
@@ -16,7 +16,7 @@ function govcms_account_security_menu() {
     'page arguments' => array('govcms_account_security_admin_settings'),
     'access callback' => 'user_access',
     'access arguments' => array('administer users'),
-    'file' => drupal_get_path('module', 'govcms_account_security') . '/govcms_account_security.admin.inc',
+    'file' => 'govcms_account_security.admin.inc',
     'description' => 'Review govCMS account security settings.',
   );
   return $items;
