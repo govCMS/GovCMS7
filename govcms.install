@@ -1616,12 +1616,3 @@ function govcms_update_7201() {
     module_enable(array('token_tweaks'));
   }
 }
-
-/**
- * Enable mpac module.
- */
-function govcms_update_7202() {
-  if (!module_exists('mpac')) {
-    module_enable(array('mpac'));
-  }
-}
