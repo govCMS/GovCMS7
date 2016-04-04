@@ -58,7 +58,7 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
       if ($user_login_final_validate_index >= 0) {
         $form['#validate'][$user_login_final_validate_index] = 'govcms_account_security_final_validate';
       }
-    break;
+      break;
   }
 }
 
@@ -82,7 +82,7 @@ function govcms_account_security_final_validate($form, &$form_state) {
       flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
     }
     if (isset($form_state['flood_control_triggered'])) {
-        form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
+      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
     }
     else {
       form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
@@ -100,9 +100,21 @@ function govcms_account_security_final_validate($form, &$form_state) {
  * Implements hook_init().
  */
 function govcms_account_security_init() {
-  if (!user_is_logged_in()) {
+  if (!user_is_logged_in() && module_exists('pathauto')) {
     $alias = drupal_get_path_alias(current_path());
-    if (drupal_match_path($alias, 'users/*')) {
+    $user_alias_pattern = variable_get('pathauto_user_pattern');
+    if (isset($user_alias_pattern) && !empty($user_alias_pattern)) {
+      // We only need to protect the login names. As Pathauto does not
+      // automatically update existing user aliases when the pattern is
+      // changed, aliases generated using the old pattern will not be
+      // protected until a bulk update is performed.
+      if (strpos($user_alias_pattern, '[user:name]') === FALSE) {
+        $user_alias_pattern = 'users/*';
+      } else {
+        $user_alias_pattern = str_replace('[user:name]', '*', $user_alias_pattern);
+      }
+    }
+    if (drupal_match_path($alias, $user_alias_pattern)) {
       // Throw an access denied or not found error to any user profile page.
       $code_to_return = variable_get('govcms_account_security_user_profile_page_code_anonymous_visit', '403');
       if ($code_to_return == '404') {
