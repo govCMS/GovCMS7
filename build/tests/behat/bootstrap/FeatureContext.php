@@ -206,6 +206,7 @@ JS;
       if (!($driver instanceof Selenium2Driver)) {
         return;
       }
+      $this->getSession()->resizeWindow(1440, 900, 'current');
       file_put_contents('./screenshot-fail.png', $this->getSession()->getDriver()->getScreenshot());
     }
   }

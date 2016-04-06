@@ -201,7 +201,7 @@ function govcms_zen_form_required_marker($variables) {
  * Adds accessibility attributes.
  */
 function govcms_zen_preprocess_aria_invalid(&$variables) {
-  if (!empty($variables['element']['#required'])) {
+  if (!empty($variables['element']['#required']) && !drupal_installation_attempted()) {
     $variables['element']['#attributes']['required'] = 'true';
   }
   if (isset($variables['element']['#parents']) && form_get_error($variables['element']) !== NULL && !empty($variables['element']['#validated'])) {

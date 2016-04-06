@@ -51,6 +51,10 @@
               value="${docroot}/profiles/${drupal.profile}/modules"/>
     <property name="docroot.profile.themes.path"
               value="${docroot}/profiles/${drupal.profile}/themes"/>
+    <property name="docroot.sites"
+              value="${docroot}/sites"/>
+    <property name="govcms.sites"
+              value="${repo.root}/sites"/>
 
     <!-- Credentials -->
     <property name="db.username" value="root"/>
@@ -141,6 +145,10 @@
     <!-- ============= -->
 
     <target name="build"
+            description="Build the govCMS project."
+            depends="git-reset, make"/>
+
+    <target name="build:install"
             description="Build the project and install govCMS."
             depends="git-reset, make, install"/>
 
@@ -148,14 +156,6 @@
             description="Build the project without removing uncommitted changes."
             depends="make:local, overwrite:profile-files, install">
         <property name="build.local" value="1" />
-    </target>
-
-    <target name="build:acsf"
-            description="Build the project with ACSF specific code additions.">
-        <property name="build.acsf" value="1" />
-
-        <phingcall target="git-reset" />
-        <phingcall target="make" />
     </target>
 
     <target name="build:with-validation"
@@ -191,6 +191,13 @@
               passthru="true" />
     </target>
 
+    <target name="rm-robotstxt"
+            description="Remove the robots.txt file">
+        <exec command="rm ${docroot}/robots.txt"
+              logoutput="true"
+              passthru="true"/>
+    </target>
+
     <target name="rm-docroot"
             description="Remove the docroot folder">
         <exec command="git clean -fd"
@@ -205,9 +212,17 @@
                         <chmod file="${docroot}/sites/default" mode="2775"/>
                     </then>
                 </if>
+                <phingcall target="make:sites" />
                 <delete dir="${docroot}"/>
             </then>
         </if>
+    </target>
+
+    <target name="mk-favicon"
+            description="Place the govCMS favicon in the docroot directory.">
+        <exec command="cp ${repo.root}/themes/govcms/GOVCMS_STARTERKIT/favicon.ico ${docroot}/"
+              logoutput="true"
+              passthru="true"/>
     </target>
 
     <target name="phantomjs:launch"
@@ -231,6 +246,28 @@
                 <phingcall target="make:local" />
             </else>
         </if>
+        <phingcall target="make:sites" />
+    </target>
+
+    <target name="make:sites">
+      <!-- Setup the sites directory outside of docroot so that future compilations
+           don't remove customisations make to the sites directory -->
+      <property name="sites.available" value="false" />
+      <available file="${govcms.sites}" property="sites.available" type="dir" />
+      <if>
+        <isfalse value="${sites.available}" />
+        <then>
+          <copy todir="${govcms.sites}">
+            <fileset dir="${docroot.sites}">
+                <include name="**" />
+            </fileset>
+          </copy>
+        </then>
+      </if>
+
+      <!-- Must remove both directory (1st time attempt) and symlink (every other attempt) -->
+      <delete dir="${docroot.sites}" file="${docroot.sites}" />
+      <symlink link="${docroot.sites}" target="../sites" />
     </target>
 
     <!-- Drush make the build using a recursive strategy -->
@@ -238,35 +275,17 @@
             description="Run drush make"
             depends="rm-docroot">
 
-        <!-- Run Acquia specific pre-make build tasks -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
-          </then>
-        </if>
-    
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
 
-        <!-- Run Acquia specific post-make build tasks -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
-          </then>
-        </if>
+        <!-- Remove robots.txt file -->
+        <phingcall target="rm-robotstxt" />
 
-        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
-          </then>
-        </if>
+        <!-- Place favicon.ico in the docroot -->
+        <phingcall target="mk-favicon" />
 
     </target>
 
@@ -275,14 +294,6 @@
     <target name="make:local"
             description="Run drush make in a development context"
             depends="rm-docroot">
-
-        <!-- Run Acquia specific pre-make build tasks -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_pre_make.build.xml" optional="true" />
-          </then>
-        </if>
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -300,21 +311,11 @@
             <param>"${docroot}"</param>
         </drush>
 
-        <!-- Run Acquia specific post-make build tasks -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_make.build.xml" optional="true" />
-          </then>
-        </if>
+        <!-- Remove robots.txt file -->
+        <phingcall target="rm-robotstxt" />
 
-        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
-          </then>
-        </if>
+        <!-- Place favicon.ico in the docroot -->
+        <phingcall target="mk-favicon" />
 
     </target>
 
@@ -419,13 +420,6 @@
             <option name="account-mail">"${account.mail}"</option>
             <param>"${drupal.profile}"</param>
         </drush>
-        <!-- Run Acquia Cloud Site Factory specific post install tasks. -->
-        <if>
-          <equals arg1="${build.acsf}" arg2="1" />
-          <then>
-            <import file="${repo.root}/build/acsf/phing/acsf_post_install.build.xml" optional="true" />
-          </then>
-        </if>
     </target>
 
     <!-- Ensure govCMS doesn't have any modules requiring security updates. -->
@@ -459,8 +453,4 @@
                returnProperty="behatPass"/>
     </target>
 
-    <target name="post-commit" description="Runs tasks on travis after a commit.">
-        <!-- Run travis specific tasks after successful commits. -->
-        <import file="${repo.root}/build/acsf/phing/acsf_post_commit.build.xml" optional="true" />
-    </target>
 </project>

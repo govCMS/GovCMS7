@@ -727,6 +727,7 @@ function _govcms_default_variables() {
     'pathauto_node_pattern' => '[node:title]',
     'pathauto_punctuation_hyphen' => 1,
     'pathauto_taxonomy_term_pattern' => '[term:vocabulary]/[term:name]',
+    'pathauto_transliterate' => 1,
     'pathauto_user_pattern' => 'users/[user:name]',
     'path_alias_whitelist' => array(
       'node' => TRUE,
@@ -1474,7 +1475,7 @@ function govcms_example_content_install_batch($type, $key, $name, $message, &$co
 /**
  * Performs any cleanup and output on completion of example content batch.
  */
-function govcms_example_content_install_finished(&$context) {
+function govcms_example_content_install_finished($context) {
 
   drupal_set_message('Example content installed.');
   drupal_set_message('Sitemap has been rebuilt.');
@@ -1598,4 +1599,20 @@ function _govcms_install_full_image_display() {
       ),
     ),
   ));
+}
+
+/**
+ * Enables robotstxt module in place of removed robots.txt file.
+ */
+function govcms_update_7200() {
+  module_enable(array('robotstxt'));
+}
+
+/**
+ * Enable token_tweaks module.
+ */
+function govcms_update_7201() {
+  if (!module_exists('token_tweaks')) {
+    module_enable(array('token_tweaks'));
+  }
 }
