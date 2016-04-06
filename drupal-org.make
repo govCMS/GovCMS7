@@ -81,6 +81,7 @@ projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-at
 projects[metatag][version] = "1.4"
 projects[mimemail][version] = "1.0-beta4"
 projects[module_filter][version] = "2.0"
+projects[module_permissions][version] = "1.2"
 projects[navbar][version] = "1.6"
 projects[node_clone][version] = "1.0-rc2"
 projects[oauth][version] = "3.2"
