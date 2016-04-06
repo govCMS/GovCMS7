@@ -9,7 +9,7 @@ hidden = FALSE
 php = 5.3
 
 ; System Requirements.
-php_memory_limit = 128M
+php_memory_limit = 192M
 
 files[] = govcms.profile
 files[] = tests/govcms_test_base.inc
