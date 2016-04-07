@@ -84,6 +84,7 @@ projects[module_filter][version] = "2.0"
 projects[navbar][version] = "1.6"
 projects[node_clone][version] = "1.0-rc2"
 projects[oauth][version] = "3.2"
+projects[openaccess][version] = "1.0"
 projects[panels][version] = "3.5"
 projects[paragraphs][version] = "1.0-rc4"
 projects[paranoia][version] = "1.4"
@@ -202,4 +203,9 @@ libraries[backbone][patch][] = "https://www.drupal.org/files/issues/2235299-11.p
 libraries[modernizr][download][type] = "get"
 libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
 libraries[modernizr][type] = "library"
+
+libraries[performx][download][type] = "get"
+libraries[performx][download][url] = "http://download.ckeditor.com/performx/releases/performx_1.0.1.zip"
+libraries[performx][directory_name] = "performx"
+libraries[performx][type] = "library"
 
