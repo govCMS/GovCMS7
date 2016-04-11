@@ -83,6 +83,7 @@ dependencies[] = media_wysiwyg
 dependencies[] = menu_block
 dependencies[] = menu_block_export
 dependencies[] = metatag
+dependencies[] = minisite
 dependencies[] = module_filter
 dependencies[] = navbar
 dependencies[] = openaccess
