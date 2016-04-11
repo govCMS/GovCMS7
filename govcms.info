@@ -85,6 +85,7 @@ dependencies[] = menu_block_export
 dependencies[] = metatag
 dependencies[] = minisite
 dependencies[] = module_filter
+dependencies[] = module_permissions
 dependencies[] = navbar
 dependencies[] = openaccess
 dependencies[] = panels
