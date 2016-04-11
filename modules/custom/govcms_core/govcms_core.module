@@ -38,10 +38,10 @@ function govcms_core_about_govcms_page() {
   return $output;
 }
 
-/**  
- * Implements hook_context_registry_alter(). 
+/**
+ * Implements hook_context_registry_alter().
  */
-function govcms_core_context_registry_alter(&$registry)  { 
+function govcms_core_context_registry_alter(&$registry) {
   // This allows govCMS users the ability to turn off conditions in
   // Context that may have a performance impact. For example, large
   // taxonomies or menus can consume excessive memory and time to
