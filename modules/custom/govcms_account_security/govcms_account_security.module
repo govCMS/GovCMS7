@@ -1,0 +1,127 @@
+<?php
+
+/**
+ * @file
+ * govCMS Account Security
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function govcms_account_security_menu() {
+  // We want to create a review settings link visiable under admin/config/people
+  $items['admin/config/people/account_security'] = array(
+    'title' => 'Review account security settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('govcms_account_security_admin_settings'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer users'),
+    'file' => 'govcms_account_security.admin.inc',
+    'description' => 'Review govCMS account security settings.',
+  );
+  return $items;
+}
+
+/**
+ * Implementation of hook_form_FORM_ID_alter()
+ */
+function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
+  if(isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0] > 0) {
+    $uid = $form_state['build_info']['args'][0];
+    // Check if the user attempting to reset their password is flood controlled
+    if (!flood_is_allowed('failed_login_attempt_user', variable_get('user_failed_login_user_limit'), variable_get('user_failed_login_user_window'), $uid)) {
+      $timestamp = $form_state['build_info']['args'][1];
+      $hashed_pass = $form_state['build_info']['args'][2];
+      $users = user_load_multiple(array($uid), array('status' => '1'));
+      $current = REQUEST_TIME;
+      // Validate the password reset link
+      if ($timestamp <= $current && $account = reset($users)) {
+        if ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
+          // Clear flood control events for the user
+          flood_clear_event('failed_login_attempt_user', $uid);
+          watchdog('user', 'Flood events have been cleared for %user.', $uid);
+          drupal_set_message(t('Your account has been unblocked.'));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_login':
+    case 'user_login_block':
+      $user_login_final_validate_index = array_search('user_login_final_validate', $form['#validate']);
+      if ($user_login_final_validate_index >= 0) {
+        $form['#validate'][$user_login_final_validate_index] = 'govcms_account_security_final_validate';
+      }
+      break;
+  }
+}
+
+/**
+ * The final validation handler on the login form.
+ *
+ * Provide a more generic error message on failed logins excessive failed
+ * login attempts. According to the govCMS security team: "In relation to
+ * the generic message this is consistent with current security practices
+ * for Government online services to avoid disclosure of the password
+ * management policy which could aid an attacker in developing more
+ * targeted attacks, e.g. denial of service, compromise of credentials,
+ * etc."
+ */
+function govcms_account_security_final_validate($form, &$form_state) {
+  if (empty($form_state['uid'])) {
+    // Always register an IP-based failed login event.
+    flood_register_event('failed_login_attempt_ip', variable_get('user_failed_login_ip_window', 3600));
+    // Register a per-user failed login event.
+    if (isset($form_state['flood_control_user_identifier'])) {
+      flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
+    }
+    if (isset($form_state['flood_control_triggered'])) {
+      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
+    }
+    else {
+      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
+      watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
+    }
+  }
+  elseif (isset($form_state['flood_control_user_identifier'])) {
+    // Clear past failures for this user so as not to block a user who might
+    // log in and out more than once in an hour.
+    flood_clear_event('failed_login_attempt_user', $form_state['flood_control_user_identifier']);
+  }
+}
+
+/**
+ * Implements hook_init().
+ */
+function govcms_account_security_init() {
+  if (!user_is_logged_in() && module_exists('pathauto')) {
+    $alias = drupal_get_path_alias(current_path());
+    $user_alias_pattern = variable_get('pathauto_user_pattern');
+    if (isset($user_alias_pattern) && !empty($user_alias_pattern)) {
+      // We only need to protect the login names. As Pathauto does not
+      // automatically update existing user aliases when the pattern is
+      // changed, aliases generated using the old pattern will not be
+      // protected until a bulk update is performed.
+      if (strpos($user_alias_pattern, '[user:name]') === FALSE) {
+        $user_alias_pattern = 'users/*';
+      } else {
+        $user_alias_pattern = str_replace('[user:name]', '*', $user_alias_pattern);
+      }
+    }
+    if (drupal_match_path($alias, $user_alias_pattern)) {
+      // Throw an access denied or not found error to any user profile page.
+      $code_to_return = variable_get('govcms_account_security_user_profile_page_code_anonymous_visit', '403');
+      if ($code_to_return == '404') {
+        drupal_not_found();
+      } else {
+        drupal_access_denied();
+      }
+    }
+  }
+}
