@@ -45,8 +45,10 @@ function govcms_form_install_configure_form_alter(&$form, &$form_state) {
  */
 function govcms_block_info_alter(&$blocks, $theme, $code_blocks) {
   $blocks['system']['help']['region'] = 'content';
-  $blocks['superfish'][1]['title'] = '<none>';
   $blocks['system']['user-menu']['title'] = '<none>';
+  if (isset($blocks['superfish'][1])) {
+    $blocks['superfish'][1]['title'] = '<none>';
+  }
 }
 
 /**
