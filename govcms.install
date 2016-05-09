@@ -1645,3 +1645,18 @@ function govcms_update_7201() {
     module_enable(array('token_tweaks'));
   }
 }
+
+/**
+ * Replaces favicon and Iconomist with Responsive Favicons.
+ */
+function govcms_update_7202() {
+  // Take any settings from favicon and add it to responsive favicons
+  if (module_exists('favicon')) {
+    module_enable(array("responsive_favicons"));
+    drupal_set_message(t('Please go to <a href="@link">the favicon generator</a> and generate responsive favicons for your site. When you have done this, enter them on <a href="@adminlink">the responsive favicons admin page</a>.', array( '@link' => 'http://realfavicongenerator.net', '@adminlink' => '/admin/config/user-interface/responsive_favicons')));
+  }
+
+  // Disable and uninstall iconomist and favicon.
+  module_disable(array('iconomist', 'favicon'));
+  module_uninstall(array('iconomist', 'favicon'));
+}
