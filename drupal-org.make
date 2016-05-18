@@ -110,17 +110,10 @@ projects[robotstxt][version] = "1.3"
 projects[role_delegation][version] = "1.1"
 projects[scheduler][version] = "1.3"
 projects[scheduler_workbench][version] = "1.2"
-<<<<<<< HEAD
-projects[search404][version] = "1.3"
-projects[search_api][version] = "1.18"
-projects[search_api_acquia][version] = "2.1"
-projects[search_api_db][version] = "1.4"
-=======
 projects[search404][version] = "1.4"
 projects[search_api][version] = "1.18"
 projects[search_api_acquia][version] = "2.2"
 projects[search_api_db][version] = "1.5"
->>>>>>> upstream/7.x-2.x
 projects[search_api_page][version] = "1.2"
 projects[search_api_solr][version] = "1.10"
 projects[seckit][version] = "1.9"
