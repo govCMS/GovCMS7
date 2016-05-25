@@ -277,6 +277,7 @@
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
+            <option name="cache-duration-releasexml">0</option>
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
@@ -298,6 +299,7 @@
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
             <option name="no-recursion" />
+            <option name="cache-duration-releasexml">0</option>
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
@@ -306,6 +308,7 @@
             <option name="concurrency">8</option>
             <option name="no-recursion" />
             <option name="no-core" />
+            <option name="cache-duration-releasexml">0</option>
             <option name="contrib-destination">profiles/${drupal.profile}</option>
             <param>"${drupal.contrib_makefile}"</param>
             <param>"${docroot}"</param>

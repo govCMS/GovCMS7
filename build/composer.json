@@ -12,7 +12,7 @@
         }
     ],
     "require-dev": {
-        "drush/drush":               "7.*",
+        "drush/drush":               "8.*",
         "phing/phing":               "2.8.*",
         "jakoch/phantomjs-installer": "1.9.8",
         "drupal/drupal-extension":   "3.0.7",
