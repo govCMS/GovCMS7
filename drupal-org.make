@@ -79,7 +79,6 @@ projects[media_oembed][patch][] = "https://www.drupal.org/files/issues/support_c
 projects[menu_attributes][version] = "1.0-rc2"
 projects[menu_block][version] = "2.6"
 projects[menu_trail_by_path][version] = "2.0"
-projects[metatag][patch][] = "https://www.drupal.org/files/issues/support-all-attributes-1970362.pass_.patch"
 projects[metatag][version] = "1.6"
 projects[mimemail][version] = "1.0-beta4"
 projects[minisite][version] = "1.0-unstable4"
