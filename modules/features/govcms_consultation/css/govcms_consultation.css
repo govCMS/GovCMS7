@@ -1,0 +1,191 @@
+.consultation__hide_short_comments .webform-component--step-1-your-submission--short-comments {
+  display: none;
+}
+
+.consultation__hide_files .webform-component--step-1-your-submission--hys-formal-uploads {
+  display: none;
+}
+
+.consultation__formal-submission-webform {
+  height: auto;
+}
+
+.consultation__progress-bar {
+  position: relative;
+  clear: both;
+  overflow: hidden;
+}
+
+
+.consultation__progress-bar__text {
+  color: #12293a;
+  padding: 0.25rem 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+.consultation__progress-bar__start-date,
+.consultation__progress-bar__text-left {
+  width: 50%;
+  float: left;
+}
+
+
+.consultation__progress-bar__end-date,
+.consultation__progress-bar__text-right {
+  width: 50%;
+  float: left;
+  text-align: right;
+}
+
+
+.consultation__progress-bar__label {
+  color: #12293a;
+  display: block;
+}
+
+
+.consultation__progress-bar__percentage {
+  color: #616161;
+  float: right;
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar__percentage,
+.consultation__progress-bar__percentage--brackets {
+  color: #12293a;
+  float: none;
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar__percentage:before,
+.consultation__progress-bar__percentage--brackets:before {
+  content: '(';
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar__percentage:after,
+.consultation__progress-bar__percentage--brackets:after {
+  content: ')';
+}
+
+
+.consultation__progress-bar__bar {
+  background: #e4e4e4;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar:nth-child(2) .consultation__progress-bar__progress,
+.consultation__progress-bar__progress--grey,
+.consultation__progress-bar__progress {
+  background-color: #55c7e3;
+  background-position: 50% 100%;
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar:nth-child(2) .consultation__progress-bar__progress,
+.consultation__progress-bar__progress--grey {
+  background: #b9b9b9;
+}
+
+
+.consultation__progress-bar__bar,
+.consultation__progress-bar--collapsed .consultation__progress-bar:nth-child(2) .consultation__progress-bar__progress,
+.consultation__progress-bar__progress--grey,
+.consultation__progress-bar__progress,
+.consultation__progress-bar__progress-thin {
+  height: 1rem;
+}
+
+
+.consultation__progress-bar--thick .consultation__progress-bar__bar,
+.consultation__progress-bar--thick .consultation__progress-bar__progress,
+.consultation__progress-bar--collapsed .consultation__progress-bar__bar,
+.consultation__progress-bar--collapsed .consultation__progress-bar__progress,
+.consultation__progress-bar--collapsed .consultation__progress-bar:nth-child(2) .consultation__progress-bar__progress,
+.consultation__progress-bar__progress-thick {
+  height: 2rem;
+}
+
+
+.consultation__progress-bar__start-date {
+  color: #616161;
+}
+
+
+.consultation__progress-bar__days-remain {
+  float: right;
+  text-align: right;
+  color: #616161;
+}
+
+
+.consultation__progress-bar__end-date {
+  color: #616161;
+}
+
+
+.consultation__progress-bar__completion {
+  float: right;
+  color: #616161;
+}
+
+.consultation__progress-bar__highlighted {
+  color: #007abb;
+  font-weight: bold;
+}
+
+
+.consultation__progress-bar--complete .consultation__progress-bar__progress {
+  background: #cd4d02;
+}
+
+
+.consultation__progress-bar--complete .consultation__progress-bar__highlighted {
+  color: #cd4d02;
+  font-weight: bold;
+}
+
+
+.consultation__progress-bar--collapsed {
+  position: relative;
+}
+
+
+.consultation__progress-bar--collapsed .consultation__progress-bar__text {
+  padding: 0.25rem 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+}
+
+.consultation__update {
+  overflow: hidden;
+}
+
+.consultation__update__icon {
+  float: left;
+  margin-right: 1rem;
+  width: 6rem;
+  text-align: center;
+  padding-top: 1rem;
+  min-height: 5rem;
+}
+
+.consultation__update__title {
+  font-size: 1.8rem;
+  line-height: 3.15rem;
+  font-weight: 500;
+  margin: 1rem 0 0;
+}
+
+.consultation__update__date {
+  font-size: 1.25rem;
+  line-height: 2.1875rem;
+  color: #616161;
+  margin-bottom: 0;
+}

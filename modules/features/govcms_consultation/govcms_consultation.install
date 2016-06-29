@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the Consultation feature.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function govcms_consultation_enable() {
+  variable_set('ds_extras_fields_extra', TRUE);
+}
+
+/**
+ * Implements hook_install().
+ */
+function govcms_consultation_install() {
+  // Set a one time hash for salting late-submission URLs.
+  variable_set('govcms_consultation_late_hash', drupal_hash_base64(uniqid()));
+}
