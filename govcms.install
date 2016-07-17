@@ -74,9 +74,6 @@ function govcms_install() {
   // Set default menu items.
   _govcms_set_menu();
 
-  // Set default tags.
-  _govcms_default_tags();
-
   // Setup login destination.
   _govcms_setup_login_destination();
 
@@ -672,9 +669,9 @@ function _govcms_default_blocks() {
     'visibility' => BLOCK_VISIBILITY_LISTED,
     'pages' => "node/*\n<front>\nnews-media\nnews-media/*\npublications\npublications/*\nblog\nblog/*\ncontact\nsitemap\ntags\ntags/*",
   ))
-  ->condition('module', 'wcag_validate')
-  ->condition('delta', 'wcag_validate')
-  ->execute();
+    ->condition('module', 'wcag_validate')
+    ->condition('delta', 'wcag_validate')
+    ->execute();
 
 }
 
@@ -899,7 +896,7 @@ function _govcms_default_variables() {
   // Set Crumbs weights.
   $crumbs_weights = array(
     'crumbs.home_title' => 1,
-    'path'  => 2,
+    'path' => 2,
     '*' => 3,
   );
   variable_set('crumbs_weights', $crumbs_weights);
@@ -969,6 +966,7 @@ function _govcms_default_news_beans() {
   // Ensure the bean save function is available.
   if (!function_exists('govcms_core_save_bean')) {
     error_log('Function not available');
+
     return;
   }
 
@@ -1017,7 +1015,7 @@ function _govcms_default_news_beans() {
             'title' => t('News and Media Intro'),
           ),
         ),
-      // Text field.
+        // Text field.
         'field_bean_text' => array(
           '0' => array(
             'value' => 'Optional intro block with image Est porttitor hac ultricies nec integer enim scelerisque proin sagittis porttitor, sit! Magnis sit egestas turpis parturient aliquam. Mauris duis nascetur vel porttitor scelerisque cursus nec, in dis sit sagittis, lacus lacus?',
@@ -1027,7 +1025,7 @@ function _govcms_default_news_beans() {
       ),
     ),
 
-  // Current News block.
+    // Current News block.
     'current-news' => array(
       'label' => $t('News'),
       'title' => $t('News'),
@@ -1035,7 +1033,7 @@ function _govcms_default_news_beans() {
       'type' => 'image_and_text',
       'view_mode' => 'default',
       'fields' => array(
-      // Image field.
+        // Image field.
         'field_bean_image' => array(
           '0' => array(
             'fid' => $files['current-news']->fid,
@@ -1043,14 +1041,14 @@ function _govcms_default_news_beans() {
             'title' => t('Current News'),
           ),
         ),
-      // Text field.
+        // Text field.
         'field_bean_text' => array(
           '0' => array(
             'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
             'format' => 'rich_text',
           ),
         ),
-      // Link to field.
+        // Link to field.
         'field_link_to' => array(
           '0' => array(
             'url' => $menus['current-news'],
@@ -1061,7 +1059,7 @@ function _govcms_default_news_beans() {
       ),
     ),
 
-  // Media releases.
+    // Media releases.
     'media-releases' => array(
       'label' => $t('Media Releases'),
       'title' => $t('Media Releases'),
@@ -1077,14 +1075,14 @@ function _govcms_default_news_beans() {
             'title' => t('Media Releases'),
           ),
         ),
-      // Text field.
+        // Text field.
         'field_bean_text' => array(
           '0' => array(
             'value' => 'Vel quis etiam enim pulvinar, tincidunt porttitor dignissim cum, dignissim sociis natoque, elementum nec scelerisque pulvinar, nascetur mauris mauris, a? Rhoncus augue et nunc, adipiscing tincidunt, sagittis, amet!',
             'format' => 'rich_text',
           ),
         ),
-      // Link to field.
+        // Link to field.
         'field_link_to' => array(
           '0' => array(
             'url' => $menus['media-releases'],
@@ -1095,7 +1093,7 @@ function _govcms_default_news_beans() {
       ),
     ),
 
-  // Events.
+    // Events.
     'events' => array(
       'label' => $t('Events'),
       'title' => $t('Events'),
@@ -1129,7 +1127,7 @@ function _govcms_default_news_beans() {
       ),
     ),
 
-   // Blog.
+    // Blog.
     'blog' => array(
       'label' => $t('Blog'),
       'title' => $t('Blog'),
@@ -1255,6 +1253,7 @@ function govcms_install_tasks($install_state) {
     'type' => 'normal',
     'run' => INSTALL_TASK_RUN_IF_NOT_COMPLETED,
   );
+
   return $task;
 }
 
@@ -1333,6 +1332,7 @@ function govcms_install_additional_options() {
     '#type' => 'submit',
     '#value' => st('Continue'),
   );
+
   return $form;
 }
 
@@ -1348,6 +1348,7 @@ function govcms_install_additional_options_submit(&$form, &$form_state) {
   if ($form_state['values']['install']) {
     variable_set('govcms_example_content_batch', TRUE);
   }
+
   return FALSE;
 }
 
@@ -1409,6 +1410,11 @@ function govcms_default_content() {
       'type' => 'module',
       'key' => 'govcms_content_slides',
     ),
+    10 => array(
+      'title' => st('Default tags'),
+      'type' => 'function',
+      'key' => '_govcms_default_tags',
+    ),
   );
 
 }
@@ -1440,6 +1446,7 @@ function govcms_example_content_install() {
     'error_message' => st('Error'),
     'finished' => 'govcms_example_content_install_finished',
   );
+
   return $batch;
 }
 
