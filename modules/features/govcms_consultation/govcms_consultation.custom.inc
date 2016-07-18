@@ -126,6 +126,9 @@ function govcms_consultation_ds_custom_fields_info() {
   return $export;
 }
 
+/**
+ * Implements hook_theme_registry_alter().
+ */
 function govcms_consultation_theme_registry_alter(&$theme_registry) {
   // Defined path to the current module.
   $module_path = drupal_get_path('module', 'govcms_consultation');
@@ -317,7 +320,12 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
 }
 
 /**
- * Helper function to add consultation variables to template files.
+ * Helper function: Add consultation variables to template files.
+ *
+ * @param array $variables
+ *
+ * @param stdClass $element_object
+ *   The consultation entity.
  */
 function _govcms_consultation_consultation_vars(&$variables, $element_object) {
   $consultation['now'] = time();
@@ -338,6 +346,12 @@ function _govcms_consultation_consultation_vars(&$variables, $element_object) {
 
 /**
  * Helper function: Return end consultation date.
+ *
+ * @param EntityDrupalWrapper $wrapper
+ *   Consultation node wrapped in a metadata wrapper.
+ *
+ * @return int
+ *   A unix timestamp, or 0 if no end date exists.
  */
 function _govcms_consultation_admin_return_end_consultation_date($wrapper) {
   // Set default consultation date end value.
@@ -353,7 +367,12 @@ function _govcms_consultation_admin_return_end_consultation_date($wrapper) {
 }
 
 /**
- * Helper function to determine percentage complete.
+ * Helper function: Return the percentage of time elapsed for a consultation.
+ *
+ * @param array $consultation
+ *   An array of consultation data.
+ *
+ * @return int
  */
 function _govcms_consultation_consultation_percentage($consultation) {
   $time_until_it_starts = ($consultation['now'] - $consultation['start']);
@@ -363,7 +382,13 @@ function _govcms_consultation_consultation_percentage($consultation) {
 }
 
 /**
- * Helper function - days_remain for progress bar.
+ * Helper function: Return number of remaining days for a consultation.
+ *
+ * @param array $consultation
+ *   An array of consultation data.
+ *
+ * @return mixed
+ *   Human readable indicator of the time remaining.
  */
 function _govcms_consultation_consultation_days_remain($consultation) {
 
@@ -385,10 +410,15 @@ function _govcms_consultation_consultation_days_remain($consultation) {
 }
 
 /**
- * Helper function: Return whether a node can validly accept late submissions.
+ * Helper function: Return whether a consultation can accept late submissions.
  *
  * Check that the 'Enable late submissions' value is set.
  * Check that the date has passed.
+ *
+ * @param stdClass $node
+ *   Consultation node.
+ *
+ * @return bool
  */
 function _govcms_consultation_admin_accept_late_submission($node) {
   // Set a default answer.
@@ -415,13 +445,24 @@ function _govcms_consultation_admin_accept_late_submission($node) {
 
 /**
  * Helper function: Return salted hash for a given node ID.
+ *
+ * @param string $uuid
+ *   A node UUID.
+ *
+ * @return string
  */
 function _govcms_consultation_admin_return_salted_hash($uuid) {
-  return crc32(LATE_SUBMISSION_SALT + $uuid);
+  return crc32(LATE_SUBMISSION_SALT . $uuid);
 }
 
 /**
  * Helper function: Return formatted late submission URL.
+ *
+ * @param stdClass $node
+ *   Consultation node.
+ *
+ * @return string
+ *   A URL.
  */
 function _govcms_consultation_admin_return_late_submission_url($node) {
   global $base_url;
