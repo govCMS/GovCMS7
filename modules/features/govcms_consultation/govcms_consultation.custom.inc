@@ -339,17 +339,14 @@ function _govcms_consultation_consultation_vars(&$variables, $element_object) {
 /**
  * Helper function: Return end consultation date.
  */
-function _govcms_consultation_admin_return_end_consultation_date($node, $wrapper) {
+function _govcms_consultation_admin_return_end_consultation_date($wrapper) {
   // Set default consultation date end value.
   $consultation_date_end = 0;
 
-  // If the 'Consultation date' field exists and is not blank.
-  $consultation_date_value = $wrapper->field_consultation_date->value();
-  if (isset($node->field_consultation_date) && !empty($consultation_date_value)) {
-    // Get the 'Consultation date' field.
-    $consultation_date = $consultation_date_value;
-    // Get the end date.
-    $consultation_date_end = $consultation_date['value2'];
+  // If there is a consultation end, use that.
+  $date_field = $wrapper->field_consultation_date->value();
+  if (!empty($date_field['value2'])) {
+    $consultation_date_end = $date_field['value2'];
   }
 
   return $consultation_date_end;
@@ -402,7 +399,7 @@ function _govcms_consultation_admin_accept_late_submission($node) {
   // Check if the 'Enable late submissions' field exists and is TRUE.
   if (isset($node->field_enable_late_submissions) && $wrapper->field_enable_late_submissions->value() === TRUE) {
     // Get the consultation date end.
-    $consultation_date_end = _govcms_consultation_admin_return_end_consultation_date($node, $wrapper);
+    $consultation_date_end = _govcms_consultation_admin_return_end_consultation_date($wrapper);
     // Get the current time.
     $time = time();
     // Check if the current date is greater than the end date (i.e. it's in the past).
