@@ -276,7 +276,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
       // If the node can accept late submissions.
       if ($accept_late_submissions) {
         // Get the salted hash for this nid.
-        $salted_hash = _govcms_consultation_admin_return_salted_hash($node->nid);
+        $salted_hash = _govcms_consultation_admin_return_salted_hash($node->uuid);
         // If the salted hash and the fso are equal.
         if ($_GET['fso'] == $salted_hash) {
           // Show the relevant HYS sections.
@@ -419,8 +419,8 @@ function _govcms_consultation_admin_accept_late_submission($node) {
 /**
  * Helper function: Return salted hash for a given node ID.
  */
-function _govcms_consultation_admin_return_salted_hash($nid) {
-  return crc32(LATE_SUBMISSION_SALT + $nid);
+function _govcms_consultation_admin_return_salted_hash($uuid) {
+  return crc32(LATE_SUBMISSION_SALT + $uuid);
 }
 
 /**
@@ -430,7 +430,7 @@ function _govcms_consultation_admin_return_late_submission_url($node) {
   global $base_url;
 
   // Get the salted hash for this nid.
-  $salted_hash = _govcms_consultation_admin_return_salted_hash($node->nid);
+  $salted_hash = _govcms_consultation_admin_return_salted_hash($node->uuid);
 
   // Get the node path.
   $uri = entity_uri('node', $node);
