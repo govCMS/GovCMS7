@@ -341,7 +341,7 @@ function _govcms_consultation_consultation_vars(&$variables, $element_object) {
  */
 function _govcms_consultation_admin_return_end_consultation_date($node, $wrapper) {
   // Set default consultation date end value.
-  $consultation_date_end = '';
+  $consultation_date_end = 0;
 
   // If the 'Consultation date' field exists and is not blank.
   $consultation_date_value = $wrapper->field_consultation_date->value();
