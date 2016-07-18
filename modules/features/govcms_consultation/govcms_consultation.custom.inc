@@ -306,7 +306,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
     }
 
     // If comments are open.
-    if ($variables['comment'] == COMMENT_NODE_OPEN) {
+    if (defined('COMMENT_NODE_OPEN') && $variables['comment'] == COMMENT_NODE_OPEN) {
       // If the heading 'Discussion Forum' heading field exists and is not blank.
       if (isset($node->field_discussion_forum_heading) && $wrapper->field_discussion_forum_heading->value() != '') {
         // Show the 'Discussion Forum' heading field.
