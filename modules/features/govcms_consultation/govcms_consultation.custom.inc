@@ -334,8 +334,6 @@ function _govcms_consultation_consultation_vars(&$variables, $element_object) {
   $consultation['status_class'] = ($consultation['percentage'] === 100 ? 'consultation__progress-bar--complete' : '');
   $consultation['hide_form'] = !$consultation['submission_enabled'] || ($consultation['start'] > $consultation['now']) || ($consultation['end'] < $consultation['now']);
   $variables['consultation'] = $consultation;
-
-  return $variables;
 }
 
 /**
