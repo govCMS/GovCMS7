@@ -269,11 +269,6 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
       ),
     ), 'setting');
 
-    // Get the end consultation date.
-    $end_consultation_date = _govcms_consultation_admin_return_end_consultation_date($node, $wrapper);
-    // Get the current timestamp.
-    $time = time();
-
     // Check if a fso has been provided.
     if (isset($_GET['fso'])) {
       // Check if the node is able to accept late submissions.
