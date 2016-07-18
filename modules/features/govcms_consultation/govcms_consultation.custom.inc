@@ -207,7 +207,7 @@ function govcms_consultation_form_node_form_alter(&$form, $form_state, $form_id)
 function govcms_consultation_preprocess_field(&$variables, $hook) {
   if ($variables['element']['#field_name'] == 'progress_bar') {
     $element =& $variables['element'];
-    _consultation_vars($variables, $element['#object']);
+    _govcms_consultation_consultation_vars($variables, $element['#object']);
   }
 }
 
@@ -224,7 +224,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
     drupal_add_js(drupal_get_path('module', 'govcms_consultation') . '/js/govcms_consultation.js', array('file'));
     drupal_add_css(drupal_get_path('module', 'govcms_consultation') . '/css/govcms_consultation.css', array('file'));
 
-    _consultation_vars($variables, $variables['node']);
+    _govcms_consultation_consultation_vars($variables, $variables['node']);
     $consultation = $variables['consultation'];
 
     // Return if formal submissions are not accepted.
@@ -319,7 +319,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
 /**
  * Helper function to add consultation variables to template files.
  */
-function _consultation_vars(&$variables, $element_object) {
+function _govcms_consultation_consultation_vars(&$variables, $element_object) {
   $consultation['now'] = time();
   $consultation['wrapped_entity'] = entity_metadata_wrapper('node', $element_object);
   $date = $consultation['wrapped_entity']->field_consultation_date->value();
@@ -327,9 +327,9 @@ function _consultation_vars(&$variables, $element_object) {
   $consultation['end'] = $date['value2'];
   $consultation['notify_email'] = $consultation['wrapped_entity']->field_formal_submission_notify->value();
   $consultation['duration'] = ($consultation['end'] - $consultation['start']);
-  $consultation['percentage'] = _consultation_percentage($consultation);
+  $consultation['percentage'] = _govcms_consultation_consultation_percentage($consultation);
   $consultation['days_total'] = round($consultation['duration'] / strtotime('1 day', 0));
-  $consultation['days_remain'] = _consultation_days_remain($consultation);
+  $consultation['days_remain'] = _govcms_consultation_consultation_days_remain($consultation);
   $consultation['submission_enabled'] = $consultation['wrapped_entity']->field_formal_submission_enabled->value();
   $consultation['status_class'] = ($consultation['percentage'] === 100 ? 'consultation__progress-bar--complete' : '');
   $consultation['hide_form'] = !$consultation['submission_enabled'] || ($consultation['start'] > $consultation['now']) || ($consultation['end'] < $consultation['now']);
@@ -360,7 +360,7 @@ function _govcms_consultation_admin_return_end_consultation_date($node, $wrapper
 /**
  * Helper function to determine percentage complete.
  */
-function _consultation_percentage($consultation) {
+function _govcms_consultation_consultation_percentage($consultation) {
   $time_until_it_starts = ($consultation['now'] - $consultation['start']);
   $percentage = $time_until_it_starts / $consultation['duration'] * 100;
   $percentage = max(0, min(100, $percentage));
@@ -370,7 +370,7 @@ function _consultation_percentage($consultation) {
 /**
  * Helper function - days_remain for progress bar.
  */
-function _consultation_days_remain($consultation) {
+function _govcms_consultation_consultation_days_remain($consultation) {
 
   $days_total = round($consultation['duration'] / strtotime('1 day', 0));
 
