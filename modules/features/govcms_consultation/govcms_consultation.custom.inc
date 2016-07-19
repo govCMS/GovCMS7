@@ -4,7 +4,7 @@
  * Custom code for the Consultation feature.
  */
 
-define("LATE_SUBMISSION_SALT", variable_get('govcms_consultation_late_hash'));
+define('GOVCMS_CONSULTATION_LATE_SUBMISSION_SALT', variable_get('govcms_consultation_late_hash'));
 
 /**
  * Implements hook_menu().
@@ -452,7 +452,7 @@ function _govcms_consultation_admin_accept_late_submission($node) {
  * @return string
  */
 function _govcms_consultation_admin_return_salted_hash($uuid) {
-  return crc32(LATE_SUBMISSION_SALT . $uuid);
+  return crc32(GOVCMS_CONSULTATION_LATE_SUBMISSION_SALT . $uuid);
 }
 
 /**
