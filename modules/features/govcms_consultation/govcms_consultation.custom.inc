@@ -465,18 +465,16 @@ function _govcms_consultation_admin_return_salted_hash($uuid) {
  *   A URL.
  */
 function _govcms_consultation_admin_return_late_submission_url($node) {
-  global $base_url;
 
   // Get the salted hash for this nid.
   $salted_hash = _govcms_consultation_admin_return_salted_hash($node->uuid);
 
   // Get the node path.
   $uri = entity_uri('node', $node);
-  // Update the options with the query.
-  $uri['options']['query']['fso'] = $salted_hash;
-  // Output the URL.
-  $url = $base_url . url($uri['path'], $uri['options']);
 
-  // Return the URL.
-  return $url;
+  // Add link options.
+  $uri['options']['query']['fso'] = $salted_hash;
+  $uri['options']['absolute'] = TRUE;
+
+  return url($uri['path'], $uri['options']);
 }
