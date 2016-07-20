@@ -152,6 +152,7 @@ dependencies[] = user_action_report
 
 ; govCMS
 
+dependencies[] = govcms_account_security
 dependencies[] = govcms_appearance
 dependencies[] = govcms_core
 dependencies[] = govcms_common_fields
