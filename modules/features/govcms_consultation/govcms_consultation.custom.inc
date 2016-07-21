@@ -4,7 +4,7 @@
  * Custom code for the Consultation feature.
  */
 
-define("LATE_SUBMISSION_SALT", variable_get('govcms_consultation_late_hash'));
+define('GOVCMS_CONSULTATION_LATE_SUBMISSION_SALT', variable_get('govcms_consultation_late_hash'));
 
 /**
  * Implements hook_menu().
@@ -126,6 +126,9 @@ function govcms_consultation_ds_custom_fields_info() {
   return $export;
 }
 
+/**
+ * Implements hook_theme_registry_alter().
+ */
 function govcms_consultation_theme_registry_alter(&$theme_registry) {
   // Defined path to the current module.
   $module_path = drupal_get_path('module', 'govcms_consultation');
@@ -207,7 +210,7 @@ function govcms_consultation_form_node_form_alter(&$form, $form_state, $form_id)
 function govcms_consultation_preprocess_field(&$variables, $hook) {
   if ($variables['element']['#field_name'] == 'progress_bar') {
     $element =& $variables['element'];
-    _consultation_vars($variables, $element['#object']);
+    _govcms_consultation_consultation_vars($variables, $element['#object']);
   }
 }
 
@@ -224,7 +227,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
     drupal_add_js(drupal_get_path('module', 'govcms_consultation') . '/js/govcms_consultation.js', array('file'));
     drupal_add_css(drupal_get_path('module', 'govcms_consultation') . '/css/govcms_consultation.css', array('file'));
 
-    _consultation_vars($variables, $variables['node']);
+    _govcms_consultation_consultation_vars($variables, $variables['node']);
     $consultation = $variables['consultation'];
 
     // Return if formal submissions are not accepted.
@@ -269,11 +272,6 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
       ),
     ), 'setting');
 
-    // Get the end consultation date.
-    $end_consultation_date = _govcms_consultation_admin_return_end_consultation_date($node, $wrapper);
-    // Get the current timestamp.
-    $time = time();
-
     // Check if a fso has been provided.
     if (isset($_GET['fso'])) {
       // Check if the node is able to accept late submissions.
@@ -281,7 +279,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
       // If the node can accept late submissions.
       if ($accept_late_submissions) {
         // Get the salted hash for this nid.
-        $salted_hash = _govcms_consultation_admin_return_salted_hash($node->nid);
+        $salted_hash = _govcms_consultation_admin_return_salted_hash($node->uuid);
         // If the salted hash and the fso are equal.
         if ($_GET['fso'] == $salted_hash) {
           // Show the relevant HYS sections.
@@ -306,7 +304,7 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
     }
 
     // If comments are open.
-    if ($variables['comment'] == COMMENT_NODE_OPEN) {
+    if (defined('COMMENT_NODE_OPEN') && $variables['comment'] == COMMENT_NODE_OPEN) {
       // If the heading 'Discussion Forum' heading field exists and is not blank.
       if (isset($node->field_discussion_forum_heading) && $wrapper->field_discussion_forum_heading->value() != '') {
         // Show the 'Discussion Forum' heading field.
@@ -322,9 +320,14 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
 }
 
 /**
- * Helper function to add consultation variables to template files.
+ * Helper function: Add consultation variables to template files.
+ *
+ * @param array $variables
+ *
+ * @param stdClass $element_object
+ *   The consultation entity.
  */
-function _consultation_vars(&$variables, $element_object) {
+function _govcms_consultation_consultation_vars(&$variables, $element_object) {
   $consultation['now'] = time();
   $consultation['wrapped_entity'] = entity_metadata_wrapper('node', $element_object);
   $date = $consultation['wrapped_entity']->field_consultation_date->value();
@@ -332,40 +335,46 @@ function _consultation_vars(&$variables, $element_object) {
   $consultation['end'] = $date['value2'];
   $consultation['notify_email'] = $consultation['wrapped_entity']->field_formal_submission_notify->value();
   $consultation['duration'] = ($consultation['end'] - $consultation['start']);
-  $consultation['percentage'] = _consultation_percentage($consultation);
+  $consultation['percentage'] = _govcms_consultation_consultation_percentage($consultation);
   $consultation['days_total'] = round($consultation['duration'] / strtotime('1 day', 0));
-  $consultation['days_remain'] = _consultation_days_remain($consultation);
+  $consultation['days_remain'] = _govcms_consultation_consultation_days_remain($consultation);
   $consultation['submission_enabled'] = $consultation['wrapped_entity']->field_formal_submission_enabled->value();
   $consultation['status_class'] = ($consultation['percentage'] === 100 ? 'consultation__progress-bar--complete' : '');
   $consultation['hide_form'] = !$consultation['submission_enabled'] || ($consultation['start'] > $consultation['now']) || ($consultation['end'] < $consultation['now']);
   $variables['consultation'] = $consultation;
-
-  return $variables;
 }
 
 /**
  * Helper function: Return end consultation date.
+ *
+ * @param EntityDrupalWrapper $wrapper
+ *   Consultation node wrapped in a metadata wrapper.
+ *
+ * @return int
+ *   A unix timestamp, or 0 if no end date exists.
  */
-function _govcms_consultation_admin_return_end_consultation_date($node, $wrapper) {
+function _govcms_consultation_admin_return_end_consultation_date($wrapper) {
   // Set default consultation date end value.
-  $consultation_date_end = '';
+  $consultation_date_end = 0;
 
-  // If the 'Consultation date' field exists and is not blank.
-  $consultation_date_value = $wrapper->field_consultation_date->value();
-  if (isset($node->field_consultation_date) && !empty($consultation_date_value)) {
-    // Get the 'Consultation date' field.
-    $consultation_date = $consultation_date_value;
-    // Get the end date.
-    $consultation_date_end = $consultation_date['value2'];
+  // If there is a consultation end, use that.
+  $date_field = $wrapper->field_consultation_date->value();
+  if (!empty($date_field['value2'])) {
+    $consultation_date_end = $date_field['value2'];
   }
 
   return $consultation_date_end;
 }
 
 /**
- * Helper function to determine percentage complete.
+ * Helper function: Return the percentage of time elapsed for a consultation.
+ *
+ * @param array $consultation
+ *   An array of consultation data.
+ *
+ * @return int
  */
-function _consultation_percentage($consultation) {
+function _govcms_consultation_consultation_percentage($consultation) {
   $time_until_it_starts = ($consultation['now'] - $consultation['start']);
   $percentage = $time_until_it_starts / $consultation['duration'] * 100;
   $percentage = max(0, min(100, $percentage));
@@ -373,9 +382,15 @@ function _consultation_percentage($consultation) {
 }
 
 /**
- * Helper function - days_remain for progress bar.
+ * Helper function: Return number of remaining days for a consultation.
+ *
+ * @param array $consultation
+ *   An array of consultation data.
+ *
+ * @return mixed
+ *   Human readable indicator of the time remaining.
  */
-function _consultation_days_remain($consultation) {
+function _govcms_consultation_consultation_days_remain($consultation) {
 
   $days_total = round($consultation['duration'] / strtotime('1 day', 0));
 
@@ -395,10 +410,15 @@ function _consultation_days_remain($consultation) {
 }
 
 /**
- * Helper function: Return whether a node can validly accept late submissions.
+ * Helper function: Return whether a consultation can accept late submissions.
  *
  * Check that the 'Enable late submissions' value is set.
  * Check that the date has passed.
+ *
+ * @param stdClass $node
+ *   Consultation node.
+ *
+ * @return bool
  */
 function _govcms_consultation_admin_accept_late_submission($node) {
   // Set a default answer.
@@ -409,7 +429,7 @@ function _govcms_consultation_admin_accept_late_submission($node) {
   // Check if the 'Enable late submissions' field exists and is TRUE.
   if (isset($node->field_enable_late_submissions) && $wrapper->field_enable_late_submissions->value() === TRUE) {
     // Get the consultation date end.
-    $consultation_date_end = _govcms_consultation_admin_return_end_consultation_date($node, $wrapper);
+    $consultation_date_end = _govcms_consultation_admin_return_end_consultation_date($wrapper);
     // Get the current time.
     $time = time();
     // Check if the current date is greater than the end date (i.e. it's in the past).
@@ -425,27 +445,36 @@ function _govcms_consultation_admin_accept_late_submission($node) {
 
 /**
  * Helper function: Return salted hash for a given node ID.
+ *
+ * @param string $uuid
+ *   A node UUID.
+ *
+ * @return string
  */
-function _govcms_consultation_admin_return_salted_hash($nid) {
-  return crc32(LATE_SUBMISSION_SALT + $nid);
+function _govcms_consultation_admin_return_salted_hash($uuid) {
+  return crc32(GOVCMS_CONSULTATION_LATE_SUBMISSION_SALT . $uuid);
 }
 
 /**
  * Helper function: Return formatted late submission URL.
+ *
+ * @param stdClass $node
+ *   Consultation node.
+ *
+ * @return string
+ *   A URL.
  */
 function _govcms_consultation_admin_return_late_submission_url($node) {
-  global $base_url;
 
   // Get the salted hash for this nid.
-  $salted_hash = _govcms_consultation_admin_return_salted_hash($node->nid);
+  $salted_hash = _govcms_consultation_admin_return_salted_hash($node->uuid);
 
   // Get the node path.
   $uri = entity_uri('node', $node);
-  // Update the options with the query.
-  $uri['options']['query']['fso'] = $salted_hash;
-  // Output the URL.
-  $url = $base_url . url($uri['path'], $uri['options']);
 
-  // Return the URL.
-  return $url;
+  // Add link options.
+  $uri['options']['query']['fso'] = $salted_hash;
+  $uri['options']['absolute'] = TRUE;
+
+  return url($uri['path'], $uri['options']);
 }
