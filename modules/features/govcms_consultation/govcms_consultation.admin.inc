@@ -4,6 +4,9 @@
  * Administrative forms and functions for govCMS Consultation.
  */
 
+/**
+ * Module administration form.
+ */
 function govcms_consultation_admin_form() {
   $form = array();
 
