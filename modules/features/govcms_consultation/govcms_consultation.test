@@ -1,0 +1,143 @@
+<?php
+
+class GovCMSConsultationUnitTestCase extends DrupalUnitTestCase {
+
+  /**
+   * @return array
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'govCMS Consultation unit tests',
+      'description' => 'Unit tests for the govCMS Consultation module.',
+      'group' => 'govCMS',
+    );
+  }
+
+  /**
+   * Tests for _govcms_consultation_inclusive_days()
+   */
+  public function test_govcms_consultation_inclusive_days() {
+
+    // Test 1
+    $start    = mktime(9,   0,  0, 6,  1, 2016); //  1 June 2016 @ 9:00:00am
+    $finish   = mktime(17,  0,  0, 6, 30, 2016); // 30 June 2016 @ 5:00:00pm
+    $expected = 30;
+    $actual   = _govcms_consultation_inclusive_days($start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 2
+    $start    = mktime(0,  0,  0,  6,  1, 2016); //  1 June 2016 @ 00:00:00am
+    $finish   = mktime(23, 59, 59, 6, 30, 2016); // 30 June 2016 @ 23:59:59pm
+    $expected = 30;
+    $actual   = _govcms_consultation_inclusive_days($start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+  }
+
+  /**
+   * Tests for _govcms_consultation_consultation_percentage()
+   */
+  public function test_govcms_consultation_consultation_percentage() {
+
+    $start    = mktime(9,   0,  0, 6,  1, 2016); //  1 June 2016 @ 9:00:00am
+    $finish   = mktime(17,  0,  0, 6, 30, 2016); // 30 June 2016 @ 5:00:00pm
+
+    // Test 1: 23%
+    $now      = mktime(8, 15, 30, 6, 7, 2016); // 7 June 2016 @ 8:15:30am
+    $expected = 23;
+    $actual   = _govcms_consultation_consultation_percentage($now, $start, $finish);
+    $message  = t('Expected @expected%, got @actual%', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 2: 50%
+    $now      = mktime(14, 30, 45, 6, 15, 2016); // 15 June 2016 @ 2:30:45pm
+    $expected = 50;
+    $actual   = _govcms_consultation_consultation_percentage($now, $start, $finish);
+    $message  = t('Expected @expected%, got @actual%', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 3: 0% - consultation starts in the future
+    $now      = mktime(8, 59, 59, 6,  1, 2016); // 1 June 2016 @ 8:59:59am
+    $expected = 0;
+    $actual   = _govcms_consultation_consultation_percentage($now, $start, $finish);
+    $message  = t('Expected @expected%, got @actual%', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 4: 100% - consultation ends in the past
+    $now      = mktime(17, 0, 1, 6, 30, 2016); // 30 June 2016 @ 5:00:01pm
+    $expected = 100;
+    $actual   = _govcms_consultation_consultation_percentage($now, $start, $finish);
+    $message  = t('Expected @expected%, got @actual%', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+  }
+
+  /**
+   * Tests for _govcms_consultation_consultation_days_remain()
+   */
+  public function test_govcms_consultation_consultation_days_remain() {
+
+    $start    = mktime(9,   0,  0, 6,  1, 2016); //  1 June 2016 @ 9:00:00am
+    $finish   = mktime(17,  0,  0, 6, 30, 2016); // 30 June 2016 @ 5:00:00pm
+
+    // Test 1: At a random point during the consultation
+    // 24 days remaining, including today
+    $now      = mktime(8, 15, 30, 6, 7, 2016); // 7 June 2016 @ 8:15:30am
+    $expected = 24;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 2: At 1 second to midnight - testing time doesn't affect day count
+    // 8 days remaining, including today
+    $now      = mktime(23, 59, 59, 6, 23, 2016); // 23 June 2016 @ 23:59:59pm
+    $expected = 8;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 3: At 1 second past midnight - testing time doesn't affect day count
+    // 8 days remaining, including today
+    $now      = mktime(0, 0, 1, 6, 23, 2016); // 23 June 2016 @ 00:00:01am
+    $expected = 8;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 4: Testing date before consultation opens
+    // 30 days remaining
+    $now      = mktime(0, 0, 0, 5, 1, 2016); // 1 May 2016
+    $expected = 30;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 5: Testing date after consultation ends
+    // 0 days remaining
+    $now      = mktime(0, 0, 0, 7, 1, 2016); // 23 June 2016 @ 00:00:01am
+    $expected = 0;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 6: Testing the day the consultation ends
+    // "< 1" days remaining
+    $now      = mktime(16, 0, 0, 6, 30, 2016); // 23 June 2016 @ 00:00:01am
+    $expected = "< 1";
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected "@expected" days, got "@actual" days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+    // Test 7: Testing the date the consultation starts
+    // 30 days remaining
+    $now      = mktime(9, 0, 0, 6, 1, 2016); // 23 June 2016 @ 00:00:01am
+    $expected = 30;
+    $actual   = _govcms_consultation_consultation_days_remain($now, $start, $finish);
+    $message  = t('Expected @expected days, got @actual days', array('@expected' => $expected, '@actual' => $actual));
+    $this->assertEqual($actual, $expected, $message);
+
+  }
+
+}
