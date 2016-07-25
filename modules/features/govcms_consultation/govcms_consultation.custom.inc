@@ -331,20 +331,26 @@ function govcms_consultation_preprocess_node(&$variables, $hook) {
  *   The consultation entity.
  */
 function _govcms_consultation_consultation_vars(&$variables, $element_object) {
-  $consultation['now'] = time();
-  $consultation['wrapped_entity'] = entity_metadata_wrapper('node', $element_object);
-  $date = $consultation['wrapped_entity']->field_consultation_date->value();
-  $consultation['start'] = $date['value'];
-  $consultation['end'] = $date['value2'];
-  $consultation['notify_email'] = $consultation['wrapped_entity']->field_formal_submission_notify->value();
-  $consultation['duration'] = ($consultation['end'] - $consultation['start']);
-  $consultation['percentage'] = _govcms_consultation_consultation_percentage($consultation);
-  $consultation['days_total'] = round($consultation['duration'] / strtotime('1 day', 0));
-  $consultation['days_remain'] = _govcms_consultation_consultation_days_remain($consultation);
-  $consultation['submission_enabled'] = $consultation['wrapped_entity']->field_formal_submission_enabled->value();
-  $consultation['status_class'] = ($consultation['percentage'] === 100 ? 'consultation__progress-bar--complete' : '');
-  $consultation['hide_form'] = !$consultation['submission_enabled'] || ($consultation['start'] > $consultation['now']) || ($consultation['end'] < $consultation['now']);
+  
+  $now     = time();
+  $wrapper = entity_metadata_wrapper('node', $element_object);
+  $date    = $wrapper->field_consultation_date->value();
+  $start   = $date['value'];
+  $end     = $date['value2'];
+
+  $consultation['wrapped_entity']     = $wrapper;
+  $consultation['start']              = $start;
+  $consultation['end']                = $end;
+  $consultation['percentage']         = _govcms_consultation_consultation_percentage($now, $start, $end);
+  $consultation['days_total']         = _govcms_consultation_inclusive_days($start, $end);
+  $consultation['days_remain']        = _govcms_consultation_consultation_days_remain($now, $start, $end);
+  $consultation['notify_email']       = $wrapper->field_formal_submission_notify->value();
+  $consultation['submission_enabled'] = $wrapper->field_formal_submission_enabled->value();
+  $consultation['status_class']       = ($consultation['days_remain'] == 0 ? 'consultation__progress-bar--complete' : '');
+  $consultation['hide_form']          = !$consultation['submission_enabled'] || ($start > $now) || ($end < $now);
+
   $variables['consultation'] = $consultation;
+
 }
 
 /**
