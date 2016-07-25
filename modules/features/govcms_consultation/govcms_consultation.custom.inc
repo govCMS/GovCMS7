@@ -498,3 +498,32 @@ function _govcms_consultation_admin_return_late_submission_url($node) {
 
   return url($uri['path'], $uri['options']);
 }
+
+/**
+ * Helper function: Return inclusive number of days between two dates.
+ *
+ * @param int $start
+ *   Unit timestamp
+ *
+ * @param int $finish
+ *   Unit timestamp
+ *
+ * @return int
+ */
+function _govcms_consultation_inclusive_days($start, $finish) {
+
+  /**
+   * Convert all timestamps to DatTime objects for easier comparison and
+   * normalise their times so we can compare days without time interference.
+   * There may still be some variation due to daylight savings time etc, but
+   * rounding that won't result in an incorrect day count.
+   * */
+  $start  = new DateTime('@' . mktime(12, 0, 0, date('m', $start),  date('d', $start),  date('Y', $start)));
+  $finish = new DateTime('@' . mktime(12, 0, 0, date('m', $finish), date('d', $finish), date('Y', $finish)));
+
+  // Get the number of days between the start at the finish, add one to make the
+  // date range inclusive.
+  $duration = $finish->diff($start);
+  return ((int) $duration->format('%a')) + 1;
+
+}
