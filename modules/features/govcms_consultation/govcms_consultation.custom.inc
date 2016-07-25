@@ -370,18 +370,32 @@ function _govcms_consultation_admin_return_end_consultation_date($wrapper) {
 }
 
 /**
- * Helper function: Return the percentage of time elapsed for a consultation.
+ * Helper function: Return the percentage of days elapsed for a consultation.
  *
- * @param array $consultation
- *   An array of consultation data.
+ * @param int $now
+ *   Current time as timestamp
+ *
+ * @param int $start
+ *   Consultation start time as timestamp
+ *
+ * @param int $end
+ *   Consultation end time as timestamp
  *
  * @return int
+ *
  */
-function _govcms_consultation_consultation_percentage($consultation) {
-  $time_until_it_starts = ($consultation['now'] - $consultation['start']);
-  $percentage = $time_until_it_starts / $consultation['duration'] * 100;
-  $percentage = max(0, min(100, $percentage));
-  return $percentage;
+function _govcms_consultation_consultation_percentage($now, $start, $finish) {
+  if ($now < $start) {
+    return 0;
+  }
+  if ($now > $finish) {
+    return 100;
+  }
+
+  $duration = _govcms_consultation_inclusive_days($start, $finish);
+  $elapsed  = _govcms_consultation_inclusive_days($start, $now);
+
+  return round($elapsed / $duration * 100);
 }
 
 /**
@@ -393,23 +407,26 @@ function _govcms_consultation_consultation_percentage($consultation) {
  * @return mixed
  *   Human readable indicator of the time remaining.
  */
-function _govcms_consultation_consultation_days_remain($consultation) {
+function _govcms_consultation_consultation_days_remain($now, $start, $finish) {
 
-  $days_total = round($consultation['duration'] / strtotime('1 day', 0));
+  if ($now < $start) {
+    return _govcms_consultation_inclusive_days($start, $finish);
+  }
 
-  if ($consultation['percentage'] === 0) {
-    $days_remain = $days_total;
+  if ($now > $finish) {
+    return 0;
   }
-  elseif ($consultation['percentage'] === 100) {
-    $days_remain = "0";
+
+  $remaining = _govcms_consultation_inclusive_days($now, $finish);
+
+  // If the number of days remaining is 1, that means we're on the last day. As
+  // some time will have expired, we return less than one.
+  if ($remaining == 1) {
+    return '< 1';
   }
-  elseif (($consultation['end'] > $consultation['now']) && ($consultation['end'] - $consultation['now'] < strtotime('1 day', 0))) {
-    $days_remain = "< 1";
-  }
-  else {
-    $days_remain = round(($consultation['end'] - time()) / strtotime('1 day', 0));
-  }
-  return $days_remain;
+  
+  return $remaining;
+  
 }
 
 /**
