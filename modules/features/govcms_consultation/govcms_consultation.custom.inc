@@ -218,21 +218,24 @@ function govcms_consultation_preprocess_field(&$variables, $hook) {
  * Implements hook_preprocess_node().
  */
 function govcms_consultation_preprocess_node(&$variables, $hook) {
-  $node = $variables['node'];
 
-  // Conditionally remove Formal Submission fields where relevant.
+  // Only process consultation nodes in full view mode.
   if ($variables['type'] == 'consultation' && $variables['view_mode'] == 'full') {
+
+    $node = $variables['node'];
 
     // Include Consultation specific script & styles.
     drupal_add_js(drupal_get_path('module', 'govcms_consultation') . '/js/govcms_consultation.js', array('file'));
     drupal_add_css(drupal_get_path('module', 'govcms_consultation') . '/css/govcms_consultation.css', array('file'));
 
-    _govcms_consultation_consultation_vars($variables, $variables['node']);
+    // Build an array of data that's used in the templates files and for node
+    // processing below.
+    _govcms_consultation_consultation_vars($variables, $node);
     $consultation = $variables['consultation'];
 
-    // Return if formal submissions are not accepted.
-    if (!empty($consultation['hide_form'])) {
-      //field_group_hide_field_groups($variables['elements'], array('group_formal_submissions'));
+    // We hide the form if submissions are not enabled, or if the consultation
+    // period is not yet open or has closed.
+    if ($consultation['hide_form']) {
       hide($variables['content']['formal_submission_form']);
       hide($variables['content']['field_formal_submission_cta_1']);
       hide($variables['content']['field_formal_submission_cta_2']);
