@@ -88,7 +88,7 @@
               override="true"/>
 
     <!-- Set git properties -->
-    <property name="git.branch.default" value="master" />
+    <property name="git.branch.default" value="7.x-2.x" />
 
     <!-- Conditional properties -->
     <!-- Check for a travis branch variable -->
