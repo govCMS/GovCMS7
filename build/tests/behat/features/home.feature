@@ -1,6 +1,6 @@
 Feature: Home Page
 
-  Ensure the home page content is available
+  Ensure the home page is rendering correctly
 
   @javascript
   Scenario: View the homepage content
@@ -13,3 +13,5 @@ Feature: Home Page
     And I should see "Twitter Feed"
     And I should see "Quick Links"
     And I should see "Connect with us"
+    And the "title" element should contain "govCMS"
+    And the "title" element should not contain "|"
