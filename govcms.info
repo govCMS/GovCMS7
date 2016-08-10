@@ -12,9 +12,6 @@ php = 5.3
 php_memory_limit = 128M
 
 files[] = govcms.profile
-files[] = tests/govcms_test_base.inc
-files[] = tests/govcms.test
-files[] = tests/govcms_metadata.test
 
 ; Core
 
