@@ -53,7 +53,7 @@ projects[flood_control][version] = "1.0"
 projects[focal_point][version] = "1.0-beta4"
 projects[funnelback][version] = "1.0-beta3"
 projects[globalredirect][version] = "1.5"
-projects[google_analytics][version] = "2.1"
+projects[google_analytics][version] = "2.3"
 projects[google_analytics_reports][version] = "3.0"
 projects[google_chart_tools][patch][] = "https://www.drupal.org/files/issues/google-chart-tools-ajax-1613258-11-7.x-1.4.patch"
 projects[google_chart_tools][version] = "1.4"
@@ -173,7 +173,7 @@ projects[xmlsitemap][version] = "2.3"
 
 ; Themes
 projects[zen][version] = "5.5"
-projects[shiny][version] = "1.6"
+projects[shiny][version] = "1.7"
 
 ; Libraries
 
@@ -193,7 +193,7 @@ libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
 
 libraries[ckeditor][download][type] = "get"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.4.7/ckeditor_4.4.7_full.zip"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.9/ckeditor_4.5.9_full.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 

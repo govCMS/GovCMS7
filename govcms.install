@@ -80,6 +80,9 @@ function govcms_install() {
   // Set defaults for the contact form.
   _govcms_contact_form_defaults();
 
+  // Set up metatag
+  _govcms_setup_metatag();
+
   // Final modules.
   module_enable(array('govcms_password_policy'));
 
@@ -1225,6 +1228,16 @@ function _govcms_default_tags() {
 
   // Save the tids.
   variable_set('govcms_tags_saved', $tids);
+}
+
+/**
+ * Set some default meta tag values
+ */
+function _govcms_setup_metatag() {
+  // Set homepage head title to the sitename token
+  $config = metatag_config_load('global:frontpage');
+  $config->config['title']['value'] = '[site:name]';
+  metatag_config_save($config);
 }
 
 /**
