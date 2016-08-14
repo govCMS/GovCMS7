@@ -33,7 +33,7 @@
     <property name="site.mail"
               value="root@[127.0.0.1]"/>
     <property name="drupal.makefile"
-              value="${repo.root}/build-${phing.project.name}.make"
+              value="${repo.root}/drupal-org-core.make"
               override="true"/>
     <property name="drupal.contrib_makefile"
               value="${repo.root}/drupal-org.make"
@@ -98,47 +98,8 @@
           logoutput="true"
           checkreturn="true" />
 
-    <!-- If the variable was not set grab it from git -->
-    <!-- This does not work for travis as it uses a detached head -->
-    <if>
-        <isfalse value="${git.branch.current}" />
-        <then>
-            <exec command="git rev-parse --abbrev-ref HEAD"
-                  outputProperty="git.branch.current"
-                  dir="${repo.root}"
-                  logoutput="true"
-                  checkreturn="true" />
-        </then>
-    </if>
-
     <!-- The following allows local overrides. -->
     <property file="${project.basedir}/build.properties" override="true"/>
-
-    <!--               -->
-    <!-- Filesets      -->
-    <!-- ============= -->
-    <!-- @TODO uncomment these inclusions when errors have been fixed. -->
-    <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
-        <!--    <include name="profiles/govcms/modules/custom/**" />-->
-        <!--    <include name="profiles/govcms/modules/features/**" />-->
-        <include name="sites/all/modules/**"/>
-    </fileset>
-
-    <fileset dir="${repo.root}/modules" id="govcms.modules">
-        <include name="custom/**"/>
-        <include name="features/**"/>
-    </fileset>
-
-    <fileset dir="${repo.root}" id="govcms.profile">
-        <include name="govcms.*"/>
-        <include name="js/**"/>
-        <include name="images/**"/>
-        <include name="css"/>
-    </fileset>
-
-    <fileset dir="${repo.root}/themes" id="govcms.themes">
-        <include name="**"/>
-    </fileset>
 
     <!--               -->
     <!-- Targets       -->
@@ -150,29 +111,23 @@
 
     <target name="build:install"
             description="Build the project and install govCMS."
-            depends="git-reset, make, install"/>
-
-    <target name="build:local"
-            description="Build the project without removing uncommitted changes."
-            depends="make:local, overwrite:profile-files, install">
-        <property name="build.local" value="1" />
-    </target>
+            depends="build, install"/>
 
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
-            depends="git-reset, make, install, validate:all"/>
+            depends="build:install, validate:all"/>
 
     <target name="build:with-tests"
             description="Build the project, install, then run tests."
-            depends="git-reset, make, install, test:all"/>
+            depends="build:install, test:all"/>
 
     <target name="build:full"
             description="Build the project, install govCMS, run validation and tests."
-            depends="git-reset, make, install, run-tests"/>
+            depends="build:install, run-tests"/>
 
     <target name="build:full:no-clean"
             description="Build the project without removing local changes, install govCMS, run validation and tests."
-            depends="make:local, install, run-tests"/>
+            depends="make, install, run-tests"/>
 
     <target name="run-tests" description="Runs code validation and tests on an installed govCMS codebase."
             depends="validate:all, test:all"/>
@@ -212,6 +167,7 @@
                         <chmod file="${docroot}/sites/default" mode="2775"/>
                     </then>
                 </if>
+                <!-- Preserve the `sites` directory -->
                 <phingcall target="make:sites" />
                 <delete dir="${docroot}"/>
             </then>
@@ -231,22 +187,6 @@
           passthru="true"
           spawn="true"
           checkreturn="true" />
-    </target>
-
-    <!-- Check if we are building master and call the appropriate make strategy -->
-    <!-- If we are on the master branch, we want to test that directly against the repo -->
-    <!-- If we are on any other branch, we want to avoid building recursively as we will pull in the master profile. -->
-    <target name="make">
-        <if>
-            <equals arg1="${git.branch.default}" arg2="${git.branch.current}" />
-            <then>
-                <phingcall target="make:remote" />
-            </then>
-            <else>
-                <phingcall target="make:local" />
-            </else>
-        </if>
-        <phingcall target="make:sites" />
     </target>
 
     <target name="make:sites">
@@ -270,29 +210,9 @@
       <symlink link="${docroot.sites}" target="../sites" />
     </target>
 
-    <!-- Drush make the build using a recursive strategy -->
-    <target name="make:remote"
-            description="Run drush make"
-            depends="rm-docroot">
-
-        <drush command="make" assume="yes" verbose="TRUE">
-            <option name="concurrency">8</option>
-            <option name="cache-duration-releasexml">0</option>
-            <param>"${drupal.makefile}"</param>
-            <param>"${docroot}"</param>
-        </drush>
-
-        <!-- Remove robots.txt file -->
-        <phingcall target="rm-robotstxt" />
-
-        <!-- Place favicon.ico in the docroot -->
-        <phingcall target="mk-favicon" />
-
-    </target>
-
     <!-- Use the local make files rather than checking out from the repository -->
     <!-- This avoids us overwriting the local make file with the master -->
-    <target name="make:local"
+    <target name="make"
             description="Run drush make in a development context"
             depends="rm-docroot">
 
@@ -303,6 +223,14 @@
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
+
+        <mkdir dir="${profile.root}" />
+
+        <exec dir="${repo.root}"
+              command="git archive --format=tar HEAD | tar -C ${profile.root} -x"
+              logoutput="true"
+              checkreturn="true"
+              passthru="true"/>
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
@@ -320,34 +248,6 @@
         <!-- Place favicon.ico in the docroot -->
         <phingcall target="mk-favicon" />
 
-    </target>
-
-    <!-- When building locally, we clean out all the profile files and copy across, rather than relying on make. -->
-    <target name="overwrite:profile-files">
-
-        <delete>
-            <fileset dir="${profile.root}">
-                <include name="govcms.*"/>
-                <include name="js/**"/>
-                <include name="images/**"/>
-                <include name="css/**"/>
-            </fileset>
-        </delete>
-        <copy todir="${profile.root}">
-            <fileset refid="govcms.profile"/>
-        </copy>
-
-        <delete dir="${docroot.profile.modules.path}/custom"/>
-        <delete dir="${docroot.profile.modules.path}/features"/>
-        <copy todir="${docroot.profile.modules.path}">
-            <fileset refid="govcms.modules"/>
-        </copy>
-
-
-        <delete dir="${docroot.profile.themes.path}/govcms"/>
-        <copy todir="${docroot.profile.themes.path}">
-            <fileset refid="govcms.themes"/>
-        </copy>
     </target>
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
