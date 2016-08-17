@@ -923,7 +923,7 @@ Submitted values are:
         'form_key' => 'phone_number_markup',
         'name' => 'Phone number markup',
         'type' => 'markup',
-        'value' => 'Please enter an Australian landline or mobile phone number including area code.<br /><em>e.g: 07 1234 5678 or 0414 1234 567</em>',
+        'value' => 'Please enter an Australian landline or mobile phone number including area code.<br /><em>e.g: 07 1234 5678 or 041 1234 567</em>',
         'extra' => array(
           'format' => 'rich_text',
           'private' => 0,
