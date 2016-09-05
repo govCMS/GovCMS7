@@ -39,7 +39,7 @@
               value="${repo.root}/drupal-org.make"
               override="true"/>
     <property name="drupal.base_url"
-              value="http://localhost/"/>
+              value="http://govcms.local/"/>
 
     <property name="profile.modules.custom.path"
               value="${repo.root}/modules"
@@ -59,7 +59,7 @@
     <!-- Credentials -->
     <property name="db.username" value="root"/>
     <property name="db.password" value=""/>
-    <property name="db.name" value="travis_ci_govcms_drupal"/>
+    <property name="db.name" value="govcms_drupal_7"/>
     <property name="db.host" value="localhost"/>
     <property name="db.port" value="3306"/>
     <property name="account.name" value="admin"/>

@@ -32,6 +32,8 @@ build/bin/phing -f build/phing/build.xml build
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
 
+This build is configured to use (http://govcms.local/) by default and will need to [add an entry to your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/). This and other credentials can be changed by duplicating `build/phing/example.build.properties` as `build.properties` and making changes there.
+
 
 
 ## Structure
@@ -70,7 +72,7 @@ export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "ht
 ### Phing
 
 - **build.xml** - Contains project specific configuration and tasks that can be executed across this projects team.
-- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will assign the url of the current environment. 
+- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will assign the url of the current environment.
 
 The variables that Phing uses are configured at the top of build.xml. If there are alterations to these parameters to allow Phing to run locally, these may be placed in the *build.properties* file. This file is ignored from git so local modifications will not be committed. To alter the base URL for the Drupal site the following may be added to *build.properties*.
 
