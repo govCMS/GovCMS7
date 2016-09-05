@@ -22,7 +22,7 @@ function govcms_editing_filter_default_formats() {
         'weight' => -50,
         'status' => 1,
         'settings' => array(
-          'valid_elements' => 'video[controls|data-fid|data-media-element],source[src|type|data-cke-saved-src],audio[controls|data-fid|data-media-element],pre,a[href|rel|target<_blank|title|class|name|id],
+          'valid_elements' => 'a[href|rel|target<_blank|title|class|name|id],
 div[id|class|align<center?justify?left?right],
 br,em,i,strong,cite,code,blockquote,ul,ol[class],li[class],dl,dt,dd,
 span,p[class],address,
