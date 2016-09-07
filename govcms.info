@@ -90,7 +90,6 @@ dependencies[] = panels_ipe
 dependencies[] = password_policy
 dependencies[] = paranoia
 dependencies[] = pathauto
-dependencies[] = pathauto_persist
 dependencies[] = phone
 dependencies[] = quicktabs
 dependencies[] = quicktabs_tabstyles
