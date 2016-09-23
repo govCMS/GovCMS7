@@ -17,13 +17,39 @@ function govcms_permissions_form_user_profile_form_alter(&$form, $form_state) {
  * Implements hook_form_alter().
  */
 function govcms_permissions_form_alter(&$form, $form_state, $form_id) {
-  if ($form_id == 'views_form_admin_views_user_system_1' && $form_state['step'] == 'views_bulk_operations_confirm_form' &&
-    $form_state['operation']->operationId == 'action::views_bulk_operations_delete_item') {
-    foreach (user_load_multiple($form_state['selection']) as $account) {
-      if (in_array((int) variable_get('user_admin_role', 3), array_keys($account->roles), TRUE) && !user_access('assign all roles')) {
-        drupal_set_message('You do not have permission to cancel this account.');
-        $form['actions']['#access'] = FALSE;
-        $form['description']['#access'] = FALSE;
+  if ($form_id == 'views_form_admin_views_user_system_1') {
+    $user_admin_role = (int) variable_get('user_admin_role', 3);
+    if ($form_state['step'] == 'views_bulk_operations_confirm_form') {
+      if ($form_state['operation']->operationId == 'action::views_bulk_operations_delete_item') {
+        foreach (user_load_multiple($form_state['selection']) as $account) {
+          if (in_array($user_admin_role, array_keys($account->roles), TRUE) && !user_access('assign all roles')) {
+            drupal_set_message('You do not have permission to cancel this account.');
+            $form['actions']['#access'] = FALSE;
+            $form['description']['#access'] = FALSE;
+          }
+        }
+      }
+    }
+    // Don't allow users to use VBO to bypass the access to role delegation.
+    elseif ($form_state['step'] == 'views_bulk_operations_config_form') {
+      // Exclude the roles that the user does not have permission to change from
+      // the "Change user roles" VBO operation.
+      if ($form_state['operation']->operationId == 'action::views_bulk_operations_user_roles_action') {
+        foreach ($form['add_roles']['#options'] as $rid => $role) {
+          if (!user_access('assign all roles') && !user_access("assign $role role")) {
+            unset($form['add_roles']['#options'][$rid]);
+            unset($form['remove_roles']['#options'][$rid]);
+          }
+        }
+      }
+      // Exclude the roles that the user does not have permission to change from
+      // the "Change value" VBO operation.
+      elseif ($form_state['operation']->operationId == 'action::views_bulk_operations_modify_action') {
+        foreach ($form['properties']['roles']['#options'] as $rid => $role) {
+          if (!user_access('assign all roles') && !user_access("assign $role role")) {
+            unset($form['properties']['roles']['#options'][$rid]);
+          }
+        }
       }
     }
   }
