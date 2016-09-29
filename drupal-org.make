@@ -8,6 +8,8 @@ defaults[projects][subdir] = "contrib"
 projects[accessible_forms][version] = "1.0-alpha1"
 projects[acquia_connector][version] = "2.15"
 projects[addressfield][version] = "1.1"
+projects[admin_menu][version] = "3.0-rc5"
+projects[adminimal_admin_menu][version] = "1.7"
 projects[admin_views][version] = "1.6"
 projects[agls][version] = "1.0-beta3"
 projects[bean][version] = "1.9"
@@ -183,6 +185,7 @@ projects[xmlsitemap][version] = "2.3"
 ; Themes
 projects[zen][version] = "5.5"
 projects[shiny][version] = "1.7"
+projects[adminimal_theme][version] = "1.24"
 
 ; Libraries
 
