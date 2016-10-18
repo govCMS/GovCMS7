@@ -39,7 +39,6 @@ function govcms_form_install_configure_form_alter(&$form, &$form_state) {
   );
 }
 
-
 /**
  * Implements hook_block_info_alter().
  */
@@ -58,4 +57,15 @@ function govcms_system_info_alter(&$info, $file, $type) {
   if (isset($info['project']) && $info['project'] == 'govcms' && arg(0) == 'admin' && arg(1) == 'modules') {
     $info['dependencies'] = array();
   }
+}
+
+/**
+ * Implements hook_paranoia_hide_modules().
+ *
+ * @TODO remove this after pathauto update.
+ */
+function govcms_paranoia_hide_modules() {
+  return array(
+    'pathauto_persist' => 'Other',
+  );
 }
