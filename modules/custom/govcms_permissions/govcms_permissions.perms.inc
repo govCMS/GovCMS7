@@ -1024,5 +1024,13 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'field' => array(
+      'administer fields' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site builder',
+        ),
+      ),
+    ),
   );
 }
