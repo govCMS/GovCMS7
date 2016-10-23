@@ -80,15 +80,15 @@
     <property name="behat.local"
               value="${repo.root}/build/tests/behat/behat.local.yml"/>
     <property name="phantomjs.bin"
-              value="${composer.bin}/phantomjs" />
-    <property name="phantomjs.webdriver" value="4444" />
+              value="${composer.bin}/phantomjs"/>
+    <property name="phantomjs.webdriver" value="4444"/>
 
     <!-- We override this so Drupal install works -->
     <property name="drush.cmd" value="${drush.bin} -r ${docroot}"
               override="true"/>
 
     <!-- Set git properties -->
-    <property name="git.branch.default" value="7.x-2.x" />
+    <property name="git.branch.default" value="7.x-2.x"/>
 
     <!-- Conditional properties -->
     <!-- Check for a travis branch variable -->
@@ -96,10 +96,20 @@
           outputProperty="git.branch.current"
           dir="${repo.root}"
           logoutput="true"
-          checkreturn="true" />
+          checkreturn="true"/>
 
     <!-- The following allows local overrides. -->
     <property file="${project.basedir}/build.properties" override="true"/>
+
+    <!--               -->
+    <!-- Filesets      -->
+    <!-- ============= -->
+    <fileset dir="${docroot}" id="custom.files" expandsymboliclinks="true">
+        <include name="profiles/govcms/modules/custom/**"/>
+        <include name="profiles/govcms/modules/features/**"/>
+        <include name="sites/all/modules/**"/>
+    </fileset>
+
 
     <!--               -->
     <!-- Targets       -->
@@ -143,7 +153,7 @@
 
         <exec command="git reset --hard"
               logoutput="true"
-              passthru="true" />
+              passthru="true"/>
     </target>
 
     <target name="rm-robotstxt"
@@ -168,7 +178,7 @@
                     </then>
                 </if>
                 <!-- Preserve the `sites` directory -->
-                <phingcall target="make:sites" />
+                <phingcall target="make:sites"/>
                 <delete dir="${docroot}"/>
             </then>
         </if>
@@ -182,32 +192,32 @@
     </target>
 
     <target name="phantomjs:launch"
-          description="Launches a GhostDriver.">
-      <exec command="${phantomjs.bin} --webdriver=${phantomjs.webdriver}"
-          passthru="true"
-          spawn="true"
-          checkreturn="true" />
+            description="Launches a GhostDriver.">
+        <exec command="${phantomjs.bin} --webdriver=${phantomjs.webdriver}"
+              passthru="true"
+              spawn="true"
+              checkreturn="true"/>
     </target>
 
     <target name="make:sites">
-      <!-- Setup the sites directory outside of docroot so that future compilations
-           don't remove customisations make to the sites directory -->
-      <property name="sites.available" value="false" />
-      <available file="${govcms.sites}" property="sites.available" type="dir" />
-      <if>
-        <isfalse value="${sites.available}" />
-        <then>
-          <copy todir="${govcms.sites}">
-            <fileset dir="${docroot.sites}">
-                <include name="**" />
-            </fileset>
-          </copy>
-        </then>
-      </if>
+        <!-- Setup the sites directory outside of docroot so that future compilations
+             don't remove customisations make to the sites directory -->
+        <property name="sites.available" value="false"/>
+        <available file="${govcms.sites}" property="sites.available" type="dir"/>
+        <if>
+            <isfalse value="${sites.available}"/>
+            <then>
+                <copy todir="${govcms.sites}">
+                    <fileset dir="${docroot.sites}">
+                        <include name="**"/>
+                    </fileset>
+                </copy>
+            </then>
+        </if>
 
-      <!-- Must remove both directory (1st time attempt) and symlink (every other attempt) -->
-      <delete dir="${docroot.sites}" file="${docroot.sites}" />
-      <symlink link="${docroot.sites}" target="../sites" />
+        <!-- Must remove both directory (1st time attempt) and symlink (every other attempt) -->
+        <delete dir="${docroot.sites}" file="${docroot.sites}"/>
+        <symlink link="${docroot.sites}" target="../sites"/>
     </target>
 
     <!-- Use the local make files rather than checking out from the repository -->
@@ -218,13 +228,13 @@
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
-            <option name="no-recursion" />
+            <option name="no-recursion"/>
             <option name="cache-duration-releasexml">0</option>
             <param>"${drupal.makefile}"</param>
             <param>"${docroot}"</param>
         </drush>
 
-        <mkdir dir="${profile.root}" />
+        <mkdir dir="${profile.root}"/>
 
         <exec dir="${repo.root}"
               command="git archive --format=tar HEAD | tar -C ${profile.root} -x"
@@ -234,8 +244,8 @@
 
         <drush command="make" assume="yes" verbose="TRUE">
             <option name="concurrency">8</option>
-            <option name="no-recursion" />
-            <option name="no-core" />
+            <option name="no-recursion"/>
+            <option name="no-core"/>
             <option name="cache-duration-releasexml">0</option>
             <option name="contrib-destination">profiles/${drupal.profile}</option>
             <param>"${drupal.contrib_makefile}"</param>
@@ -243,10 +253,10 @@
         </drush>
 
         <!-- Remove robots.txt file -->
-        <phingcall target="rm-robotstxt" />
+        <phingcall target="rm-robotstxt"/>
 
         <!-- Place favicon.ico in the docroot -->
-        <phingcall target="mk-favicon" />
+        <phingcall target="mk-favicon"/>
 
     </target>
 
@@ -273,8 +283,8 @@
                 standard="${repo.root}/build/vendor/drupal/coder/coder_sniffer/Drupal/"
                 showSniffs="true"
                 showWarnings="true"
-                haltonerror="true"
-                haltonwarning="true">
+                haltonerror="false"
+                haltonwarning="false">
             <fileset refid="custom.files"/>
             <formatter type="full" usefile="false"/>
         </phpcodesniffer>
@@ -302,7 +312,7 @@
         <drush command="pm-download" assume="yes" verbose="TRUE">
             <option name="destination">"${user.home}/.drush"</option>
             <option name="default-major">"7"</option>
-            <option name="dev" />
+            <option name="dev"/>
             <param>"drupalorg_drush"</param>
         </drush>
 
@@ -317,7 +327,7 @@
         <drush command="site-install" assume="yes" verbose="TRUE">
             <option name="db-url">"mysql://${db.username}:${db.password}@${db.host}:${db.port}/${db.name}"</option>
             <option name="site-name">"${site.name}"</option>
-            <option name="debug" />
+            <option name="debug"/>
             <option name="site-mail">"${site.mail}"</option>
             <option name="account-name">"${account.name}"</option>
             <option name="account-mail">"${account.mail}"</option>
