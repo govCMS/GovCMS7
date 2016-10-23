@@ -25,4 +25,5 @@ default:
         root: ../../docroot
 
 imports:
+  - behat.govcms.yml
   - behat.local.yml
