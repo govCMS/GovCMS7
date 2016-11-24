@@ -37,6 +37,44 @@ define('GOVCMS_TWITTER_WIDGET_ID', '588502522433646593');
 define('GOVCMS_ADMIN_ROLE_ID', '3');
 
 /**
+ * Implements hook_requirements().
+ */
+function govcms_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break during installation.
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+    $profile = drupal_get_profile();
+    if ($profile != 'standard') {
+      $info = system_get_info('module', $profile);
+
+      // govCMS git version.
+      if (empty($info['version'])) {
+        $document_root = getcwd();
+        $file_path = realpath($document_root . '/BUILD_VERSION');
+        if (file_exists($file_path) && ($git_version = file_get_contents($file_path))) {
+          $info['version'] = $git_version;
+          $requirements['govcms_build_version'] = array(
+            'title' => $t('govCMS build version'),
+            'value' => $t('%profile_name (<a href="@url">%profile-%version</a>)', array(
+              '%profile_name' => $info['name'],
+              '@url' => 'https://github.com/govCMS/govCMS/commit/' . $info['version'],
+              '%profile' => $profile,
+              '%version' => $info['version'],
+            )),
+            'severity' => REQUIREMENT_INFO,
+            'weight' => -9,
+          );
+        }
+      }
+    }
+  }
+
+  return $requirements;
+}
+
+/**
  * Implements hook_install().
  *
  * Perform actions to set up the site for this profile.

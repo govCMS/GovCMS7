@@ -258,6 +258,8 @@
         <!-- Place favicon.ico in the docroot -->
         <phingcall target="mk-favicon"/>
 
+        <!-- Create build version file -->
+        <phingcall target="build-version"/>
     </target>
 
     <!-- @TODO Remove the exceptions when we incorporate the patches in -->
@@ -366,4 +368,9 @@
                returnProperty="behatPass"/>
     </target>
 
+    <!-- Create build version file -->
+    <target name="build-version">
+        <exec dir="${repo.root}" command="git rev-parse --short --verify HEAD" outputProperty="version.number"/>
+        <echo file="${docroot}/BUILD_VERSION" append="false">${version.number}</echo>
+    </target>
 </project>
