@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Install file for govcms_config_util
+ */
+
+/**
+ * Implements hook_install().
+ */
+function govcms_config_util_install() {
+  $role = user_role_load_by_name('Site editor');
+  $role_id = $role ? $role->rid : NULL;
+  if($role_id) {
+    user_role_grant_permissions(
+      $role_id,
+      array(
+        'access govcms_config_util page',
+      )
+    );
+  }
+}
+

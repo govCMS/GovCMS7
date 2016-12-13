@@ -1,0 +1,4 @@
+name = govCMS configuration utility
+description = Utility to help users who need to be able to update certain variables on the site without exposing them to more access than they need.
+core = 7.x
+package = govCMS core

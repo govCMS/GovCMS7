@@ -167,6 +167,7 @@ dependencies[] = govcms_superfish_configuration
 dependencies[] = govcms_sitemap
 dependencies[] = govcms_social_links
 dependencies[] = govcms_share_links
+dependencies[] = govcms_config_util
 
 ; Content types
 

@@ -282,6 +282,14 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'govcms_config_util' => array(
+      'access govcms_config_util page' => array(
+        'roles' => array(
+          0 => 'Site editor',
+          1 => 'administrator',
+        ),
+      ),
+    ),
     'workbench_moderation' => array(
       'administer workbench moderation' => array(
         'roles' => array(
