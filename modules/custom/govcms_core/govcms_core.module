@@ -222,10 +222,10 @@ function govcms_core_update_block($module, $delta, $theme = '', $region = BLOCK_
     $region = $status ? $region : '';
     db_update('block')
       ->fields(array(
-      'status' => $status,
-      'weight' => $weight,
-      'region' => $region,
-    ))
+        'status' => $status,
+        'weight' => $weight,
+        'region' => $region,
+      ))
       ->condition('module', $module)
       ->condition('delta', $delta)
       ->condition('theme', $theme)
@@ -248,6 +248,18 @@ function govcms_core_theme_info() {
   );
 }
 
+function _global_file_extension_restriction($element, &$form_state)  {
+
+  $entered_extensions = preg_split("/[\s,]+/", $element['#value']);
+  $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip'));
+  $diff = array_diff($entered_extensions, $allowed_extensions);
+
+  if (!empty($diff)) {
+    form_error($element, 'File extension(s) not allowed: <em>'.implode(', ',$diff). '</em>. Please refer to allowed file extensions under file settings');
+  }
+
+}
+
 /**
  * Implements hook_form_alter().
  */
@@ -262,6 +274,14 @@ function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
     $timezone_form['#options']['Australia/Canberra'] = $canberra_tz;
     asort($timezone_form['#options']);
     $form['timezone']['date_default_timezone'] = $timezone_form;
+  }
+
+  // Prohibit file types outside the default list are allowed in content types
+  if ($form_id = 'field_ui_field_edit_form') {
+    // $form["#instance"]["settings"]["file_extensions"]
+    $form["instance"]["settings"]["file_extensions"]["#description"] = $form["instance"]["settings"]["file_extensions"]["#description"]
+      .t(' Allowed extensions must be a subset of %s', array('%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip')));
+    $form["instance"]["settings"]["file_extensions"]["#element_validate"][] = _global_file_extension_restriction;
   }
 }
 
@@ -332,4 +352,3 @@ function govcms_core_file_validate($file) {
 
   return $errors;
 }
-
