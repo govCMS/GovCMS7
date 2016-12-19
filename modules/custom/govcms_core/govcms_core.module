@@ -317,3 +317,19 @@ function govcms_core_metatag_config_default_alter(&$configs) {
   $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.gov.au)');
   $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
 }
+
+/**
+ * Implements hook_file_validate().
+ *
+ * We want to make sure no files outside the allowed types set by
+ * file_entity_default_allowed_extensions can be uploaded.
+ */
+function govcms_core_file_validate($file) {
+  $errors = array();
+
+  $allowed_extensions = variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip');
+  $errors = file_validate_extensions($file, $allowed_extensions);
+
+  return $errors;
+}
+
