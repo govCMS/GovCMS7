@@ -248,10 +248,10 @@ function govcms_core_theme_info() {
   );
 }
 
-function _global_file_extension_restriction($element, &$form_state)  {
+function _global_file_extension_restriction(&$element, &$form_state)  {
   if (!empty($element['#value'])) {
     $entered_extensions = preg_split("/[\s,]+/", $element['#value']);
-    $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip'));
+    $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm'));
     $diff = array_diff($entered_extensions, $allowed_extensions);
     if ($element['#title'] == 'Allowed file extensions' && !empty($diff)) {
       form_error($element, 'File extension(s) not allowed: <em>' . implode(', ', $diff) . '</em>. Please refer to allowed file extensions under file settings');
@@ -277,10 +277,11 @@ function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
 
   // Prohibit file types outside the default list are allowed in content types
   if ($form_id = 'field_ui_field_edit_form') {
-    // $form["#instance"]["settings"]["file_extensions"]
-    $form["instance"]["settings"]["file_extensions"]["#description"] = $form["instance"]["settings"]["file_extensions"]["#description"]
-      .t(' Allowed extensions must be a subset of %s', array('%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip')));
-    $form["instance"]["settings"]["file_extensions"]["#element_validate"][] = _global_file_extension_restriction;
+    if ($form["instance"]["settings"]["file_extensions"]["#description"]) {
+      $form["instance"]["settings"]["file_extensions"]["#description"] = $form["instance"]["settings"]["file_extensions"]["#description"]
+        . t(' Allowed extensions must be a subset of %s', array('%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm')));
+    }
+    $form["instance"]["settings"]["file_extensions"]["#element_validate"][] = '_global_file_extension_restriction';
   }
 }
 
@@ -345,9 +346,7 @@ function govcms_core_metatag_config_default_alter(&$configs) {
  */
 function govcms_core_file_validate($file) {
   $errors = array();
-
-  $allowed_extensions = variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip');
+  $allowed_extensions = variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm');
   $errors = file_validate_extensions($file, $allowed_extensions);
-
   return $errors;
 }
