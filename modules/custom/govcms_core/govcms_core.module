@@ -249,15 +249,14 @@ function govcms_core_theme_info() {
 }
 
 function _global_file_extension_restriction($element, &$form_state)  {
-
-  $entered_extensions = preg_split("/[\s,]+/", $element['#value']);
-  $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip'));
-  $diff = array_diff($entered_extensions, $allowed_extensions);
-
-  if (!empty($diff)) {
-    form_error($element, 'File extension(s) not allowed: <em>'.implode(', ',$diff). '</em>. Please refer to allowed file extensions under file settings');
+  if (!empty($element['#value'])) {
+    $entered_extensions = preg_split("/[\s,]+/", $element['#value']);
+    $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm zip'));
+    $diff = array_diff($entered_extensions, $allowed_extensions);
+    if ($element['#title'] == 'Allowed file extensions' && !empty($diff)) {
+      form_error($element, 'File extension(s) not allowed: <em>' . implode(', ', $diff) . '</em>. Please refer to allowed file extensions under file settings');
+    }
   }
-
 }
 
 /**
