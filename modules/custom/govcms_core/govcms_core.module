@@ -277,7 +277,7 @@ function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
 
   // Prohibit file types outside the default list are allowed in content types
   if ($form_id = 'field_ui_field_edit_form') {
-    if ($form["instance"]["settings"]["file_extensions"]["#description"]) {
+    if (isset($form["instance"]["settings"]["file_extensions"]["#description"]) && !empty($form["instance"]["settings"]["file_extensions"]["#description"])) {
       $form["instance"]["settings"]["file_extensions"]["#description"] = $form["instance"]["settings"]["file_extensions"]["#description"]
         . t(' Allowed extensions must be a subset of %s', array('%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm')));
     }
