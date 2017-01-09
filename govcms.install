@@ -19,12 +19,12 @@
 /**
  * Define a default theme constant
  */
-define('GOVCMS_DEFAULT_THEME', 'govcms_barton');
+define('GOVCMS_DEFAULT_THEME', 'govcms_ui_kit');
 
 /**
  * Define the install theme.
  */
-define('GOVCMS_INSTALL_DEFAULT_THEME', 'govcms_zen');
+define('GOVCMS_INSTALL_DEFAULT_THEME', 'govcms_ui_kit');
 
 /**
  * Define the admin theme.
@@ -667,7 +667,7 @@ function _govcms_default_blocks() {
   govcms_core_insert_block('views', 'footer_teaser-block', $themes, 'footer', 1);
 
   // Set govCMS sidebar blocks.
-  govcms_core_insert_block('menu_block', 'govcms_menu_block-sidebar', $themes, 'sidebar_second', -50);
+  govcms_core_insert_block('menu_block', 'govcms_menu_block-sidebar', $themes, 'first_sidebar', -50);
   govcms_core_insert_block('menu', 'menu-quick-links', $themes, 'sidebar_second', -48);
   govcms_core_insert_block('govcms_social_links', 'services', $themes, 'sidebar_second', -47);
 
@@ -1673,4 +1673,56 @@ function govcms_update_7201() {
   if (!module_exists('token_tweaks')) {
     module_enable(array('token_tweaks'));
   }
+}
+
+/**
+ * Changing default number of tweets to 3 for 'govcms_ui_kit' theme.
+ */
+function govcms_update_7202() {
+  $twitter_blocks = db_query("SELECT * FROM {twitter_block}")->fetchAllAssoc('bid');
+  foreach ($twitter_blocks as $delta => $twitter_block) {
+    $data = unserialize($twitter_block->data);
+    $data['tweet_limit'] = '3';
+
+    // Save the block configuration.
+    db_update('twitter_block')
+      ->fields(array(
+        'data' => serialize($data),
+      ))
+      ->condition('bid', $delta)
+      ->execute();
+  }
+}
+
+/**
+ * Setting menu block title to 'In this section' for the 'govcms_ui_kit' theme.
+ */
+function govcms_update_7203() {
+  db_update('block')
+    ->fields(array('title' => t('In this section'), 'weight' => '-49'))
+    ->condition('delta', 'govcms_menu_block-sidebar', '=')
+    ->condition('theme', 'govcms_ui_kit', '=')
+    ->execute();
+}
+
+/**
+ * Setting Twitter block title to 'Latest tweets' for the 'govcms_ui_kit' theme.
+ */
+function govcms_update_7204() {
+  db_update('block')
+    ->fields(array('title' => t('In this section'), 'weight' => '-50'))
+    ->condition('module', 'twitter_block', '=')
+    ->condition('theme', 'govcms_ui_kit', '=')
+    ->execute();
+}
+
+/**
+ * Moving block Footer Teaser for the 'govcms_ui_kit' theme.
+ */
+function govcms_update_7205() {
+  db_update('block')
+    ->fields(array('region' => 'sidebar_second', 'weight' => '-50'))
+    ->condition('delta', 'footer_teaser-block', '=')
+    ->condition('theme', 'govcms_ui_kit', '=')
+    ->execute();
 }

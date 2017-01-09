@@ -10,7 +10,7 @@
 function govcms_news_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-news_article-body'
+  // Exported field_instance: 'node-news_article-body'.
   $field_instances['node-news_article-body'] = array(
     'bundle' => 'news_article',
     'default_value' => NULL,
@@ -94,7 +94,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-news_article-field_news_date'
+  // Exported field_instance: 'node-news_article-field_news_date'.
   $field_instances['node-news_article-field_news_date'] = array(
     'bundle' => 'news_article',
     'deleted' => 0,
@@ -115,6 +115,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -128,6 +129,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -147,6 +149,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -160,6 +163,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -193,7 +197,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-news_article-field_tags'
+  // Exported field_instance: 'node-news_article-field_tags'.
   $field_instances['node-news_article-field_tags'] = array(
     'bundle' => 'news_article',
     'default_value' => NULL,

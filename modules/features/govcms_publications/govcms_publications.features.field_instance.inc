@@ -10,7 +10,7 @@
 function govcms_publications_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-publication-body'
+  // Exported field_instance: 'node-publication-body'.
   $field_instances['node-publication-body'] = array(
     'bundle' => 'publication',
     'default_value' => NULL,
@@ -66,7 +66,7 @@ function govcms_publications_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-publication-field_date'
+  // Exported field_instance: 'node-publication-field_date'.
   $field_instances['node-publication-field_date'] = array(
     'bundle' => 'publication',
     'default_value' => NULL,
@@ -94,6 +94,7 @@ function govcms_publications_field_default_field_instances() {
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -133,7 +134,7 @@ function govcms_publications_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-publication-field_documents'
+  // Exported field_instance: 'node-publication-field_documents'.
   $field_instances['node-publication-field_documents'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
@@ -205,7 +206,7 @@ function govcms_publications_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-publication-field_image'
+  // Exported field_instance: 'node-publication-field_image'.
   $field_instances['node-publication-field_image'] = array(
     'bundle' => 'publication',
     'deleted' => 0,
@@ -232,7 +233,7 @@ function govcms_publications_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'govcms_ui_kit_thumbnail',
         ),
         'type' => 'image',
         'weight' => 1,
@@ -280,7 +281,7 @@ function govcms_publications_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-publication-field_subtitle'
+  // Exported field_instance: 'node-publication-field_subtitle'.
   $field_instances['node-publication-field_subtitle'] = array(
     'bundle' => 'publication',
     'default_value' => NULL,
@@ -334,7 +335,7 @@ function govcms_publications_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-publication-field_tags'
+  // Exported field_instance: 'node-publication-field_tags'.
   $field_instances['node-publication-field_tags'] = array(
     'bundle' => 'publication',
     'default_value' => NULL,

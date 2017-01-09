@@ -10,7 +10,7 @@
 function govcms_blog_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-blog_article-body'
+  // Exported field_instance: 'node-blog_article-body'.
   $field_instances['node-blog_article-body'] = array(
     'bundle' => 'blog_article',
     'default_value' => NULL,
@@ -98,7 +98,7 @@ The <em>body</em> field is used for the main article content.
     ),
   );
 
-  // Exported field_instance: 'node-blog_article-field_tags'
+  // Exported field_instance: 'node-blog_article-field_tags'.
   $field_instances['node-blog_article-field_tags'] = array(
     'bundle' => 'blog_article',
     'default_value' => NULL,
@@ -164,7 +164,7 @@ The <em>body</em> field is used for the main article content.
     ),
   );
 
-  // Exported field_instance: 'node-blog_article-field_thumbnail'
+  // Exported field_instance: 'node-blog_article-field_thumbnail'.
   $field_instances['node-blog_article-field_thumbnail'] = array(
     'bundle' => 'blog_article',
     'deleted' => 0,
@@ -185,7 +185,7 @@ The <em>body</em> field is used for the main article content.
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'thumbnail',
+          'image_style' => 'govcms_ui_kit_thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -225,7 +225,7 @@ The <em>body</em> field is used for the main article content.
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'govcms_ui_kit_thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,

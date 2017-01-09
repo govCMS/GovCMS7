@@ -10,7 +10,7 @@
 function govcms_slideshow_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-slide-body'
+  // Exported field_instance: 'node-slide-body'.
   $field_instances['node-slide-body'] = array(
     'bundle' => 'slide',
     'default_value' => NULL,
@@ -82,7 +82,7 @@ function govcms_slideshow_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slide-field_read_more'
+  // Exported field_instance: 'node-slide-field_read_more'.
   $field_instances['node-slide-field_read_more'] = array(
     'bundle' => 'slide',
     'default_value' => NULL,
@@ -134,6 +134,7 @@ function govcms_slideshow_field_default_field_instances() {
     'label' => 'Read more',
     'required' => 0,
     'settings' => array(
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
         'configurable_title' => 0,
@@ -152,6 +153,7 @@ function govcms_slideshow_field_default_field_instances() {
       ),
       'rel_remove' => 'default',
       'title' => 'optional',
+      'title_label_use_field_label' => FALSE,
       'title_maxlength' => 255,
       'title_value' => '',
       'url' => 0,
@@ -167,7 +169,7 @@ function govcms_slideshow_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-slide-field_slide_image'
+  // Exported field_instance: 'node-slide-field_slide_image'.
   $field_instances['node-slide-field_slide_image'] = array(
     'bundle' => 'slide',
     'deleted' => 0,
@@ -187,12 +189,12 @@ function govcms_slideshow_field_default_field_instances() {
       ),
       'default' => array(
         'label' => 'hidden',
-        'module' => 'image_link_formatter',
+        'module' => 'image',
         'settings' => array(
           'image_link' => 'field_read_more',
-          'image_style' => 'feature_article',
+          'image_style' => 'govcms_ui_kit_banner',
         ),
-        'type' => 'image_link_formatter',
+        'type' => 'image',
         'weight' => 0,
       ),
       'feature' => array(

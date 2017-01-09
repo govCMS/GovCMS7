@@ -10,7 +10,7 @@
 function govcms_beans_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'bean-basic_content-field_bean_body'
+  // Exported field_instance: 'bean-basic_content-field_bean_body'.
   $field_instances['bean-basic_content-field_bean_body'] = array(
     'bundle' => 'basic_content',
     'default_value' => NULL,
@@ -50,7 +50,7 @@ function govcms_beans_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-image_and_text-field_bean_image'
+  // Exported field_instance: 'bean-image_and_text-field_bean_image'.
   $field_instances['bean-image_and_text-field_bean_image'] = array(
     'bundle' => 'image_and_text',
     'deleted' => 0,
@@ -123,7 +123,7 @@ function govcms_beans_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-image_and_text-field_bean_text'
+  // Exported field_instance: 'bean-image_and_text-field_bean_text'.
   $field_instances['bean-image_and_text-field_bean_text'] = array(
     'bundle' => 'image_and_text',
     'default_value' => NULL,
@@ -172,7 +172,7 @@ function govcms_beans_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'bean-image_and_text-field_link_to'
+  // Exported field_instance: 'bean-image_and_text-field_link_to'.
   $field_instances['bean-image_and_text-field_link_to'] = array(
     'bundle' => 'image_and_text',
     'default_value' => NULL,
@@ -180,14 +180,14 @@ function govcms_beans_field_default_field_instances() {
     'description' => 'This field overrides the title so it links to internal or external sources.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
         'weight' => 2,
       ),
       'highlight' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_default',
@@ -199,8 +199,10 @@ function govcms_beans_field_default_field_instances() {
     'label' => 'Link to',
     'required' => 0,
     'settings' => array(
+      'absolute_url' => 1,
       'attributes' => array(
         'class' => '',
+        'configurable_class' => 0,
         'configurable_title' => 0,
         'rel' => '',
         'target' => 'default',
@@ -216,7 +218,8 @@ function govcms_beans_field_default_field_instances() {
         'profile' => '',
       ),
       'rel_remove' => 'default',
-      'title' => 'none',
+      'title' => 'optional',
+      'title_label_use_field_label' => 0,
       'title_maxlength' => 255,
       'title_value' => '',
       'url' => 0,
