@@ -133,10 +133,8 @@
           var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
-            tabMarkup +=
-              "<li>" +
-              "<a href='#' class='" + slideClassPrefix + n + "'>" + n + "</a>" +
-              "</li>";
+            var slideTitle = $(".views-row-" + n).find('.slide__title a').text();
+            tabMarkup += "<li>" + "<a href='javascript:;' class='" + slideClassPrefix + n + "' title='Slide " + n + ": " + slideTitle + "'><span style='font-size:0; float: none; position: absolute;'>Slide </span>" + n + "<span style='font-size:0; float: none; position: absolute;'>: " + slideTitle + "</span></a>" + "</li>";
           });
           $pager.append(tabMarkup);
 
