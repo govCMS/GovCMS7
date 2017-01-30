@@ -9,17 +9,49 @@
  * Implements hook_menu().
  */
 function govcms_account_security_menu() {
-  // We want to create a review settings link visiable under admin/config/people
+  // Provide a page to review account security related settings
   $items['admin/config/people/account_security'] = array(
     'title' => 'Review account security settings',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('govcms_account_security_admin_settings'),
+    'page callback' => 'govcms_account_security_admin_settings',
     'access callback' => 'user_access',
     'access arguments' => array('administer users'),
     'file' => 'govcms_account_security.admin.inc',
     'description' => 'Review govCMS account security settings.',
   );
   return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
+  switch ($form_id) {
+    case 'user_login':
+    case 'user_login_block':
+      $user_login_final_validate_index = array_search('user_login_final_validate', $form['#validate']);
+      if ($user_login_final_validate_index >= 0) {
+        $form['#validate'][$user_login_final_validate_index] = 'govcms_account_security_final_validate';
+      }
+      break;
+    case 'views_form_admin_views_user_system_1':
+      // VBO allows those who have "administor users" permission to assign
+      // administrator role to any user and we don't want this to happen.
+      $admin_rid = variable_get('user_admin_role');
+      $admin_role = user_role_load($admin_rid);
+      $admin_role = $admin_role->name;
+      if(isset($form['add_roles'])) {
+        if(($key = array_search($admin_role, $form['add_roles']['#options'])) !== false) {
+          unset($form['add_roles']['#options'][$key]);
+          $form['add_roles']['#size']--;
+        }
+      }
+      if(isset($form['remove_roles'])) {
+        if(($key = array_search($admin_role, $form['remove_roles']['#options'])) !== false) {
+          unset($form['remove_roles']['#options'][$key]);
+          $form['remove_roles']['#size']--;
+        }
+      }
+  }
 }
 
 /**
@@ -39,7 +71,7 @@ function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state
         if ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
           // Clear flood control events for the user
           flood_clear_event('failed_login_attempt_user', $uid);
-          watchdog('user', 'Flood events have been cleared for %user.', $uid);
+          watchdog('govcms_account_security', 'Flood events have been cleared for %user.', $uid);
           drupal_set_message(t('Your account has been unblocked.'));
         }
       }
@@ -48,30 +80,9 @@ function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state
 }
 
 /**
- * Implements hook_form_alter().
- */
-function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
-  switch ($form_id) {
-    case 'user_login':
-    case 'user_login_block':
-      $user_login_final_validate_index = array_search('user_login_final_validate', $form['#validate']);
-      if ($user_login_final_validate_index >= 0) {
-        $form['#validate'][$user_login_final_validate_index] = 'govcms_account_security_final_validate';
-      }
-      break;
-  }
-}
-
-/**
  * The final validation handler on the login form.
  *
- * Provide a more generic error message on failed logins excessive failed
- * login attempts. According to the govCMS security team: "In relation to
- * the generic message this is consistent with current security practices
- * for Government online services to avoid disclosure of the password
- * management policy which could aid an attacker in developing more
- * targeted attacks, e.g. denial of service, compromise of credentials,
- * etc."
+ * Provide a more generic error message when the failed login limit is reached.
  */
 function govcms_account_security_final_validate($form, &$form_state) {
   if (empty($form_state['uid'])) {
@@ -98,16 +109,22 @@ function govcms_account_security_final_validate($form, &$form_state) {
 
 /**
  * Implements hook_init().
+ *
+ * 1. Check if current user has permission to view user profile pages.
+ * If not, instead of returning 404 on non-existent and 403 on valid profile
+ * pages, return 403 regardless. This mitigate the issue described here:
+ * https://www.drupal.org/node/2133887. The patch provided by this thread does
+ * not work thanks to the r4032login module.
+ *
+ * 2. We do not want to return 404 when a valid user profile page is requested
+ * as as this will expose the user ID thanks to the search 404 module.
+ *
  */
 function govcms_account_security_init() {
-  if (!user_is_logged_in() && module_exists('pathauto')) {
+  if (!user_is_logged_in() && module_exists('pathauto') && !user_access('access user profiles')) {
     $alias = drupal_get_path_alias(current_path());
     $user_alias_pattern = variable_get('pathauto_user_pattern');
     if (isset($user_alias_pattern) && !empty($user_alias_pattern)) {
-      // We only need to protect the login names. As Pathauto does not
-      // automatically update existing user aliases when the pattern is
-      // changed, aliases generated using the old pattern will not be
-      // protected until a bulk update is performed.
       if (strpos($user_alias_pattern, '[user:name]') === FALSE) {
         $user_alias_pattern = 'users/*';
       } else {
@@ -115,13 +132,18 @@ function govcms_account_security_init() {
       }
     }
     if (drupal_match_path($alias, $user_alias_pattern)) {
-      // Throw an access denied or not found error to any user profile page.
-      $code_to_return = variable_get('govcms_account_security_user_profile_page_code_anonymous_visit', '403');
-      if ($code_to_return == '404') {
-        drupal_not_found();
-      } else {
-        drupal_access_denied();
-      }
+      drupal_access_denied();
     }
   }
+}
+
+/**
+ * Implements hook_user_cancel_methods_alter().
+ *
+ * Remove the VBO options to cancel (delete) an account.
+ * Related discussion: https://www.drupal.org/node/2505457
+ */
+function govcms_account_security_user_cancel_methods_alter(&$methods) {
+  unset($methods['user_cancel_reassign']);
+  unset($methods['user_cancel_delete']);
 }
