@@ -3,10 +3,15 @@
  * @file
  * The govCMS install profile file.
  *
- * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
- *
- * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ * aGov
+ * @copyright Copyright(c) 2014 PreviousNext
+ * @author Chris Skene chris at previousnext dot com dot au
+ *
+ * govCMS (Forked on 1 April 2015 - http://cgit.drupalcode.org/govcms/commit/?id=64b602dcc7ddde0992c5c7cf5f3c4a795e5be08a)
+ * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
+ * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @author Department of Finance
  */
 
@@ -39,7 +44,6 @@ function govcms_form_install_configure_form_alter(&$form, &$form_state) {
   );
 }
 
-
 /**
  * Implements hook_block_info_alter().
  */
@@ -58,4 +62,15 @@ function govcms_system_info_alter(&$info, $file, $type) {
   if (isset($info['project']) && $info['project'] == 'govcms' && arg(0) == 'admin' && arg(1) == 'modules') {
     $info['dependencies'] = array();
   }
+}
+
+/**
+ * Implements hook_paranoia_hide_modules().
+ *
+ * @TODO remove this after pathauto update.
+ */
+function govcms_paranoia_hide_modules() {
+  return array(
+    'pathauto_persist' => 'Other',
+  );
 }
