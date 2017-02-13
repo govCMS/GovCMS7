@@ -166,6 +166,7 @@ projects[uuid_features][download][revision] = "8f7f1c5e193a9c11a12d503af18119d81
 projects[video_filter][version] = "3.3"
 projects[viewfield][version] = "2.0"
 projects[views][version] = "3.14"
+projects[views_datasource][version] = "1.0-alpha2"
 projects[views_bulk_operations][version] = "3.3"
 projects[view_unpublished] = "1.2"
 projects[webform][version] = "4.9"
