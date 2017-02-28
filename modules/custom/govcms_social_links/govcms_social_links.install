@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Install file for govcms_social_links.
+ */
+
+/**
+ * Set Instagram and LinkedIn icons to not show by default.
+ */
+function govcms_social_links_update_7001(&$sandbox) {
+  $govcms_social_links_instagram = variable_get('govcms_social_links_instagram', NULL);
+  if (empty($govcms_social_links_instagram)) {
+    variable_set('govcms_social_links_instagram', '');
+  }
+  $govcms_social_links_linkedin = variable_get('govcms_social_links_linkedin', NULL);
+  if (empty($govcms_social_links_linkedin)) {
+    variable_set('govcms_social_links_linkedin', '');
+  }
+}
