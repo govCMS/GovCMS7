@@ -31,6 +31,18 @@ function dfata_theme_js_alter(&$javascript) {
 }
 
 /**
+ * Implements hook_preprocess_page().
+ */
+function dfata_theme_preprocess_page(&$variables) {
+  // Sets the Government crest path.
+  $variables['gov_logo'] = '';
+  $gov_logo_path = drupal_get_path('theme', 'dfata_theme') . '/gov-logo.png';
+  if (file_exists($gov_logo_path)) {
+    $variables['gov_logo'] = '/' . $gov_logo_path;
+  }
+}
+
+/**
  * Implements hook_preprocess_html().
  */
 function dfata_theme_preprocess_html(&$variables) {

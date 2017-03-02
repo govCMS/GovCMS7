@@ -32,6 +32,24 @@
     <?php endif; ?>
     <div class="logo-and-search">
       <div class="logo-wrapper">
+        <?php if ($gov_logo): ?>
+          <?php
+            $logo_img = theme_image(array(
+              'path' => $gov_logo,
+              'alt' => 'Home',
+              'attributes' => array('class' => array('header__logo_gov-image')),
+            ));
+            print l($logo_img, $front_page, array(
+              'html' => TRUE,
+              'attributes' => array(
+                'id' => 'logo-gov',
+                'title' => t('Back to Homepage'),
+                'rel' => 'home',
+                'class' => array('header__logo_gov'),
+              ),
+            ));
+          ?>
+        <?php endif; ?>
         <?php if ($logo): ?>
           <?php
             $logo_alt = theme_get_setting('dfata_theme_header_logo_alt');
