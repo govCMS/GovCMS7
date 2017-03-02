@@ -1,0 +1,154 @@
+// =========================================================
+// GENERIC SIDEBAR BLOCK
+// =========================================================
+.region-sidebar-first {
+  .block {
+    margin-bottom: $default_padding;
+    &>h2 {
+      @include block-heading;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+// =========================================================
+// SIDEBAR MENU
+// =========================================================
+#block-menu-block-govcms-menu-block-sidebar {
+  margin-bottom: $default_padding;
+  h2 {
+    // Button is only on mobile.
+    button {
+      @include transition-fade;
+      padding: rem(13px) rem(50px) rem(13px) rem(15px);
+      position: relative;
+      width: 100%;
+      margin: 0;
+      box-sizing: border-box;
+      font-weight: 400;
+      border: 1px solid $neutral_3;
+      text-align: left;
+      background-color: #F4F4F4;
+      color: $neutral_1;
+      &:hover, &:focus {
+        color: $neutral_1;
+        background-color: $neutral_3;
+      }
+      &:after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: rem(50px);
+        background-image: url(../images/svg/sidebar-mobile-arrow-down.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: rotate(0deg);
+      }
+      &.showing {
+        &:after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  .content {
+    display: none;
+    @include breakpoint(large_tablet) {
+      display: block;
+    }
+    &.showing {
+      display: block;
+      background-color: #FAFAFA;
+      padding: rem(26px) rem(15px);
+    }
+  }
+  .menu-block-wrapper {
+    &>ul {
+      border-bottom: 1px solid #bbbbbb;
+      &>li {
+        &>a {
+          font-weight: 600;
+          padding-left: $small-spacing;
+        }
+        &>ul {
+          &>li {
+            &>a {
+              padding-left: $small-spacing * 2;
+            }
+            &>ul {
+              &>li {
+                &>a {
+                  padding-left: $small-spacing * 3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ul.menu {
+    margin: 0;
+    padding: 0;
+    &.menu-closed {
+      display: none;
+    }
+    li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-bottom: 1px solid #bbbbbb;
+      &:first-child {
+        border-top: 1px solid #bbbbbb;
+      }
+      &:last-child {
+        border-bottom: 0;
+      }
+      a {
+        color: $neutral_1;
+        width: 100%;
+        display: inline-block;
+        box-sizing: border-box;
+        padding-top: rem(13px);
+        padding-bottom: rem(13px);
+        padding-right: rem(35px);
+        border-left: 4px solid transparent;
+        border-bottom: 0;
+        &:hover, &:focus {
+          border-left-color: $primary_1;
+          background-color: #def4f9;
+        }
+      }
+      button.sidebar-toggle-menu {
+        @include transition-fade;
+        @include hide-text;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        width: rem(30px);
+        height: rem(56px);
+        box-sizing: border-box;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: url(../images/svg/sidebar-arrow-down.svg);
+        transform: rotate(180deg);
+        position: absolute;
+        right: 0;
+        top: 0;
+        &:hover, &:focus {
+          background-image: url(../images/svg/sidebar-arrow-down-hover.svg);
+          background-color: #def4f9;
+        }
+        &.menu-closed {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+// =========================================================
+// GENERAL FOOTER MENUS
+// =========================================================
+.region-footer {
+  background-color: $primary_1;
+  .block-menu, .block-menu-block {
+    &>h2 {
+      @include visually-hidden;
+    }
+    .content {
+      @include center-column($desktop_column);
+      padding-top: rem(17px);
+      padding-bottom: rem(17px);
+      color: white;
+      @include breakpoint(tablet) {
+        padding-top: rem(64px);
+        padding-bottom: rem(64px);
+      }
+      // First level of nav should be horizontal.
+      &>ul.menu, &>.menu-block-wrapper>ul.menu {
+        @include breakpoint(tablet) {
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+          margin-bottom: 0;
+        }
+        &>li {
+          @include breakpoint(tablet) {
+            display: table-cell;
+            margin-bottom: 0;
+            margin-bottom: $default_padding;
+          }
+        }
+      }
+      ul.menu {
+        padding-left: 0;
+        margin-bottom: 0;
+        &>li {
+          @include link-colours(white, $neutral_4, $neutral_1);
+          margin-left: 0;
+          margin-right: 0;
+          margin-bottom: $default_padding;
+          padding: 0;
+          list-style: none;
+          margin-bottom: rem(15px);
+          &>a {
+            font-weight: 600;
+            @include breakpoint(tablet) {
+              font-weight: 700;
+            }
+          }
+          &>ul {
+            display: none;
+            @include breakpoint(tablet) {
+              display: block;
+              padding-left: 0;
+              margin-top: rem(35px);
+            }
+            li {
+              a {
+                font-weight: 400;
+              }
+            }
+            ul {
+              padding-left: $default_padding;
+              margin-top: $default_padding;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,214 @@
+.header__inner {
+  @include center-column($desktop_column);
+  padding-top: rem(16px);
+  padding-bottom: $default_padding;
+  .header__secondary-menu {
+    display: none;
+    @include breakpoint(tablet) {
+      @include link-colours($primary_1, $secondary_3, $neutral_1);
+      display: block;
+      text-align: right;
+    }
+    ul.links {
+      li {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: $default_padding;
+        margin-right: 0;
+      }
+    }
+  }
+  .logo-and-search {
+    @include breakpoint(tablet) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      a {
+        display: inline-block;
+        vertical-align: middle;
+        img {
+          float: left;
+          max-height: rem(50px);
+          @include breakpoint(tablet) {
+            max-height: 100%;
+          }
+        }
+      }
+      .header-title {
+        padding-left: rem(5px);
+        margin-right: auto;
+        font-size: rem(18px);
+        line-height: 1em;
+        color: $primary_1;
+        font-weight: 400;
+        @include breakpoint(tablet) {
+          margin-left: $default_padding;
+          padding-left: 0;
+          display: inline-block;
+          vertical-align: middle;
+          font-size: rem(30px);
+        }
+      }
+    }
+  }
+  .header__logo {
+    margin-right: 0;
+    &.no-title {
+      margin-right: auto;
+    }
+  }
+  .block-govcms-text-resize {
+    display: none;
+    @include breakpoint(tablet) {
+      display: block;
+      margin-right: $default_padding;
+    }
+    ul.text-resize {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      margin-left: rem(5px);
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        list-style: none;
+        margin-bottom: 0;
+        height: rem(30px);
+        a {
+          @include hide-text;
+          display: inline-block;
+          background-repeat: no-repeat;
+          background-position: center;
+          width: rem(30px);
+          height: rem(30px);
+        }
+        .font-small {
+          background-image: url(../images/svg/resize_text_small.svg);
+          &:hover, &:focus {
+            background-image: url(../images/svg/resize_text_small_hover.svg);
+          }
+        }
+        .font-large {
+          background-image: url(../images/svg/resize_text_large.svg);
+          &:hover, &:focus {
+            background-image: url(../images/svg/resize_text_large_hover.svg);
+          }
+        }
+        .reset {
+          background-image: url(../images/svg/resize_text_reset.svg);
+          &:hover, &:focus {
+            background-image: url(../images/svg/resize_text_reset_hover.svg);
+          }
+        }
+      }
+    }
+  }
+  .region-header {
+    display: flex;
+    align-items: center;
+    .block-search-api-page {
+      width: 100%;
+      @include breakpoint(tablet) {
+        width: auto;
+      }
+    }
+    .search-form-widget {
+      margin-right: 0;
+      height: rem(52px);
+      @include breakpoint(tablet) {
+        width: rem(250px);
+      }
+      @include breakpoint(desktop) {
+        width: rem(370px);
+      }
+      .js & {
+        display: none;
+        @include breakpoint(tablet) {
+          display: block;
+        }
+      }
+      &.search-toggle {
+        display: none;
+        @include breakpoint(tablet) {
+          display: block;
+        }
+        &.search-open {
+          display: block;
+          margin-top: $default_padding;
+        }
+      }
+      &>div {
+        display: flex;
+        justify-content: flex-start;
+        .form-item {
+          margin: 0;
+          width: 100%;
+          box-sizing: border-box;
+          flex: 1;
+          input {
+            @include search-text-field;
+          }
+        }
+        input[type="submit"] {
+          @include search-submit-button;
+        }
+      }
+    }
+  }
+}
+
+// =========================================================
+// MOBILE SEARCH / MENU BUTTONS
+// =========================================================
+.mobile-expand-search {
+  @include hide-text;
+  width: rem(35px);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: inherit;
+  background-image: url(../images/svg/mobile_search_open.svg);
+  margin-right: $mobile_expand_search_width;
+  &:hover, &:focus {
+    background-image: url(../images/svg/mobile_search_open_hover.svg);
+  }
+  &.search-open {
+    background-image: url(../images/svg/mobile_search_close.svg);
+    &:hover, &:focus {
+      background-image: url(../images/svg/mobile_search_close_hover.svg);
+    }
+  }
+}
+
+.mobile-expand-menu {
+  @include hide-text;
+  width: $mobile_expand_search_width;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: inherit;
+  background-image: url(../images/svg/mobile_menu_open.svg);
+  position: absolute;
+  z-index: 1;
+  right: $mobile_column_padding;
+  top: rem(16px);
+  &:hover, &:focus {
+    background-image: url(../images/svg/mobile_menu_open_hover.svg);
+  }
+  &.menu-open {
+    background-image: url(../images/svg/mobile_search_close.svg);
+    &:hover, &:focus {
+      background-image: url(../images/svg/mobile_search_close_hover.svg);
+    }
+  }
+}

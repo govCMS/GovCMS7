@@ -1,0 +1,28 @@
+@import '../../vendor/gov-au-ui-kit/assets/sass/vendor/bourbon/bourbon';
+@import '../../vendor/gov-au-ui-kit/assets/sass/vendor/neat/neat';
+@import 'mixins';
+.timeline-Viewport {
+  width: 100% !important;
+  .timeline-TweetList {
+    padding: 0;
+    @include outer-container(100%);
+    display: flex;
+    flex-wrap: wrap;
+    .timeline-TweetList-tweet {
+      width: 100%;
+      @include breakpoint(tablet) {
+        @include span-columns(4 of 12);
+        display: inline-block;
+      }
+      &:nth-child(3n) {
+        @include breakpoint(tablet) {
+          @include omega();
+        }
+      }
+      .timeline-Tweet-text {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
+  }
+}

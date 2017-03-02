@@ -1,0 +1,35 @@
+.drupal-navbar {
+  ul {
+    @include media($tablet) {
+      font-size: rem(16);
+    }
+  }
+}
+
+ul.contextual-links {
+  @include media($tablet) {
+    font-size: rem(16);
+  }
+}
+
+ul.tabs.primary {
+  @include center-column($desktop_column);
+}
+
+.content .profile {
+  @include center-column($desktop_column);
+}
+
+#user-login {
+  @include center-column($desktop_column);
+  &>div {
+    max-width: rem(550px);
+    box-sizing: border-box;
+  }
+}
+
+.block-workbench {
+  @include center-column($desktop_column);
+  margin-top: $default_padding;
+  margin-bottom: $default_padding;
+}

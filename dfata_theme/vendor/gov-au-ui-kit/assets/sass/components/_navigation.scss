@@ -1,0 +1,809 @@
+/*
+Navigation
+
+Ensure users understand where they are in the service, where they have been and where they can go.
+
+***
+
+This guidance is in part adapted from <a href="https://standards.usa.gov/getting-started/" rel="external">18F Draft US Web Design Standards</a> under <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="external">CC0 1.0 Universal</a>.
+
+Style guide: Navigation
+*/
+
+/*
+Global navigation
+
+The global navigation panel is collapsed (hidden) by default.
+
+Older browsers (IE8 and lower) and those without JavaScript will get an expanded menu without a hamburger button.
+
+Markup: templates/global-navigation.hbs
+
+<details open data-label="global-nav-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.1 Global navigation
+*/
+
+/*
+Local navigation
+
+Use local navigation to help the user go straight to the specific content that meets their needs.
+
+The framework provides a vertical navigation menu. The home page title is always at top, followed by up to 3 levels of navigation.
+
+Small screens (up to `$tablet` breakpoint) will see the menu closed (unexpanded) by default.
+
+Older browsers (IE8 and lower) and those without JavaScript will see an expanded menu. It will not be able to be closed.
+
+Use active state to show where the user is. Use `class="is-active"` for each clicked menu item. Use  `class="is-active is-current"` for the current location.
+
+Markup: templates/local-navigation.hbs
+
+<details open data-label="local-nav-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.2 Local navigation
+*/
+
+/*
+Breadcrumbs
+
+Breadcrumbs help the user understand where they are in the service and how they got there.
+
+They appear directly under a page header or hero, from `$tablet` breakpoint upwards.
+
+Markup: templates/breadcrumbs.hbs
+
+<details open data-label="breadcrumb-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.3 Breadcrumbs
+*/
+
+/*
+Contents links
+
+Contents links (index links) help users understand the page structure.
+
+A heading is optional &mdash; use the correct header level for the page structure.
+
+Users with modern browsers will see a smooth scroll down the page.
+
+Markup: templates/index-links.hbs
+
+<details open data-label="index-links-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.4 Contents links
+*/
+
+/*
+Inline links block
+
+You can present a list of links as a horizontal block using an unsorted list with the `.inline-links` class.
+
+Markup: templates/inline-links.hbs
+
+<details open data-label="inline-links-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.5 Inline links
+*/
+
+/*
+Footer navigation
+
+Footers help users who reach the bottom of a page without finding what they want.
+
+This framework uses CSS Flexboxes to manage columns. It provides:
+
+- lists of links arranged horizontally
+- 2 columns for `$mobile` and `$tablet` breakpoint
+- 4 columns for `$desktop` breakpoint.
+
+Markup: templates/footer-navigation.hbs
+
+<details open data-label="footer-nav-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.6 Footer navigation
+*/
+
+.govau--header {
+  .nav-toggle {
+    position: relative;
+    float: right;
+    height: auto;
+    width: auto;
+    margin: $tiny-spacing 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid;
+
+    &::before {
+      @extend %icon-bars;
+      content: '';
+      position: absolute;
+      top: .25em;
+      bottom: .25em;
+      left: ($base-spacing * -1);
+      width: $medium-spacing;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+    &.active {
+      &::before {
+        @extend %icon-close;
+        transform: none;
+      }
+    }
+
+    &,
+    &:hover {
+      background-color: transparent;
+      color: $body-inverted-text-colour;
+    }
+  }
+}
+
+.global-nav {
+  clear: both;
+  overflow: hidden;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: $base-spacing 0;
+
+    @include media($tablet) {
+      @include outer-container;
+      margin-top: $base-spacing;
+    }
+  }
+
+  li {
+    margin: 0;
+    border-bottom: 1px solid $border-soft-colour;
+
+    &:first-child {
+      border-top: 1px solid $border-soft-colour;
+    }
+
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include omega(2n);
+
+      &:nth-child(2) {
+        border-top: 1px solid $border-soft-colour;
+      }
+    }
+
+    @include media($desktop) {
+      @include span-columns(8 of 16);
+    }
+
+    a {
+      display: block;
+      border: none;
+      padding: $small-spacing 0 1em;
+      color: $body-inverted-text-colour;
+
+      &:focus,
+      &:hover {
+        background-color: transparent;
+        color: $body-inverted-text-colour;
+      }
+    }
+  }
+
+  .feedback {
+    display: block;
+
+    @include media($tablet) {
+      display: none;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.sidebar {
+  padding: 0 0 $base-spacing;
+}
+
+.nav-toggle {
+  @extend %base-button;
+
+  position: relative;
+  width: 100%;
+  margin: $base-spacing 0 0;
+  border: 0;
+  background-color: $background-secondary-colour;
+  text-align: left;
+  font-weight: $base-font-weight;
+  color: $button-inverted-text-colour;
+
+  &:focus,
+  &:hover {
+    background-color: $light-grey;
+  }
+
+  &::before {
+    @extend %icon-chevron-down--navy;
+
+    content: '';
+    position: absolute;
+    top: .5em;
+    bottom: .5em;
+    right: $small-spacing;
+    width: $medium-spacing;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center center;
+    transform: rotate(0deg);
+    transition: transform $transition-timing $transition-easing;
+  }
+
+  &.active {
+    margin-bottom: 0;
+
+    &::before {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include media($tablet) {
+    display: none;
+  }
+}
+
+.local-nav {
+  padding-top: 0;
+  @include media($tablet) {
+    padding: $base-spacing 0;
+  }
+}
+
+.primary-nav,
+.local-nav {
+  overflow: hidden;
+
+  ul {
+    @include link-colours($link-colour, $focus-colour, $link-colour);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    ul {
+      font-size: rem(14); // level 2+ should be 14px
+      margin: 0;
+      text-transform: none;
+
+      li {
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      ul {
+        a {
+          padding-left: $base-spacing;
+          border-bottom: 0;
+        }
+
+        ul {
+          a {
+            @extend %icon-arrow-right;
+            padding-left: $base-spacing + $small-spacing;
+            background-repeat: no-repeat;
+            background-position: $base-spacing center;
+            background-size: $tiny-spacing auto;
+          }
+        }
+      }
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+      border-bottom: 1px solid $border-colour;
+
+      &:first-child {
+        border-top: 1px solid $border-colour;
+      }
+    }
+
+    a {
+      display: block;
+      border: none;
+      border-left: 4px solid transparent;
+      border-bottom: none;
+      padding: $small-spacing;
+      text-decoration: none;
+      transition: border-color $transition-timing-fast $transition-easing;
+
+      &:hover {
+        border-color: $border-contrast-colour;
+      }
+
+      &.is-active {
+        font-weight: $bold-font-weight;
+      }
+
+      &.is-current {
+        background-color: $focus-colour;
+      }
+
+    }
+
+  }
+
+}
+
+// This class is legacy as of v1.2
+// Marked for removal at 2.0
+.primary-nav {
+  padding: $base-spacing 0;
+
+  .nav-heading {
+    color: $darker-aqua;
+    background: $background-secondary-colour;
+    margin: $base-spacing 0;
+
+    .chevron {
+      float: right;
+    }
+  }
+}
+
+// This class is legacy as of v1.2
+// Marked for removal at 2.0
+.js {
+  .primary-nav {
+    ul {
+      margin: 0;
+      display: none;
+      @include media($tablet) {
+        margin: inherit;
+        display: block;
+      }
+    }
+  }
+
+  .nav-heading {
+    display: block;
+    background-color: $dark-aqua;
+    color: $white;
+    padding: $medium-spacing / 2 $small-spacing;
+
+    &:hover {
+      border-color: $dark-aqua;
+      background-color: $dark-aqua;
+    }
+
+    @include media($tablet) {
+      display: none;
+    }
+  }
+}
+
+[class^='breadcrumbs'] {
+  @include link-colours($link-colour, $link-colour--hover);
+  display: none;
+  width: 100%;
+  margin: 0;
+  background-color: $breadcrumbs-bg-colour;
+  color: $body-text-colour;
+
+  @include media($tablet) {
+    display: inline-block;
+  }
+
+  ul {
+    margin: 0;
+    padding: $small-spacing 0 .8 * $medium-spacing;
+    line-height: $medium-spacing;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      font-size: rem(14);
+
+      &:not(:last-child) {
+        @extend %icon-arrow-right;
+        margin-right: $small-spacing;
+        padding-right: $medium-spacing;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: $tiny-spacing auto;
+      }
+    }
+  }
+
+  &[class$='--inverted'] {
+    @include link-colours($link-inverted-colour, $link-inverted-colour--hover, $link-colour);
+    background-color: transparent;
+    color: $body-inverted-text-colour;
+
+    ul {
+      li:not(:last-child) {
+        @extend %icon-arrow-right--white;
+        color: $body-inverted-text-colour;
+      }
+    }
+  }
+}
+
+/*
+Skip links
+
+Provide skip links to navigation and content.
+
+These are hidden visually by default but keyboard accessible.
+
+Include skip links between the opening of the `<body>` and the page `<header>`.
+
+<div class="callout">
+  <p>To test,
+    <a href="javascript:;">click to move focus to this</a> then press <kbd>Tab</kbd> to show:
+  </p>
+  <ul>
+    <li>Skip to main content</li>
+    <li>Skip to section navigation</li>
+  </ul>
+  <p>(The example space will be visually empty until the skip links receive focus.)</p>
+</div>
+
+Markup: templates/skip-link.hbs
+
+<details open data-label="skip-links-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.7 Skip links
+*/
+
+.skip-to {
+  @include link-colours($link-colour, $link-colour--hover);
+  position: relative;
+  z-index: 99;
+
+  a {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    border-radius: $tiny-border-radius;
+
+    &:active,
+    &:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: absolute;
+      width: auto;
+      top: 10px;
+      left: 10px;
+      padding: $tiny-spacing $small-spacing;
+    }
+  }
+}
+
+.index-links {
+  margin: ($base-spacing * 2) 0 $base-spacing 0;
+  border-left: $tiny-spacing solid $non-white;
+  padding: 0 0 $medium-spacing ($base-spacing - $tiny-spacing);
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: rem(17);
+    margin-top: $base-spacing;
+    color: $grey;
+    font-weight: $base-font-weight;
+  }
+
+  ul,
+  ol {
+    list-style-type: none;
+    margin: $base-spacing 0 0;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: $medium-spacing;
+    font-weight: $bold-font-weight;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+[class^='inline-links'] {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: $small-spacing 0;
+
+  li {
+    display: inline-block;
+    margin: 0 $tiny-spacing;
+  }
+
+  &[class$='--inverted'] {
+    a {
+      color: $body-inverted-text-colour;
+    }
+  }
+}
+
+/*
+Groups of links
+
+Use groups of links to help users find content elsewhere that will meet their needs.
+
+Groups of links span from 2 columns (`$mobile`) up to 4 columns (`$tablet` and `$desktop`).
+
+You can use groups of links:
+
+- in the header (eg listing popular links across the site)
+- anywhere within an `article` (eg as a list of related topics).
+
+Markup: templates/groups-links.hbs
+
+<details open data-label="group-links-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Navigation.8 Group of links
+*/
+
+.links-group {
+  @include outer-container;
+
+  @include ie-lte(8) {
+    @include ie-clearfix;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      @include span-columns(4);
+      float: left;
+      margin-top: 0.5em;
+
+      @include media ($mobile-only) {
+        @include span-columns(2 of 4);
+        @include omega(2n);
+        }
+
+      @include media ($tablet-only) {
+        @include span-columns(3 of 12);
+        @include omega(4n);
+        }
+
+      @include media ($desktop) {
+        @include span-columns(4 of 16);
+        @include omega(4n);
+
+        @include ie-lte(8) {
+          width: 21%;
+        }
+      }
+    }
+  }
+}
+
+/*
+Tab navigation (experimental)
+
+Use tab navigation to style a links list as horizontal tabs. Tabs wrap on top of each other for smaller breakpoints.
+
+Use tab navigation in the main content area only.
+
+Client-side context is not affected by the tabs.
+
+Set current location using `class="is-current"`.
+
+Markup: templates/tab-style-nav.hbs
+
+Style guide: Navigation.07 Tab navigation
+*/
+
+.inline-tab-nav {
+  border-bottom: solid 1px $grey;
+  margin: ($base-spacing * 2) 0;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @include media($tablet) {
+      display: table-cell;
+    }
+
+    font-size: 1em;
+    font-weight: 400;
+    margin: 0;
+    padding: $small-spacing 1.5em;
+    padding-left: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    border-bottom: solid 4px transparent;
+  }
+
+  ul {
+    @include clearfix;
+    @include media($tablet) {
+      display: table-cell;
+      border-top: none;
+    }
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    border-top: solid 1px $grey;
+  }
+
+  li {
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    background: transparent;
+    display: block;
+    float: left;
+    vertical-align: bottom;
+    padding: $small-spacing 1.5em;
+    border-bottom: solid 4px transparent;
+
+    &:hover,
+    &:focus {
+      color: $non-black;
+      border-bottom-color: $aqua;
+    }
+
+    &.is-current,
+    &.is-active {
+      color: $dark-aqua; //Accessibility: can't be $aqua on $lighter-aqua
+      background-color: $lighter-aqua;
+      border-bottom-color: $aqua;
+    }
+  }
+
+}
+
+/*
+Accessibility
+
+- All navigation must be keyboard accessible and include ARIA tags.
+- Use the HTML `<nav>` element for controls and the given state classes to show which page the user is on.
+- Use short navigation links. They don't have to be the full page title.
+- Test with users to ensure the navigation hierarchy is not too long or too deep.
+- Use the [correct colour contrast](section-colours.html#guide-colours-3-colour-contrast) for breadcrumbs and inline links.
+
+Style guide: Navigation.10 Accessibility
+*/

@@ -1,0 +1,844 @@
+/*
+Typography
+
+This framework uses basic styling and good typographic defaults for clear and consistent content.
+
+This guidance may change to apply to only content inside an `article`.
+
+Style guide: Typography
+*/
+
+/*
+Typeface
+
+We are currently testing the open source <a href="https://www.google.com/fonts/specimen/Open+Sans" rel="external">Open Sans family</a> in 3 styles.
+
+Open Sans is a sans-serif font selected for accessibility.
+
+<div class="guide-example--type"><h3>Open Sans regular 400</h3>
+  <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+  abcdefghijklmnopqrstuvwxyz<br />
+  1234567890(!@#s%g.,?:;)</p>
+</div>
+<div class="guide-example--type"><h3>Open Sans regular 400 italic</h3>
+  <p><em>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+  abcdefghijklmnopqrstuvwxyz<br />
+  1234567890(!@#s%g.,?:;)</em></p>
+</div>
+<div class="guide-example--type"><h3>Open Sans bold 700</h3>
+  <p><strong class="very-bold">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+  abcdefghijklmnopqrstuvwxyz<br />
+  1234567890(!@#s%g.,?:;)</strong></p>
+</div>
+
+We are likely to change this to a different primary typeface.
+
+Style guide: Typography.1 Typeface
+*/
+
+/*
+Font stacks
+
+```
+$base-serif: 'Book Antiqua', Georgia, 'Bitstream Vera Serif', serif;
+$base-sans-serif: 'Open Sans', Verdana, 'Bitstream Vera Sans', sans-serif;
+$base-monospace: 'Lucida Sans Typewriter', 'Lucida Console', Monaco, 'Bitstream Vera Sans Mono', monospace;
+```
+
+We are currently testing the use of webfonts.
+
+The font stacks should still achieve a high degree of coverage across a range of browsers and operating systems using the fall-backs (roughly 95% coverage).
+
+You need to load webfonts through the <a href="https://github.com/typekit/webfontloader" rel="external">Google Web Font Loader</a> via `<script>` to add Open Sans via the HTML `head`. This supports modern browsers and older versions of Internet Explorer.
+
+Style guide: Typography.1 Typeface.1 Font stacks
+*/
+
+/*
+Accessibility
+
+- Use just 1 font (Open Sans).
+- Make line length less than 75 characters. Use grid boxes to limit length.
+- Set `line-height` (leading) to at least 1.5 ([UI KIT uses 1.6](#guide-typography-3-spacing)).
+- <a href="http://content-style-guide.apps.staging.digital.gov.au/writing-for-the-web/3-structure-your-page-for-readability.html" rel="external">Write short sentences</a>. Aim for less than 25 words.
+- Use sentence case for most content. For example &lsquo;Sign up&rsquo; or &lsquo;Log out&rsquo; buttons.
+- Use <a href="http://content-style-guide.apps.staging.digital.gov.au/az-indexes/t.html#titles" rel="external">title case for titles</a> like Department of Communications and the Arts.
+- Don't write in all *italics* or CAPITALS.
+- Avoid using **bold**. Bolding a word can help scannability. **But blocks of bold text are hard to read**.
+
+Style guide: Typography.1 Typeface.2 Accessibility
+*/
+
+/*
+Spacing
+
+The framework sets spacing variables in ems relative to the base font's leading. This ensures horizontal and vertical rhythm through pages.
+
+<p class="callout">Spacing will change in relation to the font size of the elements that use them. So don’t apply a <code>font-size</code> to a container element (eg a <code>footer</code>).</p>
+
+The base font's leading (`line-height`) is set using the variable `$base-leading` (`$base-leading: 1.6`).
+
+`$base-leading` is used to calculate 5 spacing values in ems:
+
+- `$base-spacing: $base-leading * 1em`
+- `$large-spacing: $base-spacing * 2`
+- `$medium-spacing: $base-spacing * 0.75`
+- `$small-spacing: $base-spacing / 2`
+- `$tiny-spacing: $base-spacing / 4`.
+
+We may change:
+
+- `$base-spacing` to a figure that is easier to multiply and divide
+- to using rems instead of ems, for consistency in calculations (in preference to relational proportionality in sizing).
+
+Style guide: Typography.3 Spacing
+*/
+
+html {
+  color: $body-text-colour;
+  line-height: $base-leading;
+  font-family: $base-font-family;
+  font-weight: $base-font-weight;
+}
+
+/*
+Headings & body copy
+
+The types sizes are based on a perfect fourth modular scale.
+
+Use `.gov-speak` styles for complex content, for example annual reports.
+
+We are currently testing all styles for legibility and readability.
+
+### Breakpoints
+
+- Mobile (extra small devices): 8 columns, 420px maximum.
+- Tablet (small devices): 12 columns, 768px maximum.
+- Desktop (medium devices): 16 columns, 1200px maximum.
+
+### Font size defaults
+
+<table class="content-table">
+  <caption>Global styles</caption>
+  <tr>
+    <th>Style</th>
+    <th>Mobile (default)</th>
+    <th>Tablet</th>
+    <th>Desktop</th>
+  </tr>
+  <tr>
+    <td>p, ol, ul, dt, dd, dl</td>
+    <td>17px</td>
+    <td>17px</td>
+    <td>17px</td>
+  </tr>
+  <tr>
+    <td>h1</td>
+    <td>24px</td>
+    <td>26px<br></td>
+    <td>32px</td>
+  </tr>
+  <tr>
+    <td>h2</td>
+    <td>32px</td>
+    <td>44px</td>
+    <td>44px</td>
+  </tr>
+  <tr>
+    <td>h3</td>
+    <td>24px</td>
+    <td>26px</td>
+    <td>26px</td>
+  </tr>
+  <tr>
+    <td>h4, h5, h6</td>
+    <td>18px</td>
+    <td>18px</td>
+    <td>18px</td>
+  </tr>
+</table>
+
+<table class="content-table">
+  <caption><code>.gov-speak</code> style</caption>
+  <tr>
+    <th>Style</th>
+    <th>Mobile (default)</th>
+    <th>Tablet</th>
+    <th>Desktop</th>
+  </tr>
+  <tr>
+    <td>p, ol, ul, dt, dd, dl</td>
+    <td>17px</td>
+    <td>17px</td>
+    <td>17px</td>
+  </tr>
+  <tr>
+    <td>h1</td>
+    <td>32px</td>
+    <td>44px<br></td>
+    <td>40px</td>
+  </tr>
+  <tr>
+    <td>h2</td>
+    <td>28px</td>
+    <td>32px</td>
+    <td>32px</td>
+  </tr>
+  <tr>
+    <td>h3</td>
+    <td>24px</td>
+    <td>26px</td>
+    <td>26px</td>
+  </tr>
+  <tr>
+    <td>h4</td>
+    <td>19px</td>
+    <td>22px</td>
+    <td>22px</td>
+  </tr>
+  <tr>
+    <td>h5</td>
+    <td>16px</td>
+    <td>16px</td>
+    <td>16px</td>
+  </tr>
+  <tr>
+    <td>h6</td>
+    <td>16px</td>
+    <td>16px</td>
+    <td>16px</td>
+  </tr>
+</table>
+
+### Base size examples &mdash; global styles
+
+Markup: templates/heading-body-styles.hbs
+
+Style guide: Typography.4 Headings & body copy
+*/
+
+// Styling for headings
+//
+// Note that we style h5 and h6 are identical to h4.
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: $base-heading-leading;
+  font-weight: $base-font-weight;
+  margin-bottom: $tiny-spacing;
+  margin-top: $base-spacing;
+}
+
+h1 {
+  font-size: rem(24);
+  font-weight: $bold-font-weight;
+  margin-bottom: $small-spacing;
+
+  @include media($tablet) {
+    font-size: rem(28);
+  }
+
+  @include media($desktop) {
+    font-size: rem(40);
+  }
+
+  &:first-of-type {
+    margin-top: $tiny-spacing;
+  }
+
+  @include ie-lte(8) {
+    font-size: 32px;
+  }
+}
+
+h2 {
+  font-size: rem(32);
+  line-height: $small-leading;
+  margin-top: $base-spacing;
+  margin-bottom: 1em;
+
+  @include media($tablet) {
+    font-size: rem(40);
+  }
+
+  @include ie-lte(8) {
+    font-size: 44px;
+  }
+}
+
+h3 {
+  font-size: rem(24);
+  font-weight: $heading-font-weight;
+  margin-top: $medium-spacing + ($small-spacing / 3); // 38.133px; was 34.4px from Alz.
+  margin-bottom: $small-spacing;
+
+  @include media($tablet) {
+    font-size: rem(26);
+  }
+
+  @include ie-lte(8) {
+    font-size: 26px;
+  }
+}
+
+h4,
+h5,
+h6 {
+  font-size: rem(18);
+  font-weight: $heading-font-weight;
+
+  @include ie-lte(8) {
+    font-size: 18px;
+  }
+}
+
+// Document this later.
+.gov-speak {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: $base-heading-leading;
+    font-weight: $heading-font-weight;
+    margin-bottom: $tiny-spacing;
+    margin-top: $base-spacing;
+  }
+
+  h1 {
+    font-size: rem(32);
+    line-height: $small-leading;
+
+    @include media($tablet) {
+      font-size: rem(44);
+    }
+
+    @include media($desktop) {
+      font-size: rem(40);
+    }
+
+    &:first-of-type {
+      margin-top: $tiny-spacing;
+    }
+  }
+
+  h2 {
+    font-size: rem(28);
+    line-height: $small-leading;
+
+    @include media($tablet) {
+      font-size: rem(32);
+    }
+  }
+
+  h3 {
+    font-size: rem(24);
+    font-weight: $heading-font-weight;
+
+    @include media($tablet) {
+      font-size: rem(26);
+    }
+  }
+
+  h4 {
+    font-size: rem(19);
+    font-weight: $heading-font-weight;
+
+    @include media($tablet) {
+      font-size: rem(22);
+    }
+  }
+
+  h5 {
+    font-size: rem(17);
+    font-weight: $heading-font-weight;
+  }
+
+  h6 {
+    font-size: rem(17);
+    font-weight: $heading-font-weight;
+  }
+}
+
+/*
+Line length
+
+UI Kit applies a maximum width to typographic elements that appear within the main content container. This maintains a readable line length.
+
+A max-width of 38rem (about 70 characters) is applied to these elements:
+- h1 - h5
+- p
+- li
+- dl
+
+<div class="callout">
+
+If you'd like to include an element that spans across the maximum available space, apply the class `.content-full-width`.
+
+</div>
+
+### Resources
+- [Typography -  Accessibility](/section-typography.html#guide-typography-1-typeface-2-accessibility)
+- <a href="https://www.smashingmagazine.com/2014/09/balancing-line-length-font-size-responsive-web-design/#line-length-measure-and-reading" rel="external">Size Matters, Smashing Magazine</a>
+
+Markup: templates/content-full-width.hbs
+
+Style guide: Typography.4 Line length
+*/
+
+.content-main {
+  @include media($desktop) {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    li,
+    dl {
+      max-width: 38rem;
+    }
+
+    .content-full-width {
+      max-width: none;
+      width: 100%;
+    }
+  }
+}
+
+code,
+pre,
+samp,
+kbd {
+  font-family: $base-monospace;
+  font-size: $small-font-size;
+}
+
+/*
+Show keyboard input
+
+Use the <a href="http://w3c.github.io/html/textlevel-semantics.html#the-kbd-element" rel="external"><code>kbd</code> element</a> to show users which key to press.
+
+Markup: Copy text to clipboard using <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+
+<details open data-label="kbd-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Typography.5 Keyboard input
+*/
+
+kbd {
+  display: inline-block;
+  border: solid 1px $light-aqua;
+  border-radius: $base-border-radius;
+  box-shadow: 0 1px 0 0 $light-aqua;
+  background-color: $non-white;
+  color: $dark-aqua;
+  text-align: center;
+  font-size: $small-font-size;
+  padding: 0 $small-spacing;
+  margin: 0 $tiny-spacing;
+}
+
+strong {
+  font-weight: $bold-font-weight;
+
+  // Huh?
+  &.very-bold {
+    font-weight: $heading-font-weight;
+  }
+}
+
+// For display font sizing.
+.display {
+  @extend h2;
+}
+
+// More specialised typography.
+//
+// For abstracts or page introductory paragraphs.
+.abstract {
+  margin: $medium-spacing 0 ($base-spacing * 1.25);
+  border-bottom: 1px solid $border-colour;
+
+  p {
+    font-size: rem(19);
+    font-weight: $base-font-weight;
+
+    @include media($tablet) {
+      font-size: rem(21);
+    }
+
+    @include media($desktop) {
+      font-size: rem(24);
+    }
+  }
+}
+
+// To be deprecated as of v2.0
+//
+// We are retaining this so that p.abstract is possible. Please use div.abstract p.
+p {
+  &.abstract {
+    margin: $small-spacing 0 ($medium-spacing * 1.25);
+    padding-bottom: $medium-spacing;
+    border-bottom: 1px solid $border-colour;
+    font-size: rem(19);
+
+    @include media($tablet) {
+      font-size: rem(21);
+    }
+
+    @include media($desktop) {
+      font-size: rem(24);
+    }
+  }
+}
+
+hr {
+  border-color: $border-colour;
+  border-style: solid;
+  border-bottom: none;
+  margin-top: $base-spacing;
+  margin-bottom: $base-spacing;
+}
+
+/*
+Lists
+
+The framework provides list styles for:
+
+- unordered lists (bullet point lists)
+- ordered lists (numbered)
+- definition lists (terms and definitions).
+
+More [complex list styles](section-list-styles.html) are available.
+
+Markup: templates/list-examples.hbs
+
+Style guide: Typography.6 Lists
+*/
+
+ul,
+ol {
+  padding-left: ($base-spacing + $small-spacing);
+
+  ul {
+    list-style-type: disc;
+  }
+}
+
+ul,
+ol,
+dl,
+p,
+dt,
+dd {
+  font-size: rem(16);
+  margin-top: 0; // Check up on where margin-top is coming from...
+  margin-bottom: $medium-spacing;
+  line-height: $base-spacing;
+
+  @include media($tablet) {
+    font-size: rem(17);
+  }
+}
+
+li {
+  margin-bottom: ($small-spacing / 1.5);
+
+  ul,
+  ol {
+    margin-top: $tiny-spacing;
+    margin-bottom: 0;
+  }
+}
+
+dt {
+  display: inline-block;
+  font-weight: $bold-font-weight;
+  margin-top: $tiny-spacing;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+/*
+Callouts & warnings
+
+There are 3 classes for drawing the user's attention:
+
+- `.callout`
+- `.callout--warning` for warnings
+- `.callout--calendar-event` for dates.
+
+You can use these on paragraphs (`<p>`), or on a wrapping element, like a `<div>` or an `<aside>`.
+
+Markup: templates/callouts-examples.hbs
+
+<details open data-label="callouts-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Typography.7 Callouts & warnings
+*/
+
+%base-callout {
+  margin: $base-spacing $small-spacing;
+  padding: $medium-spacing $medium-spacing $medium-spacing $base-spacing;
+  border-radius: $tiny-border-radius;
+  box-shadow: 0 0 8px $light-grey;
+}
+
+.callout {
+  @extend %base-callout;
+}
+
+.callout--warning {
+  @extend %base-callout;
+
+  border-left: $tiny-spacing solid $red;
+  padding-left: $base-spacing - $tiny-spacing;
+}
+
+.callout--calendar-event {
+  @extend %base-callout;
+
+  margin-left: 0;
+  box-shadow: none;
+  padding-bottom: $small-spacing;
+  background-color: $callout-bg-light-colour;
+
+  time,
+  .event-name {
+    font-size: rem(32);
+    line-height: $small-leading;
+  }
+
+  time {
+    display: block;
+    font-weight: $heading-font-weight;
+  }
+
+  .event-name {
+    font-weight: $base-font-weight;
+  }
+
+  .next-event {
+    display: block;
+    font-size: rem(17);
+    font-weight: $base-font-weight;
+    margin-bottom: $tiny-spacing;
+  }
+}
+
+/*
+Badges
+
+There is styling for badges to indicate status.
+
+Markup: templates/badges.hbs
+
+<details open data-label="badges-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Typography.8 Badges
+*/
+
+$badges: (
+  'default':  $badge-colour--default,
+  'alpha':    $badge-colour--alpha,
+  'beta':     $badge-colour--beta,
+  'error':    $badge-colour--error,
+  'success':  $badge-colour--success,
+);
+
+@each $badge-type, $colour in $badges {
+  .badge--#{$badge-type} {
+    display: inline-block;
+    background-color: $colour;
+    border-radius: $large-border-radius;
+    padding: $tiny-spacing $small-spacing;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: lighten($colour, 75%);
+    font-size: rem(14);
+  }
+}
+
+/*
+Quotations
+
+There are 2 ways of using quotes:
+
+- **in-line quoting** using `q` element (adds quotation marks to either side of the in-line quotation)
+- **block quotes** via `blockquote`:
+ - standard block quote
+ - editorial block quote (pull quote) with larger size text.
+
+`blockquote` is a block-level element that can contain in-line elements. So they can nest:
+
+- multiple paragraphs, lists, etc
+- another `blockquote`
+- the `footer` element to provide citations using `<cite>`.
+
+Markup: templates/quotation-examples.hbs
+
+<details open data-label="blockquote-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Typography.9 Quotations
+*/
+
+blockquote {
+  margin: $medium-spacing 0;
+  padding: $small-spacing ($base-spacing + $small-spacing);
+  background-color: $background-secondary-colour;
+  font-family: $base-serif;
+  quotes: '\201C''\201D''\2018''\2019';
+
+  &.pullquote {
+    padding: 0;
+    background-color: $background-colour;
+
+    p {
+      font-size: rem(24);
+      line-height: $base-leading;
+      text-align: center;
+      font-weight: $base-font-weight;
+      margin-top: $base-spacing;
+
+      @include media($tablet) {
+        font-size: rem(26);
+      }
+    }
+
+    // Support: IE7 does not properly support pseudo elements `:before`/`:after`: http://caniuse.com/#feat=css-sel2
+
+    &::before,
+    &::after {
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  &::before,
+  &::after {
+    display: block;
+    height: 0;
+    font-family: $base-serif;
+    font-size: rem(43);
+    color: $aqua;
+  }
+
+  &::before {
+    margin-left: -($small-spacing * 0.75);
+    padding-bottom: $tiny-spacing;
+    content: open-quote;
+  }
+
+  &::after {
+    margin-right: -($small-spacing * 0.75);
+    margin-top: -($small-spacing);
+    padding-bottom: $medium-spacing;
+    text-align: right;
+    content: close-quote;
+  }
+
+  footer {
+    margin-top: $medium-spacing;
+    padding-top: $tiny-spacing;
+    border-top: 1px solid $light-grey;
+  }
+
+  cite {
+    display: inline-block;
+    font-family: $base-sans-serif;
+
+    &::before {
+      content: 'Citation: ';
+      text-transform: lowercase;
+      font-variant: small-caps;
+      letter-spacing: 1px;
+      color: $body-text-colour;
+    }
+  }
+
+  // So that nested blockquotes do not break the vertical rhythm.
+  blockquote {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+q {
+  // Investigate: switching to html entities?
+  quotes: '“' '”' '‘' '’' '“' '”' '‘' '’';
+}
+
+cite {
+  font-style: $base-font-style;
+}
+
+article {
+  h1:first-of-type {
+    margin-top: 0;
+  }
+}

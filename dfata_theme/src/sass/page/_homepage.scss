@@ -1,0 +1,269 @@
+// =========================================================
+// FRONT PAGE PANEL
+// =========================================================
+.front {
+  .page__title {
+    @include visually-hidden;
+  }
+  .gov-front-left {
+    padding-top: rem(40px);
+    padding-bottom: rem(108px);
+    background-color: $neutral_4;
+    .panel-pane {
+      @include center-column($desktop_column);
+    }
+  }
+  .gov-front-right {
+    padding-top: rem(40px);
+    padding-bottom: rem(108px);
+    background-color: $neutral_4;
+    .panel-pane {
+      @include center-column($desktop_column);
+    }
+  }
+}
+
+// =========================================================
+// INTRODUCTION BEAN
+// =========================================================
+.bean-basic-content {
+  background-color: $neutral_4;
+  &>.content {
+    @include center-column($desktop_column);
+    @include link-colours($primary_1, $secondary_3, $neutral_1);
+    padding-top: $default_padding;
+    padding-bottom: $default_padding;
+    color: $neutral_1;
+    @include breakpoint(tablet) {
+      padding-top: $default_padding * 2;
+      padding-bottom: rem(50px);
+    }
+    @include breakpoint(desktop) {
+      text-align: center;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pane-title {
+  @include large-title;
+}
+
+// =========================================================
+// SLIDER
+// =========================================================
+#block-views-slideshow-block {
+  &>h2 {
+    @include visually-hidden;
+  }
+  .view-content {
+    position: relative;
+    background-color: #0B3B46;
+    &>ul {
+      padding: 0;
+      margin-bottom: 0;
+      @include breakpoint(tablet) {
+        height: rem(444px);
+      }
+      &:not(.owl-loaded) {
+        &>li:not(.views-row-first) {
+          @include breakpoint(tablet) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .view-content li.views-row {
+    position: relative;
+    list-style: none;
+    margin-bottom: 0;
+  }
+  .field-name-field-slide-image {
+    @include clearfix;
+    @include breakpoint(tablet) {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    .field-items {
+      @include breakpoint(tablet) {
+        height: 100%;
+      }
+    }
+    .field-item {
+      @include breakpoint(tablet) {
+        height: 100%;
+      }
+    }
+    img {
+      height: rem(225px);
+      object-fit: cover;
+      float: left;
+      @include breakpoint(tablet) {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .banner-description-holder {
+    color: white;
+    padding: rem(30px) $default_padding;
+    background-color: $primary_1;
+    @include breakpoint(tablet) {
+      @include center-column($desktop_column);
+      background-color: transparent;
+      position: relative;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    h3 {
+      @include link-colours(white, $neutral_4, $neutral_1);
+      margin-top: 0;
+      font-weight: 400;
+      @include breakpoint(tablet) {
+        margin-bottom: rem(21px);
+        font-size: rem(48px);
+        font-weight: 300;
+      }
+    }
+    .field {
+      @include link-colours(white, $neutral_4, $neutral_1);
+    }
+  }
+  .banner-description-panel {
+    @include breakpoint(tablet) {
+      position: relative;
+      box-sizing: border-box;
+      background-color: #0B3B46;
+      padding: rem(45px);
+      padding-top: rem(85px);
+      max-width: rem(524px);
+      min-height: rem(444px);
+      color: white;
+    }
+  }
+  .slider-controls {
+    position: absolute;
+    top: 0;
+    padding-top: rem(34px);
+    padding-left: rem(37px);
+    button {
+      color: $secondary_3;
+      border: 0;
+      margin: 0;
+      display: inline;
+      width: rem(36px);
+      height: rem(36px);
+      overflow: hidden;
+      padding: 0;
+      vertical-align: top;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center;
+      border-bottom: 1px solid transparent;
+      &:hover, &:focus {
+        color: white;
+        border-bottom-color: white;
+      }
+      &.active {
+        color: white;
+      }
+      &.slider-prev {
+        @include hide-text;
+        background-image: url(../images/svg/slider-prev.svg);
+        &:hover, &:focus {
+          background-image: url(../images/svg/slider-prev-hover.svg);
+        }
+      }
+      &.slider-next {
+        @include hide-text;
+        background-image: url(../images/svg/slider-next.svg);
+        &:hover, &:focus {
+          background-image: url(../images/svg/slider-next-hover.svg);
+        }
+      }
+      &.slider-play {
+        @include hide-text;
+        background-image: url(../images/svg/slider-pause.svg);
+        &:hover, &:focus {
+          background-image: url(../images/svg/slider-pause-hover.svg);
+        }
+        &.paused {
+          background-image: url(../images/svg/slider-play.svg);
+          &:hover, &:focus {
+            background-image: url(../images/svg/slider-play-hover.svg);
+          }
+        }
+      }
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      display: inline;
+      li {
+        display: inline;
+      }
+    }
+  }
+}
+
+// =========================================================
+// HOMEPAGE BLOGS AND NEWS LISTSING
+// =========================================================
+.view-home-page-blog-articles, .view-latest-news {
+  .view-content {
+    @include breakpoint(tablet) {
+      @include outer-container(100%);
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .views-row {
+      @include breakpoint(tablet) {
+        @include span-columns(6 of 12);
+      }
+      @include breakpoint(large_tablet) {
+        @include span-columns(4 of 12);
+      }
+      &:nth-child(2n) {
+        @include breakpoint(tablet) {
+          @include omega();
+        }
+        @include breakpoint(large_tablet) {
+          margin-right: flex-gutter(12);
+        }
+      }
+      &:nth-child(3n) {
+        @include breakpoint(large_tablet) {
+          @include omega();
+        }
+      }
+      .node {
+        @include listing-component-wrapper;
+        &.has-thumbnail {
+          padding-top: $listing_component_image_height;
+          .field-type-image {
+            @include listing-component-image;
+          }
+          h2 {
+            margin-top: rem(30px);
+          }
+        }
+      }
+      h2 {
+        @include listing-component-heading;
+        margin-top: 0;
+      }
+      .field-type-datetime, .submitted {
+        @include listing-component-subtext;
+      }
+      .field-name-body {
+        @include listing-component-body;
+      }
+    }
+  }
+}

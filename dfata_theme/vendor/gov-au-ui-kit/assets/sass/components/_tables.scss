@@ -1,0 +1,182 @@
+/*
+Tables
+
+Tables make data content easier to scan.
+
+This framework uses striped/zebra tables (alternating row colours).
+
+Use `<thead>`, `<tbody>` and `<tfoot>` to improve how browsers display tables. They don't make tables more accessible.
+
+There is
+<a href="https://www.w3.org/WAI/tutorials/tables/" rel="external">guidance on making tables</a> provided by the W3C.
+
+***
+
+This guidance is in part adapted from <a href="http://govuk-elements.herokuapp.com/" rel="external">GOV.UK elements</a> under <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="external">Open Government Licence v3.0</a>, and <a href="https://standards.usa.gov/getting-started/" rel="external">18F Draft US Web Design Standards</a> under <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="external">CC0 1.0 Universal</a>.
+
+Style guide: Tables
+*/
+
+/*
+Basic table
+
+Markup: templates/table-examples.hbs
+
+<details open data-label="table-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Tables.1 Basic tables
+*/
+
+table {
+  margin-bottom: $base-spacing;
+}
+
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr:nth-child(even) {
+    background-color: $non-white;
+  }
+
+  td,
+  th {
+    border-bottom: solid 1px $light-grey;
+    padding: $tiny-spacing;
+    font-size: $small-font-size;
+    text-align: left;
+
+    @include media($tablet) {
+      padding: $small-spacing;
+      font-size: initial;
+    }
+  }
+
+  thead {
+    border-bottom: solid 2px $grey;
+  }
+}
+
+/*
+Calendar table
+
+Markup: templates/table-calendar.hbs
+
+<details open data-label="table-calendar-style-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Tables.2 Calendar table variant
+*/
+.calendar-table {
+  width: 100%;
+  margin-top: 2 * $base-spacing;
+
+  caption {
+    margin: 0 0 $small-spacing;
+    font-size: rem(24);
+    font-weight: 700;
+    text-align: left;
+  }
+
+  tr {
+    border-bottom: $tiny-spacing solid $white;
+  }
+
+  th {
+    display: block;
+    width: 100%;
+    padding: $small-spacing $base-spacing;
+    text-transform: uppercase;
+    color: $aqua;
+
+    @include media($mobile) {
+      display: table-cell;
+      width: 6 * $base-spacing;
+    }
+
+    span {
+      font-size: rem(28);
+      font-weight: $heading-font-weight;
+      line-height: $base-heading-leading;
+      display: block;
+      margin: 0;
+    }
+  }
+
+  td {
+    display: block;
+    margin: 0;
+    padding: 0 $base-spacing $small-spacing;
+    font-size: rem(19);
+    font-weight: $heading-font-weight;
+    text-align: center;
+
+    @include media($mobile) {
+      display: table-cell;
+      padding-top: $small-spacing;
+      border-left: $tiny-spacing solid $white;
+      text-align: left;
+    }
+
+    .date-info {
+      display: block;
+      margin-top: 0;
+      font-weight: 300;
+      font-size: rem(16);
+    }
+  }
+
+  th,
+  td {
+    background-color: $background-secondary-colour;
+  }
+}
+
+/*
+Accessibility
+
+Tables should be used for data, never design.
+
+Consider more accessible ways to format content before using a table:
+
+- bullet points lists
+- numbered lists
+- definition lists.
+
+Avoid tables with multiple header levels and spanned cells.
+
+### Headers & captions
+
+Title tables using the <a href="https://www.w3.org/wiki/HTML/Elements/caption" rel="external">`<caption>` element</a> inside the `<table>` element.
+
+Row and column headers should be set with the <a href="https://www.w3.org/TR/html401/struct/tables.html#adef-scope" rel="external">`scope` attribute</a>.
+
+Style guide: Tables.3 Accessibility
+*/

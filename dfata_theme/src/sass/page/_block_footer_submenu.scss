@@ -1,0 +1,38 @@
+#block-menu-menu-footer-sub-menu {
+  border-top: 1px solid darken($primary_1, 10%);
+  .content {
+    @include breakpoint(tablet) {
+      padding-top: rem(38px);
+      padding-bottom: rem(38px);
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+    }
+    ul.menu {
+      @include breakpoint(tablet) {
+        order: 2;
+        text-align: right;
+        width: auto;
+        display: block;
+      }
+      &>li {
+        margin-bottom: rem(15px);
+        @include breakpoint(tablet) {
+          display: inline-block;
+          margin-left: rem(15px);
+        }
+        @include breakpoint(desktop) {
+          margin-left: rem(30px);
+        }
+        a {
+          font-weight: 400;
+        }
+      }
+    }
+    .footer-copyright {
+      @include breakpoint(tablet) {
+        order: 1;
+      }
+    }
+  }
+}

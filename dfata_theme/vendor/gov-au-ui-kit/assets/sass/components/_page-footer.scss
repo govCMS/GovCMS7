@@ -1,0 +1,107 @@
+footer[role='contentinfo'] {
+  @include pad(( $base-spacing * 2 ) 0);
+
+  background-color: $non-white;
+  border-top: 6px solid $border-contrast-colour;
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  .feedback {
+    display: block;
+    margin-bottom: $base-spacing;
+
+    @include media($tablet) {
+      display: none;
+    }
+  }
+
+  .button--feedback {
+    display: block;
+    margin: auto;
+    text-align: center;
+    max-width: 30em;
+    background-color: transparent;
+  }
+
+  .footer-logo {
+    @include media($tablet) {
+      @include span-columns(3 of 12);
+    }
+
+    img {
+      max-height: 7em; //was $base-spacing * 4;
+    }
+  }
+
+  .footer-links {
+    @include media($tablet) {
+      @include span-columns(9 of 12);
+    }
+
+    ul {
+      @include media($tablet) {
+        margin-top: 0;
+      }
+    }
+
+    li {
+      display: block;
+      margin-right: $small-spacing;
+
+      @include media($tablet) {
+        display: inline-block;
+      }
+    }
+
+    a {
+      display: inline-block;
+    }
+  }
+
+  // Footer navigation is documented in the navigation partial.
+  .footer-top {
+    margin-bottom: $base-spacing * 2;
+    padding-bottom: $base-spacing * 2;
+    border-bottom: 1px solid $border-colour;
+
+    nav {
+      @extend %base-vertical-list;
+
+      ul {
+        @include media($tablet) {
+          @include span-columns(6 of 12);
+          @include omega(2n);
+        }
+
+        @include media($desktop) {
+          @include omega-reset(2n);
+          @include span-columns(3 of 12);
+          @include omega(5n);
+
+          @include ie-lte(8) {
+            width: 21%;
+          }
+        }
+      }
+
+      li {
+        line-height: 1.5em;
+        list-style: none;
+
+        h1,
+        h2,
+        h3,
+        h4 {
+          font-size: rem(16);
+          font-weight: $heading-font-weight;
+        }
+      }
+    }
+  }
+}

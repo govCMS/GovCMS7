@@ -1,0 +1,54 @@
+/*
+IE Conditionals
+
+Based on implementation by govuk_frontend_toolkit
+https://github.com/alphagov/govuk_frontend_toolkit/blob/master/stylesheets/_conditionals.scss
+
+The base css you write should be for mobile. You can
+then add desktop styles on top.
+
+Usage:
+
+  div.columns {
+    border: 1px solid;
+
+    @include media($desktop){
+      width: 30%;
+      float: left;
+    }
+    @include ie-lte(8) {
+      something to fix visual bugs in old IE
+    }
+    @include ie(6) {
+      padding: 0;
+    }
+  }
+*/
+
+$is-ie: false !default;
+
+@mixin ie-lte($version) {
+  @if $is-ie {
+    @if $ie-version <= $version {
+      @content;
+    }
+  }
+}
+
+@mixin ie($version) {
+  @if $is-ie {
+    @if $ie-version == $version {
+      @content;
+    }
+  }
+}
+
+@mixin ie-clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+    height: 0;
+    border: 1px solid $maroon;
+  }
+}

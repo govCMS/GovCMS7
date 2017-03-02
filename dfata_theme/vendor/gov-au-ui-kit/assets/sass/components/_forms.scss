@@ -1,0 +1,377 @@
+/*
+Forms
+
+Keep forms as simple as possible &mdash; only ask what is needed for the transaction.
+
+Ask only 1 question per page.
+
+***
+
+This guidance is in part adapted from <a href="http://govuk-elements.herokuapp.com/" rel="external">GOV.UK elements</a> under <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="external">Open Government Licence v3.0</a> and <a href="https://www.gov.uk/service-manual/user-centred-design/resources/patterns/" rel="external">GOV.UK design patterns</a> under <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/" rel="external">Open Government Licence v2.0</a>.
+
+Style guide: Forms
+*/
+
+/*
+Text input
+
+Single line text inputs.
+
+These can be limited to number input by setting the `type` attribute to `number`. For telephone numbers set the `type` attribute to `tel`.
+
+To trigger the iPhone numpad use `pattern="[0-9]*"` attribute in the input element. Don't add a `type` attribute.
+
+Markup: templates/text-input-single-line.hbs
+
+<details open data-label="text-input-single-line-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Forms.1 Text input
+*/
+
+%base-input {
+  width: 100%;
+  outline-offset: 0;
+  border: 2px solid $border-colour;
+  border-radius: 0;
+  background-color: $background-colour;
+  padding: $tiny-spacing;
+
+  &:invalid,
+  &.invalid {
+    outline: 2px solid $error-colour;
+  }
+
+  &.valid {
+    outline: 2px solid $success-colour;
+  }
+
+  &:focus {
+    outline: 2px solid $input-focus-colour;
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    background: $non-white;
+    border: 2px solid $light-grey;
+  }
+
+}
+
+form {
+
+  fieldset,
+  p {
+    margin: 0 0 $medium-spacing 0;
+    padding: 0;
+    border: none;
+  }
+
+  label {
+    display: block;
+    margin-bottom: $tiny-spacing;
+    margin-top: $tiny-spacing;
+  }
+
+  .hint {
+    display: block;
+    margin-bottom: $tiny-spacing;
+    font-size: rem(14);
+    color: $body-text-colour;
+  }
+
+  [type='text'],
+  [type='number'],
+  [type='tel'],
+  [type='email'],
+  [type='password'] {
+    @extend %base-input;
+  }
+
+  /*
+  Text area input
+
+  The `<textarea>` element gives a multi-line text input the user can resize vertically.
+
+  Markup:
+  <form>
+    <label for="texta">An input for longer responses</label>
+    <textarea name="texta" id="texta"></textarea>
+  </form>
+
+  <details open data-label="text-area-input-accessibility" aria-expanded="false">
+    <summary>Accessibility &amp; browser testing</summary>
+    <div class="accordion-panel">
+    <strong>Passed</strong>:
+      <ul>
+        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+      </ul>
+    <strong>Untested</strong>:
+      <ul>
+        <li>WCAG:AA manual</li>
+        <li>Browser support &mdash; automated and manual</li>
+      </ul>
+    </div>
+  </details>
+
+  Style guide: Forms.2 Text area input
+  */
+
+  textarea {
+    @extend %base-input;
+    resize: vertical;
+  }
+
+
+  input {
+    &[type='radio'],
+    &[type='checkbox'] {
+      @extend %base-input;
+
+      height: 1px;
+      // hide the native widget but keep it in the tab order
+      left: -10000px;
+      position: absolute;
+      visibility: visible;
+      width: 1px;
+
+      &:focus + label {
+        outline: 1px solid $border-colour;
+      }
+
+      &:invalid + label {
+        color: $error-colour;
+
+        &::before {
+          border-color: $error-colour;
+        }
+      }
+
+      + label {
+        display: inline-block;
+        margin-bottom: 8px;
+        padding: 15px 0 15px 60px;
+        position: relative;
+        width: 100%;
+
+        @include media($tablet) {
+          padding: 12px 0 12px 60px;
+        }
+
+        &::before {
+          display: inline-block;
+          height: 27px;
+          position: absolute;
+          text-align: center;
+          top: 13px;
+          width: 27px;
+
+          @include media($tablet) {
+            top: 9px;
+          }
+        }
+
+        @include ie-lte(8) {
+          border: 0;
+          height: 3em;
+          left: 1px;
+          margin-bottom: -4em;
+          position: relative;
+          width: 3em;
+        }
+      }
+    }
+  }
+
+  /*
+  Radio button input
+
+  The `radio` input allows users to see all available choices at once and select exactly 1 option.
+
+  Markup:
+  <form>
+    <fieldset>
+      <legend>Would you like?</legend>
+      <input id="yes" name="reply" type="radio" value="Yes"/>
+      <label for="yes">Yes</label>
+      <input id="no" name="reply" type="radio" value="No"/>
+      <label for="no">No</label>
+    </fieldset>
+  </form>
+
+  <details open data-label="radio-button-accessibility" aria-expanded="false">
+    <summary>Accessibility &amp; browser testing</summary>
+    <div class="accordion-panel">
+    <strong>Passed</strong>:
+      <ul>
+        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+      </ul>
+    <strong>Untested</strong>:
+      <ul>
+        <li>WCAG:AA manual</li>
+        <li>Browser support &mdash; automated and manual</li>
+      </ul>
+    </div>
+  </details>
+
+  Style guide: Forms.3 Radio button input
+  */
+
+  input[type='radio'] {
+    & + label {
+      &::before {
+        border: 2px solid $body-text-colour;
+        border-radius: 50%;
+        content: '';
+        left: 18px;
+      }
+    }
+
+    &:checked + label {
+      font-weight: bold;
+
+      &::before {
+        border-radius: 50%;
+        content: '';
+      }
+
+      &::after {
+        width: 17px;
+        height: 17px;
+        background-color: $body-text-colour;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        content: '';
+        left: 23px;
+        top: 18px;
+        position: absolute;
+
+        @include media($tablet) {
+          top: 14px;
+        }
+      }
+    }
+  }
+
+  /*
+Checkbox input
+
+The `checkbox` input allows users to select 1 or more options from a visible list.
+
+Markup:
+<form>
+  <fieldset>
+    <legend>Which would you like?</legend>
+    <input id="aaa" name="reply" type="checkbox" value="AAA"/>
+    <label for="aaa">AAA</label>
+    <input id="bbb" name="reply" type="checkbox" value="BBB"/>
+    <label for="bbb">BBB</label>
+    <input id="ccc" name="reply" type="checkbox" value="CCC"/>
+    <label for="ccc">CCC</label>
+  </fieldset>
+</form>
+
+<details open data-label="checkbox-input-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Forms.4 Checkbox input
+*/
+  input[type='checkbox'] + label {
+    &::before {
+      left: 20px;
+      border: 2px solid $body-text-colour;
+      content: '';
+      @include media($tablet) {
+        top: 9px;
+      }
+    }
+  }
+
+  input[type='checkbox'] {
+    &:checked + label {
+      font-weight: bold;
+
+      &::before {
+        font-size: 18px;
+        content: '';
+      }
+
+      &::after {
+        width: 17px;
+        height: 17px;
+        background-color: $body-text-colour;
+        border: 1px solid transparent;
+        content: '';
+        left: 25px;
+        top: 18px;
+        position: absolute;
+
+        @include media($tablet) {
+          top: 14px;
+        }
+      }
+    }
+  }
+}
+
+/*
+Accessibility
+
+### Labels
+
+- All forms fields should have labels.
+- Don't hide labels, unless the surrounding context makes them unnecessary.
+- Tell the user what they need to enter into the field. Label text should be short and direct.
+- Avoid colons at the end of labels.
+- Align labels above their fields. They should be associated with form fields using the `for` and `id` attribute.
+
+### Hint text
+
+- Use hint text to give the user contextual help about how to provide the information.
+- The hint text should be above the form field and always visible.
+- Use ARIA tags to make sure screen readers can read hint text correctly.
+
+Markup:
+<form>
+  <label for="name">Full name</label>
+  <span class="hint" id="name-hint">Your name is on your birth certificate.</span>
+  <input type="text" id="name" aria-describedby="name-hint" />
+</form>
+
+### Optional & mandatory fields
+
+Only ask for the information you absolutely need. Don't mark mandatory fields with asterisks.
+
+If you have to ask for optional information mark the field labels with ‘(optional)’.
+
+Style guide: Forms.5 Accessibility
+*/

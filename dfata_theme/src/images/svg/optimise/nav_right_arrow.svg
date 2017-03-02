@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="7px" height="11px" viewBox="0 0 7 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>Combined Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="govCMS-Theme" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DESKTOP-03-A-DROPDOWN-v3" transform="translate(-610.000000, -134.000000)" fill="#88DBDF">
+            <g id="Hover" transform="translate(361.000000, 0.000000)">
+                <g id="Dropdown" transform="translate(0.000000, 66.000000)">
+                    <path d="M252.122956,73.7059587 L248.706643,70.2896451 C248.321981,69.9049834 247.685054,69.9012208 247.294529,70.2917451 C246.901282,70.6849921 246.903065,71.3144942 247.292429,71.7038586 L251.017947,75.4293765 C251.054409,75.6189907 251.14647,75.8005402 251.294529,75.9485993 C251.520404,76.1744741 251.828709,76.2684468 252.122956,76.2331078 C252.417204,76.2684468 252.725509,76.1744741 252.951384,75.9485993 C253.099443,75.8005402 253.191504,75.6189907 253.227966,75.4293765 L256.953484,71.7038586 C257.342848,71.3144942 257.344631,70.6849921 256.951384,70.2917451 C256.560859,69.9012208 255.923932,69.9049834 255.53927,70.2896451 L252.122956,73.7059587 Z" id="Combined-Shape" transform="translate(252.122956, 73.120172) rotate(-90.000000) translate(-252.122956, -73.120172) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
