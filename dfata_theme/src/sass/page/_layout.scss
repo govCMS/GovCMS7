@@ -109,17 +109,15 @@ html {
         }
       }
     }
-    .panel-display {
+    .panel-flexible {
       @include panel-display-layouts(tablet);
-      // All Columns - Over 2 panels columns to use full column.
-      @include center-column($desktop_column);
-      // One Column (100)
-      &.panel-1col, &.panel-1col-stacked {
-        @include center-column($desktop_content_column);
+      @include center-column($desktop_content_column);
+      .panels-flexible-region {
+        float: none;
+        width: 100%;
       }
-      // Two Columns (50 50)
-      &.panel-2col, &.panel-2col-bricks, &.panel-2col-stacked {
-        @include center-column($desktop_content_column);
+      .panel-separator {
+        display: none;
       }
     }
     #site-map {

@@ -24,13 +24,6 @@ function dfata_theme_html_head_alter(&$head_elements) {
 }
 
 /**
- * Implements hook_js_alter().
- */
-function dfata_theme_js_alter(&$javascript) {
-  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'dfata_theme') . '/vendor/jquery/jquery-3.1.1.min.js';
-}
-
-/**
  * Implements hook_preprocess_page().
  */
 function dfata_theme_preprocess_page(&$variables) {
@@ -48,8 +41,6 @@ function dfata_theme_preprocess_page(&$variables) {
 function dfata_theme_preprocess_html(&$variables) {
   drupal_add_js("(function(h) {h.className = h.className.replace('no-js', '') })(document.documentElement);", array('type' => 'inline', 'scope' => 'header'));
   drupal_add_js('jQuery.extend(Drupal.settings, { "pathToTheme": "' . path_to_theme() . '" });', 'inline');
-  // Drupal forms.js does not support new jQuery. Migrate library needed.
-  drupal_add_js(drupal_get_path('theme', 'dfata_theme') . '/vendor/jquery/jquery-migrate-1.2.1.min.js');
 }
 
 /**
@@ -234,4 +225,29 @@ function dfata_theme_preprocess_search_result(&$variables) {
   $variables['snippet'] = strip_tags($variables['snippet']);
   // Remove the author / date from the result display (404 page).
   $variables['info'] = '';
+}
+
+function dfata_theme_ds_pre_render_alter(&$layout_render_array, $context) {
+  $is_bean = $context['entity_type'] == "bean";
+  $is_image_text = $context['bundle'] == "image_and_text";
+  $is_homepage_tile = $context['view_mode'] == "homepage_tile";
+  if ($is_bean && $is_image_text && $is_homepage_tile) {
+    $title = '<h2>' . $context['entity']->title . '</h2>';
+    // Remove link options and replace the link path.
+    unset($layout_render_array['ds_content'][0][0]['#path']['options']);
+    unset($layout_render_array['ds_content'][0][0]['#path']['path']);
+    if (!empty($context['entity']->field_link_to)) {
+      $url = $context['entity']->field_link_to['und'][0]['url'];
+      $layout_render_array['ds_content'][0][0]['#path']['path'] = $url;
+      $title = l($title, $url, array(
+        'html' => TRUE,
+        'attributes' => array(
+          'title' => $context['entity']->title,
+        ),
+      ));
+    }
+    $layout_render_array['ds_content'][1] = array(
+      '#markup' => $title
+    );
+  }
 }
