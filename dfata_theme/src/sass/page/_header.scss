@@ -37,12 +37,14 @@
             max-height: 100%;
           }
         }
-        &#logo-gov, &#logo {
-          width: 250px;
-        }
       }
       #logo-gov+#logo {
-        margin-left: 5em;
+        margin-left: rem(32px);
+        margin-right: rem(32px);
+        @include breakpoint(desktop) {
+          margin-left: rem(80px);
+          margin-right: rem(48px);
+        }
       }
       .header-title {
         padding-left: rem(5px);

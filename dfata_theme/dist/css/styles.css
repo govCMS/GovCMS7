@@ -258,7 +258,7 @@ Usage:
 main > article .see-more::after, footer[role='contentinfo'] .see-more::after, .list-horizontal .tags .see-more::after, .list-vertical .tags .see-more::after, .list-vertical--thirds .tags .see-more::after, .list-vertical--fourths .tags .see-more::after, .list-small .tags .see-more::after, .list-highlighted .tags .see-more::after, .primary-nav ul .see-more::after,
 .local-nav ul .see-more::after, [class^='breadcrumbs'] .see-more::after, [class^='breadcrumbs'][class$='--inverted'] .see-more::after, .skip-to .see-more::after, [class^='controls'] .see-more::after, .govau--header .see-more::after, .prerelease-govau--header .see-more::after, .hero .see-more::after,
 .hero-sml .see-more::after,
-.hero-med .see-more::after, .header__inner .header__secondary-menu .see-more::after, .content-body .content .see-more::after, .more-link .see-more::after, .region-footer .block-menu .content ul.menu > li .see-more::after, .region-footer .block-menu-block .content ul.menu > li .see-more::after, .bean-basic-content > .content .see-more::after, #block-views-slideshow-block .banner-description-holder h3 .see-more::after, #block-views-slideshow-block .banner-description-holder .field .see-more::after, .view-home-page-blog-articles .view-content .views-row h2 .see-more::after, .view-home-page-blog-articles .view-content .views-row .display .see-more::after, .view-latest-news .view-content .views-row h2 .see-more::after, .view-latest-news .view-content .views-row .display .see-more::after, body.not-front #content .view .view-content .views-row h2 .see-more::after, body.not-front #content .view .view-content .views-row .display .see-more::after, #block-menu-menu-quick-links ul.menu li .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display .see-more::after {
+.hero-med .see-more::after, .header__inner .header__secondary-menu .see-more::after, .content-body .content .see-more::after, .more-link .see-more::after, .region-footer .block-menu .content ul.menu > li .see-more::after, .region-footer .block-menu-block .content ul.menu > li .see-more::after, .bean-basic-content > .content .see-more::after, #block-views-slideshow-block .banner-description-holder h3 .see-more::after, #block-views-slideshow-block .banner-description-holder .field .see-more::after, body.not-front #content .view .view-content .views-row h2 .see-more::after, body.not-front #content .view .view-content .views-row .display .see-more::after, #block-menu-menu-quick-links ul.menu li .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display .see-more::after {
   background-image: url("../latest/img/icons/arrow-right--aqua.svg");
 }
 
@@ -278,7 +278,7 @@ summary::before, .accordion--controls summary::before, .nav-toggle::before {
 main > article a[rel~='external']::after, footer[role='contentinfo'] a[rel~='external']::after, .list-horizontal .tags a[rel~='external']::after, .list-vertical .tags a[rel~='external']::after, .list-vertical--thirds .tags a[rel~='external']::after, .list-vertical--fourths .tags a[rel~='external']::after, .list-small .tags a[rel~='external']::after, .list-highlighted .tags a[rel~='external']::after, .primary-nav ul a[rel~='external']::after,
 .local-nav ul a[rel~='external']::after, [class^='breadcrumbs'] a[rel~='external']::after, [class^='breadcrumbs'][class$='--inverted'] a[rel~='external']::after, .skip-to a[rel~='external']::after, [class^='controls'] a[rel~='external']::after, .govau--header a[rel~='external']::after, .prerelease-govau--header a[rel~='external']::after, .hero a[rel~='external']::after,
 .hero-sml a[rel~='external']::after,
-.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, .view-home-page-blog-articles .view-content .views-row h2 a[rel~='external']::after, .view-home-page-blog-articles .view-content .views-row .display a[rel~='external']::after, .view-latest-news .view-content .views-row h2 a[rel~='external']::after, .view-latest-news .view-content .views-row .display a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
+.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
   background-image: url("../latest/img/icons/external-link--aqua.svg");
 }
 
@@ -2077,7 +2077,7 @@ Style guide: Link styles.1 Hover links
 main > article a[rel~='external']::after, footer[role='contentinfo'] a[rel~='external']::after, .list-horizontal .tags a[rel~='external']::after, .list-vertical .tags a[rel~='external']::after, .list-vertical--thirds .tags a[rel~='external']::after, .list-vertical--fourths .tags a[rel~='external']::after, .list-small .tags a[rel~='external']::after, .list-highlighted .tags a[rel~='external']::after, .primary-nav ul a[rel~='external']::after,
 .local-nav ul a[rel~='external']::after, [class^='breadcrumbs'] a[rel~='external']::after, [class^='breadcrumbs'][class$='--inverted'] a[rel~='external']::after, .skip-to a[rel~='external']::after, [class^='controls'] a[rel~='external']::after, .govau--header a[rel~='external']::after, .prerelease-govau--header a[rel~='external']::after, .hero a[rel~='external']::after,
 .hero-sml a[rel~='external']::after,
-.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, .view-home-page-blog-articles .view-content .views-row h2 a[rel~='external']::after, .view-home-page-blog-articles .view-content .views-row .display a[rel~='external']::after, .view-latest-news .view-content .views-row h2 a[rel~='external']::after, .view-latest-news .view-content .views-row .display a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
+.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
   content: '';
   position: absolute;
   display: inline;
@@ -7053,12 +7053,16 @@ article h1:first-of-type, article .hero .site-title:first-of-type, .hero article
   }
 }
 
-.header__inner .logo-and-search .logo-wrapper a#logo-gov, .header__inner .logo-and-search .logo-wrapper a#logo {
-  width: 250px;
+.header__inner .logo-and-search .logo-wrapper #logo-gov + #logo {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
-.header__inner .logo-and-search .logo-wrapper #logo-gov + #logo {
-  margin-left: 5em;
+@media (min-width: 1200px) {
+  .header__inner .logo-and-search .logo-wrapper #logo-gov + #logo {
+    margin-left: 5rem;
+    margin-right: 3rem;
+  }
 }
 
 .header__inner .logo-and-search .logo-wrapper .header-title {
@@ -9464,251 +9468,151 @@ ul.tabs.primary {
   display: inline;
 }
 
-@media (min-width: 768px) {
-  .view-home-page-blog-articles .view-content, .view-latest-news .view-content {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-  }
-  .view-home-page-blog-articles .view-content::after, .view-latest-news .view-content::after {
-    clear: both;
-    content: "";
-    display: table;
-  }
+.pane-latest-news {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-@media (min-width: 768px) {
-  .view-home-page-blog-articles .view-content .views-row, .view-latest-news .view-content .views-row {
-    float: left;
-    display: block;
-    margin-right: 2.7461357194%;
-    width: 48.6269321403%;
-  }
-  .view-home-page-blog-articles .view-content .views-row:last-child, .view-latest-news .view-content .views-row:last-child {
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .view-home-page-blog-articles .view-content .views-row, .view-latest-news .view-content .views-row {
-    float: left;
-    display: block;
-    margin-right: 2.7461357194%;
-    width: 31.502576187%;
-  }
-  .view-home-page-blog-articles .view-content .views-row:last-child, .view-latest-news .view-content .views-row:last-child {
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 768px) {
-  .view-home-page-blog-articles .view-content .views-row:nth-child(2n), .view-latest-news .view-content .views-row:nth-child(2n) {
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .view-home-page-blog-articles .view-content .views-row:nth-child(2n), .view-latest-news .view-content .views-row:nth-child(2n) {
-    margin-right: 2.7461357194%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .view-home-page-blog-articles .view-content .views-row:nth-child(3n), .view-latest-news .view-content .views-row:nth-child(3n) {
-    margin-right: 0;
-  }
-}
-
-.view-home-page-blog-articles .view-content .views-row .node, .view-latest-news .view-content .views-row .node {
-  box-sizing: border-box;
-  position: relative;
-  padding: 1.875rem;
-  margin-bottom: 1.875rem;
-  height: calc(100% - 1.875rem);
-  background-color: white;
-}
-
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail, .view-latest-news .view-content .views-row .node.has-thumbnail {
-  padding-top: 17.1875rem;
-}
-
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image {
+.pane-latest-news .pane-title {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 1px;
 }
 
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image a, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image a {
-  display: block;
-  border-bottom: 0;
+.view-latest-news .view-content ul {
+  padding: 0;
+  list-style: none;
+}
+
+.view-latest-news .view-content .node-news-article {
+  max-width: 800px;
+  position: relative;
+}
+
+.view-latest-news .view-content .node-news-article a {
+  border-bottom: none;
   transition: none;
 }
 
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image a:hover, .view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image a:focus, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image a:hover, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image a:focus {
-  background-color: black;
-}
-
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image a:hover img, .view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image a:focus img, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image a:hover img, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image a:focus img {
-  opacity: 0.6;
-}
-
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .field-type-image img, .view-latest-news .view-content .views-row .node.has-thumbnail .field-type-image img {
-  display: table;
-  font-family: "object-fit:cover;object-position:center";
-  object-fit: cover;
-  object-position: center;
-  height: 17.1875rem;
+.view-latest-news .view-content .node-news-article img {
   width: 100%;
+  height: auto;
 }
 
-.view-home-page-blog-articles .view-content .views-row .node.has-thumbnail h2, .view-home-page-blog-articles .view-content .views-row .node.has-thumbnail .display, .view-latest-news .view-content .views-row .node.has-thumbnail h2, .view-latest-news .view-content .views-row .node.has-thumbnail .display {
-  margin-top: 1.875rem;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2, .view-home-page-blog-articles .view-content .views-row .display, .view-latest-news .view-content .views-row h2, .view-latest-news .view-content .views-row .display {
-  font-size: 1.5rem;
-  line-height: 1.5em;
-  color: #146577;
-  /*
-  See more link
-
-  Use see more links at the end of [lists](section-list-styles.html),
-  to take the user to a index page of all items.
-
-  Markup: <a class="see-more" href="#">See more</a>
-
-  <details open data-label="placeholder-link-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.2 See more link
-  */
-  /*
-  Placeholder links (prototyping)
-
-  Use placeholder links (greyed out links) to show actions that users can't currently take.
-
-  Your content should explain why the action isn't available and when it will be.
-
-  <p class="callout">Placeholders only work in `<span>` tags; not `<a>`.</p>
-
-  Markup: <p><span class="placeholder-link">Draft news item</span></p>
-  <p><a href="#">News item</a><p>
-
-  <details open data-label="placeholder-links-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.3 Placeholder links
-  */
-  margin-top: 0;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 a, .view-home-page-blog-articles .view-content .views-row .display a, .view-latest-news .view-content .views-row h2 a, .view-latest-news .view-content .views-row .display a {
-  color: #146577;
-  text-decoration: none;
-  outline: none;
-  border-bottom: solid 1px #5bcbe3;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.1s;
-  transition-property: background-color, border-color, color;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 a:hover, .view-home-page-blog-articles .view-content .views-row .display a:hover, .view-home-page-blog-articles .view-content .views-row h2 a:focus, .view-home-page-blog-articles .view-content .views-row .display a:focus, .view-latest-news .view-content .views-row h2 a:hover, .view-latest-news .view-content .views-row .display a:hover, .view-latest-news .view-content .views-row h2 a:focus, .view-latest-news .view-content .views-row .display a:focus {
-  background-color: #5bcbe3;
-  color: #313131;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 a[rel~='external'], .view-home-page-blog-articles .view-content .views-row .display a[rel~='external'], .view-latest-news .view-content .views-row h2 a[rel~='external'], .view-latest-news .view-content .views-row .display a[rel~='external'] {
-  display: inline;
-  position: relative;
-  margin-right: 1.6em;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 a[rel~='external']:hover, .view-home-page-blog-articles .view-content .views-row .display a[rel~='external']:hover, .view-latest-news .view-content .views-row h2 a[rel~='external']:hover, .view-latest-news .view-content .views-row .display a[rel~='external']:hover {
-  border-color: transparent;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 a[rel~='external']::after, .view-home-page-blog-articles .view-content .views-row .display a[rel~='external']::after, .view-latest-news .view-content .views-row h2 a[rel~='external']::after, .view-latest-news .view-content .views-row .display a[rel~='external']::after {
-  background-size: 0.9em auto;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 .see-more, .view-home-page-blog-articles .view-content .views-row .display .see-more, .view-latest-news .view-content .views-row h2 .see-more, .view-latest-news .view-content .views-row .display .see-more {
-  display: inline-block;
-  position: relative;
-  margin-right: 1.6em;
-  font-weight: 700;
-  color: #18788d;
-}
-
-.view-home-page-blog-articles .view-content .views-row h2 .see-more::after, .view-home-page-blog-articles .view-content .views-row .display .see-more::after, .view-latest-news .view-content .views-row h2 .see-more::after, .view-latest-news .view-content .views-row .display .see-more::after {
-  content: '';
+.view-latest-news .view-content .node-news-article .overlay-wrapper {
   position: absolute;
-  top: 0;
-  right: -1.2em;
+  bottom: 0;
+  background-image: linear-gradient(to top, #354d61, rgba(53, 77, 97, 0.8));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#354d61', endColorstr='#354d61', GradientType=1);
+}
+
+.view-latest-news .view-content .node-news-article .news-information, .view-latest-news .view-content .node-news-article .news-links {
+  color: #fff;
+  overflow: hidden;
+}
+
+.view-latest-news .view-content .node-news-article .news-information {
+  padding: 20px 20px 10px;
+  height: 128px;
+}
+
+.view-latest-news .view-content .node-news-article .news-links {
+  padding: 5px 20px 15px;
+}
+
+.view-latest-news .view-content .node-news-article .news-links a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.view-latest-news .view-content .node-news-article .news-links a:hover {
+  background: none;
+}
+
+.view-latest-news .view-content .node-news-article h3 {
+  margin: 0;
+  width: 90%;
+  line-height: 1.2em;
+}
+
+.view-latest-news .view-content .node-news-article p {
+  line-height: 1.4em;
+}
+
+.view-latest-news .view-content .node-news-article .owl-pause, .view-latest-news .view-content .node-news-article .owl-play {
   display: block;
-  width: 1.2em;
-  height: 1.2em;
-  background-repeat: no-repeat;
-  background-position: right 0.4em;
-  background-size: 0.64em auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 50;
 }
 
-.view-home-page-blog-articles .view-content .views-row h2 .see-more:hover, .view-home-page-blog-articles .view-content .views-row .display .see-more:hover, .view-home-page-blog-articles .view-content .views-row h2 .see-more:focus, .view-home-page-blog-articles .view-content .views-row .display .see-more:focus, .view-latest-news .view-content .views-row h2 .see-more:hover, .view-latest-news .view-content .views-row .display .see-more:hover, .view-latest-news .view-content .views-row h2 .see-more:focus, .view-latest-news .view-content .views-row .display .see-more:focus {
-  color: #313131;
+.view-latest-news .owl-wrapper-outer {
+  max-width: 800px;
+  display: inline-block;
+  width: 65%;
 }
 
-.view-home-page-blog-articles .view-content .views-row h2 span.placeholder-link, .view-home-page-blog-articles .view-content .views-row .display span.placeholder-link, .view-latest-news .view-content .views-row h2 span.placeholder-link, .view-latest-news .view-content .views-row .display span.placeholder-link {
-  color: rgba(20, 101, 119, 0.7);
-  border-bottom: none;
-  cursor: not-allowed;
+@media (min-width: 1200px) {
+  .view-latest-news .owl-wrapper-outer {
+    width: 100%;
+  }
 }
 
-.view-home-page-blog-articles .view-content .views-row h2 span.placeholder-link:hover, .view-home-page-blog-articles .view-content .views-row .display span.placeholder-link:hover, .view-latest-news .view-content .views-row h2 span.placeholder-link:hover, .view-latest-news .view-content .views-row .display span.placeholder-link:hover {
-  cursor: not-allowed;
+.view-latest-news .owl-controls {
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 33%;
+  max-width: 349px;
+  margin-left: 16px;
 }
 
-.view-home-page-blog-articles .view-content .views-row .field-type-datetime, .view-home-page-blog-articles .view-content .views-row .submitted, .view-latest-news .view-content .views-row .field-type-datetime, .view-latest-news .view-content .views-row .submitted {
-  font-size: 0.875rem;
-  color: #6e6e6e;
-  text-transform: uppercase;
-  margin-top: 1.375rem;
-  margin-bottom: 1.375rem;
+.view-latest-news .owl-controls .owl-page {
+  display: block;
+  background-color: #0c354e;
+  color: #fff;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  position: relative;
 }
 
-.view-home-page-blog-articles .view-content .views-row .field-name-body, .view-latest-news .view-content .views-row .field-name-body {
-  color: #313131;
+.view-latest-news .owl-controls .owl-page.active {
+  background-color: #6f8694;
+}
+
+.view-latest-news .owl-controls .owl-page.active:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-bottom: 15px solid transparent;
+  border-top: 15px solid transparent;
+  border-right: 15px solid #6f8694;
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  right: 99.5%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.view-latest-news .owl-controls .owl-page .carousel-desk-title {
+  height: 80px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  padding: 10px 20px;
+  box-sizing: border-box;
 }
 
 body.not-front #content .no-sidebar .view {

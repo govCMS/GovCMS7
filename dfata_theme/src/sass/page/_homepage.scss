@@ -213,56 +213,127 @@
 }
 
 // =========================================================
-// HOMEPAGE BLOGS AND NEWS LISTSING
+// HOMEPAGE NEWS LISTSING
 // =========================================================
-.view-home-page-blog-articles, .view-latest-news {
+.pane-latest-news {
+  padding-top: rem(48px);
+  padding-bottom: rem(48px);
+  .pane-title {
+    @include visually-hidden;
+  }
+}
+
+.view-latest-news {
   .view-content {
-    @include breakpoint(tablet) {
-      @include outer-container(100%);
-      display: flex;
-      flex-wrap: wrap;
+    ul {
+      padding: 0;
+      list-style: none;
     }
-    .views-row {
-      @include breakpoint(tablet) {
-        @include span-columns(6 of 12);
+    .node-news-article {
+      max-width: 800px;
+      position: relative;
+      a {
+        border-bottom: none;
+        transition: none;
       }
-      @include breakpoint(large_tablet) {
-        @include span-columns(4 of 12);
+      img {
+        width: 100%;
+        height: auto;
       }
-      &:nth-child(2n) {
-        @include breakpoint(tablet) {
-          @include omega();
-        }
-        @include breakpoint(large_tablet) {
-          margin-right: flex-gutter(12);
-        }
+      .overlay-wrapper {
+        position: absolute;
+        bottom: 0;
+        background-image: -webkit-linear-gradient(top, #354d61, rgba(53, 77, 97, 0.8));
+        background-image: -moz-linear-gradient(top, #354d61, rgba(53, 77, 97, 0.8));
+        background-image: -ms-linear-gradient(top, #354d61, rgba(255, 255, 255, 0.8));
+        background-image: -o-linear-gradient(top, #354d61, rgba(255, 255, 255, 0.8));
+        background-image: linear-gradient(to top, #354d61, rgba(53, 77, 97, 0.8));
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#354d61', endColorstr='#354d61', GradientType=1);
       }
-      &:nth-child(3n) {
-        @include breakpoint(large_tablet) {
-          @include omega();
-        }
+      .news-information, .news-links {
+        color: $white;
+        overflow: hidden;
       }
-      .node {
-        @include listing-component-wrapper;
-        &.has-thumbnail {
-          padding-top: $listing_component_image_height;
-          .field-type-image {
-            @include listing-component-image;
+      .news-information {
+        padding: 20px 20px 10px;
+        height: 128px;
+      }
+      .news-links {
+        padding: 5px 20px 15px;
+        a {
+          color: inherit;
+          text-decoration: underline;
+          &:hover {
+            background: none;
           }
-          h2 {
-            margin-top: rem(30px);
-          }
         }
       }
-      h2 {
-        @include listing-component-heading;
-        margin-top: 0;
+      h3 {
+        margin: 0;
+        width: 90%;
+        line-height: 1.2em;
       }
-      .field-type-datetime, .submitted {
-        @include listing-component-subtext;
+      p {
+        line-height: 1.4em;
       }
-      .field-name-body {
-        @include listing-component-body;
+      .owl-pause, .owl-play {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 50;
+      }
+    }
+  }
+  .owl-wrapper-outer {
+    max-width: 800px;
+    display: inline-block;
+    width: 65%;
+    @include breakpoint(desktop) {
+      width: 100%;
+    }
+  }
+  .owl-controls {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 33%;
+    max-width: 349px;
+    margin-left: 16px;
+    .owl-page {
+      display: block;
+      background-color: #0c354e;
+      color: #fff;
+      margin-bottom: 4px;
+      box-sizing: border-box;
+      position: relative;
+      &.active {
+        background-color: #6f8694;
+        &:before {
+          content: '';
+          width: 0;
+          height: 0;
+          border-bottom: 15px solid transparent;
+          border-top: 15px solid transparent;
+          border-right: 15px solid #6f8694;
+          font-size: 0;
+          line-height: 0;
+          position: absolute;
+          right: 99.5%;
+          top: 50%;
+          @include transform(translateY(-50%));
+        }
+      }
+      .carousel-desk-title {
+        height: 80px;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+        padding: 10px 20px;
+        box-sizing: border-box;
       }
     }
   }

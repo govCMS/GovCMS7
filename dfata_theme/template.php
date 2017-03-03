@@ -36,7 +36,7 @@ function dfata_theme_js_alter(&$javascript) {
 function dfata_theme_preprocess_page(&$variables) {
   // Sets the Government crest path.
   $variables['gov_logo'] = '';
-  $gov_logo_path = drupal_get_path('theme', 'dfata_theme') . '/gov-logo.png';
+  $gov_logo_path = path_to_theme() . '/gov-logo.png';
   if (file_exists($gov_logo_path)) {
     $variables['gov_logo'] = '/' . $gov_logo_path;
   }
