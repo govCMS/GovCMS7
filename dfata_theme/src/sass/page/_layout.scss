@@ -14,24 +14,37 @@ html {
   @include button-colours($secondary_1, darken($secondary_1, 20%), #fff, darken($secondary_1, 40%), darken($secondary_1, 40%));
   body.not-front & {
     .content-header {
-      background-color: $secondary_1;
-      padding-top: rem(19px);
-      padding-bottom: rem(25px);
-      margin-bottom: rem(25px);
-      @include breakpoint(tablet) {
-        height: rem(235px);
-        padding-top: rem(40px);
-        padding-bottom: rem(40px);
-        margin-bottom: rem(80px);
-      }
       .content-header-inner {
+        position: relative;
         @include center-column($desktop_column);
+        padding-bottom: rem(25px);
+        margin-bottom: rem(25px);
+        @include breakpoint(tablet) {
+          height: rem(168px);
+          padding-top: rem(8px);
+          padding-bottom: rem(40px);
+          margin-bottom: rem(80px);
+        }
+
+        &.standard {
+          background: linear-gradient(45deg, pantone(7465), pantone(577));
+        }
         h1 {
-          color: white;
+          background: white;
           font-weight: 300;
-          font-size: rem(32px);
+          font-size: rem(24px);
+          line-height: rem(80px);
           @include breakpoint(tablet) {
             font-size: rem(48px);
+            margin-top: 0.5em;
+          }
+        }
+        .title_image {
+          position: absolute;
+          right: 1.25rem;
+          top: 25px;
+          img {
+            border-radius: 5px;
           }
         }
       }
@@ -52,6 +65,7 @@ html {
   }
   .content {
     @include link-colours($primary_1, $secondary_3, $neutral_1);
+    color: initial;
   }
 }
 

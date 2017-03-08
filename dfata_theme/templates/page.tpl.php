@@ -107,13 +107,16 @@
   <div id="main">
     <div id="content" class="column" role="main">
       <div class="content-header">
-        <div class="content-header-inner">
+        <div class="content-header-inner<?php print $academy_banner_classes;?>">
           <?php print $breadcrumb; ?>
           <a href="#skip-link" id="skip-content" class="element-invisible" tabindex="-1">Go to top of page</a>
           <a id="main-content"></a>
           <?php print render($title_prefix); ?>
           <?php if ($title): ?>
             <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
+          <?php endif; ?>
+          <?php if (!empty($academy_banner['image'])): ?>
+            <div class="page__title_image title_image"><?php print $academy_banner['image']; ?></div>
           <?php endif; ?>
           <?php print render($title_suffix); ?>
         </div>

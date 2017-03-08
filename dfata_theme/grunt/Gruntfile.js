@@ -65,10 +65,9 @@ module.exports = function(grunt) {
       PROFILE_MODULE_DIR + "**/*.js"
     ]);
   }
-  var jsbeautifier_files = script_files.concat(style_files);
 
   GRUNT_CONFIG['jsbeautifier'] = {
-    files : jsbeautifier_files,
+    files : script_files,
     options : {
       html: {
         braceStyle: "end-expand",

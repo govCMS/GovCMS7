@@ -296,10 +296,6 @@
   .owl-controls {
     display: inline-block;
     vertical-align: top;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
     width: 33%;
     max-width: 349px;
     margin-left: 16px;
@@ -347,7 +343,7 @@
   [class*="pane-bean-landing-page-tile-"], .panels-ipe-portlet-wrapper {
     display: inline-block;
     vertical-align: top;
-    width: calc(95% / 3);
+    width: calc(94.2% / 3);
     margin-right: 2.5%;
     &:nth-child(3n+5) {
       margin-right: 0;
@@ -375,7 +371,7 @@
     a {
       text-decoration: none;
       border: none;
-      &:hover {
+      &:hover, &:focus {
         background: none;
         border: none;
         transition: none;

@@ -5,6 +5,10 @@
  * template.php
  */
 
+// Include helper functions.
+$theme_dir = drupal_get_path('theme', 'dfata_theme');
+require_once $theme_dir . '/helpers.inc';
+
 /**
  * Implements hook_html_head_alter().
  */
@@ -24,6 +28,14 @@ function dfata_theme_html_head_alter(&$head_elements) {
 }
 
 /**
+ * Implements hook_js_alter().
+ */
+function dfata_theme_js_alter(&$javascript) {
+  // We need jQuery 1.7.2 so that we can have OwlCarousel working, as well as Panesl IPE.
+  $javascript['misc/jquery.js']['data'] = drupal_get_path('theme', 'dfata_theme') . '/vendor/jquery/jquery-1.7.2.min.js';
+}
+
+/**
  * Implements hook_preprocess_page().
  */
 function dfata_theme_preprocess_page(&$variables) {
@@ -32,6 +44,19 @@ function dfata_theme_preprocess_page(&$variables) {
   $gov_logo_path = path_to_theme() . '/gov-logo.png';
   if (file_exists($gov_logo_path)) {
     $variables['gov_logo'] = '/' . $gov_logo_path;
+  }
+
+  $variables['academy_banner'] = '';
+  _dfata_faculty_banner_info($variables);
+}
+
+/**
+ * Implements hook_process_page().
+ */
+function dfata_theme_process_page(&$variables) {
+  $variables['academy_banner_classes'] = '';
+  if (!empty($variables['academy_banner']['attributes']['class'])) {
+    $variables['academy_banner_classes'] = ' ' . implode(' ', $variables['academy_banner']['attributes']['class']);
   }
 }
 
