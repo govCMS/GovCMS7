@@ -46,3 +46,36 @@
     }
   }
 }
+
+.region-sidebar-first .block-facetapi {
+  > h2 {
+    font-size: rem(24px);
+    margin-bottom: rem(16px);
+  }
+}
+
+#content .view-courses {
+  .views-exposed-widgets {
+    margin-bottom: 2em;
+    .views-widget,
+    .views-submit-button {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    label {
+      display: none;
+    }
+    #edit-title {
+      width: rem(500px);
+    }
+    .views-submit-button {
+      float: none;
+      input {
+        margin-top: 0;
+        font-weight: normal;
+        color: inherit;
+        height: 2.45em;
+      }
+    }
+  }
+}

@@ -258,7 +258,7 @@ Usage:
 main > article .see-more::after, footer[role='contentinfo'] .see-more::after, .list-horizontal .tags .see-more::after, .list-vertical .tags .see-more::after, .list-vertical--thirds .tags .see-more::after, .list-vertical--fourths .tags .see-more::after, .list-small .tags .see-more::after, .list-highlighted .tags .see-more::after, .primary-nav ul .see-more::after,
 .local-nav ul .see-more::after, [class^='breadcrumbs'] .see-more::after, [class^='breadcrumbs'][class$='--inverted'] .see-more::after, .skip-to .see-more::after, [class^='controls'] .see-more::after, .govau--header .see-more::after, .prerelease-govau--header .see-more::after, .hero .see-more::after,
 .hero-sml .see-more::after,
-.hero-med .see-more::after, .header__inner .header__secondary-menu .see-more::after, .content-body .content .see-more::after, .more-link .see-more::after, .region-footer .block-menu .content ul.menu > li .see-more::after, .region-footer .block-menu-block .content ul.menu > li .see-more::after, .bean-basic-content > .content .see-more::after, #block-views-slideshow-block .banner-description-holder h3 .see-more::after, #block-views-slideshow-block .banner-description-holder .field .see-more::after, body.not-front #content .view .view-content .views-row h2 .see-more::after, body.not-front #content .view .view-content .views-row .display .see-more::after, #block-menu-menu-quick-links ul.menu li .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display .see-more::after {
+.hero-med .see-more::after, .header__inner .header__secondary-menu .see-more::after, .more-link .see-more::after, .region-footer .block-menu .content ul.menu > li .see-more::after, .region-footer .block-menu-block .content ul.menu > li .see-more::after, #block-views-slideshow-block .banner-description-holder h3 .see-more::after, #block-views-slideshow-block .banner-description-holder .field .see-more::after, body.not-front #content .view .view-content .views-row h2 .see-more::after, body.not-front #content .view .view-content .views-row .display .see-more::after, #block-menu-menu-quick-links ul.menu li .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 .see-more::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display .see-more::after {
   background-image: url("../latest/img/icons/arrow-right--aqua.svg");
 }
 
@@ -278,7 +278,7 @@ summary::before, .accordion--controls summary::before, .nav-toggle::before {
 main > article a[rel~='external']::after, footer[role='contentinfo'] a[rel~='external']::after, .list-horizontal .tags a[rel~='external']::after, .list-vertical .tags a[rel~='external']::after, .list-vertical--thirds .tags a[rel~='external']::after, .list-vertical--fourths .tags a[rel~='external']::after, .list-small .tags a[rel~='external']::after, .list-highlighted .tags a[rel~='external']::after, .primary-nav ul a[rel~='external']::after,
 .local-nav ul a[rel~='external']::after, [class^='breadcrumbs'] a[rel~='external']::after, [class^='breadcrumbs'][class$='--inverted'] a[rel~='external']::after, .skip-to a[rel~='external']::after, [class^='controls'] a[rel~='external']::after, .govau--header a[rel~='external']::after, .prerelease-govau--header a[rel~='external']::after, .hero a[rel~='external']::after,
 .hero-sml a[rel~='external']::after,
-.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
+.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
   background-image: url("../latest/img/icons/external-link--aqua.svg");
 }
 
@@ -2077,7 +2077,7 @@ Style guide: Link styles.1 Hover links
 main > article a[rel~='external']::after, footer[role='contentinfo'] a[rel~='external']::after, .list-horizontal .tags a[rel~='external']::after, .list-vertical .tags a[rel~='external']::after, .list-vertical--thirds .tags a[rel~='external']::after, .list-vertical--fourths .tags a[rel~='external']::after, .list-small .tags a[rel~='external']::after, .list-highlighted .tags a[rel~='external']::after, .primary-nav ul a[rel~='external']::after,
 .local-nav ul a[rel~='external']::after, [class^='breadcrumbs'] a[rel~='external']::after, [class^='breadcrumbs'][class$='--inverted'] a[rel~='external']::after, .skip-to a[rel~='external']::after, [class^='controls'] a[rel~='external']::after, .govau--header a[rel~='external']::after, .prerelease-govau--header a[rel~='external']::after, .hero a[rel~='external']::after,
 .hero-sml a[rel~='external']::after,
-.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .content-body .content a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, .bean-basic-content > .content a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
+.hero-med a[rel~='external']::after, .header__inner .header__secondary-menu a[rel~='external']::after, .more-link a[rel~='external']::after, .region-footer .block-menu .content ul.menu > li a[rel~='external']::after, .region-footer .block-menu-block .content ul.menu > li a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder h3 a[rel~='external']::after, #block-views-slideshow-block .banner-description-holder .field a[rel~='external']::after, body.not-front #content .view .view-content .views-row h2 a[rel~='external']::after, body.not-front #content .view .view-content .views-row .display a[rel~='external']::after, #block-menu-menu-quick-links ul.menu li a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row h2 a[rel~='external']::after, #block-views-footer-teaser-block .view-footer-teaser .view-content .views-row .display a[rel~='external']::after {
   content: '';
   position: absolute;
   display: inline;
@@ -6874,48 +6874,104 @@ article h1:first-of-type, article .hero .site-title:first-of-type, .hero article
   border: none;
 }
 
-.bg-pantone-7465 {
-  background: #65c5b4;
+body.not-front #content .content-header .content-header-inner h1.pantone-7465, body.not-front #content .content-header .content-header-inner .hero .pantone-7465.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7465.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7465.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7465.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7465.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7465.site-title {
+  color: #65c5b4;
 }
 
-.bg-pantone-577 {
-  background: #acd08c;
+body.not-front #content .content-header .content-header-inner h1.pantone-577, body.not-front #content .content-header .content-header-inner .hero .pantone-577.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-577.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-577.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-577.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-577.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-577.site-title {
+  color: #acd08c;
 }
 
-.bg-pantone-427 {
-  background: #d8dcdb;
+body.not-front #content .content-header .content-header-inner h1.pantone-427, body.not-front #content .content-header .content-header-inner .hero .pantone-427.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-427.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-427.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-427.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-427.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-427.site-title {
+  color: #d8dcdb;
 }
 
-.bg-pantone-2220c {
-  background: #0099b1;
+body.not-front #content .content-header .content-header-inner h1.pantone-2220c, body.not-front #content .content-header .content-header-inner .hero .pantone-2220c.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-2220c.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-2220c.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-2220c.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-2220c.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-2220c.site-title {
+  color: #0099b1;
 }
 
-.bg-pantone-431 {
-  background: #495965;
+body.not-front #content .content-header .content-header-inner h1.pantone-431, body.not-front #content .content-header .content-header-inner .hero .pantone-431.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-431.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-431.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-431.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-431.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-431.site-title {
+  color: #495965;
 }
 
-.bg-pantone-7474 {
-  background: #007ced;
+body.not-front #content .content-header .content-header-inner h1.pantone-7474, body.not-front #content .content-header .content-header-inner .hero .pantone-7474.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7474.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7474.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7474.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7474.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7474.site-title {
+  color: #007ced;
 }
 
-.bg-pantone-2020c {
-  background: #c96923;
+body.not-front #content .content-header .content-header-inner h1.pantone-2020c, body.not-front #content .content-header .content-header-inner .hero .pantone-2020c.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-2020c.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-2020c.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-2020c.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-2020c.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-2020c.site-title {
+  color: #c96923;
 }
 
-.bg-pantone-7591 {
-  background: #d3875f;
+body.not-front #content .content-header .content-header-inner h1.pantone-7591, body.not-front #content .content-header .content-header-inner .hero .pantone-7591.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7591.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7591.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7591.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7591.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7591.site-title {
+  color: #d3875f;
 }
 
-.bg-pantone-7592 {
-  background: #c15a2d;
+body.not-front #content .content-header .content-header-inner h1.pantone-7592, body.not-front #content .content-header .content-header-inner .hero .pantone-7592.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7592.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7592.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7592.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7592.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7592.site-title {
+  color: #c15a2d;
 }
 
-.bg-pantone-7738 {
-  background: #85a969;
+body.not-front #content .content-header .content-header-inner h1.pantone-7738, body.not-front #content .content-header .content-header-inner .hero .pantone-7738.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7738.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7738.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7738.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7738.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7738.site-title {
+  color: #85a969;
 }
 
-.bg-pantone-7730 {
-  background: #409f68;
+body.not-front #content .content-header .content-header-inner h1.pantone-7730, body.not-front #content .content-header .content-header-inner .hero .pantone-7730.site-title, .hero body.not-front #content .content-header .content-header-inner .pantone-7730.site-title, body.not-front #content .content-header .content-header-inner
+.hero-sml .pantone-7730.site-title,
+.hero-sml body.not-front #content .content-header .content-header-inner .pantone-7730.site-title, body.not-front #content .content-header .content-header-inner
+.hero-med .pantone-7730.site-title,
+.hero-med body.not-front #content .content-header .content-header-inner .pantone-7730.site-title {
+  color: #409f68;
+}
+
+html.video {
+  margin-bottom: 0;
+}
+
+a {
+  color: #65c5b4;
+}
+
+html {
+  color: #495965;
 }
 
 .header__inner {
@@ -7369,6 +7425,10 @@ article h1:first-of-type, article .hero .site-title:first-of-type, .hero article
   background-image: url(../images/svg/mobile_search_close_hover.svg);
 }
 
+.region-navigation {
+  background-color: #d8dcdb;
+}
+
 .region-navigation .block-superfish {
   max-width: 73.125rem;
   margin-left: auto;
@@ -7429,10 +7489,11 @@ html:not(.no-js) .region-navigation .block-superfish ul.sf-menu:not(.superfish-p
   box-sizing: content-box;
   width: 100%;
   height: 100%;
-  color: black;
+  color: inherit;
   vertical-align: top;
   text-align: center;
   text-decoration: none;
+  line-height: 1.5rem;
 }
 
 .region-navigation .block-superfish ul.sf-menu > li > ul {
@@ -7583,15 +7644,13 @@ body.not-front #content .content-header .content-header-inner {
   padding-right: 1.25rem;
   box-sizing: content-box;
   padding-bottom: 1.5625rem;
-  margin-bottom: 1.5625rem;
 }
 
 @media (min-width: 768px) {
   body.not-front #content .content-header .content-header-inner {
     height: 10.5rem;
-    padding-top: 0.5rem;
+    padding-top: 2.5rem;
     padding-bottom: 2.5rem;
-    margin-bottom: 5rem;
   }
 }
 
@@ -7608,6 +7667,7 @@ body.not-front #content .content-header .content-header-inner h1, body.not-front
   font-weight: 300;
   font-size: 1.5rem;
   line-height: 5rem;
+  color: #65c5b4;
 }
 
 @media (min-width: 768px) {
@@ -7617,18 +7677,14 @@ body.not-front #content .content-header .content-header-inner h1, body.not-front
   .hero-med .site-title,
   .hero-med body.not-front #content .content-header .content-header-inner .site-title {
     font-size: 3rem;
-    margin-top: 0.5em;
+    margin-top: 0;
   }
 }
 
 body.not-front #content .content-header .content-header-inner .title_image {
   position: absolute;
   right: 1.25rem;
-  top: 25px;
-}
-
-body.not-front #content .content-header .content-header-inner .title_image img {
-  border-radius: 5px;
+  top: 3.5rem;
 }
 
 .content-body > .messages {
@@ -7637,131 +7693,6 @@ body.not-front #content .content-header .content-header-inner .title_image img {
   margin-right: auto;
   margin-top: 1.375rem;
   margin-bottom: 1.375rem;
-}
-
-.content-body .content {
-  color: #65c5b4;
-  /*
-  See more link
-
-  Use see more links at the end of [lists](section-list-styles.html),
-  to take the user to a index page of all items.
-
-  Markup: <a class="see-more" href="#">See more</a>
-
-  <details open data-label="placeholder-link-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.2 See more link
-  */
-  /*
-  Placeholder links (prototyping)
-
-  Use placeholder links (greyed out links) to show actions that users can't currently take.
-
-  Your content should explain why the action isn't available and when it will be.
-
-  <p class="callout">Placeholders only work in `<span>` tags; not `<a>`.</p>
-
-  Markup: <p><span class="placeholder-link">Draft news item</span></p>
-  <p><a href="#">News item</a><p>
-
-  <details open data-label="placeholder-links-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.3 Placeholder links
-  */
-  color: initial;
-}
-
-.content-body .content a {
-  color: #65c5b4;
-  text-decoration: none;
-  outline: none;
-  border-bottom: solid 1px #5bcbe3;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.1s;
-  transition-property: background-color, border-color, color;
-}
-
-.content-body .content a:hover, .content-body .content a:focus {
-  background-color: #5bcbe3;
-  color: #313131;
-}
-
-.content-body .content a[rel~='external'] {
-  display: inline;
-  position: relative;
-  margin-right: 1.6em;
-}
-
-.content-body .content a[rel~='external']:hover {
-  border-color: transparent;
-}
-
-.content-body .content a[rel~='external']::after {
-  background-size: 0.9em auto;
-}
-
-.content-body .content .see-more {
-  display: inline-block;
-  position: relative;
-  margin-right: 1.6em;
-  font-weight: 700;
-  color: #18788d;
-}
-
-.content-body .content .see-more::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -1.2em;
-  display: block;
-  width: 1.2em;
-  height: 1.2em;
-  background-repeat: no-repeat;
-  background-position: right 0.4em;
-  background-size: 0.64em auto;
-}
-
-.content-body .content .see-more:hover, .content-body .content .see-more:focus {
-  color: #313131;
-}
-
-.content-body .content span.placeholder-link {
-  color: rgba(101, 197, 180, 0.7);
-  border-bottom: none;
-  cursor: not-allowed;
-}
-
-.content-body .content span.placeholder-link:hover {
-  cursor: not-allowed;
 }
 
 .content-body-inner.has-sidebar {
@@ -7787,7 +7718,8 @@ body.not-front #content .content-header .content-header-inner .title_image img {
   }
 }
 
-.sidebar-first {
+aside.sidebar-first {
+  background: #d8dcdb;
   -webkit-order: -1;
       -ms-flex-order: -1;
           order: -1;
@@ -7795,10 +7727,12 @@ body.not-front #content .content-header .content-header-inner .title_image img {
 }
 
 @media (min-width: 1024px) {
-  .sidebar-first {
-    width: 20.625rem;
-    min-width: 20.625rem;
-    padding-right: 3.75rem;
+  aside.sidebar-first {
+    width: 17.5rem;
+    min-width: 17.5rem;
+    padding: 1.875rem;
+    margin-right: 2rem;
+    margin-bottom: 5rem;
   }
 }
 
@@ -7891,6 +7825,16 @@ body.not-front #content .content-header .content-header-inner .title_image img {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   box-sizing: content-box;
+}
+
+.page-node .content-body-inner.no-sidebar .region-content .node.view-mode-full {
+  max-width: 73.125rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  box-sizing: content-box;
+  margin-bottom: 3rem;
 }
 
 .page-node .content-body-inner.no-sidebar .region-content .node-webform > .submitted {
@@ -8818,6 +8762,7 @@ ul.tabs.primary {
 .content-header .breadcrumbs--inverted {
   display: block;
   background-color: transparent;
+  color: inherit;
 }
 
 .content-header .breadcrumbs--inverted ul {
@@ -8827,10 +8772,11 @@ ul.tabs.primary {
 
 .content-header .breadcrumbs--inverted ul li a {
   white-space: nowrap;
+  color: #65c5b4;
 }
 
 .content-header .breadcrumbs--inverted ul li:not(:last-child) {
-  background-image: url("../../vendor/gov-au-ui-kit/assets/img/icons/arrow-right--white.svg");
+  background-image: url("../../vendor/gov-au-ui-kit/assets/img/icons/arrow-right--aqua.svg");
   background-position: right top 7px;
 }
 
@@ -8876,7 +8822,7 @@ ul.tabs.primary {
 }
 
 .bean-basic-content {
-  background-color: #f0f3f5;
+  background-color: #d8dcdb;
 }
 
 .bean-basic-content > .content {
@@ -8886,130 +8832,8 @@ ul.tabs.primary {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
   box-sizing: content-box;
-  color: #65c5b4;
-  /*
-  See more link
-
-  Use see more links at the end of [lists](section-list-styles.html),
-  to take the user to a index page of all items.
-
-  Markup: <a class="see-more" href="#">See more</a>
-
-  <details open data-label="placeholder-link-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.2 See more link
-  */
-  /*
-  Placeholder links (prototyping)
-
-  Use placeholder links (greyed out links) to show actions that users can't currently take.
-
-  Your content should explain why the action isn't available and when it will be.
-
-  <p class="callout">Placeholders only work in `<span>` tags; not `<a>`.</p>
-
-  Markup: <p><span class="placeholder-link">Draft news item</span></p>
-  <p><a href="#">News item</a><p>
-
-  <details open data-label="placeholder-links-accessibility" aria-expanded="false">
-    <summary>Accessibility &amp; browser testing</summary>
-    <div class="accordion-panel">
-    <strong>Passed</strong>:
-      <ul>
-        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
-        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
-      </ul>
-    <strong>Untested</strong>:
-      <ul>
-        <li>WCAG:AA manual</li>
-        <li>Browser support &mdash; automated and manual</li>
-      </ul>
-    </div>
-  </details>
-
-  Style guide: Link styles.3 Placeholder links
-  */
   padding-top: 1.375rem;
   padding-bottom: 1.375rem;
-  color: #313131;
-}
-
-.bean-basic-content > .content a {
-  color: #65c5b4;
-  text-decoration: none;
-  outline: none;
-  border-bottom: solid 1px #5bcbe3;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.1s;
-  transition-property: background-color, border-color, color;
-}
-
-.bean-basic-content > .content a:hover, .bean-basic-content > .content a:focus {
-  background-color: #5bcbe3;
-  color: #313131;
-}
-
-.bean-basic-content > .content a[rel~='external'] {
-  display: inline;
-  position: relative;
-  margin-right: 1.6em;
-}
-
-.bean-basic-content > .content a[rel~='external']:hover {
-  border-color: transparent;
-}
-
-.bean-basic-content > .content a[rel~='external']::after {
-  background-size: 0.9em auto;
-}
-
-.bean-basic-content > .content .see-more {
-  display: inline-block;
-  position: relative;
-  margin-right: 1.6em;
-  font-weight: 700;
-  color: #18788d;
-}
-
-.bean-basic-content > .content .see-more::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -1.2em;
-  display: block;
-  width: 1.2em;
-  height: 1.2em;
-  background-repeat: no-repeat;
-  background-position: right 0.4em;
-  background-size: 0.64em auto;
-}
-
-.bean-basic-content > .content .see-more:hover, .bean-basic-content > .content .see-more:focus {
-  color: #313131;
-}
-
-.bean-basic-content > .content span.placeholder-link {
-  color: rgba(101, 197, 180, 0.7);
-  border-bottom: none;
-  cursor: not-allowed;
-}
-
-.bean-basic-content > .content span.placeholder-link:hover {
-  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
@@ -9523,20 +9347,24 @@ ul.tabs.primary {
   transition: none;
 }
 
+.view-latest-news .view-content .node-news-article a:hover {
+  background: none;
+}
+
 .view-latest-news .view-content .node-news-article img {
   width: 100%;
   height: auto;
+  display: block;
 }
 
 .view-latest-news .view-content .node-news-article .overlay-wrapper {
   position: absolute;
   bottom: 0;
-  background-image: linear-gradient(to top, #354d61, rgba(53, 77, 97, 0.8));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#354d61', endColorstr='#354d61', GradientType=1);
+  background: rgba(216, 220, 219, 0.9);
 }
 
 .view-latest-news .view-content .node-news-article .news-information, .view-latest-news .view-content .node-news-article .news-links {
-  color: #fff;
+  color: #495965;
   overflow: hidden;
 }
 
@@ -9598,15 +9426,15 @@ ul.tabs.primary {
 
 .view-latest-news .owl-controls .owl-page {
   display: block;
-  background-color: #0c354e;
-  color: #fff;
+  background-color: #d8dcdb;
+  color: #495965;
   margin-bottom: 4px;
   box-sizing: border-box;
   position: relative;
 }
 
 .view-latest-news .owl-controls .owl-page.active {
-  background-color: #6f8694;
+  background-color: #65c5b4;
 }
 
 .view-latest-news .owl-controls .owl-page.active:before {
@@ -9615,7 +9443,7 @@ ul.tabs.primary {
   height: 0;
   border-bottom: 15px solid transparent;
   border-top: 15px solid transparent;
-  border-right: 15px solid #6f8694;
+  border-right: 15px solid #65c5b4;
   font-size: 0;
   line-height: 0;
   position: absolute;
@@ -9678,6 +9506,7 @@ ul.tabs.primary {
 .landing-page-tiles .bean-image-and-text.homepage_tile a {
   text-decoration: none;
   border: none;
+  color: #65c5b4;
 }
 
 .landing-page-tiles .bean-image-and-text.homepage_tile a:hover, .landing-page-tiles .bean-image-and-text.homepage_tile a:focus {
@@ -9970,58 +9799,6 @@ body.not-front #content .view .view-content .views-row .field-name-field-image i
 body.not-front #content .view .pager {
   margin-top: 1.375rem;
   margin-bottom: 1.375rem;
-}
-
-body.not-front #content .view.view-faculties .view-content .views-row .node {
-  padding-bottom: 0;
-  margin-bottom: 0;
-}
-
-body.not-front #content .view.view-faculties .view-content h2, body.not-front #content .view.view-faculties .view-content .display {
-  font-size: 1.25rem;
-}
-
-body.not-front #content .view.view-faculties .view-content h2 a, body.not-front #content .view.view-faculties .view-content .display a {
-  color: #fff;
-}
-
-body.not-front #content .view.view-faculties .image-wrapper {
-  position: relative;
-}
-
-body.not-front #content .view.view-faculties .field-name-title {
-  position: absolute;
-  bottom: 7px;
-  right: 0;
-  left: 0;
-  margin: 0;
-  padding-top: 3em;
-  padding-left: 1em;
-  padding-right: 1em;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
-}
-
-body.not-front #content .view.view-faculties .field-name-field-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-right: 1em;
-  text-align: right;
-  color: #fff;
-  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.6));
-}
-
-body.not-front #content .view.view-faculties .field-name-field-learning-streams .field-items {
-  padding-left: 2em;
-  padding-right: 2em;
-}
-
-body.not-front #content .view.view-faculties .field-name-field-learning-streams .field-item {
-  display: list-item;
 }
 
 .region-sidebar-first .block {
@@ -10853,6 +10630,40 @@ body.not-front #content .view.view-faculties .field-name-field-learning-streams 
   text-transform: uppercase;
 }
 
+.region-sidebar-first .block-facetapi > h2, .region-sidebar-first .block-facetapi > .display {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#content .view-courses .views-exposed-widgets {
+  margin-bottom: 2em;
+}
+
+#content .view-courses .views-exposed-widgets .views-widget,
+#content .view-courses .views-exposed-widgets .views-submit-button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#content .view-courses .views-exposed-widgets label {
+  display: none;
+}
+
+#content .view-courses .views-exposed-widgets #edit-title {
+  width: 31.25rem;
+}
+
+#content .view-courses .views-exposed-widgets .views-submit-button {
+  float: none;
+}
+
+#content .view-courses .views-exposed-widgets .views-submit-button input {
+  margin-top: 0;
+  font-weight: normal;
+  color: inherit;
+  height: 2.45em;
+}
+
 .page-news-media .bean-image-and-text {
   box-sizing: border-box;
   position: relative;
@@ -10909,5 +10720,278 @@ body.not-front #content .view.view-faculties .field-name-field-learning-streams 
   max-width: 33.75rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+#block-bean-our-faculties,
+#block-bean-our-faculty-heads {
+  max-width: 73.125rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  box-sizing: content-box;
+}
+
+@media (min-width: 768px) {
+  .region-content .bean-faculties .field-name-field-faculties > .field-items {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+  }
+  .region-content .bean-faculties .field-name-field-faculties > .field-items::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+.region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item {
+  margin-bottom: 2rem;
+}
+
+.region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item .field-name-field-learning-streams,
+.region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item .field-name-field-faculty-head {
+  display: none;
+}
+
+.region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item:hover .field-name-field-learning-streams,
+.region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item:hover .field-name-field-faculty-head {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item {
+    float: left;
+    display: block;
+    margin-right: 2.7461357194%;
+    width: 31.502576187%;
+  }
+  .region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item:last-child {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .region-content .bean-faculties .field-name-field-faculties > .field-items > .field-item:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+.region-content .bean-faculties .node {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.region-content .bean-faculties h2, .region-content .bean-faculties .display {
+  font-size: 1.25rem;
+}
+
+.region-content .bean-faculties h2 a, .region-content .bean-faculties .display a {
+  color: inherit;
+}
+
+.region-content .bean-faculties .image-wrapper {
+  position: relative;
+  color: #d8dcdb;
+}
+
+.region-content .bean-faculties .image-wrapper .field {
+  margin: 0;
+}
+
+.region-content .bean-faculties .image-wrapper .field-name-field-image a {
+  border-bottom: none;
+  transition: none;
+}
+
+.region-content .bean-faculties .image-wrapper .field-name-field-image a:hover {
+  background: none;
+}
+
+.region-content .bean-faculties .image-wrapper .field-name-field-image img {
+  height: auto;
+}
+
+.region-content .bean-faculties .image-wrapper .field-name-title {
+  position: absolute;
+  bottom: 7px;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding-top: 3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.8));
+}
+
+.region-content .bean-faculties .image-wrapper .field-name-field-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 1em;
+  text-align: right;
+  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.6));
+}
+
+.region-content .bean-faculties .field-name-field-learning-streams,
+.region-content .bean-faculties .field-name-field-faculty-head {
+  margin-top: 0;
+}
+
+.region-content .bean-faculties .field-name-field-learning-streams > .field-items,
+.region-content .bean-faculties .field-name-field-faculty-head > .field-items {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.region-content .bean-faculties .field-name-field-learning-streams > .field-items > .field-item,
+.region-content .bean-faculties .field-name-field-faculty-head > .field-items > .field-item {
+  display: list-item;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child {
+  background: #495965;
+  color: #fff;
+  float: none;
+  width: 100%;
+  text-align: center;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child .field-name-field-learning-streams {
+  display: block;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child .field-name-field-image {
+  display: none;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child .field-name-title {
+  position: static;
+  background: none;
+  padding-top: 0;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child a {
+  border: none;
+  transition: none;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child .field-name-field-learning-streams .field-item {
+  display: inline;
+}
+
+#block-bean-our-faculties .field-name-field-faculties > .field-items > .field-item:last-child .field-name-field-learning-streams .field-item:not(:last-child):after {
+  content: ', ';
+}
+
+#block-bean-our-faculty-heads .node-staff {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+#block-bean-our-faculty-heads .node-staff .field,
+#block-bean-our-faculty-heads .node-staff h3 {
+  margin: 0;
+}
+
+#block-bean-our-faculty-heads .node-staff h3 {
+  font-weight: normal;
+  font-size: 1.2rem;
+}
+
+#block-bean-our-faculty-heads .node-staff .field-name-field-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#block-bean-our-faculty-heads .node-staff .field-name-title,
+#block-bean-our-faculty-heads .node-staff .field-name-body {
+  width: 62%;
+}
+
+.paragraphs-item-paragraph-with-title .field-name-field-title {
+  color: #65c5b4;
+}
+
+.paragraphs-item-paragraph-with-title .field-name-field-title:hover {
+  cursor: pointer;
+}
+
+.paragraphs-item-paragraph-with-title .field-name-field-title:focus {
+  outline: none;
+}
+
+.paragraphs-item-paragraph-with-title h3 {
+  font-weight: normal;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-faculty-head {
+  display: inline-block;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-faculty-head .node-staff {
+  max-width: 200px;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-faculty-head .node-staff > .field {
+  margin: 0;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-badge {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-learning-streams .field-items {
+  padding-left: 2rem;
+}
+
+#content .node-faculty.view-mode-full > .field-name-field-learning-streams .field-items > .field-item {
+  display: list-item;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses h2, #content .node-faculty.view-mode-full > .field-name-available-courses .display {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course {
+  padding: 0;
+  margin: 0;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > h2, #content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > .display {
+  margin-bottom: 0;
+  font-size: inherit;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > h2 > a, #content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > .display > a {
+  border: none;
+  font-weight: normal;
+  font-size: inherit;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > .content {
+  padding: 0;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > .content > .field-name-body {
+  margin: 0;
+}
+
+#content .node-faculty.view-mode-full > .field-name-available-courses .view .view-content .views-row .node-course > .content > .field-name-body p {
+  margin: 0;
+  line-height: 1.5rem;
 }
 /*# sourceMappingURL=styles.css.map */

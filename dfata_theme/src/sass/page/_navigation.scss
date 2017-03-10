@@ -2,7 +2,7 @@
 // TOP NAVIGATION
 // =========================================================
 .region-navigation {
-  //background-color: $primary_1;
+  background-color: $academy_light_grey;
   .block-superfish {
     @include center-column($desktop_column);
     display: none;
@@ -52,15 +52,11 @@
           box-sizing: content-box;
           width: 100%;
           height: 100%;
-          color: black;
+          color: inherit;
           vertical-align: top;
           text-align: center;
           text-decoration: none;
-          //border-bottom: 4px solid transparent;
-          //&:hover, &:focus {
-          //  background-color: $main_menu_hover;
-          //  border-bottom-color: white;
-          //}
+          line-height: rem(24px);
         }
         &>ul {
           top: 100%;

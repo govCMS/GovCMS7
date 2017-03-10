@@ -21,8 +21,10 @@ $pantones: (
   @return null;
 }
 
-@each $code, $color in $pantones {
-  .bg-pantone-#{$code} {
-    background: $color;
+body.not-front #content .content-header .content-header-inner h1 {
+  @each $code, $color in $pantones {
+    &.pantone-#{$code} {
+      color: $color;
+    }
   }
 }

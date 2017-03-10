@@ -1,0 +1,164 @@
+#block-bean-our-faculties,
+#block-bean-our-faculty-heads {
+  @include center-column($desktop_column);
+}
+
+.region-content .bean-faculties {
+  .field-name-field-faculties > .field-items {
+    @include breakpoint(tablet) {
+      @include outer-container(100%);
+      display: flex;
+      flex-wrap: wrap;
+    }
+    > .field-item {
+      margin-bottom: rem(32px);
+      .field-name-field-learning-streams,
+      .field-name-field-faculty-head {
+        display: none;
+      }
+      &:hover {
+        .field-name-field-learning-streams,
+        .field-name-field-faculty-head {
+          display: block;
+        }
+      }
+      @include breakpoint(tablet) {
+        @include span-columns(4 of 12);
+      }
+      &:nth-child(3n) {
+        @include breakpoint(tablet) {
+          @include omega();
+        }
+      }
+    }
+  }
+  .node {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  h2 {
+    font-size: rem(20px);
+
+    a {
+      color: inherit;
+    }
+  }
+  .image-wrapper {
+    position: relative;
+    color: $academy_light_grey;
+    .field {
+      margin: 0;
+    }
+    .field-name-field-image {
+      a {
+        border-bottom: none;
+        transition: none;
+        &:hover {
+          background: none;
+        }
+      }
+      img {
+        height: auto;
+      }
+    }
+    .field-name-title {
+      position: absolute;
+      bottom: 7px;
+      right: 0;
+      left: 0;
+      margin: 0;
+      padding-top: 3em;
+      padding-left: 1em;
+      padding-right: 1em;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+    }
+    .field-name-field-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      margin: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-right: 1em;
+      text-align: right;
+      background: linear-gradient(to top, transparent, rgba(0,0,0,0.6));
+    }
+  }
+  .field-name-field-learning-streams,
+  .field-name-field-faculty-head {
+    margin-top: 0;
+    > .field-items {
+      padding-left: 2em;
+      padding-right: 2em;
+      > .field-item {
+        display: list-item;
+      }
+    }
+  }
+}
+
+#block-bean-our-faculties {
+  .field-name-field-faculties > .field-items {
+    > .field-item {
+      &:last-child {
+        .field-name-field-learning-streams {
+          display: block;
+        }
+        background: pantone(431);
+        color: $white;
+        float: none;
+        width: 100%;
+        text-align: center;
+        .field-name-field-image {
+          display: none;
+        }
+        .field-name-title {
+          position: static;
+          background: none;
+          padding-top: 0;
+        }
+        a {
+          border: none;
+          transition: none;
+        }
+        .field-name-field-learning-streams {
+          .field-item {
+            display: inline;
+            &:not(:last-child):after {
+              content: ', ';
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#block-bean-our-faculty-heads {
+  .node-staff {
+    margin-bottom: rem(16px);
+    position: relative;
+
+    .field,
+    h3 {
+      margin: 0;
+    }
+
+    h3 {
+      font-weight: normal;
+      font-size: 1.2rem;
+    }
+
+    .field-name-field-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .field-name-title,
+    .field-name-body {
+      width: 62%;
+    }
+  }
+}

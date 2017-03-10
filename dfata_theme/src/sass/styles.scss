@@ -4,11 +4,15 @@
 @import '../../vendor/gov-au-ui-kit/assets/sass/utils';
 @import '../../vendor/gov-au-ui-kit/assets/sass/vendor';
 @import '../../vendor/gov-au-ui-kit/assets/sass/components';
+
 // Diplomatic Academy.
 @import "colours";
-// govCMS UI Kit.
 @import 'variables';
 @import 'mixins';
+@import "normalize";
+
+@import "components/typography";
+
 @import 'page/header';
 @import 'page/navigation';
 @import 'page/layout';
@@ -27,3 +31,6 @@
 @import 'page/search';
 @import 'page/news_media_landing';
 @import 'page/contact_form';
+@import "components/tiles";
+@import "components/paragraph_with_title";
+@import "components/node";

@@ -1,0 +1,14 @@
+.paragraphs-item-paragraph-with-title {
+  .field-name-field-title {
+    color: $academy_green;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  h3 {
+    font-weight: normal;
+  }
+}

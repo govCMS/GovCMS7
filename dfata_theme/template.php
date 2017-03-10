@@ -36,6 +36,16 @@ function dfata_theme_js_alter(&$javascript) {
 }
 
 /**
+ * Implements hook_css_alter().
+ */
+function dfata_theme_css_alter(&$css) {
+  // Remove the jQuery UI styling.
+  unset($css['misc/ui/jquery.ui.core.css']);
+  unset($css['misc/ui/jquery.ui.theme.css']);
+  unset($css['misc/ui/jquery.ui.accordion.css']);
+}
+
+/**
  * Implements hook_preprocess_page().
  */
 function dfata_theme_preprocess_page(&$variables) {
@@ -46,18 +56,7 @@ function dfata_theme_preprocess_page(&$variables) {
     $variables['gov_logo'] = '/' . $gov_logo_path;
   }
 
-  $variables['academy_banner'] = '';
   _dfata_faculty_banner_info($variables);
-}
-
-/**
- * Implements hook_process_page().
- */
-function dfata_theme_process_page(&$variables) {
-  $variables['academy_banner_classes'] = '';
-  if (!empty($variables['academy_banner']['attributes']['class'])) {
-    $variables['academy_banner_classes'] = ' ' . implode(' ', $variables['academy_banner']['attributes']['class']);
-  }
 }
 
 /**
@@ -101,6 +100,18 @@ function dfata_theme_preprocess_field(&$variables) {
         $variables['items'][0]['#image_style'] = 'dfata_theme_thumbnail';
       }
     }
+  }
+  if ($variables['element']['#field_name'] === 'field_page_content') {
+    // Load jQuery UI Accordion for the field.
+    $variables['items'][0]['#attached'] = array(
+      'library' => array(
+        array('system', 'ui.accordion'),
+      ),
+    );
+  }
+  if ($variables['element']['#field_name'] === 'field_title' && $variables['element']['#bundle'] == "paragraph_with_title") {
+    // Surround the title with an <h3> tag.
+    $variables['items'][0]['#markup'] = '<h3>' . $variables['items'][0]['#markup'] . '</h3>';
   }
 }
 

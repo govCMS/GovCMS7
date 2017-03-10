@@ -27,13 +27,11 @@
 // INTRODUCTION BEAN
 // =========================================================
 .bean-basic-content {
-  background-color: $neutral_4;
+  background-color: $academy_light_grey;
   &>.content {
     @include center-column($desktop_column);
-    @include link-colours($primary_1, $secondary_3, $neutral_1);
     padding-top: $default_padding;
     padding-bottom: $default_padding;
-    color: $neutral_1;
     @include breakpoint(tablet) {
       padding-top: $default_padding * 2;
       padding-bottom: rem(50px);
@@ -235,23 +233,23 @@
       a {
         border-bottom: none;
         transition: none;
+
+        &:hover {
+          background: none;
+        }
       }
       img {
         width: 100%;
         height: auto;
+        display: block;
       }
       .overlay-wrapper {
         position: absolute;
         bottom: 0;
-        background-image: -webkit-linear-gradient(top, #354d61, rgba(53, 77, 97, 0.8));
-        background-image: -moz-linear-gradient(top, #354d61, rgba(53, 77, 97, 0.8));
-        background-image: -ms-linear-gradient(top, #354d61, rgba(255, 255, 255, 0.8));
-        background-image: -o-linear-gradient(top, #354d61, rgba(255, 255, 255, 0.8));
-        background-image: linear-gradient(to top, #354d61, rgba(53, 77, 97, 0.8));
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#354d61', endColorstr='#354d61', GradientType=1);
+        background: rgba(216, 220, 219, 0.9);
       }
       .news-information, .news-links {
-        color: $white;
+        color: $academy_dark_grey;
         overflow: hidden;
       }
       .news-information {
@@ -301,20 +299,20 @@
     margin-left: 16px;
     .owl-page {
       display: block;
-      background-color: #0c354e;
-      color: #fff;
+      background-color: $academy_light_grey;
+      color: $academy_dark_grey;
       margin-bottom: 4px;
       box-sizing: border-box;
       position: relative;
       &.active {
-        background-color: #6f8694;
+        background-color: $academy_green;
         &:before {
           content: '';
           width: 0;
           height: 0;
           border-bottom: 15px solid transparent;
           border-top: 15px solid transparent;
-          border-right: 15px solid #6f8694;
+          border-right: 15px solid $academy_green;
           font-size: 0;
           line-height: 0;
           position: absolute;
@@ -371,6 +369,7 @@
     a {
       text-decoration: none;
       border: none;
+      color: $primary_1;
       &:hover, &:focus {
         background: none;
         border: none;

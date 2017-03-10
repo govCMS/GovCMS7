@@ -19,6 +19,8 @@ function _dfata_banner_excluded($node = NULL) {
 }
 
 function _dfata_faculty_banner_info(&$vars) {
+  $vars['academy_banner'] = '';
+  $vars['academy_title_colour'] = '';
   $node = menu_get_object();
   if (!_dfata_banner_excluded($node)) {
     if ($node && $node->type == "faculty") {
@@ -26,17 +28,16 @@ function _dfata_faculty_banner_info(&$vars) {
         $image_file = (object) $node->field_image['und'][0];
       }
       if (!empty($node->field_colour)) {
-        $bg_class = 'bg-pantone-' . $node->field_colour['und'][0]['value'];
+        $vars['academy_title_colour'] = ' pantone-' . $node->field_colour['und'][0]['value'];
       }
     }
     else {
       // Standard banner image fid.
       $fid = 4;
       $image_file = file_load($fid);
-      $bg_class = 'standard';
     }
 
-    if (isset($image_file) && isset($bg_class)) {
+    if (isset($image_file)) {
       $image = array(
         'path' => image_style_url('banner_image', $image_file->uri),
         'alt' => $image_file->alt,
@@ -46,7 +47,6 @@ function _dfata_faculty_banner_info(&$vars) {
       $vars['academy_banner'] = array(
         'title' => drupal_get_title(),
         'image' => theme_image($image),
-        'attributes' => array('class' => array($bg_class))
       );
     }
   }

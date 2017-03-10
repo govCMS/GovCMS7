@@ -18,12 +18,10 @@ html {
         position: relative;
         @include center-column($desktop_column);
         padding-bottom: rem(25px);
-        margin-bottom: rem(25px);
         @include breakpoint(tablet) {
           height: rem(168px);
-          padding-top: rem(8px);
+          padding-top: rem(40px);
           padding-bottom: rem(40px);
-          margin-bottom: rem(80px);
         }
 
         &.standard {
@@ -34,18 +32,16 @@ html {
           font-weight: 300;
           font-size: rem(24px);
           line-height: rem(80px);
+          color: $academy_green;
           @include breakpoint(tablet) {
             font-size: rem(48px);
-            margin-top: 0.5em;
+            margin-top: 0;
           }
         }
         .title_image {
           position: absolute;
           right: 1.25rem;
-          top: 25px;
-          img {
-            border-radius: 5px;
-          }
+          top: 3.5rem;
         }
       }
     }
@@ -63,10 +59,6 @@ html {
     margin-top: $default_padding;
     margin-bottom: $default_padding;
   }
-  .content {
-    @include link-colours($primary_1, $secondary_3, $neutral_1);
-    color: initial;
-  }
 }
 
 .content-body-inner.has-sidebar {
@@ -78,13 +70,16 @@ html {
   }
 }
 
-.sidebar-first {
+aside.sidebar-first {
+  background: $academy_light_grey;
   order: -1;
   width: 100%;
   @include breakpoint(large_tablet) {
-    width: rem(330px);
-    min-width: rem(330px);
-    padding-right: rem(60px);
+    width: rem(280px);
+    min-width: rem(280px);
+    padding: rem(30px);
+    margin-right: rem(32px);
+    margin-bottom: rem(80px);
   }
 }
 
@@ -110,6 +105,10 @@ html {
           }
           &>.content {
             @include center-column($desktop_content_column);
+          }
+          &.view-mode-full {
+            @include center-column($desktop_content_column);
+            margin-bottom: rem(48px);
           }
         }
         // Node Webforms

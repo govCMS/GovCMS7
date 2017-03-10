@@ -1,0 +1,53 @@
+#content .node-faculty.view-mode-full {
+  > .field-name-field-faculty-head {
+    display: inline-block;
+
+    .node-staff {
+      max-width: 200px;
+      > .field {
+        margin: 0;
+      }
+    }
+  }
+  > .field-name-field-badge {
+    display: inline-block;
+    vertical-align: top;
+  }
+  > .field-name-field-learning-streams {
+    .field-items {
+      padding-left: rem(32px);
+      > .field-item {
+        display: list-item;
+      }
+    }
+  }
+  > .field-name-available-courses {
+    h2 {
+      font-size: rem(16px);
+      font-weight: bold;
+    }
+    .view .view-content .views-row .node-course {
+      padding: 0;
+      margin: 0;
+      > h2 {
+        margin-bottom: 0;
+        font-size: inherit;
+        > a {
+          border: none;
+          font-weight: normal;
+          font-size: inherit;
+        }
+      }
+      > .content {
+        padding: 0;
+        > .field-name-body {
+          margin: 0;
+          p {
+            margin: 0;
+            line-height: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
