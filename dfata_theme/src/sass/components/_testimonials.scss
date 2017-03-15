@@ -1,0 +1,40 @@
+.paragraphs-item-testimonial {
+  margin-bottom: rem(50px);
+  quotes: '\201c' '\201d';
+  .field-name-field-text p {
+    margin: 1.2em 0;
+    padding: 1.8em 7em;
+    background-color: $academy_light_grey;
+    font-size: rem(20px);
+    line-height: rem(40px);
+    &:before {
+      content: open-quote;
+      font-size: rem(50px);
+      margin-left: rem(-17px);
+    }
+    &:after {
+      content: close-quote;
+      font-size: rem(50px);
+      line-height: rem(20px);
+    }
+  }
+}
+
+.paragraphs-item-testimonial-source {
+  text-align: right;
+  > .content {
+    > .field {
+      margin: 0;
+      display: inline-block;
+
+      &.field-name-field-label {
+        .field-item {
+          font-weight: bold;
+          &:after {
+            content: ":\00a0";
+          }
+        }
+      }
+    }
+  }
+}

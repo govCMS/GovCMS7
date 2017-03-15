@@ -1,0 +1,56 @@
+.learning-levels-wrapper {
+  position: relative;
+  .field-name-field-learning-level {
+    .field-item {
+      border-bottom: 1px dotted;
+      cursor: pointer;
+    }
+  }
+  .field.field-name-learning-levels-key {
+    display: none;
+  }
+  &:hover {
+    .field.field-name-learning-levels-key {
+      display: block;
+    }
+  }
+}
+
+.page-node .region-content .field.field-name-learning-levels-key {
+  position: absolute;
+  top: -100px;
+  left: 300px;
+  width: 600px;
+  margin: 0;
+  background: $academy_dark_grey;
+  padding: rem(10px) rem(20px);
+}
+
+#block-views-learning-levels-key {
+  > h2 {
+    margin: 0 0 rem(10px) 0;
+    color: $academy_light_grey;
+    font-size: rem(16px);
+  }
+}
+
+body.not-front #content .no-sidebar .view.view-learning-levels {
+  margin: 0;
+  padding: 0;
+  table {
+    font-size: rem(14px);
+    margin-bottom: 1em;
+    td {
+      border-right: 1px solid #ccc;
+      padding-left: rem(10px);
+      padding-right: rem(10px);
+      padding-top: rem(5px);
+      padding-bottom: rem(5px);
+      vertical-align: top;
+    }
+    p {
+      line-height: 1.2rem;
+      margin: 0;
+    }
+  }
+}

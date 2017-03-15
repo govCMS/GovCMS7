@@ -97,7 +97,6 @@
   padding: rem(30px);
   margin-bottom: rem(30px);
   height: calc(100% - #{rem(30px)});
-  background-color: white;
 }
 
 @mixin listing-component-image() {
@@ -165,14 +164,13 @@
 }
 
 @mixin medium-title() {
-  color: $primary_1;
   font-size: rem(30px);
   font-weight: 300;
   margin-top: 0;
 }
 
 @mixin block-heading() {
-  color: $neutral_1;
+  color: $font-color-light;
   font-size: rem(18px);
   font-weight: 400;
   @include breakpoint(large_tablet) {
@@ -194,7 +192,6 @@
 
 @mixin search-submit-button() {
   @include hide-text;
-  border: 0;
   margin: 0;
   padding: 0;
   width: rem(52px);

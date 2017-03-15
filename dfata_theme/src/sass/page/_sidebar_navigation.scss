@@ -7,7 +7,7 @@
     &>h2 {
       @include block-heading;
       margin-top: 0;
-      margin-bottom: 0;
+      margin-bottom: rem(16px);
     }
   }
 }

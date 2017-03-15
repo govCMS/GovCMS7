@@ -28,14 +28,17 @@ html {
           background: linear-gradient(45deg, pantone(7465), pantone(577));
         }
         h1 {
-          background: white;
           font-weight: 300;
           font-size: rem(24px);
           line-height: rem(80px);
           color: $academy_green;
+          margin-bottom: 0;
           @include breakpoint(tablet) {
             font-size: rem(48px);
             margin-top: 0;
+          }
+          + .faculty-badge {
+            color: $academy_green;
           }
         }
         .title_image {
@@ -71,7 +74,7 @@ html {
 }
 
 aside.sidebar-first {
-  background: $academy_light_grey;
+  background: $bg_colour;
   order: -1;
   width: 100%;
   @include breakpoint(large_tablet) {
@@ -80,6 +83,17 @@ aside.sidebar-first {
     padding: rem(30px);
     margin-right: rem(32px);
     margin-bottom: rem(80px);
+  }
+
+  .page-node.node-type-news-article & {
+    order: 2;
+
+    @include breakpoint(large_tablet) {
+      padding: rem(30px);
+      margin-right: 0;
+      margin-left: rem(32px);
+      margin-bottom: rem(80px);
+    }
   }
 }
 

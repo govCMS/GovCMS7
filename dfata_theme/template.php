@@ -286,4 +286,20 @@ function dfata_theme_ds_pre_render_alter(&$layout_render_array, $context) {
       '#markup' => $title
     );
   }
+
+  $is_node = $context['entity_type'] == "node";
+  $is_full = $context['view_mode'] == "full";
+  if ($is_node && $is_full) {
+    $node = $context['entity'];
+    // If the actual summary field is empty,
+    // do not display the trimmed body in the DS Summary field.
+    if (empty($node->body['und'][0]['summary'])) {
+      foreach ($layout_render_array['ds_content'] as &$field) {
+        if (!empty($field['#field_name']) && $field['#field_name'] == "summary") {
+          $field[0]['#markup'] = '';
+          break;
+        }
+      }
+    }
+  }
 }

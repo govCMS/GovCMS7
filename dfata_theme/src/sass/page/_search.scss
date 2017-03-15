@@ -78,4 +78,15 @@
       }
     }
   }
+  .views-table {
+    width: 100%;
+    td {
+      padding: 10px 15px;
+      vertical-align: top;
+      > .date-display-single:not(:first-child),
+      > .date-display-range:not(:first-child) {
+        display: block;
+      }
+    }
+  }
 }

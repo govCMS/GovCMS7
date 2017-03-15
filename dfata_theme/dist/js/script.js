@@ -9,7 +9,8 @@
       if ($.fn.accordion) {
         $('.field-name-field-page-content').find('.field-items').accordion({
           header: ".field-name-field-title",
-          heightStyle: "fill"
+          autoHeight: false,
+          active: false
         })
       }
     }

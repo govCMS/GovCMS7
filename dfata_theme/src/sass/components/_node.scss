@@ -1,17 +1,20 @@
 #content .node-faculty.view-mode-full {
   > .field-name-field-faculty-head {
-    display: inline-block;
-
+    > .field-items {
+      > .field-item {
+        display: inline-block;
+        vertical-align: top;
+      }
+    }
     .node-staff {
       max-width: 200px;
       > .field {
         margin: 0;
       }
+      > .field-name-title {
+        font-weight: bold;
+      }
     }
-  }
-  > .field-name-field-badge {
-    display: inline-block;
-    vertical-align: top;
   }
   > .field-name-field-learning-streams {
     .field-items {
@@ -45,6 +48,84 @@
           p {
             margin: 0;
             line-height: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+#content .node-course.view-mode-full {
+  .info-wrapper {
+    background: $academy_light_grey;
+    padding: rem(8px) rem(32px);
+    display: inline-block;
+
+    .field {
+      .field-label {
+        @include breakpoint(tablet) {
+          width: rem(190px);
+        }
+      }
+    }
+
+    .date-display-range {
+      display: inline-block;
+    }
+  }
+}
+
+.page-node.node-type-news-article .node-news-article {
+  .field-name-field-tags {
+    > .field-items {
+      > .field-item {
+        display: list-item;
+        margin-left: rem(32px);
+      }
+    }
+  }
+}
+
+#content {
+  body.not-front.page-node.node-type-news-article & {
+    .content-header {
+      .content-header-inner.has-image {
+        @include breakpoint(tablet) {
+          height: rem(300px);
+        }
+        .title_image {
+          position: absolute;
+          right: 0;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          z-index: -1;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+          }
+
+          &:after {
+            content: ' ';
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+          }
+        }
+
+        .breadcrumbs--inverted {
+          li {
+            &:last-child {
+              color: $academy_light_grey;
+            }
+            &:not(:last-child) {
+              // Override previously defined icon with new path.
+              background-image: ui-kit-icon("arrow-right--white.svg");
+            }
           }
         }
       }
