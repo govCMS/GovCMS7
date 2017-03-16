@@ -1,6 +1,9 @@
-.paragraphs-item-testimonial {
+.page-node .region-content .node-testimonial {
   margin-bottom: rem(50px);
   quotes: '\201c' '\201d';
+  > .field {
+    margin-top: 0;
+  }
   .field-name-field-text p {
     margin: 1.2em 0;
     padding: 1.8em 7em;
@@ -37,4 +40,8 @@
       }
     }
   }
+}
+
+.page-node .region-content .field.field-name-field-testimonials {
+  margin-top: 0;
 }

@@ -228,18 +228,27 @@ function dfata_theme_breadcrumb($variables) {
  * Implements hook_form_alter().
  */
 function dfata_theme_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id === 'search_api_page_search_form_default_search') {
-    // Global header form.
-    $form['keys_1']['#attributes']['placeholder'] = t('Type search term here');
-    $form['keys_1']['#title'] = t('Search field');
+  switch ($form_id) {
+    case "search_api_page_search_form_default_search":
+      // Global header form.
+      $form['keys_1']['#attributes']['placeholder'] = t('Type search term here');
+      $form['keys_1']['#title'] = t('Search field');
+      break;
+    case "search_api_page_search_form":
+      // Search page (above results) form.
+      $form['form']['keys_1']['#title'] = t('Type search term here');
+      break;
+    case "search_form":
+      // Search form on page not found (404 page).
+      $form['basic']['keys']['#title'] = t('Type search term here');
+      break;
+    case "contact_site_form":
+      _dfata_contact_form_alter($form, $form_state);
+      break;
   }
-  elseif ($form_id === 'search_api_page_search_form') {
-    // Search page (above results) form.
-    $form['form']['keys_1']['#title'] = t('Type search term here');
-  }
-  if ($form_id === 'search_form') {
-    // Search form on page not found (404 page).
-    $form['basic']['keys']['#title'] = t('Type search term here');
+
+  if (!empty($form['#node']) && $form['#node']->machine_name == "course_enquiry") {
+    _dfata_course_enquiry_form_alter($form, $form_state);
   }
 }
 
@@ -263,6 +272,9 @@ function dfata_theme_preprocess_search_result(&$variables) {
   $variables['info'] = '';
 }
 
+/**
+ * Implements hook_ds_pre_render_alter.
+ */
 function dfata_theme_ds_pre_render_alter(&$layout_render_array, $context) {
   $is_bean = $context['entity_type'] == "bean";
   $is_image_text = $context['bundle'] == "image_and_text";
@@ -301,5 +313,47 @@ function dfata_theme_ds_pre_render_alter(&$layout_render_array, $context) {
         }
       }
     }
+
+    if ($node->type == "course") {
+      if (!empty($node->field_enquiry) && $node->field_enquiry['und'][0]['value']) {
+        $enquiry_url = l('here', 'course-enquiry', array('query' => array('course_nid' => $node->nid)));
+        $markup = '<div><h3>Enquire Now</h3>';
+        $markup .= '<div>Click ' . $enquiry_url . ' to enquire about this course.</div>';
+        $markup .= '</div>';
+        foreach ($layout_render_array['ds_content'] as &$field) {
+          if (!empty($field['#field_name']) && $field['#field_name'] == "field_enquiry") {
+            $field[0]['#markup'] = $markup;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  $is_tile = $context['view_mode'] == "tile";
+  if ($is_node && $is_tile) {
+    $node = $context['entity'];
+    // Add a link around the Faculty tile to make the whole image clickable.
+    if ($node->type == "faculty") {
+      $markup = $layout_render_array['ds_content'][0]['field_badge'][0]['#markup'];
+      $link = l($markup, 'node/' . $node->nid, array('html' => TRUE));
+      $layout_render_array['ds_content'][0]['field_badge'][0]['#markup'] = $link;
+    }
+  }
+}
+
+/**
+ * Implements hook_mail_alter.
+ *
+ * @see _dfata_contact_form_alter()
+ */
+function dfata_theme_mail_alter(&$message) {
+  // Alter the Contact Page emails to include our custom fields.
+  if ($message['id'] == 'contact_page_mail' || $message['id'] == 'contact_page_copy') {
+    $message['body'][1] = t('First Name') . ': ' . $message['params']['name'];
+    $message['body'][] = t('Surname') . ': ' . $message['params']['surname'];
+    $message['body'][] = t('Email') . ': ' . $message['params']['mail'];
+    $message['body'][] = t('Phone number') . ': ' . $message['params']['phone'];
+    $message['body'][] = $message['params']['message'];
   }
 }

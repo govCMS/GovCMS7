@@ -38,9 +38,15 @@
   }
   h2 {
     font-size: rem(20px);
+    margin: 0;
 
     a {
       color: inherit;
+      display: block;
+      padding-top: 2em;
+      padding-bottom: 1em;
+      padding-left: 1em;
+      padding-right: 1em;
     }
   }
   .image-wrapper {
@@ -67,9 +73,6 @@
       right: 0;
       left: 0;
       margin: 0;
-      padding-top: 3em;
-      padding-left: 1em;
-      padding-right: 1em;
       background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
     }
     .field-name-field-badge {
@@ -78,11 +81,17 @@
       right: 0;
       left: 0;
       margin: 0;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-right: 1em;
       text-align: right;
       background: linear-gradient(to top, transparent, rgba(0,0,0,0.6));
+
+      a {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 1em;
+      }
     }
   }
   .field-name-field-learning-streams,

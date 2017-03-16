@@ -134,6 +134,9 @@ aside.sidebar-first {
             max-width: $form_width;
           }
         }
+        #block-bean-testimonials {
+          @include center-column($desktop_content_column);
+        }
       }
     }
     .panel-flexible {
@@ -156,6 +159,9 @@ aside.sidebar-first {
     .page-contact & {
       .block-system {
         @include center-column($form_width);
+      }
+      .block-block {
+        @include center-column($desktop_content_column);
       }
     }
     .page-search404 & {

@@ -17,6 +17,15 @@ body.not-front #content {
         }
       }
     }
+    .view.view-testimonials {
+      .views-row {
+        width: 100%;
+        float: none;
+        .node {
+          padding-top: 0;
+        }
+      }
+    }
   }
   .view {
     .view-content {

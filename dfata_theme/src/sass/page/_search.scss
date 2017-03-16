@@ -52,6 +52,9 @@
     font-size: rem(24px);
     margin-bottom: rem(16px);
   }
+  > .content {
+    color: $font-color-light;
+  }
 }
 
 #content .view-courses {
@@ -65,7 +68,8 @@
     label {
       display: none;
     }
-    #edit-title {
+    #edit-title,
+    #edit-search-api-aggregation-1 {
       width: rem(500px);
     }
     .views-submit-button {

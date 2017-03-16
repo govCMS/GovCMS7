@@ -12,7 +12,7 @@ function _dfata_banner_excluded($node = NULL) {
   if (drupal_is_front_page()) {
     return TRUE;
   }
-  if ($node && $node->type == "news") {
+  if ($node && $node->type == "news_article" && empty($node->field_image)) {
     return TRUE;
   }
   return FALSE;
@@ -91,5 +91,63 @@ function _dfata_faculty_banner_info(&$vars) {
         'image' => theme_image($image),
       );
     }
+  }
+}
+
+function _dfata_contact_form_alter(&$form, &$form_state) {
+  $form['name']['#title'] = "Your first name";
+  $form['surname'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Your surname',
+    '#maxlength' => 255,
+    '#required' => TRUE,
+    '#weight' => 1
+  );
+  $form['phone'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Your phone number',
+    '#maxlength' => 15,
+    '#required' => TRUE,
+    '#weight' => 3
+  );
+  $form['copy']['#access'] = TRUE;
+
+  // Set the right order for fields on the form.
+  $field_order = array(
+    'name',
+    'surname',
+    'mail',
+    'phone',
+    'subject',
+    'cid',
+    'message',
+    'copy',
+  );
+  foreach ($field_order as $key => $field) {
+    // Set/Reset the field's
+    // weight to the array key value
+    // from our order array.
+    $form[$field]['#weight'] = $key;
+  }
+}
+
+function _dfata_course_enquiry_form_alter(&$form, &$form_state) {
+  // Set the value of the Course title from the query parameter.
+  $query_params = drupal_get_query_parameters();
+  if (!empty($query_params['course_nid'])) {
+    $nid = $query_params['course_nid'];
+    $course = node_load($nid);
+    if ($course->type == "course") {
+      $form['submitted']['program_event_title']['#default_value'] = $course->title;
+    }
+  }
+  $form['#validate'][] = "_dfata_course_enquiry_form_validate";
+}
+
+function _dfata_course_enquiry_form_validate($form, &$form_state) {
+  // Throw an error when email addresses do not match.
+  if ($form_state['values']['submitted']['email'] != $form_state['values']['submitted']['email_confirmation']) {
+    form_set_error('submitted][email', t('Your emails do not match. Please fix them.'));
+    form_set_error('submitted][email_confirmation');
   }
 }

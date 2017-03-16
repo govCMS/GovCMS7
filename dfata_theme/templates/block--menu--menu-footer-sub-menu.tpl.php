@@ -58,7 +58,7 @@
       <?php if (theme_get_setting('dfata_theme_footer_copyright')): ?>
         <?php print decode_entities(theme_get_setting('dfata_theme_footer_copyright')); ?>
       <?php else: ?>
-        &copy; <?php print date('Y'); ?>. <?php print variable_get('site_name', 'Home'); ?>. All rights reserved.
+        &copy; <?php print date('Y'); ?> <?php print variable_get('site_name', 'Home'); ?>. All rights reserved.
       <?php endif; ?>
       </div>
   </div>
