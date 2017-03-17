@@ -1,0 +1,267 @@
+@mixin wrapper-padding {
+  @include pad(0 $gutter);
+  width: 100%;
+  box-sizing: border-box;
+
+  @include media($desktop) {
+    width: 100%;
+    min-width: $max-width;
+  }
+}
+
+@mixin flex-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  header[role='banner'],
+  footer[role='contentinfo'] {
+    flex: none;
+  }
+
+  main {
+    // makes flex work in IE10/11 https://thatemil.com/blog/2013/11/03/sticky-footers-flexbox-and-ie10/
+    flex: 1 0 auto;
+  }
+}
+
+/*
+Layout
+
+Maximum page width is set to 1200px. Gutters between the columns are a minimum of 32px.
+
+```
+$max-width: em(1200) !global;
+$gutter: em(32);
+```
+
+We define the grid placement for the following page layout elements:
+
+- `header[role='banner']` and `footer[role='contentinfo']`
+- `main.content-main`
+- `aside`.
+
+To create your own element you will need to use the <a href="http://thoughtbot.github.io/neat-docs/latest/#span-columns" rel="external">Neat <code>span-columns</code> function</a>.
+
+For each new element you will need to set column properties for the breakpoints, from smallest to largest:
+
+1. `$mobile`
+2. `$tablet`
+3. `$desktop`
+
+The following diagram shows how the main content area takes up 12 of 16 columns at `$desktop` and above:
+
+![Diagram of the layout across 16 columns](/kss-assets/img/img_grid_layout.png)
+
+For iOS users ensure you set the `viewport` to the `device-width` in your `<head>` to ensure your site is responsive:
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+Style guide: Grid.5 Layout
+*/
+
+/*
+Wrapper class
+
+There is a wrapper class (`<div class="wrapper">`) for wrapping the contents of a block within the grid, while allowing its outer container to run the full viewport width.
+
+This is currently used for the page `header` and `footer`, and also for the [breadcrumbs](section-navigation.html#kssref-navigation-2-breadcrumbs).
+
+Style guide: Grid.5 Layout.1 Wrapper
+*/
+
+.wrapper {
+  @include wrapper-padding;
+  @include outer-container;
+}
+
+html {
+  @include ie-lte(8) {
+    position: relative;
+    min-height: 100%;
+  }
+}
+
+body {
+  @include flex-layout;
+}
+
+main {
+  @include wrapper-padding;
+  @include outer-container;
+
+  @include media($tablet) {
+    padding-top: $base-spacing * 2;
+  }
+
+  @include ie-lte(8) {
+    @include ie-clearfix;
+  }
+
+  .form-wrapper {
+    @include fill-parent;
+
+    @include media($tablet) {
+      @include span-columns(4 of 6);
+    }
+  }
+
+  @include ie-lte(7) {
+    zoom: 1;
+  }
+
+  /*
+  Sidebar
+
+  Primary content is always contained in 12 columns. This allows for seamless introduction of a sidebar/side navigation.
+
+  ![Diagram of the layout with optional aside nav](/kss-assets/img/img_grid_layout_nav.png)
+
+  By default the sidebar sits to the right of the main content. When the sidebar contains content controls (eg filters), instead of navigation, it can sit on the left side. Use the class `.sidebar-has-controls` on the parent `main` element:
+
+  ```
+  <main class="sidebar-has-controls">
+    <aside class="sidebar">
+    ...
+    </aside>
+    <article role="main" id="content" class="content-main">
+    ...
+    </article>
+  </main>
+  ```
+
+  Style guide: Grid.6 Sidebar
+  */
+  @include direction-context(right-to-left) {
+    .sidebar {
+      @include fill-parent;
+
+      @include media($tablet) {
+        @include span-columns(4 of 12);
+      }
+
+      @include media($desktop) {
+        @include span-columns(4 of 16);
+      }
+    }
+
+    .content-main {
+      @include fill-parent;
+
+      @include media($tablet) {
+        @include span-columns(8 of 12);
+
+        @include ie-lte(8) {
+          margin-left: 0;
+        }
+      }
+
+      @include media($desktop) {
+        @include span-columns(12 of 16);
+
+        @include ie-lte(8) {
+          margin-left: 0;
+        }
+      }
+
+      &:first-child {
+
+        @include reset-layout-direction;
+
+        @include fill-parent;
+        @include shift(0);
+
+        @include media($tablet) {
+          @include span-columns(8 of 12);
+          @include shift(0);
+        }
+
+        @include media($desktop) {
+          @include span-columns(10 of 16);
+          @include shift(0);
+        }
+      }
+    }
+  }
+
+  &.sidebar-has-controls {
+    @include reset-layout-direction;
+
+    .sidebar {
+      @include fill-parent;
+
+      @include media($tablet) {
+        @include span-columns(4 of 12);
+        margin-left: 0;
+      }
+
+      @include media($desktop) {
+        @include span-columns(4 of 16);
+      }
+    }
+
+    .content-main {
+      @include fill-parent;
+
+      @include media($tablet) {
+        @include span-columns(8 of 12);
+      }
+
+      @include media($desktop) {
+        @include span-columns(9 of 16);
+        @include shift(1);
+      }
+    }
+  }
+}
+
+
+/*
+Header & footer
+
+The site header and footer are targeted by their ARIA roles, not a `class` or `id`. Use `banner` and `contentinfo` roles, respectively.
+
+Style guide: Grid.7 Header & footer
+*/
+
+header {
+  &[role='banner'] {
+    @include outer-container(100%);
+    min-width: 100%;
+  }
+}
+
+footer {
+  &[role='contentinfo'] {
+    @include outer-container(100%);
+    @include pad(0 default);
+    margin-top: ($base-spacing * 2);
+    min-width: 100%;
+  }
+}
+
+/*
+Accessibility
+
+Low-vision users should be able to increase the size of the text by up to 200 per cent without breaking the layout.
+
+<details open data-label="grid-text-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Grid.8 Accessibility
+*/

@@ -1,0 +1,206 @@
+/*
+Accordions
+
+Accordions help users find only the content they need.
+
+The **expand/collapse all** feature will be provided soon &mdash; this will be mandatory if using a series of accordion elements.
+
+***
+
+This guidance is in part adapted from <a href="https://standards.usa.gov/getting-started/" rel="external">18F Draft US Web Design Standards</a> under <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="external">CC0 1.0 Universal</a>.
+
+Style guide: Accordions
+*/
+
+/*
+Content accordion
+
+Use content accordions if the user only needs a selection of the information on a page.
+
+Don't use an accordion if the user needs to see all of the information.
+
+<details open data-label="accordions-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Markup: templates/content-accordion.hbs
+
+Style guide: Accordions.1 Content accordion
+*/
+
+/*
+Controls accordion
+
+Use controls accordions to make page controls easier to use.
+
+<details open data-label="controls-accordions-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Markup: templates/controls-accordion.hbs
+
+Style guide: Accordions.2 Controls accordion
+*/
+
+/*
+Usability
+
+Don't use an accordion if the user needs to see all of the information. Structure and rewrite your content instead.
+
+Use [definition or description lists](section-typography.html#guide-typography-6-lists) for glossaries instead of accordions.
+
+Building accordions
+- Keep accordion headings and labels short but descriptive.
+- Accordions can be set to open or closed initially using `aria-expanded` property set to `true` or `false`.
+- JavaScript behaviour is used to replace the browser default for `<details>`.
+- For multiple accordion elements each `details` element must have its own `data-label` attribute.
+- You can run a text/string search of accordion content, even when collapsed (the string stays hidden until the accordion is opened).
+
+Style guide: Accordions.3 Usability
+*/
+
+%base-accordion {
+  display: block;
+  margin: $base-spacing 0 0;
+  overflow: hidden;
+}
+
+%base-accordion-button {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: $small-spacing $large-spacing $small-spacing $small-spacing;
+  border-radius: $tiny-border-radius $tiny-border-radius 0 0;
+  background-color: $background-secondary-colour;
+  cursor: pointer;
+  text-align: left;
+  font-weight: $bold-font-weight;
+  font-size: rem(20);
+  transition: background-color $transition-timing-fast $transition-easing;
+
+  &:last-child {
+    border-bottom-width: 1px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $border-colour;
+    outline: none;
+  }
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::before {
+    @extend %icon-chevron-down--navy;
+
+    content: '';
+    position: absolute;
+    top: .5em;
+    bottom: .5em;
+    right: $small-spacing;
+    width: $medium-spacing;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+    transform: rotate(0deg);
+    transition: transform $transition-timing $transition-easing;
+
+    [aria-expanded='true'] & {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+%base-accordion-panel {
+  display: block;
+  height: auto;
+  overflow: hidden;
+  padding: $base-spacing $base-spacing $small-spacing;
+  border-radius: $tiny-border-radius $tiny-border-radius 0 0;
+
+  :first-child {
+    margin-top: 0;
+  }
+}
+
+details,
+.accordion {
+  @extend %base-accordion;
+
+  border-color: $border-colour;
+  border-width: 1px 0;
+  border-style: solid;
+
+  & + & {
+    margin-top: 0;
+    border-top: none;
+  }
+}
+
+.accordion-button,
+summary {
+  @extend %base-accordion-button;
+
+  [aria-expanded='true'] & {
+    border-bottom: 1px solid $border-colour;
+  }
+}
+
+.accordion-panel {
+  @extend %base-accordion-panel;
+}
+
+.accordion--controls {
+  @extend %base-accordion;
+
+  margin-top: $small-spacing;
+  border: none;
+
+  summary {
+    @extend %base-accordion-button;
+
+    border: none;
+    background-color: $lighter-aqua;
+    font-size: $small-font-size;
+
+    &:hover,
+    &:focus {
+      background-color: $light-aqua;
+      color: $darker-aqua;
+    }
+  }
+
+  .accordion-panel {
+    @extend %base-accordion-panel;
+
+    border: $small-spacing solid $lighter-aqua;
+    border-top: none;
+  }
+}

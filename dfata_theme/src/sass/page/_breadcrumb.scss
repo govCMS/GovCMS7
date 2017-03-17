@@ -1,0 +1,22 @@
+.content-header {
+  .breadcrumbs--inverted {
+    display: block;
+    background-color: transparent;
+    color: inherit;
+    ul {
+      padding-top: rem(8px);
+      padding-bottom: 0;
+      li {
+        a {
+          white-space: nowrap;
+          color: $academy_green;
+        }
+        &:not(:last-child) {
+          // Override previously defined icon with new path.
+          background-image: ui-kit-icon("arrow-right--aqua.svg");
+          background-position: right top 7px;
+        }
+      }
+    }
+  }
+}

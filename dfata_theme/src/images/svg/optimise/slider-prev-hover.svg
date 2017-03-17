@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="11px" height="18px" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>Prev</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="govCMS-Theme" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DESKTOP-01-A-HOMEPAGE-v3" transform="translate(-310.000000, -232.000000)" fill="#FFFFFF">
+            <g id="Hero-Image" transform="translate(0.000000, 222.000000)">
+                <g id="Panel-v2" transform="translate(240.000000, 0.000000)">
+                    <g id="Navigation" transform="translate(70.000000, 0.000000)">
+                        <path d="M5.25184766,21.2481522 L-2.24815228,13.7481523 L-3.74815228,15.2481523 L5.25554315,24.2518477 L6.75554315,22.7518477 L6.75184766,22.7481522 L14.2518477,15.2481523 L12.7518477,13.7481523 L5.25184766,21.2481522 Z" id="Prev" transform="translate(5.251848, 19.000000) scale(-1, 1) rotate(-90.000000) translate(-5.251848, -19.000000) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

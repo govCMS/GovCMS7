@@ -1,0 +1,124 @@
+/*
+Grid
+
+This framework uses <a href="http://bourbon.io/" rel="external">Bourbon</a> and <a href="http://neat.bourbon.io/" rel="external">Neat</a> to create a consistent 16 column responsive grid layout with good defaults.
+
+Bourbon is a <a href="http://sass-lang.com/" rel="external">SASS</a> mixin library (it provides little styling). Neat is a flexible grid framework.
+
+Avoid mixing this layout with other grid layouts.
+
+<p class="callout"><strong>Grid classes?</strong> There are no non-semantic grid classes with which to set block elements. This is intentional. If you need to add to or customise the grid system see below.</p>
+
+Primary content is always contained in 12 columns. This allows for seamless introduction of a sidebar/side navigation.
+
+The grid unit proportions, gutters and spacing are defined in `_grid-settings.scss`.
+
+If you need an element not defined here you are probably not the only one &mdash; please <a href="https://github.com/AusDTO/gov-au-ui-kit/issues" rel="external">log a GitHub issue</a> so we can provide it for everyone.
+
+***
+
+This guidance is in part adapted from <a href="http://govuk-elements.herokuapp.com" rel="external">GOV.UK elements</a> under <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="external">Open Government Licence v3.0</a>, and <a href="https://standards.usa.gov/getting-started/" rel="external">18F Draft US Web Design Standards</a> under <a href="https://creativecommons.org/publicdomain/zero/1.0/legalcode" rel="external">CC0 1.0 Universal</a>.
+
+Style guide: Grid
+*/
+
+$grid-columns: 4 !global;
+$max-width: em(1200) !global;
+$gutter: em(32);
+
+/*
+Responsive breakpoints
+
+This framework has a mobile-first default layout of 4 columns, and adds 3 breakpoints for grid layout on larger screens:
+
+- Default: 4 columns
+- Mobile: 8 columns, 420px minimum
+- Tablet: 12 columns, 768px minimum
+- Desktop: 16 columns, 1200px minimum
+
+If you give an element a modified grid setting consider the implications for all breakpoints. The Digital Service Standard recommends you <a href="https://www.dto.gov.au/standard/6-consistent-and-responsive/" rel="external">build using mobile first design principles</a>.
+
+Please also consider the [font size](section-typography.html#kssref-typography-2-headings-body-copy-1-breakpoints) at different breakpoints.
+
+```
+$mobile: new-breakpoint(min-width 420px 8);
+$tablet: new-breakpoint(min-width 768px 12);
+$desktop: new-breakpoint(min-width $max-width 16);
+```
+
+Style guide: Grid.3 Breakpoints
+*/
+
+$mobile-minwidth: 420px;
+$tablet-minwidth: 768px;
+$desktop-minwidth: 1200px;
+
+$mobile-grid-columns: 8;
+$tablet-grid-columns: 12;
+$content-grid-columns: $tablet-grid-columns;
+$desktop-grid-columns: 16;
+
+$mobile: new-breakpoint(min-width $mobile-minwidth, $mobile-grid-columns);
+$mobile-only: new-breakpoint(min-width $mobile-minwidth max-width $tablet-minwidth - 1, $mobile-grid-columns);
+$tablet: new-breakpoint(min-width $tablet-minwidth, $tablet-grid-columns);
+$tablet-only: new-breakpoint(min-width $tablet-minwidth max-width $desktop-minwidth - 1, $tablet-grid-columns);
+$desktop: new-breakpoint(min-width $max-width, $desktop-grid-columns);
+
+/*
+Helpers
+
+Style guide: Grid.4 Helpers
+*/
+
+/*
+Omega Reset
+
+When applying grid-columns to responsive layouts you may find yourself needing to reset the [omega properties applied by Neat](http://thoughtbot.github.io/neat-docs/latest/#omega):
+
+```
+.grid-item {
+  @include span-columns(2 of 4);
+  @include omega(2n);
+
+  @include media($desktop) {
+    @include omega-reset(2n);
+    @include span-columns(4 of 12);
+    @include omega(3n);
+  }
+}
+```
+
+Style guide: Grid.4 Helpers.1 Font stacks
+*/
+
+@mixin omega-reset($nth) {
+  $nth-plus-one: '#{$nth}+1';
+
+  &:nth-child(#{$nth}) {
+    margin-right: flex-gutter($content-grid-columns);
+  }
+
+  &:nth-child(#{$nth-plus-one}) {
+    clear: none;
+  }
+}
+
+/*
+Debugging
+
+Turn on the visual grid to help debugging:
+
+```
+$visual-grid: true;
+```
+
+See the example <a href="http://neat.bourbon.io/examples/" rel="external">Bourbon Neat working grid layout</a>.
+
+Style guide: Grid.4 Helpers.2 Debugging
+*/
+
+// Toggle visibility of your grid columns for development/debugging.
+$visual-grid: false;
+
+$border-box-sizing: true;
+$disable-warnings: true;

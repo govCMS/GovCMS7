@@ -1,0 +1,223 @@
+/*
+Link styles
+
+Styling for types and classes of links.
+
+There are other link styles documented elsewhere (for example [tags in list styles](http://gov-au-ui-kit.apps.staging.digital.gov.au/section-list-styles.html)).
+
+Style guide: Link styles
+*/
+
+/*
+Hover, focus & external links
+
+The `:hover` and `:focus` styles are identical.
+
+Inverted colour versions of `:hover` and `:focus` are created using `@mixin link-colours` where required (eg in the page header). The `_buttons.scss` partial includes a similar mixin: `@mixin button-colours`.
+
+Link to external sites using `rel="external"`.
+
+Markup: templates/basic-links.hbs
+
+<details open data-label="basic-links-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: Link styles.1 Hover links
+*/
+
+// A base extend that provides the styling for icons at the end of a link.
+%base-link-icon--after {
+  content: '';
+  position: absolute;
+  display: inline;
+  width: $medium-spacing;
+  height: $medium-spacing;
+  background-repeat: no-repeat;
+  background-position: right $tiny-spacing;
+  border-bottom: 1px solid transparent;
+}
+
+@mixin link-colours($text-colour, $hover-bg-colour, $hover-text-colour: $text-colour) {
+  $link-disabled-colour: transparentize($text-colour, 0.3);
+  color: $text-colour;
+
+  a {
+    color: $text-colour;
+    text-decoration: none;
+    outline: none;
+    border-bottom: solid 1px $hover-bg-colour;
+    transition-timing-function: $transition-easing;
+    transition-duration: $transition-timing-fast;
+    transition-property: background-color, border-color, color;
+
+    &:hover,
+    &:focus {
+      background-color: $hover-bg-colour;
+      color: $hover-text-colour;
+    }
+
+    &[rel~='external'] {
+      display: inline;
+      position: relative;
+      margin-right: $base-spacing;
+
+      &:hover {
+        border-color: transparent;
+      }
+
+      &::after {
+        @extend %icon-external-link--aqua;
+        @extend %base-link-icon--after;
+
+        background-size: (0.75 * $medium-spacing) auto;
+      }
+    }
+  }
+
+  /*
+  See more link
+
+  Use see more links at the end of [lists](section-list-styles.html),
+  to take the user to a index page of all items.
+
+  Markup: <a class="see-more" href="#">See more</a>
+
+  <details open data-label="placeholder-link-accessibility" aria-expanded="false">
+    <summary>Accessibility &amp; browser testing</summary>
+    <div class="accordion-panel">
+    <strong>Passed</strong>:
+      <ul>
+        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+      </ul>
+    <strong>Untested</strong>:
+      <ul>
+        <li>WCAG:AA manual</li>
+        <li>Browser support &mdash; automated and manual</li>
+      </ul>
+    </div>
+  </details>
+
+  Style guide: Link styles.2 See more link
+  */
+
+  .see-more {
+    display: inline-block;
+    position: relative;
+    margin-right: $base-spacing;
+    font-weight: $heading-font-weight;
+    color: $button-bg-colour;
+
+    &::after {
+      @extend %icon-arrow-right--aqua;
+
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -($medium-spacing);
+      display: block;
+      width: $medium-spacing;
+      height: $medium-spacing;
+      background-repeat: no-repeat;
+      background-position: right $tiny-spacing;
+      background-size: (0.8 * $small-spacing) auto;
+    }
+
+    &:hover,
+    &:focus {
+      color: $hover-text-colour;
+    }
+  }
+
+  /*
+  Placeholder links (prototyping)
+
+  Use placeholder links (greyed out links) to show actions that users can't currently take.
+
+  Your content should explain why the action isn't available and when it will be.
+
+  <p class="callout">Placeholders only work in `<span>` tags; not `<a>`.</p>
+
+  Markup: <p><span class="placeholder-link">Draft news item</span></p>
+  <p><a href="#">News item</a><p>
+
+  <details open data-label="placeholder-links-accessibility" aria-expanded="false">
+    <summary>Accessibility &amp; browser testing</summary>
+    <div class="accordion-panel">
+    <strong>Passed</strong>:
+      <ul>
+        <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+        <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+      </ul>
+    <strong>Untested</strong>:
+      <ul>
+        <li>WCAG:AA manual</li>
+        <li>Browser support &mdash; automated and manual</li>
+      </ul>
+    </div>
+  </details>
+
+  Style guide: Link styles.3 Placeholder links
+  */
+
+  // Specifying a span here explicitly to avoid a.placeholder-link usage.
+  span {
+    &.placeholder-link {
+      color: $link-disabled-colour;
+      border-bottom: none;
+      cursor: not-allowed;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Placeholder link support for .local-nav padding and indents
+.local-nav {
+  ul {
+    .placeholder-link {
+      display: block;
+      border-left: 4px solid transparent;
+      padding: ($medium-spacing / 2) $small-spacing;
+    }
+
+    ul {
+      ul {
+        .placeholder-link {
+          padding-left: $base-spacing;
+        }
+
+        ul {
+          .placeholder-link {
+            padding-left: $base-spacing + $small-spacing;
+          }
+        }
+      }
+    }
+  }
+}
+
+main > article {
+  @include link-colours($non-black, $light-aqua, $non-black);
+  @include button-colours($button-bg-colour, $button-bg-colour--hover, $button-bg-colour--active, $button-text-colour);
+}
+
+footer[role='contentinfo'] {
+  @include link-colours($non-black, $light-aqua, $non-black);
+  @include button-colours(transparent, $button-bg-colour--hover, $button-bg-colour--active, $button-bg-colour--hover, $button-text-colour);
+}

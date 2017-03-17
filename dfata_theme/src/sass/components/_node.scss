@@ -1,0 +1,142 @@
+#content {
+  > .content-body {
+    margin-top: 3em;
+    @include breakpoint(tablet) {
+      margin-top: 0;
+    }
+  }
+
+  .view-mode-full {
+    &.node-faculty {
+      > .field-name-field-faculty-head {
+        > .field-items {
+          > .field-item {
+            display: inline-block;
+            vertical-align: top;
+          }
+        }
+        .node-staff {
+          max-width: 200px;
+          > .field {
+            margin: 0;
+          }
+          > .field-name-title {
+            font-weight: bold;
+          }
+        }
+      }
+      > .field-name-field-learning-streams {
+        .field-items {
+          padding-left: rem(32px);
+          > .field-item {
+            display: list-item;
+          }
+        }
+      }
+      > .field-name-available-courses {
+        h2 {
+          font-size: rem(16px);
+          font-weight: bold;
+        }
+        .view .view-content .views-row .node-course {
+          padding: 0;
+          margin: 0;
+          > h2 {
+            margin-bottom: 0;
+            font-size: inherit;
+            > a {
+              border: none;
+              font-weight: normal;
+              font-size: inherit;
+            }
+          }
+          > .content {
+            padding: 0;
+            > .field-name-body {
+              margin: 0;
+              p {
+                margin: 0;
+                line-height: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.node-course {
+      .info-wrapper {
+        padding: rem(8px) rem(32px);
+        display: inline-block;
+
+        .field {
+          .field-label {
+            @include breakpoint(tablet) {
+              width: rem(190px);
+            }
+          }
+        }
+
+        .date-display-range {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  body.not-front.page-node.node-type-news-article & {
+    .content-header {
+      .content-header-inner.has-image {
+        @include breakpoint(tablet) {
+          height: rem(300px);
+        }
+        .title_image {
+          position: absolute;
+          right: 0;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          z-index: -1;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+          }
+
+          &:after {
+            content: ' ';
+            position: absolute;
+            right: 0;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+          }
+        }
+
+        .breadcrumbs--inverted {
+          li {
+            &:last-child {
+              color: $academy_light_grey;
+            }
+            &:not(:last-child) {
+              // Override previously defined icon with new path.
+              background-image: ui-kit-icon("arrow-right--white.svg");
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.page-node.node-type-news-article .node-news-article {
+  .field-name-field-tags {
+    > .field-items {
+      > .field-item {
+        display: list-item;
+        margin-left: rem(32px);
+      }
+    }
+  }
+}

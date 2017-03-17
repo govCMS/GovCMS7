@@ -1,0 +1,3 @@
+@function image-url($url) {
+  @return url('#{$gov-ui-kit-image-base-url}#{$url}');
+}

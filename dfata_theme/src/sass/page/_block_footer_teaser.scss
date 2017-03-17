@@ -1,0 +1,40 @@
+#block-views-footer-teaser-block {
+  padding-top: $default_padding * 2;
+  padding-bottom: $default_padding * 2;
+  &>h2 {
+    @include center-column($desktop_column);
+    @include medium-title;
+  }
+  .content {
+    @include center-column($desktop_column);
+  }
+  .view-footer-teaser {
+    .view-content {
+      @include breakpoint(tablet) {
+        @include outer-container(100%);
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .views-row {
+        @include listing-component-wrapper;
+        padding: 0;
+        background-color: transparent;
+        @include breakpoint(tablet) {
+          @include span-columns(4 of 12);
+        }
+        h2 {
+          @include listing-component-heading;
+          margin-top: 0;
+        }
+        .field-name-field-description {
+          @include listing-component-body;
+        }
+        &:nth-child(3n) {
+          @include breakpoint(tablet) {
+            @include omega();
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+$gov-ui-kit-image-base-url: '../latest/img/' !default;
+
+$base-z-index: 0;
+$base-border-radius: 3px;
+$tiny-border-radius: 1px;
+$large-border-radius: ($base-border-radius * 4);
+
+$transition-timing: .2s;
+$transition-timing-fast: $transition-timing / 2;
+$transition-easing: ease-in-out;
+
+$base-serif: 'Book Antiqua', Georgia, 'Bitstream Vera Serif', serif;
+$base-sans-serif: 'Open Sans', Verdana, 'Bitstream Vera Sans', sans-serif;
+$base-monospace: 'Lucida Sans Typewriter', 'Lucida Console', Monaco, 'Bitstream Vera Sans Mono', monospace;
+
+$base-font-family: $base-sans-serif;
+
+// Leading/line-height.
+$base-leading: 1.6;
+$base-heading-leading: 1.4;
+$small-leading: 1.2;
+$double-leading: 2;
+
+// Base spacing, relative to leading.
+$base-spacing: $base-leading * 1em;
+$large-spacing: $base-spacing * 2;
+$medium-spacing: $base-spacing * 0.75;
+$small-spacing: $base-spacing / 2;
+$tiny-spacing: $base-spacing / 4;
+
+// Font weights
+$base-font-weight: 400;
+$bold-font-weight: 700;
+$heading-font-weight: $bold-font-weight;
+
+// Font sizes
+$smaller-font-size: 62.5%;
+$small-font-size: 87.5%;
+$large-font-size: 150%;
+
+// Font styles
+$base-font-style: normal;

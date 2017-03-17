@@ -1,0 +1,153 @@
+// =========================================================
+// TOP NAVIGATION
+// =========================================================
+.region-navigation {
+  background-color: $bg_colour;
+  .block-superfish {
+    @include center-column($desktop_column);
+    display: none;
+    @include breakpoint(tablet) {
+      display: block;
+    }
+    ul.sf-menu {
+      display: table;
+      width: 100%;
+      position: relative;
+      @include breakpoint(desktop) {
+        table-layout: fixed;
+      }
+      // If JS is enabled - hide sub nav menus until superfish finishes loading.
+      &:not(.superfish-processed) {
+        &>li>ul {
+          html:not(.no-js) & {
+            visibility: hidden;
+          }
+        }
+      }
+      &>li {
+        display: table-cell;
+        vertical-align: top;
+        float: none;
+        &.menuparent {
+          &>a:after {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            background-image: url(../images/svg/nav_down_arrow.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            width: rem(11px);
+            height: rem(7px);
+            margin-left: rem(5px);
+          }
+        }
+        &.active-trail {
+          &>a {
+            color: $primary_1;
+          }
+        }
+        &>a {
+          display: inline-block;
+          padding-top: $default_padding;
+          padding-bottom: rem(($default_padding_px - 4px));
+          box-sizing: content-box;
+          width: 100%;
+          height: 100%;
+          color: $font-color-light;
+          vertical-align: top;
+          text-align: center;
+          text-decoration: none;
+          line-height: rem(24px);
+        }
+        &>ul {
+          top: 100%;
+          padding: 0;
+          margin: 0;
+          li {
+            &.menuparent {
+              &>a {
+                background-image: url(../images/svg/nav_right_arrow.svg);
+                background-repeat: no-repeat;
+                background-position: right rem(22px) center;
+              }
+            }
+            a {
+              background-color: $primary_1;
+              color: white;
+              text-decoration: none;
+              padding-left: rem(30px);
+              padding-right: rem(30px);
+              padding-top: rem(15px);
+              padding-bottom: rem((15px - 1px));
+              border-bottom: 1px solid transparent;
+              &:hover, &:focus {
+                background-color: $main_menu_hover;
+                border-bottom-color: white;
+              }
+            }
+            &.active-trail {
+              &>a {
+                background-color: $main_menu_active;
+                &:hover, &:focus {
+                  background-color: $main_menu_hover;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mobile-nav {
+  position: relative;
+  @include breakpoint(tablet) {
+    display: none;
+  }
+  .js & {
+    display: none;
+  }
+  &.menu-open {
+    display: block;
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
+  ul.links {
+    border-top: 1px solid $neutral_3;
+    padding-left: 0;
+    padding-top: $default_padding;
+    padding-bottom: $default_padding;
+    text-align: center;
+    li {
+      list-style-type: none;
+      margin: 0;
+      a {
+        outline: 0;
+        display: block;
+        font-weight: 600;
+        font-size: rem(18);
+        text-transform: uppercase;
+        text-decoration: none;
+        padding-top: $default_padding / 2;
+        padding-bottom: $default_padding / 2;
+        color: $neutral_1;
+        &:hover, &:focus {
+          color: white;
+          background-color: $secondary_1;
+        }
+      }
+      &.active {
+        a {
+          color: white;
+          background-color: $main_menu_active;
+          &:hover, &:focus {
+            color: white;
+            background-color: $secondary_1;
+          }
+        }
+      }
+    }
+  }
+}

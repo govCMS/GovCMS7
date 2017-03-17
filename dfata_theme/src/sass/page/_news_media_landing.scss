@@ -1,0 +1,21 @@
+.page-news-media {
+  .bean-image-and-text {
+    @include listing-component-wrapper;
+    padding-top: $listing_component_image_height;
+    padding-left: 0;
+    padding-right: 0;
+    .field-name-field-bean-image {
+      @include listing-component-image;
+    }
+    .field-name-field-bean-text {
+      @include listing-component-body;
+      margin-top: $default_padding;
+    }
+    .field-name-field-link-to {
+      .field-item {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

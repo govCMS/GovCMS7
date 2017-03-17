@@ -1,0 +1,337 @@
+@import './../../assets/sass/ui-kit';
+
+%scrolling-example {
+  width: 100%;
+}
+
+.guide-section {
+  .wrapper {
+    box-sizing: border-box;;
+    min-width: 0;
+  }
+}
+
+.guide-section-nav {
+  @include media($tablet) {
+    margin-top: ($base-spacing * 4);
+  }
+}
+
+.guide-section-header {
+  margin-bottom: $base-spacing * 2;
+}
+
+.guide-example {
+  border: solid 5px $non-white;
+  margin: $base-spacing 0;
+  margin-bottom: 0;
+  padding: $base-spacing;
+}
+
+.guide-example--type {
+  @extend %scrolling-example;
+  background-color: $non-white;
+  border-radius: $base-border-radius;
+  color: $dark-aqua;
+  margin-bottom: $small-spacing;
+  padding: 2em;
+  overflow: auto;
+
+  p {
+    font-size: 2em;
+  }
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+pre {
+  @extend %scrolling-example;
+  margin: 0 0 $base-spacing;
+  white-space: pre;
+  overflow: scroll;
+  background-color: $non-white;
+  padding: $small-spacing;
+  max-height: 15.9em;
+}
+
+pre,
+code {
+  color: $navy;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr:nth-child(even) {
+    background-color: $non-white;
+  }
+
+  td,
+  th {
+    border-bottom: solid 1px $light-grey;
+    padding: $tiny-spacing;
+    font-size: $small-font-size;
+    text-align: left;
+
+    @include media($tablet) {
+      padding: $small-spacing;
+      font-size: initial;
+    }
+  }
+
+  thead {
+    border-bottom: solid 2px $grey;
+  }
+}
+
+.guide-colour {
+  float: left;
+  width: 43%;
+  margin-right: 3%;
+  margin-bottom: $gutter;
+  border: solid 1px $light-grey;
+
+  @include media($tablet) {
+    float: none;
+    margin-right: 0;
+    @include span-columns(3 of 12);
+    @include omega(4n);
+  }
+
+  .swatch {
+    padding: 50% 0;
+    border-bottom: solid 1px $light-grey;
+  }
+
+  .text {
+    padding: $small-spacing;
+    margin: 0;
+
+    small {
+      display: block;
+      line-height: 1.5;
+    }
+  }
+}
+
+.guide-colour-examples {
+  @include outer-container;
+}
+
+.guide-colour-block {
+  padding: $small-spacing $small-spacing $small-spacing $medium-spacing;
+
+  .invert {
+    float: right;
+    padding: 0 0.5em;
+    border-radius: $base-border-radius;
+    font-weight: bold;
+  }
+}
+
+// Colour background classes
+
+.bg-non-black {
+  background-color: $non-black;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $non-black;
+  }
+}
+
+.bg-grey {
+  background-color: $grey;
+  color: $white;
+
+  .invert {
+    background-color: $white;
+    color: $grey;
+  }
+}
+
+.bg-light-grey {
+  background-color: $light-grey;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $light-grey;
+  }
+}
+
+.bg-non-white {
+  background-color: $non-white;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $non-white;
+  }
+}
+
+.bg-white {
+  background-color: $white;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $white;
+  }
+}
+
+.bg-aqua {
+  background-color: $aqua;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $aqua;
+  }
+}
+
+.bg-dark-aqua {
+  background-color: $dark-aqua;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $dark-aqua;
+  }
+}
+
+.bg-darker-aqua {
+  background-color: $darker-aqua;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $darker-aqua;
+  }
+}
+
+.bg-light-aqua {
+  background-color: $light-aqua;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $light-aqua;
+  }
+}
+
+.bg-lighter-aqua {
+  background-color: $lighter-aqua;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $lighter-aqua;
+  }
+}
+
+.bg-navy {
+  background-color: $navy;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $navy;
+  }
+}
+
+.bg-dark-navy {
+  background-color: $dark-navy;
+  color: $non-white;
+
+  .invert {
+    background-color: $non-white;
+    color: $dark-navy;
+  }
+}
+
+.bg-maroon {
+  background-color: $maroon;
+  color: $white;
+
+  .invert {
+    background-color: $white;
+    color: $maroon;
+  }
+}
+
+.bg-error-red {
+  background-color: $red;
+  color: $white;
+
+  .invert {
+    background-color: $white;
+    color: $red;
+  }
+}
+
+.bg-light-red {
+  background-color: $light-red;
+  color: $red;
+
+  .invert {
+    background-color: $red;
+    color: $light-red;
+  }
+}
+
+.bg-success-green {
+  background-color: $green;
+  color: $white;
+
+  .invert {
+    background-color: $white;
+    color: $green;
+  }
+}
+
+.bg-light-green {
+  background-color: $light-green;
+  color: $green;
+
+  .invert {
+    background-color: $green;
+    color: $light-green;
+  }
+}
+
+.bg-warning-yellow {
+  background-color: $yellow;
+}
+
+.bg-light-yellow {
+  background-color: $light-yellow;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $light-yellow;
+  }
+}
+
+.bg-info-blue {
+  background-color: $blue;
+}
+
+.bg-light-blue {
+  background-color: $light-blue;
+  color: $non-black;
+
+  .invert {
+    background-color: $non-black;
+    color: $light-blue;
+  }
+}

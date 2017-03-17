@@ -1,0 +1,82 @@
+@mixin inline-background-image($img) {
+  background-image: image-url('icons/' + $img + '.svg');
+
+  @include ie-lte(8) {
+    background-image: image-url('icons/' + $img + '.png');
+  }
+}
+
+// Generic icons
+%icon-arrow-right {
+  @include inline-background-image('arrow-right');
+}
+
+%icon-arrow-right--white {
+  @include inline-background-image('arrow-right--white');
+}
+
+%icon-arrow-right--aqua {
+  @include inline-background-image('arrow-right--aqua');
+}
+
+%icon-bars {
+  @include inline-background-image('bars');
+}
+
+%icon-close {
+  @include inline-background-image('close');
+}
+
+%icon-chevron-down--navy {
+  @include inline-background-image('chevron-down--navy');
+}
+
+// Specific functions
+%icon-external-link--aqua {
+  @include inline-background-image('external-link--aqua');
+}
+
+// This class is legacy as of v1.2
+// Marked for removal in v2.0
+.icon-chevron {
+  &::before {
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.5em;
+    left: 0.15em;
+    position: relative;
+    vertical-align: top;
+    width: 0.5em;
+    transition: transform 300ms linear;
+  }
+
+  &.top {
+    &::before {
+      top: 0.75em;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &.right {
+    &::before {
+      left: 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &.bottom {
+    &::before {
+      top: 0.5em;
+      transform: rotate(135deg);
+    }
+  }
+
+  &.left {
+    &::before {
+      left: 0.25em;
+      transform: rotate(-135deg);
+    }
+  }
+}

@@ -1,0 +1,400 @@
+[class^='controls'] {
+  @include link-colours($link-inverted-colour, $link-inverted-colour, $controls-bg-colour);
+  @include button-colours(transparent, $body-inverted-text-colour, $body-inverted-text-colour, $controls-bg-colour);
+
+  padding: $tiny-spacing 0;
+  background-color: $controls-bg-colour;
+  color: $body-inverted-text-colour;
+
+  section {
+
+    @include span-columns(4 of 4);
+
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+    }
+
+    @include media($desktop) {
+      @include span-columns(8 of 16);
+    }
+
+    &:first-child:last-child {
+      @include span-columns(4 of 4);
+
+      @include media($tablet) {
+        @include span-columns(12 of 12);
+      }
+
+      @include media($desktop) {
+        @include span-columns(16 of 16);
+      }
+    }
+
+    &.right {
+      @include media($tablet) {
+        text-align: right;
+      }
+    }
+  }
+
+  [class^='breadcrumbs'] {
+    width: auto;
+    margin-right: $small-spacing;
+    background-color: transparent;
+  }
+
+  [role='button'] {
+    margin: 0;
+  }
+
+  &[class$='--contrast'] {
+    @include button-colours($controls-contrast-bg-colour, $body-inverted-text-colour, $body-inverted-text-colour, $body-inverted-text-colour, $controls-contrast-bg-colour);
+
+    background-color: $controls-contrast-bg-colour;
+
+    [role='button']:hover,
+    [role='button']:focus {
+      color: $controls-contrast-bg-colour;
+    }
+  }
+}
+
+.govau--header,
+.prerelease-govau--header {
+  .links-group {
+    margin: ($base-spacing * 1.5) 0;
+
+    @include ie-lte(8) {
+      margin-bottom: 0;
+      padding-bottom: $base-spacing * 1.5;
+    }
+
+    h2 {
+      font-size: rem(17);
+      font-weight: $bold-font-weight;
+      margin-top: 0;
+      padding: 0;
+    }
+
+    a {
+      color: $white;
+    }
+  }
+}
+
+.govau--header {
+  @include link-colours($link-inverted-colour, $link-inverted-colour, $link-colour);
+  @include button-colours($header-bg-colour, $body-inverted-text-colour, $body-inverted-text-colour, $body-inverted-text-colour, $header-bg-colour);
+
+  position: relative;
+  padding: $medium-spacing 0 ($base-spacing * 3);
+  padding-bottom: $medium-spacing;
+  margin-bottom: 0;
+  background-color: $header-bg-colour;
+  color: $body-inverted-text-colour;
+
+  @include media($tablet) {
+    padding-bottom: $medium-spacing;
+  }
+
+  @include ie-lte(8) {
+    @include ie-clearfix;
+    margin-bottom: 0;
+    padding-bottom: $base-spacing * 1.5;
+  }
+
+  .govau--logo {
+    float: left;
+
+    @include media($tablet) {
+      padding-bottom: 0;
+    }
+  }
+
+  .logo {
+    font-size: rem(24);
+    font-weight: $heading-font-weight;
+    padding-bottom: 2px;
+    border-bottom: 0;
+    color: $body-inverted-text-colour;
+    font-family: $base-sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  [class^='badge'] {
+    vertical-align: text-bottom;
+    margin-left: $tiny-spacing;
+  }
+}
+
+.prerelease-govau--header {
+  @include link-colours($link-inverted-colour, $link-inverted-colour, $link-colour);
+  @include button-colours(transparent, $body-inverted-text-colour, $body-inverted-text-colour, $body-inverted-text-colour, $header-bg-colour);
+
+  position: relative;
+  padding: $base-spacing 0 ($base-spacing * 3);
+  padding-bottom: $medium-spacing;
+  margin-bottom: 0;
+  color: $body-inverted-text-colour;
+
+  background-color: $header-bg-colour;
+  background-image: image-url('header-bg.jpg');
+  background-position: top right;
+  background-repeat: no-repeat;
+
+  //CSS gradient not used because of 'dazzle' issues on monitors with low refresh rate.
+  //background: $header-bg-colour; /* Old browsers */
+  //background: linear-gradient(45deg, $header-bg-colour 0%, $header-bg-colour-2 30%, $header-bg-colour-3 80%, $header-bg-colour-3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#043751', endColorstr='#1c809d',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* Note: do not use variables in above IE filter. */
+
+  @include media($tablet) {
+    padding-bottom: 0;
+  }
+
+  .govau--logo {
+    display: inline-block;
+    position: relative;
+
+    @include media($tablet) {
+      padding-bottom: 0;
+    }
+
+    @include ie-lte(8) {
+      display: inline;
+    }
+
+    .brandbar {
+      position: absolute;
+      top: 42px;
+      right: 66px;
+      width: 50px;
+      height: 5px;
+    }
+  }
+
+  .govau--text {
+    display: block;
+    background-image: image-url('icons/logo-gov-au-2x.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+    max-width: 337px;
+    height: 51px;
+
+    &.dusk {
+      background-image: image-url('icons/logo-gov-au-2x-dusk.png');
+    }
+
+    &.dawn {
+      background-image: image-url('icons/logo-gov-au-2x-dawn.png');
+    }
+
+    &.night {
+      background-image: image-url('icons/logo-gov-au-2x-night.png');
+    }
+
+    @include ie-lte(8) {
+      background-image: url('../latest/img/icons/logo-gov-au-1x.png');
+    }
+  }
+
+  .logo {
+    font-size: rem(24);
+    font-weight: $heading-font-weight;
+    padding-bottom: 2px;
+    border-bottom: 0;
+    color: $body-inverted-text-colour;
+    font-family: $base-sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  [class^='badge'] {
+    vertical-align: text-bottom;
+    margin-left: $tiny-spacing;
+  }
+
+  .breadcrumbs,
+  .breadcrumbs--inverted {
+    margin-top: $medium-spacing;
+  }
+}
+
+.homeintro {
+  p {
+    font-size: rem(24);
+  }
+}
+
+.feedback {
+  display: none;
+
+  @include media($tablet) {
+    display: block;
+    float: right;
+    margin-left: $base-spacing;
+  }
+}
+
+.button--feedback {
+  @extend .inverted;
+
+  margin: 0;
+  width: 100%;
+  text-align: center;
+
+  @include media($tablet) {
+    width: auto;
+    text-align: initial;
+  }
+}
+
+.hero,
+.hero-sml,
+.hero-med {
+  @include link-colours($non-black, $light-aqua, $non-black);
+
+  padding: ($base-spacing * 2) 0;
+  margin-bottom: 0;
+  background-color: $non-white;
+  color: $navy;
+
+  &.corporate {
+    //^ class name from platforms
+    background-color: $hero-bg-colour;
+    color: $body-inverted-text-colour;
+  }
+
+  h1 {
+    font-size: rem(28);
+    margin-top: 0;
+    max-width: 20em;
+
+    @include media($tablet) {
+      font-size: rem(38);
+    }
+  }
+
+  p {
+    font-size: rem(24);
+    max-width: 30em;
+    margin-bottom: $small-spacing;
+  }
+
+  .site-title {
+    @extend h1;
+
+    display: block;
+    margin-top: 0;
+    margin-bottom: $tiny-spacing;
+  }
+
+  .tagline {
+    font-size: $large-font-size;
+  }
+
+  .wrapper {
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+}
+
+.hero-sml {
+  padding: $medium-spacing 0;
+
+  p {
+    font-size: rem(19);
+    font-weight: $bold-font-weight;
+  }
+}
+
+.hero-med {
+  padding: ($base-spacing * 1.5) 0;
+}
+
+/*
+  Prototype branding bar. Work in progress
+*/
+.brandbar {
+  $bar-noon-1: #00a1bb;
+  $bar-noon-2: #b2e5ff;
+  $bar-noon-3: #44c2ef;
+  background-color: $bar-noon-1;
+  height: 8px;
+  position: relative;
+
+  .b1 {
+    position: absolute;
+    left: 25%;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background-color: $bar-noon-2;
+  }
+
+  .b2 {
+    position: absolute;
+    left: 75%;
+    top: 0;
+    bottom: 0;
+    width: 25%;
+    background-color: $bar-noon-3;
+  }
+
+  &.dusk {
+    $bar-dusk-1: #a62355;
+    $bar-dusk-2: #f16a6a;
+    $bar-dusk-3: #9c0009;
+
+    background-color: $bar-dusk-1;
+
+    .b1 {
+      background-color: $bar-dusk-2;
+    }
+
+    .b2 {
+      background-color: $bar-dusk-3;
+    }
+  }
+
+  &.night {
+    $bar-night-1: #005ba8;
+    $bar-night-2: #3e83c5;
+    $bar-night-3: #002a42;
+
+    background-color: $bar-night-1;
+
+    .b1 {
+      background-color: $bar-night-2;
+    }
+
+    .b2 {
+      background-color: $bar-night-3;
+    }
+  }
+
+  &.dawn {
+    $bar-dawn-1: #e63426;
+    $bar-dawn-2: #f38c22;
+    $bar-dawn-3: #fbc515;
+
+    background-color: $bar-dawn-1;
+
+    .b1 {
+      background-color: $bar-dawn-2;
+    }
+
+    .b2 {
+      background-color: $bar-dawn-3;
+    }
+  }
+}

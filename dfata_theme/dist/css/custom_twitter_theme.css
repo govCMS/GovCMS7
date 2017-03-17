@@ -1,0 +1,56 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+.timeline-Viewport {
+  width: 100% !important;
+}
+
+.timeline-Viewport .timeline-TweetList {
+  padding: 0;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.timeline-Viewport .timeline-TweetList::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.timeline-Viewport .timeline-TweetList .timeline-TweetList-tweet {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .timeline-Viewport .timeline-TweetList .timeline-TweetList-tweet {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 31.7615656014%;
+    display: inline-block;
+  }
+  .timeline-Viewport .timeline-TweetList .timeline-TweetList-tweet:last-child {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline-Viewport .timeline-TweetList .timeline-TweetList-tweet:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+.timeline-Viewport .timeline-TweetList .timeline-TweetList-tweet .timeline-Tweet-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/*# sourceMappingURL=custom_twitter_theme.css.map */

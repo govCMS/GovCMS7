@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="16px" viewBox="0 0 10 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>Pause</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="govCMS-Theme" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DESKTOP-01-A-HOMEPAGE-v3" transform="translate(-474.000000, -233.000000)" fill="#5BCBE3">
+            <g id="Hero-Image" transform="translate(0.000000, 222.000000)">
+                <g id="Panel-v2" transform="translate(240.000000, 0.000000)">
+                    <g id="Navigation" transform="translate(70.000000, 0.000000)">
+                        <path d="M164,11 L166,11 L166,27 L164,27 L164,11 Z M172,11 L174,11 L174,27 L172,27 L172,11 Z" id="Pause"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

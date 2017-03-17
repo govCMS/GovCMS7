@@ -1,0 +1,270 @@
+// =========================================================
+// FRONT PAGE PANEL
+// =========================================================
+.front {
+  .page__title {
+    @include visually-hidden;
+  }
+  .gov-front-left {
+    padding-top: rem(40px);
+    padding-bottom: rem(108px);
+    background-color: $neutral_4;
+    .panel-pane {
+      @include center-column($desktop_column);
+    }
+  }
+  .gov-front-right {
+    padding-top: rem(40px);
+    padding-bottom: rem(108px);
+    background-color: $neutral_4;
+    .panel-pane {
+      @include center-column($desktop_column);
+    }
+  }
+}
+
+// =========================================================
+// INTRODUCTION BEAN
+// =========================================================
+.bean-basic-content {
+  background-color: $academy_light_grey;
+  &>.content {
+    @include center-column($desktop_column);
+    padding-top: $default_padding;
+    padding-bottom: $default_padding;
+    @include breakpoint(tablet) {
+      padding-top: $default_padding * 2;
+      padding-bottom: rem(50px);
+    }
+    @include breakpoint(desktop) {
+      text-align: center;
+    }
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pane-title {
+  @include large-title;
+}
+
+// =========================================================
+// HOMEPAGE NEWS LISTSING
+// =========================================================
+.pane-latest-news {
+  padding-top: rem(48px);
+  padding-bottom: rem(48px);
+  .pane-title {
+    @include visually-hidden;
+  }
+}
+
+.view-latest-news {
+  .view-content {
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    .node-news-article {
+      max-width: 800px;
+      position: relative;
+      a {
+        border-bottom: none;
+        transition: none;
+
+        &:hover {
+          background: none;
+        }
+      }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .overlay-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(216, 220, 219, 0.9);
+      }
+      .news-information, .news-links {
+        color: $academy_dark_grey;
+        overflow: hidden;
+      }
+      .news-information {
+        padding: 20px 20px 10px;
+        height: 80px;
+      }
+      .news-links {
+        padding: 5px 20px 15px;
+        a {
+          color: inherit;
+          text-decoration: underline;
+          &:hover {
+            background: none;
+          }
+        }
+      }
+      h3 {
+        margin: 0;
+        width: 90%;
+        line-height: 1.2em;
+      }
+      p {
+        line-height: 1.4em;
+        max-height: 48px;
+        overflow: hidden;
+      }
+      .owl-pause, .owl-play {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 50;
+      }
+      .front & {
+        @include breakpoint(tablet) {
+          max-width: 68.3%;
+        }
+      }
+    }
+  }
+  .owl-wrapper-outer {
+    max-width: 800px;
+    display: inline-block;
+    @include breakpoint(tablet) {
+      width: 65%;
+    }
+    @include breakpoint(desktop) {
+      width: 100%;
+    }
+  }
+  .owl-controls {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 16px;
+    .owl-page {
+      display: block;
+      background-color: $academy_light_grey;
+      color: $academy_dark_grey;
+      margin-bottom: rem(10px);
+      box-sizing: border-box;
+      position: relative;
+      &.active {
+        background-color: $academy_green;
+        &:before {
+          display: none;
+          content: '';
+          width: 0;
+          height: 0;
+          border-bottom: 15px solid transparent;
+          border-top: 15px solid transparent;
+          border-right: 15px solid $academy_green;
+          font-size: 0;
+          line-height: 0;
+          position: absolute;
+          right: 99.5%;
+          top: 50%;
+          @include transform(translateY(-50%));
+        }
+      }
+      .carousel-desk-title {
+        box-sizing: border-box;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: left;
+        padding: 9px 20px;
+      }
+    }
+
+    @include breakpoint(tablet) {
+      width: 32.2%;
+      .owl-page {
+        &.active {
+          &:before {
+            display: block;
+          }
+        }
+      }
+    }
+
+    @include breakpoint(large_tablet) {
+      width: 32.2%;
+      .carousel-desk-title {
+        height: rem(67px);
+        padding: 10px 20px;
+      }
+    }
+
+    @include breakpoint(desktop) {
+      width: 33%;
+      max-width: 349px;
+      .carousel-desk-title {
+        height: rem(82px);
+      }
+    }
+  }
+}
+
+.landing-page-tiles {
+  >div {
+    padding-top: rem(48px);
+    padding-bottom: rem(48px);
+  }
+  [class*="pane-bean-landing-page-tile-"], .panels-ipe-portlet-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    @include breakpoint(tablet) {
+      width: calc(94.1% / 3);
+      margin-right: 2.5%;
+      &:nth-child(3n+5) {
+        margin-right: 0;
+      }
+    }
+    @include breakpoint(tablet) {
+      width: calc(94% / 3);
+      margin-right: 2.4%;
+    }
+    @include breakpoint(desktop) {
+      width: calc(94.2% / 3);
+      margin-right: 2.5%;
+    }
+  }
+  .panels-ipe-portlet-wrapper {
+    width: calc(95% / 3);
+  }
+  .panels-ipe-portlet-wrapper [class*="pane-bean-landing-page-tile-"] {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+  .bean-image-and-text.homepage_tile {
+    margin-bottom: 1em;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    h2 {
+      margin-top: .5em;
+      margin-bottom: .5em;
+      font-size: 1.6rem;
+    }
+    p {
+      font-size: .875rem;
+      line-height: 1.5rem;
+    }
+    a {
+      text-decoration: none;
+      border: none;
+      color: $primary_1;
+      &:hover, &:focus {
+        background: none;
+        border: none;
+        transition: none;
+      }
+    }
+  }
+}

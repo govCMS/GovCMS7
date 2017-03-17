@@ -1,0 +1,36 @@
+$pantones: (
+  345:    rgb(138, 202, 160),
+  427:    rgb(216, 220, 219),
+  428:    rgb(198, 205, 209),
+  431:    rgb(73, 89, 101),
+  577:    rgb(172, 208, 140),
+  2020c:  rgb(201, 105, 35),
+  2220c:  rgb(0, 153, 177),
+  7465:   rgb(101, 197, 180),
+  7474:   rgb(0, 124, 237),
+  7545:   rgb(75, 89, 101),
+  7591:   rgb(211, 135, 95),
+  7592:   rgb(193, 90, 45),
+  7730:   rgb(64, 159, 104),
+  7738:   rgb(133, 169, 105)
+);
+
+@function pantone($code) {
+  @if map-has-key($pantones, $code) {
+    @return map-get($pantones, $code);
+  }
+
+  @warn "Unknown `#{$code}` in $pantones.";
+  @return null;
+}
+
+body.not-front #content .content-header .content-header-inner h1 {
+  @each $code, $color in $pantones {
+    &.pantone-#{$code} {
+      color: $color;
+      + .faculty-badge {
+        color: $color;
+      }
+    }
+  }
+}

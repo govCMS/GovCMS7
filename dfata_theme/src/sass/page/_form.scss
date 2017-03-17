@@ -1,0 +1,278 @@
+form {
+  &>div {
+    box-sizing: border-box;
+  }
+}
+
+.block-webform {
+  @include center-column($form_width);
+  &>h2 {
+    @include block-heading;
+    margin-top: 0;
+    margin-bottom: $default_padding;
+  }
+}
+
+// =========================================================
+// GENERAL FORMS
+// =========================================================
+form {
+  .form-item {
+    margin-top: $default_padding;
+    margin-bottom: $default_padding;
+  }
+  .form-actions {
+    margin-top: $default_padding;
+    margin-bottom: $default_padding;
+  }
+}
+
+// =========================================================
+// WEBFORMS
+// =========================================================
+form.webform-client-form {
+  .form-item {
+    color: $neutral_1;
+    label {
+      color: $neutral_1;
+      box-sizing: border-box;
+    }
+    input {
+      box-sizing: border-box;
+    }
+    .description {
+      font-size: rem(14px);
+    }
+  }
+  // =========================================================
+  // SELECTORS - CHECKBOX, SELECT, RADIO, LIST
+  // =========================================================
+  .webform-component-checkboxes {
+    .form-item {
+      margin: 0;
+    }
+  }
+  .webform-component-select {
+    select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    select[multiple="multiple"] {
+      border: 2px solid #bbbbbb;
+      box-sizing: border-box;
+      background-image: none;
+      width: 100%;
+      height: auto;
+    }
+  }
+  // =========================================================
+  // DATE & TIME
+  // =========================================================
+  .webform-component-date {
+    select {
+      width: 100%;
+      margin-top: $small_padding;
+      @include breakpoint(tablet) {
+        margin-top: auto;
+        width: 25%;
+        min-width: rem(90px);
+      }
+    }
+    input.webform-calendar {
+      padding: 0;
+      width: rem(25px);
+      height: rem(28px);
+      background-color: transparent !important;
+      color: transparent !important;
+      border: 0;
+      background-image: url(../images/svg/icon_calendar.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: $small_padding;
+      @include breakpoint(tablet) {
+        margin-top: auto;
+      }
+      &:hover, &:focus {
+        background-image: url(../images/svg/icon_calendar_hover.svg);
+      }
+    }
+  }
+  .webform-component-time {
+    .webform-container-inline {
+      @include breakpoint(tablet) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .form-item.form-type-select {
+      @include breakpoint(tablet) {
+        width: 25%;
+        display: inline-block;
+      }
+    }
+    select {
+      width: 47%;
+      @include breakpoint(tablet) {
+        width: 100%;
+      }
+    }
+    .form-radios {
+      display: flex;
+      .form-item {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    input[type='radio']+label {
+      @include breakpoint(tablet) {
+        display: inline;
+      }
+    }
+  }
+  // =========================================================
+  // GRID
+  // =========================================================
+  .webform-component-grid {
+    overflow-x: auto;
+    &.is-overflowing {
+      table.sticky-header {
+        display: none;
+      }
+    }
+    table.sticky-header {
+      background-color: white;
+      z-index: 1;
+      // Values below taken directly from `vendor/gov-au-ui-kit/assets/sass/components/_tables.scss`
+      th {
+        border-bottom: solid 1px $light-grey;
+        padding: $tiny-spacing;
+        font-size: $small-font-size;
+        text-align: center;
+        @include media($tablet) {
+          padding: $small-spacing;
+          font-size: initial;
+        }
+      }
+      thead {
+        border-bottom: solid 2px $grey;
+      }
+    }
+    th.webform-grid-option {
+      font-size: initial;
+    }
+    table.webform-grid {
+      @extend .content-table;
+      width: 100%;
+      th {
+        text-align: center;
+      }
+      tr.odd {
+        // Undo system table style.
+        background-color: transparent;
+      }
+      .form-type-radio {
+        margin: 0;
+        text-align: center;
+        label {
+          clip: auto;
+          position: relative !important;
+          height: auto;
+          overflow: auto;
+          overflow: hidden;
+          width: rem(60px);
+          color: transparent;
+        }
+      }
+    }
+  }
+  // =========================================================
+  // FILE
+  // =========================================================
+  .webform-component-file {
+    .form-managed-file {
+      @include breakpoint(tablet) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      input[type="file"] {
+        width: 100%;
+        @include breakpoint(tablet) {
+          width: auto;
+        }
+      }
+      input[type="submit"] {
+        width: 100%;
+        margin-top: $small_padding;
+        margin-bottom: $small_padding;
+        @include breakpoint(tablet) {
+          margin-top: auto;
+          margin-bottom: auto;
+          width: auto;
+        }
+      }
+    }
+  }
+  // =========================================================
+  // FIELDSET
+  // =========================================================
+  .webform-component-fieldset {
+    border: 1px solid $neutral_2;
+    padding: $default_padding;
+    .fieldset-legend {
+      color: $neutral_1;
+    }
+    .form-item {
+      margin-top: 0;
+    }
+  }
+  // =========================================================
+  // PROGRESS BAR
+  // =========================================================
+  .webform-previous {
+    margin-right: $small_padding;
+  }
+  .webform-next {
+    margin-left: auto;
+  }
+}
+
+// =========================================================
+// PROGRESS BAR
+// This also exists on complete pages, where it does not
+// exist within a form element.
+// =========================================================
+.webform-progressbar {
+  box-sizing: border-box;
+  margin-bottom: $default_padding;
+  padding: 1px;
+  .webform-progressbar-page {
+    border-color: transparent;
+    background-color: $neutral_3;
+    width: rem(23px);
+    height: rem(23px);
+    border-radius: 50%;
+    margin: rem(-18px) (23px * -0.5);
+    &.completed {
+      background-color: $secondary_2;
+    }
+    &.current {
+      background-color: $primary_2;
+    }
+  }
+  .webform-progressbar-outer {
+    border-color: transparent;
+    height: rem(12px);
+    background-color: $neutral_4;
+  }
+  .webform-progressbar-inner {
+    background-color: $secondary_2;
+    height: rem(12px);
+  }
+  .webform-progressbar-page-label {
+    margin-top: rem(15px);
+    display: inline-block;
+    color: $neutral_1;
+  }
+}

@@ -1,0 +1,113 @@
+// =========================================================
+// LISTING
+// The default style for content views.
+// =========================================================
+body.not-front #content {
+  .no-sidebar {
+    .view {
+      @include center-column($desktop_column);
+    }
+    .views-row {
+      @include breakpoint(tablet) {
+        @include span-columns(4 of 12);
+      }
+      &:nth-child(3n) {
+        @include breakpoint(tablet) {
+          @include omega();
+        }
+      }
+    }
+    .view.view-testimonials {
+      .views-row {
+        width: 100%;
+        float: none;
+        .node {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+  .view {
+    .view-content {
+      @include breakpoint(tablet) {
+        @include outer-container(100%);
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .views-row {
+        .node {
+          @include listing-component-wrapper;
+          &.has-thumbnail {
+            padding-top: $listing_component_image_height;
+            .field-type-image {
+              @include listing-component-image;
+              .field-item:nth-child(n + 2) {
+                display: none;
+              }
+            }
+            h2 {
+              margin-top: rem(30px);
+            }
+          }
+          &>.links {
+            li {
+              padding-left: 0;
+            }
+          }
+        }
+        h2 {
+          @include listing-component-heading;
+          margin-top: 0;
+          
+          a {
+            color: $primary_1;
+          }
+        }
+        .field-name-field-date, .submitted, .field-type-datetime {
+          @include listing-component-subtext;
+        }
+        .field-name-body {
+          @include listing-component-body;
+        }
+        .field-name-field-image {
+          a {
+            border-bottom: none;
+            transition: none;
+            &:hover {
+              background: none;
+            }
+          }
+          img {
+            height: auto;
+          }
+        }
+      }
+    }
+    .pager {
+      margin-top: $default_padding;
+      margin-bottom: $default_padding;
+    }
+  }
+  .has-sidebar {
+    .view {
+      .view-content {
+        display: block;
+      }
+      .views-row {
+        display: block;
+        h3 {
+          font-size: rem(18px);
+          margin-bottom: 0;
+          margin-top: rem(10px);
+          font-weight: normal;
+          a {
+            text-decoration: none;
+          }
+        }
+        .field {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

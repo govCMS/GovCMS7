@@ -1,0 +1,432 @@
+/*
+List styles
+
+List styles make collections of similar content more usable and discoverable.
+
+You can add usual body elements within each list item (eg ordered and unordered lists).
+
+Use `<a class="see-more">` after your list to link to an index of all items.
+
+Style guide: List styles
+*/
+
+/*
+Horizontal style
+
+Horizontal style provides a single column of list items.
+
+Markup: templates/lists-horizontal.hbs
+
+<details open data-label="horizontal-list-styles-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: List styles.1 Horizontal style
+*/
+
+/*
+Vertical style
+
+Vertical style provides multiple columns of list items. By default the vertical lists are displayed in 2 columns.
+
+You can change the number of columns used:
+
+- `.vertical-list--thirds` give 3 columns of list items
+- `.vertical-list--fourths` give 4 columns of list items.
+
+For <a href="http://caniuse.com/#feat=flexbox" rel="external">browsers that don't support Flexbox layout</a> lists will appear as in horizontal style with images (if used) below each list item.
+
+Markup: templates/lists-vertical.hbs
+
+<details open data-label="vertical-list-styles-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: List styles.2 Vertical style
+*/
+
+/*
+Small list style
+
+Use small list style for large groups of list items.
+
+Markup: templates/lists-small.hbs
+
+<details open data-label="small-list-styles-accessibility" aria-expanded="false">
+  <summary>Accessibility &amp; browser testing</summary>
+  <div class="accordion-panel">
+  <strong>Passed</strong>:
+    <ul>
+      <li>HTML5 validation (<a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a>)</li>
+      <li>WCAG:AA automated (<a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a>)</li>
+    </ul>
+  <strong>Untested</strong>:
+    <ul>
+      <li>WCAG:AA manual</li>
+      <li>Browser support &mdash; automated and manual</li>
+    </ul>
+  </div>
+</details>
+
+Style guide: List styles.3 Small list style
+*/
+
+/*
+Highlighted words style
+
+Use highlighted words style for a list with repeating phrases.
+
+Markup: templates/lists-highlighted.hbs
+
+<details open data-label="highlighted-list-styles-accessibility" aria-expanded="false">
+  <summary>Accessibility notes</summary>
+  <div class="accordion-panel">
+
+    <p>**Passed** HTML5 validation by <a href="http://validator.github.io/validator/" rel="external">Nu Html Checker</a><br/>
+    **Passed** WCAG:AA automated by <a href="http://squizlabs.github.io/HTML_CodeSniffer/Standards/WCAG2/" rel="external">HTML_CodeSniffer</a><br/>
+    **Untested** WCAG:AA manual compliance<br/>
+    **Untested** Supported browsers tested</p>
+  </div>
+</details>
+
+Style guide: List styles.4 Highlighted word style
+*/
+
+%base-list {
+  @include clearfix;
+
+  margin-top: $base-spacing * 1.4; // Revisit.
+  padding: 0;
+  list-style: none;
+
+  .tags {
+    @include link-colours($button-bg-colour, $link-colour--hover, $link-colour);
+    color: $grey;
+
+    dl,
+    dt,
+    dd {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+      line-height: $base-heading-leading * 1.5; // Revisit.
+    }
+
+    dt,
+    dd {
+      margin-right: $tiny-spacing;
+      font-size: $small-font-size;
+    }
+
+    a {
+      padding: 2px $tiny-spacing;
+      border: 1px solid $button-bg-colour;
+      border-radius: 2px;
+
+      &:hover,
+      &:focus {
+        border-color: $link-colour--hover;
+      }
+    }
+  }
+
+  .meta {
+    font-size: $small-font-size;
+    margin-bottom: $small-spacing;
+
+    time {
+      color: $grey;
+    }
+  }
+
+  > li {
+    padding: flex-gutter($content-grid-columns) 0;
+    border-bottom: solid 1px $border-colour;
+    margin-bottom: 0;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0;
+    margin-bottom: $tiny-spacing;
+
+    font-size: rem(18);
+    font-weight: $heading-font-weight;
+    line-height: $base-heading-leading;
+  }
+
+  img {
+    display: block;
+  }
+}
+
+
+
+.list-horizontal {
+  @extend %base-list;
+
+  > li {
+    width: 100%;
+    max-width: none;
+
+    @include media($tablet) {
+      display: flex;
+    }
+
+    figure {
+      @include media($mobile) {
+        margin-bottom: $medium-spacing;
+      }
+      @include media($tablet) {
+        flex: 0 0 35%;
+        margin-right: $base-spacing;
+      }
+    }
+
+    .meta {
+      time {
+        display: inline-block;
+        margin-right: $small-spacing;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &.hero-item {
+      border-top: solid 1px $border-colour;
+
+      figure {
+        @include media($tablet) {
+          flex-basis: 65%;
+        }
+      }
+    }
+  }
+}
+
+
+%base-vertical-list {
+  @extend %base-list;
+
+  /*
+  Consider how to create an equal height grid of list items.
+  Could use this for overflow http://jsfiddle.net/barney/TPP8g/
+
+  &.vertical-list--grid {
+    > li {
+      min-height: 13em;
+    }
+  }
+  */
+
+  @include ie-lte(8) {
+    @include ie-clearfix;
+  }
+
+  > li {
+
+    border-top: 6px solid $border-highlight-colour;
+    border-bottom: none;
+
+    article {
+      display: flex;
+      flex-wrap: wrap;
+
+      h3,
+      div,
+      p {
+        flex: 0 0 100%;
+      }
+    }
+
+    p {
+      min-height: auto;
+    }
+
+    .meta {
+      order: -1;
+
+      time {
+        display: block;
+      }
+    }
+  }
+}
+
+.list-vertical {
+  @extend %base-vertical-list;
+
+  &.no-border {
+    li:nth-child(-n+2) {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+
+  > li {
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include omega(2n);
+
+      @include ie-lte(8) {
+        width: 45%;
+      }
+    }
+  }
+}
+
+
+.list-vertical--thirds {
+  @extend %base-vertical-list;
+
+  &.no-border {
+    li:nth-child(-n+3) {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+
+  > li {
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include omega(2n);
+
+      @include ie-lte(8) {
+        width: 45%;
+      }
+    }
+    @include media($desktop) {
+      @include omega-reset(2n);
+      @include span-columns(4 of 12);
+      @include omega(3n);
+
+      @include ie-lte(8) {
+        width: 30%;
+      }
+    }
+  }
+}
+
+
+.list-vertical--fourths {
+  @extend %base-vertical-list;
+
+  &.no-border {
+    li:nth-child(-n+4) {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+
+  > li {
+    @include media($tablet) {
+      @include span-columns(6 of 12);
+      @include omega(2n);
+    }
+    @include media($desktop) {
+      @include omega-reset(2n);
+      @include span-columns(3 of 12);
+      @include omega(4n);
+
+      @include ie-lte(8) {
+        width: 21%;
+      }
+    }
+  }
+}
+
+
+.list-small {
+  @extend %base-list;
+  border-top: solid 1px $border-colour;
+
+  a {
+    @extend %icon-arrow-right;
+
+    display: block;
+    padding: $small-spacing;
+    padding-left: ($base-spacing * 2);
+    border-bottom: none;
+    background-repeat: no-repeat;
+    background-position: $base-spacing ($small-spacing * 1.75);
+    background-size: $tiny-spacing auto;
+    transition: background $transition-timing $transition-easing;
+
+    &:hover,
+    &:active {
+      background-position: ($base-spacing * 1.25) ($small-spacing * 1.75);
+      background-color: $background-secondary-colour;
+
+      span {
+        color: $dark-aqua;
+      }
+    }
+
+  }
+
+  span {
+    color: $link-colour;
+    text-decoration: none;
+    border-bottom: 1px solid;
+  }
+
+  li {
+    padding: 0;
+  }
+
+  .meta {
+    display: block;
+    margin: 0;
+  }
+}
+
+.list-highlighted {
+  @extend %base-list;
+
+  li {
+    list-style: none;
+    border-bottom: 0;
+    padding-bottom: $base-spacing;
+    padding-top: 0;
+  }
+
+  a {
+    font-size: $large-font-size;
+    font-weight: $heading-font-weight;
+    line-height: $base-heading-leading;
+
+    span {
+      display: block;
+      font-size: $smaller-font-size;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+#block-menu-menu-quick-links {
+  padding-top: $default_padding * 2;
+  padding-bottom: $default_padding * 2;
+  h2 {
+    @include center-column($desktop_column);
+    @include medium-title;
+  }
+  &>.content {
+    @include center-column($desktop_column);
+  }
+  ul.menu {
+    padding: 0;
+    margin-bottom: 0;
+    @include breakpoint(tablet) {
+      @include outer-container(100%);
+    }
+    li {
+      list-style: none;
+      margin: 0;
+      background-color: $secondary_1;
+      padding: rem(30px);
+      box-sizing: border-box;
+      margin-bottom: $default_padding;
+      @include breakpoint(tablet) {
+        @include span-columns(4 of 12);
+      }
+      @include breakpoint(desktop) {
+        @include span-columns(3 of 12);
+      }
+      &:nth-child(3n) {
+        @include breakpoint(tablet) {
+          @include omega();
+        }
+        @include breakpoint(desktop) {
+          margin-right: flex-gutter(12);
+        }
+      }
+      &:nth-child(4n) {
+        @include breakpoint(desktop) {
+          @include omega();
+        }
+      }
+      @include link-colours(white, $neutral_4, $neutral_1);
+      a[rel~='external']::after {
+        background-image: url(../images/svg/external-link--white.svg) !important;
+      }
+    }
+  }
+}

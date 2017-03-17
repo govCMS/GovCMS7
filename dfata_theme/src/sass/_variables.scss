@@ -1,0 +1,33 @@
+$mobile_column_padding: rem(20px);
+$desktop_column: rem(1170px);
+$desktop_content_column: rem(1170px);
+$mobile_column: rem(320px);
+$small_padding_px: 11px;
+$default_padding_px: 22px;
+$small_padding: rem($small_padding_px);
+$default_padding: rem($default_padding_px);
+$listing_component_image_height: rem(275px);
+$form_width: rem(540px);
+$mobile_expand_search_width: rem(35px);
+
+// Academy colours
+$academy_light_grey: pantone(428);
+$academy_dark_grey: pantone(7545);
+$academy_green: pantone(345);
+$font-color-dark: $academy_dark_grey;
+$font-color-light: $academy_light_grey;
+$bg_colour: $academy_dark_grey;
+
+// govCMS UI Kit Colours.
+$primary_1: $academy_green;
+$primary_2: darken($primary_1, 6.5%);
+$primary_3: darken($primary_1, 5%);
+$secondary_1: $academy_light_grey;
+$secondary_2: $aqua; // #18788D
+$secondary_3: $light-aqua; // #5BCBE3
+$neutral_1: $non-black; // #313131
+$neutral_2: $grey; // #717171
+$neutral_3: $light-grey; // #BEBEBE
+$neutral_4: $non-white; // #F0F3F5
+$main_menu_hover: #142C3A;
+$main_menu_active: #1B3B4D;

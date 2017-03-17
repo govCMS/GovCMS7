@@ -1,0 +1,28 @@
+#block-govcms-social-links-services {
+  background-color: $primary_2;
+  .inner-wrapper {
+    @include center-column($desktop_column);
+    display: flex;
+    align-items: center;
+    color: white;
+    padding-top: rem(38px);
+    padding-bottom: rem(38px);
+    h2 {
+      margin: 0;
+      margin-right: rem(10px);
+      display: inline;
+      font-size: rem(16px);
+    }
+    .content {
+      display: inline;
+      a {
+        margin-right: rem(10px);
+        display: inline-block;
+        vertical-align: middle;
+        img {
+          float: left;
+        }
+      }
+    }
+  }
+}

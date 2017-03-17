@@ -1,0 +1,7 @@
+{
+  "drupal_version": 7,
+  "use_compass": false,
+  "use_image_compression": true,
+  "use_prefixer": true,
+  "prefixer_browsers": ["last 2 versions", "not ie <= 9", "iOS >= 7"]
+}

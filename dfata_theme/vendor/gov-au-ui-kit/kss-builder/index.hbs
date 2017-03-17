@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{options.title}}</title>
+
+  <meta name="description" content="">
+  <meta name="generator" content="kss-node">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+  (function (h) {
+    h.className = h.className.replace('no-js', 'js')
+  })(document.documentElement)
+  </script>
+
+  <!--[if gte IE 9 | !IE ]><!--><link href="/kss-assets/kss.css" rel="stylesheet" type="text/css" /><!--<![endif]-->
+  <!--[if lt IE 9]><style>body{margin:0; font-family:sans-serif;}.ua-notification {display: block;padding: 0.8em;text-align: center;background-color: #f9c642;color: #313131;font-size: rem(17); margin-top:0;}</style><![endif]-->
+  <!--[if IE 8]><!--><link href="/latest/ui-kit-ie8.css" rel="stylesheet" type="text/css"><!--<![endif]-->
+  <!--[if IE 7]><!--><link href="/latest/ui-kit-ie7.css" rel="stylesheet" type="text/css"><!--<![endif]-->
+
+  <!--[if lt IE 9]>
+  <script type='text/javascript' src='//code.jquery.com/jquery-1.12.4.min.js'></script>
+  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js'></script>
+  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js'></script>
+  <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js'></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="latest/ui-kit.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Open+Sans:400italic,700,400:latin,latin-ext']
+      }
+    });
+  </script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-72255206-3', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+
+<!-- Yellow UA msg for anything older than IE9. Please remove me post end-Aug demo. -->
+<!-- Compatibility message --><!--[if lt IE 9]><p class="ua-notification">GOV.AU works better on a newer web browser (the software you use to access the internet). We’re improving how it works in your browser.</p><![endif]-->
+
+<nav class="skip-to">
+  <a href="#content">Skip to main content</a>
+  <a href="#nav">Skip to section navigation</a>
+</nav>
+
+<header role="banner">
+  <section class="govau--header">
+    <div class="wrapper">
+      <div class="govau--logo">
+        <a href="/" class="logo">gov.au ui-kit</a> <span class="badge--default">draft</span>
+      </div>
+      <div class="feedback">
+        <a href="https://github.com/AusDTO/gov-au-ui-kit/issues/new" class="button--feedback" role="button">Give feedback</a>
+      </div>
+    </div>
+  </section>
+  {{# if homepage}}
+  <section class="hero">
+    <div class="wrapper">
+      <span class="site-title">{{options.title}}</span>
+      <p class="tagline">A living style guide of the UI-Kit <abbr title="Sassy CSS">SCSS</abbr> framework, built from the source, using <a href="http://warpspire.com/kss/" rel="external"><abbr title="Knyle Style Sheets">KSS</abbr></a>.</p>
+      <p>Documents UI-Kit release: <code>v{{package "version"}}</code></p>
+      <p>Last updated: <time datetime="{{moment "" ""}}">{{moment "" "DD MMMM Y"}}</time></p>
+    </div>
+  </section>
+  {{/if}}
+</header>
+
+<main role="main">
+  <aside class="sidebar" id="nav">
+    <nav class="local-nav" aria-label="main navigation">
+      <ul>
+        <li>
+          <a href="index.html" class="is-active">Getting started</a>
+          <ul>
+            {{#each menu}}
+              <li>
+                <a href="section-{{referenceURI}}.html" {{#if isActive}}class="is-active is-current"{{/if}}>{{header}}</a>
+              </li>
+            {{/each}}
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <article id="content" class="content-main">
+
+    {{#if homepage}}
+      <div id="guide-0" class="guide-section guide-section--depth-0 kss-overview">
+        {{{homepage}}}
+      </div>
+    {{else}}
+
+    <header class="guide-section-header">
+      <h1>{{sections.0.header}}</h1>
+
+      <nav class="index-links">
+        <h2>In this section</h2>
+        <ul>
+          {{#each sections}}
+            {{#if_equal depth 2}}
+            <li><a href="#guide-{{referenceURI}}">{{header}}</a></li>
+            {{/if_equal}}
+          {{/each}}
+        </ul>
+      </nav>
+    </header>
+
+      {{#each sections}}
+        <{{#if @first}}div{{else}}section{{/if}} id="guide-{{referenceURI}}"
+                                                 class="guide-section guide-section--depth-{{depth}}">
+
+          <div>
+            {{#unless @first}}
+            <h{{depth}} id="#guide-{{referenceURI}}">
+              {{header}}
+            </h{{depth}}>
+            {{/unless}}
+
+            {{#if description}}
+              <div class="kss-description">
+                {{{description}}}
+              </div>
+            {{/if}}
+
+            {{#if parameters}}
+              <div class="kss-parameters__title">Parameters:</div>
+              <ul class="kss-parameters">
+                {{#each parameters}}
+                  <li class="kss-parameters__item">
+                    <div class="kss-parameters__name"><code>{{name}}</code></div>
+                    <div class="kss-parameters__description">
+                      {{{description}}}
+                      {{#if defaultValue}}
+                        <div class="kss-parameters__default-value">
+                          Defaults to: <code>{{defaultValue}}</code>
+                        </div>
+                      {{/if}}
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+
+          {{#if example}}
+            <div class="kss-modifier__wrapper">
+              <h3>Example{{#if modifiers}}s{{/if}}</h3>
+
+              {{#if modifiers}}
+                <div class="kss-modifier__default-name">
+                  Default styling
+                </div>
+              {{/if}}
+
+              <div class="guide-example">
+                {{{example}}}
+              </div>
+
+              {{#each modifiers}}
+                <div class="kss-modifier__name">
+                  {{name}}
+                </div>
+                <div class="kss-modifier__description">
+                  {{{description}}}
+                </div>
+                <div class="example">
+                  {{{markup}}}
+                </div>
+              {{/each}}
+            </div>
+            {{#if example}}
+              <pre class="prettyprint lang-html"><code data-language="html">{{markup}}</code></pre>
+            {{/if}}
+          {{/if}}
+
+          {{#if sourceFile.name}}
+            <div class="kss-source">
+              Source on GitHub: <a href="https://github.com/AusDTO/gov-au-ui-kit/tree/master/assets/sass/{{sourceFile.name}}#L{{sourceFile.line}}" rel="external"><code>{{sourceFile.name}}</code></a>, line {{sourceFile.line}}
+            </div>
+          {{/if}}
+
+        </{{#if @first}}div{{else}}section{{/if}}>
+      {{/each}}
+    {{/if}}
+  </article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+{{{scripts}}}
+
+<footer role="contentinfo">
+  <div class="wrapper">
+    <div class="feedback">
+      <a href="https://github.com/AusDTO/gov-au-ui-kit/issues/new" class="button--feedback" role="button">Give feedback</a>
+    </div>
+    <section>
+      <div class="footer-logo">
+        <img alt="Australian Government Coat of Arms" src="/latest/img/coat-of-arms.png">
+      </div>
+      <div class="footer-links">
+        <nav>
+          <ul>
+            <li><a href="https://www.dto.gov.au/privacy-statement/" rel="external">Privacy Statement</a></li>
+          </ul>
+        </nav>
+        <p>&copy; Commonwealth of Australia <br>
+        <a href="https://github.com/AusDTO/gov-au-ui-kit/blob/master/LICENSE.md" rel="external license">Licensed under the MIT License.</a></p>
+      </div>
+    </section>
+  </div>
+</footer>
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>
