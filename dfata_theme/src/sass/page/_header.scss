@@ -31,6 +31,10 @@
       display: flex;
       align-items: center;
       a {
+        // IE11 fix.
+        html:not(.flexbox) & {
+          flex-basis: 277.5px;
+        }
         display: inline-block;
         vertical-align: middle;
         img {

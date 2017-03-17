@@ -36,15 +36,18 @@ html {
           @include breakpoint(tablet) {
             font-size: rem(48px);
             margin-top: 0;
+            width: 68%;
           }
           + .faculty-badge {
             color: $academy_green;
           }
         }
         .title_image {
-          position: absolute;
-          right: 1.25rem;
-          top: 3.5rem;
+          @include breakpoint(tablet) {
+            position: absolute;
+            right: 1.25rem;
+            top: 3.5rem;
+          }
         }
       }
     }

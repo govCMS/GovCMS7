@@ -30,6 +30,7 @@
           grabTitles();
         }
       });
+      owl.trigger('owl.stop');
 
       // Pause on Item Click
       $('.owl-controls').find('.owl-pagination').click(function() {

@@ -26,18 +26,19 @@
       }
       &>li {
         display: table-cell;
+        vertical-align: top;
         float: none;
         &.menuparent {
           &>a:after {
             content: '';
             display: inline-block;
+            vertical-align: middle;
             background-image: url(../images/svg/nav_down_arrow.svg);
             background-position: center;
             background-repeat: no-repeat;
             width: rem(11px);
             height: rem(7px);
             margin-left: rem(5px);
-            vertical-align: middle;
           }
         }
         &.active-trail {

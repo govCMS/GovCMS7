@@ -13,7 +13,7 @@
 // =========================================================
 @mixin breakpoint($class) {
   @if $class==desktop {
-    @media (min-width: 1200px) {
+    @media (min-width: 1210px) {
       @content;
     }
   }
@@ -94,9 +94,14 @@
 @mixin listing-component-wrapper() {
   box-sizing: border-box;
   position: relative;
-  padding: rem(30px);
-  margin-bottom: rem(30px);
+  padding-top: rem(30px);
+  padding-left: 0;
+  padding-right: 0;
   height: calc(100% - #{rem(30px)});
+  @include breakpoint(tablet) {
+    margin-bottom: rem(30px);
+    padding-bottom: rem(30px);
+  }
 }
 
 @mixin listing-component-image() {

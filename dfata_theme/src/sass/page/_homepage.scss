@@ -124,12 +124,19 @@
         top: 20px;
         z-index: 50;
       }
+      .front & {
+        @include breakpoint(tablet) {
+          max-width: 68.3%;
+        }
+      }
     }
   }
   .owl-wrapper-outer {
     max-width: 800px;
     display: inline-block;
-    width: 65%;
+    @include breakpoint(tablet) {
+      width: 65%;
+    }
     @include breakpoint(desktop) {
       width: 100%;
     }
@@ -137,8 +144,6 @@
   .owl-controls {
     display: inline-block;
     vertical-align: top;
-    width: 33%;
-    max-width: 349px;
     margin-left: 16px;
     .owl-page {
       display: block;
@@ -150,6 +155,7 @@
       &.active {
         background-color: $academy_green;
         &:before {
+          display: none;
           content: '';
           width: 0;
           height: 0;
@@ -165,12 +171,38 @@
         }
       }
       .carousel-desk-title {
-        height: rem(82px);
+        box-sizing: border-box;
         display: table-cell;
         vertical-align: middle;
         text-align: left;
+        padding: 9px 20px;
+      }
+    }
+
+    @include breakpoint(tablet) {
+      width: 32.2%;
+      .owl-page {
+        &.active {
+          &:before {
+            display: block;
+          }
+        }
+      }
+    }
+
+    @include breakpoint(large_tablet) {
+      width: 32.2%;
+      .carousel-desk-title {
+        height: rem(67px);
         padding: 10px 20px;
-        box-sizing: border-box;
+      }
+    }
+
+    @include breakpoint(desktop) {
+      width: 33%;
+      max-width: 349px;
+      .carousel-desk-title {
+        height: rem(82px);
       }
     }
   }
@@ -184,10 +216,21 @@
   [class*="pane-bean-landing-page-tile-"], .panels-ipe-portlet-wrapper {
     display: inline-block;
     vertical-align: top;
-    width: calc(94.2% / 3);
-    margin-right: 2.5%;
-    &:nth-child(3n+5) {
-      margin-right: 0;
+    width: 100%;
+    @include breakpoint(tablet) {
+      width: calc(94.1% / 3);
+      margin-right: 2.5%;
+      &:nth-child(3n+5) {
+        margin-right: 0;
+      }
+    }
+    @include breakpoint(tablet) {
+      width: calc(94% / 3);
+      margin-right: 2.4%;
+    }
+    @include breakpoint(desktop) {
+      width: calc(94.2% / 3);
+      margin-right: 2.5%;
     }
   }
   .panels-ipe-portlet-wrapper {
@@ -201,6 +244,7 @@
   .bean-image-and-text.homepage_tile {
     margin-bottom: 1em;
     img {
+      width: 100%;
       height: auto;
     }
     h2 {

@@ -37,8 +37,6 @@ body.not-front #content {
       .views-row {
         .node {
           @include listing-component-wrapper;
-          padding-left: 0;
-          padding-right: 0;
           &.has-thumbnail {
             padding-top: $listing_component_image_height;
             .field-type-image {
