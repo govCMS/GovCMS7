@@ -1,0 +1,6 @@
+screenshot  = screenshot.png
+name        = Shiny for Diplomatic Academy
+description = Sub theme of Shiny for Diplomatic Academy admin.
+core        = 7.x
+
+base theme  = shiny
