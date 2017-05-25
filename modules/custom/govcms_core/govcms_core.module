@@ -44,6 +44,21 @@ function govcms_core_about_govcms_page() {
 }
 
 /**
+ * Implements hook_context_registry_alter().
+ */
+function govcms_core_context_registry_alter(&$registry) {
+  // This allows govCMS users the ability to turn off conditions in
+  // Context that may have a performance impact. For example, large
+  // taxonomies or menus can consume excessive memory and time to
+  // generate.
+  foreach (array_keys($registry['conditions']) as $module) {
+    if (variable_get('govcms_context_condition_' . $module . '_disabled', FALSE)) {
+      unset($registry['conditions'][$module]);
+    }
+  }
+}
+
+/**
  * Helper to manufacture a new Bean of a given type.
  *
  * @param string $bean_type
