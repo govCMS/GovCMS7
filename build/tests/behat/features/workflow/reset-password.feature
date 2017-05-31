@@ -4,7 +4,7 @@ Feature: Reset Password
 
   @api @javascript
   Scenario: Reset my password
-    Given I am logged in as a user named "peskypaul" with the "Content editor" role that doesn't force password change
+    Given I am logged in as a user with the "Content editor" role
     Then I logout
     Given I am on "/user"
     Then I should see the link "Request new password"
@@ -20,5 +20,3 @@ Feature: Reset Password
     And I press "E-mail new password"
     Then I should see "Further instructions have been sent to your e-mail address."
     And I should not see "Notice: Undefined index"
-
-
