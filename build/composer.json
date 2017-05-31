@@ -15,15 +15,11 @@
         "drush/drush":               "8.*",
         "phing/phing":               "2.8.*",
         "jakoch/phantomjs-installer": "1.9.8",
-        "drupal/drupal-extension":   "3.0.7",
-        "drupal/drupal-driver":      "v1.0.6",
-        "fabpot/goutte":             "1.0.x-dev",
-        "guzzle/guzzle":             "v3.9.2",
-        "squizlabs/php_codesniffer": "1.5.*",
-        "phpmd/phpmd":               "1.5.*",
-        "pdepend/pdepend":           "1.1.*",
-        "phploc/phploc":             "2.0.0-BETA1",
-        "sebastian/phpcpd":          "2.0.*",
+        "drupal/drupal-extension":   "3.2.2",
+        "fabpot/goutte":             "3.2.*",
+        "phpmd/phpmd":               "2.6.*",
+        "phploc/phploc":             "2.0.0",
+        "sebastian/phpcpd":          "3.*",
         "drupal/coder":              "7.2.*"
     },
     "minimum-stability": "dev",
@@ -39,5 +35,8 @@
       "post-update-cmd": [
         "PhantomInstaller\\Installer::installPhantomJS"
       ]
+    },
+    "require": {
+        "phpunit/phpunit": "^5.7"
     }
 }
