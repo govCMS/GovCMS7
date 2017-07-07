@@ -476,9 +476,10 @@ abbr[title]',
           'rule_style_urls' => array(),
         ),
       ),
+      // Media Filter - Must go before 'Convert URLs into links' to not break govCMS-CKAN
       // Convert Media tags to markup.
       'media_filter' => array(
-        'weight' => 3,
+        'weight' => -1,
         'status' => 1,
         'settings' => array(),
       ),
