@@ -1,6 +1,6 @@
 <?php
 
-namespace Acquia\govCMSExtension\Context;
+namespace GovCMS\govCMSExtension\Context;
 
 use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 use Drupal\DrupalExtension\Context\MinkContext;
@@ -66,8 +66,6 @@ class MediaBrowserContext extends DrupalSubContextBase {
     $link->click();
     $this->minkContext->iWaitForAjaxToFinish();
     $session->switchToIFrame('mediaBrowser');
-    // This might be vestigial.
-    sleep(10);
   }
 
   /**
@@ -96,8 +94,6 @@ class MediaBrowserContext extends DrupalSubContextBase {
     $link->click();
     $this->minkContext->iWaitForAjaxToFinish();
     $session->switchToIFrame('mediaBrowser');
-    // This might be vestigial.
-    sleep(10);
   }
 
   /**

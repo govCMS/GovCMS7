@@ -13,8 +13,8 @@ Feature: News Article
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     Given "tags" terms:
-      | name   |
-      | acquia |
+      | name       |
+      | govcmstest |
     When I go to "/node/add/news-article"
     Then I should see "Create News Article"
     And I fill in the following:
@@ -25,7 +25,7 @@ Feature: News Article
     And I select "19" from "Day"
     And I select "16" from "Hour"
     And I select "45" from "Minute"
-    Then I set the chosen element "Tags" to "acquia"
+    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
@@ -45,8 +45,8 @@ Feature: News Article
     And I should see an "nav.breadcrumb:contains(Good news)" element
     And I should see "19 November 2015"
     And I should see "Digital transformation is real. GovCMS is the best!"
-    And the ".field-name-field-tags" element should contain "<a href=\"/tags/acquia\""
-    And I should see the link "acquia"
+    And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
+    And I should see the link "govcmstest"
 
   @api @javascript
   Scenario: Check that moderation works.

@@ -31,8 +31,8 @@ Feature: Events
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     Given "tags" terms:
-      | name   |
-      | acquia |
+      | name       |
+      | govcmstest |
     When I go to "/node/add/event"
     Then I should see "Create Event"
     And I fill in the following:
@@ -50,7 +50,7 @@ Feature: Events
     And I select "19" from "Day"
     And I select "16" from "Hour"
     And I select "45" from "Minute"
-    Then I set the chosen element "Tags" to "acquia"
+    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Feature Image" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
@@ -92,8 +92,8 @@ Feature: Events
     And I should see "Canberra, ACT" in the ".field-name-field-location" element
     And I should see "Free entry" in the ".field-name-field-cost" element
     And I should see "Department of Finance FORREST ACT 2603" in the ".field-name-field-contact" element
-    And the ".field-name-field-tags" element should contain "<a href=\"/tags/acquia\""
-    And I should see the link "acquia"
+    And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
+    And I should see the link "govcmstest"
 
   @api @javascript
   Scenario: Check that Events moderation works.

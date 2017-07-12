@@ -68,7 +68,7 @@ mock classes and functions.
 To get around this problem, we call our module code from wrapper functions.
 These wrapper functions should be a single line of code that passes all
 arguments, and return the results without making any changes.
-
+```
 	<?php
 	/**
 	 * @file mymodule.module
@@ -76,7 +76,7 @@ arguments, and return the results without making any changes.
 	function mymodule_theme($existing = array(), $type = '', $theme = '', $path = '') {
 	  return \myorg\mymodule\mymodule_theme($existing, $type, $theme, $path);
 	}
-
+```
 This may sometimes be erroneously be referred to as a function stub.
 
 ## Basefixtures

@@ -20,7 +20,8 @@
         "phpmd/phpmd":               "2.6.*",
         "phploc/phploc":             "2.0.0",
         "sebastian/phpcpd":          "3.*",
-        "drupal/coder":              "7.2.*"
+        "drupal/coder":              "7.2.*",
+        "phpunit/phpunit":           "^5.7"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -35,8 +36,5 @@
       "post-update-cmd": [
         "PhantomInstaller\\Installer::installPhantomJS"
       ]
-    },
-    "require": {
-        "phpunit/phpunit": "^5.7"
     }
 }

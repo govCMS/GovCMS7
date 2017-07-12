@@ -14,14 +14,14 @@ Feature: Blog Article
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     Given "tags" terms:
-      | name   |
-      | acquia |
+      | name       |
+      | govcmstest |
     When I go to "/node/add/blog-article"
     Then I should see "Create Blog Article"
     And I fill in the following:
       | Title   | New blog               |
       | Summary | How we migrated to govCMS! |
-    Then I set the chosen element "Tags" to "acquia"
+    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Feature Image" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
@@ -58,8 +58,8 @@ Feature: Blog Article
     And I should see the "img" element with the "title" attribute set to "govCMS Automated" in the "content" region
     And the response should contain "/files/styles/article_page_620x349/public/images/blog/autotest.jpg"
     And I should see "Digital transformation is real. GovCMS is the best!"
-    And the ".field-name-field-tags" element should contain "<a href=\"/tags/acquia\""
-    And I should see the link "acquia"
+    And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
+    And I should see the link "govcmstest"
 
 
   @api @javascript

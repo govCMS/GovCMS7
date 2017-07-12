@@ -13,15 +13,15 @@ Feature: Media Release
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     Given "tags" terms:
-      | name   |
-      | acquia |
+      | name       |
+      | govcmstest |
     When I go to "/node/add/media-release"
     Then I should see "Create Media Release"
     And I fill in the following:
       | Title   | New release            |
       | Date    | 13/05/2017             |
       | Summary | We migrated to govCMS! |
-    Then I set the chosen element "Tags" to "acquia"
+    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Attach media" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
@@ -41,8 +41,8 @@ Feature: Media Release
     Then I should see the heading "New release"
     And I should see an "nav.breadcrumb:contains(New release)" element
     And I should see "Digital transformation is real. GovCMS is the best!"
-    And the ".field-name-field-tags" element should contain "<a href=\"/tags/acquia\""
-    And I should see the link "acquia"
+    And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
+    And I should see the link "govcmstest"
 
   @api @javascript
   Scenario: Check that moderation works.

@@ -87,10 +87,10 @@ composer install --prefer-dist
 Adding Behat tests
 --------------------
 
-All existing Behat scenarios are captured in *.feature* files and located in
-*build/tests/behat/features*. If you are introducing a new functionality that
+All existing Behat scenarios are captured in `.feature` files and located in
+`build/tests/behat/features`. If you are introducing a new functionality that
 has not been captured by tests before you should provide a new
-*test-name.feature* file in that folder (or relevant sub-folder) and script the
+`test-name.feature` file in that folder (or relevant sub-folder) and script the
 scenarios there. It can be a good idea to copy an existing feature and follow
 the same principles for writing your own.
 
@@ -112,13 +112,13 @@ Scenarios can be tagged with @api @drush @javascript or any other custom tags.
   - @javascript can be added when the scenario requires javascript
   - @drush can be added when the scenario needs to be run using Drush driver
 
-*Note, scenarios without @javascript would usually be much faster, however they
-won't produce a screenshot on failure.*
+Note, scenarios without @javascript would usually be much faster, however they
+won't produce a screenshot on failure.
 
 There are plenty of existing steps available already that handle some typical
 activities on the site so you might also want to scan through the scenarios to
 get a better idea. Additionally, you can have a look inside the
-*/build/tests/behat/bootstrap* to find the contexts that define some of the
+`/build/tests/behat/bootstrap` to find the contexts that define some of the
 custom steps. If you want to perform a custom step then you would need to add
 its definition to one of the existing contexts (or create a new sub-context).
 
@@ -132,7 +132,7 @@ build/bin/phing -f build/phing/build.xml test:phpunit
 
 With the current configuration, the modules directory next to the docroot and
 its contents are searched, so tests will only be run for the custom govCMS
-modules. Files containing PHPunit tests should match the pattern '*Test.php'.
+modules. Files containing PHPunit tests should match the pattern '&ast;Test.php'.
 
 The iconomistTest.php may be used as a pattern for writing new tests for other
 modules - it shows how to include TDD7, mock Drupal core functions and implement
@@ -142,7 +142,7 @@ invocations in Drupal itself aren't prefixed with namespaces, the definitions
 in the file's namespace can override them. These then invoke the static methods
 defined in TDD7. The phpunit.conf file includes configuration for generating
 code coverage information as well. This is commented out by default as it's not
-needed for Jenkins. The output will be placed in a */coverage* directory.
+needed for Jenkins. The output will be placed in a `/coverage` directory.
 
 Additional Resources
 --------------------

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acquia\govCMSExtension\Context;
+namespace GovCMS\govCMSExtension\Context;
 
 use Drupal\DrupalExtension\Context\DrupalSubContextInterface;
 use Drupal\DrupalDriverManager;

@@ -13,8 +13,8 @@ Feature: Publication
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     Given "tags" terms:
-      | name   |
-      | acquia |
+      | name       |
+      | govcmstest |
     When I go to "/node/add/publication"
     Then I should see "Create Publication"
     And I fill in the following:
@@ -23,7 +23,7 @@ Feature: Publication
     And I select "2018" from "Year"
     And I select "Nov" from "Month"
     And I select "19" from "Day"
-    Then I set the chosen element "Tags" to "acquia"
+    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     And I click "Edit summary"
     And I fill in "Our recent and independent performance audit" for "Summary"
@@ -57,8 +57,8 @@ Feature: Publication
     And I should see "Date of Publication: 19 November 2018"
     And I should see "Digital transformation is real. GovCMS is the best!"
     And the response should contain "/images/publication/autotest.jpg"
-    And the ".field-name-field-tags" element should contain "<a href=\"/tags/acquia\""
-    And I should see the link "acquia"
+    And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
+    And I should see the link "govcmstest"
 
   @api @javascript
   Scenario: Check that Publication moderation works.
