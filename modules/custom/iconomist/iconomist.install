@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Iconomist module.
+ */
+
+/**
+ * Remove Iconomist theme settings.
+ *
+ * @param string $variable_name
+ *   Name of theme variable.
+ */
+function _iconomist_remove_settings($variable_name) {
+  $theme_settings = variable_get($variable_name, array());
+  if (!empty($theme_settings['iconomist_icons'])) {
+    foreach ($theme_settings['iconomist_icons'] as $icon) {
+      $file = file_load($icon['fid']);
+      if ($file) {
+        file_usage_delete($file, 'iconomist', 'theme', $icon['usage_id']);
+      }
+    }
+  }
+  unset($theme_settings['iconomist_icons']);
+  unset($theme_settings['iconomist_toggle']);
+  variable_set($variable_name, $theme_settings);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function iconomist_uninstall() {
+  variable_del('iconomist_counter');
+  foreach (list_themes() as $theme_name => $theme) {
+    _iconomist_remove_settings('theme_' . $theme_name . '_settings');
+  }
+  _iconomist_remove_settings('theme_settings');
+}
