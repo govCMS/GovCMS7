@@ -1,0 +1,4 @@
+name = TDD7
+description = Test Driven Development framework Drupal 7
+version = 7.0.1
+core = 7.x
