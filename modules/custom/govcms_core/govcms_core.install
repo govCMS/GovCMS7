@@ -1,0 +1,34 @@
+<?php
+/**
+ * @file
+ * Install file for govcms core.
+ */
+
+/**
+ * Consolidate current file extensions set in custom and default content types
+ * and provide a default value for var file_entity_default_allowed_extensions.
+ * We do not want to overly restrict file extensions that have already been set
+ * on existing sites.
+ */
+function govcms_core_update_7000() {
+  $result = db_query("select data from {field_config_instance} where data LIKE '%file_extensions%'");
+  $records = $result->fetchAll();
+  if ($records) {
+    $extensions = '';
+    foreach ($records as $record) {
+      if ($record) {
+        $record = unserialize($record->data);
+        if ($record['settings']['file_extensions']) {
+          $extensions .= $record['settings']['file_extensions'].' ';
+        }
+      }
+    }
+  }
+  $default_allowed_extensions = variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm');
+  $extensions .= trim($extensions.' '.$default_allowed_extensions);
+  if (!empty($extensions)) {
+    $extensions = implode(' ', array_unique(preg_split("/[\s,]+/", $extensions)));
+    variable_set('file_entity_default_allowed_extensions', $extensions);
+    watchdog('govcms_core', t('U7000 - Variable file_entity_default_allowed_extensions has been set to: %extensions.', array('%extensions' => $extensions)));
+  }
+}

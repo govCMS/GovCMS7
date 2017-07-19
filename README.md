@@ -29,6 +29,10 @@ cd <project_directory>
 composer install --prefer-dist --working-dir=build
 build/bin/phing -f build/phing/build.xml build
 ```
+Optionally, if the composer install command returns errors, run the following command before running composer install:
+```
+composer update --working-dir=build
+```
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
 
