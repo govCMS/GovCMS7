@@ -31,6 +31,16 @@ define('GOVCMS_SOCIAL_LINKS_VIMEO_DEFAULT', 'http://www.vimeo.com');
 define('GOVCMS_SOCIAL_LINKS_FLICKR_DEFAULT', 'https://www.flickr.com/');
 
 /**
+ * Define the Instagram default.
+ */
+define('GOVCMS_SOCIAL_LINKS_INSTAGRAM_DEFAULT', 'https://www.instagram.com/');
+
+/**
+ * Define the LinkedIn default.
+ */
+define('GOVCMS_SOCIAL_LINKS_LINKEDIN_DEFAULT', 'https://www.linkedin.com/');
+
+/**
  * Define the RSS default.
  */
 define('GOVCMS_SOCIAL_LINKS_RSS_DEFAULT', 'rss.xml');
@@ -50,6 +60,8 @@ function govcms_social_links_services_list() {
     'youtube',
     'vimeo',
     'flickr',
+    'instagram',
+    'linkedin',
     'rss',
     'email',
   );
