@@ -99,7 +99,7 @@ projects[openaccess][version] = "1.0"
 projects[panels][version] = "3.9"
 projects[paragraphs][version] = "1.0-rc5"
 projects[paragraphs][patch][] = "https://www.drupal.org/files/issues/paragraphs_workbench_moderation-2603424-19.patch"
-projects[paranoia][version] = "1.4"
+projects[paranoia][version] = "1.7"
 projects[password_policy][version] = "1.11"
 projects[pathauto][version] = "1.3"
 ; @TODO remove this after pathauto update.
