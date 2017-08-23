@@ -57,3 +57,7 @@ hooks
 .bundle
 node_modules
 .sass-cache
+
+# build results #
+#################
+docroot
