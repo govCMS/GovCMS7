@@ -10,7 +10,7 @@
 function govcms_media_releases_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-media_release-body'
+  // Exported field_instance: 'node-media_release-body'.
   $field_instances['node-media_release-body'] = array(
     'bundle' => 'media_release',
     'default_value' => NULL,
@@ -82,7 +82,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-media_release-field_date'
+  // Exported field_instance: 'node-media_release-field_date'.
   $field_instances['node-media_release-field_date'] = array(
     'bundle' => 'media_release',
     'deleted' => 0,
@@ -97,6 +97,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 0,
@@ -110,6 +111,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 4,
@@ -129,6 +131,7 @@ The <em>body</em> field is used for the main article content.',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
+          'show_remaining_days' => FALSE,
         ),
         'type' => 'date_default',
         'weight' => 1,
@@ -161,7 +164,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-media_release-field_file'
+  // Exported field_instance: 'node-media_release-field_file'.
   $field_instances['node-media_release-field_file'] = array(
     'bundle' => 'media_release',
     'deleted' => 0,
@@ -242,7 +245,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-media_release-field_image'
+  // Exported field_instance: 'node-media_release-field_image'.
   $field_instances['node-media_release-field_image'] = array(
     'bundle' => 'media_release',
     'deleted' => 0,
@@ -285,7 +288,7 @@ The <em>body</em> field is used for the main article content.',
         'module' => 'image',
         'settings' => array(
           'image_link' => 'content',
-          'image_style' => 'medium',
+          'image_style' => 'govcms_ui_kit_thumbnail',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -335,7 +338,7 @@ The <em>body</em> field is used for the main article content.',
     ),
   );
 
-  // Exported field_instance: 'node-media_release-field_tags'
+  // Exported field_instance: 'node-media_release-field_tags'.
   $field_instances['node-media_release-field_tags'] = array(
     'bundle' => 'media_release',
     'default_value' => NULL,

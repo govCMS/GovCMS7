@@ -10,7 +10,7 @@
 function govcms_promotion_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-footer_teaser-field_description'
+  // Exported field_instance: 'node-footer_teaser-field_description'.
   $field_instances['node-footer_teaser-field_description'] = array(
     'bundle' => 'footer_teaser',
     'default_value' => NULL,
@@ -65,7 +65,7 @@ function govcms_promotion_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-footer_teaser-field_image'
+  // Exported field_instance: 'node-footer_teaser-field_image'.
   $field_instances['node-footer_teaser-field_image'] = array(
     'bundle' => 'footer_teaser',
     'deleted' => 0,
@@ -148,7 +148,7 @@ function govcms_promotion_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-footer_teaser-field_reference'
+  // Exported field_instance: 'node-footer_teaser-field_reference'.
   $field_instances['node-footer_teaser-field_reference'] = array(
     'bundle' => 'footer_teaser',
     'default_value' => NULL,
@@ -203,7 +203,7 @@ function govcms_promotion_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-footer_teaser-field_tags'
+  // Exported field_instance: 'node-footer_teaser-field_tags'.
   $field_instances['node-footer_teaser-field_tags'] = array(
     'bundle' => 'footer_teaser',
     'default_value' => NULL,

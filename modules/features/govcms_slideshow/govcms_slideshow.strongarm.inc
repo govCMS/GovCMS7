@@ -95,6 +95,9 @@ function govcms_slideshow_strongarm() {
       'compact' => array(
         'custom_settings' => FALSE,
       ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
