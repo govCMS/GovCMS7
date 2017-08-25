@@ -114,6 +114,14 @@
             description="Build the project and install govCMS."
             depends="build, install"/>
 
+    <target name="build:no-clean"
+            description="Build the project without removing local changes, install govCMS."
+            depends="make"/>
+
+    <target name="build:no-clean:install"
+            description="Build the project without removing local changes, install govCMS."
+            depends="make, install"/>
+
     <target name="build:with-validation"
             description="Build the project, install, then run code validation."
             depends="build:install, validate:all"/>
