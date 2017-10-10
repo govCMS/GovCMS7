@@ -7,7 +7,7 @@ defaults[projects][subdir] = "contrib"
 
 projects[accessible_forms][version] = "1.0-alpha1"
 projects[acquia_connector][version] = "3.1"
-projects[addressfield][version] = "1.1"
+projects[addressfield][version] = "1.2"
 projects[admin_views][version] = "1.6"
 projects[agls][version] = "1.0-beta3"
 projects[bean][version] = "1.11"
