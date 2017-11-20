@@ -207,7 +207,7 @@ libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
 libraries[underscore][download][type] = "get"
-libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.5.2.zip"
+libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.8.3.zip"
 libraries[underscore][type] = "library"
 libraries[underscore][patch][] = "https://www.drupal.org/files/issues/2235299-12.patch"
 
