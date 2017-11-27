@@ -199,7 +199,7 @@ libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
 
 libraries[ckeditor][download][type] = "get"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.9/ckeditor_4.5.9_full.zip"
+libraries[ckeditor][download][url] = "https://github.com/ckeditor/ckeditor-releases/archive/full/4.6.2.zip"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
