@@ -98,11 +98,7 @@ projects[openaccess][version] = "1.0"
 projects[panels][version] = "3.9"
 projects[paragraphs][version] = "1.0-rc5"
 projects[paragraphs][patch][] = "https://www.drupal.org/files/issues/paragraphs_workbench_moderation-2603424-19.patch"
-<<<<<<< HEAD
 projects[paranoia][version] = "1.7"
-=======
-projects[paranoia][version] = "1.4"
->>>>>>> b2d555e6f8eeb49f4e1ff354a6537db31c71c1cd
 projects[password_policy][version] = "1.14"
 projects[pathauto][version] = "1.3"
 ; @TODO remove this after pathauto update.
