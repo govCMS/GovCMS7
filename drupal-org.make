@@ -181,7 +181,7 @@ projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[xmlsitemap][version] = "2.3"
 
 ; Themes
-projects[zen][version] = "5.5"
+projects[zen][version] = "5.6"
 projects[shiny][version] = "1.7"
 
 ; Libraries
