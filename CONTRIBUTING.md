@@ -134,15 +134,6 @@ With the current configuration, the modules directory next to the docroot and
 its contents are searched, so tests will only be run for the custom govCMS
 modules. Files containing PHPunit tests should match the pattern '&ast;Test.php'.
 
-The iconomistTest.php may be used as a pattern for writing new tests for other
-modules - it shows how to include TDD7, mock Drupal core functions and implement
-tests. The heart of the implementation is the use of a namespace, within which
-functions are defined with the same name as those being overridden. Since the
-invocations in Drupal itself aren't prefixed with namespaces, the definitions
-in the file's namespace can override them. These then invoke the static methods
-defined in TDD7. The phpunit.conf file includes configuration for generating
-code coverage information as well. This is commented out by default as it's not
-needed for Jenkins. The output will be placed in a `/coverage` directory.
 
 Additional Resources
 --------------------
