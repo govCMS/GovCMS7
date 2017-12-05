@@ -1,59 +1,33 @@
 {
     "name": "govCMS/govCMS",
-    "description": "The GovCMS build.",
-    "authors": [
-        {
-            "name": "Adam Malone",
-            "email": "adam@adammalone.net"
-        },
-        {
-            "name": "James Gollan",
-            "email": "james@swamphen.com"
-        },
-        {
-            "name": "Roman Barbun",
-            "email": "romanbarbun@gmail.com"
-        }
-    ],
+    "description": "The govCMS7 build.",
     "require-dev": {
-        "drush/drush":               "8.*",
-        "phing/phing":               "2.8.*",
+        "drush/drush": "8.*",
+        "phing/phing": "2.8.*",
         "jakoch/phantomjs-installer": "1.9.8",
-        "drupal/drupal-extension":   "3.2.2",
-        "fabpot/goutte":             "3.2.*",
-        "phpmd/phpmd":               "2.6.*",
-        "phploc/phploc":             "2.0.0",
-        "sebastian/phpcpd":          "3.*",
-        "drupal/coder":              "7.2.*",
-        "drupal/tdd7":               "7.0.1",
-        "phpunit/phpunit":           "^5.7"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": {
-        "tdd7": {
-            "type": "package",
-            "package": {
-                "name": "drupal/tdd7",
-                "version": "7.0.1",
-                "dist": {
-                    "url": "https://github.com/barbun/tdd7/archive/master.zip",
-                    "type": "zip"
-                }
-            }
-        }
+        "drupal/drupal-extension": "3.2.2",
+        "fabpot/goutte": "3.2.*",
+        "phpmd/phpmd": "2.6.*",
+        "phploc/phploc": "2.0.0",
+        "sebastian/phpcpd": "3.*",
+        "drupal/coder": "7.2.*",
+        "phpunit/phpunit": "^5.7"
     },
     "config": {
         "bin-dir": "bin",
-        "secure-http": false
+        "preferred-install": "dist",
+        "secure-http": false,
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
-
     "scripts": {
-      "post-install-cmd": [
-        "PhantomInstaller\\Installer::installPhantomJS"
-      ],
-      "post-update-cmd": [
-        "PhantomInstaller\\Installer::installPhantomJS"
-      ]
-    }
+        "post-install-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ],
+        "post-update-cmd": [
+            "PhantomInstaller\\Installer::installPhantomJS"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
