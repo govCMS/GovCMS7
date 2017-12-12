@@ -1675,3 +1675,13 @@ function govcms_update_7201() {
     module_enable(array('token_tweaks'));
   }
 }
+
+/**
+ * Deprecate and disable the modules.
+ */
+function govcms_update_7202() {
+  if (module_exists('govcms_register')) {
+    module_disable(array('govcms_register'));
+    drupal_uninstall_modules(array('govcms_register'), FALSE);
+  }
+}
