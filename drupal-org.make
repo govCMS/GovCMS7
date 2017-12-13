@@ -215,7 +215,7 @@ libraries[backbone][type] = "library"
 libraries[backbone][patch][] = "https://www.drupal.org/files/issues/2235299-11.patch"
 
 libraries[modernizr][download][type] = "get"
-libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.0.tar.gz"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.8.3.tar.gz"
 libraries[modernizr][type] = "library"
 
 libraries[performx][download][type] = "get"
