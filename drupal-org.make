@@ -195,7 +195,7 @@ libraries[superfish][directory_name] = "superfish"
 libraries[superfish][type] = "library"
 
 libraries[html5placeholder][download][type] = "get"
-libraries[html5placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.0.8.zip"
+libraries[html5placeholder][download][url] = "https://github.com/mathiasbynens/jquery-placeholder/archive/v2.3.1.zip"
 libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
 
