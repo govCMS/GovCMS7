@@ -224,5 +224,7 @@ libraries[performx][download][url] = "http://download.ckeditor.com/performx/rele
 libraries[performx][directory_name] = "performx"
 libraries[performx][type] = "library"
 
-libraries[swiftmailer][download][type] = "file"
+libraries[swiftmailer][download][type] = "get"
 libraries[swiftmailer][download][url] = "https://github.com/swiftmailer/swiftmailer/archive/v5.4.9.tar.gz"
+libraries[swiftmailer][directory_name] = "swiftmailer"
+libraries[swiftmailer][destination] = "libraries"
