@@ -71,7 +71,6 @@ function govcms_system_info_alter(&$info, $file, $type) {
  */
 function govcms_paranoia_hide_modules() {
   return array(
-    'pathauto_persist' => 'Other',
     'govcms_register' => 'govCMS',
   );
 }
