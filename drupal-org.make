@@ -67,6 +67,7 @@ projects[honeypot][patch][] = "https://www.drupal.org/files/issues/form_not_prot
 projects[image_link_formatter][version] = "1.0"
 projects[job_scheduler][version] = "2.0-alpha3"
 projects[libraries][version] = "2.3"
+projects[libraries][patch][] = "https://www.drupal.org/files/issues/libraries-version-callback-reference-parameter-fix-2779591-3.patch"
 projects[linkchecker][version] = "1.2"
 projects[linkchecker][patch][] = "https://www.drupal.org/files/issues/linkchecker-views-integration-965720-112.patch"
 projects[linkit][version] = "3.5"
