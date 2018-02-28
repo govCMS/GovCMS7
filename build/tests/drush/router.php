@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Custom prepend file for PHP unserver for govCMS. Used to provide Drupal
+ * Custom prepend file for PHP runserver for govCMS. Used to provide Drupal
  * with the correct information when Drush cannot be used.
  *
  * @TODO Remove and reimplement when the upstream Drush bug is fixed in
