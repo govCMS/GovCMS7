@@ -732,6 +732,8 @@ function _govcms_twitter_block() {
 function _govcms_default_variables() {
 
   $variables = array(
+    // Swiftmailer library path.
+    'swiftmailer_path' => 'profiles/govcms/libraries/swiftmailer',
 
     // Pathauto default.
     'pathauto_node_pattern' => '[node:title]',
@@ -1673,5 +1675,15 @@ function govcms_update_7200() {
 function govcms_update_7201() {
   if (!module_exists('token_tweaks')) {
     module_enable(array('token_tweaks'));
+  }
+}
+
+/**
+ * Deprecate and disable the modules.
+ */
+function govcms_update_7202() {
+  if (module_exists('govcms_register')) {
+    module_disable(array('govcms_register'));
+    drupal_uninstall_modules(array('govcms_register'), FALSE);
   }
 }
