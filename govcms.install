@@ -732,6 +732,8 @@ function _govcms_twitter_block() {
 function _govcms_default_variables() {
 
   $variables = array(
+    // Swiftmailer library path.
+    'swiftmailer_path' => 'profiles/govcms/libraries/swiftmailer',
 
     // Pathauto default.
     'pathauto_node_pattern' => '[node:title]',
