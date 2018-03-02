@@ -5,8 +5,8 @@
  * Custom prepend file for PHP runserver for govCMS. Used to provide Drupal
  * with the correct information when Drush cannot be used.
  *
- * @TODO Remove and reimplement when the upstream Drush bug is fixed in
- * https://github.com/drush-ops/drush/pull/1699
+ * This may be able to be removed and/or reimplemented when the upstream 
+ * Drush bug is fixed in https://github.com/drush-ops/drush/pull/1699
  */
 
 /**
