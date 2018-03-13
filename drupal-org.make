@@ -143,6 +143,7 @@ projects[spamspan][download][revision] = "cebf9dd3a360b466b498755fe800580e6b2156
 projects[strongarm][version] = "2.0"
 projects[swiftmailer][version] = "1.7"
 projects[superfish][version] = "1.9"
+projects[taxonomy_manager][version] = "1.0"
 projects[toc_filter][version] = "1.2"
 projects[token][version] = "1.6"
 projects[token_tweaks][version] = "1.x-dev"
