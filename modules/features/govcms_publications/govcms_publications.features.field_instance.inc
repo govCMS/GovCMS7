@@ -245,7 +245,7 @@ function govcms_publications_field_default_field_instances() {
     'settings' => array(
       'alt_field' => 0,
       'default_image' => 0,
-      'file_directory' => '',
+      'file_directory' => 'images/publication',
       'file_extensions' => 'png gif jpg jpeg',
       'max_filesize' => '16 MB',
       'max_resolution' => '',
