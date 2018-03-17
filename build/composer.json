@@ -8,7 +8,7 @@
         "drupal/drupal-extension": "3.2.2",
         "fabpot/goutte": "3.2.*",
         "phpmd/phpmd": "2.6.*",
-        "phploc/phploc": "2.0.0",
+        "phploc/phploc": "4.0.1",
         "sebastian/phpcpd": "3.*",
         "drupal/coder": "7.2.*",
         "phpunit/phpunit": "^5.7"
