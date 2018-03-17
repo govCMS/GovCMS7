@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "053405ee32c2cbe31d605580491713e8",
+    "content-hash": "530ebbc3e0b4c5c073e4fde3014c0643",
     "packages": [],
     "packages-dev": [
         {
@@ -674,12 +674,6 @@
                 "url": "https://git.drupal.org/project/coder.git",
                 "reference": "f1d99c99744e4703e8c2c654bddd313173d74b82"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/klausi/coder/zipball/f1d99c99744e4703e8c2c654bddd313173d74b82",
-                "reference": "f1d99c99744e4703e8c2c654bddd313173d74b82",
-                "shasum": ""
-            },
             "require": {
                 "php": ">=5.2.0",
                 "squizlabs/php_codesniffer": ">=1.4.6,<2.0.0"
@@ -761,16 +755,16 @@
         },
         {
             "name": "drupal/drupal-extension",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jhedstrom/drupalextension.git",
-                "reference": "abe3a33abd94382ab62423dd972fa820c63962e3"
+                "reference": "0ab44c8dda608b9885a53640882914a18992b6b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jhedstrom/drupalextension/zipball/abe3a33abd94382ab62423dd972fa820c63962e3",
-                "reference": "abe3a33abd94382ab62423dd972fa820c63962e3",
+                "url": "https://api.github.com/repos/jhedstrom/drupalextension/zipball/0ab44c8dda608b9885a53640882914a18992b6b6",
+                "reference": "0ab44c8dda608b9885a53640882914a18992b6b6",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +812,7 @@
                 "test",
                 "web"
             ],
-            "time": "2016-06-30T21:12:18+00:00"
+            "time": "2017-06-08T18:32:33+00:00"
         },
         {
             "name": "drush/drush",

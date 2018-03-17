@@ -5,7 +5,7 @@
         "drush/drush": "8.*",
         "phing/phing": "2.8.*",
         "jakoch/phantomjs-installer": "1.9.8",
-        "drupal/drupal-extension": "3.2.2",
+        "drupal/drupal-extension": "3.2.3",
         "fabpot/goutte": "3.2.*",
         "phpmd/phpmd": "2.6.*",
         "phploc/phploc": "2.0.0",
