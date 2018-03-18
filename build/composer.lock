@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "053405ee32c2cbe31d605580491713e8",
+    "content-hash": "9811158435368fb0ed1b00ca0f4c0f5f",
     "packages": [],
     "packages-dev": [
         {
@@ -674,12 +674,6 @@
                 "url": "https://git.drupal.org/project/coder.git",
                 "reference": "f1d99c99744e4703e8c2c654bddd313173d74b82"
             },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/klausi/coder/zipball/f1d99c99744e4703e8c2c654bddd313173d74b82",
-                "reference": "f1d99c99744e4703e8c2c654bddd313173d74b82",
-                "shasum": ""
-            },
             "require": {
                 "php": ">=5.2.0",
                 "squizlabs/php_codesniffer": ">=1.4.6,<2.0.0"
@@ -1227,23 +1221,32 @@
         },
         {
             "name": "jakoch/phantomjs-installer",
-            "version": "1.9.8",
+            "version": "2.1.1-p09",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jakoch/phantomjs-installer.git",
-                "reference": "fd6459094404f698a4edb9609e5e8c55c6418824"
+                "reference": "41c9fc2608adbc3905338c60829d6e4dd3b739bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jakoch/phantomjs-installer/zipball/fd6459094404f698a4edb9609e5e8c55c6418824",
-                "reference": "fd6459094404f698a4edb9609e5e8c55c6418824",
+                "url": "https://api.github.com/repos/jakoch/phantomjs-installer/zipball/41c9fc2608adbc3905338c60829d6e4dd3b739bf",
+                "reference": "41c9fc2608adbc3905338c60829d6e4dd3b739bf",
                 "shasum": ""
             },
             "require": {
-                "ext-openssl": "*"
+                "ext-bz2": "*",
+                "ext-openssl": "*",
+                "php": ">5.3"
+            },
+            "require-dev": {
+                "composer/composer": "^1.2",
+                "phpunit/phpunit": "^4.8"
             },
             "type": "custom-installer",
             "autoload": {
+                "psr-4": {
+                    "PhantomInstaller\\Test\\": "tests/"
+                },
                 "psr-0": {
                     "PhantomInstaller\\": "src/"
                 }
@@ -1264,7 +1267,7 @@
                 "headless",
                 "phantomjs"
             ],
-            "time": "2014-12-05T17:57:27+00:00"
+            "time": "2017-08-16T08:57:05+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
