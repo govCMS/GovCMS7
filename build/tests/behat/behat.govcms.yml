@@ -3,5 +3,3 @@ default:
   extensions:
     Behat\MinkExtension:
       base_url: http://govcms.local/
-    Bex\Behat\StepTimeLoggerExtension:
-      enabled_always: true
