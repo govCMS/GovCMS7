@@ -2,17 +2,18 @@
     "name": "govCMS/govCMS",
     "description": "The govCMS7 build.",
     "require-dev": {
-        "bex/behat-step-time-logger": "^1.0",
-        "drupal/coder": "7.2.*",
-        "drupal/drupal-extension": "3.2.2",
-        "drush/drush": "8.*",
-        "fabpot/goutte": "3.2.*",
-        "jakoch/phantomjs-installer": "1.9.8",
-        "phing/phing": "2.8.*",
-        "phploc/phploc": "2.0.0",
-        "phpmd/phpmd": "2.6.*",
+        "behat/behat": "^3.4",
+        "drupal/coder": "^8.2",
+        "drupal/drupal-extension": "^3.4",
+        "drush/drush": "^8.1",
+        "fabpot/goutte": "^3.2",
+        "jakoch/phantomjs-installer": "^2.1",
+        "phing/phing": "^2.16",
+        "phploc/phploc": "^4.0",
+        "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": "^5.7",
-        "sebastian/phpcpd": "3.*"
+        "sebastian/phpcpd": "^3.0",
+        "squizlabs/php_codesniffer": "^2.9"
     },
     "config": {
         "bin-dir": "bin",
