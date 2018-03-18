@@ -2,16 +2,17 @@
     "name": "govCMS/govCMS",
     "description": "The govCMS7 build.",
     "require-dev": {
-        "drush/drush": "8.*",
-        "phing/phing": "2.8.*",
-        "jakoch/phantomjs-installer": "1.9.8",
-        "drupal/drupal-extension": "3.2.2",
-        "fabpot/goutte": "3.2.*",
-        "phpmd/phpmd": "2.6.*",
-        "phploc/phploc": "2.0.0",
-        "sebastian/phpcpd": "3.*",
+        "bex/behat-step-time-logger": "^1.0",
         "drupal/coder": "7.2.*",
-        "phpunit/phpunit": "^5.7"
+        "drupal/drupal-extension": "3.2.2",
+        "drush/drush": "8.*",
+        "fabpot/goutte": "3.2.*",
+        "jakoch/phantomjs-installer": "1.9.8",
+        "phing/phing": "2.8.*",
+        "phploc/phploc": "2.0.0",
+        "phpmd/phpmd": "2.6.*",
+        "phpunit/phpunit": "^5.7",
+        "sebastian/phpcpd": "3.*"
     },
     "config": {
         "bin-dir": "bin",
