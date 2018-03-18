@@ -57,3 +57,11 @@ hooks
 .bundle
 node_modules
 .sass-cache
+
+# Build results #
+#################
+docroot
+
+# Testing #
+###########
+screenshot-fail.png
