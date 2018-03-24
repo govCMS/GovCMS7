@@ -29,6 +29,10 @@ cd <project_directory>
 composer install --prefer-dist --working-dir=build
 build/bin/phing -f build/phing/build.xml build
 ```
+Optionally, if the composer install command returns errors, run the following command before running composer install:
+```
+composer update --working-dir=build
+```
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
 
@@ -102,20 +106,20 @@ From the build/phing folder:
 The ability to test a govCMS build is built into the repository with all tests run by [Travis CI](https://travis-ci.com/) able to be run locally. Any changes made should be added and committed to your local repository and the following commands run:
 
 ```
-phing -f build/phing/build.xml build
-phing -f build/phing/build.xml run-tests
+build/bin/phing -f build/phing/build.xml build
+build/bin/phing -f build/phing/build.xml run-tests
 ```
 
 Individual tests may be run by specifying the target for Phing. If just the behat tests need to be run, the target can be changed:
 
 ```
-phing -f build/phing/build.xml test:behat
+build/bin/phing -f build/phing/build.xml test:behat
 ```
 
 All tasks in this project can be listed via the command:
 
 ```
-phing -f build/phing/build.xml -l
+build/bin/phing -f build/phing/build.xml -l
 ```
 
 
