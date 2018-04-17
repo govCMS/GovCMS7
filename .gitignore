@@ -58,6 +58,10 @@ hooks
 node_modules
 .sass-cache
 
-# build results #
+# Build results #
 #################
 docroot
+
+# Testing #
+###########
+screenshot-fail.png
