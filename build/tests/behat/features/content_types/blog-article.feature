@@ -20,8 +20,8 @@ Feature: Blog Article
     Then I should see "Create Blog Article"
     And I fill in the following:
       | Title   | New blog               |
-      | Summary | How we migrated to govCMS! |
     Then I set the chosen element "Tags" to "govcmstest"
+    And I put "How we migrated to govCMS!" into WYSIWYG of "Summary" field
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Feature Image" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
