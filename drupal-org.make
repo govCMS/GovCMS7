@@ -144,6 +144,7 @@ projects[spamspan][download][revision] = "cebf9dd3a360b466b498755fe800580e6b2156
 projects[strongarm][version] = "2.0"
 projects[swiftmailer][version] = "1.7"
 projects[superfish][version] = "1.9"
+projects[taxonomy_manager][version] = "1.0"
 projects[toc_filter][version] = "1.2"
 projects[token][version] = "1.6"
 projects[token_tweaks][version] = "1.x-dev"
@@ -202,7 +203,7 @@ libraries[html5placeholder][directory_name] = "html5placeholder"
 libraries[html5placeholder][type] = "library"
 
 libraries[ckeditor][download][type] = "get"
-libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.9/ckeditor_4.5.9_full.zip"
+libraries[ckeditor][download][url] = "https://download.cksource.com/CKEditor/CKEditor/CKEditor%204.9.2/ckeditor_4.9.2_full.tar.gz"
 libraries[ckeditor][directory_name] = "ckeditor"
 libraries[ckeditor][type] = "library"
 
