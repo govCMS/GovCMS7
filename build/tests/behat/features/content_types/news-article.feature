@@ -19,13 +19,13 @@ Feature: News Article
     Then I should see "Create News Article"
     And I fill in the following:
       | Title   | Good news              |
-      | Summary | We migrated to govCMS! |
     And I select "2015" from "Year"
     And I select "Nov" from "Month"
     And I select "19" from "Day"
     And I select "16" from "Hour"
     And I select "45" from "Minute"
     Then I set the chosen element "Tags" to "govcmstest"
+    And I put "We migrated to govCMS!" into WYSIWYG of "Summary" field
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
