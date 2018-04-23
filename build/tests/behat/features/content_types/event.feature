@@ -37,7 +37,6 @@ Feature: Events
     Then I should see "Create Event"
     And I fill in the following:
       | Title            | New event                           |
-      | Summary          | We celebrate govCMS!                |
       | Location         | Canberra, ACT                       |
       | Cost             | Free entry                          |
     And fill in "Contact" with:
@@ -51,6 +50,7 @@ Feature: Events
     And I select "16" from "Hour"
     And I select "45" from "Minute"
     Then I set the chosen element "Tags" to "govcmstest"
+    And I put "We celebrate govCMS! " into WYSIWYG of "Summary" field
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Feature Image" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
