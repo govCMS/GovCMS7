@@ -83,6 +83,9 @@
               value="${composer.bin}/phantomjs"/>
     <property name="phantomjs.webdriver" value="4444"/>
 
+    <!-- PHPunit -->
+    <property name="phpunit.config" value="${repo.root}/build/tests/phpunit/phpunit.conf" />
+
     <!-- We override this so Drupal install works -->
     <property name="drush.cmd" value="${drush.bin} -r ${docroot}"
               override="true"/>
@@ -359,4 +362,10 @@
                returnProperty="behatPass"/>
     </target>
 
+    <target name="test:phpunit" description="PHPunit tests for govCMS">
+      <exec command="${composer.bin}/phpunit -c ${phpunit.config}"
+        checkreturn="true"
+        logoutput="true"
+        passthru="true" />
+    </target>
 </project>
