@@ -161,7 +161,6 @@ dependencies[] = govcms_chosen
 dependencies[] = govcms_contact
 dependencies[] = govcms_front
 dependencies[] = govcms_menu_block
-dependencies[] = govcms_register
 dependencies[] = govcms_slideshow
 dependencies[] = govcms_superfish_configuration
 dependencies[] = govcms_sitemap
