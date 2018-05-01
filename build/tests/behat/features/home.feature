@@ -5,13 +5,21 @@ Feature: Home Page
   @javascript
   Scenario: View the homepage content
     Given I am on the homepage
-    Then I should see "Publications"
-    And I should see "News & Media"
-    And I should see "Contact"
-    And I should see "View more news"
-    And I should see "View more blog articles"
-    And I should see "Twitter Feed"
-    And I should see "Quick Links"
-    And I should see "Connect with us"
+    Then I should see the link "Site map and Feeds" in the "header" region
+    Then I should see the link "Home" in the "navigation" region
+    And I should see the link "Publications" in the "navigation" region
+    And I should see the link "News & Media" in the "navigation" region
+    And I should see the link "Contact" in the "navigation" region
+    And I should see the link "View more news" in the "content" region
+    And I should see the link "View more blog articles" in the "content" region
+    And I should see the heading "Twitter Feed" in the "sidebar_second" region
+    And I should see the heading "Quick Links" in the "sidebar_second" region
+    And I should see the heading "Connect with us" in the "sidebar_second" region
+    And I should see the link "Publications" in the "footer" region
+    And I should see the link "News & Media" in the "footer" region
+    And I should see the link "Contact" in the "footer" region
+    And I should see the link "Feedback" in the "footer" region
+    And I should see the link "Sitemap and Feeds" in the "footer" region
     And the "title" element should contain "govCMS"
     And the "title" element should not contain "|"
+    And the response should contain "/profiles/govcms/themes/govcms/govcms_barton/logo.png"
