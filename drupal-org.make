@@ -5,7 +5,6 @@ defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
 projects[accessible_forms][version] = "1.0-alpha1"
-projects[acquia_connector][version] = "3.1"
 projects[acquia_connector][version] = "3.2"
 ; addressfield locked at 7.x-1.x revision for php7 compatibility until 7.x-1.3 release available
 projects[addressfield][download][branch] = "7.x-1.x"
