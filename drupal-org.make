@@ -230,3 +230,8 @@ libraries[performx][type] = "library"
 libraries[swiftmailer][download][type] = "get"
 libraries[swiftmailer][download][url] = "https://github.com/swiftmailer/swiftmailer/archive/v5.4.9.tar.gz"
 libraries[swiftmailer][directory_name] = "swiftmailer"
+
+libraries[jsonpath][download][type] = "get"
+libraries[jsonpath][download][url] = "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/jsonpath/jsonpath-0.8.1.php"
+libraries[jsonpath][directory_name] = "jsonpath"
+
