@@ -101,7 +101,7 @@ before_script:
   - cd "${TRAVIS_BUILD_DIR}/docroot"
 
   # Start default web server.
-  - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - drush runserver --default-server=builtin 8080 &>${TRAVIS_BUILD_DIR}/tmp/php.log &
   - cd "${TRAVIS_BUILD_DIR}"
 
 script:
@@ -110,5 +110,4 @@ script:
   - phing -f build/phing/build.xml run-tests
 
 after_failure:
-  - cd "${TRAVIS_BUILD_DIR}"
-  - cat tmp/php.log
+  - cat ${TRAVIS_BUILD_DIR}/tmp/php.log
