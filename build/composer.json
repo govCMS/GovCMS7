@@ -3,17 +3,18 @@
     "description": "The govCMS7 build.",
     "require-dev": {
         "dmore/behat-chrome-extension": "^1.2",
-        "drupal/coder": "7.2.*",
-        "drupal/drupal-extension": "3.2.2",
-        "drush/drush": "8.*",
-        "fabpot/goutte": "3.2.*",
+        "drupal/coder": "^7.2",
+        "drupal/drupal-extension": "^3.4",
+        "drush/drush": "~8",
+        "fabpot/goutte": "^3.2",
+        "grasmash/drupal-security-warning": "^1.1",
         "jakoch/phantomjs-installer": "1.9.8",
-        "phing/phing": "2.*",
-        "phploc/phploc": "2.0.0",
-        "phpmd/phpmd": "2.6.*",
-        "phpunit/phpunit": "^5.7",
+        "phing/phing": "^2.16",
+        "phploc/phploc": "^3.0 || ^4.0",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "^4.8.35 || ^6.1",
         "se/selenium-server-standalone": "^3.12",
-        "sebastian/phpcpd": "3.*"
+        "sebastian/phpcpd": "^3.0"
     },
     "config": {
         "bin-dir": "bin",
@@ -22,6 +23,10 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
+    "conflict": {
+       "drupal/core": "8.*",
+       "drush/drush": ">9"
+    },
     "scripts": {
         "post-install-cmd": [
             "PhantomInstaller\\Installer::installPhantomJS"
@@ -29,6 +34,9 @@
         "post-update-cmd": [
             "PhantomInstaller\\Installer::installPhantomJS"
         ]
+    },
+    "suggest": {
+        "hirak/prestissimo": "^0.3"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

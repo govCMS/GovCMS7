@@ -50,7 +50,7 @@ before_install:
   - composer self-update
   - composer --version
   # For better composer performance.
-  - travis_retry composer require hirak/prestissimo --dev
+  - travis_retry composer global require hirak/prestissimo
 
   # Initialize xvfb (see https://docs.travis-ci.com/user/gui-and-headless-browsers)
   - export DISPLAY=:99.0
