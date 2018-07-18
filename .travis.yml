@@ -79,8 +79,8 @@ install:
 
   - jdk_switcher use oraclejdk8
   # Start Selenium and dump its ginormous log into a temporary file.
-  - selenium-server-standalone -port 4444 -log tmp/selenium2.log &
-  - sleep 5
+  - selenium-server-standalone -port 4444 -log /tmp/selenium2.log &
+  - sleep 1
 
   # composer install should fail on bad patches.
   - export COMPOSER_EXIT_ON_PATCH_FAILURE=1
