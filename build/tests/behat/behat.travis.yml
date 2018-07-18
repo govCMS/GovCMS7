@@ -1,0 +1,85 @@
+default:
+  autoload:
+    '':                           %paths.base%/bootstrap
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - FeatureContext
+      paths:
+        features:                 %paths.base%/features
+      filters:
+       tags:                      "~@drush"
+  extensions:
+    Behat\MinkExtension:
+      base_url:                   'http://127.0.0.1:8080'
+      goutte:                     ~
+      selenium2:
+        wd_host:                  "http://localhost:4444/wd/hub"
+        browser:                  chrome
+      javascript_session:         selenium2
+      browser_name:               chrome
+      files_path:                 %paths.base%/files
+    Drupal\DrupalExtension:
+      subcontexts:
+        paths:
+          - %paths.base%/bootstrap
+        autoload:                 0
+      blackbox:                   ~
+      api_driver:                 "drupal"
+      drupal:
+        drupal_root:              ../../docroot
+      drush:
+        root:                     ../../docroot
+      selectors:
+        success_message_selector: '.messages.status'
+        message_selector:         '.messages'
+        error_message_selector:   '.messages.error'
+      region_map:
+        sidebar_second:           'section.region-sidebar-second'
+        navigation:               '.region.region-navigation'
+        highlighted:              '.region.region-highlighted'
+        content:                  '#content'
+        footer:                   '.region.region-footer'
+        header:                   '#header'
+
+# Separate profile for testing using the Drush driver.
+drush:
+  autoload:
+    '':                           %paths.base%/bootstrap
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - FeatureContext
+      filters:
+        tags:                     "@drush"
+  extensions:
+    Behat\MinkExtension:
+      goutte:                     ~
+      selenium2:
+        wd_host:                  "http://localhost:4444/wd/hub"
+      javascript_session:         selenium2
+      files_path:                 %paths.base%/files
+    Drupal\DrupalExtension:
+      blackbox:                   ~
+      api_driver:                 "drush"
+      drupal:
+        drupal_root:              ../../docroot
+      drush:
+        root:                     ../../docroot
+      region_map:
+        sidebar_second:           'section.region-sidebar-second'
+        navigation:               '.region.region-navigation'
+        highlighted:              '.region.region-highlighted'
+        content:                  '#content'
+        footer:                   '.region.region-footer'
+        header:                   '#header'

@@ -50,6 +50,7 @@
   <property name="drush.file" value="${phing.project.name}.aliases.drushrc.php" override="true"/>
   <property name="behat.config" value="${repo.root}/build/tests/behat/behat.yml"/>
   <property name="behat.local" value="${repo.root}/build/tests/behat/behat.local.yml"/>
+  <property name="behat.travis" value="${repo.root}/build/tests/behat/behat.travis.yml"/>
   <property name="phantomjs.bin" value="${composer.bin}/phantomjs"/>
   <property name="phantomjs.webdriver" value="4444"/>
 
@@ -268,6 +269,21 @@
 
     <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
     <behat executable="${composer.bin}/behat" config="${behat.config}" verbose="true" strict="true" haltonerror="true" returnProperty="behatPass"/>
+  </target>
+
+  <target name="test:behat:travis" description="Travis CI Behat testing for govCMS" depends="phantomjs:launch">
+    <!-- If behat.local.yml doesn't exist, behat will be a sad panda so create a stub to appease it. -->
+    <if>
+      <not>
+        <available file="${behat.local}" property="behat_local_exists" value="exists"/>
+      </not>
+      <then>
+        <echo message="# Local behat settings." file="${behat.local}" append="false"/>
+      </then>
+    </if>
+
+    <!-- Run behat. Any settings in behat.yml or behat.local.yml will be used. -->
+    <behat executable="${composer.bin}/behat" config="${behat.travis}" verbose="true" strict="true" haltonerror="true" returnProperty="behatPass"/>
   </target>
 
   <target name="test:phpunit" description="PHPunit tests for govCMS">

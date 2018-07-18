@@ -107,7 +107,7 @@ before_script:
 script:
   - cd "${TRAVIS_BUILD_DIR}"
   # Run tests
-  - phing -f build/phing/build.xml run-tests
+  - phing -f build/phing/build.xml test:behat:travis
 
 after_failure:
   - cat ${TRAVIS_BUILD_DIR}/tmp/php.log
