@@ -252,7 +252,7 @@
 
   <!-- Ensure govCMS doesn't have any modules requiring security updates. Note, that workbench_moderation is specifically excluded from this check. @see https://github.com/govCMS/govCMS/pull/376 -->
   <target name="test:security-updates" description="Checks an installed site for security updates on modules">
-    <exec dir="${docroot}" command="! ${drush.bin} -n ups --check-disabled --security-only 2>/dev/null | grep 'SECURITY UPDATE' | grep -v Workbench" logoutput="true" checkreturn="true" passthru="true"/>
+    <exec dir="${docroot}" command="${drush.bin} -r ${docroot} -n ups --check-disabled --security-only 2>/dev/null | grep 'SECURITY UPDATE' | grep -v Workbench" logoutput="true" checkreturn="true" passthru="true"/>
   </target>
 
   <target name="test:behat" description="Behat testing for govCMS" depends="phantomjs:launch">
