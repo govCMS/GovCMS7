@@ -3,7 +3,7 @@
     "description": "The govCMS7 build.",
     "require-dev": {
         "drush/drush": "8.*",
-        "phing/phing": "2.8.*",
+        "phing/phing": "2.*",
         "jakoch/phantomjs-installer": "1.9.8",
         "drupal/drupal-extension": "3.2.2",
         "fabpot/goutte": "3.2.*",
