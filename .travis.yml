@@ -49,6 +49,8 @@ before_install:
   # Composer
   - composer self-update
   - composer --version
+  # For better composer performance.
+  - travis_retry composer require hirak/prestissimo --dev
 
   # Initialize xvfb (see https://docs.travis-ci.com/user/gui-and-headless-browsers)
   - export DISPLAY=:99.0
@@ -74,9 +76,6 @@ before_install:
 install:
   - cd "${TRAVIS_BUILD_DIR}"
 
-  # Create temporary folder.
-  - mkdir tmp
-
   - jdk_switcher use oraclejdk8
   # Start Selenium and dump its ginormous log into a temporary file.
   - selenium-server-standalone -port 4444 -log /tmp/selenium2.log &
@@ -101,13 +100,17 @@ before_script:
   - cd "${TRAVIS_BUILD_DIR}/docroot"
 
   # Start default web server.
-  - drush runserver --default-server=builtin 8080 &>${TRAVIS_BUILD_DIR}/tmp/php.log &
+  - drush runserver --default-server=builtin 8080 &>/tmp/php.log &
   - cd "${TRAVIS_BUILD_DIR}"
 
 script:
-  - cd "${TRAVIS_BUILD_DIR}"
-  # Run tests
-  - phing -f build/phing/build.xml test:behat:travis
+  # Run tests.
+  - build/bin/phing -f build/phing/build.xml validate:makefile
+  - build/bin/phing -f build/phing/build.xml validate:lint
+  - build/bin/phing -f build/phing/build.xml validate:phpcs
+  - build/bin/phing -f build/phing/build.xml validate:phpmd
+  - build/bin/phing -f build/phing/build.xml test:security-updates
+  - behat --config build/tests/behat/behat.travis.yml
 
 after_failure:
-  - cat ${TRAVIS_BUILD_DIR}/tmp/php.log
+  - cat /tmp/php.log
