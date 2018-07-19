@@ -131,7 +131,7 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
@@ -161,7 +161,7 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
