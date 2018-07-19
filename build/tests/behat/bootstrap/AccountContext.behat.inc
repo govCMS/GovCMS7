@@ -83,11 +83,27 @@ class AccountContext extends DrupalSubContextBase {
   public function assertAuthenticatedByRole($username, $role = '') {
     // Check if a user with this role is already logged in.
     if (!$this->loggedInWithRole($role)) {
-      // Create user.
-      $this->createUser($username, '', $role);
+      // Create user (and project)
+      $user = (object) array(
+        'name' => $username,
+        'pass' => $this->getRandom()->name(16),
+        'role' => $role,
+      );
+      $user->mail = "{$user->name}@example.com";
+
+      $this->userCreate($user);
+
+      $roles = explode(',', $role);
+      $roles = array_map('trim', $roles);
+      foreach ($roles as $role) {
+        if (!in_array(strtolower($role), array('authenticated', 'authenticated user'))) {
+          // Only add roles other than 'authenticated user'.
+          $this->getDriver()->userAddRole($user, $role);
+        }
+      }
 
       // Login.
-      $this->login();
+      $this->login($user);
     }
   }
 
