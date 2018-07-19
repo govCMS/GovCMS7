@@ -35,6 +35,8 @@ default:
         drupal_root:              docroot
       drush:
         root:                     docroot
+      text:
+        username_field:           "edit-name"
       selectors:
         success_message_selector: '.messages.status'
         message_selector:         '.messages'
@@ -76,6 +78,8 @@ drush:
         drupal_root:              docroot
       drush:
         root:                     docroot
+      text:
+        username_field:           "edit-name"
       region_map:
         sidebar_second:           'section.region-sidebar-second'
         navigation:               '.region.region-navigation'
