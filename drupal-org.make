@@ -180,6 +180,7 @@ projects[wysiwyg][download][revision] = "4efd47771a7fce77eb0364c747e3c76a6a65c46
 projects[wysiwyg_abbr][version] = "1.0"
 projects[wysiwyg_filter][version] = "1.6-rc2"
 projects[xmlsitemap][version] = "2.4"
+projects[xmlsitemap][patch][] = "https://www.drupal.org/files/issues/2018-07-19/xmlsitemap-2986847-2.patch"
 
 ; Themes
 projects[zen][version] = "5.5"
