@@ -137,6 +137,8 @@ class AccountContext extends DrupalSubContextBase {
   /**
    * Creates and authenticates a user with the given set of permissions.
    *
+   * @Given /^I am logged in as a user (?:|named )(?:|"(?P<username>[^"]*)" )(?:|with the password "(?P<password>[^"]*)" )with the following permissions:$/
+   *
    * @param \Behat\Gherkin\Node\PyStringNode $permissions
    *   The permissions to check for.
    * @param string $username
@@ -144,7 +146,7 @@ class AccountContext extends DrupalSubContextBase {
    * @param string $password
    *   The initial password (a random one is chosen if not supplied).
    *
-   * @Given /^I am logged in as a user (?:|named )(?:|"(?P<username>[^"]*)" )(?:|with the password "(?P<password>[^"]*)" )with the following permissions:$/
+   * @throws \Exception
    */
   public function assertAuthenticatedWithPermissionsList(PyStringNode $permissions, $username = '', $password = '') {
     // Create user.
