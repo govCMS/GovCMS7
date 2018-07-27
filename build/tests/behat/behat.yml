@@ -16,11 +16,11 @@ default:
        tags:                      "~@drush"
   extensions:
     Behat\MinkExtension:
+      javascript_session:         selenium2
+      files_path:                 %paths.base%/files
       goutte:                     ~
       selenium2:
         wd_host:                  "http://localhost:4444/wd/hub"
-      javascript_session:         selenium2
-      files_path:                 %paths.base%/files
     Drupal\DrupalExtension:
       subcontexts:
         paths:
