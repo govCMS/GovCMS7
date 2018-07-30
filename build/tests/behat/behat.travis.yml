@@ -17,6 +17,7 @@ default:
   extensions:
     Behat\MinkExtension:
       base_url:                   'http://127.0.0.1:8080'
+      browser_name:               chrome
       goutte:                     ~
       selenium2:
         wd_host:                  "http://localhost:4444/wd/hub"
@@ -35,8 +36,6 @@ default:
         drupal_root:              docroot
       drush:
         root:                     docroot
-      text:
-        username_field:           "edit-name"
       selectors:
         success_message_selector: '.messages.status'
         message_selector:         '.messages'
@@ -78,8 +77,6 @@ drush:
         drupal_root:              docroot
       drush:
         root:                     docroot
-      text:
-        username_field:           "edit-name"
       region_map:
         sidebar_second:           'section.region-sidebar-second'
         navigation:               '.region.region-navigation'

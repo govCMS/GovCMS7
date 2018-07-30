@@ -16,6 +16,7 @@ default:
        tags:                      "~@drush"
   extensions:
     Behat\MinkExtension:
+      browser_name:               chrome
       javascript_session:         selenium2
       files_path:                 %paths.base%/files
       goutte:                     ~
