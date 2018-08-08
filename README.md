@@ -1,5 +1,8 @@
 # govCMS
 
+**Note:**
+**This is an early release of a future 7.x-3.x branch, and is not ready for Production yet - it is under active development**
+
 ## Installation
 
 ### Packaged installation
