@@ -1,0 +1,95 @@
+version: 2
+aliases:
+  - &container_config
+    working_directory: /app
+    docker:
+      - image: integratedexperts/circleci2-builder
+        environment:
+          COMPOSER_ALLOW_SUPERUSER: 1
+          COMPOSE_PROJECT_NAME: govcms
+
+jobs:
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Docker-compose validate
+          command: docker-compose config -q
+      - run:
+          name: Composer validate
+          command: composer validate -d tests --ansi --strict
+      - run:
+          name: Update codebase to follow CI config
+          command: sed -i -e "/###/d" /app/docker-compose.yml
+#      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 17.06.0-ce
+      - run:
+          name: Pull newest Docker images
+          command: ahoy -v pull
+      - run:
+          name: Start amazeeio-network
+          command: |
+            docker network prune -f
+            docker network create amazeeio-network
+      - run:
+          name: Build project
+          command: |
+            ahoy -v build
+            docker-compose exec test dockerize -wait tcp://mariadb:3306 -timeout 1m
+            ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
+      - run:
+          name: Lint code
+          command: ahoy -v lint || true
+      - run:
+          name: Run behat tests
+          command: |
+            ahoy test-behat -- "--format=progress_fail --tags=smoke" || ahoy test-behat -- "--format=progress_fail --rerun --tags=smoke" || true
+      - run:
+          name: Copy artifacts
+          command: |
+            mkdir -p /tmp/artifacts/behat
+            docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
+          when: always
+      - store_artifacts:
+          path: /tmp/artifacts
+
+  deploy:
+    <<: *container_config
+    steps:
+      - checkout
+#      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
+          version: 17.06.0-ce
+      - run:
+          name: Pull newest Docker images
+          command: ahoy pull
+      - run:
+          name: Build and push Docker images to Dockerhub
+          command: |
+            echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env.default
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            export $(grep -v '^#' .env.default | xargs)
+            ahoy push
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^(?:7|8)\.x\-[0-9]+\.[0-9]+(?:[A-z0-9\-])*$/
+            branches:
+              # @todo: Uncomment below and remove the line after once merged.
+              #only: /master|ci/
+              only: /master|ci|feature\/7\.x\-3\.x\-lagoon/

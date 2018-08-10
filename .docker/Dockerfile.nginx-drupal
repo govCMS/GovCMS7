@@ -1,0 +1,2 @@
+FROM amazeeio/nginx-drupal
+COPY --from=govcms/govcms7 /app /app

@@ -1,0 +1,2 @@
+FROM amazeeio/varnish-drupal
+ENV LAGOON_PROJECT=govcms

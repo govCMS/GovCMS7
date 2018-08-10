@@ -84,10 +84,10 @@ class AccountContext extends DrupalSubContextBase {
     // Check if a user with this role is already logged in.
     if (!$this->loggedInWithRole($role)) {
       // Create user.
-      $this->createUser($username, '', $role);
+      $user = $this->createUser($username, '', $role);
 
       // Login.
-      $this->login();
+      $this->login($user);
     }
   }
 
@@ -115,7 +115,7 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
@@ -145,7 +145,7 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
