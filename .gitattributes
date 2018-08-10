@@ -1,0 +1,19 @@
+# Ignore files for distribution archives.
+
+.ahoy.yml                 export-ignore
+.circleci/*               export-ignore
+.dockerignore             export-ignore
+.env                      export-ignore
+.gitattributes            export-ignore
+.gitignore                export-ignore
+.github                   export-ignore
+.lagoon/**/*              export-ignore
+build/**/*                export-ignore
+CONTRIBUTING.md           export-ignore
+composer.lock             export-ignore
+composer.json             export-ignore
+docker*                   export-ignore
+phpcs.xml                 export-ignore
+RELEASE.md                export-ignore
+tests/**/*                export-ignore
+xdebug.sh                 export-ignore

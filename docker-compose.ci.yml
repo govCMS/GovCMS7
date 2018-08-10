@@ -1,0 +1,27 @@
+version: '2'
+services:
+  cli:
+    volumes:
+      - .:/app/docroot/sites/default/files
+  test:
+    build:
+      context: .
+      dockerfile: $PWD/.lagoon/Dockerfile.test
+    image: test
+    depends_on:
+      - cli
+    volumes:
+      - .:/app/docroot/sites/default/files
+  php:
+    volumes:
+      - .:/app/docroot/sites/default/files
+  nginx:
+    volumes:
+      - .:/app/docroot/sites/default/files
+  chrome:
+    image: selenium/standalone-chrome
+    shm_size: '1gb'
+    depends_on:
+      - test
+    volumes:
+      - .:/app

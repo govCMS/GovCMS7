@@ -1,0 +1,56 @@
+version: '2'
+services:
+  cli:
+    build:
+      context: .
+      dockerfile: $PWD/.lagoon/Dockerfile.cli
+    image: cli
+    labels:
+      lagoon.type: cli-persistent
+      lagoon.persistent.name: nginx
+      lagoon.persistent: /app/docroot/sites/default/files/
+  nginx:
+    build:
+      context: .
+      dockerfile: $PWD/.lagoon/Dockerfile.nginx-drupal
+      args:
+        CLI_IMAGE: cli
+    labels:
+      lagoon.type: nginx-php-persistent
+      lagoon.persistent: /app/docroot/sites/default/files/
+#    environment:
+#      LAGOON_ROUTE: http://site.govcms.gov.au/
+    networks:
+      - default
+    depends_on:
+      - cli
+    expose:
+      - "8080"
+  php:
+    build:
+      context: .
+      dockerfile: $PWD/.lagoon/Dockerfile.php
+      args:
+        CLI_IMAGE: cli
+    labels:
+      lagoon.type: nginx-php-persistent
+      lagoon.name: nginx
+      lagoon.persistent: /app/docroot/sites/default/files/
+    depends_on:
+      - cli
+  mariadb:
+    image: amazeeio/mariadb-drupal
+    labels:
+      lagoon.type: mariadb
+  redis:
+    image: amazeeio/redis
+    labels:
+      lagoon.type: redis
+  solr:
+    image: amazeeio/solr:6.6-drupal
+    labels:
+      lagoon.type: solr
+#  varnish:
+#    image: amazeeio/varnish-drupal
+#    labels:
+#      lagoon.type: varnish
