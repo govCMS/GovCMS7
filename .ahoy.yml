@@ -1,0 +1,209 @@
+---
+##
+# Ahoy workflow configuration for GovCMS.
+#
+# Modify environment variables in .env file to adjust workflow.
+#
+
+ahoyapi: v2
+
+commands:
+  build:
+    usage: Build project.
+    cmd: |
+      ahoy _title "Building project"
+      docker-compose build --no-cache
+      ahoy docker-start
+      sleep 20
+      [ "$SKIP_INSTALL_ON_HOST" != "1" ] && ahoy install-dependencies && ahoy install-codebase
+      ahoy install-site
+      echo ''
+      ahoy _title "Build complete"
+      echo ''
+      ahoy info
+
+  clean:
+    usage: Remove dependencies.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      chmod -Rf 777 $WEBROOT
+      git ls-files --directory --other -i --exclude-from=.gitignore $WEBROOT|xargs rm -Rf
+      rm -Rf vendor
+
+  clean-full:
+    usage: Remove dependencies.
+    cmd: |
+      ahoy docker-stop
+      docker-compose down
+      docker-compose rm -f
+      ahoy clean
+
+  cli:
+    usage: Start a shell inside CLI container.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      docker-compose exec test bash
+
+  cli-run:
+    usage: Run command inside CLI container.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      docker-compose exec test bash -c "$@"
+
+  drush:
+    usage: Run drush commands in the CLI service container.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      docker-compose exec cli drush -r /app/$WEBROOT -l $LAGOON_LOCALDEV_URL "$@"
+
+  docker-logs:
+    usage: Show Docker logs.
+    cmd: docker-compose logs "$@"
+
+  docker-prune:
+    usage: Prune project Docker containers
+    cmd: |
+      docker container prune -f
+      docker image prune -f
+
+  docker-ps:
+    usage: List running Docker containers.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      docker ps -a --filter name=^/$COMPOSE_PROJECT_NAME "$@"
+
+  docker-pull:
+    usage: Pull latest Docker containes.
+    cmd: |
+      ahoy _title "Pulling latest Docker containers"
+      export $(grep -v '^#' .env | xargs)
+      docker image ls --format \"{{.Repository}}:{{.Tag}}\" | grep $DOCKER_IMAGE_PREFIX | grep -v none | xargs -n1 docker pull | cat
+
+  docker-push:
+    usage: Push all docker images.
+    cmd: |
+      ahoy _title "Building and pushing Docker images to Dockerhub"
+      export COMPOSE_FILE=docker-compose.yml
+       . .lagoon/docker-build-push.sh
+
+  docker-release:
+    usage: Push all docker images.
+    cmd: |
+      ahoy _title "Releasing Docker images to Dockerhub"
+      export COMPOSE_FILE=docker-compose.yml
+      ahoy _confirm "This will tag all 'beta' Docker images with 'latest'. Would you like to proceed?" && . .lagoon/docker-release.sh || true
+
+  docker-restart:
+    usage: Restart Docker containers.
+    cmd: |
+      ahoy _title "Restarting Docker containers"
+      docker-compose restart "$@"
+
+  docker-start:
+    usage: Start Docker containers.
+    cmd: |
+      ahoy _title "Starting Docker containers"
+      export $(grep -v '^#' .env | xargs)
+      COMPOSE_CONVERT_WINDOWS_PATHS=1 docker-compose up -d "$@"
+      if docker-compose logs |grep "\[Error\]"; then exit 1; fi
+      ahoy docker-ps
+
+  docker-stop:
+    usage: Stop Docker containers.
+    cmd: |
+      ahoy _title "Stopping Docker containers"
+      docker-compose stop "$@"
+
+  info:
+    usage: Show site information.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      printf "Site URL              : $LAGOON_LOCALDEV_URL\n"
+      printf "Path inside container : /app\n"
+      printf "Path to docroot       : /app/$WEBROOT\n"
+      printf "DB connection         : " && ahoy drush sql-connect
+      printf "Mailhog URL           : http://mailhog.docker.amazee.io/\n"
+      printf "One-time login        : " && ahoy login
+
+  install-dependencies:
+    usage: Install dependencies.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy _title "Installing dependencies"
+      ahoy cli-run "composer install -n --ansi --prefer-dist --no-suggest"
+
+  install-codebase:
+    usage: Build codebase.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy _title "Builiding codebase"
+      ahoy cli-run " \
+        rm -rf /app/docroot \
+        && cd /app \
+        && drush make /app/.lagoon/stub.local.make /app/docroot \
+        && cp /app/.lagoon/settings.php /app/docroot/sites/default/settings.php \
+        "
+      ahoy _title "Symlinking profile into built codebase"
+      ahoy cli-run " \
+        rm -Rf /app/docroot/profiles/govcms/modules/custom && cd /app/docroot/profiles/govcms/modules && ln -s ../../../../modules/custom custom \
+        && rm -Rf /app/docroot/profiles/govcms/modules/features && cd /app/docroot/profiles/govcms/modules && ln -s ../../../../modules/features features \
+        && rm -Rf /app/docroot/profiles/govcms/themes/govcms && cd /app/docroot/profiles/govcms/themes && ln -s ../../../../themes/govcms govcms \
+        && rm -Rf /app/docroot/profiles/govcms/govcms.info && cd /app/docroot/profiles/govcms && ln -s ../../../govcms.info govcms.info \
+        && rm -Rf /app/docroot/profiles/govcms/govcms.install && cd /app/docroot/profiles/govcms && ln -s ../../../govcms.install govcms.install \
+        && rm -Rf /app/docroot/profiles/govcms/govcms.profile && cd /app/docroot/profiles/govcms && ln -s ../../../govcms.profile govcms.profile \
+        "
+
+  install-site:
+    usage: Install the website.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy _title "Installing website from \"$DRUPAL_PROFILE\" profile"
+      ahoy drush si -y $DRUPAL_PROFILE --site-name=$DRUPAL_SITE_NAME --site-mail=$DRUPAL_SITE_MAIL --account-name=$DRUPAL_ACCOUNT_NAME --account-mail=$DRUPAL_ACCOUNT_MAIL install_configure_form.update_status_module='array(FALSE,FALSE)'
+
+  login:
+    usage: Login to a website.
+    cmd: ahoy drush uli "$@"
+
+  test-behat:
+    usage: Run behat tests.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy cli-run "cd tests/behat && ../../vendor/bin/behat --strict --colors $BEHAT_PROFILE $@"
+
+  test-phpunit:
+    usage: Run phpunit tests.
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy cli-run "cd tests/phpunit && ../../vendor/bin/phpunit $@"
+
+################################################################################
+#                                   HELPERS                                    #
+################################################################################
+  _title:
+    cmd: ahoy _green && echo "==> $1" && ahoy _reset
+    hide: true
+  _green:
+    cmd: tput -Txterm setaf 2
+    hide: true
+  _yellow:
+    cmd: tput -Txterm setaf 3
+    hide: true
+  _white:
+    cmd: tput -Txterm setaf 7
+    hide: true
+  _reset:
+    cmd: tput -Txterm sgr0
+    hide: true
+  _confirm:
+    cmd: |
+      if [[ "$@" == *--yes* ]]; then
+        true
+      else
+        read -r -p "$@ [y/N] " response
+        if [ "$response" = y ] || [ "$response" = Y ]; then
+          true
+        else
+          false
+        fi
+      fi
+    hide: true
