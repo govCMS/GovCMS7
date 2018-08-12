@@ -82,6 +82,7 @@ commands:
   docker-push:
     usage: Push all docker images.
     cmd: |
+      export $(grep -v '^#' .env | xargs)
       ahoy _title "Building and pushing Docker images to Dockerhub"
       export COMPOSE_FILE=docker-compose.yml
        . .lagoon/docker-build-push.sh
@@ -89,6 +90,7 @@ commands:
   docker-release:
     usage: Push all docker images.
     cmd: |
+      export $(grep -v '^#' .env | xargs)
       ahoy _title "Releasing Docker images to Dockerhub"
       export COMPOSE_FILE=docker-compose.yml
       ahoy _confirm "This will tag all 'beta' Docker images with 'latest'. Would you like to proceed?" && . .lagoon/docker-release.sh || true
