@@ -46,7 +46,7 @@ jobs:
           name: Copy artifacts
           command: |
             mkdir -p /tmp/artifacts/behat
-            docker cp $(docker-compose ps -q cli):/app/tests/behat/screenshots /tmp/artifacts/behat
+            ahoy cli-run "[ -d /app/tests/behat/screenshots ]" && docker cp $(docker-compose ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
           when: always
       - store_artifacts:
           path: /tmp/artifacts
