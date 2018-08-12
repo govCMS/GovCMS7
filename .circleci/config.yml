@@ -46,7 +46,7 @@ jobs:
           name: Copy artifacts
           command: |
             mkdir -p /tmp/artifacts/behat
-            docker cp $(docker-compose -d govcms ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
+            docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
           when: always
       - store_artifacts:
           path: /tmp/artifacts
