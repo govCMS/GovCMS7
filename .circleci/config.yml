@@ -39,14 +39,14 @@ jobs:
       - run:
           name: Run behat tests
           command: |
-            ahoy cli-run "mkdir -p /tmp/screenshots"
+            ahoy cli-run "mkdir -p /app/tests/behat/screenshots"
             [ "$CIRCLE_NODE_TOTAL" -gt "1" ] && BEHAT_PROFILE=--profile=p$CIRCLE_NODE_INDEX && echo "BEHAT_PROFILE=$BEHAT_PROFILE">>.env.local
             ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun || true
       - run:
           name: Copy artifacts
           command: |
             mkdir -p /tmp/artifacts/behat
-            ahoy cli-run "[ -d /app/tests/behat/screenshots ]" && docker cp $(docker-compose ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
+            docker cp $(docker-compose -d govcms ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
           when: always
       - store_artifacts:
           path: /tmp/artifacts
