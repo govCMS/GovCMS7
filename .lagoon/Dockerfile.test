@@ -5,5 +5,6 @@ COPY --from=cli /app /app
 
 COPY composer.json composer.lock /app/
 RUN composer install -n --ansi --prefer-dist --no-suggest
+RUN drush dl drupalorg_drush -y
 
 COPY tests /app/tests

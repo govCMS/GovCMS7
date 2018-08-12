@@ -131,6 +131,7 @@ commands:
       export $(grep -v '^#' .env | xargs)
       ahoy _title "Installing dependencies"
       ahoy cli-run "composer install -n --ansi --prefer-dist --no-suggest"
+      ahoy cli-run "drush dl drupalorg_drush -y"
 
   install-codebase:
     usage: Build codebase.
@@ -159,6 +160,19 @@ commands:
       export $(grep -v '^#' .env | xargs)
       ahoy _title "Installing website from \"$DRUPAL_PROFILE\" profile"
       ahoy drush si -y $DRUPAL_PROFILE --site-name=$DRUPAL_SITE_NAME --site-mail=$DRUPAL_SITE_MAIL --account-name=$DRUPAL_ACCOUNT_NAME --account-mail=$DRUPAL_ACCOUNT_MAIL install_configure_form.update_status_module='array(FALSE,FALSE)'
+
+  lint:
+    usage: Lint code
+    cmd: |
+      export $(grep -v '^#' .env | xargs)
+      ahoy _title "Linting code"
+      ahoy cli-run "vendor/bin/parallel-lint --exclude vendor --exclude docroot -e php,inc,module,theme,install,profile,test ."
+      ahoy _title "Checking standards"
+      ahoy cli-run "vendor/bin/phpcs"
+      ahoy _title "Verify makefile"
+      ahoy cli-run "drush verify-makefile drupal-org.make"
+      ahoy _title "Check for code mess"
+      ahoy cli-run "vendor/bin/phpmd modules,themes text codesize,unusedcode,cleancode"
 
   login:
     usage: Login to a website.

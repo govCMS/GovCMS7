@@ -30,9 +30,9 @@ jobs:
           command: |
             echo "COMPOSE_FILE=$COMPOSE_FILE">>.env
             ahoy build
-#      - run:
-#          name: Lint code
-#          command: ahoy lint
+      - run:
+          name: Lint code
+          command: ahoy lint || true
       - run:
           name: Run phpunit tests
           command: ahoy test-phpunit
