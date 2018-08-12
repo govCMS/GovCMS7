@@ -41,7 +41,7 @@ jobs:
           command: |
             ahoy cli-run "mkdir -p /tmp/screenshots"
             [ "$CIRCLE_NODE_TOTAL" -gt "1" ] && BEHAT_PROFILE=--profile=p$CIRCLE_NODE_INDEX && echo "BEHAT_PROFILE=$BEHAT_PROFILE">>.env.local
-            ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun
+            ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun || true
       - run:
           name: Copy artifacts
           command: |
