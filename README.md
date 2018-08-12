@@ -77,6 +77,13 @@ Individual tests may be run by specifying the target for commands:
 ahoy test-behat -- tests/behat/features/home.feature
 ```
 
+### Debugging CLI
+
+To debug CLI commands, such as Behat tests, using XDEBUG:
+1. `ahoy cli` to get into `test` container.
+4. `cd tests/behat`
+3. `. xdebug.sh ../../vendor/bin/behat path/to/test.feature`
+
 ## Patching govCMS
 
 Because govCMS is a [Drupal distribution](https://www.drupal.org/documentation/build/distributions), modules and configurations are not added directly to the codebase. Rather, they are referenced within the `govcms.make` file.
