@@ -30,19 +30,6 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
   }
 
   /**
-   * Set default browser window size to maximum.
-   *
-   * @BeforeScenario
-   */
-  public function maximizeWindow() {
-    $driver = $this->getSession()->getDriver();
-    if (!($driver instanceof Selenium2Driver)) {
-      return;
-    }
-    $this->getSession()->getDriver()->maximizeWindow();
-  }
-
-  /**
    * Log the user IDs created during the tests.
    *
    * Collect user IDs later to be used for cleaning up processes.
@@ -78,36 +65,6 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
     $date_field->setValue($date);
     $time_field->setValue($time);
-  }
-
-  /**
-   * Actions to take after a step has run.
-   *
-   * @AfterStep
-   */
-  public function takeScreenShotAfterFailedStep(AfterStepScope $scope) {
-    if (99 === $scope->getTestResult()->getResultCode()) {
-      $driver = $this->getSession()->getDriver();
-      if (!($driver instanceof Selenium2Driver)) {
-        return;
-      }
-      $this->getSession()->resizeWindow(1440, 900, 'current');
-      file_put_contents(__DIR__ . '../../screenshot-fail.png', $this->getSession()->getDriver()->getScreenshot());
-    }
-  }
-
-  /**
-   * Takes a screenshot for debugging purposes.
-   *
-   * @param string $filename
-   *   The name of the screenshot file.
-   *
-   * @When I take a screenshot named :filename
-   */
-  public function takeScreenshot($filename) {
-    $screenshot = $this->getSession()->getDriver()->getScreenshot();
-    // If this file is in tests/features/bootstrap, the screenshot be in tests.
-    file_put_contents(__DIR__ . '../../' . $filename . '.png', $screenshot);
   }
 
   /**

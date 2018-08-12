@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ruleset name="govCMS">
+  <description>PHPCS Standard for govCMS, based on Drupal standards.
+  </description>
+
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+
+  <arg name="extensions" value="inc,info,install,module,php,profile,test,theme"/>
+  <arg name="colors"/>
+  <arg value="sp"/>
+
+  <file>modules</file>
+  <file>themes</file>
+  <file>tests</file>
+  <file>govcms.info</file>
+  <file>govcms.install</file>
+  <file>govcms.profile</file>
+
+  <!-- Exclude CircleCI config files. -->
+  <exclude-pattern>circle\.yml</exclude-pattern>
+  <exclude-pattern>\.circle\/config\.yml</exclude-pattern>
+
+  <!-- Exclude all features-generated files. -->
+  <exclude-pattern>*\.bean\.*</exclude-pattern>
+  <exclude-pattern>*\.context\.*</exclude-pattern>
+  <exclude-pattern>*\.current_search\.*</exclude-pattern>
+  <exclude-pattern>*\.custom_formatters\.*</exclude-pattern>
+  <exclude-pattern>*\.ds\.*</exclude-pattern>
+  <exclude-pattern>*\.facetapi_defaults\.*</exclude-pattern>
+  <exclude-pattern>*\.feeds_*\.*</exclude-pattern>
+  <exclude-pattern>*\.features\.*</exclude-pattern>
+  <exclude-pattern>*\.field_group\.*</exclude-pattern>
+  <exclude-pattern>*\.file_default_displays\.*</exclude-pattern>
+  <exclude-pattern>*\.file_type\.*</exclude-pattern>
+  <exclude-pattern>*\.heartbeat\.*</exclude-pattern>
+  <exclude-pattern>*\.layouts\.*</exclude-pattern>
+  <exclude-pattern>*\.linkit_profiles\.*</exclude-pattern>
+  <exclude-pattern>*\.pages_default\.*</exclude-pattern>
+  <exclude-pattern>*\.panels_default\.*</exclude-pattern>
+  <exclude-pattern>*\.rules_defaults\.*</exclude-pattern>
+  <exclude-pattern>*\.strongarm\.*</exclude-pattern>
+  <exclude-pattern>*\.views_default\.*</exclude-pattern>
+  <exclude-pattern>*\.quicktabs\.*</exclude-pattern>
+
+</ruleset>

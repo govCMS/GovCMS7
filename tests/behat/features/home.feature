@@ -2,9 +2,10 @@ Feature: Home Page
 
   Ensure the home page is rendering correctly
 
-  @javascript
-  Scenario: View the homepage content
+  @javascript @smoke
+  Scenario: Anonymous user visits the homepage
     Given I am on the homepage
+    And save screenshot
     Then I should see the link "Site map and Feeds" in the "header" region
     Then I should see the link "Home" in the "navigation" region
     And I should see the link "Publications" in the "navigation" region
