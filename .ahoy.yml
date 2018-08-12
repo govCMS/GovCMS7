@@ -164,6 +164,12 @@ commands:
     usage: Login to a website.
     cmd: ahoy drush uli "$@"
 
+  test:
+    usage: Run all tests.
+    cmd: |
+      ahoy test-phpunit
+      ahoy test-behat
+
   test-behat:
     usage: Run behat tests.
     cmd: |
