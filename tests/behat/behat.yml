@@ -33,9 +33,9 @@ default:
       blackbox:                   ~
       api_driver:                 "drupal"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              ../../
       drush:
-        root:                     ../../docroot
+        root:                     ../../
       selectors:
         success_message_selector: '.messages.status'
         message_selector:         '.messages'
@@ -79,9 +79,9 @@ drush:
       blackbox:                   ~
       api_driver:                 "drush"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              ../../
       drush:
-        root:                     ../../docroot
+        root:                     ../../
       region_map:
         sidebar_second:           'section.region-sidebar-second'
         navigation:               '.region.region-navigation'

@@ -9,7 +9,7 @@
     <!-- Filter for coverage reports. -->
     <filter>
         <blacklist>
-            <directory>./vendor</directory>
+            <directory>./tests/vendor</directory>
         </blacklist>
     </filter>
     <!-- Uncomment the following for code coverage output. -->

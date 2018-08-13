@@ -21,27 +21,30 @@ jobs:
           version: 17.06.0-ce
       - run:
           name: Composer validate
-          command: composer validate --ansi --strict
+          command: composer validate -d tests --ansi --strict
       - run:
           name: Pull newest Docker images
-          command: ahoy docker-pull
+          command: ahoy -v pull
+      - run: 
+          name: Start amazeeio-network
+          command: docker network create amazeeio-network
       - run:
           name: Build project
           command: |
-            echo "COMPOSE_FILE=$COMPOSE_FILE">>.env
-            ahoy build
+            ahoy -v build
+            docker-compose exec test dockerize -wait tcp://mariadb:3306 -timeout 1m
+            ahoy -v install govcms install_configure_form.update_status_module='array(FALSE,FALSE)'
       - run:
           name: Lint code
-          command: ahoy lint || true
-      - run:
-          name: Run phpunit tests
-          command: ahoy test-phpunit
+          command: ahoy -v lint || true
       - run:
           name: Run behat tests
           command: |
-            ahoy cli-run "mkdir -p /app/tests/behat/screenshots"
             [ "$CIRCLE_NODE_TOTAL" -gt "1" ] && BEHAT_PROFILE=--profile=p$CIRCLE_NODE_INDEX && echo "BEHAT_PROFILE=$BEHAT_PROFILE">>.env.local
             ahoy test-behat -- "--format=progress_fail --tags=smoke" || ahoy test-behat -- "--format=progress_fail --rerun --tags=smoke" || true
+      # - run:
+      #     name: Run phpunit tests
+      #     command: ahoy test-phpunit
       - run:
           name: Copy artifacts
           command: |
@@ -62,7 +65,7 @@ jobs:
           version: 17.06.0-ce
       - run:
           name: Pull newest Docker images
-          command: ahoy docker-pull
+          command: ahoy pull
       - run:
           name: Build and push Docker images to Dockerhub
           command: |

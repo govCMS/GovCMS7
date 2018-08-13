@@ -11,10 +11,8 @@ CHANGELOG.txt
 CONTRIBUTING.md
 build
 docker-compose.ci.yml
-docker-compose.local.yml
 docker-compose.yml
 LICENSE.txt
 LOCAL.md
 README.md
 RELEASE.md
-vendor

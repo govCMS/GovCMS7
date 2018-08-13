@@ -1,6 +1,10 @@
 # git ls-files --others --exclude-from=.git/info/exclude
 # Lines that start with '#' are comments.
 
+libraries/
+modules/contrib
+themes/contrib
+
 # Compiled source #
 ###################
 *.com

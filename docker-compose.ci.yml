@@ -1,27 +1,21 @@
-version: '2'
+version: '2.3'
+
+x-volumes:
+  &default-volumes
+    # Define all volumes you would like to have real-time mounted into the docker containers
+    volumes:
+      - .:/app/docroot/sites/default/files
+
 services:
+
   cli:
-    volumes:
-      - .:/app/docroot/sites/default/files
+    << : *default-volumes # loads the defined volumes from the top
+
   test:
-    build:
-      context: .
-      dockerfile: $PWD/.lagoon/Dockerfile.test
-    image: test
-    depends_on:
-      - cli
-    volumes:
-      - .:/app/docroot/sites/default/files
+    << : *default-volumes # loads the defined volumes from the top
+
   php:
-    volumes:
-      - .:/app/docroot/sites/default/files
+    << : *default-volumes # loads the defined volumes from the top
+
   nginx:
-    volumes:
-      - .:/app/docroot/sites/default/files
-  chrome:
-    image: selenium/standalone-chrome
-    shm_size: '1gb'
-    depends_on:
-      - test
-    volumes:
-      - .:/app
+    << : *default-volumes # loads the defined volumes from the top

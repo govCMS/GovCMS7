@@ -1,0 +1,14 @@
+FROM amazeeio/php:7.1-cli-drupal
+ARG WEBROOT
+
+# @todo don't ep php!
+RUN ep /usr/local/etc/php/php.ini
+
+COPY . /tmp/src
+
+RUN rm -rf $WEBROOT \
+    && cd /tmp/src \
+    && drush make /tmp/src/.docker/stub.make $WEBROOT --contrib-destination \
+    && rm -rf /tmp/src
+
+COPY .docker/settings.php $WEBROOT/sites/default/settings.php

@@ -1,0 +1,18 @@
+FROM amazeeio/php:7.1-cli-drupal
+
+# @todo don't ep php!
+RUN ep /usr/local/etc/php/php.ini
+
+ENV DOCKERIZE_VERSION v0.6.1
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+RUN mkdir -p /app/tests /app/tests/behat/screenshots
+COPY tests/composer.json tests/composer.lock /app/tests/
+RUN composer install -d /app/tests -n --ansi --prefer-dist --no-suggest
+RUN drush dl drupalorg_drush-7.x-1.x-dev -y
+
+COPY --from=govcms/govcms7 /app /app
+
+COPY tests /app/tests
