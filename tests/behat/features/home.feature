@@ -21,6 +21,4 @@ Feature: Home Page
     And I should see the link "Contact" in the "footer" region
     And I should see the link "Feedback" in the "footer" region
     And I should see the link "Sitemap and Feeds" in the "footer" region
-    And the "title" element should contain "govCMS"
-    And the "title" element should not contain "|"
     And the response should contain "/profiles/govcms/themes/govcms/govcms_barton/logo.png"
