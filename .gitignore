@@ -5,6 +5,7 @@ libraries/
 modules/contrib
 themes/contrib
 .env
+docker-compose.override.yml
 
 # Compiled source #
 ###################
