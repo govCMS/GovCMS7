@@ -13,9 +13,10 @@ govCMS exists as packaged versions on both the [Github](https://github.com/govCM
 
 1. Make sure that you have [Docker](https://www.docker.com/), [Pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) and [Ahoy](https://github.com/ahoy-cli/ahoy)installed.
 2. Checkout project repository `git clone git@github.com:govCMS/govCMS.git`
-3. `ahoy build`
-4. `ahoy install`
-5. http://govcms.docker.amazee.io
+3. `ahoy up`
+4. `ahoy make`
+5. `ahoy install`
+6. http://govcms.docker.amazee.io
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the `govcms.make` file.
 
@@ -24,29 +25,25 @@ Once built, the profile files will be symlinked into `docroot/profiles/govcms`.
 ## List of available Ahoy workflow commands:
 
 ```
-   build                Build project.
-   clean                Remove dependencies.
-   clean-full           Remove dependencies.
-   cli                  Start a shell inside CLI container.
-   cli-run              Run command inside CLI container.
-   docker-logs          Show Docker logs.
-   docker-prune         Prune project Docker containers
-   docker-ps            List running Docker containers.
-   docker-pull          Pull latest Docker containes.
-   docker-push          Push all docker images.
-   docker-release       Push all docker images.
-   docker-restart       Restart Docker containers.
-   docker-start         Start Docker containers.
-   docker-stop          Stop Docker containers.
-   drush                Run drush commands in the CLI service container.
-   info                 Show site information.
-   install-codebase     Build codebase.
-   install-dependencies Install dependencies.
-   install-site         Install the website.
-   login                Login to a website.
-   test                 Run all tests.
-   test-behat           Run behat tests.
-   test-phpunit         Run phpunit tests.
+   build        Build project.
+   cli          Start a shell inside CLI container.
+   drush        Run drush commands in the CLI service container.
+   install      Install the profile.
+   lint         Lint code
+   login        Login to a website.
+   logs         Show Docker logs.
+   make         Install local dependencies.
+   ps           List running Docker containers.
+   pull         Pull latest docker images.
+   push         Push all docker images.
+   release      Push all docker images.
+   restart      Restart Docker containers.
+   run          Run command inside CLI container.
+   stop         Stop Docker containers.
+   test         Run all tests.
+   test-behat   Run behat tests.
+   test-phpunit Run phpunit tests.
+   up           Build project.
 ```
 
 ## Structure

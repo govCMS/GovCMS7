@@ -1,0 +1,12 @@
+FROM amazeeio/php:7.1-cli-drupal
+
+COPY . /tmp/src
+
+RUN rm -rf /app \
+    && cd /tmp/src \
+    && echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
+    && drush make /tmp/src/.docker/stub.make /app --contrib-destination \
+    && rm -rf /tmp/src \
+    && rm -rf /usr/local/etc/php/conf.d/memory.ini
+
+COPY .docker/settings.php /app/sites/default/settings.php

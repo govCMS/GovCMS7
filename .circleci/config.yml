@@ -7,40 +7,45 @@ aliases:
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
           COMPOSE_PROJECT_NAME: govcms
-          COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
-          SKIP_INSTALL_ON_HOST: 1
+
 jobs:
   build:
     <<: *container_config
-    parallelism: 1
     steps:
       - checkout
+      - run:
+          name: Docker-compose validate
+          command: docker-compose config -q
+      - run:
+          name: Composer validate
+          command: composer validate -d tests --ansi --strict
+      - run:
+          name: Update codebase to follow CI config
+          command: sed -i -e "/###/d" /app/docker-compose.yml
 #      - setup_remote_docker
       - setup_remote_docker:
           docker_layer_caching: true
           version: 17.06.0-ce
       - run:
-          name: Composer validate
-          command: composer validate -d tests --ansi --strict
-      - run:
           name: Pull newest Docker images
           command: ahoy -v pull
-      - run: 
+      - run:
           name: Start amazeeio-network
-          command: docker network create amazeeio-network
+          command: |
+            docker network prune -f
+            docker network create amazeeio-network
       - run:
           name: Build project
           command: |
             ahoy -v build
             docker-compose exec test dockerize -wait tcp://mariadb:3306 -timeout 1m
-            ahoy -v install govcms install_configure_form.update_status_module='array(FALSE,FALSE)'
+            ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
       - run:
           name: Lint code
           command: ahoy -v lint || true
       - run:
           name: Run behat tests
           command: |
-            [ "$CIRCLE_NODE_TOTAL" -gt "1" ] && BEHAT_PROFILE=--profile=p$CIRCLE_NODE_INDEX && echo "BEHAT_PROFILE=$BEHAT_PROFILE">>.env.local
             ahoy test-behat -- "--format=progress_fail --tags=smoke" || ahoy test-behat -- "--format=progress_fail --rerun --tags=smoke" || true
       # - run:
       #     name: Run phpunit tests
@@ -56,7 +61,6 @@ jobs:
 
   deploy:
     <<: *container_config
-    parallelism: 1
     steps:
       - checkout
 #      - setup_remote_docker
@@ -69,9 +73,11 @@ jobs:
       - run:
           name: Build and push Docker images to Dockerhub
           command: |
-            echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env
+            echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env.default
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            ahoy docker-push
+            echo "DOCKERHUB_NAMESPACE=alexdesignworks">>.env.default
+            export $(grep -v '^#' .env.default | xargs)
+            ahoy push
 
 workflows:
   version: 2

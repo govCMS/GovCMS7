@@ -1,9 +1,5 @@
 ---
-##
 # Ahoy workflow configuration for GovCMS.
-#
-# Modify environment variables in .env file to adjust workflow.
-#
 
 ahoyapi: v2
 
@@ -11,6 +7,10 @@ commands:
   up:
     usage: Build project.
     cmd: docker-compose up -d
+
+  down:
+    usage: Delete project.
+    cmd: docker-compose down
 
   build:
     usage: Build project.
@@ -50,7 +50,7 @@ commands:
 
   install:
     usage: Install the profile.
-    cmd: ahoy drush si -y "$@"
+    cmd: ahoy drush si -y govcms "$@"
 
   login:
     usage: Login to a website.
@@ -58,6 +58,7 @@ commands:
 
   lint:
     usage: Lint code
+    # @todo: Refactor to use a script from inside of the container.
     cmd: |
       ahoy run "tests/vendor/bin/parallel-lint -e php,inc,module,theme,install,profile,test \
         profiles/govcms/modules/custom \
@@ -78,10 +79,12 @@ commands:
 
   test-behat:
     usage: Run behat tests.
+    # @todo: Refactor to use a script from inside of the container.
     cmd: ahoy run "cd tests/behat && ../../tests/vendor/bin/behat --strict --colors $BEHAT_PROFILE $@"
 
   test-phpunit:
     usage: Run phpunit tests.
+    # @todo: Refactor to use a script from inside of the container.
     cmd: ahoy run "cd tests/phpunit && ../../tests/vendor/bin/phpunit $@"
 
   pull:
@@ -90,17 +93,8 @@ commands:
 
   push:
     usage: Push all docker images.
-    cmd: |
-      export $(grep -v '^#' .env | xargs)
-      ahoy _title "Building and pushing Docker images to Dockerhub"
-      export COMPOSE_FILE=docker-compose.yml
-       . .lagoon/docker-build-push.sh
+    cmd: .docker/push.sh
 
   release:
     usage: Push all docker images.
-    cmd: |
-      export $(grep -v '^#' .env | xargs)
-      ahoy _title "Releasing Docker images to Dockerhub"
-      export COMPOSE_FILE=docker-compose.yml
-      ahoy _confirm "This will tag all 'beta' Docker images with 'latest'. Would you like to proceed?" && . .lagoon/docker-release.sh || true
-
+    cmd: .docker/release.sh

@@ -4,6 +4,7 @@
 libraries/
 modules/contrib
 themes/contrib
+.env
 
 # Compiled source #
 ###################
