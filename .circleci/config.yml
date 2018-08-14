@@ -47,9 +47,6 @@ jobs:
           name: Run behat tests
           command: |
             ahoy test-behat -- "--format=progress_fail --tags=smoke" || ahoy test-behat -- "--format=progress_fail --rerun --tags=smoke" || true
-      # - run:
-      #     name: Run phpunit tests
-      #     command: ahoy test-phpunit
       - run:
           name: Copy artifacts
           command: |
