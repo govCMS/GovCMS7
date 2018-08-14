@@ -64,12 +64,6 @@ if (getenv('LAGOON')) {
   $conf['varnish_version'] = 4;
 }
 
-### Base URL
-if (getenv('LAGOON_ROUTES')) {
-  $routes = explode(',', getenv('LAGOON_ROUTES'));
-  $base_url = $routes[0];
-}
-
 ### Temp directory
 if (getenv('TMP')) {
   $conf['file_temporary_path'] = getenv('TMP');
