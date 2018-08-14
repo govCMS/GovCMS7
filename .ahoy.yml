@@ -58,18 +58,7 @@ commands:
 
   lint:
     usage: Lint code
-    # @todo: Refactor to use a script from inside of the container.
-    cmd: |
-      ahoy run "tests/vendor/bin/parallel-lint -e php,inc,module,theme,install,profile,test \
-        profiles/govcms/modules/custom \
-        profiles/govcms/modules/features \
-        profiles/govcms/themes/govcms \
-        profiles/govcms/govcms.info \
-        profiles/govcms/govcms.install \
-        profiles/govcms/govcms.profile"
-      # ahoy run "tests/vendor/bin/phpcs"
-      ahoy run "cd profiles/govcms && drush verify-makefile"
-      # ahoy run "tests/vendor/bin/phpmd profiles/govcms/modules/custom,profiles/govcms/modules/features,profiles/govcms/themes/govcms,tests,profiles/govcms/govcms.info,profiles/govcms/govcms.install,profiles/govcms/govcms.profile text codesize,unusedcode,cleancode"
+    cmd: ahoy run lint-govcms
 
   test:
     usage: Run all tests.

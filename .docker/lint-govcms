@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Code linting for GovCMS project.
+
+APP_DIR=${APPDIR:-/app}
+PROFILE_DIR=${PROFILE_DIR:-${APP_DIR}/profiles/govcms}
+
+# Lint code.
+${APP_DIR}/tests/vendor/bin/parallel-lint --exclude ${APP_DIR}/tests/vendor -e php,inc,module,theme,install,profile,test \
+        ${PROFILE_DIR}/modules/custom \
+        ${PROFILE_DIR}/modules/features \
+        ${PROFILE_DIR}/themes/govcms \
+        ${PROFILE_DIR}/govcms.info \
+        ${PROFILE_DIR}/govcms.install \
+        ${PROFILE_DIR}/govcms.profile \
+        ${APP_DIR}/tests
+
+# Validate makefile.
+cd ${PROFILE_DIR} && drush verify-makefile
+
+# Check code standards.
+${APP_DIR}/tests/vendor/bin/phpcs --standard=${PROFILE_DIR}/phpcs.xml
+
+# Check code mess.
+${APP_DIR}/tests/vendor/bin/phpmd ${PROFILE_DIR}/modules/custom,${PROFILE_DIR}/modules/features,${PROFILE_DIR}/themes/govcms,tests/behat/bootstrap,${PROFILE_DIR}/govcms.info,${PROFILE_DIR}/govcms.install,${PROFILE_DIR}/govcms.profile text codesize,unusedcode,cleancode

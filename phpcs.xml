@@ -10,17 +10,13 @@
   <arg name="colors"/>
   <arg value="sp"/>
 
-  <file>docroot/profiles/govcms/modules/custom</file>
-  <file>docroot/profiles/govcms/modules/features</file>
-  <file>docroot/profiles/govcms/themes/govcms</file>
-  <file>tests</file>
-  <file>docroot/profiles/govcms/govcms.info</file>
-  <file>docroot/profiles/govcms/govcms.install</file>
-  <file>docroot/profiles/govcms/govcms.profile</file>
-
-  <!-- Exclude CircleCI config files. -->
-  <exclude-pattern>circle\.yml</exclude-pattern>
-  <exclude-pattern>\.circle\/config\.yml</exclude-pattern>
+  <file>/app/profiles/govcms/modules/custom</file>
+  <file>/app/profiles/govcms/modules/features</file>
+  <file>/app/profiles/govcms/themes/govcms</file>
+  <file>/app/profiles/govcms/govcms.info</file>
+  <file>/app/profiles/govcms/govcms.install</file>
+  <file>/app/profiles/govcms/govcms.profile</file>
+  <file>/app/profiles/govcms/tests</file>
 
   <!-- Exclude all features-generated files. -->
   <exclude-pattern>*\.bean\.*</exclude-pattern>
@@ -43,5 +39,4 @@
   <exclude-pattern>*\.strongarm\.*</exclude-pattern>
   <exclude-pattern>*\.views_default\.*</exclude-pattern>
   <exclude-pattern>*\.quicktabs\.*</exclude-pattern>
-
 </ruleset>
