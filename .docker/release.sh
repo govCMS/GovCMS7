@@ -20,6 +20,6 @@ for file in $(echo $FILE_PREFIX"*"); do
 
     echo "==> Releasing \"$service\" image for project \"$DOCKERHUB_NAMESPACE/$project\""
     docker pull $DOCKERHUB_NAMESPACE/$project:$IMAGE_TAG_EDGE
-    docker tag $service $DOCKERHUB_NAMESPACE/$project:latest
+    docker tag $DOCKERHUB_NAMESPACE/$service:$IMAGE_TAG_EDGE $DOCKERHUB_NAMESPACE/$project:latest
     echo "==> Tagging and pushing \"$service\" image to $DOCKERHUB_NAMESPACE/$project:latest" && docker push $DOCKERHUB_NAMESPACE/$project:latest
 done

@@ -75,7 +75,6 @@ jobs:
           command: |
             echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env.default
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            echo "DOCKERHUB_NAMESPACE=alexdesignworks">>.env.default
             export $(grep -v '^#' .env.default | xargs)
             ahoy push
 
