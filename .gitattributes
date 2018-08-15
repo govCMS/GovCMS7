@@ -10,7 +10,7 @@
 .github                   export-ignore
 build/**/*                export-ignore
 CONTRIBUTING.md           export-ignore
-RELEASE.md           export-ignore
+RELEASE.md                export-ignore
 docker*                   export-ignore
 phpcs.xml                 export-ignore
 RELEASE.md                export-ignore
