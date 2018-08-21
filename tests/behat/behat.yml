@@ -1,6 +1,5 @@
 default:
-  autoload:
-    '':                           %paths.base%/bootstrap
+  autoload:                      [ '%paths.base%/bootstrap' ]
   suites:
     default:
       contexts:
@@ -9,29 +8,34 @@ default:
         - Drupal\DrupalExtension\Context\MessageContext
         - Drupal\DrupalExtension\Context\DrushContext
         - Drupal\DrupalExtension\Context\MarkupContext
+        - IntegratedExperts\BehatScreenshotExtension\Context\ScreenshotContext
         - FeatureContext
       paths:
-        features:                 %paths.base%/features
+        features:                 '%paths.base%/features'
       filters:
-       tags:                      "~@drush"
+        tags:                     "~@drush"
   extensions:
     Behat\MinkExtension:
+    Behat\MinkExtension:
+      base_url:                   http://nginx:8080
       goutte:                     ~
+      browser_name:               chrome
       selenium2:
-        wd_host:                  "http://localhost:4444/wd/hub"
+        wd_host:                  http://chrome:4444/wd/hub
+        capabilities:             { "browser": "chrome", "version": "*", "marionette": true }
       javascript_session:         selenium2
-      files_path:                 %paths.base%/files
+      files_path:                 '%paths.base%/files'
     Drupal\DrupalExtension:
       subcontexts:
         paths:
-          - %paths.base%/bootstrap
+          - '%paths.base%/bootstrap'
         autoload:                 0
       blackbox:                   ~
       api_driver:                 "drupal"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              ../../
       drush:
-        root:                     ../../docroot
+        root:                     ../../
       selectors:
         success_message_selector: '.messages.status'
         message_selector:         '.messages'
@@ -43,11 +47,16 @@ default:
         content:                  '#content'
         footer:                   '.region.region-footer'
         header:                   '#header'
+    IntegratedExperts\BehatScreenshotExtension:
+      dir:                        '%paths.base%/screenshots'
+      fail:                       true
+      purge:                      false
+    # Show explicit fail information and continue the test run.
+    IntegratedExperts\BehatFormatProgressFail\FormatExtension: ~
 
 # Separate profile for testing using the Drush driver.
 drush:
-  autoload:
-    '':                           %paths.base%/bootstrap
+  autoload:                      [ '%paths.base%/bootstrap' ]
   suites:
     default:
       contexts:
@@ -63,16 +72,16 @@ drush:
     Behat\MinkExtension:
       goutte:                     ~
       selenium2:
-        wd_host:                  "http://localhost:4444/wd/hub"
+        wd_host:                  "http://chrome:4444/wd/hub"
       javascript_session:         selenium2
-      files_path:                 %paths.base%/files
+      files_path:                 '%paths.base%/files'
     Drupal\DrupalExtension:
       blackbox:                   ~
       api_driver:                 "drush"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              ../../
       drush:
-        root:                     ../../docroot
+        root:                     ../../
       region_map:
         sidebar_second:           'section.region-sidebar-second'
         navigation:               '.region.region-navigation'
@@ -80,7 +89,5 @@ drush:
         content:                  '#content'
         footer:                   '.region.region-footer'
         header:                   '#header'
-
-imports:
-  - behat.govcms.yml
-  - behat.local.yml
+    # Show explicit fail information and continue the test run.
+    IntegratedExperts\BehatFormatProgressFail\FormatExtension: ~

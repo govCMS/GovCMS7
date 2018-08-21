@@ -1,0 +1,26 @@
+{
+    "name": "govcms/govcms",
+    "description": "govCMS Drupal 7 profile",
+    "license": "GPL-2.0-or-later",
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
+        "drupal/coder": "^8.2.12",
+        "drupal/drupal-extension": "^v3.4",
+        "integratedexperts/behat-screenshot": "^0.7",
+        "integratedexperts/behat-format-progress-fail": "^0.2",
+        "jakub-onderka/php-parallel-lint": "^1.0",
+        "fabpot/goutte": "^3.2",
+        "phploc/phploc": "^2.0",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "^5.7",
+        "sebastian/phpcpd": "^3"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "secure-http": false,
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

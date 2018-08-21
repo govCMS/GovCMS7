@@ -1,0 +1,107 @@
+version: '2.3'
+
+x-volumes:
+  &default-volumes
+    # Define all volumes you would like to have real-time mounted into the docker containers
+    volumes:
+      - .:/app/profiles/govcms:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
+      - /app/sites/default/files
+
+x-environment:
+  &default-environment
+    # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
+    LAGOON_ROUTE: ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
+
+services:
+
+  cli:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.govcms7
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+    << : *default-volumes # loads the defined volumes from the top
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+
+  test:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.test
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/test
+    << : *default-volumes # loads the defined volumes from the top
+    depends_on:
+      - cli # basically just tells docker-compose to build the cli first
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+
+  nginx:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.nginx-drupal
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
+    << : *default-volumes # loads the defined volumes from the top
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+      LAGOON_LOCALDEV_URL: ${LOCALDEV_URL_NGINX:-http://govcms-nginx.docker.amazee.io}
+    networks:
+      - amazeeio-network
+      - default
+
+  php:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.php
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/php
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+
+  mariadb:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.mariadb-drupal
+    image: mariadb-drupal
+    ports:
+      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+
+  redis:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.redis
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/redis
+    environment:
+      << : *default-environment # loads the defined environment variables from the top
+
+  solr:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.solr
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/solr
+    ports:
+      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
+    environment:
+      << : *default-environment
+
+  varnish:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.varnish-drupal
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/varnish
+    environment:
+      << : *default-environment
+      VARNISH_BYPASS: "true"
+    networks:
+      - amazeeio-network
+      - default
+
+  chrome:
+    image: selenium/standalone-chrome
+    shm_size: '1gb'
+    depends_on:
+      - test
+    << : *default-volumes # loads the defined volumes from the top
+
+networks:
+  amazeeio-network:
+    external: true
