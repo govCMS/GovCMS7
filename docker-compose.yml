@@ -59,7 +59,7 @@ services:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.mariadb-drupal
-    image: mariadb-drupal
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/mariadb-drupal
     ports:
       - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
     environment:
