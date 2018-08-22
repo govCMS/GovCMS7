@@ -11,7 +11,7 @@
         "phploc/phploc": "2.0.0",
         "sebastian/phpcpd": "3.*",
         "drupal/coder": "7.2.*",
-        "phpunit/phpunit": "^5.7"
+        "phpunit/phpunit": "^6.5"
     },
     "config": {
         "bin-dir": "bin",
