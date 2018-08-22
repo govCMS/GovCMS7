@@ -49,3 +49,13 @@ jobs:
               export $(grep -v '^#' .env.default | xargs)
               ahoy push
             fi
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
