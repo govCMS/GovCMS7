@@ -24,11 +24,14 @@ cache:
     - "$HOME/.npm"
 
 php:
+  - 5.6
   - 7.1
   - 7.2
 
 matrix:
   allow_failures:
+  - php:          5.6
+  - php:          7.1
   - php:          7.2
   fast_finish:    true
 
