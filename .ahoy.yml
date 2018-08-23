@@ -6,7 +6,7 @@ ahoyapi: v2
 commands:
   up:
     usage: Build project.
-    cmd: docker-compose up -d
+    cmd: docker-compose up -d "$@"
 
   down:
     usage: Delete project.
@@ -14,7 +14,7 @@ commands:
 
   build:
     usage: Build project.
-    cmd: docker-compose up -d --build
+    cmd: docker-compose up -d --build "$@"
 
   make:
     usage: Install local dependencies.
