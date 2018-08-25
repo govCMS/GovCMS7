@@ -24,4 +24,6 @@ RUN mv /app/profiles/govcms/.docker/lint-govcms /usr/bin/lint-govcms \
     && mv /app/profiles/govcms/.docker/lint-theme /usr/bin/lint-theme \
     && chmod +x /usr/bin/lint-theme \
     && mv /app/profiles/govcms/.docker/behat /usr/bin/behat \
-    && chmod +x /usr/bin/behat
+    && chmod +x /usr/bin/behat \
+    && mv /app/profiles/govcms/.docker/phpunit /usr/bin/phpunit \
+    && chmod +x /usr/bin/phpunit

@@ -67,13 +67,12 @@ commands:
       ahoy test-behat
 
   test-behat:
-    usage: Run behat tests.
+    usage: Run Behat tests.
     cmd: docker-compose exec test behat "$@"
 
   test-phpunit:
-    usage: Run phpunit tests.
-    # @todo: Refactor to use a script from inside of the container.
-    cmd: docker-compose exec test bash -c "cd tests/phpunit && ../../tests/vendor/bin/phpunit $@"
+    usage: Run PHPUnit tests.
+    cmd: docker-compose exec test phpunit "$@"
 
   pull:
     usage: Pull latest docker images.

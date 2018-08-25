@@ -36,8 +36,11 @@ jobs:
           name: Lint code
           command: ahoy -v lint || true
       - run:
-          name: Run behat tests with rerun
-          command: ahoy test-behat -- --format=progress_fail --tags=smoke || ahoy test-behat -- --format=progress_fail --rerun --tags=smoke || true
+          name: Run PHPUnit tests
+          command: ahoy test-phpunit
+      - run:
+          name: Run Behat tests with rerun
+          command: ahoy test-behat -- --format=progress_fail --tags=smoke || ahoy test-behat -- --format=progress_fail --rerun --tags=smoke
       - run:
           name: Copy artifacts
           command: mkdir -p /tmp/artifacts/behat && docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/features/screenshots /tmp/artifacts/behat
