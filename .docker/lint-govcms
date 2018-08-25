@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Code linting for GovCMS project.
 
-APP_DIR=${APPDIR:-/app}
+APP_DIR=${APP_DIR:-/app}
 PROFILE_DIR=${PROFILE_DIR:-${APP_DIR}/profiles/govcms}
 
 # Lint code.

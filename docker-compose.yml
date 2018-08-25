@@ -2,26 +2,25 @@ version: '2.3'
 
 x-volumes:
   &default-volumes
-    # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
       - .:/app/profiles/govcms:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
+      - ./tests/behat/features/:/app/tests/behat/features:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
       - /app/sites/default/files
 
 x-environment:
   &default-environment
-    # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
     LAGOON_ROUTE: ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
 
 services:
 
-  cli:
+  code:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
-    << : *default-volumes # loads the defined volumes from the top
+    << : *default-volumes
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
 
   test:
     build:
@@ -30,11 +29,11 @@ services:
       args:
         CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/test
-    << : *default-volumes # loads the defined volumes from the top
+    << : *default-volumes
     depends_on:
-      - cli # basically just tells docker-compose to build the cli first
+      - code
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
 
   nginx:
     build:
@@ -43,9 +42,9 @@ services:
       args:
         CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
-    << : *default-volumes # loads the defined volumes from the top
+    << : *default-volumes
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
       LAGOON_LOCALDEV_URL: ${LOCALDEV_URL_NGINX:-http://govcms-nginx.docker.amazee.io}
     networks:
       - amazeeio-network
@@ -59,7 +58,7 @@ services:
         CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/php
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
 
   mariadb:
     build:
@@ -67,9 +66,9 @@ services:
       dockerfile: $PWD/.docker/Dockerfile.mariadb-drupal
     image: ${DOCKERHUB_NAMESPACE:-govcms}/mariadb-drupal
     ports:
-      - "3306" # exposes the port 3306 with a random local port, find it with `docker-compose port mariadb 3306`
+      - "3306" # Find port on host with `docker-compose port mariadb 3306`
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
 
   redis:
     build:
@@ -77,7 +76,7 @@ services:
       dockerfile: $PWD/.docker/Dockerfile.redis
     image: ${DOCKERHUB_NAMESPACE:-govcms}/redis
     environment:
-      << : *default-environment # loads the defined environment variables from the top
+      << : *default-environment
 
   solr:
     build:
@@ -85,7 +84,7 @@ services:
       dockerfile: $PWD/.docker/Dockerfile.solr
     image: ${DOCKERHUB_NAMESPACE:-govcms}/solr
     ports:
-      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
+      - "8983" # Find port on host with `docker-compose port solr 8983`
     environment:
       << : *default-environment
 
@@ -106,7 +105,7 @@ services:
     shm_size: '1gb'
     depends_on:
       - test
-    << : *default-volumes # loads the defined volumes from the top
+    << : *default-volumes
 
 networks:
   amazeeio-network:

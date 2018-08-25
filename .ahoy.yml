@@ -68,8 +68,7 @@ commands:
 
   test-behat:
     usage: Run behat tests.
-    # @todo: Refactor to use a script from inside of the container.
-    cmd: docker-compose exec test bash -c "cd tests/behat && ../../tests/vendor/bin/behat --strict --colors $BEHAT_PROFILE $@"
+    cmd: docker-compose exec test behat "$@"
 
   test-phpunit:
     usage: Run phpunit tests.

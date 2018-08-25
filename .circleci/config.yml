@@ -37,10 +37,10 @@ jobs:
           command: ahoy -v lint || true
       - run:
           name: Run behat tests with rerun
-          command: ahoy test-behat -- "--format=progress_fail --tags=smoke" || ahoy test-behat -- "--format=progress_fail --rerun --tags=smoke" || true
+          command: ahoy test-behat -- --format=progress_fail --tags=smoke || ahoy test-behat -- --format=progress_fail --rerun --tags=smoke || true
       - run:
           name: Copy artifacts
-          command: mkdir -p /tmp/artifacts/behat && docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/screenshots /tmp/artifacts/behat
+          command: mkdir -p /tmp/artifacts/behat && docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/features/screenshots /tmp/artifacts/behat
           when: always
       - store_artifacts:
           path: /tmp/artifacts
@@ -48,9 +48,9 @@ jobs:
           name: Push Docker images to Dockerhub
           command: |
             if [ "${DEPLOY_ANY_BRANCH}" != "" ] || [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env.default
+              echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env
               docker login -u $DOCKER_USER -p $DOCKER_PASS
-              export $(grep -v '^#' .env.default | xargs)
+              export $(grep -v '^#' .env | xargs)
               ahoy push
             fi
 workflows:
