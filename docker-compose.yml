@@ -27,6 +27,8 @@ services:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.test
+      args:
+        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/test
     << : *default-volumes # loads the defined volumes from the top
     depends_on:
@@ -38,6 +40,8 @@ services:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.nginx-drupal
+      args:
+        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
     << : *default-volumes # loads the defined volumes from the top
     environment:
@@ -51,6 +55,8 @@ services:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.php
+      args:
+        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/php
     environment:
       << : *default-environment # loads the defined environment variables from the top

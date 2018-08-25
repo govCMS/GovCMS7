@@ -1,3 +1,6 @@
+ARG CODE_IMAGE
+FROM ${CODE_IMAGE} as code
+
 FROM amazeeio/php:7.1-cli-drupal
 
 ENV DOCKERIZE_VERSION v0.6.1
@@ -12,7 +15,7 @@ RUN echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
     && drush dl drupalorg_drush-7.x-1.x-dev -y \
     && rm -rf /usr/local/etc/php/conf.d/memory.ini
 
-COPY --from=govcms/govcms7 /app /app
+COPY --from=code /app /app
 
 COPY tests /app/tests
 

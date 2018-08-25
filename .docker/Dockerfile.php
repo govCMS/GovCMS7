@@ -1,2 +1,5 @@
+ARG CODE_IMAGE
+FROM ${CODE_IMAGE} as code
+
 FROM amazeeio/php:7.1-fpm
-COPY --from=govcms/govcms7 /app /app
+COPY --from=code /app /app

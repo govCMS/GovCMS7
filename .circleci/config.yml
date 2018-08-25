@@ -17,7 +17,9 @@ jobs:
           command: composer validate -d tests --ansi --strict
       - run:
           name: Update codebase to follow CI configuration
-          command: sed -i -e "/###/d" /app/docker-compose.yml
+          command: |
+            sed -i -e "/###/d" docker-compose.yml
+            cp .env.default .env
       - setup_remote_docker
       - run:
           name: Start amazeeio-network
@@ -27,7 +29,9 @@ jobs:
           command: |
             ahoy -v build
             docker-compose exec test dockerize -wait tcp://mariadb:3306 -timeout 1m
-            ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
+      - run:
+          name: Install site
+          command: ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
       - run:
           name: Lint code
           command: ahoy -v lint || true

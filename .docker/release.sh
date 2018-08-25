@@ -5,21 +5,19 @@
 
 # Namespace for the image.
 DOCKERHUB_NAMESPACE=${DOCKERHUB_NAMESPACE:-govcms}
-# Name of the project. Image with code in it will get this name.
-DOCKERHUB_PROJECT=${DOCKERHUB_PROJECT:-govcms7}
 # Docker image edge tag.
 IMAGE_TAG_EDGE=${IMAGE_TAG_EDGE:-beta}
 
-# Path prefix to Dockerfiles.
-FILE_PREFIX=${FILE_PREFIX:-.docker/Dockerfile.}
+# Path prefix to Dockerfiles extension that is used as a name of the service.
+FILE_EXTENSION_PREFIX=${FILE_EXTENSION_PREFIX:-.docker/Dockerfile.}
 
-for file in $(echo $FILE_PREFIX"*"); do
-    service=${file/$FILE_PREFIX/}
+for file in $(echo $FILE_EXTENSION_PREFIX"*"); do
+    service=${file/$FILE_EXTENSION_PREFIX/}
 
-    project=${service}
+    echo "==> Releasing \"$service\" image for service \"$DOCKERHUB_NAMESPACE/$service\""
+    docker pull $DOCKERHUB_NAMESPACE/$service:$IMAGE_TAG_EDGE
+    docker tag $DOCKERHUB_NAMESPACE/$service:$IMAGE_TAG_EDGE $DOCKERHUB_NAMESPACE/$service:latest
 
-    echo "==> Releasing \"$service\" image for project \"$DOCKERHUB_NAMESPACE/$project\""
-    docker pull $DOCKERHUB_NAMESPACE/$project:$IMAGE_TAG_EDGE
-    docker tag $DOCKERHUB_NAMESPACE/$service:$IMAGE_TAG_EDGE $DOCKERHUB_NAMESPACE/$project:latest
-    echo "==> Tagging and pushing \"$service\" image to $DOCKERHUB_NAMESPACE/$project:latest" && docker push $DOCKERHUB_NAMESPACE/$project:latest
+    echo "==> Tagging and pushing \"$service\" image to $DOCKERHUB_NAMESPACE/$service:latest"
+    docker push $DOCKERHUB_NAMESPACE/$service:latest
 done

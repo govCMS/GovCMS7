@@ -1,2 +1,5 @@
+ARG CODE_IMAGE
+FROM ${CODE_IMAGE} as code
+
 FROM amazeeio/nginx-drupal
-COPY --from=govcms/govcms7 /app /app
+COPY --from=code /app /app
