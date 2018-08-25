@@ -1,5 +1,7 @@
 FROM amazeeio/php:7.1-cli-drupal
 
+RUN apk add python
+
 COPY . /tmp/src
 
 RUN rm -rf /app \
