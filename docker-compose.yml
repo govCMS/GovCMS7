@@ -14,7 +14,7 @@ x-environment:
 
 services:
 
-  code:
+  cli:
     build:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.govcms7
@@ -28,11 +28,11 @@ services:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.test
       args:
-        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/test
     << : *default-volumes
     depends_on:
-      - code
+      - cli
     environment:
       << : *default-environment
 
@@ -41,7 +41,7 @@ services:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.nginx-drupal
       args:
-        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
     << : *default-volumes
     environment:
@@ -56,7 +56,7 @@ services:
       context: .
       dockerfile: $PWD/.docker/Dockerfile.php
       args:
-        CODE_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/php
     environment:
       << : *default-environment
