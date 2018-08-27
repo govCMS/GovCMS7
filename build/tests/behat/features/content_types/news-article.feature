@@ -92,7 +92,7 @@ Feature: News Article
     And I select "45" from "Minute"
     Then I click "Publishing options"
     And I select "Needs Review" from "Moderation state"
-    And I schedule the node to be published at "2018-07-07 08:57:00"
+    And I schedule the node to be published at "2020-12-31 08:57:00"
     And I press "Save"
     Then I should see the message containing "This post is unpublished and will be published 2018-07-07 08:57:00."
     When I go to "/admin/config/content/scheduler/list"
