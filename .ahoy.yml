@@ -18,7 +18,7 @@ commands:
 
   make:
     usage: Install local dependencies.
-    cmd: docker-compose exec test drush "make --no-core --contrib-destination=profiles/govcms profiles/govcms/drupal-org.make -y"
+    cmd: docker-compose exec test drush make --no-core --contrib-destination=profiles/govcms profiles/govcms/drupal-org.make -y
 
   cli:
     usage: Start a shell inside CLI container.
