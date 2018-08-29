@@ -85,7 +85,7 @@ commands:
       . .docker/push.sh
 
   release:
-    usage: Push all docker images.
+    usage: Release all docker images.
     cmd: |
       export $(grep -v '^#' .env.default | xargs)
       . .docker/release.sh
