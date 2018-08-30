@@ -8,7 +8,8 @@ RUN rm -rf /app \
     && cd /tmp/src \
     && echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
     && drush make /tmp/src/.docker/stub.make /app --contrib-destination \
-    && rm -rf /tmp/src /usr/local/etc/php/conf.d/memory.ini /home/.drush \
+    && rm -rf /tmp/src /usr/local/etc/php/conf.d/memory.ini \
+	&& fix-permissions /home/.drush \
 	&& cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
 	&& { \
 		echo ; \

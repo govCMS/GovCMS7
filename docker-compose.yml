@@ -8,10 +8,6 @@ x-volumes:
       - ./tests/phpunit/tests:/app/tests/phpunit/tests:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
       - /app/sites/default/files
 
-x-environment:
-  &default-environment
-    LOCALDEV_URL: ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
-
 services:
 
   cli:
@@ -21,7 +17,7 @@ services:
     image: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     << : *default-volumes
     environment:
-      << : *default-environment
+      LAGOON_ROUTE: &default-url ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
 
   test:
     build:
@@ -31,10 +27,10 @@ services:
         CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/test
     << : *default-volumes
+    environment:
+      LAGOON_ROUTE: *default-url
     depends_on:
       - cli
-    environment:
-      << : *default-environment
 
   nginx:
     build:
@@ -45,7 +41,7 @@ services:
     image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
     << : *default-volumes
     environment:
-      << : *default-environment
+      LAGOON_LOCALDEV_URL: *default-url
     networks:
       - amazeeio-network
       - default
@@ -57,8 +53,7 @@ services:
       args:
         CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
     image: ${DOCKERHUB_NAMESPACE:-govcms}/php
-    environment:
-      << : *default-environment
+    << : *default-volumes
 
   mariadb:
     build:
@@ -67,8 +62,6 @@ services:
     image: ${DOCKERHUB_NAMESPACE:-govcms}/mariadb-drupal
     ports:
       - "3306" # Find port on host with `docker-compose port mariadb 3306`
-    environment:
-      << : *default-environment
 
   solr:
     build:
@@ -79,8 +72,6 @@ services:
     image: ${DOCKERHUB_NAMESPACE:-govcms}/solr
     ports:
       - "8983" # Find port on host with `docker-compose port solr 8983`
-    environment:
-      << : *default-environment
 
   chrome:
     image: selenium/standalone-chrome
