@@ -1,3 +1,4 @@
+@skipped
 Feature: Image and Text bean
 
   Ensure that Image and Text bean type is available and displayed as expected

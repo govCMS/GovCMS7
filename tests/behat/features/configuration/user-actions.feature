@@ -2,7 +2,7 @@ Feature: User Actions
 
   Ensure the user actions are being logged
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Perform typical user account actions and verify that they are logged.
     Given I am logged in as a user "roman" with the "administer users" permission
     When I am on "/admin/people/create"

@@ -1,3 +1,4 @@
+@skipped
 Feature:Meta tags
 
   So content contains relevant SEO

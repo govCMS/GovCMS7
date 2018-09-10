@@ -1,3 +1,4 @@
+@skipped
 Feature: Robots.txt is available
 
   Ensure the robotstxt module returns a valid robots.txt file

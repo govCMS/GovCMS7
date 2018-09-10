@@ -8,7 +8,7 @@ Feature: Media Release
     When I visit "/node/add/media-release"
     Then CKEditor for the "Body" field should exist
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Create Media Release content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
@@ -63,7 +63,7 @@ Feature: Media Release
     When I visit "/news-media/media-releases/agency-update"
     Then I should see the heading "Agency update"
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Check that custom menu link can be created.
     Given "media_release" content:
       | title         | author     | status | state         |

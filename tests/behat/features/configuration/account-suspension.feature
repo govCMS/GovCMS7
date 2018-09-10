@@ -1,3 +1,4 @@
+@skipped
 Feature: Account suspension
 
   To maintain the security of the website, when a user hasn't logged in for 60 days, then their account should be

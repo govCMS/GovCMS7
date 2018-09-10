@@ -1,3 +1,4 @@
+@skipped
 Feature: Social Media Links
 
   As a user able to administer blocks

@@ -1,3 +1,4 @@
+@skipped
 Feature: Contact
 
   Ensure that printable version of Contact information functionality is intact.
