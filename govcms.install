@@ -52,6 +52,9 @@ function govcms_install() {
   $revert = array('govcms_beans');
   _govcms_features_revert($revert);
 
+  // Configure security kit with default security requirements.
+  _govcms_default_security_configuration();
+
   // Configure default text formats and basic permissions.
   _govcms_default_formats_and_permissions();
 
@@ -193,6 +196,51 @@ function _govcms_set_default_themes() {
 
   // Disable the default Bartik & default admin theme.
   theme_disable(array('bartik', GOVCMS_DEFAULT_ADMIN_THEME));
+}
+
+/**
+ * Add default security kit configuration
+ */
+function _govcms_default_security_configuration() {
+
+//Default Content Security Policy settings. (note! disabling report only option will break the install)
+  $seckit_csp_default = array(
+    'csp' =>
+    array(
+      'checkbox' => 1,
+      'report-only' => 1,
+      'default-src' => "'self'",
+      'script-src' => '',
+      'object-src' => '',
+      'style-src' => '',
+      'img-src' => '',
+      'media-src' => '',
+      'frame-src' => '',
+      'font-src' => '',
+      'connect-src' => '',
+      'report-uri' => 'admin/config/system/seckit/csp-report',
+      'policy-uri' => '',
+    ),
+    'x_xss' =>
+    array(
+      'select' => '2',
+    ),
+    'x_content_type' =>
+    array(
+      'checkbox' => 1,
+    ),
+  );
+variable_set('seckit_xss', $seckit_csp_default);
+
+//Default SSL/TLS settings
+  $seckit_ssl_default = array(
+    'hsts' => 0,
+    'hsts_max_age' => 86400,
+    'hsts_subdomains' => false,
+  );
+
+variable_set('seckit_ssl', $seckit_ssl_default);
+
 }
 
 /**
