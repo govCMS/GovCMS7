@@ -1,4 +1,3 @@
-@skipped
 Feature:Meta tags
 
   So content contains relevant SEO
@@ -19,10 +18,10 @@ Feature:Meta tags
     And I enter "Text" for "edit-metatags-und-dctermstype-item-value"
     And press "Save"
     Then I should see "Standard page test has been created"
-    And the response should contain "<meta name=\"description\" content=\"When tweetle beetles fight, its called a tweetle beetle battle.\">"
-    And the response should contain "<title>test | govCMS</title>"
-    And the response should contain "<meta name=\"dcterms.type\" content=\"Text\">"
-    And the response should contain "<meta name=\"dcterms.title\" content=\"test\">"
+    And the response should contain "<meta name=\"description\" content=\"When tweetle beetles fight, its called a tweetle beetle battle.\" />"
+    And the response should contain "<title>test | "
+    And the response should contain "<meta name=\"dcterms.type\" content=\"Text\" />"
+    And the response should contain "<meta name=\"dcterms.title\" content=\"test\" />"
 
   @api @javascript
   Scenario: Meta-tags can be edited
@@ -39,9 +38,9 @@ Feature:Meta tags
     And I enter "Fox in socks" for "edit-metatags-und-dctermstitle-item-value"
     And press "Save"
     Then I should see "Standard page test has been created"
-    And the response should contain "<meta name=\"description\" content=\"And when they battle in a puddle, its a tweetle beetle puddle battle\">"
+    And the response should contain "<meta name=\"description\" content=\"And when they battle in a puddle, its a tweetle beetle puddle battle\" />"
     And the response should contain "<title>Fox in socks</title>"
-    And the response should contain "<meta name=\"dcterms.title\" content=\"Fox in socks\">"
+    And the response should contain "<meta name=\"dcterms.title\" content=\"Fox in socks\" />"
 
   @api @javascript
   Scenario: govCMS core successfully applies default meta-tags configuration.
@@ -71,14 +70,14 @@ Feature:Meta tags
     And press "Save configuration"
     Given the cache has been cleared
     When I go to homepage
-    Then the response should contain "<meta name=\"dcterms.creator\" content=\"My Sitename\">"
-    And the response should contain "<meta name=\"dcterms.publisher\" content=\"My Sitename\">"
-    And the response should contain "<meta name=\"dcterms.subject\" content=\"Everything is Awesome!!!\">"
+    Then the response should contain "<meta name=\"dcterms.creator\" content=\"My Sitename\" />"
+    And the response should contain "<meta name=\"dcterms.publisher\" content=\"My Sitename\" />"
+    And the response should contain "<meta name=\"dcterms.subject\" content=\"Everything is Awesome!!!\" />"
     When I go to "/admin/config/system/site-information"
     And I fill in "govCMS" for "Site name"
     And I fill in "" for "Slogan"
     And press "Save configuration"
     Given the cache has been cleared
     When I go to homepage
-    Then the response should contain "<meta name=\"dcterms.creator\" content=\"govCMS\">"
+    Then the response should contain "<meta name=\"dcterms.creator\" content=\"govCMS\" />"
     And the response should not contain "<meta name=\"dcterms.subject\""
