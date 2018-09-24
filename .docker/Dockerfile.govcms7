@@ -1,6 +1,8 @@
 FROM amazeeio/php:7.1-cli-drupal
 
-RUN apk add python
+RUN apk add python gmp gmp-dev \
+    && docker-php-ext-install gmp \
+    && docker-php-ext-configure gmp
 
 COPY . /tmp/src
 
