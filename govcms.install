@@ -128,8 +128,6 @@ function _govcms_create_basic_roles_perms() {
   );
 
   $extra_perms = array(
-    'administer google analytics reports',
-    'access google analytics reports',
   );
   $extended_permissions = $base_permissions + $extra_perms;
 
