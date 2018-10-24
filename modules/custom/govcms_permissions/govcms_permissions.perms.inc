@@ -224,6 +224,24 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'media' => array(
+      'administer media browser' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
+      'access media browser' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'administrator',
+          3 => 'Site editor',
+          4 => 'Site builder',
+        ),
+      ),
+    ),
     'media_internet' => array(
       'add media from remote sources' => array(
         'roles' => array(
@@ -231,6 +249,18 @@ function govcms_permissions_base_permissions() {
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
+          4 => 'Site builder',
+        ),
+      ),
+    ),
+    'media_wysiwyg' => array(
+      'use media wysiwyg' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'administrator',
+          3 => 'Site editor',
+          4 => 'Site builder',
         ),
       ),
     ),
