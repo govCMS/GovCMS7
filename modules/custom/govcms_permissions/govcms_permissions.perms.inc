@@ -399,6 +399,15 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'linkit' => array(
+      'administer linkit' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site builder',
+          2 => 'Site editor',
+        ),
+      ),
+    ),
     'maintenance_mode_permissions' => array(
       'administer maintenance mode' => array(
         'roles' => array(
