@@ -669,6 +669,13 @@ function govcms_permissions_base_permissions() {
       ),
     ),
     'filter' => array(
+      'administer filters' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
       'use text format rich_text' => array(
         'roles' => array(
           0 => 'Content approver',
