@@ -281,6 +281,123 @@ function govcms_permissions_base_permissions() {
           2 => 'Site builder',
         ),
       ),
+      'create files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'edit any image files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'delete any image files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'download any image files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'edit any video files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'delete any video files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'download any video files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'edit any audio files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'delete any audio files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'download any audio files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'edit any document files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'delete any document files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
+      'download any document files' => array(
+        'roles' => array(
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ),
+      ),
     ),
     'maintenance_mode_permissions' => array(
       'administer maintenance mode' => array(
