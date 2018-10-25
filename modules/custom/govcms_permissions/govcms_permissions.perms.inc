@@ -203,6 +203,15 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'superfish' => array(
+      'administer superfish' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
+    ),
     'toolbar' => array(
       'access toolbar' => array(
         'roles' => array(
