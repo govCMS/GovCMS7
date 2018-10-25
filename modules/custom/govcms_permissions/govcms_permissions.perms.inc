@@ -1036,6 +1036,15 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'pathauto' => array(
+      'administer pathauto' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
+    ),
     'password_policy' => array(
       'force password change' => array(
         'roles' => array(
