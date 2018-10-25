@@ -927,6 +927,22 @@ function govcms_permissions_base_permissions() {
         ),
       ),
     ),
+    'honeypot' => array(
+      'administer honeypot' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
+      'bypass honeypot protection' => array(
+        'roles' => array(
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ),
+      ),
+    ),
     'menu' => array(
       'administer menu' => array(
         'roles' => array(
