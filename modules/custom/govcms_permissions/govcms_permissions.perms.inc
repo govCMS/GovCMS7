@@ -172,6 +172,13 @@ function govcms_permissions_base_permissions() {
           4 => 'Site editor',
         ],
       ],
+      'delete revisions' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site builder',
+          2 => 'Site editor',
+        ],
+      ],
       'view own unpublished content' => [
         'roles' => [
           0 => 'authenticated user',
