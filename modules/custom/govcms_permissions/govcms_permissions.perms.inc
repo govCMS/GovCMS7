@@ -223,6 +223,13 @@ function govcms_permissions_base_permissions() {
       ],
     ],
     'workbench' => [
+      'administer workbench' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
       'access workbench' => [
         'roles' => [
           0 => 'Content approver',
