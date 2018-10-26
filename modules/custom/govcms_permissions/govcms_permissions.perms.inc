@@ -831,6 +831,13 @@ function govcms_permissions_base_permissions() {
           2 => 'Site builder',
         ],
       ],
+      'edit webform components' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
     ],
     'metatag' => [
       'edit meta tags' => [
