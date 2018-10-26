@@ -1182,6 +1182,13 @@ function govcms_permissions_base_permissions() {
           2 => 'Site builder',
         ],
       ],
+      'use xmlsitemap' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
     ],
     'shortcut' => [
       'administer shortcuts' => [
