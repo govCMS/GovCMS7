@@ -1,4 +1,3 @@
-@skipped
 Feature: Image and Text bean
 
   Ensure that Image and Text bean type is available and displayed as expected
@@ -21,7 +20,7 @@ Feature: Image and Text bean
     When I open the "Image" media browser
     And I attach the file "autotest.jpg" to "files[upload]"
     And I press "Next"
-    Then I select the radio button "Public local files served by the webserver."
+    Then the "Public local files served by the webserver." checkbox should be checked
     And I press "Next"
     And I enter "Behold, a generic logo" for "Name"
     And I submit the media browser
@@ -42,7 +41,7 @@ Feature: Image and Text bean
     Then I should see the success message "The block configuration has been saved."
     And I go to homepage
     Then I should see the heading "Beans are good for you" in the "sidebar_second" region
-    And the "#block-bean-cool-beans" element should contain "/image_and_text_bean_small/public/autotest.jpg"
+    And the "#block-bean-cool-beans" element should contain "image_and_text_bean_small"
     And I should see "govCMS is the best!"
     And I should see a ".entity.default" element
     When I go to "/block/cool-beans/edit"
