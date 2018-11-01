@@ -5,7 +5,7 @@ x-volumes:
     volumes:
       - .:/app/profiles/govcms:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
       - ./tests/behat/features:/app/tests/behat/features:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
-      - ./tests/behat/files:/app/tests/behat/files:${VOLUME_FLAGS:-delegated}
+      - ./tests/behat/files:/app/tests/behat/files:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
       - ./tests/phpunit/tests:/app/tests/phpunit/tests:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
       - /app/sites/default/files
 
