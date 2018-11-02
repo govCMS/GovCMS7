@@ -79,7 +79,7 @@ Feature: Publication
     When I am on "/publications/agency-publication"
     Then I should see the heading "Agency publication"
 
-  @api @javascript @skipped
+  @api @javascript
   Scenario: Check that custom menu link can be created.
     Given "publication" content:
       | title              | author     | status | state         |
@@ -88,7 +88,7 @@ Feature: Publication
     When I am on "/publications/agency-publication"
     Then I click "Edit draft"
     And I click "Menu settings"
-    And I check the box "Provide a menu link"
+    And I click the label of the "Provide a menu link" field
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"

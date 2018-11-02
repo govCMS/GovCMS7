@@ -2,9 +2,9 @@
 
 namespace GovCMS\govCMSExtension\Context;
 
-use Drupal\DrupalExtension\Context\DrupalSubContextBase;
-use Behat\Mink\Exception\Exception;
 use Behat\Mink\Element\Element;
+use Behat\Mink\Exception\Exception;
+use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 
 /**
  * Contains various step definitions to extend default possibilities.
@@ -123,6 +123,40 @@ class MiscContext extends DrupalSubContextBase {
     }
 
     return $rows;
+  }
+
+  /**
+   * Triggers click on field labels.
+   *
+   * This is helpful when an input is wrapped within a label or
+   * in case of checkboxes and radio buttons which can be
+   * selected if their label is clicked.
+   *
+   * @Then /^I click the label of the "([^"]*)" field$/
+   *
+   * @throws \Exception
+   *   When no element is found.
+   */
+  public function iClickLabelofField($field) {
+    $session = $this->getSession();
+    $driver = $session->getDriver();
+    $page = $session->getPage();
+
+    $element = $page->findField($field);
+    if (empty($element)) {
+      throw new \Exception(sprintf('Element @element was not found.', $element));
+    }
+
+    $elementID = $element->getAttribute('id');
+    $label = $page->find('css', 'label[for="' . $elementID . '"]');
+
+    // Click the label if it exists, otherwise, click the element itself.
+    if (!empty($label)) {
+      $driver->click($label->getXPath());
+    }
+    else {
+      $driver->click($element->getXPath());
+    }
   }
 
 }
