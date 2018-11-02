@@ -144,7 +144,7 @@ class MiscContext extends DrupalSubContextBase {
 
     $element = $page->findField($field);
     if (empty($element)) {
-      throw new \Exception(sprintf('Element @element was not found.', $element));
+      throw new \Exception(sprintf('Field "%s" was not found.', $field));
     }
 
     $elementID = $element->getAttribute('id');
