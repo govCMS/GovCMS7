@@ -2,10 +2,10 @@
 
 namespace GovCMS\govCMSExtension\Context;
 
-use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 use Behat\Gherkin\Node\PyStringNode;
-use Drupal\DrupalExtension\Context\MinkContext;
 use Behat\Mink\Exception\Exception;
+use Drupal\DrupalExtension\Context\DrupalSubContextBase;
+use Drupal\DrupalExtension\Context\MinkContext;
 
 /**
  * Contains step definitions for working with users.
@@ -30,38 +30,72 @@ class PermissionsContext extends DrupalSubContextBase {
   }
 
   /**
-   * Asserts that a role has a set of permissions.
+   *  Check that we are on the role's permission setting page.
    *
    * @param string $rid
-   *   The role ID.
+   *   Role id.
+   *
+   * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
+   */
+  private function assertPermissionPagePath($rid) {
+    $base_url = $this->getMinkParameter('base_url');
+    $page = '/admin/people/permissions/' . $rid;
+    $path = !empty($base_url) ? $base_url . $page : $page;
+    $mink = new MinkContext();
+    $mink->setMink($this->getMink());
+    $mink->assertAtPath($path);
+  }
+
+  /**
+   * Asserts that a role has a set of permissions.
+   *
+   * @param string $role
+   *   The role name.
    * @param \Behat\Gherkin\Node\PyStringNode $permissions
    *   The permissions to check for.
    *
    * @Then the :role role should have permissions:
    * @Then the :role role should have permission to:
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
+   * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
    */
-  public function assertPermissions($rid, PyStringNode $permissions) {
-    $rid = self::roleToRid($rid);
+  public function assertPermissions($role, PyStringNode $permissions) {
+    $rid = self::roleToRid($role);
+    try {
+      self::assertPermissionPagePath($rid);
+    }
+    catch (\Exception $e) {
+      throw new \Exception(sprintf('Invalid permission page path for role "%s"', $role));
+    }
     foreach ($permissions->getStrings() as $permission) {
-      $this->assertPermission($rid, trim($permission), TRUE);
+      $this->assertPermission($rid, trim($permission));
     }
   }
 
   /**
    * Asserts that a role does NOT have a set of permissions.
    *
-   * @param string $rid
+   * @param string $role
    *   The role ID.
    * @param \Behat\Gherkin\Node\PyStringNode $permissions
    *   The permissions to check for.
    *
    * @Then the :role role should not have permissions:
    * @Then the :role role should not have permission to:
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
-  public function assertNoPermissions($rid, PyStringNode $permissions) {
-    $rid = self::roleToRid($rid);
+  public function assertNoPermissions($role, PyStringNode $permissions) {
+    $rid = self::roleToRid($role);
+    try {
+      self::assertPermissionPagePath($rid);
+    }
+    catch (\Exception $e) {
+      throw new \Exception(sprintf('Invalid permission page path for role "%s"', $role));
+    }
     foreach ($permissions->getStrings() as $permission) {
-      $this->assertNoPermission($rid, trim($permission), TRUE);
+      $this->assertNoPermission($rid, trim($permission));
     }
   }
 
@@ -72,22 +106,16 @@ class PermissionsContext extends DrupalSubContextBase {
    *   The role ID.
    * @param string $permission
    *   The permission to check for.
-   * @param bool $assertPath
-   *   Whether we should check the path.
    *
    * @Given the :role role has the :permission permission
    * @Given the :role role has permission to :permission
    *
    * @Then the :role role should have the :permission permission
    * @Then the :role role should have permission to :permission
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
-  public function assertPermission($rid, $permission, $assertPath = TRUE) {
-    $rid = self::roleToRid($rid);
-    if ($assertPath) {
-      $mink = new MinkContext();
-      $mink->setMink($this->getMink());
-      $mink->assertAtPath('/admin/people/permissions/' . $rid);
-    }
+  public function assertPermission($rid, $permission) {
     $this->assertSession()->checkboxChecked($rid . '[' . $permission . ']');
   }
 
@@ -98,22 +126,16 @@ class PermissionsContext extends DrupalSubContextBase {
    *   The role ID.
    * @param string $permission
    *   The permission to check for.
-   * @param bool $assertPath
-   *   Whether we should check the path.
    *
    * @Given the :role role does not have the :permission permission
    * @Given the :role role does not have permission to :permission
    *
    * @Then the :role role should not have the :permission permission
    * @Then the :role role should not have permission to :permission
+   *
+   * @throws \Behat\Mink\Exception\ExpectationException
    */
-  public function assertNoPermission($rid, $permission, $assertPath = TRUE) {
-    $rid = self::roleToRid($rid);
-    if ($assertPath) {
-      $mink = new MinkContext();
-      $mink->setMink($this->getMink());
-      $mink->assertAtPath('/admin/people/permissions/' . $rid);
-    }
+  public function assertNoPermission($rid, $permission) {
     $field = $rid . '[' . $permission . ']';
     try {
       $this->assertSession()->fieldNotExists($field);
