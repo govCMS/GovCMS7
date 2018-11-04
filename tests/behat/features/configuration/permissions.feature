@@ -1,4 +1,3 @@
-@skipped
 Feature: Permissions
   Check that permissions are as expected.
 
