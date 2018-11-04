@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit  colors="true" bootstrap="bootstrap_phpunit.inc">
+    <formatter type="testdox"/>
+    <testsuites>
+        <testsuite name="modules">
+            <directory>../../profiles/govcms/modules/custom</directory>
+            <directory>../../tests/phpunit/tests</directory>
+        </testsuite>
+    </testsuites>
+    <!-- Filter for coverage reports. -->
+    <filter>
+        <blacklist>
+            <directory>./tests/vendor</directory>
+        </blacklist>
+    </filter>
+    <!-- Uncomment the following for code coverage output. -->
+    <!--
+    <filter>
+      <whitelist>
+        <directory suffix=".php">../../modules/custom</directory>
+      </whitelist>
+    </filter>
+    <logging>
+      <log type="coverage-html" target="../../coverage" />
+    </logging>
+    -->
+</phpunit>
