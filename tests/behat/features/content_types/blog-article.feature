@@ -68,7 +68,6 @@ Feature: Blog Article
       | Agency blog | Jim Editor | 0 | draft |
     And I am logged in as a user with the "Content approver" role
     When I am on "/news-media/blog/agency-blog"
-    And save screenshot
     Then I select "Needs Review" from "Moderation state"
     And press "Apply"
     And I logout
