@@ -2,10 +2,11 @@
 
 namespace GovCMS\govCMSExtension\Context;
 
-use Drupal\DrupalExtension\Context\DrupalSubContextBase;
-use Drupal\DrupalExtension\Hook\Scope\EntityScope;
 use Behat\Behat\Definition\Call\Given;
 use Behat\Gherkin\Node\PyStringNode;
+use Drupal\DrupalExtension\Context\DrupalSubContextBase;
+use Drupal\DrupalExtension\Context\MinkContext;
+use Drupal\DrupalExtension\Hook\Scope\EntityScope;
 
 /**
  * Contains step definitions for working with users.
@@ -249,21 +250,30 @@ class AccountContext extends DrupalSubContextBase {
    */
   public function iShouldNotBeAbleToCancelTheAccount($username) {
     $account = user_load_by_name($username);
-    return new Given('I visit "/user/' . $account->uid . '/cancel"', function () {
-    });
+    $mink = new MinkContext();
+    $mink->setMink($this->getMink());
+    $base_url = $this->getMinkParameter('base_url');
+    $mink->assertAtPath($base_url . '/user/' . $account->uid . '/cancel');
   }
 
   /**
    * Test that an account can be cancelled.
    *
-   * @Then /^I should be able to cancel the account "(?P<username>[^"]*)"$/
+   * @param string $username
+   *   The username to be cancelled.
+   *
+   * @Then I should be able to cancel the account ":username"
+
+   * @return \Behat\Behat\Definition\Call\Given
+   * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iShouldBeAbleToCancelTheAccount($username) {
     $this->selectUserVBOCheckbox($username);
     $this->getSession()->getPage()->fillField('operation', 'action::views_bulk_operations_user_cancel_action');
     $this->getSession()->getPage()->pressButton('edit-submit--2');
     $this->assertSession()->elementExists('css', 'input[value=Next][type=submit]');
-    return new Given('I should not see "is protected from cancellation, and was not cancelled."');
+    return new Given('I should not see "is protected from cancellation, and was not cancelled."', function () {
+    });
   }
 
   /**
