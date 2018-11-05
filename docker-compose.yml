@@ -74,6 +74,9 @@ services:
       - "8983" # Find port on host with `docker-compose port solr 8983`
 
   chrome:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.chrome
     image: selenium/standalone-chrome
     shm_size: '1gb'
     depends_on:
