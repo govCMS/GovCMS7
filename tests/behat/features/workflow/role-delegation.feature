@@ -14,8 +14,6 @@ Feature: Role delegation
     And I should not be able to block the user
     Given I visit "/admin/people"
     Then I visit the user cancel page for "joe"
-    And save screenshot
     Then I should see text matching "You are not authorized to access this page."
-    And save screenshot
     And I visit "/admin/people"
     Then I should be able to cancel the account "bob"

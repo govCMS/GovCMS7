@@ -246,13 +246,21 @@ class AccountContext extends DrupalSubContextBase {
   /**
    * Test visiting an account cancel page.
    *
+   * @param string $username
+   *   Account username.
+   *
    * @Given /^I visit the user cancel page for "(?P<username>[^"]*)"$/
+   *
+   * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
    */
   public function iShouldNotBeAbleToCancelTheAccount($username) {
     $account = user_load_by_name($username);
+    if (empty($account)) {
+      throw new \Exception(sprintf('Could not find user: %s', $username));
+    }
     $mink = new MinkContext();
     $mink->setMink($this->getMink());
-    $base_url = $this->getMinkParameter('base_url');
+    $base_url = !empty($this->getMinkParameter('base_url')) ? $this->getMinkParameter('base_url') : '';
     $mink->assertAtPath($base_url . '/user/' . $account->uid . '/cancel');
   }
 
