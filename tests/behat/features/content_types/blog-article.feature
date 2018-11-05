@@ -84,8 +84,8 @@ Feature: Blog Article
   @api @javascript
   Scenario: Check that custom menu links are disabled by default.
     Given "blog_article" content:
-      | title       | author     | status | workbench_moderation_state_new         |
-      | Agency blog | Jim Editor | 0      | needs_review     |
+      | title       | author     | status | workbench_moderation_state_new |
+      | Agency blog | Jim Editor | 0 | needs_review |
     And I am logged in as a user with the "administrator" role
     When I am on "/news-media/blog/agency-blog"
     Then I click "Edit draft"
