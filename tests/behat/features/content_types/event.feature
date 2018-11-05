@@ -99,7 +99,7 @@ Feature: Events
   Scenario: Check that Events moderation works.
     Given "event" content:
       | title        | author     | status | workbench_moderation_state_new |
-      | Agency event | Jim Editor | 0      | draft |
+      | Agency event | Jim Editor | 0 | draft |
     And I am logged in as a user with the "Content approver" role
     When I am on "/news-media/events/agency-event"
     Then I select "Needs Review" from "Moderation state"
