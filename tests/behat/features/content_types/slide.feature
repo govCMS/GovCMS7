@@ -8,26 +8,27 @@ Feature: Slide
     When I visit "/node/add/slide"
     Then CKEditor for the "Body" field should exist
 
-  @api @javascript @skipped
+  @api @javascript
   Scenario: Create Slide content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     When I go to "/node/add/slide"
     Then I should see "Create Slide"
-    And I fill in the following:
-      | title                          | New slide         |
-      | field_read_more[und][0][title] | Find out more     |
-      | URL                            | www.govcms.gov.au |
-    And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "media[field_slide_image_und_0]" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
     And I press "Next"
-    Then I select the radio button "Public local files served by the webserver."
+    Then I click the label of the "Public local files served by the webserver." field
     And I press "Next"
     Then I fill in "Auto Test" for "Name"
     And I fill in "govCMS test image" for "Alt Text"
     And I fill in "govCMS Automated" for "Title Text"
     And I submit the media browser
+    And I fill in the following:
+      | title                          | New slide         |
+      | field_read_more[und][0][title] | Find out more     |
+      | URL                            | www.govcms.gov.au |
+    And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
+    
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"
@@ -45,8 +46,8 @@ Feature: Slide
   @api @javascript
   Scenario: Check that moderation works.
     Given "slide" content:
-      | title        | author     | status | state |
-      | Agency slide | Jim Editor | 0      | draft |
+      | title        | author     | status | workbench_moderation_state_new |
+      | Agency slide | Jim Editor | 0 | draft |
     And I am logged in as a user with the "Content approver" role
     When I am on "/agency-slide"
     Then I select "Needs Review" from "Moderation state"
@@ -64,8 +65,8 @@ Feature: Slide
   @api @javascript
   Scenario: Check that custom menu links are disabled by default.
     Given "slide" content:
-      | title        | author     | status | state         |
-      | Agency slide | Jim Editor | 0      | needs_review     |
+      | title        | author     | status | workbench_moderation_state_new |
+      | Agency slide | Jim Editor | 0 | needs_review |
     And I am logged in as a user with the "administrator" role
     When I am on "/agency-slide"
     Then I click "Edit draft"
