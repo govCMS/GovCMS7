@@ -618,7 +618,6 @@ Feature: Permissions
     And the "Site builder" role should not have permission to:
       """
       administer comments
-      add media from remote sources
       edit own webform content
       delete own webform content
       assign all roles
@@ -669,7 +668,6 @@ Feature: Permissions
       access broken links report
       access own broken links report
       administer maintenance mode
-      add media from remote sources
       administer menu
       administer meta tags
       edit meta tags
