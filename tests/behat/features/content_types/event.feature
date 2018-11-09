@@ -26,7 +26,7 @@ Feature: Events
     And I should not see "Past event"
 
 
-  @api @javascript @skipped
+  @api @javascript
   Scenario: Create Event content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
@@ -35,7 +35,19 @@ Feature: Events
       | govcmstest |
     When I go to "/node/add/event"
     Then I should see "Create Event"
-    And I fill in the following:
+    And I set the chosen element "Tags" to "govcmstest"
+    When I open the "Feature Image" media browser
+    Then I attach the file "autotest.jpg" to "files[upload]"
+    And I press "Next"
+    Then the "Public local files served by the webserver." checkbox should be checked
+    And I press "Next"
+    Then I fill in "Auto Test" for "Name"
+    And I fill in "govCMS test image" for "Alt Text"
+    And I fill in "govCMS Automated" for "Title Text"
+    And I submit the media browser
+    Then the "#edit-field-feature-image" element should contain "Edit"
+    And the "#edit-field-feature-image" element should contain "Remove"
+    Then I fill in the following:
       | Title            | New event                           |
       | Summary          | We celebrate govCMS!                |
       | Location         | Canberra, ACT                       |
@@ -50,19 +62,7 @@ Feature: Events
     And I select "19" from "Day"
     And I select "16" from "Hour"
     And I select "45" from "Minute"
-    Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
-    When I open the "Feature Image" media browser
-    Then I attach the file "autotest.jpg" to "files[upload]"
-    And I press "Next"
-    Then I select the radio button "Public local files served by the webserver."
-    And I press "Next"
-    Then I fill in "Auto Test" for "Name"
-    And I fill in "govCMS test image" for "Alt Text"
-    And I fill in "govCMS Automated" for "Title Text"
-    And I submit the media browser
-    Then the "#edit-field-feature-image" element should contain "Edit"
-    And the "#edit-field-feature-image" element should contain "Remove"
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"
@@ -98,8 +98,8 @@ Feature: Events
   @api @javascript
   Scenario: Check that Events moderation works.
     Given "event" content:
-      | title        | author     | status | state |
-      | Agency event | Jim Editor | 0      | draft |
+      | title        | author     | status | workbench_moderation_state_new |
+      | Agency event | Jim Editor | 0 | draft |
     And I am logged in as a user with the "Content approver" role
     When I am on "/news-media/events/agency-event"
     Then I select "Needs Review" from "Moderation state"
@@ -117,8 +117,8 @@ Feature: Events
   @api @javascript
   Scenario: Check that custom menu links are disabled by default.
     Given "event" content:
-      | title        | author     | status | state         |
-      | Agency event | Jim Editor | 0      | needs_review     |
+      | title        | author     | status | workbench_moderation_state_new |
+      | Agency event | Jim Editor | 0 | needs_review |
     And I am logged in as a user with the "Site builder" role
     When I am on "/news-media/events/agency-event"
     Then I click "Edit draft"
