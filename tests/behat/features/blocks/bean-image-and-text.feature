@@ -1,4 +1,3 @@
-@skipped
 Feature: Image and Text bean
 
   Ensure that Image and Text bean type is available and displayed as expected
@@ -21,7 +20,7 @@ Feature: Image and Text bean
     When I open the "Image" media browser
     And I attach the file "autotest.jpg" to "files[upload]"
     And I press "Next"
-    Then I select the radio button "Public local files served by the webserver."
+    Then the "Public local files served by the webserver." checkbox should be checked
     And I press "Next"
     And I enter "Behold, a generic logo" for "Name"
     And I submit the media browser

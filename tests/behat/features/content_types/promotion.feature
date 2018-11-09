@@ -9,7 +9,7 @@ Feature: Promotion
     When I visit "/node/add/footer-teaser"
     Then CKEditor for the "Promotion Text" field exists
 
-  @api @javascript @skipped
+  @api @javascript
   Scenario: Create Publication content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
@@ -30,7 +30,7 @@ Feature: Promotion
     And I submit the media browser
     Then I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Promotion Text" field
     Given I click "Publishing options"
-    When I check the box "Promoted to front page"
+    And I click the label of the "Promoted to front page" field 
     And I select "Published" from "Moderation state"
     And I press "Save"
     Then I should see the success message containing "Promotion Big promotion has been created."

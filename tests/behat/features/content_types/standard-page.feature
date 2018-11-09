@@ -8,16 +8,12 @@ Feature: Standard Page
     When I visit "/node/add/page"
     Then CKEditor for the "Body" field exists
 
-  @api @javascript @skipped
+  @api @javascript
   Scenario: Create Standard page content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
     When I go to "/node/add/page"
     Then I should see "Create Standard page"
-    And I fill in the following:
-      | Title   | New page               |
-      | Summary | We migrated to govCMS! |
-    And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Attach media" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"
     And I press "Next"
@@ -25,6 +21,11 @@ Feature: Standard Page
     And I fill in "govCMS test image" for "Alt Text"
     And I fill in "govCMS Automated" for "Title Text"
     And I submit the media browser
+    And I fill in the following:
+      | Title   | New page               |
+      | Summary | We migrated to govCMS! |
+    And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
+    
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"
