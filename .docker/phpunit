@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# PHPUnit testing.
+
+APP_DIR=${APP_DIR:-/app}
+
+${APP_DIR}/tests/vendor/bin/phpunit --bootstrap ${APP_DIR}/tests/phpunit/bootstrap_phpunit.inc --configuration  ${APP_DIR}/tests/phpunit/phpunit.xml "$@"
