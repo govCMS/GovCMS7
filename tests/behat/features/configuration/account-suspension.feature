@@ -1,4 +1,3 @@
-@skipped
 Feature: Account suspension
 
   To maintain the security of the website, when a user hasn't logged in for 60 days, then their account should be
@@ -29,7 +28,7 @@ Feature: Account suspension
     Then I should see the message containing "The username Fred has not been activated or is blocked."
     Given I am logged in as a user with the "administrator" role
     When I visit the user edit page for "Fred"
-    Then I select the radio button "Active"
+    Then I click the label of the "Active" field
     And I press "Save"
     And I logout
     Given I visit "/user/login"
