@@ -1,0 +1,88 @@
+version: '2.3'
+
+x-volumes:
+  &default-volumes
+    volumes:
+      - .:/app/profiles/govcms:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
+      - ./tests/behat/features:/app/tests/behat/features:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
+      - ./tests/phpunit/tests:/app/tests/phpunit/tests:${VOLUME_FLAGS:-delegated} ### Removed automatically in CI.
+      - /app/sites/default/files
+
+services:
+
+  cli:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.govcms7
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+    << : *default-volumes
+    environment:
+      LAGOON_ROUTE: &default-url ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
+
+  test:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.test
+      args:
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/test
+    << : *default-volumes
+    environment:
+      LAGOON_ROUTE: *default-url
+    depends_on:
+      - cli
+
+  nginx:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.nginx-drupal
+      args:
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/nginx-drupal
+    << : *default-volumes
+    environment:
+      LAGOON_LOCALDEV_URL: *default-url
+    networks:
+      - amazeeio-network
+      - default
+
+  php:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.php
+      args:
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/php
+    << : *default-volumes
+
+  mariadb:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.mariadb-drupal
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/mariadb-drupal
+    ports:
+      - "3306" # Find port on host with `docker-compose port mariadb 3306`
+
+  solr:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.solr
+      args:
+        CLI_IMAGE: ${DOCKERHUB_NAMESPACE:-govcms}/govcms7      
+    image: ${DOCKERHUB_NAMESPACE:-govcms}/solr
+    ports:
+      - "8983" # Find port on host with `docker-compose port solr 8983`
+
+  chrome:
+    build:
+      context: .
+      dockerfile: $PWD/.docker/Dockerfile.chrome
+    image: selenium/standalone-chrome
+    shm_size: '1gb'
+    depends_on:
+      - test
+    << : *default-volumes
+
+networks:
+  amazeeio-network:
+    external: true
