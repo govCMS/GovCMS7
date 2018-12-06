@@ -141,8 +141,8 @@ function govcms_social_links_block_view($delta = '') {
   $block = array();
   switch ($delta) {
     case 'services':
-      $block['subject'] = t('Connect with us');
-      $block['content'] = '';
+      $block['subject'] = ('Connect with us');
+      $block['content'] = array();
 
       foreach ($services as $service) {
         $service_default = constant('GOVCMS_SOCIAL_LINKS_' . strtoupper($service) . '_DEFAULT');
@@ -157,6 +157,7 @@ function govcms_social_links_block_view($delta = '') {
 
           // Load the service's image.
           $icon = drupal_get_path('module', 'govcms_social_links') . '/images/' . $service . '.png';
+
 
           $block['content'][$service] = array(
             '#theme' => 'govcms_social_link',
