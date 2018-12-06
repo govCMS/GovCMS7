@@ -1,17 +1,11 @@
-FROM amazeeio/php:7.1-cli-drupal
+FROM amazeeio/php:7.1-cli-drupal as builder
 
-RUN apk add python gmp gmp-dev \
-    && docker-php-ext-install gmp \
-    && docker-php-ext-configure gmp
-
-COPY . /tmp/src
+COPY . /src
 
 RUN rm -rf /app \
-    && cd /tmp/src \
+    && cd /src \
     && echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
-    && drush make /tmp/src/.docker/stub.make /app --contrib-destination \
-    && rm -rf /tmp/src /usr/local/etc/php/conf.d/memory.ini \
-	&& fix-permissions /home/.drush \
+    && drush make /src/.docker/stub.make /app --contrib-destination \
 	&& cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
 	&& { \
 		echo ; \
@@ -28,3 +22,11 @@ RUN rm -rf /app \
 		echo "\$drupal_hash_salt = getenv('DRUPAL_HASH_SALT') ?: 'changeme';"; \
     } | tee -a "/app/sites/default/settings.php" \
     && chmod 444 /app/sites/default/settings.php
+
+FROM amazeeio/php:7.1-cli-drupal
+
+RUN apk add gmp gmp-dev \
+    && docker-php-ext-install gmp \
+    && docker-php-ext-configure gmp
+
+COPY --from=builder /app /app

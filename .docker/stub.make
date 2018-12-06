@@ -7,4 +7,4 @@ includes[] = drupal-org-core.make
 ; Download the govCMS install profile and build all its dependencies.
 projects[govcms][type] = profile
 projects[govcms][download][type] = copy
-projects[govcms][download][url] = "/tmp/src"
+projects[govcms][download][url] = "/src"
