@@ -10,16 +10,16 @@
  */
 function options_flatten_field_widget_info_alter(&$info) {
   if (module_exists('options')) {
-    $settings = array(
+    $settings = [
       'flatten_options' => 0,
       'flatten_sort' => 1,
-    );
+    ];
     $info['options_select']['settings'] += $settings;
   }
 }
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
 function options_flatten_form_field_ui_field_edit_form_alter(&$form, $form_state) {
   if (isset($form['instance']['widget']['type']['#value'])) {
@@ -39,25 +39,25 @@ function options_flatten_field_widget_settings_form($field, $instance) {
   $widget = $instance['widget'];
   $settings = $widget['settings'];
 
-  $form['options_flatten'] = array(
+  $form['options_flatten'] = [
     '#type' => 'fieldset',
     '#title' => t('Options Flatten'),
     '#collapsed' => TRUE,
     '#collapsible' => TRUE,
-    '#parents' => array('instance', 'widget', 'settings'),
-  );
+    '#parents' => ['instance', 'widget', 'settings'],
+  ];
 
-  $form['options_flatten']['flatten_options'] = array(
+  $form['options_flatten']['flatten_options'] = [
     '#type' => 'checkbox',
     '#title' => t('Flatten select options'),
     '#default_value' => $settings['flatten_options'],
-  );
+  ];
 
-  $form['options_flatten']['flatten_sort'] = array(
+  $form['options_flatten']['flatten_sort'] = [
     '#type' => 'checkbox',
     '#title' => t('Sort the flatten options by label'),
     '#default_value' => $settings['flatten_sort'],
-  );
+  ];
 
   return $form;
 }
