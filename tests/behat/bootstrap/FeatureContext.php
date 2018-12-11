@@ -1,7 +1,5 @@
 <?php
 
-namespace GovCMS\govCMSExtension\Context;
-
 use Drupal\DrupalExtension\Context\MinkContext;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
