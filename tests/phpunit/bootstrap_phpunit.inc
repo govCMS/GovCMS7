@@ -21,6 +21,9 @@ if (!file_exists($site_dir . '/settings.php')) {
   exit(1);
 }
 
+if (!isset($_SERVER['REQUEST_METHOD'])) {
+  $_SERVER['REQUEST_METHOD'] = 'GET';
+}
 $_SERVER['HTTP_HOST'] = 'localhost';
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 $_SERVER['PHPUNIT'] = TRUE;
