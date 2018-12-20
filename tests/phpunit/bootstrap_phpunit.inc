@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @file
  * Bootstrap Drupal for PHPUnit testing.
  */
 
 $docroot = __DIR__ . '/../..';
+ob_start();
 print "Checking drupal dir :: " . $docroot . PHP_EOL;
 if (!is_dir($docroot)) {
   echo "No drupal directory found in or above current working directory. Aborting. \n";
