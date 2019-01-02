@@ -40,6 +40,7 @@ projects[entityreference][patch][] = "https://www.drupal.org/files/issues/url_fo
 projects[entityreference][version] = "1.5"
 projects[entity][patch][2307807] = "https://www.drupal.org/files/issues/2307807-entity-reset-insert-1.patch"
 projects[entity][version] = "1.9"
+projects[environment_indicator][version] = "2.9"
 projects[escape_admin][version] = "1.2"
 projects[event_log][version] = "1.4"
 projects[event_log][patch][] = "https://www.drupal.org/files/issues/event-log-request-password-2365895-2.patch"
