@@ -20,7 +20,7 @@ Feature: News Article
     And I fill in the following:
       | Title   | Good news              |
       | Summary | We migrated to govCMS! |
-    And I select "2015" from "Year"
+    And I select "2018" from "Year"
     And I select "Nov" from "Month"
     And I select "19" from "Day"
     And I select "16" from "Hour"
@@ -36,14 +36,14 @@ Feature: News Article
     When I visit "/news-media/news/news"
     Then I should see the heading "News"
     And I should see the link "Good news"
-    And I should see "19 November 2015"
+    And I should see "19 November 2018"
     And I should see "We migrated to govCMS!"
     And I should see the link "Read more"
     When I click "Good news"
     Then the response should contain "<li><a href=\"/news-media/news\">News</a> › </li>"
     And the "h1" element should contain "Good news"
     And I should see an "nav.breadcrumb:contains(Good news)" element
-    And I should see "19 November 2015"
+    And I should see "19 November 2018"
     And I should see "Digital transformation is real. GovCMS is the best!"
     And the ".field-name-field-tags" element should contain "<a href=\"/tags/govcmstest\""
     And I should see the link "govcmstest"
@@ -85,7 +85,7 @@ Feature: News Article
       | Good things | Joe Editor | 0      | needs_review  |
     When I visit "/news-media/news/good-things"
     And I click "Edit draft"
-    And I select "2015" from "Year"
+    And I select "2018" from "Year"
     And I select "Nov" from "Month"
     And I select "19" from "Day"
     And I select "16" from "Hour"
