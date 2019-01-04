@@ -4,10 +4,13 @@ api = 2
 defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
-
 projects[accessible_forms][version] = "1.0-alpha1"
 projects[acquia_connector][version] = "3.2"
-projects[addressfield][version] = "1.1"
+; addressfield locked at 7.x-1.x revision for php7 compatibility until 7.x-1.3 release available
+projects[addressfield][download][branch] = "7.x-1.x"
+projects[addressfield][download][revision] = "fc5ef89e79786b656125820d6adf78d993108db7"
+projects[addressfield][download][type] = "git"
+projects[addressfield][download][url] ="https://git.drupal.org/project/addressfield.git"
 projects[admin_views][version] = "1.6"
 projects[agls][version] = "1.0-beta3"
 projects[bean][version] = "1.11"
