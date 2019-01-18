@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: debug fs
-          command: ls -lah && echo $PWD
-      - run:
           name: Composer install
           command: composer install --prefer-dist --working-dir=build
       - run:
