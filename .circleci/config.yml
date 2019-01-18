@@ -6,7 +6,7 @@ jobs:
     steps:
       - run:
           name: Composer install
-          command: composer install --prefer-dist --working-dir=build
+          command: composer install --prefer-dist
       - run:
           name: Phing build
           command: build/bin/phing -f build/phing/build.xml build
