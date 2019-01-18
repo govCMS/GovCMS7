@@ -1,6 +1,6 @@
 version: 3
 jobs:
-  build:
+  end-2-end:
     docker:
       - image: wodby/php:7.1
     steps:
@@ -14,10 +14,6 @@ jobs:
       - run:
           name: Phing build
           command: build/bin/phing -f build/phing/build.xml build
-  test:
-    docker:
-      - image: integratedexperts/circleci2-builder
-    steps:
       - run:
           name: Phing test
           command: build/bin/phing -f build/phing/build.xml run-tests
@@ -25,13 +21,7 @@ workflows:
   version: 2
   main:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              only: /.*/
-      - test:
+      - end-2-end:
           filters:
             tags:
               only: /.*/
