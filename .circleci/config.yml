@@ -12,6 +12,9 @@ jobs:
           name: Composer install
           command: composer install --prefer-dist --working-dir=build
       - run:
+          name: Copy properties file into place
+          command: cp phing/example.build.properties phing/build.properties
+      - run:
           name: Phing build
           command: build/bin/phing -f build/phing/build.xml build
       - run:
