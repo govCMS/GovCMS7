@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: integratedexperts/circleci2-builder
     steps:
+      - checkout
       - run:
           name: debug fs
           command: ls -lah && echo $PWD
