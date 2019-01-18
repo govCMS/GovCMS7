@@ -29,7 +29,7 @@ workflows:
               only: /.*/
             branches:
               only: /.*/
-      - :
+      - test:
           filters:
             tags:
               only: /.*/
