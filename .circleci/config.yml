@@ -5,8 +5,11 @@ jobs:
       - image: integratedexperts/circleci2-builder
     steps:
       - run:
+          name: debug fs
+          command: ls -lah && echo $PWD
+      - run:
           name: Composer install
-          command: composer install --prefer-dist
+          command: composer install --prefer-dist --working-dir=build
       - run:
           name: Phing build
           command: build/bin/phing -f build/phing/build.xml build
