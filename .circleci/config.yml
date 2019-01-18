@@ -1,0 +1,26 @@
+version: 3
+jobs:
+  end-2-end:
+    docker:
+      - image: wodby/php:7.1
+    steps:
+      - checkout
+      - run:
+          name: Composer install
+          command: composer install --prefer-dist --working-dir=build
+      - run:
+          name: Copy properties file into place
+          command: cp build/phing/example.build.properties build/phing/build.properties
+      - run:
+          name: Phing build
+          command: build/bin/phing -f build/phing/build.xml build
+workflows:
+  version: 2
+  main:
+    jobs:
+      - end-2-end:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
