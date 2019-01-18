@@ -2,7 +2,7 @@ version: 3
 jobs:
   build:
     docker:
-      - image: integratedexperts/circleci2-builder
+      - image: php:7.1
     steps:
       - checkout
       - run:
