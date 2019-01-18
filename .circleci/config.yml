@@ -2,7 +2,7 @@ version: 3
 jobs:
   build:
     docker:
-      - image: php:7.1
+      - image: wodby/php:7.1
     steps:
       - checkout
       - run:
