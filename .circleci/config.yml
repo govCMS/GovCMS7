@@ -21,7 +21,7 @@ jobs:
           name: Phing test
           command: build/bin/phing -f build/phing/build.xml run-tests
 workflows:
-  version: 3
+  version: 2
   main:
     jobs:
       - build:
