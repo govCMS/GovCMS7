@@ -1,4 +1,4 @@
-version: 2
+version: 3
 jobs:
   build:
     docker:
@@ -21,7 +21,7 @@ jobs:
           name: Phing test
           command: build/bin/phing -f build/phing/build.xml run-tests
 workflows:
-  version: 2
+  version: 3
   main:
     jobs:
       - build:
