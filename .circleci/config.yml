@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: integratedexperts/circleci2-builder
+    steps:
+      - build
+      - run:
+          name: Composer install
+          command: composer install --prefer-dist --working-dir=build
+      - run:
+          name: Phing build
+          command: build/bin/phing -f build/phing/build.xml build
+      - test
+      - run:
+          name: Phing test
+          command: build/bin/phing -f build/phing/build.xml run-tests
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              only: /.*/
