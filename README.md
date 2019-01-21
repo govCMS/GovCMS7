@@ -1,7 +1,7 @@
 # govCMS
 
 **Note:**
-**This is an early release of a future 7.x-3.x branch, and is not ready for Production yet - it is under active development**
+**This release is not Acquia specific. Please continue to use 2.x release if you are in Acquia.**
 
 ## Installation
 
