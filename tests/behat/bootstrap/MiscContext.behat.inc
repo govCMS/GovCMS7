@@ -159,4 +159,11 @@ class MiscContext extends DrupalSubContextBase {
     }
   }
 
+  /**
+   * @Given I wait :arg1 seconds
+   */
+  public function iWaitSeconds($arg1) {
+    sleep($arg1);
+  }
+
 }
