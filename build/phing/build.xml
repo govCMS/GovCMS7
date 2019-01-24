@@ -91,7 +91,7 @@
               override="true"/>
 
     <!-- Set git properties -->
-    <property name="git.branch.default" value="7.x-2.x"/>
+    <property name="git.branch.default" value="7.x-3.x"/>
 
     <!-- The following allows local overrides. -->
     <property file="${project.basedir}/build.properties" override="true"/>
