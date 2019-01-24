@@ -166,4 +166,21 @@ class MiscContext extends DrupalSubContextBase {
     sleep($arg1);
   }
 
+  /**
+   * Click any element.
+   *
+   * @Given I click the :selector element
+   *
+   * @see https://stackoverflow.com/a/33672497/1023773
+   */
+  public function iClickTheElement($selector) {
+    $page = $this->getSession()->getPage();
+    $element = $page->find('css', $selector);
+
+    if (empty($element)) {
+      throw new Exception("No html element found for selector '{$selector}'");
+    }
+
+    $element->click();
+  }
 }
