@@ -16,7 +16,6 @@ Feature:Meta tags
     And I follow "Show Dublin Core Basic Tags"
     And I wait 2 seconds
     And I follow "Show Type"
-    # And I click the '#edit-metatags-und-dctermstype-item .fieldset-title' element
     And I wait 2 seconds
     And I enter "Text" for "edit-metatags-und-dctermstype-item-value"
     And press "Save"
