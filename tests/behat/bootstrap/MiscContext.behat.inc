@@ -198,20 +198,14 @@ class MiscContext extends DrupalSubContextBase {
    * @Given /^I expand all fieldsets$/
    */
   public function i_expand_all_fieldsets() {
-    $session = $this->getSession();
-    $page = $session->getPage();
+    
+    $elements = $this
+      ->getSession()
+      ->getPage()
+      ->findAll('css', 'fieldset > collapsed');
 
-    try {
-      // Expand all fieldsets.
-      $expandallxpath = "//fieldset[@class='collapsed']";
-
-      $collapseexpandlink = $page->find('xpath', $expandallxpath,
-        FALSE, FALSE, self::REDUCED_TIMEOUT);
-      $collapseexpandlink->click();
-
-    } catch (ElementNotFoundException $e) {
-      // The behat_base::find() method throws an exception if there are no elements,
-      // we should not fail a test because of this. We continue if there are not expandable fields.
+    foreach ($elements as $element) {
+      $element->click();
     }
   }
 
