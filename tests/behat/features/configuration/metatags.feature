@@ -13,10 +13,10 @@ Feature:Meta tags
     Then I should see "Create Standard page"
     And I enter "test" for "Title"
     And I put "When tweetle beetles fight, its called a tweetle beetle battle." into WYSIWYG of "Body" field
-    And I follow "Show Dublin Core Basic Tags"
-    And I wait 2 seconds
-    And I follow "Show Type"
-    And I wait 2 seconds
+    #And I follow "Show Dublin Core Basic Tags"
+    And I expand all fieldsets
+    #And I follow "Show Type"
+    #And I wait 2 seconds
     And I enter "Text" for "edit-metatags-und-dctermstype-item-value"
     And press "Save"
     Then I should see "Standard page test has been created"
