@@ -192,45 +192,27 @@ class MiscContext extends DrupalSubContextBase {
   }
 
 
-    /**
-     * Expands all moodleform's fields, including collapsed fieldsets and advanced fields if they are present.
-     * @Given /^I expand all fieldsets$/
-     */
-    public function i_expand_all_fieldsets() {
-        $this->expand_all_fields();
+  /**
+   * Expands all moodleform's fields, including collapsed fieldsets and
+   * advanced fields if they are present.
+   * @Given /^I expand all fieldsets$/
+   */
+  public function i_expand_all_fieldsets() {
+    $session = $this->getSession();
+    $page = $session->getPage();
+
+    try {
+      // Expand all fieldsets.
+      $expandallxpath = "//fieldset[@class='collapsed']";
+
+      $collapseexpandlink = $page->find('xpath', $expandallxpath,
+        FALSE, FALSE, self::REDUCED_TIMEOUT);
+      $collapseexpandlink->click();
+
+    } catch (ElementNotFoundException $e) {
+      // The behat_base::find() method throws an exception if there are no elements,
+      // we should not fail a test because of this. We continue if there are not expandable fields.
     }
-
-    /**
-     * Expands all moodle form fieldsets if they exists.
-     *
-     * Externalized from i_expand_all_fields to call it from
-     * other form-related steps without having to use steps-group calls.
-     *
-     * @throws ElementNotFoundException Thrown by behat_base::find_all
-     * @return void
-     */
-    protected function expand_all_fields() {
-      $session = $this->getSession();
-      $page = $session->getPage();
-
-      try {
-
-        // Expand all fieldsets link - which will only be there if there is more than one collapsible section.
-        $expandallxpath = "//div[@class='collapsible-actions']" .
-          "//a[contains(concat(' ', @class, ' '), ' collapseexpand ')]" .
-          "[not(contains(concat(' ', @class, ' '), ' collapse-all '))]";
-        // Else, look for the first expand fieldset link.
-        $expandonlysection = "//legend[@class='ftoggler']" .
-          "//a[contains(concat(' ', @class, ' '), ' fheader ') and @aria-expanded = 'false']";
-
-        $collapseexpandlink = $page->find('xpath', $expandallxpath . '|' . $expandonlysection,
-          FALSE, FALSE, self::REDUCED_TIMEOUT);
-        $collapseexpandlink->click();
-
-      } catch (ElementNotFoundException $e) {
-        // The behat_base::find() method throws an exception if there are no elements,
-        // we should not fail a test because of this. We continue if there are not expandable fields.
-      }
-    }
+  }
 
 }
