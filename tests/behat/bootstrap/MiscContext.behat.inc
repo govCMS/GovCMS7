@@ -12,6 +12,13 @@ use Drupal\DrupalExtension\Context\DrupalSubContextBase;
 class MiscContext extends DrupalSubContextBase {
 
   /**
+   * Small timeout.
+   *
+   * A reduced timeout for cases where $page->find() could not be enough.
+   */
+  const REDUCED_TIMEOUT = 2;
+
+  /**
    * Check that a particular option on a select list is selected.
    *
    * @Then the :arg1 select list should be set to :arg2
