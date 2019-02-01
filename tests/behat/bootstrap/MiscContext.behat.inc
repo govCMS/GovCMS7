@@ -203,6 +203,7 @@ class MiscContext extends DrupalSubContextBase {
      * @return void
      */
     protected function expand_all_fields() {
+      $page = $this->getSession()->getPage();
         // We already know that we waited for the DOM and the JS to be loaded, even the editor
         // so, we will use the reduced timeout as it is a common task and we should save time.
         try {
@@ -215,7 +216,7 @@ class MiscContext extends DrupalSubContextBase {
             $expandonlysection = "//legend[@class='ftoggler']" .
                     "//a[contains(concat(' ', @class, ' '), ' fheader ') and @aria-expanded = 'false']";
 
-            $collapseexpandlink = $this->find('xpath', $expandallxpath . '|' . $expandonlysection,
+            $collapseexpandlink = $page->find('xpath', $expandallxpath . '|' . $expandonlysection,
                     false, false, self::REDUCED_TIMEOUT);
             $collapseexpandlink->click();
 
