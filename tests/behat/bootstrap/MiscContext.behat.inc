@@ -210,13 +210,13 @@ class MiscContext extends DrupalSubContextBase {
   }
 
   /**
-   * @Given I scroll to :arg1 element by xpath
+   * @Given I scroll to :arg1 element by id
    * @javascript
    */
-  public function iScrollToElementByXpath($arg1) {
+  public function iScrollToElementById($arg1) {
     $this->getSession()->executeScript(
       "
-                var element = document.getElementByXpath('" . $arg1 . "');
+                var element = document.getElementById('" . $arg1 . "');
                 element.scrollIntoView( true );
             "
     );
