@@ -17,6 +17,8 @@ Feature:Meta tags
     And I expand all fieldsets
     #And I follow "Show Type"
     #And I wait 2 seconds
+    And I scroll to '#edit-metatags-und-dctermstype-item' element by xpath
+    And save screenshot
     And I enter "Text" for "edit-metatags-und-dctermstype-item-value"
     And press "Save"
     Then I should see "Standard page test has been created"

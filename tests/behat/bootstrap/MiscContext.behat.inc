@@ -198,7 +198,7 @@ class MiscContext extends DrupalSubContextBase {
    * @Given /^I expand all fieldsets$/
    */
   public function i_expand_all_fieldsets() {
-    
+
     $elements = $this
       ->getSession()
       ->getPage()
@@ -207,6 +207,19 @@ class MiscContext extends DrupalSubContextBase {
     foreach ($elements as $element) {
       $element->click();
     }
+  }
+
+  /**
+   * @Given I scroll to :arg1 element by xpath
+   * @javascript
+   */
+  public function iScrollToElementByXpath($arg1) {
+    $this->getSession()->executeScript(
+      "
+                var element = document.getElementByXpath('" . $arg1 . "');
+                element.scrollIntoView( true );
+            "
+    );
   }
 
 }
