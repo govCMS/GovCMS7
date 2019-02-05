@@ -72,7 +72,7 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
         var_dump($form['permission']['administer blocks']);
         foreach ($banned_permissions as $perm) {
           if (isset($form['checkboxes'][$key])) {
-            if ($user->uid === 1) {
+            if ($user->uid !== 1) {
               $form['checkboxes'][$key][$perm]['#disabled'] = TRUE;
             }
             $form['permission'][$perm]['#description'] = '<strong>Disabled via govCMS</strong>';
@@ -90,7 +90,7 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
       foreach ($form['modules'] as $group => $value) {
         foreach ($modules as $module) {
           if (isset($form['modules'][$group][$module]) && is_array($form['modules'][$group][$module])) {
-            if ($user->uid === 1) {
+            if ($user->uid !== 1) {
               $form['modules'][$group][$module]['enable']['#disabled'] = TRUE;
             }
             $form['modules'][$group][$module]['description']['#markup'] .= '<br /><strong>Disabled via govCMS</strong>';
