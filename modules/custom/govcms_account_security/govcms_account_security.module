@@ -69,7 +69,6 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
 
       foreach (element_children($form['checkboxes']) as $key) {
         // Loop through each permission and disable
-        var_dump($form['permission']['administer blocks']);
         foreach ($banned_permissions as $perm) {
           if (isset($form['checkboxes'][$key])) {
             if ($user->uid !== 1) {
