@@ -15,7 +15,7 @@ Feature:Meta tags
     And I put "When tweetle beetles fight, its called a tweetle beetle battle." into WYSIWYG of "Body" field
     And I follow "Show Dublin Core Basic Tags"
     And I follow "Show Type"
-    And I should see the text "Text"
+    And the "edit-metatags-und-dctermstype-item-value" field should contain "Text"
     And press "Save"
     Then I should see "Standard page test has been created"
     And the response should contain "<meta name=\"description\" content=\"When tweetle beetles fight, its called a tweetle beetle battle.\" />"
