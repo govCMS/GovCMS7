@@ -158,5 +158,4 @@ class MiscContext extends DrupalSubContextBase {
       $driver->click($element->getXPath());
     }
   }
-
 }
