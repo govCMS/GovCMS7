@@ -2,7 +2,7 @@
 # Lines that start with '#' are comments.
 
 # Compiled source #
-###################
+#####################
 *.com
 *.class
 *.dll
