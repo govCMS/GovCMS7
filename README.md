@@ -1,7 +1,7 @@
 # govCMS
 
 **Note:**
-**This is an early release of a future 7.x-3.x branch, and is not ready for Production yet - it is under active development**
+**This release is not Acquia specific. Please continue to use 2.x release if you are in Acquia.**
 
 ## Installation
 
@@ -9,126 +9,81 @@
 
 govCMS exists as packaged versions on both the [Github](https://github.com/govCMS/govCMS) and [Drupal.org](https://www.drupal.org/project/govcms) project pages. These compressed archives are available in both zip and tar.gz format to download and use as needed.
 
+## Local development environment setup
 
-### Installation from source
+1. Make sure that you have [Docker](https://www.docker.com/), [Pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) and [Ahoy](https://github.com/ahoy-cli/ahoy)installed.
+2. Checkout project repository `git clone git@github.com:govCMS/govCMS.git`
+3. `ahoy up`
+4. `ahoy make`
+5. `ahoy install`
+6. http://govcms.docker.amazee.io
 
-**Dependencies**
+This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the `govcms.make` file.
 
-- [git](http://git-scm.com/)
-- [composer](https://getcomposer.org/)
+Once built, the profile files will be symlinked into `docroot/profiles/govcms`.
 
-To develop on or patch against govCMS, the source files should be downloaded and the project built.
-
-govCMS source may be downloaded using git
-
-```
-git clone git@github.com:govCMS/govCMS.git
-```
-
-Enter the project root, and run the following commands in order:
+## List of available Ahoy workflow commands:
 
 ```
-cd <project_directory>
-composer install --prefer-dist --working-dir=build
-build/bin/phing -f build/phing/build.xml build
+   build        Build project.
+   cli          Start a shell inside CLI container.
+   drush        Run drush commands in the CLI service container.
+   install      Install the profile.
+   lint         Lint code
+   login        Login to a website.
+   logs         Show Docker logs.
+   make         Install local dependencies.
+   ps           List running Docker containers.
+   pull         Pull latest docker images.
+   push         Push all docker images.
+   release      Push all docker images.
+   restart      Restart Docker containers.
+   run          Run command inside CLI container.
+   stop         Stop Docker containers.
+   test         Run all tests.
+   test-behat   Run behat tests.
+   test-phpunit Run phpunit tests.
+   up           Build project.
 ```
-Optionally, if the composer install command returns errors, run the following command before running composer install:
-```
-composer update --working-dir=build
-```
-
-This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the govcms.make file.
-
-This build is configured to use (http://govcms.local/) by default and will need to [add an entry to your host file](http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/http://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/). This and other credentials can be changed by duplicating `build/phing/example.build.properties` as `build.properties` and making changes there.
-
-
 
 ## Structure
 
 ### General
 
-- **docroot** - The Drupal root. This can be either a directory or a symlink.
-- **README.md** - Project documentation written in markdown.
-- **build** - Project specific files for building and testing govCMS.
-- **composer.json** - Project specific vendor packages and repositories.
-- **composer.lock** - Locked in version of vendor packages. To ensure consistency across the project.
-- **.gitignore** - A list of files to be ignored by git. This is typically used for excluding local development modules and may create files to ignore that an IDE creates.
+- `docroot` - The Drupal root. This can be either a directory or a symlink.
+- `README.md` - Project documentation written in markdown.
+- `composer.json` - Project specific vendor packages and repositories.
+- `composer.lock` - Locked in version of vendor packages. To ensure consistency across the project.
+- `.gitignore` - A list of files to be ignored by git. This is typically used for excluding local development modules and may create files to ignore that an IDE creates.
 
 ### Behat
 
-- **behat.yml** - Provides all project specific behat configuration. Including regions and context configuration.
-- **behat.local.yml** - Local configuration to override *behat.yml*. Typically this will only be the url of the current environment.
-- **tests/behat** - The directory where behat .feature files are stored.
+- `behat.yml` - Provides all project specific behat configuration. Including regions and context configuration.
+- `tests/behat` - The directory where behat `*.feature` files are stored.
 
-The *behat.local.yml* file is provided empty and ignored from the repository so changes can be made to run behat in the local environment. The structure of the file follows that of *behat.yml*, to set the local target URL to *http://govcms.local/* for behat, the following may be placed in *behat.local.yml*:
-
-```
-# Local behat settings.
-default:
-  extensions:
-    Behat\MinkExtension:
-      base_url: http://govcms.local/
-```
-
-Behat parameters may also be added by altering the BEHAT_PARAMS variable. This will only affect direct behat runs, rather than those run through Phing.
+The ability to test a govCMS build is built into the repository with all tests run by [Circle CI](https://cirlceci.com/) able to be run locally. Any changes made should be added and committed to your local repository and the following commands run:
 
 ```
-export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "http://govcms.local/"}}}'
+ahoy test-behat
+ahoy test-phpunit
 ```
 
-### Phing
-
-- **build.xml** - Contains project specific configuration and tasks that can be executed across this projects team.
-- **build.properties** - Environment specific configuration. Just like *behat.local.yml*, typically this will assign the url of the current environment.
-
-The variables that Phing uses are configured at the top of build.xml. If there are alterations to these parameters to allow Phing to run locally, these may be placed in the *build.properties* file. This file is ignored from git so local modifications will not be committed. To alter the base URL for the Drupal site the following may be added to *build.properties*.
+Individual tests may be run by specifying the target for commands:
 
 ```
-; local build properties
-
-; The uri of the site.
-drupal.base_url='http://govcms.local/'
-
-; The database settings.
-; db.host=DB_HOST
-; db.name=DB_NAME
-; db.username=DB_USER
-; db.password=DB_PASS
-; db.port=DB_PORT
+ahoy test-behat -- tests/behat/features/home.feature
 ```
 
-If you are making changes to the make file, you can tell the build process to build from your local make file, instead of the one in the profile repository.
+### Debugging CLI
 
-From the build/phing folder:
-
-```
-../bin/phing build:no-clean
-```
-
-## Testing govCMS
-The ability to test a govCMS build is built into the repository with all tests run by [Travis CI](https://travis-ci.com/) able to be run locally. Any changes made should be added and committed to your local repository and the following commands run:
-
-```
-build/bin/phing -f build/phing/build.xml build
-build/bin/phing -f build/phing/build.xml run-tests
-```
-
-Individual tests may be run by specifying the target for Phing. If just the behat tests need to be run, the target can be changed:
-
-```
-build/bin/phing -f build/phing/build.xml test:behat
-```
-
-All tasks in this project can be listed via the command:
-
-```
-build/bin/phing -f build/phing/build.xml -l
-```
-
+To debug CLI commands, such as Behat tests, using XDEBUG:
+1. `ahoy cli` to get into `test` container.
+4. `cd tests/behat`
+3. `. xdebug.sh ../../vendor/bin/behat path/to/test.feature`
 
 ## Patching govCMS
 
-Because govCMS is a [Drupal distribution](https://www.drupal.org/documentation/build/distributions), modules and configurations are not added directly to the codebase. Rather, they are referenced within the govcms.make file.
+Because govCMS is a [Drupal distribution](https://www.drupal.org/documentation/build/distributions), modules and configurations are not added directly to the codebase. Rather, they are referenced within the `govcms.make` file.
 
 Any alterations to Drupal core or contributed modules must have an associated [drupal.org](https://www.drupal.org) issue filed against the project in question. Modifications should be made directly to the project in question and patched into govCMS rather than made directly against govCMS.
 
@@ -136,6 +91,8 @@ It is a requirement for any patches to govCMS to pass all automated testing prio
 
 To submit a patch, the govCMS project should be forked and changes applied to a branch on the forked repository. Once all changes are applied, a pull request between govCMS/master and the branch of the fork may be created.
 
+## Releasing govCMS
+See [RELEASE.md](RELEASE.md)
 
 ## Contributing to govCMS
 

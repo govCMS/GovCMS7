@@ -26,999 +26,1224 @@
  *   An array of permissions.
  */
 function govcms_permissions_base_permissions() {
-  return array(
-    'system' => array(
-      'access administration pages' => array(
-        'roles' => array(
+  return [
+    'system' => [
+      'access administration pages' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'access site in maintenance mode' => array(
-        'roles' => array(
+        ],
+      ],
+      'access site in maintenance mode' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'view the administration theme' => array(
-        'roles' => array(
+        ],
+      ],
+      'view the administration theme' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'access site reports' => array(
-        'roles' => array(
+        ],
+      ],
+      'access site reports' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer actions' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer actions' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer themes' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer themes' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'comment' => array(
-      'access comments' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'comment' => [
+      'access comments' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'authenticated user',
-        ),
-      ),
-      'administer comments' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer comments' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-      'edit own comments' => array(
-        'roles' => array(
-          0 => 'administrator',
-          1 => 'Site editor',
-          2 => 'anonymous user',
-          3 => 'authenticated user',
-        ),
-      ),
-      'post comments' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit own comments' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'authenticated user',
-        ),
-      ),
-      'skip comment approval' => array(
-        'roles' => array(
-          0 => 'administrator',
-          1 => 'Site editor',
-        ),
-      ),
-    ),
-    'contextual' => array(
-      'access contextual links' => array(
-        'roles' => array(
+        ],
+      ],
+      'post comments' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'authenticated user',
-        ),
-      ),
-    ),
-    'node' => array(
-      'access content' => array(
-        'roles' => array(
+        ],
+      ],
+      'skip comment approval' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+        ],
+      ],
+    ],
+    'contextual' => [
+      'access contextual links' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'authenticated user',
-        ),
-      ),
-      'access content overview' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'node' => [
+      'access content' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'anonymous user',
+          3 => 'authenticated user',
+        ],
+      ],
+      'access content overview' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'administer content types' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer content types' => [
+        'roles' => [
           0 => 'Site builder',
           1 => 'administrator',
-        ),
-      ),
-      'administer nodes' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer nodes' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-      'bypass node access' => array(
-        'roles' => array(
+        ],
+      ],
+      'bypass node access' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-      'revert revisions' => array(
-        'roles' => array(
+        ],
+      ],
+      'revert revisions' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'view own unpublished content' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete revisions' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site builder',
+          2 => 'Site editor',
+        ],
+      ],
+      'view own unpublished content' => [
+        'roles' => [
           0 => 'authenticated user',
           1 => 'Content approver',
           2 => 'Content editor',
           3 => 'administrator',
           4 => 'Site editor',
           5 => 'Site builder',
-        ),
-      ),
-      'view revisions' => array(
-        'roles' => array(
+        ],
+      ],
+      'view revisions' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-    ),
-    'site_map' => array(
-      'access site map' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'site_map' => [
+      'access site map' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'Site builder',
           4 => 'authenticated user',
-        ),
-      ),
-    ),
-    'toolbar' => array(
-      'access toolbar' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'superfish' => [
+      'administer superfish' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+    ],
+    'toolbar' => [
+      'access toolbar' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-    ),
-    'workbench' => array(
-      'access workbench' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'workbench' => [
+      'administer workbench' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+      'access workbench' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-    ),
-    'media_internet' => array(
-      'add media from remote sources' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'media' => [
+      'administer media browser' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+      'access media browser' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-    ),
-    'file_entity' => array(
-      'administer files' => array(
-        'roles' => array(
+          4 => 'Site builder',
+        ],
+      ],
+    ],
+    'media_internet' => [
+      'add media from remote sources' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'administrator',
+          3 => 'Site editor',
+          4 => 'Site builder',
+        ],
+      ],
+    ],
+    'media_wysiwyg' => [
+      'use media wysiwyg' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'administrator',
+          3 => 'Site editor',
+          4 => 'Site builder',
+        ],
+      ],
+    ],
+    'file_entity' => [
+      'administer files' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'Site builder',
           3 => 'administrator',
           4 => 'Site editor',
-        ),
-      ),
-      'bypass file access' => array(
-        'roles' => array(
+        ],
+      ],
+      'bypass file access' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'maintenance_mode_permissions' => array(
-      'administer maintenance mode' => array(
-        'roles' => array(
+        ],
+      ],
+      'create files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'edit any image files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'delete any image files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'download any image files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'edit any video files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'delete any video files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'download any video files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'edit any audio files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'delete any audio files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'download any audio files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'edit any document files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'delete any document files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+      'download any document files' => [
+        'roles' => [
+          0 => 'Content approver',
+          1 => 'Content editor',
+          2 => 'Site builder',
+          3 => 'administrator',
+          4 => 'Site editor',
+        ],
+      ],
+    ],
+    'linkit' => [
+      'administer linkit' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-    ),
-    'scheduler' => array(
-      'administer scheduler' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'maintenance_mode_permissions' => [
+      'administer maintenance mode' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-      'schedule (un)publishing of nodes' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'scheduler' => [
+      'administer scheduler' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site builder',
+          2 => 'Site editor',
+        ],
+      ],
+      'schedule (un)publishing of nodes' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-    ),
-    'govcms_appearance' => array(
-      'administer theme settings' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'govcms_appearance' => [
+      'administer theme settings' => [
+        'roles' => [
           0 => 'Site editor',
           1 => 'Site builder',
           2 => 'administrator',
-        ),
-      ),
-    ),
-    'workbench_moderation' => array(
-      'administer workbench moderation' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'workbench_moderation' => [
+      'administer workbench moderation' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-      'bypass workbench moderation' => array(
-        'roles' => array(
+        ],
+      ],
+      'bypass workbench moderation' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
-        ),
-      ),
-      'moderate content from draft to needs_review' => array(
-        'roles' => array(
+        ],
+      ],
+      'moderate content from draft to needs_review' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-      'moderate content from needs_review to draft' => array(
-        'roles' => array(
+        ],
+      ],
+      'moderate content from needs_review to draft' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-      'moderate content from needs_review to published' => array(
-        'roles' => array(
+        ],
+      ],
+      'moderate content from needs_review to published' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'administrator',
           2 => 'Site editor',
-        ),
-      ),
-      'use workbench_moderation my drafts tab' => array(
-        'roles' => array(
+        ],
+      ],
+      'use workbench_moderation my drafts tab' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'use workbench_moderation needs review tab' => array(
-        'roles' => array(
+        ],
+      ],
+      'use workbench_moderation needs review tab' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'view all unpublished content' => array(
-        'roles' => array(
+        ],
+      ],
+      'view all unpublished content' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'view moderation history' => array(
-        'roles' => array(
+        ],
+      ],
+      'view moderation history' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'view moderation messages' => array(
-        'roles' => array(
+        ],
+      ],
+      'view moderation messages' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-    ),
-    'bean' => array(
-      'create any basic_content bean' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'bean' => [
+      'create any basic_content bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'create any image_and_text bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'create any image_and_text bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'delete any basic_content bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete any basic_content bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'delete any image_and_text bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete any image_and_text bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'edit any basic_content bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit any basic_content bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'edit any image_and_text bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit any image_and_text bean' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'view any basic_content bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'view any basic_content bean' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'Site builder',
           4 => 'authenticated user',
-        ),
-      ),
-      'view any image_and_text bean' => array(
-        'roles' => array(
+        ],
+      ],
+      'view any image_and_text bean' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'Site builder',
           4 => 'authenticated user',
-        ),
-      ),
-      'view bean page' => array(
-        'roles' => array(
+        ],
+      ],
+      'view bean page' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'access bean overview' => array(
-        'roles' => array(
+        ],
+      ],
+      'access bean overview' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer beans' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer beans' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'edit bean view mode' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit bean view mode' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'view bean revisions' => array(
-        'roles' => array(
+        ],
+      ],
+      'view bean revisions' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer bean types' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer bean types' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-      'administer bean settings' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer bean settings' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-    ),
-    'scheduler_workbench' => array(
-      'override default scheduler time' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'scheduler_workbench' => [
+      'override default scheduler time' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-    ),
-    'search' => array(
-      'search content' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'search' => [
+      'search content' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'anonymous user',
           3 => 'Site builder',
           4 => 'authenticated user',
-        ),
-      ),
-      'administer search' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer search' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'filter' => array(
-      'use text format rich_text' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'filter' => [
+      'administer filters' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+      'use text format rich_text' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-    ),
-    'view_unpublished' => array(
-      'view any unpublished content' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'view_unpublished' => [
+      'view any unpublished content' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-    ),
-    'role_delegation' => array(
-      'assign all roles' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'role_delegation' => [
+      'assign all roles' => [
+        'roles' => [
           0 => 'administrator',
-        ),
-      ),
-      'assign Content approver role' => array(
-        'roles' => array(
-          0 => 'administrator',
-          1 => 'Site editor',
-        ),
-      ),
-      'assign Content editor role' => array(
-        'roles' => array(
+        ],
+      ],
+      'assign Content approver role' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-      'assign Site editor role' => array(
-        'roles' => array(
+        ],
+      ],
+      'assign Content editor role' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-      'assign Site builder role' => array(
-        'roles' => array(
+        ],
+      ],
+      'assign Site editor role' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-    ),
-    'webform' => array(
-      'create webform content' => array(
-        'roles' => array(
+        ],
+      ],
+      'assign Site builder role' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+        ],
+      ],
+    ],
+    'webform' => [
+      'create webform content' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'edit any webform content' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit any webform content' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'delete any webform content' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete any webform content' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'access all webform results' => array(
-        'roles' => array(
+        ],
+      ],
+      'access all webform results' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'access own webform results' => array(
-        'roles' => array(
+        ],
+      ],
+      'access own webform results' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'access own webform submissions' => array(
-        'roles' => array(
+        ],
+      ],
+      'access own webform submissions' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site builder',
           4 => 'Site editor',
-        ),
-      ),
-      'edit own webform submissions' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit own webform submissions' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-      'delete own webform submissions' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete own webform submissions' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
-        ),
-      ),
-      'delete all webform submissions' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete all webform submissions' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'edit all webform submissions' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit all webform submissions' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'metatag' => array(
-      'edit meta tags' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit webform components' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+    ],
+    'metatag' => [
+      'edit meta tags' => [
+        'roles' => [
           0 => 'Content approver',
           1 => 'Content editor',
           2 => 'administrator',
           3 => 'Site editor',
           4 => 'Site builder',
-        ),
-      ),
-      'administer meta tags' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer meta tags' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'user_action_report' => array(
-      'view user actions' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'user_action_report' => [
+      'view user actions' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'quicktabs' => array(
-      'administer quicktabs' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'quicktabs' => [
+      'administer quicktabs' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'linkchecker' => array(
-      'access broken links report' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'linkchecker' => [
+      'access broken links report' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'access own broken links report' => array(
-        'roles' => array(
+        ],
+      ],
+      'access own broken links report' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'draggableviews' => array(
-      'access draggableviews' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'draggableviews' => [
+      'access draggableviews' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'event_log' => array(
-      'access event log' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'event_log' => [
+      'access event log' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'user' => array(
-      'access user profiles' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'user' => [
+      'access user profiles' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer users' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer users' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'block' => array(
-      'administer blocks' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'block' => [
+      'administer blocks' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'contact' => array(
-      'administer contact forms' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'contact' => [
+      'administer contact forms' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'googleanalytics' => array(
-      'administer google analytics' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'googleanalytics' => [
+      'administer google analytics' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'menu' => array(
-      'administer menu' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'honeypot' => [
+      'administer honeypot' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'redirect' => array(
-      'administer redirects' => array(
-        'roles' => array(
+        ],
+      ],
+      'bypass honeypot protection' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'search_api' => array(
-      'administer search_api' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'menu' => [
+      'administer menu' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'shield' => array(
-      'administer shield' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'redirect' => [
+      'administer redirects' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'taxonomy' => array(
-      'administer taxonomy' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'search_api' => [
+      'administer search_api' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'delete terms in 1' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'shield' => [
+      'administer shield' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'edit terms in 1' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'taxonomy' => [
+      'administer taxonomy' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'path' => array(
-      'administer url aliases' => array(
-        'roles' => array(
+        ],
+      ],
+      'delete terms in 1' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'create url aliases' => array(
-        'roles' => array(
+        ],
+      ],
+      'edit terms in 1' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'password_policy' => array(
-      'force password change' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'path' => [
+      'administer url aliases' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'unblock expired accounts' => array(
-        'roles' => array(
+        ],
+      ],
+      'create url aliases' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'webform_clear' => array(
-      'set webform_clear times' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'pathauto' => [
+      'administer pathauto' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'panels' => array(
-      'use panels in place editing' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'password_policy' => [
+      'force password change' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'use panels dashboard' => array(
-        'roles' => array(
+        ],
+      ],
+      'unblock expired accounts' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'view pane admin links' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'webform_clear' => [
+      'set webform_clear times' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer pane access' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'panels' => [
+      'use panels in place editing' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'change layouts in place editing' => array(
-        'roles' => array(
+        ],
+      ],
+      'use panels dashboard' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'administer advanced pane settings' => array(
-        'roles' => array(
+        ],
+      ],
+      'view pane admin links' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'use panels caching features' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer pane access' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'use panels locks' => array(
-        'roles' => array(
+        ],
+      ],
+      'change layouts in place editing' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'use ipe with page manager' => array(
-        'roles' => array(
+        ],
+      ],
+      'administer advanced pane settings' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'page_manager' => array(
-      'use page manager' => array(
-        'roles' => array(
+        ],
+      ],
+      'use panels caching features' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'views' => array(
-      'administer views' => array(
-        'roles' => array(
+        ],
+      ],
+      'use panels locks' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-      'access all views' => array(
-        'roles' => array(
+        ],
+      ],
+      'use ipe with page manager' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'xmlsitemap' => array(
-      'administer xmlsitemap' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'page_manager' => [
+      'use page manager' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
           2 => 'Site builder',
-        ),
-      ),
-    ),
-    'shortcut' => array(
-      'administer shortcuts' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'views' => [
+      'administer views' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-      'customize shortcut links' => array(
-        'roles' => array(
+          2 => 'Site builder',
+        ],
+      ],
+      'access all views' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-      'switch shortcut sets' => array(
-        'roles' => array(
+          2 => 'Site builder',
+        ],
+      ],
+    ],
+    'xmlsitemap' => [
+      'administer xmlsitemap' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site editor',
-        ),
-      ),
-    ),
-    'crumbs' => array(
-      'administer crumbs' => array(
-        'roles' => array(
+          2 => 'Site builder',
+        ],
+      ],
+      'use xmlsitemap' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+          2 => 'Site builder',
+        ],
+      ],
+    ],
+    'shortcut' => [
+      'administer shortcuts' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+        ],
+      ],
+      'customize shortcut links' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+        ],
+      ],
+      'switch shortcut sets' => [
+        'roles' => [
+          0 => 'administrator',
+          1 => 'Site editor',
+        ],
+      ],
+    ],
+    'crumbs' => [
+      'administer crumbs' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-    ),
-    'ds' => array(
-      'admin_display_suite' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'ds' => [
+      'admin_display_suite' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-    ),
-    'image' => array(
-      'administer image styles' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'image' => [
+      'administer image styles' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-    ),
-    'service_links' => array(
-      'access service links' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'service_links' => [
+      'access service links' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
           2 => 'Site editor',
@@ -1026,16 +1251,16 @@ function govcms_permissions_base_permissions() {
           4 => 'Content editor',
           5 => 'authenticated user',
           6 => 'anonymous user',
-        ),
-      ),
-    ),
-    'field' => array(
-      'administer fields' => array(
-        'roles' => array(
+        ],
+      ],
+    ],
+    'field' => [
+      'administer fields' => [
+        'roles' => [
           0 => 'administrator',
           1 => 'Site builder',
-        ),
-      ),
-    ),
-  );
+        ],
+      ],
+    ],
+  ];
 }
