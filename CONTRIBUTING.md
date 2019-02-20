@@ -31,14 +31,14 @@ Submitting a pull request:
 - [Fork the govCMS repository on github](https://help.github.com/articles/using-pull-requests/)
   and clone your repository to your development environment;
 - Make your feature addition or bug fix;
-- __Always__ base your changes on the `7.x-2.x` branch on github (all new
+- __Always__ base your changes on the `7.x-3.x` branch on github (all new
   development happens here);
 - Commit your code, but do not add to `CHANGELOG.txt`. This will be done at
   each point release.
 - Add new modules or features to the make file rather than directly to the
   govCMS repository; and
 - __Remember__: when you create [Pull Request](https://help.github.com/articles/using-pull-requests/),
-  always select `7.x-2.x` branch as
+  always select `7.x-3.x` branch as
   target, otherwise it will be closed (this is selected by default).
 - The existing functionality might already be covered by Behat or PHPUnit tests. In case of changing such code with your PR you will also need to include any relevant adjustments to the test cases. (*/build/tests/behat/features*)
 - Any new code should be covered with the tests.

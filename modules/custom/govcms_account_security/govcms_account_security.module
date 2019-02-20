@@ -2,7 +2,7 @@
 
 /**
  * @file
- * govCMS Account Security
+ * GovCMS Account Security.
  */
 
 /**
@@ -10,14 +10,14 @@
  */
 function govcms_account_security_menu() {
   // Provide a page to review account security related settings
-  $items['admin/config/people/account_security'] = array(
+  $items['admin/config/people/account_security'] = [
     'title' => 'Review account security settings',
     'page callback' => 'govcms_account_security_admin_settings',
     'access callback' => 'user_access',
-    'access arguments' => array('administer users'),
+    'access arguments' => ['administer users'],
     'file' => 'govcms_account_security.admin.inc',
     'description' => 'Review govCMS account security settings.',
-  );
+  ];
   return $items;
 }
 
@@ -39,14 +39,14 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
       $admin_rid = variable_get('user_admin_role');
       $admin_role = user_role_load($admin_rid);
       $admin_role = $admin_role->name;
-      if(isset($form['add_roles'])) {
-        if(($key = array_search($admin_role, $form['add_roles']['#options'])) !== false) {
+      if (isset($form['add_roles'])) {
+        if (($key = array_search($admin_role, $form['add_roles']['#options'])) !== FALSE) {
           unset($form['add_roles']['#options'][$key]);
           $form['add_roles']['#size']--;
         }
       }
-      if(isset($form['remove_roles'])) {
-        if(($key = array_search($admin_role, $form['remove_roles']['#options'])) !== false) {
+      if (isset($form['remove_roles'])) {
+        if (($key = array_search($admin_role, $form['remove_roles']['#options'])) !== FALSE) {
           unset($form['remove_roles']['#options'][$key]);
           $form['remove_roles']['#size']--;
         }
@@ -58,13 +58,13 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
  * Implementation of hook_form_FORM_ID_alter()
  */
 function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
-  if(isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0] > 0) {
+  if (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0] > 0) {
     $uid = $form_state['build_info']['args'][0];
     // Check if the user attempting to reset their password is flood controlled
     if (!flood_is_allowed('failed_login_attempt_user', variable_get('user_failed_login_user_limit'), variable_get('user_failed_login_user_window'), $uid)) {
       $timestamp = $form_state['build_info']['args'][1];
       $hashed_pass = $form_state['build_info']['args'][2];
-      $users = user_load_multiple(array($uid), array('status' => '1'));
+      $users = user_load_multiple([$uid], ['status' => '1']);
       $current = REQUEST_TIME;
       // Validate the password reset link
       if ($timestamp <= $current && $account = reset($users)) {
@@ -82,7 +82,9 @@ function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state
 /**
  * The final validation handler on the login form.
  *
- * Provide a more generic error message when the failed login limit is reached.
+ * Sets a form error if user has not been authenticated, or if too many
+ * logins have been attempted. This validation function should always
+ * be the last one.
  */
 function govcms_account_security_final_validate($form, &$form_state) {
   if (empty($form_state['uid'])) {
@@ -92,11 +94,22 @@ function govcms_account_security_final_validate($form, &$form_state) {
     if (isset($form_state['flood_control_user_identifier'])) {
       flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
     }
+
     if (isset($form_state['flood_control_triggered'])) {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
+      if ($form_state['flood_control_triggered'] == 'user') {
+        form_set_error('name', format_plural(variable_get('user_failed_login_user_limit', 5), 'Sorry, there has been more than one failed login attempt for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', 'Sorry, there have been more than @count failed login attempts for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
+      else {
+        // We did not find a uid, so the limit is IP-based.
+        form_set_error('name', t('Sorry, too many failed login attempts from your IP address. This IP address is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
     }
     else {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => array('name' => $form_state['values']['name']))))));
+      // Use $form_state['input']['name'] here to guarantee that we send
+      // exactly what the user typed in. $form_state['values']['name'] may have
+      // been modified by validation handlers that ran earlier than this one.
+      $query = isset($form_state['input']['name']) ? array('name' => $form_state['input']['name']) : array();
+      form_set_error('name', t('Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => $query)))));
       watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
     }
   }
@@ -127,7 +140,8 @@ function govcms_account_security_init() {
     if (isset($user_alias_pattern) && !empty($user_alias_pattern)) {
       if (strpos($user_alias_pattern, '[user:name]') === FALSE) {
         $user_alias_pattern = 'users/*';
-      } else {
+      }
+      else {
         $user_alias_pattern = str_replace('[user:name]', '*', $user_alias_pattern);
       }
     }
@@ -146,4 +160,143 @@ function govcms_account_security_init() {
 function govcms_account_security_user_cancel_methods_alter(&$methods) {
   unset($methods['user_cancel_reassign']);
   unset($methods['user_cancel_delete']);
+}
+
+/**
+ * Implements hook_action_info_alter().
+ */
+function govcms_account_security_action_info_alter(&$actions) {
+  if (module_exists('views_bulk_operations')) {
+    $actions['views_bulk_operations_user_roles_action']['permissions'] = ['administer users'];
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function govcms_account_security_form_system_actions_configure_alter(&$form, &$form_state, $form_id) {
+  $action = actions_function_lookup($form['actions_action']['#value']);
+
+  switch ($action) {
+    case 'views_bulk_operations_user_roles_action':
+      $roles = user_roles(TRUE);
+      // Can't edit authenticated role.
+      unset($roles[DRUPAL_AUTHENTICATED_RID]);
+      // Remove admin role.
+      $admin_rid = variable_get('user_admin_role');
+      if ($admin_rid) {
+        unset($roles[$admin_rid]);
+      }
+      // Rebuild the roles list.
+      $form['add_roles'] = [
+        '#type' => 'select',
+        '#multiple' => TRUE,
+        '#title' => t('Add roles'),
+        '#description' => t('Choose one or more roles you would like to assign to the selected users.'),
+        '#options' => $roles,
+        '#size' => 5,
+      ];
+      $form['remove_roles'] = [
+        '#type' => 'select',
+        '#multiple' => TRUE,
+        '#title' => t('Remove roles'),
+        '#description' => t('Choose one or more roles you would like to remove from the selected users.'),
+        '#options' => $roles,
+        '#size' => 5,
+      ];
+      break;
+  }
+}
+
+/**
+ * Implements hook_views_bulk_operations_form_alter().
+ */
+function govcms_account_security_views_bulk_operations_form_alter(&$form, &$form_state, $vbo) {
+  if ($vbo->table != 'users') {
+    return;
+  }
+
+  // Alter the configuration step of the VBO form.
+  if ($form_state['step'] == 'views_bulk_operations_config_form') {
+    $admin_rid = variable_get('user_admin_role');
+    if ($admin_rid && !empty($form['properties']['roles'])) {
+      // Hide admin role from the list.
+      unset($form['properties']['roles']['#options'][$admin_rid]);
+    }
+  }
+
+  // Alter the appropriate form submitter.
+  $form_element = NULL;
+  if (isset($form['select']['submit']['#submit'])) {
+    $form_element = &$form['select']['submit'];
+  }
+  elseif (isset($form['actions']['submit']['#submit'])) {
+    $form_element = &$form['actions']['submit'];
+  }
+  else {
+    $form_element = &$form;
+  }
+
+  $form_element['#validate'] = isset($form_element['#validate']) ? $form_element['#validate'] : [];
+  array_unshift($form_element['#validate'], 'govcms_account_security_vbo_user_validate');
+}
+
+/**
+ * Validate user and group in VBO.
+ *
+ * @param $form
+ *  A step of the VBO form to be altered.
+ * @param $form_state
+ *  Form state. Contains the name of the current step in $form_state['step'].
+ */
+function govcms_account_security_vbo_user_validate($form, &$form_state) {
+  // Get the checked users, and the operation name.
+  if (isset($form_state['operation']) && $form_state['operation'] instanceof ViewsBulkOperationsAction) {
+    $uids = $form_state['selection'];
+    $operation = $form_state['operation']->operationId;
+  }
+  elseif (!empty($form_state['values']['views_bulk_operations'])) {
+    $uids = array_filter($form_state['values']['views_bulk_operations']);
+    $operation = $form_state['values']['operation'];
+  }
+  elseif (!empty($form_state['values']['accounts'])) {
+    $uids = array_filter($form_state['values']['accounts']);
+    $operation_rid = explode('-', $form_state['values']['operation']);
+    $operation = $operation_rid[0];
+  }
+  else {
+    // Uids or operation could not be found. Abort.
+    return;
+  }
+
+  // Perform the check for each submitted user.
+  foreach ($uids as $key => $uid) {
+    $account = user_load($uid);
+    switch ($operation) {
+      // VBO module compatibility.
+      case 'action::views_bulk_operations_modify_action':
+        if (empty($form_state['values']['properties']['show_value'])) {
+          // No properties were selected to be changed. Abort.
+          return;
+        }
+
+        // Check which properties are changed.
+        $properties = array_keys(array_filter($form_state['values']['properties']['show_value']));
+        foreach ($properties as $property) {
+          if (in_array($property, ['roles'])) {
+            // Change roles.
+            $roles = array_keys(array_filter($form_state['values']['properties']['roles']));
+            $admin_rid = variable_get('user_admin_role');
+            if ($admin_rid && in_array($admin_rid, $roles)) {
+              unset($uids[$key]);
+              unset($form_state['selection'][$key]);
+              unset($form_state['values']['views_bulk_operations'][$key]);
+              drupal_set_message(t('Admin role is protected from any changes, and %user was not updated.', ['%user' => $account->name]), 'error');
+              continue;
+            }
+          }
+        }
+        break;
+    }
+  }
 }
