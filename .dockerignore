@@ -1,0 +1,17 @@
+.git
+.idea
+.ahoy.yml
+.circleci
+.dockerignore
+.editorconfig
+.env
+.gitattributes
+.gitignore
+CHANGELOG.txt
+CONTRIBUTING.md
+build
+docker-compose.yml
+LICENSE.txt
+modules/contrib
+README.md
+RELEASE.md

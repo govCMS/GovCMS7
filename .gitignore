@@ -1,6 +1,12 @@
 # git ls-files --others --exclude-from=.git/info/exclude
 # Lines that start with '#' are comments.
 
+libraries/
+modules/contrib
+themes/contrib
+.env
+docker-compose.override.yml
+
 # Compiled source #
 ###################
 *.com
@@ -64,4 +70,4 @@ docroot
 
 # Testing #
 ###########
-screenshot-fail.png
+screenshots
