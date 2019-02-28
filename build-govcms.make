@@ -6,6 +6,6 @@ includes[] = drupal-org-core.make
 
 ; Download the govCMS install profile and recursively build all its dependencies:
 projects[govcms][type] = profile
-projects[govcms][version] = 7.x-3.1
+projects[govcms][version] = 3.x-dev
 projects[govcms][download][type] = git
-projects[govcms][download][branch] = 7.x-3.1
+projects[govcms][download][branch] = 7.x-3.x
