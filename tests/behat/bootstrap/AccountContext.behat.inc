@@ -271,12 +271,13 @@ class AccountContext extends DrupalSubContextBase {
    *   The username to be cancelled.
    *
    * @Then I should be able to cancel the account ":username"
-
+   *
    * @return \Behat\Behat\Definition\Call\Given
+   *
    * @throws \Behat\Mink\Exception\ElementNotFoundException
    */
   public function iShouldBeAbleToCancelTheAccount($username) {
-    $this->selectUserVBOCheckbox($username);
+    $this->selectUserVboCheckbox($username);
     $this->getSession()->getPage()->fillField('operation', 'action::views_bulk_operations_user_cancel_action');
     $this->getSession()->getPage()->pressButton('edit-submit--2');
     $this->assertSession()->elementExists('css', 'input[value=Next][type=submit]');
@@ -293,7 +294,7 @@ class AccountContext extends DrupalSubContextBase {
    * @throws \InvalidArgumentException
    *   When no such username exists or the checkbox can't be found.
    */
-  protected function selectUserVBOCheckbox($username) {
+  protected function selectUserVboCheckbox($username) {
     if ($account = user_load_by_name($username)) {
       if ($checkbox = $this->getSession()->getPage()->find('css', 'input[value=' . $account->uid . ']')) {
         $checkbox->check();

@@ -2,8 +2,6 @@
 
 use Drupal\DrupalExtension\Context\MinkContext;
 use Drupal\DrupalExtension\Context\RawDrupalContext;
-use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Drupal\DrupalExtension\Hook\Scope\EntityScope;
 

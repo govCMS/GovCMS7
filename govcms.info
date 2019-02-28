@@ -1,5 +1,4 @@
 name = govCMS
-project = govcms
 package = govCMS Profile
 distribution_name = govCMS
 description = A distribution for government and the public sector in Australia
@@ -10,8 +9,6 @@ php = 5.3
 
 ; System Requirements.
 php_memory_limit = 128M
-
-files[] = govcms.profile
 
 ; Core
 

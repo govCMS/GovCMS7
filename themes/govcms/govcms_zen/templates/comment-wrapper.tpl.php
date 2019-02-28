@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Bartik's theme implementation to provide an HTML container for comments.
