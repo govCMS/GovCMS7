@@ -84,7 +84,9 @@ function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state
 /**
  * The final validation handler on the login form.
  *
- * Provide a more generic error message when the failed login limit is reached.
+ * Sets a form error if user has not been authenticated, or if too many
+ * logins have been attempted. This validation function should always
+ * be the last one.
  */
 function govcms_account_security_final_validate($form, &$form_state) {
   if (empty($form_state['uid'])) {
@@ -94,12 +96,23 @@ function govcms_account_security_final_validate($form, &$form_state) {
     if (isset($form_state['flood_control_user_identifier'])) {
       flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
     }
+
     if (isset($form_state['flood_control_triggered'])) {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', ['@password' => url('user/password', ['query' => ['name' => $form_state['values']['name']]])]));
+      if ($form_state['flood_control_triggered'] == 'user') {
+        form_set_error('name', format_plural(variable_get('user_failed_login_user_limit', 5), 'Sorry, there has been more than one failed login attempt for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', 'Sorry, there have been more than @count failed login attempts for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
+      else {
+        // We did not find a uid, so the limit is IP-based.
+        form_set_error('name', t('Sorry, too many failed login attempts from your IP address. This IP address is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
     }
     else {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', ['@password' => url('user/password', ['query' => ['name' => $form_state['values']['name']]])]));
-      watchdog('user', 'Login attempt failed for %user.', ['%user' => $form_state['values']['name']]);
+      // Use $form_state['input']['name'] here to guarantee that we send
+      // exactly what the user typed in. $form_state['values']['name'] may have
+      // been modified by validation handlers that ran earlier than this one.
+      $query = isset($form_state['input']['name']) ? array('name' => $form_state['input']['name']) : array();
+      form_set_error('name', t('Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => $query)))));
+      watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
     }
   }
   elseif (isset($form_state['flood_control_user_identifier'])) {
