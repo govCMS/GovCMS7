@@ -7,7 +7,6 @@ PROFILE_DIR=${PROFILE_DIR:-${APP_DIR}/profiles/govcms}
 # Lint code.
 ${APP_DIR}/tests/vendor/bin/parallel-lint --exclude ${APP_DIR}/tests/vendor -e php,inc,module,theme,install,profile,test \
         ${PROFILE_DIR}/modules/custom \
-        ${PROFILE_DIR}/modules/features \
         ${PROFILE_DIR}/themes/govcms \
         ${PROFILE_DIR}/govcms.info \
         ${PROFILE_DIR}/govcms.install \
@@ -21,4 +20,4 @@ cd ${PROFILE_DIR} && drush verify-makefile
 ${APP_DIR}/tests/vendor/bin/phpcs --standard=${PROFILE_DIR}/phpcs.xml
 
 # Check code mess.
-${APP_DIR}/tests/vendor/bin/phpmd ${PROFILE_DIR}/modules/custom,${PROFILE_DIR}/modules/features,${PROFILE_DIR}/themes/govcms,tests/behat/bootstrap,${PROFILE_DIR}/govcms.info,${PROFILE_DIR}/govcms.install,${PROFILE_DIR}/govcms.profile text codesize,unusedcode,cleancode
+${APP_DIR}/tests/vendor/bin/phpmd --ignore-violations-on-exit ${PROFILE_DIR}/modules/custom,${PROFILE_DIR}/themes/govcms,tests/behat/bootstrap,${PROFILE_DIR}/govcms.info,${PROFILE_DIR}/govcms.install,${PROFILE_DIR}/govcms.profile text codesize,unusedcode,cleancode

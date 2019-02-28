@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Template for a 3 column panel layout.
@@ -12,7 +13,7 @@
  *   $content['middle']: The only panel in the layout.
  */
 ?>
-<div class="panel-display panel-1col-stacked clearfix" <?php if (!empty($css_id)): print "id=\"$css_id\""; endif; ?>>
+<div class="panel-display panel-1col-stacked clearfix" <?php print(!empty($css_id) ? "id=\"$css_id\"" : ''); ?>>
   <?php if ($content['top']): ?>
     <div class="panel-panel panel-col-top"><?php print $content['top']; ?></div>
   <?php endif; ?>

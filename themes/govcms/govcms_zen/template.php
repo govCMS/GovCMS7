@@ -112,9 +112,9 @@ function govcms_zen_process_node(&$variables) {
  * Private callback to process compact node view modes.
  *
  * @param array $variables
- *   Standard variables array
+ *   Standard variables array.
  */
-function _govcms_zen_process_node_compact(&$variables) {
+function _govcms_zen_process_node_compact(array &$variables) {
   // Compact items are wrapped in an h3, as there is usually an h2
   // preceding them (the view or pane title).
   $variables['title_tag'] = 'h3';
@@ -124,9 +124,9 @@ function _govcms_zen_process_node_compact(&$variables) {
  * Private callback to process compact and teaser node view modes.
  *
  * @param array $variables
- *   Standard variables array
+ *   Standard variables array.
  */
-function _govcms_zen_process_node_compact_teaser(&$variables) {
+function _govcms_zen_process_node_compact_teaser(array &$variables) {
   $fields = field_read_fields(array('entity_type' => 'node', 'bundle' => $variables['type']));
   foreach ($fields as $field_name => $field_settings) {
     if ($field_settings['type'] == 'image') {
@@ -135,7 +135,7 @@ function _govcms_zen_process_node_compact_teaser(&$variables) {
         if (!empty($children)) {
           $limited = $variables['content'][$field_name][0];
           foreach ($children as $child_index) {
-            unset ($variables['content'][$field_name][$child_index]);
+            unset($variables['content'][$field_name][$child_index]);
           }
           $variables['content'][$field_name][0] = $limited;
         }
@@ -144,7 +144,6 @@ function _govcms_zen_process_node_compact_teaser(&$variables) {
   }
 
 }
-
 
 /**
  * Overrides zen_status_messages to fix a small bug with output.
@@ -244,8 +243,8 @@ function govcms_zen_theme_registry_alter(&$theme_registry) {
  * reverse proxies.
  */
 function govcms_zen_file_link($variables) {
-  $file = $variables ['file'];
-  $icon_directory = $variables ['icon_directory'];
+  $file = $variables['file'];
+  $icon_directory = $variables['icon_directory'];
 
   $url = file_create_url($file->uri);
   $icon = theme('file_icon', array('file' => $file, 'icon_directory' => $icon_directory));
@@ -267,7 +266,7 @@ function govcms_zen_file_link($variables) {
   }
   else {
     $link_text = $file->description;
-    $options ['attributes']['title'] = check_plain($file->filename);
+    $options['attributes']['title'] = check_plain($file->filename);
   }
 
   return '<span class="file">' . $icon . ' ' . l($link_text, $url, $options) . '</span>';
