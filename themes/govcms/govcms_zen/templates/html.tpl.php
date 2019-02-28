@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Returns the HTML for the basic html structure of a single Drupal page.

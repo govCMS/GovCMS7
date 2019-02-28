@@ -2,9 +2,11 @@
 
 /**
  * @file
- * Contains admin paths for govCMS Password Policy
+ * Contains admin paths for govCMS Password Policy.
  *
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ * @codingStandardsIgnoreStart
  *
  * aGov
  * @copyright Copyright(c) 2014 PreviousNext
@@ -14,6 +16,8 @@
  * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
  * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @author Department of Finance
+ *
+ * @codingStandardsIgnoreEnd
  */
 
 /**
@@ -21,17 +25,17 @@
  */
 function govcms_password_policy_admin_settings() {
 
-  $form = array();
+  $form = [];
 
-  $form['govcms_password_policy_ready'] = array(
+  $form['govcms_password_policy_ready'] = [
     '#type' => 'select',
     '#title' => t('Hide the ASD password warning'),
-    '#options' => array(
+    '#options' => [
       '0' => t('Visible'),
       '1' => t('Hidden'),
-    ),
+    ],
     '#default_value' => variable_get('govcms_password_policy_ready', 0),
-  );
+  ];
 
   return system_settings_form($form);
 }

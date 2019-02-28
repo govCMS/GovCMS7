@@ -11,4 +11,4 @@ ${APP_DIR}/tests/vendor/bin/parallel-lint --exclude /app/tests/vendor -e php,inc
 ${APP_DIR}/tests/vendor/bin/phpcs --standard=${PROFILE_DIR}/phpcs.xml ${PROFILE_DIR}/themes/custom
 
 # Check code mess.
-${APP_DIR}/tests/vendor/bin/phpmd ${PROFILE_DIR}/themes/custom text codesize,unusedcode,cleancode
+${APP_DIR}/tests/vendor/bin/phpmd --ignore-violations-on-exit ${PROFILE_DIR}/themes/custom text codesize,unusedcode,cleancode

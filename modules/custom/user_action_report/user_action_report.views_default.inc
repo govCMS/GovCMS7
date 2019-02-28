@@ -8,7 +8,7 @@
  * Implements hook_views_default_views().
  */
 function user_action_report_views_default_views() {
-  $export = array();
+  $export = [];
 
   $view = new view();
   $view->name = 'admin_user_actions';
@@ -32,51 +32,51 @@ function user_action_report_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
+  $handler->display->display_options['style_options']['columns'] = [
     'created' => 'created',
     'name' => 'name',
     'operation' => 'operation',
     'description' => 'description',
     'title' => 'title',
-  );
+  ];
   $handler->display->display_options['style_options']['default'] = 'created';
-  $handler->display->display_options['style_options']['info'] = array(
-    'created' => array(
+  $handler->display->display_options['style_options']['info'] = [
+    'created' => [
       'sortable' => 1,
       'default_sort_order' => 'desc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-    ),
-    'name' => array(
+    ],
+    'name' => [
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-    ),
-    'operation' => array(
+    ],
+    'operation' => [
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-    ),
-    'description' => array(
+    ],
+    'description' => [
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-    ),
-    'title' => array(
+    ],
+    'title' => [
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
-    ),
-  );
+    ],
+  ];
   /* Relationship: Event log: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'event_log';
@@ -118,10 +118,10 @@ function user_action_report_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'event_log';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['filter_groups']['groups'] = array(
+  $handler->display->display_options['filter_groups']['groups'] = [
     1 => 'OR',
     2 => 'AND',
-  );
+  ];
   /* Filter criterion: Event log: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'event_log';
@@ -153,14 +153,14 @@ function user_action_report_views_default_views() {
   $handler->display->display_options['filters']['uid']['expose']['label'] = 'User';
   $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
   $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'uid';
-  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['uid']['expose']['remember_roles'] = [
     2 => '2',
     1 => 0,
     4 => 0,
     5 => 0,
     6 => 0,
     3 => 0,
-  );
+  ];
   /* Filter criterion: Event log: Event timestamp */
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'event_log';
@@ -172,14 +172,14 @@ function user_action_report_views_default_views() {
   $handler->display->display_options['filters']['created']['expose']['label'] = 'Timestamp';
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
-  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = array(
+  $handler->display->display_options['filters']['created']['expose']['remember_roles'] = [
     2 => '2',
     1 => 0,
     4 => 0,
     5 => 0,
     6 => 0,
     3 => 0,
-  );
+  ];
   /* Filter criterion: Event log: Type */
   $handler->display->display_options['filters']['type_2']['id'] = 'type_2';
   $handler->display->display_options['filters']['type_2']['table'] = 'event_log';
