@@ -19,7 +19,7 @@ class ChosenContext implements DrupalSubContextInterface {
   /**
    * Store Mink context.
    *
-   * @var MinkContext
+   * @var \Drupal\DrupalExtension\Context\MinkContext
    */
   private $minkContext;
 
@@ -43,7 +43,7 @@ class ChosenContext implements DrupalSubContextInterface {
   /**
    * Helper function to retrieve Mink context.
    *
-   * @return MinkContext
+   * @return \Drupal\DrupalExtension\Context\MinkContext
    *   Mink class.
    */
   public function getMinkContext() {

@@ -54,7 +54,7 @@ define('GOVCMS_SOCIAL_LINKS_EMAIL_DEFAULT', 'contact');
  * Returns a list of the social services.
  */
 function govcms_social_links_services_list() {
-  return array(
+  return [
     'facebook',
     'twitter',
     'youtube',
@@ -64,18 +64,18 @@ function govcms_social_links_services_list() {
     'linkedin',
     'rss',
     'email',
-  );
+  ];
 }
 
 /**
  * Implements hook_block_info().
  */
 function govcms_social_links_block_info() {
-  $blocks = array();
+  $blocks = [];
 
-  $blocks['services'] = array(
+  $blocks['services'] = [
     'info' => t('Social links'),
-  );
+  ];
 
   return $blocks;
 }
@@ -86,13 +86,13 @@ function govcms_social_links_block_info() {
 function govcms_social_links_block_configure($delta = '') {
   $services = govcms_social_links_services_list();
 
-  $form = array();
+  $form = [];
   if ($delta == 'services') {
-    $form['social_links'] = array(
+    $form['social_links'] = [
       '#type' => 'fieldset',
       '#title' => t('Social media service links'),
-      '#description' => 'Enter your social media service links. You may enter: <ul><li>Absolute urls, i.e. "http://www.facebook.com/yourpage"</li><li>Relative urls to internal pages, i.e. "contact"</li><li>mailto: links, i.e. "mailto:youremail@address.com"</li></ul> Services left blank will not show on the block.',
-    );
+      '#description' => t('Enter your social media service links. You may enter: <ul><li>Absolute urls, i.e. "http://www.facebook.com/yourpage"</li><li>Relative urls to internal pages, i.e. "contact"</li><li>mailto: links, i.e. "mailto:youremail@address.com"</li></ul> Services left blank will not show on the block.'),
+    ];
 
     foreach ($services as $service) {
       // Load default value for service.
@@ -105,24 +105,23 @@ function govcms_social_links_block_configure($delta = '') {
       }
 
       // Create an input field for each service url.
-      $form['social_links'][$service] = array(
+      $form['social_links'][$service] = [
         '#type' => 'textfield',
         '#title' => $service_title . ' ' . t('URL'),
         '#size' => 100,
         '#maxlength' => 255,
         '#default_value' => variable_get('govcms_social_links_' . $service, $service_default),
-      );
+      ];
     }
   }
 
   return $form;
 }
 
-
 /**
  * Implements hook_block_save().
  */
-function govcms_social_links_block_save($delta = '', $edit = array()) {
+function govcms_social_links_block_save($delta = '', $edit = []) {
   $services = govcms_social_links_services_list();
 
   if ($delta == 'services') {
@@ -138,11 +137,11 @@ function govcms_social_links_block_save($delta = '', $edit = array()) {
 function govcms_social_links_block_view($delta = '') {
   $services = govcms_social_links_services_list();
 
-  $block = array();
+  $block = [];
   switch ($delta) {
     case 'services':
       $block['subject'] = ('Connect with us');
-      $block['content'] = array();
+      $block['content'] = [];
 
       foreach ($services as $service) {
         $service_default = constant('GOVCMS_SOCIAL_LINKS_' . strtoupper($service) . '_DEFAULT');
@@ -158,13 +157,12 @@ function govcms_social_links_block_view($delta = '') {
           // Load the service's image.
           $icon = drupal_get_path('module', 'govcms_social_links') . '/images/' . $service . '.png';
 
-
-          $block['content'][$service] = array(
+          $block['content'][$service] = [
             '#theme' => 'govcms_social_link',
             '#title' => $service_title,
             '#icon' => $icon,
             '#url' => $service_url,
-          );
+          ];
         }
       }
 
@@ -178,33 +176,33 @@ function govcms_social_links_block_view($delta = '') {
  * Implements hook_theme().
  */
 function govcms_social_links_theme($existing, $type, $theme, $path) {
-  return array(
-    'govcms_social_link' => array(
-      'variables' => array(
+  return [
+    'govcms_social_link' => [
+      'variables' => [
         'title' => NULL,
         'icon' => NULL,
         'url' => NULL,
-      ),
-    ),
-  );
+      ],
+    ],
+  ];
 }
 
 /**
  * Default theme implementation for govcms_social_link.
  */
 function theme_govcms_social_link($variables) {
-  $service_image = theme('image', array(
+  $service_image = theme('image', [
     'path' => $variables['icon'],
     'title' => $variables['title'],
     'alt' => $variables['title'],
-  ));
+  ]);
 
-  return theme('link', array(
+  return theme('link', [
     'text' => $service_image,
     'path' => $variables['url'],
-    'options' => array(
+    'options' => [
       'html' => TRUE,
-      'attributes' => array(),
-    ),
-  ));
+      'attributes' => [],
+    ],
+  ]);
 }
