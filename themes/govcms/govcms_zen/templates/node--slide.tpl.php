@@ -4,7 +4,6 @@
  * @file
  * Markup for slide node-type.
  */
-
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
