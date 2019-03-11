@@ -1,9 +1,12 @@
 <?php
+
 /**
  * @file
  * Provides themed representation of the front layout.
  *
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
+ *
+ * @codingStandardsIgnoreStart
  *
  * aGov
  * @copyright Copyright(c) 2014 PreviousNext
@@ -17,13 +20,14 @@
  * Available variables
  * -------------------
  * $content array of panels.
+ *
+ * @codingStandardsIgnoreEnd
  */
-
 ?>
 
 
-<div class="gov-front-layout clearfix" <?php if (!empty($css_id)) : print "id=\"$css_id\""; endif; ?>>
-  
+<div class="gov-front-layout clearfix" <?php print(!empty($css_id) ? "id=\"$css_id\"" : ''); ?>>
+
   <?php if (!empty($content['main'])) : ?>
     <?php print $content['main'];?>
   <?php endif; ?>

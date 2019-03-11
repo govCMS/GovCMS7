@@ -27,7 +27,9 @@ if (!isset($_SERVER['REQUEST_METHOD'])) {
   $_SERVER['REQUEST_METHOD'] = 'GET';
 }
 $_SERVER['HTTP_HOST'] = 'localhost';
+// @codingStandardsIgnoreStart Drupal.Semantics.RemoteAddress.RemoteAddress
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+// @codingStandardsIgnoreEnd
 $_SERVER['PHPUNIT'] = TRUE;
 $_SERVER['PHPUNIT_BACKUP_FILE'] = tempnam('/tmp/', 'phpunit-backup');
 

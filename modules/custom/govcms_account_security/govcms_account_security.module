@@ -9,7 +9,7 @@
  * Implements hook_menu().
  */
 function govcms_account_security_menu() {
-  // Provide a page to review account security related settings
+  // Provide a page to review account security related settings.
   $items['admin/config/people/account_security'] = [
     'title' => 'Review account security settings',
     'page callback' => 'govcms_account_security_admin_settings',
@@ -33,6 +33,7 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
         $form['#validate'][$user_login_final_validate_index] = 'govcms_account_security_final_validate';
       }
       break;
+
     case 'views_form_admin_views_user_system_1':
       // VBO allows those who have "administor users" permission to assign
       // administrator role to any user and we don't want this to happen.
@@ -51,25 +52,26 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
           $form['remove_roles']['#size']--;
         }
       }
+      break;
   }
 }
 
 /**
- * Implementation of hook_form_FORM_ID_alter()
+ * Implements hook_form_FORM_ID_alter().
  */
 function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state, $form_id) {
   if (isset($form_state['build_info']['args'][0]) && $form_state['build_info']['args'][0] > 0) {
     $uid = $form_state['build_info']['args'][0];
-    // Check if the user attempting to reset their password is flood controlled
+    // Check if the user attempting to reset their password is flood controlled.
     if (!flood_is_allowed('failed_login_attempt_user', variable_get('user_failed_login_user_limit'), variable_get('user_failed_login_user_window'), $uid)) {
       $timestamp = $form_state['build_info']['args'][1];
       $hashed_pass = $form_state['build_info']['args'][2];
       $users = user_load_multiple([$uid], ['status' => '1']);
       $current = REQUEST_TIME;
-      // Validate the password reset link
+      // Validate the password reset link.
       if ($timestamp <= $current && $account = reset($users)) {
         if ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
-          // Clear flood control events for the user
+          // Clear flood control events for the user.
           flood_clear_event('failed_login_attempt_user', $uid);
           watchdog('govcms_account_security', 'Flood events have been cleared for %user.', $uid);
           drupal_set_message(t('Your account has been unblocked.'));
@@ -82,7 +84,9 @@ function govcms_account_security_form_user_pass_reset_alter(&$form, &$form_state
 /**
  * The final validation handler on the login form.
  *
- * Provide a more generic error message when the failed login limit is reached.
+ * Sets a form error if user has not been authenticated, or if too many
+ * logins have been attempted. This validation function should always
+ * be the last one.
  */
 function govcms_account_security_final_validate($form, &$form_state) {
   if (empty($form_state['uid'])) {
@@ -92,12 +96,23 @@ function govcms_account_security_final_validate($form, &$form_state) {
     if (isset($form_state['flood_control_user_identifier'])) {
       flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
     }
+
     if (isset($form_state['flood_control_triggered'])) {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', ['@password' => url('user/password', ['query' => ['name' => $form_state['values']['name']]])]));
+      if ($form_state['flood_control_triggered'] == 'user') {
+        form_set_error('name', format_plural(variable_get('user_failed_login_user_limit', 5), 'Sorry, there has been more than one failed login attempt for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', 'Sorry, there have been more than @count failed login attempts for this account. It is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
+      else {
+        // We did not find a uid, so the limit is IP-based.
+        form_set_error('name', t('Sorry, too many failed login attempts from your IP address. This IP address is temporarily blocked. Try again later or <a href="@url">request a new password</a>.', array('@url' => url('user/password'))));
+      }
     }
     else {
-      form_set_error('name', t('Unrecognised username or password. <a href="@password">Have you forgotten your password?</a>', ['@password' => url('user/password', ['query' => ['name' => $form_state['values']['name']]])]));
-      watchdog('user', 'Login attempt failed for %user.', ['%user' => $form_state['values']['name']]);
+      // Use $form_state['input']['name'] here to guarantee that we send
+      // exactly what the user typed in. $form_state['values']['name'] may have
+      // been modified by validation handlers that ran earlier than this one.
+      $query = isset($form_state['input']['name']) ? array('name' => $form_state['input']['name']) : array();
+      form_set_error('name', t('Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>', array('@password' => url('user/password', array('query' => $query)))));
+      watchdog('user', 'Login attempt failed for %user.', array('%user' => $form_state['values']['name']));
     }
   }
   elseif (isset($form_state['flood_control_user_identifier'])) {
@@ -118,7 +133,6 @@ function govcms_account_security_final_validate($form, &$form_state) {
  *
  * 2. We do not want to return 404 when a valid user profile page is requested
  * as as this will expose the user ID thanks to the search 404 module.
- *
  */
 function govcms_account_security_init() {
   if (!user_is_logged_in() && module_exists('pathauto') && !user_access('access user profiles')) {
@@ -231,12 +245,12 @@ function govcms_account_security_views_bulk_operations_form_alter(&$form, &$form
 /**
  * Validate user and group in VBO.
  *
- * @param $form
- *  A step of the VBO form to be altered.
- * @param $form_state
- *  Form state. Contains the name of the current step in $form_state['step'].
+ * @param array $form
+ *   A step of the VBO form to be altered.
+ * @param array $form_state
+ *   Form state. Contains the name of the current step in $form_state['step'].
  */
-function govcms_account_security_vbo_user_validate($form, &$form_state) {
+function govcms_account_security_vbo_user_validate(array $form, array &$form_state) {
   // Get the checked users, and the operation name.
   if (isset($form_state['operation']) && $form_state['operation'] instanceof ViewsBulkOperationsAction) {
     $uids = $form_state['selection'];
