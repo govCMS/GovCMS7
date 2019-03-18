@@ -60,17 +60,6 @@ function govcms_account_security_enable() {
 }
 
 /**
- * Implements hook_uninstall().
- */
-function govcms_account_security_uninstall() {
-  // Delete the variables to use the value set by Drupal's user module.
-  // Drupal's default value is 5.
-  variable_del('user_failed_login_user_limit');
-  // Drupal's default value is 21600.
-  variable_del('user_failed_login_user_window');
-}
-
-/**
  * Implements hook_update().
  */
  function govcms_account_security_update_7000(&$sandbox) {
