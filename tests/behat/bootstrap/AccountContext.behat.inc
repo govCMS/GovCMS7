@@ -343,4 +343,94 @@ class AccountContext extends DrupalSubContextBase {
     $this->assertSession()->elementNotExists('css', '#edit-roles-change-' . $administrator_role->rid);
   }
 
+  /**
+   * Clear the flood table.
+   */
+  public function clearFloodTable() {
+    db_delete('flood')->execute();
+  }
+
+  /**
+   * @Given the flood table has been cleared
+   */
+  public function theFloodTableHasBeenCleared() {
+    $this->clearFloodTable();
+  }
+
+  /**
+   * Assert failed login.
+   *
+   * @param $username
+   *
+   * @throws \Exception
+   */
+  public function assertFailedLogin($username = '') {
+    // Find the user.
+    $user = user_load_by_name($username);
+
+    if (empty($user)) {
+      // Create user.
+      $user = $this->createUser($username);
+    }
+
+    // Set the wrong password.
+    $user->pass = 'WrongPassword';
+
+    for ($i = 0; $i < 5; $i++) {
+      // Check if logged in.
+      if ($this->loggedIn()) {
+        $this->logout();
+      }
+
+      $this->getSession()->visit($this->locatePath('/user'));
+      $element = $this->getSession()->getPage();
+      $element->fillField($this->getDrupalText('username_field'), $user->name);
+      $element->fillField($this->getDrupalText('password_field'), $user->pass);
+      $submit = $element->findButton($this->getDrupalText('log_in'));
+      if (empty($submit)) {
+        throw new \Exception(sprintf("No submit button at %s", $this->getSession()->getCurrentUrl()));
+      }
+
+      // Log in.
+      $submit->click();
+    }
+  }
+
+  /**
+   * @Given the user named :username who triggered the flood control
+   */
+  public function theUserNamedWhoTriggeredTheFloodControl($username = '')
+  {
+    $this->assertFailedLogin($username);
+  }
+
+  /**
+   * @Given user :username log in with the One Time Login Url
+   */
+  public function userLogInWithTheOneTimeLoginUrl($username = '') {
+    // Find the user.
+    $user = user_load_by_name($username);
+
+    if (empty($user)) {
+      throw new \Exception(sprintf('Could not find user: %s', $username));
+    }
+
+    if ($this->loggedIn()) {
+      $this->logOut();
+    }
+
+    $base_url = rtrim($this->locatePath('/'), '/');
+    $login_link = $this->getDriver('drush')->drush('uli', array(
+      "'$user->name'",
+      '--browser=0',
+      "--uri=${base_url}",
+    ));
+
+    // Trim EOL characters. Required or else visiting the link won't work.
+    $login_link = trim($login_link);
+    $login_link = str_replace("/login", '', $login_link);
+    $this->getSession()->visit($this->locatePath($login_link));
+    return TRUE;
+  }
+
 }
