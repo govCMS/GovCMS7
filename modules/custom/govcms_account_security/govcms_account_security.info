@@ -4,4 +4,3 @@ package = govCMS
 core = 7.x
 required = TRUE
 configure = admin/config/people/account_security
-dependencies[] = password_policy
