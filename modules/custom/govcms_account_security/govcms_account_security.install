@@ -73,12 +73,21 @@ function govcms_account_security_uninstall() {
 /**
  * Implements hook_update().
  */
- function govcms_account_security_update_7000() {
+ function govcms_account_security_update_7000(&$sandbox) {
    // Delete account security specific var.
    variable_del('govcms_account_security_user_profile_page_code_anonymous_visit');
-   // Delete the variables to use the value set by Drupal's user module.
-   // Drupal's default value is 5.
-   variable_del('user_failed_login_user_limit');
-   // Drupal's default value is 21600.
-   variable_del('user_failed_login_user_window');
+   // ISM 2015, control: 1403, accounts are locked after a maximum of 5 failed
+   // logon attempts.
+   variable_set('user_failed_login_user_limit', 5);
+   // Lock the offending account for 21600 seconds (6 hours).
+   variable_set('user_failed_login_user_window', 21600);
+   // Register flood events based on the uid only, see user.module.
+   variable_set('user_failed_login_identifier_uid_only', TRUE);
+   // An accounts with expired password will be forced to change their password
+   // upon the next login.
+   // @see password_policy_admin_settings()
+   variable_set('password_policy_block', 1);
+   // Disable soft block users after 5 failed login attempts in 24 hours.
+   // @see _login_security_get_variables_by_name()
+   variable_set('login_security_user_wrong_count', 0);
  }
