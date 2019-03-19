@@ -364,7 +364,7 @@ class AccountContext extends DrupalSubContextBase {
    *
    * @throws \Exception
    */
-  public function assertFailedLogin($username = '') {
+  public function assertFailedLogin($username = '', int $times = 5) {
     // Find the user.
     $user = user_load_by_name($username);
 
@@ -376,7 +376,7 @@ class AccountContext extends DrupalSubContextBase {
     // Set the wrong password.
     $user->pass = 'WrongPassword';
 
-    for ($i = 0; $i < 5; $i++) {
+    for ($i = 0; $i < $times; $i++) {
       // Check if logged in.
       if ($this->loggedIn()) {
         $this->logout();
@@ -399,9 +399,15 @@ class AccountContext extends DrupalSubContextBase {
   /**
    * @Given the user named :username who triggered the flood control
    */
-  public function theUserNamedWhoTriggeredTheFloodControl($username = '')
-  {
+  public function theUserNamedWhoTriggeredTheFloodControl($username = '') {
     $this->assertFailedLogin($username);
+  }
+
+  /**
+   * @Given the user named :arg1 who triggered the IP flood control
+   */
+  public function theUserNamedWhoTriggeredTheIpFloodControl($username = '') {
+    $this->assertFailedLogin($username, 50);
   }
 
   /**
@@ -420,11 +426,11 @@ class AccountContext extends DrupalSubContextBase {
     }
 
     $base_url = rtrim($this->locatePath('/'), '/');
-    $login_link = $this->getDriver('drush')->drush('uli', array(
+    $login_link = $this->getDriver('drush')->drush('uli', [
       "'$user->name'",
       '--browser=0',
       "--uri=${base_url}",
-    ));
+    ]);
 
     // Trim EOL characters. Required or else visiting the link won't work.
     $login_link = trim($login_link);

@@ -63,3 +63,19 @@ Feature: Account lockout
       | Password | GovCMS123456!@# |
     And I press "Log in"
     Then I should see "Member for"
+
+  @api @javascript @account
+  Scenario: Login IP blocked after 50 failed login attempts.
+    Given the user named "joe.user" who triggered the IP flood control
+    And I visit "/user/login"
+    When I fill in the following:
+      | Username | joe.user      |
+      | Password | GovCMS1234!@# |
+    And I press "Log in"
+    Then I should see the message containing "Sorry, too many failed login attempts from your IP address. This IP address is temporarily blocked. Try again later or request a new password."
+    Given the flood table has been cleared
+    When I fill in the following:
+      | Username | joe.user      |
+      | Password | GovCMS1234!@# |
+    And I press "Log in"
+    Then I should see "Member for"
