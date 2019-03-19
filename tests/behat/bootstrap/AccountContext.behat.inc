@@ -39,6 +39,22 @@ class AccountContext extends DrupalSubContextBase {
   }
 
   /**
+   * Creates and authenticates a user with a specific name and given role(s).
+   *
+   * @Given /^I am logged in as a user named "(?P<username>[^"]*)" with the "(?P<role>[^"]*)" role$/
+   */
+  public function assertAuthenticatedByRole($username, $role = '') {
+    // Check if a user with this role is already logged in.
+    if (!$this->loggedInWithRole($role)) {
+      // Create user.
+      $user = $this->createUser($username, '', $role);
+
+      // Login.
+      $this->login($user);
+    }
+  }
+
+  /**
    * Helper for creating users.
    *
    * @param string $name
@@ -74,22 +90,6 @@ class AccountContext extends DrupalSubContextBase {
     }
 
     return $user;
-  }
-
-  /**
-   * Creates and authenticates a user with a specific name and given role(s).
-   *
-   * @Given /^I am logged in as a user named "(?P<username>[^"]*)" with the "(?P<role>[^"]*)" role$/
-   */
-  public function assertAuthenticatedByRole($username, $role = '') {
-    // Check if a user with this role is already logged in.
-    if (!$this->loggedInWithRole($role)) {
-      // Create user.
-      $user = $this->createUser($username, '', $role);
-
-      // Login.
-      $this->login($user);
-    }
   }
 
   /**
@@ -344,6 +344,13 @@ class AccountContext extends DrupalSubContextBase {
   }
 
   /**
+   * @Given the flood table has been cleared
+   */
+  public function theFloodTableHasBeenCleared() {
+    $this->clearFloodTable();
+  }
+
+  /**
    * Clear the flood table.
    */
   public function clearFloodTable() {
@@ -351,10 +358,10 @@ class AccountContext extends DrupalSubContextBase {
   }
 
   /**
-   * @Given the flood table has been cleared
+   * @Given the user named :username who triggered the flood control
    */
-  public function theFloodTableHasBeenCleared() {
-    $this->clearFloodTable();
+  public function theUserNamedWhoTriggeredTheFloodControl($username = '') {
+    $this->assertFailedLogin($username);
   }
 
   /**
@@ -394,13 +401,6 @@ class AccountContext extends DrupalSubContextBase {
       // Log in.
       $submit->click();
     }
-  }
-
-  /**
-   * @Given the user named :username who triggered the flood control
-   */
-  public function theUserNamedWhoTriggeredTheFloodControl($username = '') {
-    $this->assertFailedLogin($username);
   }
 
   /**
