@@ -9,17 +9,17 @@
  * Implements hook_requirements().
  */
 function event_log_node_alt_requirements($phase) {
-  $requirements = array();
+  $requirements = [];
   // Ensure translations don't break at install time.
   $t = get_t();
 
   if ($phase == 'install') {
     if (module_exists('event_log_node')) {
-      $requirements['event_log_node_alt'] = array(
+      $requirements['event_log_node_alt'] = [
         'title' => $t('Event Log Node events (alt)'),
         'value' => $t('Event Log Node events (alt) is not compatible with Event Log Node events module.'),
         'severity' => REQUIREMENT_ERROR,
-      );
+      ];
     }
   }
 

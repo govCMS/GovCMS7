@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Theme implementation for beans.

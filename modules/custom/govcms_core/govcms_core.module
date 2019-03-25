@@ -1,29 +1,38 @@
 <?php
+
 /**
  * @file
  * Common functionality used across govCMS.
  *
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  *
+ * @codingStandardsIgnoreStart
+ *
  * aGov
  * @copyright Copyright(c) 2014 PreviousNext
  * @author Chris Skene chris at previousnext dot com dot au
  *
  * govCMS (Forked on 1 April 2015 - http://cgit.drupalcode.org/govcms/commit/?id=64b602dcc7ddde0992c5c7cf5f3c4a795e5be08a)
- * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
- * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
+ * The original foundation for the govCMS distribution is aGov; the Drupal
+ * distribution created by PreviousNext to provide a core set of elements,
+ * functionality and features that can be used to develop government websites
+ *
+ * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by
+ * Department of Finance
  * @author Department of Finance
+ *
+ * @codingStandardsIgnoreEnd
  */
 
 /**
  * Implements hook_menu().
  */
 function govcms_core_menu() {
-  $items['about-govcms'] = array(
+  $items['about-govcms'] = [
     'title' => 'About govCMS',
     'page callback' => 'govcms_core_about_govcms_page',
-    'access arguments' => array('access content'),
-  );
+    'access arguments' => ['access content'],
+  ];
   return $items;
 }
 
@@ -34,12 +43,12 @@ function govcms_core_menu() {
  *   A render array for the page callback.
  */
 function govcms_core_about_govcms_page() {
-  $output = array(
-    'about' => array(
+  $output = [
+    'about' => [
       '#type' => 'markup',
       '#markup' => "<p>" . l(t('govCMS'), 'http://govcms.gov.au') . " is a free open source Drupal 7 distribution developed specifically for Australian government organisations.</p>",
-    ),
-  );
+    ],
+  ];
   return $output;
 }
 
@@ -47,13 +56,13 @@ function govcms_core_about_govcms_page() {
  * Helper to manufacture a new Bean of a given type.
  *
  * @param string $bean_type
- *   The type of bean to create
+ *   The type of bean to create.
  * @param string $label
- *   Admin label for the bean
+ *   Admin label for the bean.
  * @param string $description
- *   (optional) Admin description for the bean
+ *   (optional) Admin description for the bean.
  * @param string $title
- *   (optional) Block title for the bean
+ *   (optional) Block title for the bean.
  * @param array $fields
  *   (optional) An array of fields to assign. This should resemble the ACTUAL
  *   field array, as it is literally transposed onto the bean, with the
@@ -61,12 +70,15 @@ function govcms_core_about_govcms_page() {
  * @param string $view_mode
  *   (optional) The view mode. Defaults to 'default'.
  */
-function govcms_core_save_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
+function govcms_core_save_bean($bean_type, $label, $description = '', $title = '', array $fields = [], $view_mode = 'default') {
 
   $bean = govcms_core_create_bean($bean_type, $label, $description, $title, $fields, $view_mode);
   $bean->save();
 
-  drupal_set_message('Created a new bean "' . $label . '" of type <em>' . $bean_type . '</em>');
+  drupal_set_message(t('Created a new bean %label of type <em>%bean_type</em>', [
+    '%label' => $label,
+    '%bean_type' => $bean_type,
+  ]));
 }
 
 /**
@@ -76,13 +88,13 @@ function govcms_core_save_bean($bean_type, $label, $description = '', $title = '
  * you need to manipulate the bean before saving.
  *
  * @param string $bean_type
- *   The type of bean to create
+ *   The type of bean to create.
  * @param string $label
- *   Admin label for the bean
+ *   Admin label for the bean.
  * @param string $description
- *   (optional) Admin description for the bean
+ *   (optional) Admin description for the bean.
  * @param string $title
- *   (optional) Block title for the bean
+ *   (optional) Block title for the bean.
  * @param array $fields
  *   (optional) An array of fields to assign. This should resemble the ACTUAL
  *   field array, as it is literally transposed onto the bean, with the
@@ -91,20 +103,20 @@ function govcms_core_save_bean($bean_type, $label, $description = '', $title = '
  *   (optional) The view mode. Defaults to 'default'.
  *
  * @return Bean
- *   a Bean entity
+ *   A Bean entity.
  */
-function govcms_core_create_bean($bean_type, $label, $description = '', $title = '', $fields = array(), $view_mode = 'default') {
-  $config = array(
+function govcms_core_create_bean($bean_type, $label, $description = '', $title = '', array $fields = [], $view_mode = 'default') {
+  $config = [
     'label' => $label,
     'description' => $description,
     'title' => $title,
     'type' => $bean_type,
     'view_mode' => $view_mode,
     'is_new' => TRUE,
-  );
+  ];
   foreach ($fields as $field_key => $field_value) {
-    $config[$field_key] = array();
-    $config[$field_key]['und'] = $field_value;
+    $config[$field_key] = [];
+    $config[$field_key][LANGUAGE_NONE] = $field_value;
   }
   $bean = bean_create($config);
   return $bean;
@@ -116,11 +128,11 @@ function govcms_core_create_bean($bean_type, $label, $description = '', $title =
  * @todo There is better logic in block_add_block_form_submit()
  *
  * @param string $module
- *   The module providing the block
+ *   The module providing the block.
  * @param string $delta
- *   The block delta
+ *   The block delta.
  * @param string $theme
- *   (optional) The theme to insert into. Defaults to the current theme
+ *   (optional) The theme to insert into. Defaults to the current theme.
  * @param int|string $region
  *   (optional) The region to insert the block into. Defaults to
  *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
@@ -135,6 +147,7 @@ function govcms_core_create_bean($bean_type, $label, $description = '', $title =
  *   (optional) The title. Defaults to empty. Specify '<none>' to hide.
  *
  * @throws Exception
+ *
  * @return bool
  *   TRUE if the block is inserted, or FALSE on an error.
  */
@@ -145,7 +158,7 @@ function govcms_core_insert_block($module, $delta, $theme, $region = BLOCK_REGIO
       return FALSE;
     }
   }
-  $block = array(
+  $block = [
     'module' => $module,
     'delta' => $delta,
     'theme' => $theme,
@@ -156,10 +169,10 @@ function govcms_core_insert_block($module, $delta, $theme, $region = BLOCK_REGIO
     'visibility' => $visibility,
     'pages' => $pages,
     'cache' => DRUPAL_NO_CACHE,
-  );
+  ];
 
   $query = db_insert('block')->fields(
-    array(
+    [
       'module',
       'delta',
       'theme',
@@ -170,13 +183,13 @@ function govcms_core_insert_block($module, $delta, $theme, $region = BLOCK_REGIO
       'visibility',
       'pages',
       'cache',
-    )
+    ]
   );
 
   // If a theme was specified execute the single value.
   if (is_array($theme)) {
     // Get a list of themes that this block is already assigned to.
-    $assigned_themes = db_query('SELECT theme FROM {block} b WHERE b.module = :module AND b.delta = :delta', array(':module' => $module, ':delta' => $delta))->fetchCol();
+    $assigned_themes = db_query('SELECT theme FROM {block} b WHERE b.module = :module AND b.delta = :delta', [':module' => $module, ':delta' => $delta])->fetchCol();
 
     // Get a list of the themes govCMS supports.
     foreach ($theme as $theme_id) {
@@ -203,20 +216,20 @@ function govcms_core_insert_block($module, $delta, $theme, $region = BLOCK_REGIO
 /**
  * Update block placement for an existing block.
  *
+ * This is based on block_admin_display_form_submit().
+ *
  * @param string $module
- *   The module providing the block
+ *   The module providing the block.
  * @param string $delta
- *   The block delta
+ *   The block delta.
  * @param string $theme
- *   (optional) The theme to insert into. Defaults to the current theme
+ *   (optional) The theme to insert into. Defaults to the current theme.
  * @param int|string $region
  *   (optional) The region to insert the block into. Defaults to
  *   BLOCK_REGION_NONE, so a block can be created but not assigned by leaving
  *   this blank.
  * @param int $weight
- *   (optional) The weight of the block. Defaults to 0
- *
- * This is based on block_admin_display_form_submit()
+ *   (optional) The weight of the block. Defaults to 0.
  *
  * @throws Exception
  */
@@ -226,11 +239,11 @@ function govcms_core_update_block($module, $delta, $theme = '', $region = BLOCK_
     $status = (int) ($region != BLOCK_REGION_NONE);
     $region = $status ? $region : '';
     db_update('block')
-      ->fields(array(
+      ->fields([
         'status' => $status,
         'weight' => $weight,
         'region' => $region,
-      ))
+      ])
       ->condition('module', $module)
       ->condition('delta', $delta)
       ->condition('theme', $theme)
@@ -248,18 +261,29 @@ function govcms_core_update_block($module, $delta, $theme = '', $region = BLOCK_
  * Returns a list of the themes that govCMS supports.
  */
 function govcms_core_theme_info() {
-  return array(
+  return [
     GOVCMS_DEFAULT_THEME,
-  );
+  ];
 }
 
-function _global_file_extension_restriction(&$element, &$form_state)  {
+/**
+ * Form Element validation callback.
+ *
+ * @param array $element
+ *   Element.
+ * @param array $form_state
+ *   Form state.
+ */
+function _global_file_extension_restriction(array &$element, array &$form_state) {
   if (!empty($element['#value'])) {
     $entered_extensions = preg_split("/[\s,]+/", $element['#value']);
     $allowed_extensions = preg_split("/[\s,]+/", variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm'));
     $diff = array_diff($entered_extensions, $allowed_extensions);
     if ($element['#title'] == 'Allowed file extensions' && !empty($diff)) {
-      form_error($element, 'File extension(s) not allowed: <em>' . implode(', ', $diff) . '</em>. Please refer to allowed file extensions under file settings');
+      form_error($element, t(
+        'File extension(s) not allowed: <em>%extension</em>. Please refer to allowed file extensions under file settings.',
+        ['%extension' => implode(', ', $diff)]
+      ));
     }
   }
 }
@@ -268,7 +292,6 @@ function _global_file_extension_restriction(&$element, &$form_state)  {
  * Implements hook_form_alter().
  */
 function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
-
   // Install Canberra timezone.
   if ($form_id == 'system_regional_settings') {
     $timezone_form = $form['timezone']['date_default_timezone'];
@@ -280,11 +303,13 @@ function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
     $form['timezone']['date_default_timezone'] = $timezone_form;
   }
 
-  // Prohibit file types outside the default list are allowed in content types
+  // Prohibit file types outside the default list are allowed in content types.
   if ($form_id = 'field_ui_field_edit_form') {
     if (isset($form["instance"]["settings"]["file_extensions"]["#description"]) && !empty($form["instance"]["settings"]["file_extensions"]["#description"])) {
-      $form["instance"]["settings"]["file_extensions"]["#description"] = $form["instance"]["settings"]["file_extensions"]["#description"]
-        . t(' Allowed extensions must be a subset of %s', array('%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm')));
+      $form["instance"]["settings"]["file_extensions"]["#description"] .= ' ' . t(
+        'Allowed extensions must be a subset of %s',
+        ['%s' => variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm')]
+      );
     }
     $form["instance"]["settings"]["file_extensions"]["#element_validate"][] = '_global_file_extension_restriction';
   }
@@ -294,11 +319,11 @@ function govcms_core_form_alter(&$form, &$form_alter, $form_id) {
  * Implements hook_block_info().
  */
 function govcms_core_block_info() {
-  $blocks = array();
+  $blocks = [];
 
-  $blocks['update_notification'] = array(
+  $blocks['update_notification'] = [
     'info' => t('govCMS Update Notification'),
-  );
+  ];
 
   return $blocks;
 }
@@ -307,7 +332,7 @@ function govcms_core_block_info() {
  * Implements hook_block_view().
  */
 function govcms_core_block_view($delta = '') {
-  $block = array();
+  $block = [];
 
   switch ($delta) {
     case 'update_notification':
@@ -322,25 +347,25 @@ function govcms_core_block_view($delta = '') {
  * Implements hook_entity_info_alter().
  */
 function govcms_core_entity_info_alter(&$entity_info) {
-  $entity_info['node']['view modes']['compact'] = array(
+  $entity_info['node']['view modes']['compact'] = [
     'label' => t('Compact'),
     'custom settings' => TRUE,
-  );
+  ];
 }
 
 /**
  * Implements hook_metatag_config_default_alter().
  */
 function govcms_core_metatag_config_default_alter(&$configs) {
-  $configs['global']->config['dcterms.creator'] = array('item' => array('value' => '[site:name]'));
-  $configs['global']->config['dcterms.date'] = array('item' => array('value' => '[current-date:custom:Y-m-d\TH:iP]'));
-  $configs['global']->config['dcterms.description'] = array('item' => array('value' => '[site:slogan]'));
-  $configs['global']->config['dcterms.language'] = array('item' => array('value' => 'en'));
-  $configs['global']->config['dcterms.publisher'] = array('item' => array('value' => '[site:name]'));
-  $configs['global']->config['dcterms.subject'] = array('item' => array('value' => '[site:slogan]'));
-  $configs['global']->config['dcterms.type'] = array('item' => array('value' => 'other'));
-  $configs['global']->config['generator'] = array('value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.gov.au)');
-  $configs['node']->config['dcterms.language'] = array('item' => array('value' => 'en'));
+  $configs['global']->config['dcterms.creator'] = ['item' => ['value' => '[site:name]']];
+  $configs['global']->config['dcterms.date'] = ['item' => ['value' => '[current-date:custom:Y-m-d\TH:iP]']];
+  $configs['global']->config['dcterms.description'] = ['item' => ['value' => '[site:slogan]']];
+  $configs['global']->config['dcterms.language'] = ['item' => ['value' => 'en']];
+  $configs['global']->config['dcterms.publisher'] = ['item' => ['value' => '[site:name]']];
+  $configs['global']->config['dcterms.subject'] = ['item' => ['value' => '[site:slogan]']];
+  $configs['global']->config['dcterms.type'] = ['item' => ['value' => 'other']];
+  $configs['global']->config['generator'] = ['value' => 'Drupal 7 (http://drupal.org) + govCMS (http://govcms.gov.au)'];
+  $configs['node']->config['dcterms.language'] = ['item' => ['value' => 'en']];
 }
 
 /**
@@ -350,7 +375,7 @@ function govcms_core_metatag_config_default_alter(&$configs) {
  * file_entity_default_allowed_extensions can be uploaded.
  */
 function govcms_core_file_validate($file) {
-  $errors = array();
+  $errors = [];
   $allowed_extensions = variable_get('file_entity_default_allowed_extensions', 'jpg jpeg gif png txt doc docx xls xlsx xlsm pdf ppt pptx pps ppsx odt ods odp mp3 mov mp4 m4a m4v mpeg avi ogg oga ogv svg weba webp webm');
   $errors = file_validate_extensions($file, $allowed_extensions);
   return $errors;

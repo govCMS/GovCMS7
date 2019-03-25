@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Drupal needs this blank file.
@@ -21,7 +22,7 @@ function govcms_permissions_form_alter(&$form, $form_state, $form_id) {
     $form_state['operation']->operationId == 'action::views_bulk_operations_delete_item') {
     foreach (user_load_multiple($form_state['selection']) as $account) {
       if (in_array((int) variable_get('user_admin_role', 3), array_keys($account->roles), TRUE) && !user_access('assign all roles')) {
-        drupal_set_message('You do not have permission to cancel this account.');
+        drupal_set_message(t('You do not have permission to cancel this account.'));
         $form['actions']['#access'] = FALSE;
         $form['description']['#access'] = FALSE;
       }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Functionality for registration of site.
@@ -8,14 +9,14 @@
  * Implements hook_menu().
  */
 function govcms_register_menu() {
-  $items = array();
-  $items['admin/config/system/register'] = array(
+  $items = [];
+  $items['admin/config/system/register'] = [
     'title' => 'govCMS Registration',
     'description' => 'Manage site registration.',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('govcms_register_form'),
-    'access arguments' => array('administer site'),
-  );
+    'page arguments' => ['govcms_register_form'],
+    'access arguments' => ['administer site'],
+  ];
   return $items;
 }
 
@@ -23,19 +24,19 @@ function govcms_register_menu() {
  * Form builder.
  */
 function govcms_register_form($form, &$form_state) {
-  $form = array();
+  $form = [];
 
-  $information = variable_get('govcms_register_information', array());
+  $information = variable_get('govcms_register_information', []);
 
   $form['registration'] = govcms_register_form_elements($information);
 
   $form['#submit'][] = 'govcms_register_submit';
   $form['#validate'][] = 'govcms_register_validate';
 
-  $form['submit'] = array(
+  $form['submit'] = [
     '#type' => 'submit',
     '#value' => empty($information) ? 'Register' : 'Update',
-  );
+  ];
 
   return $form;
 }
@@ -46,56 +47,56 @@ function govcms_register_form($form, &$form_state) {
  * @ingroup forms
  */
 function govcms_register_form_elements($data = FALSE, $install = FALSE) {
-  $form = array();
+  $form = [];
   $t_function = get_t();
 
   if (!$install) {
-    $form['govcms_register_status'] = array(
+    $form['govcms_register_status'] = [
       '#type' => 'item',
       '#title' => $t_function('Status'),
       '#markup' => govcms_register_status($data),
-    );
+    ];
   }
 
   if (isset($data['registered']) && $data['registered']) {
 
-    $form['govcms_register_display_id'] = array(
+    $form['govcms_register_display_id'] = [
       '#type' => 'item',
       '#title' => $t_function('Registration ID'),
       '#markup' => $data['govcms_register_id'],
-    );
+    ];
 
-    $form['govcms_register_date'] = array(
+    $form['govcms_register_date'] = [
       '#type' => 'item',
       '#title' => $t_function('Registration date'),
       '#markup' => format_date($data['govcms_register_last_attempt'], 'govcms_month_day_year'),
-    );
+    ];
   }
 
-  $form['govcms_register_agency'] = array(
+  $form['govcms_register_agency'] = [
     '#type' => 'textfield',
     '#title' => $t_function('Department/Agency/Company'),
     '#default_value' => isset($data['govcms_register_agency']) ? $data['govcms_register_agency'] : '',
-  );
-  $form['govcms_register_contact'] = array(
+  ];
+  $form['govcms_register_contact'] = [
     '#type' => 'textfield',
     '#title' => $t_function('Contact Name or Position'),
     '#default_value' => isset($data['govcms_register_contact']) ? $data['govcms_register_contact'] : '',
-  );
-  $form['govcms_register_email'] = array(
+  ];
+  $form['govcms_register_email'] = [
     '#type' => 'textfield',
     '#title' => $t_function('Contact Email'),
     '#default_value' => isset($data['govcms_register_email']) ? $data['govcms_register_email'] : '',
-  );
-  $form['govcms_register_notification'] = array(
+  ];
+  $form['govcms_register_notification'] = [
     '#type' => 'checkbox',
     '#title' => $t_function('Do not send govCMS news or product update information to the registered address'),
     '#default_value' => isset($data['govcms_register_notification']) ? $data['govcms_register_notification'] : '',
-  );
-  $form['govcms_register_id'] = array(
+  ];
+  $form['govcms_register_id'] = [
     '#type' => 'hidden',
     '#value' => isset($data['govcms_register_id']) ? $data['govcms_register_id'] : '',
-  );
+  ];
 
   return $form;
 }
@@ -107,7 +108,7 @@ function govcms_register_form_elements($data = FALSE, $install = FALSE) {
  */
 function govcms_register_validate(&$form, &$form_state) {
   if (!valid_email_address($form_state['values']['govcms_register_email'])) {
-    form_set_error('govcms_register_email', 'Please enter a valid email address.');
+    form_set_error('govcms_register_email', t('Please enter a valid email address.'));
   }
 }
 
@@ -117,7 +118,7 @@ function govcms_register_validate(&$form, &$form_state) {
  * @ingroup forms
  */
 function govcms_register_submit(&$form, &$form_state) {
-  $data = variable_get('govcms_register_information', array());
+  $data = variable_get('govcms_register_information', []);
 
   $data['govcms_register_agency'] = check_plain($form_state['values']['govcms_register_agency']);
   $data['govcms_register_contact'] = check_plain($form_state['values']['govcms_register_contact']);
@@ -136,14 +137,14 @@ function govcms_register_submit(&$form, &$form_state) {
   $response = govcms_register_post($data);
 
   // Reload the variable data as it may have been modified.
-  $data = variable_get('govcms_register_information', array());
+  $data = variable_get('govcms_register_information', []);
 
   if ($response->code == 200) {
-    drupal_set_message('Thank you, your registration was successful');
+    drupal_set_message(t('Thank you, your registration was successful'));
     $data['registered'] = TRUE;
   }
   else {
-    drupal_set_message('Sorry, your registration failed at this time. We will try again later to register your site. If the problem persists, please contact us.', 'error');
+    drupal_set_message(t('Sorry, your registration failed at this time. We will try again later to register your site. If the problem persists, please contact us.'), 'error');
     $data['registered'] = FALSE;
   }
 
@@ -163,11 +164,11 @@ function govcms_register_post($data) {
   }
   $query = drupal_http_build_query($data);
 
-  $options = array(
+  $options = [
     'method' => 'POST',
     'data' => $query,
-    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
-  );
+    'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
+  ];
   $response = drupal_http_request($update_site, $options);
   if ($response->code == 200) {
     $data['registered'] = TRUE;
@@ -195,8 +196,9 @@ function govcms_register_cron() {
 
 /**
  * Generates a unique id.
+ *
  * @return string
- *   unique id
+ *   Unique id
  */
 function govcms_register_generate_id() {
 
@@ -221,7 +223,7 @@ function govcms_register_generate_id() {
  * @return string
  *   The status of the registration.
  */
-function govcms_register_status($data = NULL) {
+function govcms_register_status(array $data = NULL) {
   if (is_null($data)) {
     $status = 'Not registered.';
   }

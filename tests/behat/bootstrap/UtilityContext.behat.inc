@@ -119,8 +119,10 @@ class UtilityContext extends DrupalSubContextBase {
    *
    * @param string $field
    *   The field to check.
+   * @param \Behat\Mink\Element\ElementInterface $container
+   *   The container.
    *
-   * @throws ExpectationException
+   * @throws \Behat\Mink\Exception\ExpectationException
    *   If the field is not empty.
    *
    * @Then the :field field should be empty
