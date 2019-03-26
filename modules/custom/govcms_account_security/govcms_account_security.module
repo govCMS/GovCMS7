@@ -12,7 +12,8 @@ function govcms_account_security_menu() {
   // Provide a page to review account security related settings.
   $items['admin/config/people/account_security'] = [
     'title' => 'Review account security settings',
-    'page callback' => 'govcms_account_security_admin_settings',
+    'page arguments' => ['govcms_account_security_admin_settings'],
+    'page callback' => 'drupal_get_form',
     'access callback' => 'user_access',
     'access arguments' => ['administer users'],
     'file' => 'govcms_account_security.admin.inc',
