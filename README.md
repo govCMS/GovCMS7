@@ -20,7 +20,7 @@ govCMS exists as packaged versions on both the [Github](https://github.com/govCM
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the `govcms.make` file.
 
-Once built, the profile files will be symlinked into `app/profiles/govcms`.
+Once built, the profile files will be symlinked into `/app/profiles/govcms`.
 
 ## List of available Ahoy workflow commands:
 
