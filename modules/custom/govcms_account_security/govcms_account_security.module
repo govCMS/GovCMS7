@@ -12,7 +12,8 @@ function govcms_account_security_menu() {
   // Provide a page to review account security related settings.
   $items['admin/config/people/account_security'] = [
     'title' => 'Review account security settings',
-    'page callback' => 'govcms_account_security_admin_settings',
+    'page arguments' => ['govcms_account_security_admin_settings'],
+    'page callback' => 'drupal_get_form',
     'access callback' => 'user_access',
     'access arguments' => ['administer users'],
     'file' => 'govcms_account_security.admin.inc',
@@ -53,6 +54,51 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
         }
       }
       break;
+
+    case 'user_admin_permissions':
+
+      // Disable the ability to change any configured permissions.
+      global $user;
+      $banned_permissions = variable_get('govcms_account_security_policy_report_banned_permissions', array());
+      // The following permissions cannot be absent from this flow control.
+      $permissions = array(
+        'administer module permissions',
+        'administer managed modules',
+        'administer managed modules permissions',
+      );
+      array_merge($permissions, $banned_permissions);
+
+      foreach (element_children($form['checkboxes']) as $key) {
+        // Loop through each permission and disable
+        foreach ($banned_permissions as $perm) {
+          if (isset($form['checkboxes'][$key])) {
+            if ((int) $user->uid !== 1) {
+              $form['checkboxes'][$key][$perm]['#disabled'] = TRUE;
+            }
+            $form['permission'][$perm]['#description'] = '<strong>Disabled via govCMS</strong>';
+          }
+        }
+      }
+
+      break;
+
+    case 'system_modules':
+
+      // Disable the ability to change any configured modules.
+      global $user;
+      $modules = variable_get('govcms_account_security_policy_report_banned_modules', array());
+      foreach ($form['modules'] as $group => $value) {
+        foreach ($modules as $module) {
+          if (isset($form['modules'][$group][$module]) && is_array($form['modules'][$group][$module])) {
+            if ((int) $user->uid !== 1) {
+              $form['modules'][$group][$module]['enable']['#disabled'] = TRUE;
+            }
+            $form['modules'][$group][$module]['description']['#markup'] .= '<br /><strong>Disabled via govCMS</strong>';
+          }
+        }
+      }
+      break;
+
   }
 }
 
