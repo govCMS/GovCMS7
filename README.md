@@ -1,7 +1,7 @@
 # govCMS
 
 **Note:**
-**This is an early release of a future 7.x-3.x branch, and is not ready for Production yet - it is under active development**
+**This release is not Acquia specific. Please continue to use 2.x release if you are in Acquia.**
 
 ## Installation
 
@@ -20,7 +20,7 @@ govCMS exists as packaged versions on both the [Github](https://github.com/govCM
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the `govcms.make` file.
 
-Once built, the profile files will be symlinked into `docroot/profiles/govcms`.
+Once built, the profile files will be symlinked into `/app/profiles/govcms`.
 
 ## List of available Ahoy workflow commands:
 

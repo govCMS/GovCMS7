@@ -1,8 +1,5 @@
 name = govCMS Account Security
 description = Locking an account after a specified number of failed logon attempts. Prevent user name enumeration on user profile pages.
-project = govcms_account_security
 dependencies[] = password_policy
 package = govCMS
 core = 7.x
-
-

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Returns the HTML for a single Drupal page.
@@ -33,7 +34,7 @@
 
     <?php if ($logo): ?>
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
-  <?php endif; ?>
+    <?php endif; ?>
 
   <?php print render($page['header']); ?>
   </div>
@@ -71,7 +72,7 @@
 
     <?php
       // Render the sidebars to see if there's anything in them.
-      $sidebar_first  = render($page['sidebar_first']);
+      $sidebar_first = render($page['sidebar_first']);
       $sidebar_second = render($page['sidebar_second']);
     ?>
 

@@ -21,7 +21,7 @@ class PermissionsContext extends DrupalSubContextBase {
    * @return int
    *   The role ID
    */
-  private function roleToRid($rid) {
+  protected function roleToRid($rid) {
     if (is_numeric($rid)) {
       return $rid;
     }
@@ -30,14 +30,14 @@ class PermissionsContext extends DrupalSubContextBase {
   }
 
   /**
-   *  Check that we are on the role's permission setting page.
+   * Check that we are on the role's permission setting page.
    *
    * @param string $rid
    *   Role id.
    *
    * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
    */
-  private function assertPermissionPagePath($rid) {
+  protected function assertPermissionPagePath($rid) {
     $base_url = $this->getMinkParameter('base_url');
     $page = '/admin/people/permissions/' . $rid;
     $path = !empty($base_url) ? $base_url . $page : $page;

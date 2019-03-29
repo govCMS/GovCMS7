@@ -1,3 +1,4 @@
+; @codingStandardsIgnoreFile
 ; Drupal's .info files allow themers to easily specify some of the static
 ; properties of your theme. Properties such as its name, stylesheets,
 ; javascripts, and block regions.
