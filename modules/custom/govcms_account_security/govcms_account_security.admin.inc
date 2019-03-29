@@ -80,59 +80,68 @@ function govcms_account_security_admin_settings($form, $form_state) {
 
   $output .= theme('table', array('header' => $header, 'rows' => $rows));
 
- $modules = module_list();
- $module_options = array(
-   ' - none -',
- );
- foreach ($modules as $key => $m) {
-   $module_options[$key] = $key;
- }
+  $modules = module_list();
+  $module_options = array(
+    ' - none -',
+  );
+  foreach ($modules as $key => $m) {
+    $module_options[$key] = $key;
+  }
+
   $permissions = user_permission_get_modules();
- $permission_options = array(
-   ' - none -'
- );
- foreach ($permissions as $key => $p) {
-   $permission_options[$key] = $key;
- }
+  $permission_options = array(
+    ' - none -'
+  );
+  foreach ($permissions as $key => $p) {
+    $permission_options[$key] = $key;
+  }
+
   $form['vtabs'] = array(
-   '#type' => 'vertical_tabs',
- );
+    '#type' => 'vertical_tabs',
+  );
+
   $form['password_report'] = array(
-   '#type' => 'fieldset',
-   '#title' => t('Password policy report'),
-   '#group' => 'vtabs',
- );
+    '#type' => 'fieldset',
+    '#title' => t('Password policy report'),
+    '#group' => 'vtabs',
+  );
+
   $form['modules'] = array(
-   '#type' => 'fieldset',
-   '#title' => t('Banned module access'),
-   '#group' => 'vtabs',
- );
+    '#type' => 'fieldset',
+    '#title' => t('Banned module access'),
+    '#group' => 'vtabs',
+  );
+
   $form['permissions'] = array(
-   '#type' => 'fieldset',
-   '#title' => t('Banned permissions access'),
-   '#group' => 'vtabs',
- );
+    '#type' => 'fieldset',
+    '#title' => t('Banned permissions access'),
+    '#group' => 'vtabs',
+  );
+
   $form['password_report']['govcms_account_security_policy_report'] = array(
-   '#markup' => $output
- );
+    '#markup' => $output
+  );
+
   $form['modules']['govcms_account_security_policy_report_banned_modules'] = array(
-   '#type' => 'select',
-   '#title' => t('Modules to remove from applicability'),
-   '#options' => $module_options,
-   '#size' => '10',
-   '#default_value' => variable_get('govcms_account_security_policy_report_banned_modules', array()),
-   '#description' => t('Remove the following modules from the modules list page for all users not user 1.'),
-   '#multiple' => TRUE
- );
+    '#type' => 'select',
+    '#title' => t('Modules to remove from applicability'),
+    '#options' => $module_options,
+    '#size' => '10',
+    '#default_value' => variable_get('govcms_account_security_policy_report_banned_modules', array()),
+    '#description' => t('Remove the following modules from the modules list page for all users not user 1.'),
+    '#multiple' => TRUE
+  );
+
   $form['permissions']['govcms_account_security_policy_report_banned_permissions'] = array(
-   '#type' => 'select',
-   '#title' => t('Permissions to remove from applicability'),
-   '#options' => $permission_options,
-   '#size' => '10',
-   '#default_value' => variable_get('govcms_account_security_policy_report_banned_permissions', array()),
-   '#description' => t('Remove the following permissions from the modules list page for all users not user 1.'),
-   '#multiple' => TRUE
- );
+    '#type' => 'select',
+    '#title' => t('Permissions to remove from applicability'),
+    '#options' => $permission_options,
+    '#size' => '10',
+    '#default_value' => variable_get('govcms_account_security_policy_report_banned_permissions', array()),
+    '#description' => t('Remove the following permissions from the modules list page for all users not user 1.'),
+    '#multiple' => TRUE
+  );
+
   return system_settings_form($form);
 
 }
