@@ -13,6 +13,6 @@ Feature: Breadcrumbs
     And I put "Body text" into WYSIWYG of "Body" field
     And press "Save"
     Then I should see "News Article test has been created"
-    Then the response should contain "<a href=\"/front\">Home</a>"
+    Then the response should contain "<a href=\"/\">Home</a>"
     And the response should contain "<a href=\"/news-media\">News &amp; Media</a>"
     And the response should contain "<a href=\"/news-media/news\">News</a>"
