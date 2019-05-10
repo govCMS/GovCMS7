@@ -1687,3 +1687,12 @@ function govcms_update_7202() {
     drupal_uninstall_modules(array('govcms_register'), FALSE);
   }
 }
+
+/**
+ * Enable Environment Indicator module.
+ */
+function govcms_update_7203() {
+  if (!module_exists('environment_indicator')) {
+    module_enable(array('environment_indicator'));
+  }
+}
