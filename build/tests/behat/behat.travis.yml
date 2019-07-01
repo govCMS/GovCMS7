@@ -16,12 +16,15 @@ default:
        tags:                      "~@drush"
   extensions:
     Behat\MinkExtension:
+      base_url:                   'http://127.0.0.1:8080'
       browser_name:               chrome
-      javascript_session:         selenium2
-      files_path:                 %paths.base%/files
       goutte:                     ~
       selenium2:
         wd_host:                  "http://localhost:4444/wd/hub"
+        browser:                  chrome
+      javascript_session:         selenium2
+      browser_name:               chrome
+      files_path:                 %paths.base%/files
     Drupal\DrupalExtension:
       subcontexts:
         paths:
@@ -30,9 +33,9 @@ default:
       blackbox:                   ~
       api_driver:                 "drupal"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              docroot
       drush:
-        root:                     ../../docroot
+        root:                     docroot
       selectors:
         success_message_selector: '.messages.status'
         message_selector:         '.messages'
@@ -71,9 +74,9 @@ drush:
       blackbox:                   ~
       api_driver:                 "drush"
       drupal:
-        drupal_root:              ../../docroot
+        drupal_root:              docroot
       drush:
-        root:                     ../../docroot
+        root:                     docroot
       region_map:
         sidebar_second:           'section.region-sidebar-second'
         navigation:               '.region.region-navigation'
@@ -81,7 +84,3 @@ drush:
         content:                  '#content'
         footer:                   '.region.region-footer'
         header:                   '#header'
-
-imports:
-  - behat.govcms.yml
-  - behat.local.yml

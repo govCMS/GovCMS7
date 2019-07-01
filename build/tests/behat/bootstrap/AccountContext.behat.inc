@@ -83,11 +83,27 @@ class AccountContext extends DrupalSubContextBase {
   public function assertAuthenticatedByRole($username, $role = '') {
     // Check if a user with this role is already logged in.
     if (!$this->loggedInWithRole($role)) {
-      // Create user.
-      $this->createUser($username, '', $role);
+      // Create user (and project)
+      $user = (object) array(
+        'name' => $username,
+        'pass' => $this->getRandom()->name(16),
+        'role' => $role,
+      );
+      $user->mail = "{$user->name}@example.com";
+
+      $this->userCreate($user);
+
+      $roles = explode(',', $role);
+      $roles = array_map('trim', $roles);
+      foreach ($roles as $role) {
+        if (!in_array(strtolower($role), array('authenticated', 'authenticated user'))) {
+          // Only add roles other than 'authenticated user'.
+          $this->getDriver()->userAddRole($user, $role);
+        }
+      }
 
       // Login.
-      $this->login();
+      $this->login($user);
     }
   }
 
@@ -115,11 +131,13 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
    * Creates and authenticates a user with the given set of permissions.
+   *
+   * @Given /^I am logged in as a user (?:|named )(?:|"(?P<username>[^"]*)" )(?:|with the password "(?P<password>[^"]*)" )with the following permissions:$/
    *
    * @param \Behat\Gherkin\Node\PyStringNode $permissions
    *   The permissions to check for.
@@ -128,7 +146,7 @@ class AccountContext extends DrupalSubContextBase {
    * @param string $password
    *   The initial password (a random one is chosen if not supplied).
    *
-   * @Given /^I am logged in as a user (?:|named )(?:|"(?P<username>[^"]*)" )(?:|with the password "(?P<password>[^"]*)" )with the following permissions:$/
+   * @throws \Exception
    */
   public function assertAuthenticatedWithPermissionsList(PyStringNode $permissions, $username = '', $password = '') {
     // Create user.
@@ -145,7 +163,7 @@ class AccountContext extends DrupalSubContextBase {
     $this->roles[] = $rid;
 
     // Login.
-    $this->login();
+    $this->login($user);
   }
 
   /**
