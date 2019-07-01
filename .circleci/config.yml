@@ -36,15 +36,6 @@ jobs:
           name: Install site
           command: ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
       - run:
-          name: Lint code
-          command: ahoy -v lint || true
-      - run:
-          name: Run PHPUnit tests
-          command: ahoy test-phpunit
-      - run:
-          name: Run Behat tests with rerun
-          command: ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun
-      - run:
           name: Copy artifacts
           command: mkdir -p /tmp/artifacts/behat && docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/features/screenshots /tmp/artifacts/behat
           when: always
