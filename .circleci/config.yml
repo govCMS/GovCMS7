@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
 jobs:
   build:
     working_directory: /app
@@ -57,6 +59,10 @@ jobs:
               export $(grep -v '^#' .env | xargs)
               ahoy push
             else
+              echo "IMAGE_VERSION_TAG=V99.99">>.env
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              export $(grep -v '^#' .env | xargs)
+              ahoy push
               echo "Skipping deployment"
             fi
 workflows:
