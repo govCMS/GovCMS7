@@ -14,7 +14,7 @@ class CkEditorContext extends DrupalSubContextBase {
   /**
    * The Mink context.
    *
-   * @var MinkContext
+   * @var \Drupal\DrupalExtension\Context\MinkContext
    */
   protected $minkContext;
 
@@ -85,7 +85,7 @@ class CkEditorContext extends DrupalSubContextBase {
    * @param string $id
    *   (optional) The editor instance ID.
    *
-   * @throws ExpectationException
+   * @throws \Behat\Mink\Exception\ExpectationException
    *   If the editor does not contain the specified text.
    *
    * @Then CKEditor should contain :text
@@ -110,7 +110,7 @@ class CkEditorContext extends DrupalSubContextBase {
    * @param string $id
    *   (optional) The editor instance ID.
    *
-   * @throws ExpectationException
+   * @throws \Behat\Mink\Exception\ExpectationException
    *   If the expression does not match.
    *
    * @Then CKEditor should match :expression
@@ -151,7 +151,7 @@ class CkEditorContext extends DrupalSubContextBase {
    * @param mixed $data
    *   Additional data to pass to the executed command.
    *
-   * @throws ExpectationException
+   * @throws \Behat\Mink\Exception\ExpectationException
    *   If the command cannot be executed (i.e., returns a falsy value).
    *
    * @When I execute the :command command in CKEditor

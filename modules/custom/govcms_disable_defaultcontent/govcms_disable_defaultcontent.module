@@ -2,26 +2,26 @@
 
 /**
  * @file
- * Provides core functionality
+ * Provides core functionality.
  */
 
 /**
  * Implements hook_menu().
  */
 function govcms_disable_defaultcontent_menu() {
-  $items = array();
-  $items['admin/config/content/default-content'] = array(
+  $items = [];
+  $items['admin/config/content/default-content'] = [
     'title' => 'Default Content Settings',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('govcms_disable_defaultcontent_admin_form'),
-    'access arguments' => array('administer site'),
-  );
-  $items['admin/config/content/default-content/disable'] = array(
+    'page arguments' => ['govcms_disable_defaultcontent_admin_form'],
+    'access arguments' => ['administer site'],
+  ];
+  $items['admin/config/content/default-content/disable'] = [
     'title' => 'Disable Default Content',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('govcms_disable_defaultcontent_disable_modules'),
-    'access arguments' => array('administer site'),
-  );
+    'page arguments' => ['govcms_disable_defaultcontent_disable_modules'],
+    'access arguments' => ['administer site'],
+  ];
   return $items;
 }
 
@@ -29,13 +29,13 @@ function govcms_disable_defaultcontent_menu() {
  * Form builder for default content admin form.
  */
 function govcms_disable_defaultcontent_admin_form() {
-  $form = array();
+  $form = [];
 
-  $form['govcms_disable_defaultcontent_notice_enabled'] = array(
+  $form['govcms_disable_defaultcontent_notice_enabled'] = [
     '#type' => 'checkbox',
     '#title' => t('Display a notice about default content'),
     '#default_value' => variable_get('govcms_disable_defaultcontent_notice_enabled', 1),
-  );
+  ];
 
   return system_settings_form($form);
 }
@@ -104,9 +104,9 @@ function govcms_disable_defaultcontent_init() {
     if (!empty($default_content) && variable_get('govcms_disable_defaultcontent_notice_enabled', 1)) {
       drupal_set_message(
         t('You are viewing the site with example content. You must disable example content before editing the content on the site. !disable_link',
-          array(
+          [
             '!disable_link' => l(t('Disable example content'), 'admin/config/content/default-content/disable'),
-          )),
+          ]),
         'warning',
         FALSE
       );
@@ -119,7 +119,7 @@ function govcms_disable_defaultcontent_init() {
  */
 function govcms_disable_defaultcontent_modules() {
   // Variables.
-  $enabled_content = array();
+  $enabled_content = [];
 
   // Get a list of enabled modules.
   $enabled_modules = array_values(module_list());
@@ -141,7 +141,7 @@ function govcms_disable_defaultcontent_modules() {
  * Provides modules to be controlled by this module.
  */
 function _govcms_disable_defaultcontent_list() {
-  return array(
+  return [
     'govcms_content_event',
     'govcms_content_publication',
     'govcms_content_blog',
@@ -150,5 +150,5 @@ function _govcms_disable_defaultcontent_list() {
     'govcms_content_promotion',
     'govcms_content_standard_page',
     'govcms_content_slides',
-  );
+  ];
 }

@@ -11,7 +11,6 @@
   <arg value="sp"/>
 
   <file>/app/profiles/govcms/modules/custom</file>
-  <file>/app/profiles/govcms/modules/features</file>
   <file>/app/profiles/govcms/themes/govcms</file>
   <file>/app/profiles/govcms/govcms.info</file>
   <file>/app/profiles/govcms/govcms.install</file>
@@ -39,4 +38,44 @@
   <exclude-pattern>*\.strongarm\.*</exclude-pattern>
   <exclude-pattern>*\.views_default\.*</exclude-pattern>
   <exclude-pattern>*\.quicktabs\.*</exclude-pattern>
+
+  <!-- Exclude all text files. -->
+  <exclude-pattern>*\.txt</exclude-pattern>
+  <exclude-pattern>*\.md</exclude-pattern>
+
+  <!-- Exclude compiled CSS files in govCMS themes. -->
+  <exclude-pattern>/app/profiles/govcms/themes/govcms/*/css/*\.css</exclude-pattern>
+  <!-- Exclude code in SASS Extensions. -->
+  <exclude-pattern>sass-extensions/*</exclude-pattern>
+
+  <!-- Exclude GOVCMS_STARTERKIT -->
+  <exclude-pattern>GOVCMS_STARTERKIT/*</exclude-pattern>
+
+  <!--Allow uncommented functions in tests as they usually provide enough
+  information from their names.-->
+  <rule ref="Drupal.Commenting.DocComment.MissingShort">
+    <exclude-pattern>tests/behat/bootstrap/*\.php</exclude-pattern>
+    <exclude-pattern>tests/behat/bootstrap/*.inc</exclude-pattern>
+    <exclude-pattern>tests/phpunit/tests/*.Test\.php</exclude-pattern>
+  </rule>
+  <rule ref="Drupal.Commenting.FunctionComment.Missing">
+    <exclude-pattern>tests/behat/bootstrap/*\.php</exclude-pattern>
+    <exclude-pattern>tests/behat/bootstrap/*.inc</exclude-pattern>
+    <exclude-pattern>tests/phpunit/tests/*.Test\.php</exclude-pattern>
+  </rule>
+  <rule ref="Drupal.Commenting.FunctionComment.MissingReturnComment">
+    <exclude-pattern>tests/behat/bootstrap/*\.php</exclude-pattern>
+    <exclude-pattern>tests/behat/bootstrap/*.inc</exclude-pattern>
+    <exclude-pattern>tests/phpunit/tests/*.Test\.php</exclude-pattern>
+  </rule>
+  <rule ref="DrupalPractice.General.ClassName.ClassPrefix" >
+    <exclude-pattern>tests/behat/bootstrap/*\.php</exclude-pattern>
+    <exclude-pattern>tests/behat/bootstrap/*.inc</exclude-pattern>
+    <exclude-pattern>tests/phpunit/tests/*.Test\.php</exclude-pattern>
+  </rule>
+
+  <!-- Template files may have inline PHP on the same line -->
+  <rule ref="Drupal.WhiteSpace.ScopeClosingBrace.Line">
+    <exclude-pattern>*.tpl.php</exclude-pattern>
+  </rule>
 </ruleset>
