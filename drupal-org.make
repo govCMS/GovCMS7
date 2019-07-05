@@ -43,6 +43,7 @@ projects[entity][patch][2307807] = "https://www.drupal.org/files/issues/2307807-
 projects[entity][version] = "1.9"
 projects[escape_admin][version] = "1.2"
 projects[event_log][version] = "1.6"
+projects[event_log][patch][] = "https://www.drupal.org/files/issues/2019-05-03/3052347.patch"
 projects[facetapi][version] = "1.5"
 projects[favicon][version] = "1.0-rc2"
 projects[features][version] = "2.11"
