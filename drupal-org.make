@@ -57,6 +57,7 @@ projects[file_lock][version] = "2.0"
 projects[flood_control][version] = "1.0"
 projects[focal_point][version] = "1.2"
 projects[funnelback][version] = "4.0-beta4"
+projects[funnelback][patch][] = 'https://www.drupal.org/files/issues/2019-04-02/funnelback-missing-bracket-3045105-2.patch'
 projects[globalredirect][version] = "1.5"
 projects[google_analytics][version] = "2.4"
 projects[google_chart_tools][patch][] = "https://www.drupal.org/files/issues/google-chart-tools-ajax-1613258-11-7.x-1.4.patch"
