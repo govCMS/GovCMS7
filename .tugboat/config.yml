@@ -38,7 +38,7 @@ services:
       build:
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot/
-        - drush make drupal-org.make ${TUGBOAT_ROOT}/docroot/sites/all
+        - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/sites/all/ -y
        
         # Prepare for install.
         - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" /var/govcms/docroot/sites/default/
