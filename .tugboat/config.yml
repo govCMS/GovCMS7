@@ -41,6 +41,7 @@ services:
         - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/sites/all/ -y
        
         # Prepare for install.
+        - rm -rf "${TUGBOAT_ROOT}/docroot/sites/default/"
         - mkdir "${TUGBOAT_ROOT}/docroot/sites/default/"
         - mkdir -p "${TUGBOAT_ROOT}/docroot/sites/default/files"
         - chgrp -R www-data "${TUGBOAT_ROOT}/docroot/sites/default/files"
