@@ -38,7 +38,7 @@ services:
       build:
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot/
-        - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/sites/all/ -y
+        - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/ -y
        
         # Prepare for install.
         - rm -rf "${TUGBOAT_ROOT}/docroot/sites/default/"
