@@ -41,7 +41,12 @@ services:
         - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/sites/all/ -y
        
         # Prepare for install.
-        - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" /var/govcms/docroot/sites/default/
+        - mkdir "${TUGBOAT_ROOT}/docroot/sites/default/"
+        - mkdir -p "${TUGBOAT_ROOT}/docroot/sites/default/files"
+        - chgrp -R www-data "${TUGBOAT_ROOT}/docroot/sites/default/files"
+        - find "${TUGBOAT_ROOT}/docroot/sites/default/files" -type d -exec chmod 2775 {} \;
+        - find "${TUGBOAT_ROOT}/docroot/sites/default/files" -type f -exec chmod 0664 {} \;
+        - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" "${TUGBOAT_ROOT}/docroot/sites/default/"
        
         # Install the site.
         - drush -r "${DOCROOT}" si -y govcms
