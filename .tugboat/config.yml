@@ -16,8 +16,10 @@ services:
     commands:
       # Commands that set up the basic preview infrastructure
       init:
-        # Install opcache and enable mod-rewrite.
-        - docker-php-ext-install opcache
+        # Install opcache and enable mod-rewrite and more.
+        - apt-get update
+        - apt-get install -y libbz2-dev
+        - docker-php-ext-install opcache bz2 zip
         - a2enmod headers rewrite
 
         # Install drush 8.1.17
