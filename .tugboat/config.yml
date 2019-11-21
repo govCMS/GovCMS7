@@ -31,11 +31,11 @@ services:
       # skipping the init step, because the results of that step will
       # already be present.
       update:
-        # Link the document root to the expected path. This example links
-        # /docroot to the docroot
-        - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         
       build:
+        # Link the document root to the expected path. This example links
+        # /var/www/html to /var/lib/tugboat/docroot
+        - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         # Remove the root folder if it existed.
         - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
         # Run the make command to prepare our custom build
