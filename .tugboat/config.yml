@@ -39,10 +39,10 @@ services:
         
       build:
         # Remove the root folder if it existed.
-        - if [ -d "${DOCROOT}" ]; then rm -Rf ${DOCROOT}; fi
+        - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
         # Run the make command to prepare our custom build
-        - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot/
-        - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/ -y
+        - drush make build-govcms.make ${DOCROOT} -y
+        - drush make --no-core drupal-org.make ${DOCROOT} -y
        
         # Prepare for install.
         - rm -rf "${DOCROOT}/sites/default/"
@@ -53,8 +53,8 @@ services:
         - find "${DOCROOT}/sites/default/files" -type f -exec chmod 0664 {} \;
         - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" "${TUGBOAT_ROOT}/docroot/sites/default/"
        
-        # Install the site.
-        - drush -r "${DOCROOT}" si -y govcms
+        # Install the govcsm instance where the module update notification is off.
+        - drush -r "${DOCROOT}" site-install govcms install_configure_form.update_status_module='array(FALSE,FALSE)' -y
         
         # Update the folders permissions again after installing Drupal
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
