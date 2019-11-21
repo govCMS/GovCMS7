@@ -5,7 +5,7 @@
  *
  * Most settings based on Drupal defaults.
  * Comments removed for brevity.
- * @see https://git.drupalcode.org/project/drupal/blob/8.8.x/sites/default/default.settings.php
+ * @see https://git.drupalcode.org/project/drupal/blob/7.x/sites/default/default.settings.php
  */
 
 $databases = array();
