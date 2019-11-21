@@ -26,22 +26,20 @@ services:
         - composer --no-ansi global require drush/drush:8.1.17
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
 
-        # Link the document root to the expected path. This example links
-        # /docroot to the docroot
-        - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
-
       # Commands that import files, databases,  or other assets. When an
       # existing preview is refreshed, the build workflow starts here,
       # skipping the init step, because the results of that step will
       # already be present.
       update:
-        # We have no external assets to update for testing the distro.
+        # Link the document root to the expected path. This example links
+        # /docroot to the docroot
+        - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         
       build:
         # Remove the root folder if it existed.
         - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
         # Run the make command to prepare our custom build
-        - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot/
+        - drush make build-govcms.make ${DOCROOT}
         - drush make --no-core drupal-org.make ${DOCROOT} -y
        
         # Prepare for install.
