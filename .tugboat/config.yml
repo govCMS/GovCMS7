@@ -38,9 +38,11 @@ services:
         # We have no external assets to update for testing the distro.
         
       build:
+        # Remove the root folder if it existed.
+        - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
         # Run the make command to prepare our custom build
-        - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot/
-        - drush make --no-core drupal-org.make ${TUGBOAT_ROOT}/docroot/ -y
+        - drush make build-govcms.make ${DOCROOT}
+        - drush make --no-core drupal-org.make ${DOCROOT} -y
        
         # Prepare for install.
         - rm -rf "${DOCROOT}/sites/default/"
