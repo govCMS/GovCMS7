@@ -42,7 +42,7 @@ services:
         - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${DOCROOT} -y
-        - drush make --no-core drupal-org.make ${DOCROOT} -y
+       # - drush make --no-core drupal-org.make ${DOCROOT} -y
        
         # Prepare for install.
         - rm -rf "${DOCROOT}/sites/default/"
