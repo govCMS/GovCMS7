@@ -37,7 +37,7 @@ services:
         # /var/www/html to /var/lib/tugboat/docroot
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
         # Remove the root folder if it existed.
-        - if [ -d ${DOCROOT} ]; then echo "Remove the existing ${DOCROOT} folder";rm -Rf ${DOCROOT}; fi
+        - if [ -d ${TUGBOAT_ROOT}/docroot ]; then echo "Remove the existing ${TUGBOAT_ROOT}/docroot folder";rm -Rf ${TUGBOAT_ROOT}/docroot; fi
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot
         - drush make --no-core drupal-org.make ${DOCROOT} -y
