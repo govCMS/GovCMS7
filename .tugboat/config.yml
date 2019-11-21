@@ -51,7 +51,9 @@ services:
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
         - find "${DOCROOT}/sites/default/files" -type d -exec chmod 2775 {} \;
         - find "${DOCROOT}/sites/default/files" -type f -exec chmod 0664 {} \;
-        - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" "${TUGBOAT_ROOT}/docroot/sites/default/"
+        - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" "${DOCROOT}/sites/default/"
+        - chgrp www-data "${DOCROOT}/sites/default/settings.php"
+        - chmod 0664 "${DOCROOT}/sites/default/settings.php"
        
         # Install the govcsm instance where the module update notification is off.
         - drush -r "${DOCROOT}" site-install govcms install_configure_form.update_status_module='array(FALSE,FALSE)' -y
@@ -60,6 +62,8 @@ services:
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
         - find "${DOCROOT}/sites/default/files" -type d -exec chmod 2775 {} \;
         - find "${DOCROOT}/sites/default/files" -type f -exec chmod 0664 {} \;
+        - chgrp root "${DOCROOT}/sites/default/settings.php"
+        - chmod 0444 "${DOCROOT}/sites/default/settings.php"
 
   # What to call the service hosting MySQL. This name also acts as the
   # hostname to access the service by from the php service.
