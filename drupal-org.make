@@ -7,7 +7,7 @@ defaults[projects][subdir] = "contrib"
 
 projects[accessible_forms][version] = "1.0-alpha1"
 projects[addressfield][version] = "1.1"
-projects[admin_views][version] = "1.6"
+projects[admin_views][version] = "1.7"
 projects[agls][version] = "1.0-beta3"
 projects[bean][version] = "1.11"
 projects[bean_panels][version] = "1.3"
