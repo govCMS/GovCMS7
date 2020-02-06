@@ -14,7 +14,7 @@ Feature: Events
     When I go to "/node/add/event"
     Then I should see "Create Event"
     And I fill in "Past event" for "Title"
-    And I select "2016" from "Year"
+    And I select "2019" from "Year"
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"
