@@ -104,7 +104,6 @@ projects[paranoia][version] = "1.7"
 projects[password_policy][version] = "1.16"
 projects[pathauto][version] = "1.3"
 ; @TODO remove this after pathauto update.
-projects[pathauto_persist][version] = "1.4"
 projects[pathologic][version] = "3.1"
 projects[pci_update][version] = "1.0"
 projects[pci_update][patch][] = "https://www.drupal.org/files/issues/pci_update_password_field_0.patch"
