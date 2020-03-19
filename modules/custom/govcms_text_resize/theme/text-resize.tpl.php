@@ -4,7 +4,6 @@
  * @file
  * Provides template for govcms_text_resize.
  */
-
 ?>
 <ul class="text-resize">
   <li>
