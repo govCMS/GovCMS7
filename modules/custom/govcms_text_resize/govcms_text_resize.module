@@ -16,11 +16,11 @@ function govcms_text_resize_preprocess_text_resize($vars) {
  * Implements hook_block_info().
  */
 function govcms_text_resize_block_info() {
-  $blocks = array();
+  $blocks = [];
 
-  $blocks['text_resize'] = array(
+  $blocks['text_resize'] = [
     'info' => t('Text Resize'),
-  );
+  ];
 
   return $blocks;
 }
@@ -29,7 +29,7 @@ function govcms_text_resize_block_info() {
  * Implements hook_block_view().
  */
 function govcms_text_resize_block_view($delta = '') {
-  $block = array();
+  $block = [];
   switch ($delta) {
     case 'text_resize':
       $block['content'] = theme('text_resize');
@@ -42,9 +42,9 @@ function govcms_text_resize_block_view($delta = '') {
  * Implements hook_theme().
  */
 function govcms_text_resize_theme() {
-  return array(
-    'text_resize' => array(
+  return [
+    'text_resize' => [
       'template' => 'theme/text-resize',
-    ),
-  );
+    ],
+  ];
 }
