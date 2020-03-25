@@ -19,6 +19,7 @@ services:
         # Install opcache and enable mod-rewrite and more.
         - apt-get update
         - apt-get install -y libbz2-dev
+        - apt-get install libzip-dev
         - docker-php-ext-install opcache bz2 zip
         - a2enmod headers rewrite
 
