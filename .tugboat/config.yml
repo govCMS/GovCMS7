@@ -1,7 +1,7 @@
 services:
   app:
-    # Use PHP 7.3 with Apache to serve the Drupal site
-    image: tugboatqa/php:7.3-apache
+    # Use PHP 7.2 with Apache to serve the Drupal site
+    image: tugboatqa/php:7.2-apache
 
     # Set this as the default service. This does a few things
     #   1. Clones the git repository into the service container
@@ -19,6 +19,7 @@ services:
         # Install opcache and enable mod-rewrite and more.
         - apt-get update
         - apt-get install -y libbz2-dev
+        - apt-get install libzip-dev
         - docker-php-ext-install opcache bz2 zip
         - a2enmod headers rewrite
 
