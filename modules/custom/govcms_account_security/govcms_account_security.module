@@ -83,6 +83,9 @@ function govcms_account_security_form_alter(&$form, &$form_state, $form_id) {
       break;
 
     case 'system_modules':
+      if (empty($form['modules'])) {
+        break;
+      }
 
       // Disable the ability to change any configured modules.
       global $user;
