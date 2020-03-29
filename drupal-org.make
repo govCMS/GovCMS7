@@ -202,6 +202,11 @@ libraries[chosen][download][url] = "https://github.com/harvesthq/chosen/releases
 libraries[chosen][directory_name] = "chosen"
 libraries[chosen][type] = "library"
 
+libraries[php-encryption][download][type] = "get"
+libraries[php-encryption][download][url] = "https://gist.github.com/paragonie-scott/949daee819bb7f19c50e5e103170b400/archive/4d72ab0049b1dc37ce68e4cecaf9b280953a1d0a.zip"
+libraries[php-encryption][directory_name] = "php-encryption"
+libraries[php-encryption][type] = "library"
+
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"
