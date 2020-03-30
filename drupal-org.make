@@ -208,6 +208,12 @@ libraries[php-encryption][download][url] = "https://github.com/defuse/php-encryp
 libraries[php-encryption][directory_name] = "php-encryption"
 libraries[php-encryption][type] = "library"
 
+libraries[php-encryption-autoload][download][type] = "file"
+libraries[php-encryption-autoload][download][url] = "https://gist.githubusercontent.com/paragonie-scott/949daee819bb7f19c50e5e103170b400/raw/4d72ab0049b1dc37ce68e4cecaf9b280953a1d0a/autoload.php"
+libraries[php-encryption-autoload][directory_name] = "php-encryption"
+libraries[php-encryption-autoload][file_name] = "autoload.php"
+libraries[php-encryption-autoload][type] = "library"
+
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
 libraries[superfish][directory_name] = "superfish"
