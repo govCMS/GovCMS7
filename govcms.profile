@@ -69,14 +69,3 @@ function govcms_system_info_alter(&$info, $file, $type) {
   }
 }
 
-/**
- * Implements hook_paranoia_hide_modules().
- *
- * @TODO remove this after pathauto update.
- */
-function govcms_paranoia_hide_modules() {
-  return array(
-    'pathauto_persist' => 'Other',
-    'govcms_register' => 'govCMS',
-  );
-}
