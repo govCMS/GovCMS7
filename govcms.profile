@@ -80,21 +80,12 @@ function govcms_paranoia_hide_modules() {
     'govcms_register' => 'govCMS',
   );
 }
-
-function govcms_search_core_install() {
-  user_role_grant_permissions(
-    DRUPAL_ANONYMOUS_RID,
-    array(
-      'access search_api_page',
-    )
+/**
+ * Returns a list of the themes that govCMS supports.
+ */
+function govcms_supported_themes() {
+  return array(
+    GOVCMS_DEFAULT_THEME,
+    GOVCMS_INSTALL_DEFAULT_THEME,
   );
-  user_role_grant_permissions(
-    DRUPAL_AUTHENTICATED_RID,
-    array(
-      'access search_api_page',
-    )
-  );
-
-  $themes = govcms_supported_themes();
-  govcms_core_insert_block('search_api_page', 'default_search', $themes, 'header', 0, 0, '', '<none>');
 }
