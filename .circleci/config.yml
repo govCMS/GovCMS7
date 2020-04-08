@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: quay.io/govcms/govcms-ci:feature_updates
+      - image: quay.io/govcms/govcms-ci
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
           COMPOSE_PROJECT_NAME: govcms
