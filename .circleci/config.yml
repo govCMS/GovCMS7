@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /app
     docker:
-      - image: integratedexperts/circleci2-builder
+      - image: quay.io/govcms/govcms-ci
         environment:
           COMPOSER_ALLOW_SUPERUSER: 1
           COMPOSE_PROJECT_NAME: govcms
@@ -48,17 +48,6 @@ jobs:
           when: always
       - store_artifacts:
           path: /tmp/artifacts
-      - run:
-          name: Push Docker images to Dockerhub
-          command: |
-            if [ "${DEPLOY_ANY_BRANCH}" != "" ] || [ "${CIRCLE_BRANCH}" == "${DEPLOY_BRANCH}" ] || [ ! -z ${CIRCLE_TAG} ]; then
-              echo "IMAGE_VERSION_TAG=$CIRCLE_TAG">>.env
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              export $(grep -v '^#' .env | xargs)
-              ahoy push
-            else
-              echo "Skipping deployment"
-            fi
 workflows:
   version: 2
   main:

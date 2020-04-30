@@ -22,7 +22,7 @@ if (!file_exists($site_dir . '/settings.php')) {
   exit(1);
 }
 
-$_SERVER['HTTP_HOST'] = 'localhost';
+$_SERVER['HTTP_HOST'] = 'http://nginx:8080';
 // @codingStandardsIgnoreStart Drupal.Semantics.RemoteAddress.RemoteAddress
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 // @codingStandardsIgnoreEnd

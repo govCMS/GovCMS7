@@ -1252,6 +1252,11 @@ function _govcms_setup_metatag() {
   $config = metatag_config_load('global:frontpage');
   $config->config['title']['value'] = '[site:name]';
   metatag_config_save($config);
+
+  // Set creator value with site name
+  $config = metatag_config_load('node');
+  $config->config['dcterms.creator']['value'] = '[site:name]';
+  metatag_config_save($config);
 }
 
 /**
