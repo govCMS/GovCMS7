@@ -6,6 +6,8 @@
  *
  * @license GPL v2 http://www.fsf.org/licensing/licenses/gpl.html
  *
+ * @codingStandardsIgnoreStart
+ *
  * aGov
  * @copyright Copyright(c) 2014 PreviousNext
  * @author Chris Skene chris at previousnext dot com dot au
@@ -14,10 +16,12 @@
  * The original foundation for the govCMS distribution is aGov; the Drupal distribution created by PreviousNext to provide a core set of elements, functionality and features that can be used to develop government websites
  * @copyright Copyright(c) 2015 Commonwealth of Australia as represented by Department of Finance
  * @author Department of Finance
- **/
+ *
+ * @codingStandardsIgnoreEnd
+ */
 
 /**
- * Define a default theme constant
+ * Define a default theme constant.
  */
 define('GOVCMS_DEFAULT_THEME', 'govcms_barton');
 
@@ -85,7 +89,7 @@ function govcms_install() {
   // Set defaults for the contact form.
   _govcms_contact_form_defaults();
 
-  // Set up metatag
+  // Set up metatag.
   _govcms_setup_metatag();
 
   // Final modules.
@@ -127,8 +131,7 @@ function _govcms_create_basic_roles_perms() {
     'permissions' => $base_permissions,
   );
 
-  $extra_perms = array(
-  );
+  $extra_perms = array();
   $extended_permissions = $base_permissions + $extra_perms;
 
   // Site builder.
@@ -474,7 +477,8 @@ abbr[title]',
           'rule_style_urls' => array(),
         ),
       ),
-      // Media Filter - Must go before 'Convert URLs into links' to not break govCMS-CKAN
+      // Media Filter - Must go before 'Convert URLs into links' to not break
+      // govCMS-CKAN.
       // Convert Media tags to markup.
       'media_filter' => array(
         'weight' => -1,
@@ -508,7 +512,7 @@ abbr[title]',
           'spamspan_form_default_displaytext' => 'contact form',
         ),
       ),
-      //Pathologic Setting.
+      // Pathologic Setting.
       'pathologic' => array(
         'weight' => 50,
         'status' => 1,
@@ -966,7 +970,7 @@ function _govcms_default_beans() {
     govcms_core_insert_block('bean', 'footer-copyright', $themes, 'footer', 4);
   }
   else {
-    drupal_set_message('govCMS Core was not available. Some of your blocks could not be created.', 'error');
+    drupal_set_message(t('govCMS Core was not available. Some of your blocks could not be created.'), 'error');
   }
 }
 
@@ -1241,12 +1245,17 @@ function _govcms_default_tags() {
 }
 
 /**
- * Set some default meta tag values
+ * Set some default meta tag values.
  */
 function _govcms_setup_metatag() {
-  // Set homepage head title to the sitename token
+  // Set homepage head title to the sitename token.
   $config = metatag_config_load('global:frontpage');
   $config->config['title']['value'] = '[site:name]';
+  metatag_config_save($config);
+
+  // Set creator value with site name
+  $config = metatag_config_load('node');
+  $config->config['dcterms.creator']['value'] = '[site:name]';
   metatag_config_save($config);
 }
 
@@ -1305,7 +1314,6 @@ function govcms_finished() {
   // Flush all caches to ensure that any full bootstraps during the installer
   // do not leave stale cached data, and that any content types or other items
   // registered by the installation profile are registered correctly.
-
   variable_set('features_rebuild_on_flush', FALSE);
   drupal_flush_all_caches();
 
@@ -1358,7 +1366,6 @@ function govcms_install_additional_options() {
 
   return $form;
 }
-
 
 /**
  * Submit handler.
@@ -1487,7 +1494,7 @@ function govcms_example_content_install() {
  * @param array $context
  *   Batch context data.
  */
-function govcms_example_content_install_batch($type, $key, $name, $message, &$context) {
+function govcms_example_content_install_batch($type, $key, $name, $message, array &$context) {
   if ($type == 'module') {
     module_enable(array($key), FALSE);
     $context['results'][] = $key;
@@ -1507,8 +1514,8 @@ function govcms_example_content_install_batch($type, $key, $name, $message, &$co
  */
 function govcms_example_content_install_finished($context) {
 
-  drupal_set_message('Example content installed.');
-  drupal_set_message('Sitemap has been rebuilt.');
+  drupal_set_message(t('Example content installed.'));
+  drupal_set_message(t('Sitemap has been rebuilt.'));
 }
 
 /**
@@ -1634,7 +1641,7 @@ function _govcms_install_full_image_display() {
   ));
 }
 
-/*
+/**
  * Enable OpenAccess buttons in Rich Text profile.
  */
 function govcms_enable_openaccess_buttons() {
@@ -1648,7 +1655,7 @@ function govcms_enable_openaccess_buttons() {
       );
 
       // Update settings in the database.
-      $update = db_update('wysiwyg')
+      db_update('wysiwyg')
         ->fields(array('settings' => serialize($settings)))
         ->condition('format', 'rich_text')
         ->condition('editor', 'ckeditor')

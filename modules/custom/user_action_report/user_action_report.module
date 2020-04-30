@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * user_action_report.module
@@ -8,17 +9,17 @@
  * Implements hook_permission().
  */
 function user_action_report_permission() {
-  return array(
-    'view user actions' => array(
+  return [
+    'view user actions' => [
       'title' => t('View User Actions'),
       'description' => t('View user actions such as logging in and adding/updating content.'),
-    ),
-  );
+    ],
+  ];
 }
 
 /**
  * Implements hook_views_api().
  */
 function user_action_report_views_api($module = NULL, $api = NULL) {
-  return array("api" => "3.0");
+  return ["api" => "3.0"];
 }

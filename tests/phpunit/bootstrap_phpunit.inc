@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Bootstrap Drupal for PHPUnit testing.
@@ -21,8 +22,10 @@ if (!file_exists($site_dir . '/settings.php')) {
   exit(1);
 }
 
-$_SERVER['HTTP_HOST'] = 'localhost';
+$_SERVER['HTTP_HOST'] = 'http://nginx:8080';
+// @codingStandardsIgnoreStart Drupal.Semantics.RemoteAddress.RemoteAddress
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+// @codingStandardsIgnoreEnd
 $_SERVER['PHPUNIT'] = TRUE;
 $_SERVER['PHPUNIT_BACKUP_FILE'] = tempnam('/tmp/', 'phpunit-backup');
 

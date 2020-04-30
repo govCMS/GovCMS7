@@ -13,7 +13,7 @@ class MediaBrowserContext extends DrupalSubContextBase {
   /**
    * The Mink context.
    *
-   * @var MinkContext
+   * @var \Drupal\DrupalExtension\Context\MinkContext
    */
   protected $minkContext;
 
