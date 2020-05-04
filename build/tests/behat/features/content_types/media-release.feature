@@ -20,8 +20,8 @@ Feature: Media Release
     And I fill in the following:
       | Title   | New release            |
       | Date    | 13/05/2017             |
-      | Summary | We migrated to govCMS! |
     Then I set the chosen element "Tags" to "govcmstest"
+    And I put "We migrated to govCMS!" into WYSIWYG of "Summary" field
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     When I open the "Attach media" media browser
     Then I attach the file "autotest.jpg" to "files[upload]"

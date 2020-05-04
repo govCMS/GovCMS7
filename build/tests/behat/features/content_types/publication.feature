@@ -26,7 +26,7 @@ Feature: Publication
     Then I set the chosen element "Tags" to "govcmstest"
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
     And I click "Edit summary"
-    And I fill in "Our recent and independent performance audit" for "Summary"
+    And I put "Our recent and independent performance audit" into WYSIWYG of "Summary" field
     Then I open the media browser for "Attach media" in "Image" field set
     And I attach the file "autotest.jpg" to "files[upload]"
     And I press "Next"
