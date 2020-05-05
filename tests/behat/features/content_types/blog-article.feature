@@ -28,8 +28,9 @@ Feature: Blog Article
     And I submit the media browser
     Then the "#edit-field-thumbnail" element should contain "Edit"
     And the "#edit-field-thumbnail" element should contain "Remove"
-    And I press "Save"
-    And I fill in the following:
+    When I press "Save"
+    Then I should see "autotest.jpg"
+    When I fill in the following:
       | Title   | New blog               |
       | Summary | How we migrated to govCMS! |
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
