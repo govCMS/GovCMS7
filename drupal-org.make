@@ -5,7 +5,7 @@ defaults[projects][subdir] = "contrib"
 
 ; Contrib modules
 
-projects[accessible_forms][version] = "1.0-alpha1"
+projects[accessible_forms][version] = "1.0-alpha2"
 projects[addressfield][version] = "1.1"
 projects[admin_views][version] = "1.7"
 projects[agls][version] = "1.0-beta3"
