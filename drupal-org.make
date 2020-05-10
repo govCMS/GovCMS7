@@ -190,7 +190,7 @@ projects[wysiwyg][download][type] = "git"
 projects[wysiwyg][download][url] = "http://git.drupal.org/project/wysiwyg.git"
 projects[wysiwyg][download][revision] = "eb781256ffc7bc05d6db017d8f443f610571d250"
 projects[wysiwyg_abbr][version] = "1.0"
-projects[wysiwyg_filter][version] = "1.6-rc2"
+projects[wysiwyg_filter][version] = "1.6-rc9"
 projects[xmlsitemap][version] = "2.6"
 
 ; Themes
