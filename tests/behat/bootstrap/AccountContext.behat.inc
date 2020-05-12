@@ -354,7 +354,7 @@ class AccountContext extends DrupalSubContextBase {
    * Clear the flood table.
    */
   public function clearFloodTable() {
-    db_delete('flood')->execute();
+    db_truncate('flood')->execute();
   }
 
   /**
