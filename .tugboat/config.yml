@@ -42,6 +42,8 @@ services:
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot
         - drush make --no-core drupal-org.make ${DOCROOT} -y
+        # Download and copy the autoload.php file to the php-encryption library folder required by Real AES module.
+        - curl https://gist.githubusercontent.com/paragonie-scott/949daee819bb7f19c50e5e103170b400/raw/4d72ab0049b1dc37ce68e4cecaf9b280953a1d0a/autoload.php -o ${DOCROOT}/sites/all/libraries/php-encryption/autoload.php
        
         # Prepare for install.
         - rm -rf "${DOCROOT}/sites/default/"

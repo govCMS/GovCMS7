@@ -5,6 +5,23 @@
  * Install file for govcms account security.
  */
 
+ /**
+  * Implements hook_requirements().
+  */
+ function govcms_account_security_requirements($phase) {
+   $requirements = array();
+   $t = get_t();
+   if ($phase == 'runtime' && (module_exists('login_security') || module_exists('flood_control'))) {
+     $requirements['govcms_account_security'] = array(
+       'title' => $t('Login Security and Flood Contol'),
+       'value' => $t('Enabled'),
+       'description' => $t('Login Security and Flood Control modules need to be disabled.'),
+       'severity' => REQUIREMENT_INFO,
+     );
+   }
+   return $requirements;
+ }
+
 /**
  * Implements hook_install().
  */
@@ -12,15 +29,17 @@ function govcms_account_security_install() {
   // ISM 2015, control: 1403, accounts are locked after a maximum of 5 failed
   // logon attempts.
   variable_set('user_failed_login_user_limit', 5);
-  // Lock the offending account for 315400000 seconds (10 years).
-  variable_set('user_failed_login_user_window', 315400000);
+  // Lock the offending account for 21600 seconds (6 hours).
+  variable_set('user_failed_login_user_window', 21600);
   // Register flood events based on the uid only, see user.module.
   variable_set('user_failed_login_identifier_uid_only', TRUE);
-  // Set HTTP status code returned to anonymous visits on user profile pages.
-  variable_set('govcms_account_security_user_profile_page_code_anonymous_visit', '403');
   // An accounts with expired password will be forced to change their password
   // upon the next login.
+  // @see password_policy_admin_settings()
   variable_set('password_policy_block', 1);
+  // Disable soft block users after 5 failed login attempts in 24 hours.
+  // @see _login_security_get_variables_by_name()
+  variable_set('login_security_user_wrong_count', 0);
 }
 
 /**
@@ -41,31 +60,23 @@ function govcms_account_security_enable() {
 }
 
 /**
- * Implements hook_requirements().
+ * Implements hook_update().
  */
-function govcms_account_security_requirements($phase) {
-  $requirements = array();
-  $t = get_t();
-  if ($phase == 'runtime' && (module_exists('login_security') || module_exists('flood_control'))) {
-    $requirements['govcms_account_security'] = array(
-      'title' => $t('Login Security and Flood Contol'),
-      'value' => $t('Enabled'),
-      'description' => $t('Login Security and Flood Control modules need to be disabled.'),
-      'severity' => REQUIREMENT_INFO,
-    );
-  }
-  return $requirements;
-}
-
-/**
- * Implements hook_uninstall().
- */
-function govcms_account_security_uninstall() {
-  // Delete the variables to use the value set by Drupal's user module.
-  // Drupal's default value is 5.
-  variable_del('user_failed_login_user_limit');
-  // Drupal's default value is 21600.
-  variable_del('user_failed_login_user_window');
-  // Delete account security specific var.
-  variable_del('govcms_account_security_user_profile_page_code_anonymous_visit');
-}
+ function govcms_account_security_update_7000(&$sandbox) {
+   // Delete account security specific var.
+   variable_del('govcms_account_security_user_profile_page_code_anonymous_visit');
+   // ISM 2015, control: 1403, accounts are locked after a maximum of 5 failed
+   // logon attempts.
+   variable_set('user_failed_login_user_limit', 5);
+   // Lock the offending account for 21600 seconds (6 hours).
+   variable_set('user_failed_login_user_window', 21600);
+   // Register flood events based on the uid only, see user.module.
+   variable_set('user_failed_login_identifier_uid_only', TRUE);
+   // An accounts with expired password will be forced to change their password
+   // upon the next login.
+   // @see password_policy_admin_settings()
+   variable_set('password_policy_block', 1);
+   // Disable soft block users after 5 failed login attempts in 24 hours.
+   // @see _login_security_get_variables_by_name()
+   variable_set('login_security_user_wrong_count', 0);
+ }
