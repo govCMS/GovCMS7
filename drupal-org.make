@@ -208,6 +208,7 @@ libraries[php-encryption][download][type] = "get"
 libraries[php-encryption][download][url] = "https://github.com/defuse/php-encryption/archive/v2.1.0.zip"
 libraries[php-encryption][directory_name] = "php-encryption"
 libraries[php-encryption][type] = "library"
+libraries[php-encryption][patch][] = "https://www.drupal.org/files/issues/2020-05-13/php-encryption-add_autoloader_file.patch"
 
 libraries[superfish][download][type] = "get"
 libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal/archive/1.x.zip"
