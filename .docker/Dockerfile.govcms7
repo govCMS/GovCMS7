@@ -6,7 +6,7 @@ RUN rm -rf /app \
     && cd /src \
     && echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
     && drush make /src/.docker/stub.make /app --contrib-destination \
-	&& cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
+    && cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
 	&& { \
 		echo ; \
 		echo "\$databases['default']['default'] = array ("; \

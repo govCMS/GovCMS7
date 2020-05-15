@@ -779,10 +779,8 @@ function _govcms_default_variables() {
     // Session lifetime 0.
     'session_cookie_lifetime_type' => 'browser_session',
 
-    // Soft block users after 5 failed login attempts in 24 hours.
-    'login_security_user_wrong_count' => '5',
+    // Set 24 hours as the time window to check for security violations.
     'login_security_track_time' => '24',
-
     // Display last login time.
     'login_security_last_access_timestamp' => 1,
     'login_security_last_login_timestamp' => 1,
