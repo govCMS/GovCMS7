@@ -32,17 +32,29 @@ services:
       # skipping the init step, because the results of that step will
       # already be present.
       update:
-        
+
+      # Commands that build the site. This is where you would add things
+      # like feature reverts or any other drush commands required to
+      # set up or configure the site. When a preview is built from a
+      # base preview, the build workflow starts here, skipping the init
+      # and update steps, because the results of those are inherited
+      # from the base preview.
       build:
+        # Remove the root folder if it existed.
+        - if [ -d ${TUGBOAT_ROOT}/docroot ]; then echo "Remove the existing ${TUGBOAT_ROOT}/docroot folder";rm -Rf ${TUGBOAT_ROOT}/docroot; fi
+
         # Link the document root to the expected path. This example links
         # /var/www/html to /var/lib/tugboat/docroot
         - ln -snf "${TUGBOAT_ROOT}/docroot" "${DOCROOT}"
-        # Remove the root folder if it existed.
-        - if [ -d ${TUGBOAT_ROOT}/docroot ]; then echo "Remove the existing ${TUGBOAT_ROOT}/docroot folder";rm -Rf ${TUGBOAT_ROOT}/docroot; fi
+
         # Run the make command to prepare our custom build
         - drush make build-govcms.make ${TUGBOAT_ROOT}/docroot
         - drush make --no-core drupal-org.make ${DOCROOT} -y
-       
+
+        # Copy the current profile.
+        - if [ -d ${TUGBOAT_ROOT}/docroot/profiles/govcms ]; then echo "Remove the existing ${TUGBOAT_ROOT}/docroot/profiles/govcms folder";rm -Rf ${TUGBOAT_ROOT}/docroot/profiles/govcms; fi
+        - rsync -av --delete --exclude 'docroot' --exclude .git'' ${TUGBOAT_ROOT}/ ${DOCROOT}/profiles/govcms
+
         # Prepare for install.
         - rm -rf "${DOCROOT}/sites/default/"
         - mkdir "${DOCROOT}/sites/default/"
@@ -53,10 +65,10 @@ services:
         - cp "${TUGBOAT_ROOT}/.tugboat/settings.php" "${DOCROOT}/sites/default/"
         - chgrp www-data "${DOCROOT}/sites/default/settings.php"
         - chmod 0664 "${DOCROOT}/sites/default/settings.php"
-       
+
         # Install the govcsm instance where the module update notification is off.
         - drush -r "${DOCROOT}" site-install govcms install_configure_form.update_status_module='array(FALSE,FALSE)' -y
-        
+
         # Update the folders permissions again after installing Drupal
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
         - find "${DOCROOT}/sites/default/files" -type d -exec chmod 2775 {} \;
