@@ -41,7 +41,7 @@ jobs:
           command: ahoy test-phpunit
       - run:
           name: Run Behat tests with rerun
-          command: ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun
+          command: ahoy test-behat -- --format=progress_fail || ahoy test-behat -- --format=progress_fail --rerun || export BEHAT_TEST_FAILED=true
       - run:
           name: Copy artifacts
           command: mkdir -p /tmp/artifacts/behat && docker cp $(docker-compose -p govcms ps -q test):/app/tests/behat/features/screenshots /tmp/artifacts/behat
