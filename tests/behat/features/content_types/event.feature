@@ -26,7 +26,7 @@ Feature: Events
     And I should not see "Past event"
 
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Create Event content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
