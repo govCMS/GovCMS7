@@ -8,7 +8,7 @@ Feature: Publication
     When I visit "/node/add/publication"
     Then CKEditor for the "Body" field exists
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Create Publication content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role

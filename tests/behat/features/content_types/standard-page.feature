@@ -8,7 +8,7 @@ Feature: Standard Page
     When I visit "/node/add/page"
     Then CKEditor for the "Body" field exists
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Create Standard page content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role
@@ -25,7 +25,7 @@ Feature: Standard Page
       | Title   | New page               |
       | Summary | We migrated to govCMS! |
     And I put "Digital transformation is real. GovCMS is the best!" into WYSIWYG of "Body" field
-    
+
     Given I click "Publishing options"
     Then I select "Published" from "Moderation state"
     And I press "Save"
