@@ -91,7 +91,6 @@ projects[mpac][patch][] = "https://www.drupal.org/files/issues/2418317-2-mpac.pa
 projects[mpac][patch][] = "https://www.drupal.org/files/issues/module-info-2698853-1.patch"
 projects[mpac][patch][] = "https://www.drupal.org/files/issues/module-install-file-2698851-1.patch"
 projects[mpac][patch][] = "https://www.drupal.org/files/issues/more-user-access-check-2698843-1.patch"
-projects[mimemail][version] = "1.1"
 projects[minisite][version] = "1.2"
 projects[module_filter][version] = "2.2"
 projects[module_permissions][version] = "1.4"
