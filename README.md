@@ -1,6 +1,6 @@
 # govCMS
 
-[![CircleCI](https://circleci.com/gh/govCMS/govCMS.svg?style=svg)](https://circleci.com/gh/govCMS/govCMS)
+[![CircleCI](https://circleci.com/gh/govCMS/GovCMS7.svg?style=svg)](https://circleci.com/gh/govCMS/GovCMS7)
 
 **Note:**
 **This release is not Acquia specific. Please continue to use 2.x release if you are in Acquia.**
