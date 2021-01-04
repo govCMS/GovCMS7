@@ -5,7 +5,7 @@ description = A distribution for government and the public sector in Australia
 core = 7.x
 exclusive = TRUE
 hidden = FALSE
-php = 7.2
+php = 7.3
 
 ; System Requirements.
 php_memory_limit = 128M
@@ -102,7 +102,6 @@ dependencies[] = search_api_db
 dependencies[] = search_api_page
 dependencies[] = scheduler
 dependencies[] = scheduler_workbench
-dependencies[] = session_cookie_lifetime
 dependencies[] = shield
 dependencies[] = r4032login
 dependencies[] = seckit

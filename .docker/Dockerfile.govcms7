@@ -1,4 +1,4 @@
-FROM amazeeio/php:7.2-cli-drupal as builder
+FROM amazeeio/php:7.3-cli-drupal as builder
 
 COPY . /src
 
@@ -6,7 +6,7 @@ RUN rm -rf /app \
     && cd /src \
     && echo "memory_limit=-1" >> /usr/local/etc/php/conf.d/memory.ini \
     && drush make /src/.docker/stub.make /app --contrib-destination \
-	&& cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
+    && cp /app/sites/default/default.settings.php /app/sites/default/settings.php \
 	&& { \
 		echo ; \
 		echo "\$databases['default']['default'] = array ("; \
@@ -23,7 +23,7 @@ RUN rm -rf /app \
     } | tee -a "/app/sites/default/settings.php" \
     && chmod 444 /app/sites/default/settings.php
 
-FROM amazeeio/php:7.2-cli-drupal
+FROM amazeeio/php:7.3-cli-drupal
 
 RUN apk add gmp gmp-dev \
     && docker-php-ext-install gmp \

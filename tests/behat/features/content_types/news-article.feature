@@ -8,7 +8,7 @@ Feature: News Article
     When I visit "/node/add/news-article"
     Then CKEditor for the "Body" field should exist
 
-  @api @javascript
+  @api @javascript @skipped
   Scenario: Create News Article content and check how it's displayed.
     # @TODO change the role to "Content editor" once https://github.com/govCMS/govCMS/pull/483 is merged.
     Given I am logged in as a user with the "administrator" role

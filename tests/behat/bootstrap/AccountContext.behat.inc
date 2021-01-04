@@ -39,6 +39,22 @@ class AccountContext extends DrupalSubContextBase {
   }
 
   /**
+   * Creates and authenticates a user with a specific name and given role(s).
+   *
+   * @Given /^I am logged in as a user named "(?P<username>[^"]*)" with the "(?P<role>[^"]*)" role$/
+   */
+  public function assertAuthenticatedByRole($username, $role = '') {
+    // Check if a user with this role is already logged in.
+    if (!$this->loggedInWithRole($role)) {
+      // Create user.
+      $user = $this->createUser($username, '', $role);
+
+      // Login.
+      $this->login($user);
+    }
+  }
+
+  /**
    * Helper for creating users.
    *
    * @param string $name
@@ -74,22 +90,6 @@ class AccountContext extends DrupalSubContextBase {
     }
 
     return $user;
-  }
-
-  /**
-   * Creates and authenticates a user with a specific name and given role(s).
-   *
-   * @Given /^I am logged in as a user named "(?P<username>[^"]*)" with the "(?P<role>[^"]*)" role$/
-   */
-  public function assertAuthenticatedByRole($username, $role = '') {
-    // Check if a user with this role is already logged in.
-    if (!$this->loggedInWithRole($role)) {
-      // Create user.
-      $user = $this->createUser($username, '', $role);
-
-      // Login.
-      $this->login($user);
-    }
   }
 
   /**
@@ -341,6 +341,102 @@ class AccountContext extends DrupalSubContextBase {
   public function iShouldNotBeAbleToChangeTheRole($role_name) {
     $administrator_role = user_role_load_by_name($role_name);
     $this->assertSession()->elementNotExists('css', '#edit-roles-change-' . $administrator_role->rid);
+  }
+
+  /**
+   * @Given the flood table has been cleared
+   */
+  public function theFloodTableHasBeenCleared() {
+    $this->clearFloodTable();
+  }
+
+  /**
+   * Clear the flood table.
+   */
+  public function clearFloodTable() {
+    db_truncate('flood')->execute();
+  }
+
+  /**
+   * @Given the user named :username who triggered the flood control
+   */
+  public function theUserNamedWhoTriggeredTheFloodControl($username = '') {
+    $this->assertFailedLogin($username);
+  }
+
+  /**
+   * Assert failed login.
+   *
+   * @param $username
+   *
+   * @throws \Exception
+   */
+  public function assertFailedLogin($username = '', int $times = 5) {
+    // Find the user.
+    $user = user_load_by_name($username);
+
+    if (empty($user)) {
+      // Create user.
+      $user = $this->createUser($username);
+    }
+
+    // Set the wrong password.
+    $user->pass = 'WrongPassword';
+
+    for ($i = 0; $i < $times; $i++) {
+      // Check if logged in.
+      if ($this->loggedIn()) {
+        $this->logout();
+      }
+
+      $this->getSession()->visit($this->locatePath('/user'));
+      $element = $this->getSession()->getPage();
+      $element->fillField($this->getDrupalText('username_field'), $user->name);
+      $element->fillField($this->getDrupalText('password_field'), $user->pass);
+      $submit = $element->findButton($this->getDrupalText('log_in'));
+      if (empty($submit)) {
+        throw new \Exception(sprintf("No submit button at %s", $this->getSession()->getCurrentUrl()));
+      }
+
+      // Log in.
+      $submit->click();
+    }
+  }
+
+  /**
+   * @Given the user named :arg1 who triggered the IP flood control
+   */
+  public function theUserNamedWhoTriggeredTheIpFloodControl($username = '') {
+    $this->assertFailedLogin($username, 50);
+  }
+
+  /**
+   * @Given user :username log in with the One Time Login Url
+   */
+  public function userLogInWithTheOneTimeLoginUrl($username = '') {
+    // Find the user.
+    $user = user_load_by_name($username);
+
+    if (empty($user)) {
+      throw new \Exception(sprintf('Could not find user: %s', $username));
+    }
+
+    if ($this->loggedIn()) {
+      $this->logOut();
+    }
+
+    $base_url = rtrim($this->locatePath('/'), '/');
+    $login_link = $this->getDriver('drush')->drush('uli', [
+      "'$user->name'",
+      '--browser=0',
+      "--uri=${base_url}",
+    ]);
+
+    // Trim EOL characters. Required or else visiting the link won't work.
+    $login_link = trim($login_link);
+    $login_link = str_replace("/login", '', $login_link);
+    $this->getSession()->visit($this->locatePath($login_link));
+    return TRUE;
   }
 
 }
