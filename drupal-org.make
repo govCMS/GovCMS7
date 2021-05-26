@@ -37,6 +37,7 @@ projects[ds][patch][] = "https://www.drupal.org/files/issues/2018-04-26/ds-fix_b
 projects[elements][version] = "1.5"
 projects[encrypt][version] = "2.3"
 projects[entitycache][version] = "1.5"
+projects[entitycache][patch][] = "https://www.drupal.org/files/issues/2018-07-05/entitycache_php_7-2981629-0.patch"
 projects[entityreference][patch][] = "https://www.drupal.org/files/issues/url_formatter-2370029-2-7.x-1.5.patch"
 projects[entityreference][version] = "1.5"
 projects[entity][patch][2307807] = "https://www.drupal.org/files/issues/2307807-entity-reset-insert-1.patch"
