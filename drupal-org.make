@@ -145,6 +145,7 @@ projects[spamspan][download][revision] = "cebf9dd3a360b466b498755fe800580e6b2156
 projects[strongarm][version] = "2.0"
 projects[swiftmailer][version] = "1.7"
 projects[swiftmailer][patch][] = "https://www.drupal.org/files/issues/2019-07-24/fix_attachment_webform-3069836-2.patch"
+projects[swiftmailer][patch][] = "https://www.drupal.org/files/issues/2019-06-04/swiftmailer_support_php_72-3058147-2.patch"
 projects[superfish][version] = "1.9"
 projects[taxonomy_manager][version] = "1.0"
 projects[tfa][version] = "2.0"
