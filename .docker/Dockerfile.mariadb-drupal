@@ -1,1 +1,1 @@
-FROM amazeeio/mariadb-drupal
+FROM uselagoon/mariadb-drupal

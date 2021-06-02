@@ -1,7 +1,7 @@
 ARG CLI_IMAGE
 FROM ${CLI_IMAGE} as cli
 
-FROM amazeeio/php:7.3-fpm
+FROM uselagoon/php-7.4-fpm
 
 RUN apk add gmp gmp-dev \
     && docker-php-ext-install gmp \
