@@ -1,4 +1,4 @@
-FROM amazeeio/php:7.3-cli-drupal as builder
+FROM uselagoon/php-7.4-cli-drupal as builder
 
 COPY . /src
 
@@ -23,7 +23,7 @@ RUN rm -rf /app \
     } | tee -a "/app/sites/default/settings.php" \
     && chmod 444 /app/sites/default/settings.php
 
-FROM amazeeio/php:7.3-cli-drupal
+FROM uselagoon/php-7.4-cli-drupal
 
 RUN apk add gmp gmp-dev \
     && docker-php-ext-install gmp \
