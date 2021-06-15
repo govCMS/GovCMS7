@@ -1,7 +1,7 @@
 services:
   app:
-    # Use PHP 7.3 with Apache to serve the Drupal site
-    image: tugboatqa/php:7.3-apache
+    # Use PHP 7.4 with Apache to serve the Drupal site
+    image: tugboatqa/php:7.4-apache
 
     # Set this as the default service. This does a few things
     #   1. Clones the git repository into the service container
@@ -16,15 +16,17 @@ services:
     commands:
       # Commands that set up the basic preview infrastructure
       init:
-        # Install opcache and enable mod-rewrite and more.
+        # Tooling.
         - apt-get update
-        - apt-get install -y libbz2-dev
-        - apt-get install libzip-dev
+        - apt-get install -y libbz2-dev libzip-dev
         - docker-php-ext-install opcache bz2 zip
         - a2enmod headers rewrite
 
+        # Clean up. This keeps image storage tighter on Tugboat.
+        - apt-get autoclean && apt-get clean
+
         # Install drush 8.1.17
-        - composer --no-ansi global require drush/drush:8.1.17
+        - composer --no-ansi global require drush/drush:8.4.8
         - ln -sf ~/.composer/vendor/bin/drush /usr/local/bin/drush
 
       # Commands that import files, databases,  or other assets. When an
