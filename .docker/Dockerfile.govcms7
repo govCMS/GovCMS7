@@ -25,8 +25,4 @@ RUN rm -rf /app \
 
 FROM uselagoon/php-7.4-cli-drupal
 
-RUN apk add gmp gmp-dev \
-    && docker-php-ext-install gmp \
-    && docker-php-ext-configure gmp
-
 COPY --from=builder /app /app
