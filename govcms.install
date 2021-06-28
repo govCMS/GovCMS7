@@ -132,13 +132,14 @@ function _govcms_create_basic_roles_perms() {
   );
 
   $extra_perms = array();
+  $sitebuilder_permissions = array("administer login destination settings");
   $extended_permissions = $base_permissions + $extra_perms;
 
   // Site builder.
   $roles['Site builder'] = array(
     'name' => 'Site builder',
     'weight' => $weight++,
-    'permissions' => $extended_permissions,
+    'permissions' => array_merge($extended_permissions, $sitebuilder_permissions),
   );
 
   // Site editor.
