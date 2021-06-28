@@ -13,7 +13,7 @@ govCMS exists as packaged versions on both the [Github](https://github.com/govCM
 
 ## Local development environment setup
 
-1. Make sure that you have [Docker](https://www.docker.com/), [Pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) and [Ahoy](https://github.com/ahoy-cli/ahoy)installed.
+1. Make sure that you have [Docker](https://www.docker.com/), [Pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) and [Ahoy](https://github.com/ahoy-cli/ahoy) installed.
 2. Checkout project repository `git clone git@github.com:govCMS/govCMS.git`
 3. `ahoy up`
 4. `ahoy make`
