@@ -1,4 +1,5 @@
 # govCMS
+[![CircleCI](https://circleci.com/gh/govCMS/govCMS/tree/7.x-3.x.svg?style=svg)](https://circleci.com/gh/govCMS/govCMS/tree/7.x-3.x)
 
 [![CircleCI](https://circleci.com/gh/govCMS/govCMS.svg?style=svg)](https://circleci.com/gh/govCMS/govCMS)
 
