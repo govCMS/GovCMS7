@@ -55,6 +55,7 @@ dependencies[] = elements
 dependencies[] = entity
 dependencies[] = entitycache
 dependencies[] = entityreference
+dependencies[] = environment_indicator
 dependencies[] = escape_admin
 dependencies[] = favicon
 dependencies[] = features
