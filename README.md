@@ -15,10 +15,11 @@ govCMS exists as packaged versions on both the [Github](https://github.com/govCM
 
 1. Make sure that you have [Docker](https://www.docker.com/), [Pygmy](https://docs.amazee.io/local_docker_development/pygmy.html) and [Ahoy](https://github.com/ahoy-cli/ahoy)installed.
 2. Checkout project repository `git clone git@github.com:govCMS/govCMS.git`
-3. `ahoy up`
-4. `ahoy make`
-5. `ahoy install`
-6. http://govcms.docker.amazee.io
+3. `pygmy up`
+4. `ahoy up`
+5. `ahoy make`
+6. `ahoy install`
+7. http://govcms.docker.amazee.io
 
 This will construct a copy of the govCMS Drupal codebase in the `docroot` directory using instructions from the `govcms.make` file.
 
