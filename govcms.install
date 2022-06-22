@@ -567,6 +567,7 @@ abbr[title]',
     DRUPAL_ANONYMOUS_RID,
     array(
       'access content',
+      'view securitytxt'
     )
   );
   user_role_grant_permissions(
