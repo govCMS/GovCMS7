@@ -26,9 +26,11 @@ jobs:
           name: Start amazeeio-network
           command: docker network prune -f && docker network inspect amazeeio-network >/dev/null || docker network create amazeeio-network
       - run:
+          name: Build project
+          command: docker-compose up -d "$@"
+      - run:
           name: Install local dependencies.
           command: docker-compose exec test drush make --no-core --contrib-destination=profiles/govcms profiles/govcms/drupal-org.make -y
-
       - run:
           name: Install site
           command: ahoy -v install -- install_configure_form.update_status_module='array(FALSE,FALSE)'
