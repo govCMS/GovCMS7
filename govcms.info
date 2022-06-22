@@ -105,6 +105,7 @@ dependencies[] = scheduler_workbench
 dependencies[] = shield
 dependencies[] = r4032login
 dependencies[] = seckit
+dependencies[] = securitytxt
 dependencies[] = simple_aggregation
 dependencies[] = site_map
 dependencies[] = superfish
